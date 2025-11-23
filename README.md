@@ -82,11 +82,17 @@ npm run docs:preview
 
 ### PR収集（手動実行）
 
-```bash
-# 環境変数を設定して実行
-export GITHUB_TOKEN="your_github_token"
-export OPENAI_API_KEY="your_openai_api_key"
+ルートディレクトリに `.env` ファイルを作成：
 
+```bash
+# .env
+GITHUB_TOKEN=your_github_token
+OPENAI_API_KEY=your_openai_api_key
+```
+
+スクリプトを実行：
+
+```bash
 npm run collect
 ```
 

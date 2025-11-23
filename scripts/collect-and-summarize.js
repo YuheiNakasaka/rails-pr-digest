@@ -1,5 +1,6 @@
 #!/usr/bin/env node
 
+import 'dotenv/config';
 import { Octokit } from '@octokit/rest';
 import OpenAI from 'openai';
 import { writeFileSync, readFileSync, existsSync, mkdirSync, readdirSync } from 'fs';
