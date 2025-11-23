@@ -1,0 +1,191 @@
+# Ruby on Rails PR Digest
+
+Ruby on Railsの最新変更を自動追跡し、AI要約付きで閲覧できるシステムです。
+
+## 概要
+
+このプロジェクトは、[rails/rails](https://github.com/rails/rails)リポジトリのmainブランチにマージされたPull Requestを定期的に収集し、OpenAI GPT-4oで要約・解説してGitHub Pagesで公開します。
+
+### 主な機能
+
+- **定期実行**: GitHub Actionsで2日ごとに自動実行
+- **AI要約**: OpenAI GPT-4oで各PRを日本語で要約・解説
+- **週別管理**: ISO週番号に基づいて週ごとにファイルを生成・更新
+- **GitHub Pages**: 自動的にWebページとして公開
+- **継続的更新**: 週内は同じファイルに追記、新しい週には新しいファイルを作成
+
+## セットアップ
+
+### 1. 必要な環境
+
+- Node.js 18以上
+- GitHub リポジトリ
+- GitHub Personal Access Token
+- OpenAI API Key
+
+### 2. 依存関係のインストール
+
+```bash
+cd acme/rails-pr-digest
+npm install
+```
+
+### 3. 環境変数の設定
+
+GitHub Actionsで実行する場合は、リポジトリのSecretsに以下を設定してください：
+
+#### `GITHUB_TOKEN`
+
+GitHub Actionsでは自動的に利用可能です。追加の設定は不要です。
+
+#### `OPENAI_API_KEY`
+
+1. [OpenAI Platform](https://platform.openai.com/api-keys)でAPI Keyを取得
+2. GitHubリポジトリの Settings > Secrets and variables > Actions > New repository secret
+3. Name: `OPENAI_API_KEY`
+4. Secret: 取得したAPI Key
+
+### 4. GitHub Pagesの有効化
+
+1. GitHubリポジトリの Settings > Pages
+2. Source: "GitHub Actions" を選択
+3. 保存
+
+## 使い方
+
+### 手動実行
+
+```bash
+# 環境変数を設定して実行
+export GITHUB_TOKEN="your_github_token"
+export OPENAI_API_KEY="your_openai_api_key"
+
+cd acme/rails-pr-digest
+npm run collect
+```
+
+### GitHub Actionsでの実行
+
+#### 自動実行（デフォルト）
+
+GitHub Actionsワークフローは2日ごと（午前0時UTC）に自動実行されます。
+
+#### 手動トリガー
+
+1. GitHubリポジトリの Actions タブを開く
+2. "Collect Rails PRs" ワークフローを選択
+3. "Run workflow" ボタンをクリック
+
+## プロジェクト構造
+
+```
+acme/rails-pr-digest/
+├── .github/
+│   └── workflows/
+│       └── collect-prs.yml       # GitHub Actionsワークフロー
+├── scripts/
+│   └── collect-and-summarize.js  # PR収集・要約スクリプト
+├── docs/                         # GitHub Pages用ディレクトリ
+│   ├── index.html               # トップページ
+│   ├── weekly-index.json        # 週別ファイルインデックス（自動生成）
+│   ├── .nojekyll                # Jekyllを無効化
+│   └── weekly/                  # 週別ダイジェストファイル
+│       ├── 2025-W01.md
+│       ├── 2025-W02.md
+│       └── ...
+├── package.json
+└── README.md
+```
+
+## 動作の仕組み
+
+### 1. PR収集
+
+- GitHub APIを使用して過去24時間にマージされたPRを検索
+- PR番号、タイトル、説明、変更ファイルなどの情報を取得
+
+### 2. AI要約
+
+- OpenAI GPT-4oに各PRの情報を送信
+- 日本語で以下の内容を生成：
+  - 概要
+  - 変更内容の詳細
+  - 影響範囲・注意点
+  - 参考情報
+
+### 3. ファイル生成
+
+- ISO週番号に基づいてファイル名を決定（例: `2025-W01.md`）
+- 週の途中の実行では既存ファイルに追記
+- 新しい週の最初の実行では新しいファイルを作成
+
+### 4. インデックス更新
+
+- 週別ファイルの一覧を `weekly-index.json` として生成
+- トップページで読み込んで表示
+
+### 5. GitHub Pagesへのデプロイ
+
+- 変更をコミット＆プッシュ
+- GitHub Pagesに自動デプロイ
+
+## カスタマイズ
+
+### 実行頻度の変更
+
+`.github/workflows/collect-prs.yml` のcron式を編集：
+
+```yaml
+on:
+  schedule:
+    # 毎日実行に変更
+    - cron: '0 0 * * *'
+```
+
+### 要約プロンプトのカスタマイズ
+
+`scripts/collect-and-summarize.js` の `summarizePR()` 関数内のプロンプトを編集してください。
+
+### 他のリポジトリへの対応
+
+`scripts/collect-and-summarize.js` の以下の定数を変更：
+
+```javascript
+const RAILS_OWNER = 'your-owner';
+const RAILS_REPO = 'your-repo';
+```
+
+## トラブルシューティング
+
+### PRが収集されない
+
+- GitHub Tokenの権限を確認（read:org, repo スコープが必要）
+- 過去24時間にマージされたPRが存在するか確認
+
+### AI要約が生成されない
+
+- OpenAI API Keyが正しく設定されているか確認
+- APIレート制限に達していないか確認
+- OpenAIアカウントに十分なクレジットがあるか確認
+- スクリプトのログを確認
+
+### GitHub Pagesが更新されない
+
+- ワークフローが正常に完了しているか確認
+- GitHub Pagesの設定が "GitHub Actions" になっているか確認
+- `.nojekyll` ファイルが存在するか確認
+
+## ライセンス
+
+MIT
+
+## 貢献
+
+Issue・Pull Requestを歓迎します。
+
+## 参考リンク
+
+- [Ruby on Rails GitHub](https://github.com/rails/rails)
+- [GitHub Actions Documentation](https://docs.github.com/en/actions)
+- [OpenAI API Documentation](https://platform.openai.com/docs)
+- [GitHub Pages Documentation](https://docs.github.com/en/pages)

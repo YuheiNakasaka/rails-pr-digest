@@ -1,0 +1,16 @@
+{
+  "name": "rails-pr-digest",
+  "version": "1.0.0",
+  "description": "Daily digest of Ruby on Rails merged PRs with AI summaries",
+  "type": "module",
+  "scripts": {
+    "collect": "node scripts/collect-and-summarize.js"
+  },
+  "dependencies": {
+    "openai": "^4.0.0",
+    "@octokit/rest": "^20.0.2"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}
