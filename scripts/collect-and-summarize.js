@@ -187,7 +187,7 @@ function getExistingPRNumbers() {
 }
 
 /**
- * Update monthly markdown file
+ * Update monthly markdown file (VitePress format)
  */
 function updateMonthlyFile(entries) {
   if (entries.length === 0) {
@@ -204,6 +204,7 @@ function updateMonthlyFile(entries) {
   const filepath = join(DOCS_DIR, filename);
   const { year, month } = getYearMonth();
 
+  let frontmatter = '';
   let header = '';
   let existingContent = '';
 
@@ -212,36 +213,51 @@ function updateMonthlyFile(entries) {
     const content = readFileSync(filepath, 'utf-8');
     console.log(`Updating existing file: ${filename}`);
 
-    // Split header and existing content
-    // Header includes title, description, and last updated timestamp
-    const headerEndMatch = content.match(/最終更新: .*\n\n/);
-    if (headerEndMatch) {
-      const headerEndIndex = headerEndMatch.index + headerEndMatch[0].length;
-      header = content.substring(0, headerEndIndex);
-      existingContent = content.substring(headerEndIndex);
+    // Extract frontmatter if exists
+    const frontmatterMatch = content.match(/^---\n([\s\S]*?)\n---\n/);
+    if (frontmatterMatch) {
+      // Update lastUpdated in frontmatter
+      const existingFrontmatter = frontmatterMatch[1];
+      const updatedFrontmatter = existingFrontmatter.replace(
+        /lastUpdated: .*/,
+        `lastUpdated: ${new Date().toISOString().split('T')[0]}`
+      );
+      frontmatter = `---\n${updatedFrontmatter}\n---\n\n`;
+
+      // Extract content after frontmatter
+      const contentAfterFrontmatter = content.substring(frontmatterMatch[0].length);
+
+      // Split header and existing content
+      const headerMatch = contentAfterFrontmatter.match(/^(# .*?\n\n> .*?\n\n)/);
+      if (headerMatch) {
+        header = headerMatch[1];
+        existingContent = contentAfterFrontmatter.substring(headerMatch[0].length);
+      } else {
+        existingContent = contentAfterFrontmatter;
+      }
     } else {
-      // Fallback if header format is unexpected
+      // No frontmatter, treat entire content as existing
       existingContent = content;
     }
   } else {
+    // Create new file with frontmatter
+    frontmatter = `---
+title: ${year}年 ${month}月
+description: Ruby on Rails PR Digest - ${year}年 ${month}月にマージされたPRの要約
+lastUpdated: ${new Date().toISOString().split('T')[0]}
+---
+
+`;
     header = `# Ruby on Rails PR Digest - ${year}年 ${month}月
 
 > このページは [rails/rails](https://github.com/rails/rails) リポジトリにマージされたPull Requestを自動的に収集し、AIで要約したものです。
-
-最終更新: ${new Date().toLocaleString('ja-JP')}
 
 `;
     console.log(`Creating new file: ${filename}`);
   }
 
-  // Update last modified timestamp in header
-  header = header.replace(
-    /最終更新: .*/,
-    `最終更新: ${new Date().toLocaleString('ja-JP')}`
-  );
-
   // Prepend new entries to existing content
-  const newContent = header + entries.join('\n') + '\n' + existingContent;
+  const newContent = frontmatter + header + entries.join('\n') + '\n' + existingContent;
 
   writeFileSync(filepath, newContent, 'utf-8');
   console.log(`Updated: ${filepath}`);

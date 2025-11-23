@@ -25,4 +25,6 @@ yarn-error.log*
 *.tmp
 *.temp
 
-docs/monthly/
+# VitePress
+docs/.vitepress/dist
+docs/.vitepress/cache

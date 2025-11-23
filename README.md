@@ -11,6 +11,9 @@ Ruby on Railsの最新変更を自動追跡し、AI要約付きで閲覧でき�
 - **定期実行**: GitHub Actionsで2日ごとに自動実行
 - **AI要約**: OpenAI GPT-4oで各PRを日本語で要約・解説
 - **月別管理**: 月ごとにファイルを生成・更新
+- **VitePress**: 美しいUIとローカル開発環境
+- **検索機能**: VitePress組み込みの高速検索
+- **ダークモード**: 自動切り替え対応
 - **GitHub Pages**: 自動的にWebページとして公開
 - **継続的更新**: 月内は同じファイルの先頭に追記、新しい月には新しいファイルを作成
 
@@ -26,7 +29,6 @@ Ruby on Railsの最新変更を自動追跡し、AI要約付きで閲覧でき�
 ### 2. 依存関係のインストール
 
 ```bash
-cd acme/rails-pr-digest
 npm install
 ```
 
@@ -53,14 +55,38 @@ GitHub Actionsでは自動的に利用可能です。追加の設定は不要で
 
 ## 使い方
 
-### 手動実行
+### ローカル開発
+
+VitePressの開発サーバーを起動して、サイトをプレビューできます：
+
+```bash
+npm run docs:dev
+```
+
+ブラウザで http://localhost:5173 にアクセスして、サイトをプレビューできます。
+変更は即座に反映されます（ホットリロード）。
+
+### ビルド
+
+本番用の静的ファイルを生成：
+
+```bash
+npm run docs:build
+```
+
+ビルド後のプレビュー：
+
+```bash
+npm run docs:preview
+```
+
+### PR収集（手動実行）
 
 ```bash
 # 環境変数を設定して実行
 export GITHUB_TOKEN="your_github_token"
 export OPENAI_API_KEY="your_openai_api_key"
 
-cd acme/rails-pr-digest
 npm run collect
 ```
 
@@ -79,20 +105,24 @@ GitHub Actionsワークフローは2日ごと（午前0時UTC）に自動実行�
 ## プロジェクト構造
 
 ```
-acme/rails-pr-digest/
+./
 ├── .github/
 │   └── workflows/
-│       └── collect-prs.yml       # GitHub Actionsワークフロー
+│       └── collect-prs.yml            # GitHub Actionsワークフロー
 ├── scripts/
-│   └── collect-and-summarize.js  # PR収集・要約スクリプト
-├── docs/                         # GitHub Pages用ディレクトリ
-│   ├── index.html               # トップページ
-│   ├── monthly-index.json       # 月別ファイルインデックス（自動生成）
-│   ├── .nojekyll                # Jekyllを無効化
-│   └── monthly/                 # 月別ダイジェストファイル
-│       ├── 2025-01.md
-│       ├── 2025-02.md
-│       └── ...
+│   └── collect-and-summarize.js       # PR収集・要約スクリプト
+├── docs/                              # VitePressソースディレクトリ
+│   ├── .vitepress/
+│   │   ├── config.js                  # VitePress設定
+│   │   ├── dist/                      # ビルド出力（gitignore）
+│   │   └── cache/                     # キャッシュ（gitignore）
+│   ├── index.md                       # トップページ
+│   ├── monthly/                       # 月別ダイジェスト
+│   │   ├── index.md                   # アーカイブ一覧
+│   │   ├── 2025-11.md
+│   │   └── ...
+│   ├── monthly-index.json             # 月別インデックス（自動生成）
+│   └── public/                        # 静的ファイル
 ├── package.json
 └── README.md
 ```

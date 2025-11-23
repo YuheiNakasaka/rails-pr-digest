@@ -26,32 +26,31 @@ jobs:
         with:
           node-version: '20'
           cache: 'npm'
-          cache-dependency-path: acme/rails-pr-digest/package.json
 
       - name: Install dependencies
-        working-directory: acme/rails-pr-digest
         run: npm ci
 
       - name: Collect and summarize PRs
-        working-directory: acme/rails-pr-digest
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
         run: npm run collect
 
       - name: Commit and push changes
-        working-directory: acme/rails-pr-digest
         run: |
           git config --local user.email "github-actions[bot]@users.noreply.github.com"
           git config --local user.name "github-actions[bot]"
 
           if [ -n "$(git status --porcelain)" ]; then
-            git add docs/weekly/*.md
+            git add docs/monthly/*.md docs/monthly-index.json
             git commit -m "Update Rails PR digest [skip ci]"
             git push
           else
             echo "No changes to commit"
           fi
+
+      - name: Build VitePress site
+        run: npm run docs:build
 
       - name: Setup Pages
         if: success()
@@ -61,7 +60,7 @@ jobs:
         if: success()
         uses: actions/upload-pages-artifact@v3
         with:
-          path: 'acme/rails-pr-digest/docs'
+          path: 'docs/.vitepress/dist'
 
       - name: Deploy to GitHub Pages
         if: success()
