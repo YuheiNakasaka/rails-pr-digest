@@ -14,32 +14,30 @@ const RAILS_OWNER = 'rails';
 const RAILS_REPO = 'rails';
 const GITHUB_TOKEN = process.env.GITHUB_TOKEN;
 const OPENAI_API_KEY = process.env.OPENAI_API_KEY;
-const DOCS_DIR = join(__dirname, '..', 'docs', 'weekly');
-const INDEX_FILE = join(__dirname, '..', 'docs', 'weekly-index.json');
+const DOCS_DIR = join(__dirname, '..', 'docs', 'monthly');
+const INDEX_FILE = join(__dirname, '..', 'docs', 'monthly-index.json');
 
 // Initialize clients
 const octokit = new Octokit({ auth: GITHUB_TOKEN });
 const openai = new OpenAI({ apiKey: OPENAI_API_KEY });
 
 /**
- * Get ISO week number and year for a given date
+ * Get year and month for a given date
  */
-function getISOWeek(date = new Date()) {
-  const d = new Date(Date.UTC(date.getFullYear(), date.getMonth(), date.getDate()));
-  const dayNum = d.getUTCDay() || 7;
-  d.setUTCDate(d.getUTCDate() + 4 - dayNum);
-  const yearStart = new Date(Date.UTC(d.getUTCFullYear(), 0, 1));
-  const weekNum = Math.ceil((((d - yearStart) / 86400000) + 1) / 7);
-  return { year: d.getUTCFullYear(), week: weekNum };
+function getYearMonth(date = new Date()) {
+  return {
+    year: date.getFullYear(),
+    month: date.getMonth() + 1
+  };
 }
 
 /**
- * Get filename for the current week
+ * Get filename for the current month
  */
-function getWeeklyFilename() {
-  const { year, week } = getISOWeek();
-  const weekStr = String(week).padStart(2, '0');
-  return `${year}-W${weekStr}.md`;
+function getMonthlyFilename() {
+  const { year, month } = getYearMonth();
+  const monthStr = String(month).padStart(2, '0');
+  return `${year}-${monthStr}.md`;
 }
 
 /**
@@ -164,10 +162,10 @@ ${summary}
 }
 
 /**
- * Get existing PR numbers from weekly file
+ * Get existing PR numbers from monthly file
  */
 function getExistingPRNumbers() {
-  const filename = getWeeklyFilename();
+  const filename = getMonthlyFilename();
   const filepath = join(DOCS_DIR, filename);
 
   if (!existsSync(filepath)) {
@@ -189,31 +187,44 @@ function getExistingPRNumbers() {
 }
 
 /**
- * Update weekly markdown file
+ * Update monthly markdown file
  */
-function updateWeeklyFile(entries) {
+function updateMonthlyFile(entries) {
   if (entries.length === 0) {
     console.log('No new PRs to add');
     return;
   }
 
-  // Ensure docs/weekly directory exists
+  // Ensure docs/monthly directory exists
   if (!existsSync(DOCS_DIR)) {
     mkdirSync(DOCS_DIR, { recursive: true });
   }
 
-  const filename = getWeeklyFilename();
+  const filename = getMonthlyFilename();
   const filepath = join(DOCS_DIR, filename);
-  const { year, week } = getISOWeek();
+  const { year, month } = getYearMonth();
 
-  let content = '';
+  let header = '';
+  let existingContent = '';
 
   // Read existing content or create new file
   if (existsSync(filepath)) {
-    content = readFileSync(filepath, 'utf-8');
+    const content = readFileSync(filepath, 'utf-8');
     console.log(`Updating existing file: ${filename}`);
+
+    // Split header and existing content
+    // Header includes title, description, and last updated timestamp
+    const headerEndMatch = content.match(/最終更新: .*\n\n/);
+    if (headerEndMatch) {
+      const headerEndIndex = headerEndMatch.index + headerEndMatch[0].length;
+      header = content.substring(0, headerEndIndex);
+      existingContent = content.substring(headerEndIndex);
+    } else {
+      // Fallback if header format is unexpected
+      existingContent = content;
+    }
   } else {
-    content = `# Ruby on Rails PR Digest - ${year}年 第${week}週
+    header = `# Ruby on Rails PR Digest - ${year}年 ${month}月
 
 > このページは [rails/rails](https://github.com/rails/rails) リポジトリにマージされたPull Requestを自動的に収集し、AIで要約したものです。
 
@@ -223,31 +234,31 @@ function updateWeeklyFile(entries) {
     console.log(`Creating new file: ${filename}`);
   }
 
-  // Append new entries
-  content += '\n' + entries.join('\n');
-
-  // Update last modified timestamp
-  content = content.replace(
+  // Update last modified timestamp in header
+  header = header.replace(
     /最終更新: .*/,
     `最終更新: ${new Date().toLocaleString('ja-JP')}`
   );
 
-  writeFileSync(filepath, content, 'utf-8');
+  // Prepend new entries to existing content
+  const newContent = header + entries.join('\n') + '\n' + existingContent;
+
+  writeFileSync(filepath, newContent, 'utf-8');
   console.log(`Updated: ${filepath}`);
 }
 
 /**
- * Generate index of weekly files
+ * Generate index of monthly files
  */
-function generateWeeklyIndex() {
-  console.log('Generating weekly file index...');
+function generateMonthlyIndex() {
+  console.log('Generating monthly file index...');
 
   if (!existsSync(DOCS_DIR)) {
-    console.log('No weekly directory found');
+    console.log('No monthly directory found');
     return;
   }
 
-  // Read all .md files from weekly directory
+  // Read all .md files from monthly directory
   const files = readdirSync(DOCS_DIR)
     .filter(f => f.endsWith('.md'))
     .sort()
@@ -255,16 +266,16 @@ function generateWeeklyIndex() {
 
   // Generate index data
   const indexData = files.map(filename => {
-    const match = filename.match(/(\d{4})-W(\d{2})\.md/);
+    const match = filename.match(/(\d{4})-(\d{2})\.md/);
     if (match) {
       const year = match[1];
-      const week = parseInt(match[2]);
+      const month = parseInt(match[2]);
       return {
         filename,
         year,
-        week,
-        title: `${year}年 第${week}週`,
-        url: `weekly/${filename}`
+        month,
+        title: `${year}年 ${month}月`,
+        url: `monthly/${filename}`
       };
     }
     return null;
@@ -302,7 +313,7 @@ async function main() {
 
   // Get existing PR numbers to avoid duplicates
   const existingPRs = getExistingPRNumbers();
-  console.log(`Found ${existingPRs.size} existing PRs in the current week's file`);
+  console.log(`Found ${existingPRs.size} existing PRs in the current month's file`);
 
   // Filter out already processed PRs
   const newPRs = prs.filter(pr => !existingPRs.has(pr.number));
@@ -329,11 +340,11 @@ async function main() {
     await new Promise(resolve => setTimeout(resolve, 1000));
   }
 
-  // Update weekly file
-  updateWeeklyFile(entries);
+  // Update monthly file
+  updateMonthlyFile(entries);
 
-  // Generate weekly index
-  generateWeeklyIndex();
+  // Generate monthly index
+  generateMonthlyIndex();
 
   console.log('\n✓ Rails PR Digest collection completed!');
 }
