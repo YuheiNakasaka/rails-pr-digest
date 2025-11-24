@@ -1,5 +1,7 @@
 # Ruby on Rails PR Digest
 
+[![CI](https://github.com/YuheiNaksaka/rails-pr-digest/actions/workflows/ci.yml/badge.svg)](https://github.com/YuheiNaksaka/rails-pr-digest/actions/workflows/ci.yml)
+
 Ruby on Railsの最新変更を自動追跡し、AI要約付きで閲覧できるシステムです。
 
 ## 概要
@@ -23,6 +25,7 @@ Ruby on Railsの最新変更を自動追跡し、AI要約付きで閲覧でき�
 - **tsx**: 高速なTypeScript実行環境
 - **Biome**: 統合されたformatter & linter
 - **Vitest**: 高速でモダンなテストフレームワーク
+- **GitHub Actions**: CI/CDパイプラインによる品質保証
 - **厳格な型チェック**: strict mode有効化で品質向上
 
 ## セットアップ
@@ -152,7 +155,8 @@ GitHub Actionsワークフローは2日ごと（午前0時UTC）に自動実行�
 ./
 ├── .github/
 │   └── workflows/
-│       └── collect-prs.yml            # GitHub Actionsワークフロー
+│       ├── ci.yml                     # CI ワークフロー（テスト・Lint・型チェック）
+│       └── collect-prs.yml            # PR収集・デプロイ ワークフロー
 ├── scripts/
 │   ├── main.ts       # メインスクリプト（オーケストレーション）
 │   ├── github-client.ts               # GitHub API クライアント
@@ -309,6 +313,13 @@ const RAILS_REPO = 'your-repo';
 - 必要に応じて型定義を追加・修正
 - `tsconfig.json` の設定を確認
 
+### CIが失敗する
+
+- GitHub Actionsの「Actions」タブでログを確認
+- どのジョブが失敗したかを特定（lint-and-format, typecheck, test, build-docs）
+- ローカルで同じコマンドを実行して再現
+- 修正後、再度Pushして確認
+
 ## 開発ガイドライン
 
 ### コード品質
@@ -347,6 +358,33 @@ npm run test      # テスト実行
 npm run format && npm run lint && npm run typecheck && npm run test
 ```
 
+### CI/CD
+
+GitHub Actionsによる自動化されたCI/CDパイプラインを使用しています。
+
+#### CI ワークフロー (`.github/workflows/ci.yml`)
+
+Pull RequestとmainブランチへのPushで自動実行され、以下のチェックを並列で実行します：
+
+- **Lint & Format**: Biomeによるコードスタイルチェック
+- **Type Check**: TypeScriptの型チェック
+- **Test**: Vitestによるユニットテスト（26テスト）
+- **Build Documentation**: VitePressドキュメントのビルド確認
+
+すべてのチェックが成功しないとマージできません。
+
+#### PR収集 ワークフロー (`.github/workflows/collect-prs.yml`)
+
+2日ごとに自動実行され、以下の処理を行います：
+
+1. Rails/RailsリポジトリからマージされたPRを収集
+2. OpenAI GPT-4oで日本語要約を生成
+3. 月別マークダウンファイルを更新
+4. VitePressサイトをビルド
+5. GitHub Pagesにデプロイ
+
+手動でも実行可能（Actions タブから "Run workflow"）
+
 ## ライセンス
 
 MIT
@@ -354,6 +392,14 @@ MIT
 ## 貢献
 
 Issue・Pull Requestを歓迎します。
+
+Pull Requestを作成する際は：
+
+1. フォークしてブランチを作成
+2. コードを修正
+3. `npm run format && npm run lint && npm run typecheck && npm run test` を実行
+4. コミットしてPull Requestを作成
+5. CIが自動的に実行されます（全てのチェックが成功する必要があります）
 
 ## 参考リンク
 
