@@ -1,8 +1,8 @@
 #!/usr/bin/env tsx
 
-import "dotenv/config";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
+import { loadEnv } from "vitepress";
 import { FileManager } from "./file-manager";
 import { formatPREntry } from "./formatter";
 import { GitHubClient } from "./github-client";
@@ -12,10 +12,11 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
 // Configuration
+const env = loadEnv("", process.cwd(), "");
 const RAILS_OWNER = "rails";
 const RAILS_REPO = "rails";
-const GITHUB_TOKEN = process.env.GITHUB_TOKEN;
-const OPENAI_API_KEY = process.env.OPENAI_API_KEY;
+const GITHUB_TOKEN = env.GITHUB_TOKEN;
+const OPENAI_API_KEY = env.OPENAI_API_KEY;
 const DOCS_DIR = join(__dirname, "..", "docs", "monthly");
 const INDEX_FILE = join(__dirname, "..", "docs", "monthly-index.json");
 
