@@ -69,12 +69,12 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      - name: Run tests
-        run: npm run test
+      - name: Run tests with coverage
+        run: npm run test:coverage
 
       - name: Upload coverage reports
         uses: actions/upload-artifact@v4
-        if: always()
+        if: success()
         with:
           name: coverage-reports
           path: coverage/
