@@ -424,7 +424,7 @@ Pull Requestを作成する際は：
 - **GitHub Actions**: CI/CDパイプラインによる品質保証
 - **Renovate Bot**: 依存パッケージの自動更新
 - **VitePress**: ドキュメントサイト生成
-- **OpenAI GPT-4o**: PR要約生成
+- **OpenAI GPT**: PR要約生成
 - **Octokit**: GitHub API クライアント
 
 ## 参考リンク
