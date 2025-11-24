@@ -7,7 +7,10 @@ hero:
   tagline: rails/railsにマージされたPRをAIで日本語要約
   actions:
     - theme: brand
-      text: 月別アーカイブを見る
+      text: 最新のPRを見る
+      link: /monthly/2025-11.md
+    - theme: alt
+      text: 月別アーカイブ
       link: /monthly/
 
 features:
@@ -17,5 +20,8 @@ features:
   - icon: 📅
     title: 月別整理
     details: 月ごとに整理され、最新のPRが上に表示されます
+  - icon: 🔄
+    title: 毎日自動更新
+    details: GitHub Actionsで毎日自動的に最新PRを収集
 
 ---

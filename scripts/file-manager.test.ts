@@ -159,6 +159,15 @@ lastUpdated: 2025-11-20
     });
 
     it("should generate index with sorted monthly files", () => {
+      const homePageContent = `---
+layout: home
+hero:
+  actions:
+    - theme: brand
+      text: 最新のPRを見る
+      link: /monthly/2025-01.md
+---`;
+
       vi.mocked(existsSync).mockReturnValue(true);
       vi.mocked(readdirSync).mockReturnValue([
         "2025-01.md",
@@ -166,6 +175,7 @@ lastUpdated: 2025-11-20
         "2025-02.md",
         "index.md",
       ] as any);
+      vi.mocked(readFileSync).mockReturnValue(homePageContent);
 
       fileManager.generateMonthlyIndex();
 
@@ -180,8 +190,18 @@ lastUpdated: 2025-11-20
     });
 
     it("should include correct metadata for each file", () => {
+      const homePageContent = `---
+layout: home
+hero:
+  actions:
+    - theme: brand
+      text: 最新のPRを見る
+      link: /monthly/2025-10.md
+---`;
+
       vi.mocked(existsSync).mockReturnValue(true);
       vi.mocked(readdirSync).mockReturnValue(["2025-11.md"] as any);
+      vi.mocked(readFileSync).mockReturnValue(homePageContent);
 
       fileManager.generateMonthlyIndex();
 
@@ -195,6 +215,41 @@ lastUpdated: 2025-11-20
         title: "2025年 11月",
         url: "monthly/2025-11.md",
       });
+    });
+
+    it("should update home page with latest month link", () => {
+      const homePageContent = `---
+layout: home
+
+hero:
+  name: Rails PR Digest
+  actions:
+    - theme: brand
+      text: 最新のPRを見る
+      link: /monthly/2025-10.md
+    - theme: alt
+      text: 月別アーカイブ
+      link: /monthly/
+---`;
+
+      vi.mocked(existsSync).mockReturnValue(true);
+      vi.mocked(readdirSync).mockReturnValue(["2025-11.md"] as any);
+      vi.mocked(readFileSync).mockReturnValue(homePageContent);
+
+      fileManager.generateMonthlyIndex();
+
+      // Check that writeFileSync was called for both index.json and index.md
+      const calls = vi.mocked(writeFileSync).mock.calls;
+      expect(calls.length).toBe(2);
+
+      // First call should be for monthly-index.json
+      expect(calls[0][0]).toBe(indexFile);
+
+      // Second call should be for index.md
+      expect(String(calls[1][0])).toContain("index.md");
+      const updatedContent = calls[1][1] as string;
+      expect(updatedContent).toContain("link: /monthly/2025-11.md");
+      expect(updatedContent).not.toContain("link: /monthly/2025-10.md");
     });
   });
 });

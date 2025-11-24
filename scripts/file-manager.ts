@@ -161,5 +161,35 @@ lastUpdated: ${new Date().toISOString().split("T")[0]}
     // Write index file
     writeFileSync(this.indexFile, JSON.stringify(indexData, null, 2), "utf-8");
     console.log(`Generated index with ${indexData.length} entries: ${this.indexFile}`);
+
+    // Update home page with latest month link
+    if (indexData.length > 0) {
+      this.updateHomePage(indexData[0]);
+    }
+  }
+
+  /**
+   * Update home page (docs/index.md) with latest month link
+   */
+  private updateHomePage(latestMonth: MonthlyIndexEntry): void {
+    const homePagePath = join(this.docsDir, "..", "index.md");
+
+    if (!existsSync(homePagePath)) {
+      console.log("Home page not found, skipping update");
+      return;
+    }
+
+    const content = readFileSync(homePagePath, "utf-8");
+
+    // Update the hero action link to point to the latest month
+    const updatedContent = content.replace(
+      /(text: 最新のPRを見る[\s\S]*?link: )\/monthly\/[\w-]+\.md/,
+      `$1/${latestMonth.url}`,
+    );
+
+    if (content !== updatedContent) {
+      writeFileSync(homePagePath, updatedContent, "utf-8");
+      console.log(`Updated home page link to: ${latestMonth.url}`);
+    }
   }
 }
