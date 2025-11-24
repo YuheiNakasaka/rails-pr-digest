@@ -8,7 +8,7 @@ Ruby on Railsの最新変更を自動追跡し、AI要約付きで閲覧でき�
 
 ## 主な機能
 
-- 2日ごとに自動実行（GitHub Actions）
+- 毎日自動実行（GitHub Actions）
 - OpenAI GPT-4oによる日本語要約
 - 月別管理とVitePressによる美しいUI
 - 検索機能、ダークモード対応
