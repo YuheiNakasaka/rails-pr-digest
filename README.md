@@ -154,8 +154,15 @@ GitHub Actionsワークフローは2日ごと（午前0時UTC）に自動実行�
 │   └── workflows/
 │       └── collect-prs.yml            # GitHub Actionsワークフロー
 ├── scripts/
-│   ├── collect-and-summarize.ts       # PR収集・要約スクリプト（TypeScript）
-│   └── collect-and-summarize.test.ts  # テストファイル
+│   ├── main.ts       # メインスクリプト（オーケストレーション）
+│   ├── github-client.ts               # GitHub API クライアント
+│   ├── github-client.test.ts          # GitHub クライアントテスト
+│   ├── openai-client.ts               # OpenAI API クライアント
+│   ├── openai-client.test.ts          # OpenAI クライアントテスト
+│   ├── file-manager.ts                # ファイルシステム操作
+│   ├── file-manager.test.ts           # ファイルマネージャーテスト
+│   ├── formatter.ts                   # フォーマットとユーティリティ
+│   └── formatter.test.ts              # フォーマッターテスト
 ├── docs/                              # VitePressソースディレクトリ
 │   ├── .vitepress/
 │   │   ├── config.js                  # VitePress設定
@@ -174,6 +181,49 @@ GitHub Actionsワークフローは2日ごと（午前0時UTC）に自動実行�
 ├── package.json
 └── README.md
 ```
+
+## コードアーキテクチャ
+
+コードベースは責務ごとに明確に分離されており、保守性と拡張性を重視した設計になっています。
+
+### モジュール構成
+
+#### **github-client.ts** - GitHub API通信
+- `GitHubClient`: GitHub API との通信を担当
+  - `fetchRecentPRs()`: 最近マージされたPRを取得
+  - `getPRDetails()`: PR詳細とファイルリストを取得
+- テスト: `github-client.test.ts` (4テスト)
+
+#### **openai-client.ts** - OpenAI API通信
+- `OpenAIClient`: OpenAI API との通信を担当
+  - `summarizePR()`: PRの要約を生成
+- テスト: `openai-client.test.ts` (2テスト)
+
+#### **file-manager.ts** - ファイルシステム操作
+- `FileManager`: ファイルの読み書きを担当
+  - `getExistingPRNumbers()`: 既存のPR番号を抽出
+  - `updateMonthlyFile()`: 月別ファイルの更新
+  - `generateMonthlyIndex()`: インデックスファイルの生成
+- テスト: `file-manager.test.ts` (10テスト)
+
+#### **formatter.ts** - フォーマットとユーティリティ
+- `getYearMonth()`: 年月の取得
+- `getMonthlyFilename()`: ファイル名の生成
+- `formatPREntry()`: PRエントリーのマークダウンフォーマット
+- テスト: `formatter.test.ts` (10テスト)
+
+#### **main.ts** - メインスクリプト
+- 各モジュールを組み合わせてPR収集・要約フローを実行
+- 環境変数の検証
+- エラーハンドリング
+
+### 設計の利点
+
+- **単一責任の原則**: 各モジュールが1つの明確な責務を持つ
+- **テスト容易性**: モジュールごとに独立してテスト可能
+- **再利用性**: 各クライアントを他のプロジェクトでも利用可能
+- **保守性**: 変更が必要な場合、該当モジュールのみを修正
+- **拡張性**: 新しい機能追加が容易
 
 ## 動作の仕組み
 
@@ -222,11 +272,11 @@ on:
 
 ### 要約プロンプトのカスタマイズ
 
-`scripts/collect-and-summarize.ts` の `summarizePR()` 関数内のプロンプトを編集してください。
+`scripts/openai-client.ts` の `OpenAIClient.summarizePR()` メソッド内のプロンプトを編集してください。
 
 ### 他のリポジトリへの対応
 
-`scripts/collect-and-summarize.ts` の以下の定数を変更：
+`scripts/main.ts` の以下の定数を変更：
 
 ```typescript
 const RAILS_OWNER = 'your-owner';

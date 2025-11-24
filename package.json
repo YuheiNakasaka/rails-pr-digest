@@ -4,7 +4,7 @@
   "description": "Daily digest of Ruby on Rails merged PRs with AI summaries",
   "type": "module",
   "scripts": {
-    "collect": "tsx scripts/collect-and-summarize.ts",
+    "collect": "tsx scripts/main.ts",
     "docs:dev": "vitepress dev docs",
     "docs:build": "vitepress build docs",
     "docs:preview": "vitepress preview docs",
