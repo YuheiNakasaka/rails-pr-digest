@@ -19,8 +19,8 @@ const DOCS_DIR = join(__dirname, "..", "docs", "monthly");
 const INDEX_FILE = join(__dirname, "..", "docs", "monthly-index.json");
 
 // Initialize clients
-const octokit = new Octokit({ auth: GITHUB_TOKEN });
-const openai = new OpenAI({ apiKey: OPENAI_API_KEY });
+export const octokit = new Octokit({ auth: GITHUB_TOKEN });
+export const openai = new OpenAI({ apiKey: OPENAI_API_KEY });
 
 // Type definitions
 interface YearMonth {

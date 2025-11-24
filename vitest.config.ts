@@ -4,6 +4,10 @@ export default defineConfig({
   test: {
     globals: true,
     environment: "node",
+    env: {
+      GITHUB_TOKEN: "test-github-token",
+      OPENAI_API_KEY: "test-openai-key",
+    },
     coverage: {
       provider: "v8",
       reporter: ["text", "json", "html"],
