@@ -260,7 +260,8 @@ function updateMonthlyFile(entries: string[]): void {
       const contentAfterFrontmatter = content.substring(frontmatterMatch[0].length);
 
       // Split header and existing content
-      const headerMatch = contentAfterFrontmatter.match(/^(# .*?\n\n> .*?\n\n)/);
+      // Note: Skip leading whitespace before matching header
+      const headerMatch = contentAfterFrontmatter.match(/^\s*(# .*?\n\n> .*?\n\n)/);
       if (headerMatch) {
         header = headerMatch[1];
         existingContent = contentAfterFrontmatter.substring(headerMatch[0].length);
