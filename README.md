@@ -6,14 +6,6 @@ Ruby on Railsの最新変更を自動追跡し、AI要約付きで閲覧でき�
 
 [rails/rails](https://github.com/rails/rails)リポジトリにマージされたPull Requestを定期的に収集し、OpenAI GPT-4oで要約・解説してGitHub Pagesで公開します。
 
-## 主な機能
-
-- 毎日自動実行（GitHub Actions）
-- OpenAI GPT-4oによる日本語要約
-- 月別管理とVitePressによる美しいUI
-- 検索機能、ダークモード対応
-- GitHub Pagesで自動公開
-
 ## クイックスタート
 
 ### 必要な環境
