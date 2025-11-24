@@ -18,7 +18,7 @@ Ruby on Railsの最新変更を自動追跡し、AI要約付きで閲覧でき�
 
 ### 必要な環境
 
-- Node.js 18以上
+- Node.js 24.11.1以上
 - GitHub Personal Access Token
 - OpenAI API Key
 

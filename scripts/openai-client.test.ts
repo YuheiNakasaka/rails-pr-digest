@@ -3,29 +3,24 @@ import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import type { PRDetails } from "./github-client";
 import { OpenAIClient } from "./openai-client";
 
-vi.mock("openai");
+// Mock the entire openai module
+vi.mock("openai", () => {
+  const MockOpenAI = vi.fn();
+  MockOpenAI.prototype.chat = {
+    completions: {
+      create: vi.fn(),
+    },
+  };
+  return {
+    default: MockOpenAI,
+  };
+});
 
 describe("OpenAIClient", () => {
   let client: OpenAIClient;
-  let mockOpenAI: {
-    chat: {
-      completions: {
-        create: ReturnType<typeof vi.fn>;
-      };
-    };
-  };
 
   beforeEach(() => {
-    mockOpenAI = {
-      chat: {
-        completions: {
-          create: vi.fn(),
-        },
-      },
-    };
-
-    vi.mocked(OpenAI).mockImplementation(() => mockOpenAI as any);
-
+    vi.clearAllMocks();
     client = new OpenAIClient("test-api-key");
   });
 
@@ -35,7 +30,9 @@ describe("OpenAIClient", () => {
 
   describe("summarizePR", () => {
     it("should return summary from OpenAI API", async () => {
-      mockOpenAI.chat.completions.create.mockResolvedValue({
+      const mockCreate = vi.spyOn(OpenAI.prototype.chat.completions, "create") as any;
+
+      mockCreate.mockResolvedValue({
         choices: [
           {
             message: {
@@ -72,7 +69,7 @@ describe("OpenAIClient", () => {
 
       expect(typeof result).toBe("string");
       expect(result).toContain("AI generated summary");
-      expect(mockOpenAI.chat.completions.create).toHaveBeenCalledWith(
+      expect(mockCreate).toHaveBeenCalledWith(
         expect.objectContaining({
           model: "gpt-4o",
         }),
@@ -80,7 +77,9 @@ describe("OpenAIClient", () => {
     });
 
     it("should handle OpenAI API error gracefully", async () => {
-      mockOpenAI.chat.completions.create.mockRejectedValue(new Error("API Error"));
+      const mockCreate = vi.spyOn(OpenAI.prototype.chat.completions, "create") as any;
+
+      mockCreate.mockRejectedValue(new Error("API Error"));
 
       const mockPRData: PRDetails = {
         pr: {

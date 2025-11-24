@@ -2,33 +2,26 @@ import { Octokit } from "@octokit/rest";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import { GitHubClient } from "./github-client";
 
-vi.mock("@octokit/rest");
+// Mock the Octokit module
+vi.mock("@octokit/rest", () => {
+  const MockOctokit = vi.fn();
+  MockOctokit.prototype.search = {
+    issuesAndPullRequests: vi.fn(),
+  };
+  MockOctokit.prototype.pulls = {
+    get: vi.fn(),
+    listFiles: vi.fn(),
+  };
+  return {
+    Octokit: MockOctokit,
+  };
+});
 
 describe("GitHubClient", () => {
   let client: GitHubClient;
-  let mockOctokit: {
-    search: {
-      issuesAndPullRequests: ReturnType<typeof vi.fn>;
-    };
-    pulls: {
-      get: ReturnType<typeof vi.fn>;
-      listFiles: ReturnType<typeof vi.fn>;
-    };
-  };
 
   beforeEach(() => {
-    mockOctokit = {
-      search: {
-        issuesAndPullRequests: vi.fn(),
-      },
-      pulls: {
-        get: vi.fn(),
-        listFiles: vi.fn(),
-      },
-    };
-
-    vi.mocked(Octokit).mockImplementation(() => mockOctokit as any);
-
+    vi.clearAllMocks();
     client = new GitHubClient("test-token", "rails", "rails");
   });
 
@@ -38,7 +31,12 @@ describe("GitHubClient", () => {
 
   describe("fetchRecentPRs", () => {
     it("should return list of merged PRs", async () => {
-      mockOctokit.search.issuesAndPullRequests.mockResolvedValue({
+      const mockIssuesAndPullRequests = vi.spyOn(
+        (Octokit.prototype as any).search,
+        "issuesAndPullRequests",
+      );
+
+      mockIssuesAndPullRequests.mockResolvedValue({
         data: {
           items: [
             { number: 1, title: "PR 1" },
@@ -56,7 +54,12 @@ describe("GitHubClient", () => {
     });
 
     it("should return empty array when API call fails", async () => {
-      mockOctokit.search.issuesAndPullRequests.mockRejectedValue(new Error("API Error"));
+      const mockIssuesAndPullRequests = vi.spyOn(
+        (Octokit.prototype as any).search,
+        "issuesAndPullRequests",
+      );
+
+      mockIssuesAndPullRequests.mockRejectedValue(new Error("API Error"));
 
       const result = await client.fetchRecentPRs();
 
@@ -67,7 +70,10 @@ describe("GitHubClient", () => {
 
   describe("getPRDetails", () => {
     it("should return PR details with files", async () => {
-      mockOctokit.pulls.get.mockResolvedValue({
+      const mockPullsGet = vi.spyOn((Octokit.prototype as any).pulls, "get");
+      const mockPullsListFiles = vi.spyOn((Octokit.prototype as any).pulls, "listFiles");
+
+      mockPullsGet.mockResolvedValue({
         data: {
           number: 12345,
           title: "Test PR",
@@ -83,7 +89,7 @@ describe("GitHubClient", () => {
         },
       });
 
-      mockOctokit.pulls.listFiles.mockResolvedValue({
+      mockPullsListFiles.mockResolvedValue({
         data: [
           { filename: "file1.ts", additions: 10, deletions: 5 },
           { filename: "file2.ts", additions: 20, deletions: 10 },
@@ -100,7 +106,9 @@ describe("GitHubClient", () => {
     });
 
     it("should return null when API call fails", async () => {
-      mockOctokit.pulls.get.mockRejectedValue(new Error("API Error"));
+      const mockPullsGet = vi.spyOn((Octokit.prototype as any).pulls, "get");
+
+      mockPullsGet.mockRejectedValue(new Error("API Error"));
 
       const result = await client.getPRDetails(12345);
 
