@@ -27,3 +27,6 @@ yarn-error.log*
 # VitePress
 docs/.vitepress/dist
 docs/.vitepress/cache
+
+# Test coverage
+coverage/

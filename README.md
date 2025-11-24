@@ -22,6 +22,7 @@ Ruby on Railsの最新変更を自動追跡し、AI要約付きで閲覧でき�
 - **TypeScript**: 型安全な開発環境
 - **tsx**: 高速なTypeScript実行環境
 - **Biome**: 統合されたformatter & linter
+- **Vitest**: 高速でモダンなテストフレームワーク
 - **厳格な型チェック**: strict mode有効化で品質向上
 
 ## セットアップ
@@ -119,6 +120,18 @@ npm run lint:fix
 
 # TypeScript型チェック
 npm run typecheck
+
+# テスト実行
+npm run test
+
+# テスト実行（watchモード）
+npm run test:watch
+
+# テスト実行（UIモード）
+npm run test:ui
+
+# テスト実行（カバレッジ付き）
+npm run test:coverage
 ```
 
 ### GitHub Actionsでの実行
@@ -141,7 +154,8 @@ GitHub Actionsワークフローは2日ごと（午前0時UTC）に自動実行�
 │   └── workflows/
 │       └── collect-prs.yml            # GitHub Actionsワークフロー
 ├── scripts/
-│   └── collect-and-summarize.ts       # PR収集・要約スクリプト（TypeScript）
+│   ├── collect-and-summarize.ts       # PR収集・要約スクリプト（TypeScript）
+│   └── collect-and-summarize.test.ts  # テストファイル
 ├── docs/                              # VitePressソースディレクトリ
 │   ├── .vitepress/
 │   │   ├── config.js                  # VitePress設定
@@ -156,6 +170,7 @@ GitHub Actionsワークフローは2日ごと（午前0時UTC）に自動実行�
 │   └── public/                        # 静的ファイル
 ├── biome.json                         # Biome設定（formatter & linter）
 ├── tsconfig.json                      # TypeScript設定
+├── vitest.config.ts                   # Vitest設定
 ├── package.json
 └── README.md
 ```
@@ -260,6 +275,11 @@ const RAILS_REPO = 'your-repo';
   - Strict mode有効化
   - 未使用変数・パラメータの検出
 
+- **Vitest**: テストフレームワーク
+  - 設定: `vitest.config.ts`
+  - ユニットテストをサポート
+  - watchモード、UIモード、カバレッジレポートに対応
+
 ### コミット前のチェック
 
 コードをコミットする前に以下を実行してください：
@@ -268,12 +288,13 @@ const RAILS_REPO = 'your-repo';
 npm run format    # コードフォーマット
 npm run lint      # Lintチェック
 npm run typecheck # 型チェック
+npm run test      # テスト実行
 ```
 
 または一括で：
 
 ```bash
-npm run format && npm run lint && npm run typecheck
+npm run format && npm run lint && npm run typecheck && npm run test
 ```
 
 ## ライセンス
@@ -302,3 +323,4 @@ Issue・Pull Requestを歓迎します。
 - [TypeScript Documentation](https://www.typescriptlang.org/docs/)
 - [Biome Documentation](https://biomejs.dev/)
 - [tsx - TypeScript Execute](https://github.com/privatenumber/tsx)
+- [Vitest Documentation](https://vitest.dev/)

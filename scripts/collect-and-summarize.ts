@@ -44,7 +44,7 @@ interface MonthlyIndexEntry {
 /**
  * Get year and month for a given date
  */
-function getYearMonth(date = new Date()): YearMonth {
+export function getYearMonth(date = new Date()): YearMonth {
   return {
     year: date.getFullYear(),
     month: date.getMonth() + 1,
@@ -54,7 +54,7 @@ function getYearMonth(date = new Date()): YearMonth {
 /**
  * Get filename for the current month
  */
-function getMonthlyFilename(): string {
+export function getMonthlyFilename(): string {
   const { year, month } = getYearMonth();
   const monthStr = String(month).padStart(2, "0");
   return `${year}-${monthStr}.md`;
@@ -63,7 +63,7 @@ function getMonthlyFilename(): string {
 /**
  * Fetch merged PRs from the last 24 hours
  */
-async function fetchRecentPRs() {
+export async function fetchRecentPRs() {
   console.log("Fetching recently merged PRs from rails/rails...");
 
   const yesterday = new Date();
@@ -88,7 +88,7 @@ async function fetchRecentPRs() {
 /**
  * Get PR details including diff
  */
-async function getPRDetails(prNumber: number): Promise<PRDetails | null> {
+export async function getPRDetails(prNumber: number): Promise<PRDetails | null> {
   try {
     const { data: pr } = await octokit.pulls.get({
       owner: RAILS_OWNER,
@@ -116,7 +116,7 @@ async function getPRDetails(prNumber: number): Promise<PRDetails | null> {
 /**
  * Summarize PR using OpenAI
  */
-async function summarizePR(prData: PRDetails): Promise<string> {
+export async function summarizePR(prData: PRDetails): Promise<string> {
   const { pr, files } = prData;
 
   // Prepare file changes summary
@@ -180,7 +180,7 @@ ${files.length > 20 ? `\n... 他 ${files.length - 20} ファイル` : ""}
 /**
  * Format PR entry for markdown
  */
-function formatPREntry(pr: PRDetails["pr"], summary: string): string {
+export function formatPREntry(pr: PRDetails["pr"], summary: string): string {
   const date = new Date(pr.merged_at ?? "").toLocaleDateString("ja-JP");
   return `
 ## [#${pr.number}](${pr.html_url}) ${pr.title}
@@ -196,7 +196,7 @@ ${summary}
 /**
  * Get existing PR numbers from monthly file
  */
-function getExistingPRNumbers(): Set<number> {
+export function getExistingPRNumbers(): Set<number> {
   const filename = getMonthlyFilename();
   const filepath = join(DOCS_DIR, filename);
 
@@ -221,7 +221,7 @@ function getExistingPRNumbers(): Set<number> {
 /**
  * Update monthly markdown file (VitePress format)
  */
-function updateMonthlyFile(entries: string[]): void {
+export function updateMonthlyFile(entries: string[]): void {
   if (entries.length === 0) {
     console.log("No new PRs to add");
     return;
@@ -299,7 +299,7 @@ lastUpdated: ${new Date().toISOString().split("T")[0]}
 /**
  * Generate index of monthly files
  */
-function generateMonthlyIndex(): void {
+export function generateMonthlyIndex(): void {
   console.log("Generating monthly file index...");
 
   if (!existsSync(DOCS_DIR)) {
@@ -400,8 +400,10 @@ async function main(): Promise<void> {
   console.log("\n✓ Rails PR Digest collection completed!");
 }
 
-// Run main function
-main().catch((error) => {
-  console.error("Fatal error:", error);
-  process.exit(1);
-});
+// Run main function only when executed directly (not imported)
+if (import.meta.url === `file://${process.argv[1]}`) {
+  main().catch((error) => {
+    console.error("Fatal error:", error);
+    process.exit(1);
+  });
+}
