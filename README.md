@@ -17,6 +17,13 @@ Ruby on Railsの最新変更を自動追跡し、AI要約付きで閲覧でき�
 - **GitHub Pages**: 自動的にWebページとして公開
 - **継続的更新**: 月内は同じファイルの先頭に追記、新しい月には新しいファイルを作成
 
+### 技術スタック
+
+- **TypeScript**: 型安全な開発環境
+- **tsx**: 高速なTypeScript実行環境
+- **Biome**: 統合されたformatter & linter
+- **厳格な型チェック**: strict mode有効化で品質向上
+
 ## セットアップ
 
 ### 1. 必要な環境
@@ -96,6 +103,24 @@ OPENAI_API_KEY=your_openai_api_key
 npm run collect
 ```
 
+### 開発コマンド
+
+コード品質を維持するための各種コマンド：
+
+```bash
+# コードフォーマット
+npm run format
+
+# Lintチェック
+npm run lint
+
+# Lint自動修正
+npm run lint:fix
+
+# TypeScript型チェック
+npm run typecheck
+```
+
 ### GitHub Actionsでの実行
 
 #### 自動実行（デフォルト）
@@ -116,7 +141,7 @@ GitHub Actionsワークフローは2日ごと（午前0時UTC）に自動実行�
 │   └── workflows/
 │       └── collect-prs.yml            # GitHub Actionsワークフロー
 ├── scripts/
-│   └── collect-and-summarize.js       # PR収集・要約スクリプト
+│   └── collect-and-summarize.ts       # PR収集・要約スクリプト（TypeScript）
 ├── docs/                              # VitePressソースディレクトリ
 │   ├── .vitepress/
 │   │   ├── config.js                  # VitePress設定
@@ -129,6 +154,8 @@ GitHub Actionsワークフローは2日ごと（午前0時UTC）に自動実行�
 │   │   └── ...
 │   ├── monthly-index.json             # 月別インデックス（自動生成）
 │   └── public/                        # 静的ファイル
+├── biome.json                         # Biome設定（formatter & linter）
+├── tsconfig.json                      # TypeScript設定
 ├── package.json
 └── README.md
 ```
@@ -180,13 +207,13 @@ on:
 
 ### 要約プロンプトのカスタマイズ
 
-`scripts/collect-and-summarize.js` の `summarizePR()` 関数内のプロンプトを編集してください。
+`scripts/collect-and-summarize.ts` の `summarizePR()` 関数内のプロンプトを編集してください。
 
 ### 他のリポジトリへの対応
 
-`scripts/collect-and-summarize.js` の以下の定数を変更：
+`scripts/collect-and-summarize.ts` の以下の定数を変更：
 
-```javascript
+```typescript
 const RAILS_OWNER = 'your-owner';
 const RAILS_REPO = 'your-repo';
 ```
@@ -211,6 +238,44 @@ const RAILS_REPO = 'your-repo';
 - GitHub Pagesの設定が "GitHub Actions" になっているか確認
 - `.nojekyll` ファイルが存在するか確認
 
+### TypeScript型エラーが出る
+
+- `npm run typecheck` で詳細なエラーを確認
+- 必要に応じて型定義を追加・修正
+- `tsconfig.json` の設定を確認
+
+## 開発ガイドライン
+
+### コード品質
+
+このプロジェクトでは以下のツールでコード品質を維持しています：
+
+- **Biome**: フォーマットとlintを統合管理
+  - 設定: `biome.json`
+  - スペース2個インデント、行幅100
+  - Node.js組み込みモジュールは `node:` プロトコル必須
+
+- **TypeScript**: 厳格な型チェック
+  - 設定: `tsconfig.json`
+  - Strict mode有効化
+  - 未使用変数・パラメータの検出
+
+### コミット前のチェック
+
+コードをコミットする前に以下を実行してください：
+
+```bash
+npm run format    # コードフォーマット
+npm run lint      # Lintチェック
+npm run typecheck # 型チェック
+```
+
+または一括で：
+
+```bash
+npm run format && npm run lint && npm run typecheck
+```
+
 ## ライセンス
 
 MIT
@@ -221,7 +286,19 @@ Issue・Pull Requestを歓迎します。
 
 ## 参考リンク
 
+### プロジェクト
+
 - [Ruby on Rails GitHub](https://github.com/rails/rails)
+
+### ツール & サービス
+
 - [GitHub Actions Documentation](https://docs.github.com/en/actions)
 - [OpenAI API Documentation](https://platform.openai.com/docs)
 - [GitHub Pages Documentation](https://docs.github.com/en/pages)
+- [VitePress Documentation](https://vitepress.dev/)
+
+### 開発ツール
+
+- [TypeScript Documentation](https://www.typescriptlang.org/docs/)
+- [Biome Documentation](https://biomejs.dev/)
+- [tsx - TypeScript Execute](https://github.com/privatenumber/tsx)
