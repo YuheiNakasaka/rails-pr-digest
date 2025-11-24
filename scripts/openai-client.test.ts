@@ -71,7 +71,8 @@ describe("OpenAIClient", () => {
       expect(result).toContain("AI generated summary");
       expect(mockCreate).toHaveBeenCalledWith(
         expect.objectContaining({
-          model: "gpt-4o",
+          model: "gpt-5.1",
+          prompt_cache_retention: "24h",
         }),
       );
     });

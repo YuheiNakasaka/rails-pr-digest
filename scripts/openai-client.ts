@@ -41,7 +41,7 @@ ${files.length > 20 ? `\n... 他 ${files.length - 20} ファイル` : ""}
 
 以下の形式で出力してください:
 1. 概要 (1-2文で)
-2. 変更内容の詳細
+2. 変更内容の詳細(あればサンプルコードも含めて)
 3. 影響範囲・注意点
 4. 参考情報 (あれば)
 
@@ -49,8 +49,8 @@ ${files.length > 20 ? `\n... 他 ${files.length - 20} ファイル` : ""}
 
     try {
       const completion = await this.client.chat.completions.create({
-        model: "gpt-4o",
-        max_tokens: 1500,
+        model: "gpt-5.1",
+        prompt_cache_retention: "24h",
         messages: [
           {
             role: "user",

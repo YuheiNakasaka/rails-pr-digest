@@ -120,7 +120,10 @@ export default defineConfig({
     ["meta", { property: "og:title", content: "Ruby on Rails PR Digest" }],
     ["meta", { property: "og:site_name", content: "Ruby on Rails PR Digest" }],
     ["meta", { property: "og:description", content: "rails/railsのマージされたPRを自動要約" }],
-    ["meta", { property: "og:image", content: "https://yuheinakasaka.github.io/rails-pr-digest/ogp.png" }],
+    [
+      "meta",
+      { property: "og:image", content: "https://yuheinakasaka.github.io/rails-pr-digest/ogp.png" },
+    ],
     ["meta", { property: "og:site_name", content: "Rails PR Digest" }],
     ["meta", { property: "twitter:card", content: "summary" }],
   ],
