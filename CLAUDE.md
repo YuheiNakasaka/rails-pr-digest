@@ -47,6 +47,7 @@
 ├── biome.json                         # Biome設定（formatter & linter）
 ├── tsconfig.json                      # TypeScript設定
 ├── vitest.config.ts                   # Vitest設定
+├── renovate.json                      # Renovate Bot設定（依存関係自動更新）
 ├── package.json
 ├── CLAUDE.md                          # 開発者向け詳細ドキュメント（このファイル）
 └── README.md                          # ユーザー向け基本ドキュメント
@@ -128,6 +129,36 @@
 - GitHub Pagesに自動デプロイ
 
 ## セットアップ詳細
+
+### Renovate Botの有効化
+
+このプロジェクトはRenovate Botを使用して依存パッケージを自動更新します。
+
+#### 初回セットアップ
+
+1. [Renovate GitHub App](https://github.com/apps/renovate)をリポジトリにインストール
+2. インストール時にリポジトリを選択
+3. Renovateが自動的にオンボーディングPRを作成します
+4. オンボーディングPRをマージすると、設定が有効化されます
+
+#### 設定内容 (renovate.json)
+
+- **スケジュール**: 毎週月曜日の午前10時前（JST）
+- **グループ化**:
+  - マイナー/パッチバージョンを1つのPRにまとめる
+  - TypeScript関連ツールをグループ化
+  - テストツール（Vitest）をグループ化
+  - Linting/Formatting（Biome）をグループ化
+- **セマンティックコミット**: `chore(deps):` プレフィックス
+- **脆弱性アラート**: セキュリティラベル付きで即座にPR作成
+- **ロックファイルメンテナンス**: 毎月1日に実行
+
+#### 動作
+
+1. 毎週月曜日に依存関係をチェック
+2. 更新がある場合、自動的にPRを作成
+3. CIが自動実行され、全テストが実行される
+4. テスト成功後、手動でマージ（またはレビュー後に自動マージ設定も可能）
 
 ### GitHub Pagesの有効化
 
@@ -264,6 +295,20 @@ const RAILS_REPO = 'your-repo';
 - ローカルで同じコマンドを実行して再現
 - 修正後、再度Pushして確認
 
+### Renovate BotのPRが作成されない
+
+- [Renovate GitHub App](https://github.com/apps/renovate)がリポジトリにインストールされているか確認
+- リポジトリの「Settings > Integrations」でRenovateの設定を確認
+- Renovate Botのログを確認（PRのコメントに表示される）
+- `renovate.json` の構文エラーがないか確認
+
+### 依存関係の更新PRでテストが失敗する
+
+- Breaking changesが含まれている可能性があります
+- パッケージのCHANGELOGやリリースノートを確認
+- 必要に応じてコードを修正してからマージ
+- メジャーバージョンアップは慎重にレビュー
+
 ## 開発ガイドライン
 
 ### コード品質
@@ -377,6 +422,7 @@ Pull Requestを作成する際は：
 - **Biome**: 統合されたformatter & linter
 - **Vitest**: 高速でモダンなテストフレームワーク
 - **GitHub Actions**: CI/CDパイプラインによる品質保証
+- **Renovate Bot**: 依存パッケージの自動更新
 - **VitePress**: ドキュメントサイト生成
 - **OpenAI GPT-4o**: PR要約生成
 - **Octokit**: GitHub API クライアント
@@ -386,6 +432,7 @@ Pull Requestを作成する際は：
 ### ツール & サービス
 
 - [GitHub Actions Documentation](https://docs.github.com/en/actions)
+- [Renovate Bot Documentation](https://docs.renovatebot.com/)
 - [OpenAI API Documentation](https://platform.openai.com/docs)
 - [GitHub Pages Documentation](https://docs.github.com/en/pages)
 - [VitePress Documentation](https://vitepress.dev/)
