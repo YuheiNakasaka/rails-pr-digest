@@ -41,8 +41,6 @@ export default defineConfig({
 
   // Theme configuration
   themeConfig: {
-    logo: "🚂",
-
     nav: [
       { text: "ホーム", link: "/" },
       { text: "月別アーカイブ", link: "/monthly/" },
