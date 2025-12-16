@@ -10,6 +10,7 @@
   "semanticCommits": "enabled",
   "commitMessagePrefix": "chore(deps):",
   "rangeStrategy": "bump",
+  "dependencyDashboard": false,
   "packageRules": [
     {
       "description": "Group all non-major updates together",
