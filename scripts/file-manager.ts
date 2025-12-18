@@ -10,13 +10,31 @@ export interface MonthlyIndexEntry {
   url: string;
 }
 
+export interface PRData {
+  number: number;
+  title: string;
+  url: string;
+  mergedAt: string;
+  author: string;
+  authorUrl: string;
+  summary: string;
+}
+
+export interface PRDataStore {
+  lastUpdated: string;
+  totalCount: number;
+  items: PRData[];
+}
+
 export class FileManager {
   private docsDir: string;
   private indexFile: string;
+  private prDataFile: string;
 
   constructor(docsDir: string, indexFile: string) {
     this.docsDir = docsDir;
     this.indexFile = indexFile;
+    this.prDataFile = join(docsDir, "..", "pr-data.json");
   }
 
   /**
@@ -190,6 +208,139 @@ lastUpdated: ${new Date().toISOString().split("T")[0]}
     if (content !== updatedContent) {
       writeFileSync(homePagePath, updatedContent, "utf-8");
       console.log(`Updated home page link to: ${latestMonth.url}`);
+    }
+  }
+
+  /**
+   * Extract PR data from all monthly markdown files and save to JSON
+   */
+  extractAndSavePRsFromMonthlyFiles(): void {
+    console.log("Extracting PR data from monthly markdown files...");
+
+    if (!existsSync(this.docsDir)) {
+      console.log("Monthly directory not found, skipping PR extraction");
+      return;
+    }
+
+    try {
+      const files = readdirSync(this.docsDir)
+        .filter((f) => f.endsWith(".md") && f !== "index.md")
+        .sort()
+        .reverse(); // Most recent first
+
+      const allPRs: PRData[] = [];
+
+      for (const filename of files) {
+        const filepath = join(this.docsDir, filename);
+        const content = readFileSync(filepath, "utf-8");
+        const prs = this.extractPRsFromMarkdown(content, filename);
+        allPRs.push(...prs);
+      }
+
+      // Sort by merged date (newest first) and limit to 50
+      const sortedPRs = allPRs
+        .sort((a, b) => {
+          const dateA = new Date(a.mergedAt).getTime();
+          const dateB = new Date(b.mergedAt).getTime();
+          return dateB - dateA;
+        })
+        .slice(0, 50);
+
+      const dataStore: PRDataStore = {
+        lastUpdated: new Date().toISOString(),
+        totalCount: sortedPRs.length,
+        items: sortedPRs,
+      };
+
+      writeFileSync(this.prDataFile, JSON.stringify(dataStore, null, 2), "utf-8");
+      console.log(`Extracted and saved ${sortedPRs.length} PRs from monthly files`);
+    } catch (error) {
+      console.error(
+        `Error extracting PRs from monthly files: ${error instanceof Error ? error.message : String(error)}`,
+      );
+    }
+  }
+
+  /**
+   * Extract PR entries from markdown content
+   */
+  private extractPRsFromMarkdown(content: string, filename: string): PRData[] {
+    const prs: PRData[] = [];
+
+    // Split content by PR entries (## [#...] header pattern)
+    const prPattern = /## \[#(\d+)\]\((https:\/\/github\.com\/rails\/rails\/pull\/\d+)\) (.+?)$/gm;
+    const matches = Array.from(content.matchAll(prPattern));
+
+    for (let i = 0; i < matches.length; i++) {
+      const match = matches[i];
+      const prNumber = Number.parseInt(match[1], 10);
+      const prUrl = match[2];
+      const prTitle = match[3].trim();
+
+      // Get the content between this PR and the next PR (or end of file)
+      const startIndex = match.index || 0;
+      const endIndex =
+        i < matches.length - 1 ? matches[i + 1].index || content.length : content.length;
+      const prContent = content.substring(startIndex, endIndex);
+
+      // Extract metadata line
+      const metadataPattern = /\*\*マージ日\*\*: (.+?) \| \*\*作成者\*\*: \[@(.+?)\]\((.+?)\)/;
+      const metadataMatch = prContent.match(metadataPattern);
+
+      if (!metadataMatch) {
+        console.warn(`Could not extract metadata for PR #${prNumber} in ${filename}`);
+        continue;
+      }
+
+      const mergedDateStr = metadataMatch[1].trim(); // e.g., "2025/12/17"
+      const author = metadataMatch[2].trim();
+      const authorUrl = metadataMatch[3].trim();
+
+      // Convert Japanese date format to ISO 8601
+      const mergedAt = this.convertJapaneseDateToISO(mergedDateStr);
+
+      // Extract summary (content after metadata line until ----)
+      const summaryStart = prContent.indexOf("\n\n", prContent.indexOf("**作成者**"));
+      const summaryEnd = prContent.indexOf("\n---", summaryStart);
+
+      if (summaryStart === -1 || summaryEnd === -1) {
+        console.warn(`Could not extract summary for PR #${prNumber} in ${filename}`);
+        continue;
+      }
+
+      const summary = prContent.substring(summaryStart, summaryEnd).trim();
+
+      prs.push({
+        number: prNumber,
+        title: prTitle,
+        url: prUrl,
+        mergedAt,
+        author,
+        authorUrl,
+        summary,
+      });
+    }
+
+    return prs;
+  }
+
+  /**
+   * Convert Japanese date format (2025/12/17) to ISO 8601
+   */
+  private convertJapaneseDateToISO(dateStr: string): string {
+    try {
+      // Parse Japanese format: "2025/12/17" or "2025/12/17 10:30"
+      const parts = dateStr.split(/[/\s:]/);
+      const year = Number.parseInt(parts[0], 10);
+      const month = Number.parseInt(parts[1], 10);
+      const day = Number.parseInt(parts[2], 10);
+
+      // Create date object (assume UTC)
+      const date = new Date(Date.UTC(year, month - 1, day));
+      return date.toISOString();
+    } catch (error) {
+      console.error(`Error converting date "${dateStr}": ${error}`);
+      return new Date().toISOString();
     }
   }
 }

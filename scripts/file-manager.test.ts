@@ -252,4 +252,156 @@ hero:
       expect(updatedContent).not.toContain("link: /monthly/2025-10.md");
     });
   });
+
+  describe("extractAndSavePRsFromMonthlyFiles", () => {
+    it("should extract PRs from markdown files and save to JSON", () => {
+      const mockMarkdownContent = `---
+title: 2025年 12月
+---
+
+# Ruby on Rails PR Digest - 2025年 12月
+
+> このページは [rails/rails](https://github.com/rails/rails) リポジトリにマージされたPull Requestを自動的に収集し、AIで要約したものです。
+
+## [#12345](https://github.com/rails/rails/pull/12345) Fix authentication bug
+
+**マージ日**: 2025/12/17 | **作成者**: [@testuser](https://github.com/testuser)
+
+This PR fixes a critical authentication bug.
+
+1. 概要
+2. 変更内容
+
+---
+
+## [#67890](https://github.com/rails/rails/pull/67890) Add new feature
+
+**マージ日**: 2025/12/16 | **作成者**: [@developer](https://github.com/developer)
+
+This PR adds a new feature.
+
+Summary content here.
+
+---
+`;
+
+      vi.mocked(existsSync).mockReturnValue(true);
+      vi.mocked(readdirSync).mockReturnValue(["2025-12.md"] as any);
+      vi.mocked(readFileSync).mockReturnValue(mockMarkdownContent);
+
+      fileManager.extractAndSavePRsFromMonthlyFiles();
+
+      expect(writeFileSync).toHaveBeenCalledWith(
+        expect.stringContaining("pr-data.json"),
+        expect.any(String),
+        "utf-8",
+      );
+
+      const writtenContent = vi.mocked(writeFileSync).mock.calls[0][1] as string;
+      const savedData = JSON.parse(writtenContent);
+
+      expect(savedData.totalCount).toBe(2);
+      expect(savedData.items).toHaveLength(2);
+      expect(savedData.items[0].number).toBe(12345);
+      expect(savedData.items[0].title).toBe("Fix authentication bug");
+      expect(savedData.items[0].author).toBe("testuser");
+      expect(savedData.items[0].summary).toContain("This PR fixes a critical authentication bug");
+    });
+
+    it("should skip monthly directory if it does not exist", () => {
+      vi.mocked(existsSync).mockReturnValue(false);
+
+      fileManager.extractAndSavePRsFromMonthlyFiles();
+
+      expect(writeFileSync).not.toHaveBeenCalled();
+    });
+
+    it("should limit to 50 most recent PRs", () => {
+      // Create markdown content with more than 50 PRs
+      const prs = Array.from({ length: 60 }, (_, i) => {
+        const prNumber = i + 1;
+        const date = new Date(2025, 11, 1 + i); // December 1-60, 2025
+        const dateStr = `${date.getFullYear()}/${String(date.getMonth() + 1).padStart(2, "0")}/${String(date.getDate()).padStart(2, "0")}`;
+
+        return `## [#${prNumber}](https://github.com/rails/rails/pull/${prNumber}) PR ${prNumber}
+
+**マージ日**: ${dateStr} | **作成者**: [@user${prNumber}](https://github.com/user${prNumber})
+
+Summary for PR ${prNumber}
+
+---
+`;
+      }).join("\n");
+
+      const mockContent = `---
+title: 2025年 12月
+---
+
+# Ruby on Rails PR Digest
+
+${prs}`;
+
+      vi.mocked(existsSync).mockReturnValue(true);
+      vi.mocked(readdirSync).mockReturnValue(["2025-12.md"] as any);
+      vi.mocked(readFileSync).mockReturnValue(mockContent);
+
+      fileManager.extractAndSavePRsFromMonthlyFiles();
+
+      const writtenContent = vi.mocked(writeFileSync).mock.calls[0][1] as string;
+      const savedData = JSON.parse(writtenContent);
+
+      // Should only have 50 items (newest ones)
+      expect(savedData.totalCount).toBe(50);
+      expect(savedData.items).toHaveLength(50);
+
+      // Newest PR should be first (PR #60)
+      expect(savedData.items[0].number).toBe(60);
+      // Oldest in the list should be PR #11 (60 - 49 = 11)
+      expect(savedData.items[49].number).toBe(11);
+    });
+
+    it("should sort PRs by merged date descending across multiple files", () => {
+      const mockContent2025_12 = `---
+title: 2025年 12月
+---
+
+## [#300](https://github.com/rails/rails/pull/300) Latest PR
+
+**マージ日**: 2025/12/20 | **作成者**: [@user300](https://github.com/user300)
+
+Latest PR summary
+
+---
+`;
+
+      const mockContent2025_11 = `---
+title: 2025年 11月
+---
+
+## [#200](https://github.com/rails/rails/pull/200) Older PR
+
+**マージ日**: 2025/11/15 | **作成者**: [@user200](https://github.com/user200)
+
+Older PR summary
+
+---
+`;
+
+      vi.mocked(existsSync).mockReturnValue(true);
+      vi.mocked(readdirSync).mockReturnValue(["2025-12.md", "2025-11.md"] as any);
+      vi.mocked(readFileSync)
+        .mockReturnValueOnce(mockContent2025_12)
+        .mockReturnValueOnce(mockContent2025_11);
+
+      fileManager.extractAndSavePRsFromMonthlyFiles();
+
+      const writtenContent = vi.mocked(writeFileSync).mock.calls[0][1] as string;
+      const savedData = JSON.parse(writtenContent);
+
+      expect(savedData.items).toHaveLength(2);
+      // Newest PR should be first
+      expect(savedData.items[0].number).toBe(300);
+      expect(savedData.items[1].number).toBe(200);
+    });
+  });
 });
