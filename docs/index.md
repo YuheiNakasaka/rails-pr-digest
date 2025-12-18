@@ -14,7 +14,7 @@ hero:
       link: /monthly/
     - theme: alt
       text: RSSフィード
-      link: /feed.xml
+      link: /rails-pr-digest/feed.xml
 
 features:
   - icon: 🤖
