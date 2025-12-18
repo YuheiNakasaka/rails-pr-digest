@@ -7,7 +7,6 @@ import { FileManager } from "./file-manager";
 import { formatPREntry } from "./formatter";
 import { GitHubClient } from "./github-client";
 import { OpenAIClient } from "./openai-client";
-import { RSSGenerator } from "./rss-generator";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -18,7 +17,6 @@ const RAILS_OWNER = "rails";
 const RAILS_REPO = "rails";
 const GITHUB_TOKEN = env.GITHUB_TOKEN;
 const OPENAI_API_KEY = env.OPENAI_API_KEY;
-const BASE_URL = env.BASE_URL;
 const DOCS_DIR = join(__dirname, "..", "docs", "monthly");
 const INDEX_FILE = join(__dirname, "..", "docs", "monthly-index.json");
 
@@ -87,25 +85,13 @@ async function main(): Promise<void> {
     }
   }
 
-  // Always extract PRs from monthly markdown files and generate RSS feed
-  // This ensures RSS is regenerated even if there are no new PRs from GitHub
-  console.log("\nGenerating RSS feed from existing monthly files...");
+  // Extract PRs from monthly markdown files and save to JSON for RSS feed
+  // RSS feed will be generated at VitePress build time using buildEnd hook
+  console.log("\nExtracting PR data from monthly files for RSS feed...");
   fileManager.extractAndSavePRsFromMonthlyFiles();
 
-  // Generate RSS feed
-  try {
-    const rssGenerator = new RSSGenerator(
-      join(__dirname, "..", "docs", "pr-data.json"),
-      join(__dirname, "..", "docs", "public", "feed.xml"),
-      BASE_URL,
-    );
-    rssGenerator.generate();
-  } catch (error) {
-    console.error("RSS generation failed:", error instanceof Error ? error.message : String(error));
-    console.log("Continuing without RSS feed update");
-  }
-
   console.log("\n✓ Rails PR Digest collection completed!");
+  console.log("Note: RSS feed will be generated during VitePress build (buildEnd hook)");
 }
 
 // Run main function only when executed directly (not imported)

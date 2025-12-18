@@ -1,5 +1,6 @@
-import { readdirSync } from "node:fs";
+import { existsSync, readdirSync, readFileSync, writeFileSync } from "node:fs";
 import { join } from "node:path";
+import { Feed } from "feed";
 import { defineConfig } from "vitepress";
 
 // Dynamically generate sidebar items from monthly directory
@@ -125,4 +126,84 @@ export default defineConfig({
     ["meta", { property: "og:site_name", content: "Rails PR Digest" }],
     ["meta", { property: "twitter:card", content: "summary" }],
   ],
+
+  // Build hooks
+  async buildEnd(config) {
+    // Generate RSS feed at build time
+    const baseUrl = process.env.BASE_URL || "https://yuheinakasaka.github.io/rails-pr-digest";
+    const prDataFile = join(__dirname, "..", "pr-data.json");
+    const outputFile = join(config.outDir, "feed.xml");
+
+    if (!existsSync(prDataFile)) {
+      console.warn("PR data file not found, skipping RSS generation");
+      return;
+    }
+
+    try {
+      const prData = JSON.parse(readFileSync(prDataFile, "utf-8"));
+
+      if (!prData.items || prData.items.length === 0) {
+        console.warn("No PR data available, skipping RSS generation");
+        return;
+      }
+
+      const feed = new Feed({
+        title: "Ruby on Rails PR Digest",
+        description:
+          "rails/railsリポジトリにマージされたPull RequestをAIで要約した日本語ダイジェスト",
+        id: baseUrl,
+        link: baseUrl,
+        language: "ja",
+        favicon: `${baseUrl}/favicon.ico`,
+        copyright: "Copyright © 2025 Yuhei Nakasaka",
+        updated: new Date(prData.lastUpdated),
+        generator: "Rails PR Digest RSS Generator",
+        feedLinks: {
+          rss2: `${baseUrl}/feed.xml`,
+        },
+      });
+
+      // Add PR items to feed
+      for (const pr of prData.items) {
+        const yearMonth = pr.mergedAt.substring(0, 7);
+        const itemLink = `${baseUrl}/monthly/${yearMonth}#pr-${pr.number}`;
+
+        // Convert summary to HTML
+        let htmlContent = pr.summary
+          .replace(/^### (.*?)$/gm, "<h3>$1</h3>")
+          .replace(/^## (.*?)$/gm, "<h2>$1</h2>")
+          .replace(/^# (.*?)$/gm, "<h1>$1</h1>")
+          .replace(/```(\w+)?\n([\s\S]*?)```/g, "<pre><code>$2</code></pre>")
+          .replace(/`([^`]+)`/g, "<code>$1</code>")
+          .replace(/\*\*([^*]+)\*\*/g, "<strong>$1</strong>")
+          .replace(/^- (.*?)$/gm, "<li>$1</li>")
+          .replace(/\n\n/g, "</p><p>")
+          .replace(/\n/g, "<br>");
+
+        htmlContent = `<p>${htmlContent}</p>`;
+        htmlContent = htmlContent.replace(/(<li>.*?<\/li>)+/gs, (match) => `<ul>${match}</ul>`);
+
+        feed.addItem({
+          title: `[#${pr.number}] ${pr.title}`,
+          id: pr.url,
+          link: itemLink,
+          description: pr.summary,
+          content: htmlContent,
+          author: [
+            {
+              name: `@${pr.author}`,
+              link: pr.authorUrl,
+            },
+          ],
+          date: new Date(pr.mergedAt),
+          published: new Date(pr.mergedAt),
+        });
+      }
+
+      writeFileSync(outputFile, feed.rss2(), "utf-8");
+      console.log(`RSS feed generated: ${outputFile} (${prData.items.length} items)`);
+    } catch (error) {
+      console.error("Error generating RSS feed:", error);
+    }
+  },
 });
