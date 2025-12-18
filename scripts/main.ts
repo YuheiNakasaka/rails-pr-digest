@@ -7,6 +7,7 @@ import { FileManager } from "./file-manager";
 import { formatPREntry } from "./formatter";
 import { GitHubClient } from "./github-client";
 import { OpenAIClient } from "./openai-client";
+import { RSSGenerator } from "./rss-generator";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -47,43 +48,61 @@ async function main(): Promise<void> {
 
   if (prs.length === 0) {
     console.log("No merged PRs found in the last 24 hours");
-    return;
+  } else {
+    // Get existing PR numbers to avoid duplicates
+    const existingPRs = fileManager.getExistingPRNumbers();
+    console.log(`Found ${existingPRs.size} existing PRs in the current month's file`);
+
+    // Filter out already processed PRs
+    const newPRs = prs.filter((pr) => !existingPRs.has(pr.number));
+    console.log(
+      `${newPRs.length} new PRs to process (${prs.length - newPRs.length} already exist)`,
+    );
+
+    if (newPRs.length > 0) {
+      // Process each PR
+      const entries: string[] = [];
+      for (const pr of newPRs) {
+        console.log(`\nProcessing PR #${pr.number}: ${pr.title}`);
+
+        const prDetails = await githubClient.getPRDetails(pr.number);
+        if (!prDetails) continue;
+
+        const summary = await openaiClient.summarizePR(prDetails);
+        const entry = formatPREntry(prDetails.pr, summary);
+        entries.push(entry);
+
+        // Rate limiting: wait 1 second between requests
+        await new Promise((resolve) => setTimeout(resolve, 1000));
+      }
+
+      // Update monthly file
+      fileManager.updateMonthlyFile(entries);
+
+      // Generate monthly index
+      fileManager.generateMonthlyIndex();
+    } else {
+      console.log("No new PRs to add");
+    }
   }
 
-  // Get existing PR numbers to avoid duplicates
-  const existingPRs = fileManager.getExistingPRNumbers();
-  console.log(`Found ${existingPRs.size} existing PRs in the current month's file`);
+  // Always extract PRs from monthly markdown files and generate RSS feed
+  // This ensures RSS is regenerated even if there are no new PRs from GitHub
+  console.log("\nGenerating RSS feed from existing monthly files...");
+  fileManager.extractAndSavePRsFromMonthlyFiles();
 
-  // Filter out already processed PRs
-  const newPRs = prs.filter((pr) => !existingPRs.has(pr.number));
-  console.log(`${newPRs.length} new PRs to process (${prs.length - newPRs.length} already exist)`);
-
-  if (newPRs.length === 0) {
-    console.log("No new PRs to add");
-    return;
+  // Generate RSS feed
+  try {
+    const rssGenerator = new RSSGenerator(
+      join(__dirname, "..", "docs", "pr-data.json"),
+      join(__dirname, "..", "docs", "public", "feed.xml"),
+      "https://yuheinakasaka.github.io/rails-pr-digest",
+    );
+    rssGenerator.generate();
+  } catch (error) {
+    console.error("RSS generation failed:", error instanceof Error ? error.message : String(error));
+    console.log("Continuing without RSS feed update");
   }
-
-  // Process each PR
-  const entries: string[] = [];
-  for (const pr of newPRs) {
-    console.log(`\nProcessing PR #${pr.number}: ${pr.title}`);
-
-    const prDetails = await githubClient.getPRDetails(pr.number);
-    if (!prDetails) continue;
-
-    const summary = await openaiClient.summarizePR(prDetails);
-    const entry = formatPREntry(prDetails.pr, summary);
-    entries.push(entry);
-
-    // Rate limiting: wait 1 second between requests
-    await new Promise((resolve) => setTimeout(resolve, 1000));
-  }
-
-  // Update monthly file
-  fileManager.updateMonthlyFile(entries);
-
-  // Generate monthly index
-  fileManager.generateMonthlyIndex();
 
   console.log("\n✓ Rails PR Digest collection completed!");
 }

@@ -6,6 +6,21 @@ Ruby on Railsの最新変更を自動追跡し、AI要約付きで閲覧でき�
 
 [rails/rails](https://github.com/rails/rails)リポジトリにマージされたPull Requestを定期的に収集し、OpenAI GPT-4oで要約・解説してGitHub Pagesで公開します。
 
+### 主な機能
+
+- 📅 **月別アーカイブ**: PRを月ごとに整理して表示
+- 🤖 **AI自動要約**: OpenAI GPT-4oによる日本語要約
+- 🔄 **毎日自動更新**: GitHub Actionsで自動収集
+- 📡 **RSSフィード**: 最新50件のPRをRSS 2.0形式で配信
+
+### RSSフィード
+
+最新のPR要約をRSSリーダーで購読できます：
+
+```
+https://yuheinakasaka.github.io/rails-pr-digest/feed.xml
+```
+
 ## クイックスタート
 
 ### 必要な環境

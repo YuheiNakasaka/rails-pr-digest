@@ -31,7 +31,9 @@
 │   ├── file-manager.ts                # ファイルシステム操作
 │   ├── file-manager.test.ts           # ファイルマネージャーテスト
 │   ├── formatter.ts                   # フォーマットとユーティリティ
-│   └── formatter.test.ts              # フォーマッターテスト
+│   ├── formatter.test.ts              # フォーマッターテスト
+│   ├── rss-generator.ts               # RSS 2.0フィード生成
+│   └── rss-generator.test.ts          # RSSジェネレータテスト
 ├── docs/                              # VitePressソースディレクトリ
 │   ├── .vitepress/
 │   │   ├── config.js                  # VitePress設定
@@ -43,7 +45,9 @@
 │   │   ├── 2025-11.md
 │   │   └── ...
 │   ├── monthly-index.json             # 月別インデックス（自動生成）
+│   ├── pr-data.json                   # PRデータストア（自動生成、RSS用）
 │   └── public/                        # 静的ファイル
+│       └── feed.xml                   # RSSフィード（自動生成）
 ├── biome.json                         # Biome設定（formatter & linter）
 ├── tsconfig.json                      # TypeScript設定
 ├── vitest.config.ts                   # Vitest設定
@@ -75,7 +79,10 @@
   - `getExistingPRNumbers()`: 既存のPR番号を抽出
   - `updateMonthlyFile()`: 月別ファイルの更新
   - `generateMonthlyIndex()`: インデックスファイルの生成
-- テスト: `file-manager.test.ts` (10テスト)
+  - `extractAndSavePRsFromMonthlyFiles()`: 月別マークダウンからPR抽出・保存
+  - `extractPRsFromMarkdown()`: マークダウンのパース処理
+  - `convertJapaneseDateToISO()`: 日付フォーマット変換
+- テスト: `file-manager.test.ts` (16テスト)
 
 #### **formatter.ts** - フォーマットとユーティリティ
 - `getYearMonth()`: 年月の取得
@@ -83,8 +90,17 @@
 - `formatPREntry()`: PRエントリーのマークダウンフォーマット
 - テスト: `formatter.test.ts` (10テスト)
 
+#### **rss-generator.ts** - RSS 2.0フィード生成
+- `RSSGenerator`: RSSフィードの生成を担当
+  - `generate()`: PRデータからRSS 2.0 XMLを生成
+  - `loadPRData()`: pr-data.jsonからPRデータを読み込み
+  - `createFeed()`: Feed instanceを作成
+  - `addPRItem()`: 個別のPRをフィードに追加
+  - `convertSummaryToHTML()`: マークダウン要約をHTMLに変換
+- テスト: `rss-generator.test.ts` (14テスト)
+
 #### **main.ts** - メインスクリプト
-- 各モジュールを組み合わせてPR収集・要約フローを実行
+- 各モジュールを組み合わせてPR収集・要約・RSS生成フローを実行
 - 環境変数の検証
 - エラーハンドリング
 
@@ -125,7 +141,19 @@
   - 最新の月へのリンクに自動的に差し替わる
   - 新しい月が作成されると、次回の実行時にリンクが更新される
 
-### 5. GitHub Pagesへのデプロイ
+### 5. RSSフィード生成
+
+- 月別マークダウンファイルから全PRを抽出
+  - PR番号、タイトル、URL、マージ日、作成者、**AI要約全文**を抽出
+  - 正規表現でマークダウン構造をパース
+- 最新50件を選択（日付降順でソート）
+- `docs/pr-data.json` にJSON形式で保存
+- RSS 2.0形式のXMLを生成
+  - AI要約をHTMLに変換（見出し、コードブロック、リストなど）
+  - `docs/public/feed.xml` として出力
+- **重要**: RSSの内容は月別マークダウンファイルの実際の公開内容と完全に一致
+
+### 6. GitHub Pagesへのデプロイ
 
 - 変更をコミット＆プッシュ
 - GitHub Pagesに自動デプロイ
@@ -145,7 +173,7 @@
 
 #### 設定内容 (renovate.json)
 
-- **スケジュール**: 毎週水曜日の午前10時前（JST）
+- **スケジュール**: 毎週月曜日の午前10時前（JST）
 - **グループ化**:
   - マイナー/パッチバージョンを1つのPRにまとめる
   - TypeScript関連ツールをグループ化
@@ -262,11 +290,11 @@ on:
 ```
 
 他のスケジュール例：
-- `"before 10am on monday"`: 毎週月曜日の午前10時前
+- `"before 10am on wednesday"`: 毎週水曜日の午前10時前
 - `"after 5pm every weekday"`: 平日の午後5時以降
 - `"every weekend"`: 毎週末
 
-現在のデフォルト設定は毎週水曜日の午前10時前（JST）です。
+現在のデフォルト設定は毎週月曜日の午前10時前（JST）です。
 
 ### 要約プロンプトのカスタマイズ
 
@@ -327,6 +355,26 @@ const RAILS_REPO = 'your-repo';
 - パッケージのCHANGELOGやリリースノートを確認
 - 必要に応じてコードを修正してからマージ
 - メジャーバージョンアップは慎重にレビュー
+
+### RSSフィードが生成されない
+
+- `docs/monthly/` ディレクトリに `.md` ファイルが存在するか確認
+- `npm run collect` を実行して `docs/pr-data.json` が生成されるか確認
+- `docs/public/feed.xml` が生成されているか確認
+- スクリプトのログでエラーメッセージを確認
+- マークダウンファイルのフォーマットが正しいか確認（PR番号、マージ日、作成者のパターン）
+
+### RSSフィードの内容がWebサイトと異なる
+
+- `npm run collect` を再実行して、月別マークダウンファイルから再抽出
+- `docs/pr-data.json` と `docs/public/feed.xml` を削除してから再生成
+- マークダウンファイルが最新の状態になっているか確認
+
+### RSSフィードのバリデーションエラー
+
+- [W3C Feed Validator](https://validator.w3.org/feed/) でフィードを検証
+- 特殊文字のエスケープ問題の可能性（feedパッケージがCDATAセクションで処理）
+- XMLフォーマットエラーの場合は、`rss-generator.ts` のHTML変換ロジックを確認
 
 ## 開発ガイドライン
 
@@ -407,7 +455,7 @@ Pull RequestとmainブランチへのPushで自動実行され、以下のチェ
 
 - **Lint & Format**: Biomeによるコードスタイルチェック
 - **Type Check**: TypeScriptの型チェック
-- **Test**: Vitestによるユニットテスト（26テスト）
+- **Test**: Vitestによるユニットテスト（45テスト）
 - **Build Documentation**: VitePressドキュメントのビルド確認
 
 すべてのチェックが成功しないとマージできません。
@@ -419,8 +467,9 @@ Pull RequestとmainブランチへのPushで自動実行され、以下のチェ
 1. Rails/RailsリポジトリからマージされたPRを収集
 2. OpenAI GPT-4oで日本語要約を生成
 3. 月別マークダウンファイルを更新
-4. VitePressサイトをビルド
-5. GitHub Pagesにデプロイ
+4. 月別マークダウンファイルからPRを抽出してRSSフィード生成
+5. VitePressサイトをビルド
+6. GitHub Pagesにデプロイ
 
 手動でも実行可能（Actions タブから "Run workflow"）
 
@@ -439,12 +488,13 @@ Pull Requestを作成する際は：
 - **TypeScript**: 型安全な開発環境
 - **tsx**: 高速なTypeScript実行環境（ランタイム）
 - **Biome**: 統合されたformatter & linter
-- **Vitest**: 高速でモダンなテストフレームワーク
+- **Vitest**: 高速でモダンなテストフレームワーク（45テスト）
 - **GitHub Actions**: CI/CDパイプラインによる品質保証
 - **Renovate Bot**: 依存パッケージの自動更新
 - **VitePress**: ドキュメントサイト生成
-- **OpenAI GPT**: PR要約生成
+- **OpenAI GPT-4o**: PR要約生成（日本語）
 - **Octokit**: GitHub API クライアント
+- **feed**: RSS 2.0/Atom/JSON Feed生成ライブラリ
 
 ## 参考リンク
 
@@ -462,3 +512,4 @@ Pull Requestを作成する際は：
 - [Biome Documentation](https://biomejs.dev/)
 - [tsx - TypeScript Execute](https://github.com/privatenumber/tsx)
 - [Vitest Documentation](https://vitest.dev/)
+- [feed - RSS/Atom/JSON Feed Generator](https://github.com/jpmonette/feed)
