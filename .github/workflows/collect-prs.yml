@@ -34,6 +34,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+          BASE_URL: https://yuheinakasaka.github.io/rails-pr-digest
         run: npm run collect
 
       - name: Commit and push changes
@@ -42,7 +43,7 @@ jobs:
           git config --local user.name "github-actions[bot]"
 
           if [ -n "$(git status --porcelain)" ]; then
-            git add docs/monthly/*.md docs/monthly-index.json
+            git add docs/monthly/*.md docs/monthly-index.json docs/pr-data.json docs/public/feed.xml
             git commit -m "Update Rails PR digest [skip ci]"
             git push
           else

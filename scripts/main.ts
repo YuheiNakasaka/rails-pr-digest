@@ -18,7 +18,7 @@ const RAILS_OWNER = "rails";
 const RAILS_REPO = "rails";
 const GITHUB_TOKEN = env.GITHUB_TOKEN;
 const OPENAI_API_KEY = env.OPENAI_API_KEY;
-const BASE_URL = env.BASE_URL;
+const BASE_URL = env.BASE_URL || "https://yuheinakasaka.github.io/rails-pr-digest";
 const DOCS_DIR = join(__dirname, "..", "docs", "monthly");
 const INDEX_FILE = join(__dirname, "..", "docs", "monthly-index.json");
 
