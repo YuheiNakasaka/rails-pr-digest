@@ -31,13 +31,12 @@
 │   ├── file-manager.ts                # ファイルシステム操作
 │   ├── file-manager.test.ts           # ファイルマネージャーテスト
 │   ├── formatter.ts                   # フォーマットとユーティリティ
-│   ├── formatter.test.ts              # フォーマッターテスト
-│   ├── rss-generator.ts               # RSS 2.0フィード生成
-│   └── rss-generator.test.ts          # RSSジェネレータテスト
+│   └── formatter.test.ts              # フォーマッターテスト
 ├── docs/                              # VitePressソースディレクトリ
 │   ├── .vitepress/
-│   │   ├── config.js                  # VitePress設定
+│   │   ├── config.js                  # VitePress設定（buildEndフックでRSS生成）
 │   │   ├── dist/                      # ビルド出力（gitignore）
+│   │   │   └── feed.xml               # RSSフィード（ビルド時に生成）
 │   │   └── cache/                     # キャッシュ（gitignore）
 │   ├── index.md                       # トップページ
 │   ├── monthly/                       # 月別ダイジェスト
@@ -47,7 +46,6 @@
 │   ├── monthly-index.json             # 月別インデックス（自動生成）
 │   ├── pr-data.json                   # PRデータストア（自動生成、RSS用）
 │   └── public/                        # 静的ファイル
-│       └── feed.xml                   # RSSフィード（自動生成）
 ├── biome.json                         # Biome設定（formatter & linter）
 ├── tsconfig.json                      # TypeScript設定
 ├── vitest.config.ts                   # Vitest設定
@@ -90,17 +88,18 @@
 - `formatPREntry()`: PRエントリーのマークダウンフォーマット
 - テスト: `formatter.test.ts` (10テスト)
 
-#### **rss-generator.ts** - RSS 2.0フィード生成
-- `RSSGenerator`: RSSフィードの生成を担当
-  - `generate()`: PRデータからRSS 2.0 XMLを生成
-  - `loadPRData()`: pr-data.jsonからPRデータを読み込み
-  - `createFeed()`: Feed instanceを作成
-  - `addPRItem()`: 個別のPRをフィードに追加
-  - `convertSummaryToHTML()`: マークダウン要約をHTMLに変換
-- テスト: `rss-generator.test.ts` (14テスト)
+#### **VitePress config.js** - ビルド設定とRSS生成
+- `buildEnd()`: VitePressビルド完了時にRSSフィードを生成
+  - `pr-data.json` からPRデータを読み込み
+  - `feed` パッケージでRSS 2.0 XMLを生成
+  - `config.outDir/feed.xml` に出力
+  - マークダウン要約をHTMLに変換
+- サイドバーの動的生成
+- テーマ設定、検索設定
 
 #### **main.ts** - メインスクリプト
-- 各モジュールを組み合わせてPR収集・要約・RSS生成フローを実行
+- 各モジュールを組み合わせてPR収集・要約フローを実行
+- 月別マークダウンファイルからPRデータを抽出してpr-data.json生成
 - 環境変数の検証
 - エラーハンドリング
 
@@ -141,19 +140,26 @@
   - 最新の月へのリンクに自動的に差し替わる
   - 新しい月が作成されると、次回の実行時にリンクが更新される
 
-### 5. RSSフィード生成
+### 5. PR データ抽出
 
-- 月別マークダウンファイルから全PRを抽出
+- 月別マークダウンファイルから全PRを抽出（`file-manager.ts`）
   - PR番号、タイトル、URL、マージ日、作成者、**AI要約全文**を抽出
   - 正規表現でマークダウン構造をパース
 - 最新50件を選択（日付降順でソート）
 - `docs/pr-data.json` にJSON形式で保存
-- RSS 2.0形式のXMLを生成
-  - AI要約をHTMLに変換（見出し、コードブロック、リストなど）
-  - `docs/public/feed.xml` として出力
-- **重要**: RSSの内容は月別マークダウンファイルの実際の公開内容と完全に一致
+- **重要**: このJSONファイルがRSS生成のデータソース
 
-### 6. GitHub Pagesへのデプロイ
+### 6. VitePress ビルドとRSS生成
+
+- VitePressがサイトをビルド（`npm run docs:build`）
+- **buildEnd フック**が実行される（`.vitepress/config.js`）
+  - `pr-data.json` を読み込み
+  - `feed` パッケージでRSS 2.0 XMLを生成
+  - AI要約をHTMLに変換（見出し、コードブロック、リストなど）
+  - `dist/feed.xml` に出力
+- **重要**: RSSフィードはビルド時に動的生成され、Gitにはコミットされない
+
+### 7. GitHub Pagesへのデプロイ
 
 - 変更をコミット＆プッシュ
 - GitHub Pagesに自動デプロイ
@@ -390,25 +396,27 @@ const RAILS_REPO = 'your-repo';
 - 必要に応じてコードを修正してからマージ
 - メジャーバージョンアップは慎重にレビュー
 
-### RSSフィードが生成されない
+### RSSフィードが生成されない（404エラー）
 
 - `docs/monthly/` ディレクトリに `.md` ファイルが存在するか確認
 - `npm run collect` を実行して `docs/pr-data.json` が生成されるか確認
-- `docs/public/feed.xml` が生成されているか確認
-- スクリプトのログでエラーメッセージを確認
+- `npm run docs:build` を実行して、ビルドログに "RSS feed generated" が表示されるか確認
+- `docs/.vitepress/dist/feed.xml` が生成されているか確認
+- GitHub Actionsで BASE_URL 環境変数が設定されているか確認
 - マークダウンファイルのフォーマットが正しいか確認（PR番号、マージ日、作成者のパターン）
 
 ### RSSフィードの内容がWebサイトと異なる
 
 - `npm run collect` を再実行して、月別マークダウンファイルから再抽出
-- `docs/pr-data.json` と `docs/public/feed.xml` を削除してから再生成
+- `docs/pr-data.json` を削除してから再生成
+- `npm run docs:build` で feed.xml を再生成
 - マークダウンファイルが最新の状態になっているか確認
 
 ### RSSフィードのバリデーションエラー
 
 - [W3C Feed Validator](https://validator.w3.org/feed/) でフィードを検証
 - 特殊文字のエスケープ問題の可能性（feedパッケージがCDATAセクションで処理）
-- XMLフォーマットエラーの場合は、`rss-generator.ts` のHTML変換ロジックを確認
+- XMLフォーマットエラーの場合は、`.vitepress/config.js` の `buildEnd` フック内のHTML変換ロジックを確認
 
 ## 開発ガイドライン
 
@@ -489,8 +497,8 @@ Pull RequestとmainブランチへのPushで自動実行され、以下のチェ
 
 - **Lint & Format**: Biomeによるコードスタイルチェック
 - **Type Check**: TypeScriptの型チェック
-- **Test**: Vitestによるユニットテスト（45テスト）
-- **Build Documentation**: VitePressドキュメントのビルド確認
+- **Test**: Vitestによるユニットテスト（31テスト）
+- **Build Documentation**: VitePressドキュメントのビルド確認（buildEndフックでRSS生成も実行）
 
 すべてのチェックが成功しないとマージできません。
 
@@ -501,11 +509,14 @@ Pull RequestとmainブランチへのPushで自動実行され、以下のチェ
 1. Rails/RailsリポジトリからマージされたPRを収集
 2. OpenAI GPT-4oで日本語要約を生成
 3. 月別マークダウンファイルを更新
-4. 月別マークダウンファイルからPRを抽出してRSSフィード生成
-5. VitePressサイトをビルド
-6. GitHub Pagesにデプロイ
+4. 月別マークダウンファイルからPRを抽出して `pr-data.json` 生成
+5. 変更をコミット＆プッシュ
+6. VitePressサイトをビルド（**buildEndフック**でRSSフィード生成）
+7. GitHub Pagesにデプロイ
 
 手動でも実行可能（Actions タブから "Run workflow"）
+
+**重要**: RSSフィード（`feed.xml`）はVitePressビルド時に動的生成されるため、Gitにはコミットされません。`pr-data.json` のみがコミットされ、ビルド時にそこからRSSが生成されます。
 
 ### 貢献ガイドライン
 
@@ -522,10 +533,10 @@ Pull Requestを作成する際は：
 - **TypeScript**: 型安全な開発環境
 - **tsx**: 高速なTypeScript実行環境（ランタイム）
 - **Biome**: 統合されたformatter & linter
-- **Vitest**: 高速でモダンなテストフレームワーク（45テスト）
+- **Vitest**: 高速でモダンなテストフレームワーク（31テスト）
 - **GitHub Actions**: CI/CDパイプラインによる品質保証
 - **Renovate Bot**: 依存パッケージの自動更新
-- **VitePress**: ドキュメントサイト生成
+- **VitePress**: ドキュメントサイト生成（buildEndフックでRSS生成）
 - **OpenAI GPT-4o**: PR要約生成（日本語）
 - **Octokit**: GitHub API クライアント
 - **feed**: RSS 2.0/Atom/JSON Feed生成ライブラリ

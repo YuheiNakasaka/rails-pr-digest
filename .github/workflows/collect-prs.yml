@@ -43,7 +43,7 @@ jobs:
           git config --local user.name "github-actions[bot]"
 
           if [ -n "$(git status --porcelain)" ]; then
-            git add docs/monthly/*.md docs/monthly-index.json docs/pr-data.json docs/public/feed.xml
+            git add docs/monthly/*.md docs/monthly-index.json docs/pr-data.json
             git commit -m "Update Rails PR digest [skip ci]"
             git push
           else
@@ -51,6 +51,8 @@ jobs:
           fi
 
       - name: Build VitePress site
+        env:
+          BASE_URL: ${{ secrets.BASE_URL }}
         run: npm run docs:build
 
       - name: Setup Pages

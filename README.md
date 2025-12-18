@@ -50,7 +50,8 @@ GitHub Actionsで実行する場合は、リポジトリのSecretsに設定し�
 **環境変数の説明**:
 - `GITHUB_TOKEN`: GitHub APIアクセス用のPersonal Access Token（必須）
 - `OPENAI_API_KEY`: OpenAI APIキー（必須）
-- `BASE_URL`: GitHub PagesのベースURL（オプション、RSSフィードのリンク生成に使用）
+- `BASE_URL`: GitHub PagesのベースURL（オプション、デフォルト: `https://yuheinakasaka.github.io/rails-pr-digest`）
+  - RSSフィードのリンク生成に使用（VitePress buildEndフック）
 
 ### PR収集の実行
 
