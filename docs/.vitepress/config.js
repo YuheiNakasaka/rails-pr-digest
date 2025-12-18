@@ -1,7 +1,11 @@
 import { existsSync, readdirSync, readFileSync, writeFileSync } from "node:fs";
-import { join } from "node:path";
+import { dirname, join } from "node:path";
+import { fileURLToPath } from "node:url";
 import { Feed } from "feed";
 import { defineConfig } from "vitepress";
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
 
 // Dynamically generate sidebar items from monthly directory
 function getMonthlyItems() {
