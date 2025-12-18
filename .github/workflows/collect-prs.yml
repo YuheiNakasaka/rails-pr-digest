@@ -55,13 +55,6 @@ jobs:
           BASE_URL: ${{ secrets.BASE_URL }}
         run: npm run docs:build
 
-      - name: Verify feed.xml generation
-        run: |
-          echo "Checking for feed.xml in dist directory..."
-          ls -lh docs/.vitepress/dist/feed.xml || echo "ERROR: feed.xml not found!"
-          echo "Files in dist directory:"
-          ls -la docs/.vitepress/dist/ | head -20
-
       - name: Setup Pages
         if: success()
         uses: actions/configure-pages@v4

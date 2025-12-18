@@ -12,6 +12,9 @@ hero:
     - theme: alt
       text: 月別アーカイブ
       link: /monthly/
+    - theme: alt
+      text: RSSフィード
+      link: /feed.xml
 
 features:
   - icon: 🤖
@@ -23,5 +26,8 @@ features:
   - icon: 🔄
     title: 毎日自動更新
     details: GitHub Actionsで毎日自動的に最新PRを収集
+  - icon: 📡
+    title: RSSフィード
+    details: 最新50件のPRをRSS 2.0形式で配信
 
 ---
