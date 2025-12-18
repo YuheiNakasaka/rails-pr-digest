@@ -117,6 +117,15 @@ export default defineConfig({
   // Head tags
   head: [
     ["link", { rel: "icon", href: "/rails-pr-digest/favicon.ico" }],
+    [
+      "link",
+      {
+        rel: "alternate",
+        type: "application/rss+xml",
+        title: "Ruby on Rails PR Digest",
+        href: "/rails-pr-digest/feed.xml",
+      },
+    ],
     ["meta", { name: "theme-color", content: "#cc0000" }],
     ["meta", { property: "og:type", content: "website" }],
     ["meta", { property: "og:locale", content: "ja" }],
