@@ -18,6 +18,7 @@ const RAILS_OWNER = "rails";
 const RAILS_REPO = "rails";
 const GITHUB_TOKEN = env.GITHUB_TOKEN;
 const OPENAI_API_KEY = env.OPENAI_API_KEY;
+const BASE_URL = env.BASE_URL || "https://yuheinakasaka.github.io/rails-pr-digest";
 const DOCS_DIR = join(__dirname, "..", "docs", "monthly");
 const INDEX_FILE = join(__dirname, "..", "docs", "monthly-index.json");
 
@@ -96,7 +97,7 @@ async function main(): Promise<void> {
     const rssGenerator = new RSSGenerator(
       join(__dirname, "..", "docs", "pr-data.json"),
       join(__dirname, "..", "docs", "public", "feed.xml"),
-      "https://yuheinakasaka.github.io/rails-pr-digest",
+      BASE_URL,
     );
     rssGenerator.generate();
   } catch (error) {

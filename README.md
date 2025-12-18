@@ -42,9 +42,15 @@ npm install
 ```bash
 GITHUB_TOKEN=your_github_token
 OPENAI_API_KEY=your_openai_api_key
+BASE_URL=https://yourusername.github.io/your-repo-name  # オプション（デフォルト: https://yuheinakasaka.github.io/rails-pr-digest）
 ```
 
 GitHub Actionsで実行する場合は、リポジトリのSecretsに設定してください。
+
+**環境変数の説明**:
+- `GITHUB_TOKEN`: GitHub APIアクセス用のPersonal Access Token（必須）
+- `OPENAI_API_KEY`: OpenAI APIキー（必須）
+- `BASE_URL`: GitHub PagesのベースURL（オプション、RSSフィードのリンク生成に使用）
 
 ### PR収集の実行
 

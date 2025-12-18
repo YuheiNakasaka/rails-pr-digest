@@ -212,6 +212,12 @@
 3. Name: `OPENAI_API_KEY`
 4. Secret: 取得したAPI Key
 
+**BASE_URL（オプション）**
+1. デフォルトでは `https://yuheinakasaka.github.io/rails-pr-digest` が使用されます
+2. 別のURLを使用する場合は、リポジトリのSecretsまたはVariablesに設定
+3. Name: `BASE_URL`
+4. Value: `https://yourusername.github.io/your-repo-name`
+
 #### ローカルで実行する場合
 
 ルートディレクトリに `.env` ファイルを作成：
@@ -219,7 +225,15 @@
 ```bash
 GITHUB_TOKEN=your_github_token
 OPENAI_API_KEY=your_openai_api_key
+BASE_URL=https://yourusername.github.io/your-repo-name  # オプション
 ```
+
+**環境変数の説明**:
+- `GITHUB_TOKEN`: GitHub APIアクセス用のPersonal Access Token（必須）
+- `OPENAI_API_KEY`: OpenAI APIキー（必須）
+- `BASE_URL`: GitHub PagesのベースURL（オプション、デフォルト: `https://yuheinakasaka.github.io/rails-pr-digest`）
+  - RSSフィードのリンク生成に使用
+  - フォークして別のリポジトリで使用する場合は変更が必要
 
 ### ローカル開発サーバー
 
@@ -295,6 +309,26 @@ on:
 - `"every weekend"`: 毎週末
 
 現在のデフォルト設定は毎週月曜日の午前10時前（JST）です。
+
+### ベースURLの変更
+
+フォークして別のリポジトリで使用する場合、RSSフィードのリンクを正しく生成するためにベースURLを変更します。
+
+#### 方法1: 環境変数で設定（推奨）
+
+`.env` ファイルまたはGitHub Actions Secretsに `BASE_URL` を設定：
+
+```bash
+BASE_URL=https://yourusername.github.io/your-repo-name
+```
+
+#### 方法2: デフォルト値を変更
+
+`scripts/main.ts` の以下の行を編集：
+
+```typescript
+const BASE_URL = env.BASE_URL || "https://your-custom-domain.com";
+```
 
 ### 要約プロンプトのカスタマイズ
 
