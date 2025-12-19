@@ -1,7 +1,25 @@
 {
-  "lastUpdated": "2025-12-19T00:10:08.400Z",
+  "lastUpdated": "2025-12-19T09:30:33.567Z",
   "totalCount": 50,
   "items": [
+    {
+      "number": 56207,
+      "title": "Bump minitest to V6",
+      "url": "https://github.com/rails/rails/pull/56207",
+      "mergedAt": "2025-12-19T00:00:00.000Z",
+      "author": "zenspider",
+      "authorUrl": "https://github.com/zenspider",
+      "summary": "1. 概要 (1-2文で)  \nRails のテスト周りの依存関係として使っている minitest を 6.0 以上に引き上げ、あわせて minitest-mock を追加し、それに伴って発生したテスト関連の不整合や不具合を修正した PR です。主に ActiveSupport のテスト補助モジュールと並列実行周り、およびガイド用テストヘルパに対する調整が含まれます。"
+    },
+    {
+      "number": 56403,
+      "title": "Add Rails.app alias for Rails.application",
+      "url": "https://github.com/rails/rails/pull/56403",
+      "mergedAt": "2025-12-19T00:00:00.000Z",
+      "author": "dhh",
+      "authorUrl": "https://github.com/dhh",
+      "summary": "1. 概要 (1–2文で)  \nRails に `Rails.application` の短縮エイリアスとして `Rails.app` が追加され、コアコード・ジェネレータ・ガイド内の一部参照もそれに合わせて置き換えられました。これにより、`Rails.application.credentials` などの長くなりがちな呼び出しが、`Rails.app.credentials` のように簡潔に書けるようになります。"
+    },
     {
       "number": 56398,
       "title": "Remove duplicate unique index for token migrations",
@@ -433,24 +451,6 @@
       "author": "adrianna-chang-shopify",
       "authorUrl": "https://github.com/adrianna-chang-shopify",
       "summary": "1. 概要 (1-2文で)  \n`config.action_controller.action_on_open_redirect = :notify` を有効にしているアプリで、オープンリダイレクト検知時に自動で「構造化ログイベント」が発行されるようにした PR です。ActiveSupport::Notifications の購読を自前で書かなくても、標準の Structured Event Subscriber 経由でオープンリダイレクトの情報を取得できます。"
-    },
-    {
-      "number": 56296,
-      "title": "Remove unnecessary defined? check in Active Job instrumentation",
-      "url": "https://github.com/rails/rails/pull/56296",
-      "mergedAt": "2025-12-08T00:00:00.000Z",
-      "author": "shivamsinghchahar",
-      "authorUrl": "https://github.com/shivamsinghchahar",
-      "summary": "1. 概要 (1-2文で)  \nActive Job のインストルメンテーション処理内で、インスタンス変数へのアクセス前に行っていた `defined?` チェックを削除し、よりシンプルな条件分岐に変更した PR です。Ruby 2.7 サポート終了により、未定義変数アクセスに関する警告回避コードが不要になったことが背景です。"
-    },
-    {
-      "number": 56311,
-      "title": "Deprecate PreviewImageJob",
-      "url": "https://github.com/rails/rails/pull/56311",
-      "mergedAt": "2025-12-08T00:00:00.000Z",
-      "author": "p8",
-      "authorUrl": "https://github.com/p8",
-      "summary": "1. 概要 (1-2文で)  \nActive Storage の `ActiveStorage::PreviewImageJob` を非推奨にしつつ、内部実装を現状の API に追従させる変更です。Rails 本体からは既に呼ばれていないものの、ドキュメント済みでパブリック API であるため、削除ではなく deprecate という形で扱っています。"
     }
   ]
 }
