@@ -200,14 +200,17 @@ lastUpdated: ${new Date().toISOString().split("T")[0]}
     const content = readFileSync(homePagePath, "utf-8");
 
     // Update the hero action link to point to the latest month
+    // Match the pattern more precisely: text line, then link line with proper indentation
     const updatedContent = content.replace(
-      /(text: 最新のPRを見る[\s\S]*?link: )\/monthly\/[\w-]+\.md/,
-      `$1/${latestMonth.url}`,
+      /(text: 最新のPRを見る\n\s+link: )\/monthly\/[\w-]+\.md/,
+      `$1/monthly/${latestMonth.filename}`,
     );
 
     if (content !== updatedContent) {
       writeFileSync(homePagePath, updatedContent, "utf-8");
-      console.log(`Updated home page link to: ${latestMonth.url}`);
+      console.log(`Updated home page link to: /monthly/${latestMonth.filename}`);
+    } else {
+      console.log(`Home page link is already up to date: /monthly/${latestMonth.filename}`);
     }
   }
 
