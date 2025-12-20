@@ -1,7 +1,16 @@
 {
-  "lastUpdated": "2025-12-19T09:30:33.567Z",
+  "lastUpdated": "2025-12-20T00:09:25.678Z",
   "totalCount": 50,
   "items": [
+    {
+      "number": 53335,
+      "title": "Deprecate built-in snekaers adapter",
+      "url": "https://github.com/rails/rails/pull/53335",
+      "mergedAt": "2025-12-19T00:00:00.000Z",
+      "author": "dixpac",
+      "authorUrl": "https://github.com/dixpac",
+      "summary": "1. 概要 (1-2文で)  \nRails の Active Job に含まれていた built-in の `sneakers` アダプタが非推奨（deprecate）扱いになり、代わりに後継である `kicks` gem の利用が推奨されるようになりました。これに伴い、非推奨警告の追加と関連テスト、CHANGELOG の更新が行われています。"
+    },
     {
       "number": 56207,
       "title": "Bump minitest to V6",
@@ -442,15 +451,6 @@
       "author": "p8",
       "authorUrl": "https://github.com/p8",
       "summary": "1. 概要 (1-2文で)  \nActive Storage のテスト実行時に、非推奨オプション`:preprocessed`に関する deprecation warning が大量に出る問題を、テスト側でサイレンスするPRです。Rails 9.0 での削除予定APIに関する警告を抑制し、テスト出力をノイズレスにしています。"
-    },
-    {
-      "number": 56019,
-      "title": "Add structured event for open redirects",
-      "url": "https://github.com/rails/rails/pull/56019",
-      "mergedAt": "2025-12-09T00:00:00.000Z",
-      "author": "adrianna-chang-shopify",
-      "authorUrl": "https://github.com/adrianna-chang-shopify",
-      "summary": "1. 概要 (1-2文で)  \n`config.action_controller.action_on_open_redirect = :notify` を有効にしているアプリで、オープンリダイレクト検知時に自動で「構造化ログイベント」が発行されるようにした PR です。ActiveSupport::Notifications の購読を自前で書かなくても、標準の Structured Event Subscriber 経由でオープンリダイレクトの情報を取得できます。"
     }
   ]
 }
