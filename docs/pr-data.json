@@ -1,7 +1,34 @@
 {
-  "lastUpdated": "2025-12-20T00:09:25.678Z",
+  "lastUpdated": "2025-12-21T00:10:19.887Z",
   "totalCount": 50,
   "items": [
+    {
+      "number": 56404,
+      "title": "Add Rails.app.creds to provide combined credentials lookup in ENV and encrypted file",
+      "url": "https://github.com/rails/rails/pull/56404",
+      "mergedAt": "2025-12-20T00:00:00.000Z",
+      "author": "dhh",
+      "authorUrl": "https://github.com/dhh",
+      "summary": "1. 概要 (1-2文で)  \nRails 8系(?) に、ENV と encrypted credentials を意識せずに一元的に参照できる `Rails.app.creds` が追加されました。これにより、鍵の保管場所を ENV と credentials の間で移行・併用してもアプリケーションコードを変更せずに済む設計になります。"
+    },
+    {
+      "number": 56409,
+      "title": "Remove support for psych < 4",
+      "url": "https://github.com/rails/rails/pull/56409",
+      "mergedAt": "2025-12-20T00:00:00.000Z",
+      "author": "byroot",
+      "authorUrl": "https://github.com/byroot",
+      "summary": "1. 概要 (1-2文で)  \nPsych 4未満（古いYAMLライブラリ）への対応コードをRails本体から削除し、「Psych 4以上のみサポート」に整理したPRです。これによりYAML関連の分岐や互換コードが減り、実装とテストがシンプルになっています。"
+    },
+    {
+      "number": 56408,
+      "title": "Make minitest-mock a hard dependency again",
+      "url": "https://github.com/rails/rails/pull/56408",
+      "mergedAt": "2025-12-20T00:00:00.000Z",
+      "author": "byroot",
+      "authorUrl": "https://github.com/byroot",
+      "summary": "1. 概要 (1-2文で)  \nRails 自身のテストスイートで使っている `minitest-mock` を「必須依存関係（hard dependency）」に戻す PR です。以前行った「soft dependency 化」の変更をリバートし、Rails テスト実行時に `minitest/mock` を必ず読み込む形に統一しています。"
+    },
     {
       "number": 53335,
       "title": "Deprecate built-in snekaers adapter",
@@ -424,33 +451,6 @@
       "author": "gmcgibbon",
       "authorUrl": "https://github.com/gmcgibbon",
       "summary": "1. 概要 (1-2文で)  \nRailsの新しいイベントレポーター（log subscriber 周り）で、デフォルトでは出なくなっていた「debug イベント」を、再びデフォルトで有効にする変更です。特にアプリケーション初期化前（テストやフレームワーク単体利用時）でも debug イベントが出力されるようになります。"
-    },
-    {
-      "number": 56334,
-      "title": "Yield the transaction for Model#with_lock",
-      "url": "https://github.com/rails/rails/pull/56334",
-      "mergedAt": "2025-12-09T00:00:00.000Z",
-      "author": "ngan",
-      "authorUrl": "https://github.com/ngan",
-      "summary": "1. 概要 (1-2文で)  \n`ActiveRecord::Base#with_lock` が、ブロック引数として「現在のトランザクションオブジェクト」を受け取れるように拡張されました。これにより、`with_lock` 内で `after_commit` などのトランザクションフックを、より扱いやすい形で利用できます。"
-    },
-    {
-      "number": 56332,
-      "title": "Fix typo in comments: exisiting → existing",
-      "url": "https://github.com/rails/rails/pull/56332",
-      "mergedAt": "2025-12-09T00:00:00.000Z",
-      "author": "yujiteshima",
-      "authorUrl": "https://github.com/yujiteshima",
-      "summary": "1. 概要 (1-2文で)  \nRails の Active Record に含まれるコメント内のスペルミス「exisiting」を正しい「existing」に修正した PR です。コードロジックの変更は一切なく、挙動への影響はありません。\n\n2. 変更内容の詳細(あればサンプルコードも含めて)  \n\n- 対象ファイル:\n  - `activerecord/lib/active_record/encryption/encryptor.rb`\n  - `activerecord/test/models/dats.rb`\n\n- 修正内容:\n  どちらのファイルも「exisiting」というスペルミスを「existing」に修正しています。  \n  変更はコメント行のみで、Ruby コード自体には変更がありません。\n\n  想定されるイメージ（※実際のコメント文脈に沿った概略）:\n\n  ```ruby\n  # Before\n  # This feature allows searches on exisiting data...\n\n  # After\n  # This feature allows searches on existing data...\n  ```\n\n  ```ruby\n  # Before\n  # This model is used to persist data in exisiting tables...\n\n  # After\n  # This model is used to persist data in existing tables...\n  ```\n\n- 背景:\n  - `codespell` というツールでコードベースのスペルチェックを行った際に、2 つのコメント行で誤字が見つかり、それを修正したという位置付けです。\n\n3. 影響範囲・注意点  \n\n- コードコメントのみの修正であり、実行パス・API・DB スキーマ・挙動には一切影響しません。\n- テスト (`activerecord/test/models/dats.rb`) のコメントも対象ですが、テストの内容や結果に影響はありません。\n- バージョンアップやパッチ適用時に、この変更に起因するマイグレーション・リリースノート上の特別な対応は不要です。\n- ドキュメント生成やソースコードブラウジング時（IDE でのコメント表示など）において、より読みやすく正確な説明になるという程度の改善です。\n\n4. 参考情報 (あれば)  \n\n- PR: https://github.com/rails/rails/pull/56332  \n- 誤字検出ツール: [codespell](https://github.com/codespell-project/codespell)  \n  - CI やローカル開発環境に導入することで、同様のスペルミスを自動で検出できます。  \n- 対象領域の補足:\n  - `activerecord/lib/active_record/encryption/encryptor.rb` は Active Record の暗号化関連の処理（暗号化・復号・検索など）を扱うクラス群で、今回の修正はその動作説明コメント部分です。\n  - `activerecord/test/models/dats.rb` は Active Record のテスト用モデル定義ファイルであり、既存テーブルを利用したテストシナリオの説明コメントが修正対象になっています。"
-    },
-    {
-      "number": 56318,
-      "title": "Silence ActiveStorage deprecation warnings in tests",
-      "url": "https://github.com/rails/rails/pull/56318",
-      "mergedAt": "2025-12-09T00:00:00.000Z",
-      "author": "p8",
-      "authorUrl": "https://github.com/p8",
-      "summary": "1. 概要 (1-2文で)  \nActive Storage のテスト実行時に、非推奨オプション`:preprocessed`に関する deprecation warning が大量に出る問題を、テスト側でサイレンスするPRです。Rails 9.0 での削除予定APIに関する警告を抑制し、テスト出力をノイズレスにしています。"
     }
   ]
 }
