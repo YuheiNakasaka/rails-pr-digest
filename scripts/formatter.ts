@@ -40,7 +40,7 @@ export function formatPREntry(
 ): string {
   const date = new Date(pr.merged_at ?? "").toLocaleDateString("ja-JP");
   return `
-## [#${pr.number}](${pr.html_url}) ${pr.title}
+## [#${pr.number}](${pr.html_url}) ${pr.title} {#pr-${pr.number}}
 
 **マージ日**: ${date} | **作成者**: [@${pr.user?.login ?? "unknown"}](${pr.user?.html_url ?? "#"})
 

@@ -73,7 +73,7 @@ describe("formatter", () => {
       const result = formatPREntry(mockPR, summary);
 
       expect(result).toContain("## [#12345](https://github.com/rails/rails/pull/12345)");
-      expect(result).toContain("Fix bug in authentication");
+      expect(result).toContain("Fix bug in authentication {#pr-12345}");
       expect(result).toContain("[@testuser](https://github.com/testuser)");
       expect(result).toContain("This PR fixes a critical bug in authentication.");
       expect(result).toContain("---");
@@ -95,7 +95,7 @@ describe("formatter", () => {
       const result = formatPREntry(mockPR, summary);
 
       expect(result).toContain("## [#12345]");
-      expect(result).toContain("Test PR");
+      expect(result).toContain("Test PR {#pr-12345}");
     });
 
     it("should handle PR with null user", () => {
@@ -111,6 +111,7 @@ describe("formatter", () => {
       const result = formatPREntry(mockPR, summary);
 
       expect(result).toContain("[@unknown]");
+      expect(result).toContain("{#pr-12345}");
     });
   });
 });
