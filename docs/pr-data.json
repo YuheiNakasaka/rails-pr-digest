@@ -1,7 +1,52 @@
 {
-  "lastUpdated": "2025-12-21T05:05:42.510Z",
+  "lastUpdated": "2025-12-22T00:11:03.085Z",
   "totalCount": 50,
   "items": [
+    {
+      "number": 56415,
+      "title": "Ensure batched preloaded associations accounts for klass when grouping to avoid issues with STI {#pr-56415}",
+      "url": "https://github.com/rails/rails/pull/56415",
+      "mergedAt": "2025-12-21T00:00:00.000Z",
+      "author": "zzak",
+      "authorUrl": "https://github.com/zzak",
+      "summary": "1. 概要 (1-2文で)\n- ActiveRecord の関連プリロード（`includes` など）のバッチ処理において、STI や `class_name` を伴う関連で正しいクラスが使われない問題を修正し、グルーピング時に「レコードのクラス情報」も考慮するようにした PR です。\n- これにより、`SpecialAuthor` / `SpecialBook` のような STI / テーブル共有モデルを含む複雑な関連を `includes` したときでも、期待どおりのモデルクラスで関連オブジェクトがロードされます。"
+    },
+    {
+      "number": 56416,
+      "title": "Fix rerun command on CI for railties {#pr-56416}",
+      "url": "https://github.com/rails/rails/pull/56416",
+      "mergedAt": "2025-12-21T00:00:00.000Z",
+      "author": "byroot",
+      "authorUrl": "https://github.com/byroot",
+      "summary": "1. 概要 (1-2文で)  \nこのPRは、Rails の `railties` において CI 上で `rake test TESTOPTS=\"--rerun …\"` を利用した際の「失敗テストの再実行」機能が正しく動作するように修正したものです。テストレポーターと Rake タスクの連携を調整し、rerun 用のコマンドが壊れないようにしています。"
+    },
+    {
+      "number": 56411,
+      "title": "Fix code in comment example {#pr-56411}",
+      "url": "https://github.com/rails/rails/pull/56411",
+      "mergedAt": "2025-12-21T00:00:00.000Z",
+      "author": "morgoth",
+      "authorUrl": "https://github.com/morgoth",
+      "summary": "1. 概要 (1-2文で)  \n`ActiveSupport::CombinedConfiguration` のコメント内に書かれていたサンプルコードの条件式が、実際には到達しない（無意味な）`||` を含んでいたため、正しい挙動を反映した形に修正されたドキュメント的変更です。実行コードの挙動そのものではなく、コメント中の例示コードの論理を整えるためのフォローアップ PR です。"
+    },
+    {
+      "number": 56412,
+      "title": "Fixed bin/rails notes command to work with CSS /**/ comments {#pr-56412}",
+      "url": "https://github.com/rails/rails/pull/56412",
+      "mergedAt": "2025-12-21T00:00:00.000Z",
+      "author": "davidrhyswhite",
+      "authorUrl": "https://github.com/davidrhyswhite",
+      "summary": "1. 概要 (1-2文で)  \n`bin/rails notes` コマンドが `.css` ファイル内の `TODO` / `FIXME` / `OPTIMIZE` などを正しく検出できていなかったバグを修正した PR です。CSS のコメント形式 `/* ... */` に対応する正規表現へ変更し、期待どおりスタイルシート内のノートを拾えるようにしています。"
+    },
+    {
+      "number": 56410,
+      "title": "Add block support to ActionController::Parameters#merge {#pr-56410}",
+      "url": "https://github.com/rails/rails/pull/56410",
+      "mergedAt": "2025-12-21T00:00:00.000Z",
+      "author": "Saidbek",
+      "authorUrl": "https://github.com/Saidbek",
+      "summary": "1. 概要 (1-2文で)  \n`ActionController::Parameters#merge` にブロック引数のサポートが追加され、`Hash#merge` や `Parameters#merge!` と同じインターフェースで使えるようになりました。これにより、パラメータ同士のマージ時にキー競合の解決ロジックをブロックで記述できます。"
+    },
     {
       "number": 56404,
       "title": "Add Rails.app.creds to provide combined credentials lookup in ENV and encrypted file",
@@ -406,51 +451,6 @@
       "author": "jeromedalbert",
       "authorUrl": "https://github.com/jeromedalbert",
       "summary": "1. 概要 (1-2文で)  \nRails 8.1.1 で生成される `deploy.yml` と `database.yml` に紛れ込んでいた不要な空行を削除し、今後同様の空行が紛れ込まないようにテストを追加した PR です。見た目の調整・品質向上が目的で、挙動や仕様の変更はありません。"
-    },
-    {
-      "number": 56327,
-      "title": "Active Storage: eager analysis and local file processing for immediate variants",
-      "url": "https://github.com/rails/rails/pull/56327",
-      "mergedAt": "2025-12-10T00:00:00.000Z",
-      "author": "jeremy",
-      "authorUrl": "https://github.com/jeremy",
-      "summary": "1. 概要 (1-2文で)  \nActive Storage で `process: :immediately` を指定したバリアント付き添付ファイルについて、**バリデーション時にメタデータ解析（analysis）を即時実行**し、かつ**アップロード直後のローカルファイルを直接使って解析・変換を行う**ようにした PR です。これにより、画像サイズなどのメタデータを使ったカスタムバリデーションがやりやすくなり、無駄な再ダウンロードも減ります。"
-    },
-    {
-      "number": 56331,
-      "title": "Backport #56275 to 7-2-stable",
-      "url": "https://github.com/rails/rails/pull/56331",
-      "mergedAt": "2025-12-09T00:00:00.000Z",
-      "author": "yahonda",
-      "authorUrl": "https://github.com/yahonda",
-      "summary": "1. 概要 (1-2文で)  \nRails 7.2 系ブランチ（7-2-stable）に対して、本来取り込むべきだった PR #56275 をバックポートし、Bundler 4.0.0 でテストが落ちる問題に対応する修正です。  \nrailties のジェネレーター用テストヘルパーを調整し、7-2-stable でも CI が安定して通るようにしています。"
-    },
-    {
-      "number": 56336,
-      "title": "Split dbs_test.rb to whittle away at CI bottlenecks",
-      "url": "https://github.com/rails/rails/pull/56336",
-      "mergedAt": "2025-12-09T00:00:00.000Z",
-      "author": "jeremy",
-      "authorUrl": "https://github.com/jeremy",
-      "summary": "1. 概要 (1-2文で)  \n`railties/test/application/rake/dbs_test.rb` が CI の大きなボトルネックになっていたため、テストの見積り時間を現実に合わせて更新しつつ、テスト構成を整理・分割して並列化しやすくした PR です。重複していた ERB YAML テストを統合したうえで、DB 関連のテストを4つのファイルに分割し、CI のタイムアウトと全体時間の削減を狙っています。"
-    },
-    {
-      "number": 56175,
-      "title": "Make flaky parallel tests easier to diagnose by deterministically assigning tests to workers",
-      "url": "https://github.com/rails/rails/pull/56175",
-      "mergedAt": "2025-12-09T00:00:00.000Z",
-      "author": "jeremy",
-      "authorUrl": "https://github.com/jeremy",
-      "summary": "1. 概要 (1-2文で)  \nRails の並列テスト実行時に、テストをワーカーへ決定論的（再現可能）に割り当てる仕組みが入り、「同じ `--seed` とワーカー数なら同じワーカーが同じ順番でテストを実行できる」ようになりました。  \n加えて、オプション `work_stealing: true` によってアイドルワーカーが他のワーカーからテストを奪う「ワークスティーリング」を有効化できるようになり、実行時間の平準化と再現性のトレードオフを選べます。"
-    },
-    {
-      "number": 56330,
-      "title": "Enable debug events by default",
-      "url": "https://github.com/rails/rails/pull/56330",
-      "mergedAt": "2025-12-09T00:00:00.000Z",
-      "author": "gmcgibbon",
-      "authorUrl": "https://github.com/gmcgibbon",
-      "summary": "1. 概要 (1-2文で)  \nRailsの新しいイベントレポーター（log subscriber 周り）で、デフォルトでは出なくなっていた「debug イベント」を、再びデフォルトで有効にする変更です。特にアプリケーション初期化前（テストやフレームワーク単体利用時）でも debug イベントが出力されるようになります。"
     }
   ]
 }
