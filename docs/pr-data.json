@@ -1,7 +1,34 @@
 {
-  "lastUpdated": "2025-12-22T00:11:03.085Z",
+  "lastUpdated": "2025-12-23T00:09:39.691Z",
   "totalCount": 50,
   "items": [
+    {
+      "number": 56431,
+      "title": "Add \"Missing key: ...\" to `KeyError` message in EncryptedConfiguration {#pr-56431}",
+      "url": "https://github.com/rails/rails/pull/56431",
+      "mergedAt": "2025-12-22T00:00:00.000Z",
+      "author": "jordan-brough",
+      "authorUrl": "https://github.com/jordan-brough",
+      "summary": "1. 概要 (1-2文で)  \nEncryptedConfiguration で `KeyError` を発生させる際のエラーメッセージに、「Missing key: ...」という具体的なキー名を含めるようにした PR です。既に `CombinedConfiguration` で行っている挙動と揃えるための、開発者向けの利便性改善です。"
+    },
+    {
+      "number": 56432,
+      "title": "Fix `assert_equal` invocations in bug report templates {#pr-56432}",
+      "url": "https://github.com/rails/rails/pull/56432",
+      "mergedAt": "2025-12-22T00:00:00.000Z",
+      "author": "callmesangio",
+      "authorUrl": "https://github.com/callmesangio",
+      "summary": "1. 概要 (1-2文で)  \nRails のバグ報告テンプレート内で使われている `assert_equal` の引数の順番ミス（`actual, expected`）を、正しい順番（`expected, actual`）に修正した PR です。テストコードの書き方のサンプルとして配布されているテンプレートの品質を整えるための、ドキュメント／ガイド系の小さな修正です。"
+    },
+    {
+      "number": 56423,
+      "title": "Fix link to jemalloc repo [ci skip]  {#pr-56423}",
+      "url": "https://github.com/rails/rails/pull/56423",
+      "mergedAt": "2025-12-22T00:00:00.000Z",
+      "author": "andreimaxim",
+      "authorUrl": "https://github.com/andreimaxim",
+      "summary": "1. 概要 (1-2文で)  \nRailsガイド「tuning_performance_for_deployment.md」に記載されていた jemalloc のリンク先が、アーカイブされた旧リポジトリを指していた問題を修正し、現行の正しいリポジトリへのリンクに差し替えたPRです。ドキュメントのみの更新で、Rails本体のコードや挙動には変更はありません。\n\n2. 変更内容の詳細  \n- 対象ファイル: `guides/source/tuning_performance_for_deployment.md`  \n- 変更内容は 1 行だけで、「jemalloc への参照リンク」の URL を修正するものです。  \n\nガイドでは、アプリケーションのパフォーマンスチューニング／デプロイ時の最適化において jemalloc を利用することが推奨されており、その際に参照すべき jemalloc プロジェクトの GitHub リポジトリURLが掲載されています。  \n元々は「アーカイブ済みの旧リポジトリ」を指していたため、読者が「もうメンテされていないのでは？」と誤解する可能性がありました。  \nこのPRでは、そのリンクを「現在メンテナンスされている（または正しい公式の）jemalloc リポジトリ」へ更新しています。\n\n※実際の差分イメージ（URLのみ変更・擬似例）:\n```diff\n- 詳細は jemalloc のリポジトリ https://github.com/old-archived/jemalloc を参照してください。\n+ 詳細は jemalloc のリポジトリ https://github.com/jemalloc/jemalloc を参照してください。\n```\n\n3. 影響範囲・注意点  \n- 影響範囲:\n  - Rails ガイドを読む開発者が、最新かつサポートされている jemalloc のリポジトリに直接アクセスできるようになります。\n  - Rails 本体のコード、API、挙動、パフォーマンスには一切影響ありません（ドキュメントのみの変更）。\n- 注意点:\n  - jemalloc の導入・設定手順そのものはこのPRでは変更されていないため、利用環境や OS ごとのビルド・導入方法は、リンク先の README / ドキュメントを改めて確認する必要があります。\n  - すでに古いリンクをブックマーク等している場合は、今後は新しいリンクを参照することが推奨されます。\n\n4. 参考情報 (あれば)  \n- 関連Issue: `Fixes #56388`  \n  - ガイドがアーカイブ済みリポジトリを指していることへの報告・改善要望に対応したものです。  \n- jemalloc 公式リポジトリ（想定）:  \n  - https://github.com/jemalloc/jemalloc  \n  ※正確なURLは、マージ済みのガイド (`tuning_performance_for_deployment.md`) を確認してください。"
+    },
     {
       "number": 56415,
       "title": "Ensure batched preloaded associations accounts for klass when grouping to avoid issues with STI {#pr-56415}",
@@ -424,33 +451,6 @@
       "author": "Saidbek",
       "authorUrl": "https://github.com/Saidbek",
       "summary": "1. 概要 (1-2文で)  \nRails 8.1 以降で、カスタムロケール使用時に `pluralize` ヘルパーが英語 (`:en`) へのフォールバックを正しく参照できなくなっていた不具合を修正する PR です。`ActiveSupport::Inflector::Inflections.instance_or_fallback` がフォールバックチェーン内の `:en` を正しく扱うように変更されています。"
-    },
-    {
-      "number": 56335,
-      "title": "Analyze attachments before validation",
-      "url": "https://github.com/rails/rails/pull/56335",
-      "mergedAt": "2025-12-10T00:00:00.000Z",
-      "author": "jeremy",
-      "authorUrl": "https://github.com/jeremy",
-      "summary": "1. 概要 (1–2文で)  \nActive Storage の添付ファイル(画像・動画等)のメタデータ（幅・高さ・再生時間など）を「モデルのバリデーション前」に取得できるようになり、`avatar.metadata[:width]` などを使ったサーバーサイドのバリデーションが素直に書けるようになりました。あわせて、メタデータ解析のタイミングを `:immediately / :later / :lazily` から選べる新オプションが導入されています。"
-    },
-    {
-      "number": 56017,
-      "title": "Add `Rails::CodeStatistics#register_extension` to register file extensions for `rails stats`",
-      "url": "https://github.com/rails/rails/pull/56017",
-      "mergedAt": "2025-12-10T00:00:00.000Z",
-      "author": "taketo1113",
-      "authorUrl": "https://github.com/taketo1113",
-      "summary": "1. 概要 (1-2文で)  \n`rails stats` が対象とするファイル拡張子を、安全に追加できる `Rails::CodeStatistics.register_extension` が新設されました。これにより、将来のデフォルト拡張子の変更と競合せずに、独自や gem 由来の拡張子を統計対象に含められます。"
-    },
-    {
-      "number": 56323,
-      "title": "Ensure generated yml files do not have extra blank lines",
-      "url": "https://github.com/rails/rails/pull/56323",
-      "mergedAt": "2025-12-10T00:00:00.000Z",
-      "author": "jeromedalbert",
-      "authorUrl": "https://github.com/jeromedalbert",
-      "summary": "1. 概要 (1-2文で)  \nRails 8.1.1 で生成される `deploy.yml` と `database.yml` に紛れ込んでいた不要な空行を削除し、今後同様の空行が紛れ込まないようにテストを追加した PR です。見た目の調整・品質向上が目的で、挙動や仕様の変更はありません。"
     }
   ]
 }
