@@ -1,7 +1,70 @@
 {
-  "lastUpdated": "2025-12-23T00:09:39.691Z",
+  "lastUpdated": "2025-12-24T00:11:23.268Z",
   "totalCount": 50,
   "items": [
+    {
+      "number": 56433,
+      "title": "don't create unused routes in authentication generator {#pr-56433}",
+      "url": "https://github.com/rails/rails/pull/56433",
+      "mergedAt": "2025-12-23T00:00:00.000Z",
+      "author": "gregmolnar",
+      "authorUrl": "https://github.com/gregmolnar",
+      "summary": "1. 概要 (1-2文で)  \nRails の認証用ジェネレータが、実際には使われていない RESTful ルートまで routes.rb に生成していた問題を修正し、必要なルートだけを生成するようにした PR です。これにより、不要なルーティングが減り、生成されるアプリのルーティングがシンプルかつ意図に沿ったものになります。"
+    },
+    {
+      "number": 56442,
+      "title": "Pin Minitest to version 5 on 7-2-stable {#pr-56442}",
+      "url": "https://github.com/rails/rails/pull/56442",
+      "mergedAt": "2025-12-23T00:00:00.000Z",
+      "author": "yahonda",
+      "authorUrl": "https://github.com/yahonda",
+      "summary": "1. 概要 (1-2文で)  \nRails 7.2 系（7-2-stable ブランチ）で利用する Minitest のバージョンを「5 系」に固定し、Minitest 6 への自動アップデートを防ぐ変更です。理由は、Minitest 6 が Ruby 3.2 以上を要求するのに対し、Rails 7.2 は Ruby 3.1 をサポート対象としているためです。"
+    },
+    {
+      "number": 56440,
+      "title": "Fix `live_streaming_excluded_keys` docs [ci skip] {#pr-56440}",
+      "url": "https://github.com/rails/rails/pull/56440",
+      "mergedAt": "2025-12-23T00:00:00.000Z",
+      "author": "zzak",
+      "authorUrl": "https://github.com/zzak",
+      "summary": "1. 概要 (1-2文で)  \n`ActionController::Live` の `live_streaming_excluded_keys` に関するドキュメントの誤りが修正されました。実装に合わせて説明が正しくなるように調整しただけで、挙動そのものの変更はありません。"
+    },
+    {
+      "number": 56434,
+      "title": "[8-1-stable] Minitest 6 support {#pr-56434}",
+      "url": "https://github.com/rails/rails/pull/56434",
+      "mergedAt": "2025-12-23T00:00:00.000Z",
+      "author": "zzak",
+      "authorUrl": "https://github.com/zzak",
+      "summary": "1. 概要 (1–2文で)  \nこのPRは、Rails 8.1 系 (`8-1-stable` ブランチ) に Minitest 6 対応をバックポートしたものです。Minitest 6 での非互換・仕様変更に追従しつつ、`rails test` や ActiveSupport::TestCase まわりの動作が壊れないように調整しています。"
+    },
+    {
+      "number": 56435,
+      "title": "[8-0-stable] Minitest 6 support {#pr-56435}",
+      "url": "https://github.com/rails/rails/pull/56435",
+      "mergedAt": "2025-12-23T00:00:00.000Z",
+      "author": "zzak",
+      "authorUrl": "https://github.com/zzak",
+      "summary": "1. 概要 (1–2文で)  \nRails 8.0-stable ブランチに対して、Minitest 6 への対応を行うバックポート PRです。Gemfile の依存関係更新に加え、Minitest 6 での非互換点（autorun、並列実行、ラインフィルタなど）に追随するためのテスト基盤コードの修正が含まれます。"
+    },
+    {
+      "number": 56439,
+      "title": "[ci skip] Clarify behavior of monday and sunday methods in guides {#pr-56439}",
+      "url": "https://github.com/rails/rails/pull/56439",
+      "mergedAt": "2025-12-23T00:00:00.000Z",
+      "author": "Yuhi-Sato",
+      "authorUrl": "https://github.com/Yuhi-Sato",
+      "summary": "1. 概要 (1-2文で)  \nこのPRは、Railsガイドの `Date`/`ActiveSupport` 拡張に関するドキュメントを修正し、`monday` と `sunday` メソッドの挙動をより正確に説明したものです。コードの挙動自体は変えず、「常に前の月曜日／次の日曜日」ではなく「同じ日付を返す場合がある」ことを明示しました。"
+    },
+    {
+      "number": 56429,
+      "title": "Fixes for default handling in CombinedConfiguration {#pr-56429}",
+      "url": "https://github.com/rails/rails/pull/56429",
+      "mergedAt": "2025-12-23T00:00:00.000Z",
+      "author": "jordan-brough",
+      "authorUrl": "https://github.com/jordan-brough",
+      "summary": "1. 概要 (1-2文で)  \n`CombinedConfiguration` まわりの「default」値の扱いに関するバグ修正です。`env_configuration` と `encrypted_configuration` の両方で「遅延評価」と「false を正しく扱う」ように挙動が統一されました。"
+    },
     {
       "number": 56431,
       "title": "Add \"Missing key: ...\" to `KeyError` message in EncryptedConfiguration {#pr-56431}",
@@ -388,69 +451,6 @@
       "author": "alpaca-tc",
       "authorUrl": "https://github.com/alpaca-tc",
       "summary": "1. 概要 (1-2文で)  \nRails の `Rails::BacktraceCleaner` が、アプリケーションルート直下のディレクトリ(※vendor を除く)にあるファイルのスタックトレースを「クリーン」しないように変更されました。これにより、`./script` や `./packs` など独自ディレクトリに置いたスクリプトやユーティリティの呼び出し元が backtrace にきちんと表示されるようになります。"
-    },
-    {
-      "number": 56349,
-      "title": "Fix request load leak when building middleware stack",
-      "url": "https://github.com/rails/rails/pull/56349",
-      "mergedAt": "2025-12-12T00:00:00.000Z",
-      "author": "gmcgibbon",
-      "authorUrl": "https://github.com/gmcgibbon",
-      "summary": "1. 概要 (1-2文で)  \nこのPRは、Rails 起動時にミドルウェアスタックを構築する際、不要に `ActionDispatch::Request` をロードしてしまう「リクエスト関連のロードリーク」を解消するものです。`ActionDispatch::Request` を eager load せず、autoload + load hook を活用することで、ブート時の不要な処理を避けています。"
-    },
-    {
-      "number": 56347,
-      "title": "Fix guides/bug_report_template_test not running with rake",
-      "url": "https://github.com/rails/rails/pull/56347",
-      "mergedAt": "2025-12-11T00:00:00.000Z",
-      "author": "zzak",
-      "authorUrl": "https://github.com/zzak",
-      "summary": "1. 概要 (1-2文で)  \nRails の guides 用テスト (guides/bug_report_template_test) が `bin/test` では動くのに `rake test` では実行されていなかった問題を修正した PR です。あわせて、guides のテスト用 Rake タスク定義を、フレームワーク本体のテストタスクと同じスタイルに整理しています。"
-    },
-    {
-      "number": 56252,
-      "title": "[ci skip] Improve docs about system test generation",
-      "url": "https://github.com/rails/rails/pull/56252",
-      "mergedAt": "2025-12-11T00:00:00.000Z",
-      "author": "callmesangio",
-      "authorUrl": "https://github.com/callmesangio",
-      "summary": "1. 概要 (1-2文で)  \nこのPRは、Railsのシステムテスト関連ドキュメント（Testing GuideおよびAPIドキュメント）の内容を、現在の挙動に合わせて改善・修正したものです。特に「system test は自動生成されない」「`application_system_test_case.rb` はデフォルトでは作られない」という点を明確にしています。"
-    },
-    {
-      "number": 55294,
-      "title": "[RF-DOCS][ci skip] Update Threading and Code Execution Guide",
-      "url": "https://github.com/rails/rails/pull/55294",
-      "mergedAt": "2025-12-11T00:00:00.000Z",
-      "author": "OughtPuts",
-      "authorUrl": "https://github.com/OughtPuts",
-      "summary": "1. 概要 (1-2文で)  \nこのPRは Rails ガイド「Threading and Code Execution (スレッドとコード実行)」を大幅にアップデートし、非同期 Active Record や Isolated Execution State、`CurrentAttributes` など、現行 Rails のスレッド関連機能を整理・追記したドキュメント改善です。ガイドの表現・構成も見直され、より読みやすく実践的な内容になっています。"
-    },
-    {
-      "number": 56345,
-      "title": "Add SVG renderer",
-      "url": "https://github.com/rails/rails/pull/56345",
-      "mergedAt": "2025-12-11T00:00:00.000Z",
-      "author": "thiagoyoussef",
-      "authorUrl": "https://github.com/thiagoyoussef",
-      "summary": "1. 概要 (1-2文で)  \nRails に `format.svg { render svg: ... }` という形で利用できる SVG レンダラーが追加され、コントローラの `respond_to` で SVG を第一級のレスポンス形式として扱えるようになりました。これに伴い、MIME type 定義とテスト、CHANGELOG が更新されています。"
-    },
-    {
-      "number": 56329,
-      "title": "[ci skip][docs] Fix RDoc markup for DATE_FORMATS constant references",
-      "url": "https://github.com/rails/rails/pull/56329",
-      "mergedAt": "2025-12-11T00:00:00.000Z",
-      "author": "Yuhi-Sato",
-      "authorUrl": "https://github.com/Yuhi-Sato",
-      "summary": "1. 概要 (1-2文で)  \nこのPRは、`DATE_FORMATS` 定数への言及に対して RDoc 用のマークアップ（`+DATE_FORMATS+`）を付けることで、日付・日時関連のドキュメントコメントを整備・統一したものです。コードの挙動には一切変更はなく、ドキュメント生成時の表示改善のみを目的としています。"
-    },
-    {
-      "number": 56344,
-      "title": "Fix Inflections.instance_or_fallback to properly find :en fallback",
-      "url": "https://github.com/rails/rails/pull/56344",
-      "mergedAt": "2025-12-11T00:00:00.000Z",
-      "author": "Saidbek",
-      "authorUrl": "https://github.com/Saidbek",
-      "summary": "1. 概要 (1-2文で)  \nRails 8.1 以降で、カスタムロケール使用時に `pluralize` ヘルパーが英語 (`:en`) へのフォールバックを正しく参照できなくなっていた不具合を修正する PR です。`ActiveSupport::Inflector::Inflections.instance_or_fallback` がフォールバックチェーン内の `:en` を正しく扱うように変更されています。"
     }
   ]
 }
