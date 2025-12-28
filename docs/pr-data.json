@@ -1,7 +1,16 @@
 {
-  "lastUpdated": "2025-12-27T00:09:15.693Z",
+  "lastUpdated": "2025-12-28T00:10:04.216Z",
   "totalCount": 50,
   "items": [
+    {
+      "number": 56183,
+      "title": "Document how to enable Rate Limiting in tests {#pr-56183}",
+      "url": "https://github.com/rails/rails/pull/56183",
+      "mergedAt": "2025-12-27T00:00:00.000Z",
+      "author": "Kerrick",
+      "authorUrl": "https://github.com/Kerrick",
+      "summary": "1. 概要 (1-2文で)  \nこのPRは、Railsの`rate_limit`をテスト環境で有効にするための設定方法を公式ドキュメントに追記したものです。デフォルトのテスト用キャッシュ (`NullStore`) のままだとレートリミットが動作しない、という「ハマりどころ」を明示的に説明しています。"
+    },
     {
       "number": 56433,
       "title": "don't create unused routes in authentication generator {#pr-56433}",
@@ -442,15 +451,6 @@
       "author": "rafaelfranca",
       "authorUrl": "https://github.com/rafaelfranca",
       "summary": "1. 概要 (1-2文で)  \n`BasicObject` を継承したクラスでも `delegate` / `delegate_missing_to` が正しく動くように、例外の発生元や例外クラス参照を `::Kernel` / ルート名前空間経由に修正した PR です。これにより、`BasicObject` サブクラスで `delegate_missing_to` を使った際に `SystemStackError`（無限再帰）が発生していた問題が解消されます。"
-    },
-    {
-      "number": 56333,
-      "title": "Do not clean directories directly under the application root with `Rails::BacktraceCleaner`",
-      "url": "https://github.com/rails/rails/pull/56333",
-      "mergedAt": "2025-12-12T00:00:00.000Z",
-      "author": "alpaca-tc",
-      "authorUrl": "https://github.com/alpaca-tc",
-      "summary": "1. 概要 (1-2文で)  \nRails の `Rails::BacktraceCleaner` が、アプリケーションルート直下のディレクトリ(※vendor を除く)にあるファイルのスタックトレースを「クリーン」しないように変更されました。これにより、`./script` や `./packs` など独自ディレクトリに置いたスクリプトやユーティリティの呼び出し元が backtrace にきちんと表示されるようになります。"
     }
   ]
 }
