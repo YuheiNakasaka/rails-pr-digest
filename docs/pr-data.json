@@ -1,7 +1,34 @@
 {
-  "lastUpdated": "2025-12-28T00:10:04.216Z",
+  "lastUpdated": "2025-12-29T00:10:39.336Z",
   "totalCount": 50,
   "items": [
+    {
+      "number": 56474,
+      "title": "Add `ActionDispatch::Request#bearer_token` to extract the bearer token {#pr-56474}",
+      "url": "https://github.com/rails/rails/pull/56474",
+      "mergedAt": "2025-12-28T00:00:00.000Z",
+      "author": "dhh",
+      "authorUrl": "https://github.com/dhh",
+      "summary": "1. 概要 (1-2文で)  \n`ActionDispatch::Request` に `#bearer_token` メソッドが追加され、`Authorization` ヘッダから Bearer トークンを簡単かつ統一的に取得できるようになりました。主に API や MCP (Model Context Protocol) リクエストでのトークン認証を想定したユーティリティです。"
+    },
+    {
+      "number": 55788,
+      "title": "[Activejob] Enable enqueue_after_transaction_commit by default with ActiveRecord and validate invalid configurations {#pr-55788}",
+      "url": "https://github.com/rails/rails/pull/55788",
+      "mergedAt": "2025-12-28T00:00:00.000Z",
+      "author": "mugitti9",
+      "authorUrl": "https://github.com/mugitti9",
+      "summary": "1. 概要 (1-2文で)  \nActiveJobの `enqueue_after_transaction_commit` のデフォルト値が、ActiveRecord 利用時には `true` になるように変更され、トランザクション内でenqueueされたジョブはコミット後にキュー投入される挙動が標準になります。併せて、ActiveRecordがない環境で `enqueue_after_transaction_commit = true` を設定するとエラーにするバリデーションが追加されました。"
+    },
+    {
+      "number": 56455,
+      "title": "Allow Rails.app.creds to access .env values in dev {#pr-56455}",
+      "url": "https://github.com/rails/rails/pull/56455",
+      "mergedAt": "2025-12-28T00:00:00.000Z",
+      "author": "dhh",
+      "authorUrl": "https://github.com/dhh",
+      "summary": "1. 概要 (1-2文で)  \nRails 7.2(?) 以降の開発環境において、`Rails.app.creds` から `.env` ファイルの値を参照できるようになり、ENV / `.env` / 暗号化 credentials を統一的な優先順位で扱えるようになりました。これにより、開発時の秘密情報管理や外部ツール連携 (例: 1Password CLI) が、credentials API に一本化されます。"
+    },
     {
       "number": 56183,
       "title": "Document how to enable Rate Limiting in tests {#pr-56183}",
@@ -424,33 +451,6 @@
       "author": "jeremy",
       "authorUrl": "https://github.com/jeremy",
       "summary": "1. 概要 (1-2文で)  \nこのPRは、CSRF関連の警告・ブロック処理を「直接ログ出力」から Active Support Notifications を用いた「イベント駆動のログ・フック」に変更し、CSRFイベントを購読・拡張できるようにしたものです。新しい通知イベントが追加され、StructuredEventSubscriber によってログ用の構造化イベントへ変換されるようになりました。"
-    },
-    {
-      "number": 56350,
-      "title": "Use a modern approach for cross-site request forgery protection",
-      "url": "https://github.com/rails/rails/pull/56350",
-      "mergedAt": "2025-12-12T00:00:00.000Z",
-      "author": "rosa",
-      "authorUrl": "https://github.com/rosa",
-      "summary": "1. 概要 (1-2文で)  \nRails の CSRF 保護を「`Sec-Fetch-Site` ヘッダを使ったモダン方式」がデフォルトとなるように刷新し、従来の authenticity token 方式はレガシー環境向けのフォールバックとして扱う変更です。あわせて、正当なクロスサイトアクセスを許可する `trusted_origins` オプションなどが追加され、将来的に CSRF トークンを廃止していく足がかりになっています。"
-    },
-    {
-      "number": 56354,
-      "title": "[ci skip][docs] PARALLEL_WORKERS threshold bypass behavior",
-      "url": "https://github.com/rails/rails/pull/56354",
-      "mergedAt": "2025-12-12T00:00:00.000Z",
-      "author": "justinko",
-      "authorUrl": "https://github.com/justinko",
-      "summary": "1. 概要 (1-2文で)  \nRails のテスト並列実行機能で使われる `PARALLEL_WORKERS` 環境変数について、「しきい値(threshold)よりテスト件数が少ない場合でも、`PARALLEL_WORKERS` を明示指定すれば並列実行を強制できる」という挙動を、ガイドと API ドキュメントに明記した PR です。コード上の変更はごく小さく、主にドキュメントの明文化が目的です。"
-    },
-    {
-      "number": 56353,
-      "title": "Make `delegate` and `delegate_missing_to` work in BasicObject subclasses",
-      "url": "https://github.com/rails/rails/pull/56353",
-      "mergedAt": "2025-12-12T00:00:00.000Z",
-      "author": "rafaelfranca",
-      "authorUrl": "https://github.com/rafaelfranca",
-      "summary": "1. 概要 (1-2文で)  \n`BasicObject` を継承したクラスでも `delegate` / `delegate_missing_to` が正しく動くように、例外の発生元や例外クラス参照を `::Kernel` / ルート名前空間経由に修正した PR です。これにより、`BasicObject` サブクラスで `delegate_missing_to` を使った際に `SystemStackError`（無限再帰）が発生していた問題が解消されます。"
     }
   ]
 }
