@@ -1,7 +1,16 @@
 {
-  "lastUpdated": "2025-12-30T00:09:50.797Z",
+  "lastUpdated": "2025-12-31T00:09:51.329Z",
   "totalCount": 50,
   "items": [
+    {
+      "number": 56484,
+      "title": "Remove deprecated fetch cast type {#pr-56484}",
+      "url": "https://github.com/rails/rails/pull/56484",
+      "mergedAt": "2025-12-30T00:00:00.000Z",
+      "author": "seuros",
+      "authorUrl": "https://github.com/seuros",
+      "summary": "1. 概要 (1-2文で)  \nRails 8.1 以降では schema cache dump に常に `cast_type` が含まれるようになったため、接続オブジェクトから `cast_type`（キャスト用の型情報）をフォールバック取得する古い互換コードが削除されました。これにより Active Record の型キャスト周りの実装が簡素化され、古いバージョン向けのデプリケート経路が整理されています。"
+    },
     {
       "number": 56482,
       "title": "Fix merging relations with arel equality predicates with null relations {#pr-56482}",
@@ -442,15 +451,6 @@
       "author": "afurm",
       "authorUrl": "https://github.com/afurm",
       "summary": "1. 概要 (1-2文で)  \n`ActiveSupport::TimeWithZone` の YAML シリアライズに関するテストから、既に無効となった非推奨警告(assert_not_deprecated)のアサーションと TODO コメントが削除され、テストがシンプルに YAML 出力そのものを検証する形に整理されています。挙動変更はなく、テストコードのクリーンアップのみです。"
-    },
-    {
-      "number": 55928,
-      "title": "Batch reset sequence",
-      "url": "https://github.com/rails/rails/pull/55928",
-      "mergedAt": "2025-12-13T00:00:00.000Z",
-      "author": "gmcgibbon",
-      "authorUrl": "https://github.com/gmcgibbon",
-      "summary": "1. 概要 (1-2文で)  \nPostgreSQL アダプタに、複数テーブルのシーケンスを一括でリセットできる `reset_column_sequences!` が追加され、特にフィクスチャ読み込み時などに多数テーブルがある環境でのパフォーマンス改善を狙った変更です。あわせて抽象アダプタ/各DBアダプタの reset 関連メソッドの整理が行われています。"
     }
   ]
 }
