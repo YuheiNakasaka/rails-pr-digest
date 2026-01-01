@@ -1,7 +1,16 @@
 {
-  "lastUpdated": "2025-12-31T00:09:51.329Z",
+  "lastUpdated": "2026-01-01T00:10:31.499Z",
   "totalCount": 50,
   "items": [
+    {
+      "number": 56490,
+      "title": "Add Rails.app.revision {#pr-56490}",
+      "url": "https://github.com/rails/rails/pull/56490",
+      "mergedAt": "2025-12-31T00:00:00.000Z",
+      "author": "byroot",
+      "authorUrl": "https://github.com/byroot",
+      "summary": "1. 概要 (1–2文で)  \n`Rails.app.revision` という新しいAPIが追加され、アプリケーションの「リビジョン(デプロイごとの識別子)」をRails側からシンプルに参照できるようになりました。デプロイトラッキング、エラーレポート、監視、キャッシュキーなどで、統一的にアプリのバージョン/リビジョンを扱うための仕組みです。"
+    },
     {
       "number": 56484,
       "title": "Remove deprecated fetch cast type {#pr-56484}",
@@ -442,15 +451,6 @@
       "author": "guilleiguaran",
       "authorUrl": "https://github.com/guilleiguaran",
       "summary": "1. 概要 (1-2文で)  \n`rails routes --expanded` とルーティングエラーページで、各コントローラアクションが「どのファイルの何行目で定義されているか」を表示できるようになりました。`RAILS_EDITOR` / `EDITOR` が設定されている場合、ルーティングエラーページからワンクリックで該当アクションのソースをエディタで開けます。"
-    },
-    {
-      "number": 56359,
-      "title": "Active Support: remove stale deprecation assertions from TimeWithZone YAML tests",
-      "url": "https://github.com/rails/rails/pull/56359",
-      "mergedAt": "2025-12-13T00:00:00.000Z",
-      "author": "afurm",
-      "authorUrl": "https://github.com/afurm",
-      "summary": "1. 概要 (1-2文で)  \n`ActiveSupport::TimeWithZone` の YAML シリアライズに関するテストから、既に無効となった非推奨警告(assert_not_deprecated)のアサーションと TODO コメントが削除され、テストがシンプルに YAML 出力そのものを検証する形に整理されています。挙動変更はなく、テストコードのクリーンアップのみです。"
     }
   ]
 }
