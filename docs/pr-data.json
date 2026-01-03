@@ -1,7 +1,16 @@
 {
-  "lastUpdated": "2026-01-02T00:09:20.905Z",
+  "lastUpdated": "2026-01-03T00:09:07.052Z",
   "totalCount": 50,
   "items": [
+    {
+      "number": 56507,
+      "title": "Remove non existing autoload for sucker punch {#pr-56507}",
+      "url": "https://github.com/rails/rails/pull/56507",
+      "mergedAt": "2026-01-02T00:00:00.000Z",
+      "author": "morgoth",
+      "authorUrl": "https://github.com/morgoth",
+      "summary": "1. 概要 (1-2文で)  \nActive Job のキューアダプタ定義から、存在しない「sucker_punch」関連の autoload 設定が1行削除されました。  \n古いコミットの「消し残し」を整理する、挙動にはほぼ影響しないリファクタリングです。"
+    },
     {
       "number": 56490,
       "title": "Add Rails.app.revision {#pr-56490}",
@@ -442,15 +451,6 @@
       "author": "Yuhi-Sato",
       "authorUrl": "https://github.com/Yuhi-Sato",
       "summary": "1. 概要 (1-2文で)  \nActiveRecord::Transactions 内の `:nodoc:` の付け方を修正し、APIドキュメントに本来載るべきメソッドが非表示になっていた問題を直した PR です。あわせて、内部用の `with_transaction_returning_status` を公式に「内部メソッド」としてドキュメントから隠すようにしています。"
-    },
-    {
-      "number": 56361,
-      "title": "Add controller action source location to routes inspector",
-      "url": "https://github.com/rails/rails/pull/56361",
-      "mergedAt": "2025-12-14T00:00:00.000Z",
-      "author": "guilleiguaran",
-      "authorUrl": "https://github.com/guilleiguaran",
-      "summary": "1. 概要 (1-2文で)  \n`rails routes --expanded` とルーティングエラーページで、各コントローラアクションが「どのファイルの何行目で定義されているか」を表示できるようになりました。`RAILS_EDITOR` / `EDITOR` が設定されている場合、ルーティングエラーページからワンクリックで該当アクションのソースをエディタで開けます。"
     }
   ]
 }
