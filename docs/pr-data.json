@@ -1,7 +1,34 @@
 {
-  "lastUpdated": "2026-01-03T00:09:07.052Z",
+  "lastUpdated": "2026-01-04T00:10:39.166Z",
   "totalCount": 50,
   "items": [
+    {
+      "number": 56471,
+      "title": "Override inspect in Combined, Env & Encrypted Configurations {#pr-56471}",
+      "url": "https://github.com/rails/rails/pull/56471",
+      "mergedAt": "2026-01-03T00:00:00.000Z",
+      "author": "siaw23",
+      "authorUrl": "https://github.com/siaw23",
+      "summary": "1. 概要 (1-2文で)  \nRails の `CombinedConfiguration`, `EnvConfiguration`, `EncryptedConfiguration` の `inspect` 出力から、実際のシークレット値や ENV の中身を隠し、キー名だけが見えるようにした変更です。コンソール・ログ・エラーレポート等で機密情報が漏洩するリスクを減らすセキュリティ改善です。"
+    },
+    {
+      "number": 53334,
+      "title": "Deprecate built-in ActiveJob backburner adapter {#pr-53334}",
+      "url": "https://github.com/rails/rails/pull/53334",
+      "mergedAt": "2026-01-03T00:00:00.000Z",
+      "author": "dixpac",
+      "authorUrl": "https://github.com/dixpac",
+      "summary": "1. 概要 (1-2文で)  \nActive Job に組み込みで用意されている Backburner アダプタが「非推奨（deprecate）」としてマークされました。今後のバージョンで削除される可能性が高く、別のアダプタや実装への移行が推奨されます。"
+    },
+    {
+      "number": 56508,
+      "title": "Remove proc support in config.revision {#pr-56508}",
+      "url": "https://github.com/rails/rails/pull/56508",
+      "mergedAt": "2026-01-03T00:00:00.000Z",
+      "author": "byroot",
+      "authorUrl": "https://github.com/byroot",
+      "summary": "1. 概要 (1-2文で)  \n`config.revision` で Proc（ラムダ / ブロック）を指定するサポートが削除され、常に「その場で評価された値」を設定する前提の API に整理されました。これにより設定方法がシンプルになり、ガイドやテストもそれに合わせて縮小されています。"
+    },
     {
       "number": 56507,
       "title": "Remove non existing autoload for sucker punch {#pr-56507}",
@@ -424,33 +451,6 @@
       "author": "jeromedalbert",
       "authorUrl": "https://github.com/jeromedalbert",
       "summary": "1. 概要 (1-2文で)  \nRails の `rails new` が生成する `.ruby-version` について、MRI のプレリリース版（例: `4.0.0-preview2`）を使っている場合に、プレリリースのサフィックス（`-preview2` など）を含めて正しく出力するように修正した PR です。これにより、`asdf` や `mise` などの Ruby バージョンマネージャーでエラーになりにくくなります。"
-    },
-    {
-      "number": 56363,
-      "title": "Fix typo in Active Job callbacks test",
-      "url": "https://github.com/rails/rails/pull/56363",
-      "mergedAt": "2025-12-15T00:00:00.000Z",
-      "author": "shivamsinghchahar",
-      "authorUrl": "https://github.com/shivamsinghchahar",
-      "summary": "1. 概要 (1-2文で)  \nActive Job のコールバックに関するテスト名に含まれていたタイプミス（`swhen`）を修正する、テストコードのみの非常に小さな修正です。挙動や API には一切変更がありません。\n\n2. 変更内容の詳細  \n- 対象ファイル: `activejob/test/cases/callbacks_test.rb`  \n- 変更内容: テストメソッド名から不要な文字列 `swhen` を取り除くリネームのみ。\n\nイメージとしては、以下のような変更です（実際の名前は PR 本文からは断定できませんが、ニュアンスとして）:\n\n```ruby\n# 変更前\ndef test_callbacks_run_swhen_job_is_performed\n  # ...\nend\n\n# 変更後\ndef test_callbacks_run_when_job_is_performed\n  # ...\nend\n```\n\n- ロジックやアサーション内容、テスト対象のコードには一切手を入れておらず、「テスト名の typo 修正」という一点に限定されています。\n- コミットメッセージや PR 説明からも、他の副次的な変更がないことが明示されています。\n\n3. 影響範囲・注意点  \n- 影響範囲\n  - Rails 本体の実行時挙動には影響なし。\n  - Active Job の API/挙動/パフォーマンスも一切変化なし。\n  - 影響するのは「テストコード上のメソッド名」のみです。\n\n- 注意点\n  - Rails 本体の CI を前提とした他のコード（例えば「特定のテストメソッド名をピンポイントで実行するスクリプト」など）がもし存在する場合、そのメソッド名に依存していると影響を受ける可能性はあります。ただし、通常の利用では問題になりません。\n  - 公開 API の変更や仕様変更ではないため、CHANGELOG の更新も不要と判断されています。\n\n4. 参考情報 (あれば)  \n- PR: https://github.com/rails/rails/pull/56363  \n- 対象コンポーネント: Active Job のコールバック関連テスト (`activejob/test/cases/callbacks_test.rb`)  \n- 目的: テスト名の可読性・一貫性向上（typo 修正）"
-    },
-    {
-      "number": 56364,
-      "title": "[ci-skip] Fix typo in Active Job test helper",
-      "url": "https://github.com/rails/rails/pull/56364",
-      "mergedAt": "2025-12-15T00:00:00.000Z",
-      "author": "shivamsinghchahar",
-      "authorUrl": "https://github.com/shivamsinghchahar",
-      "summary": "1. 概要 (1-2文で)  \nActive Job のテストヘルパー内にある文言の文法ミス（\"it's\" と \"its\" の誤用）を修正した PR です。機能や挙動には一切変更がなく、コメント／メッセージの英語表現のみが改善されています。"
-    },
-    {
-      "number": 56360,
-      "title": "[ci skip][docs] Fix :nodoc: placement in ActiveRecord::Transactions",
-      "url": "https://github.com/rails/rails/pull/56360",
-      "mergedAt": "2025-12-15T00:00:00.000Z",
-      "author": "Yuhi-Sato",
-      "authorUrl": "https://github.com/Yuhi-Sato",
-      "summary": "1. 概要 (1-2文で)  \nActiveRecord::Transactions 内の `:nodoc:` の付け方を修正し、APIドキュメントに本来載るべきメソッドが非表示になっていた問題を直した PR です。あわせて、内部用の `with_transaction_returning_status` を公式に「内部メソッド」としてドキュメントから隠すようにしています。"
     }
   ]
 }
