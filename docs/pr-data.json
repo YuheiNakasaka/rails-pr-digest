@@ -1,7 +1,79 @@
 {
-  "lastUpdated": "2026-01-04T00:10:39.166Z",
+  "lastUpdated": "2026-01-05T00:12:22.931Z",
   "totalCount": 50,
   "items": [
+    {
+      "number": 56513,
+      "title": "Attempt to fix secret_key_base test failure {#pr-56513}",
+      "url": "https://github.com/rails/rails/pull/56513",
+      "mergedAt": "2026-01-04T00:00:00.000Z",
+      "author": "byroot",
+      "authorUrl": "https://github.com/byroot",
+      "summary": "1. 概要 (1-2文で)  \nテスト環境でごくまれに発生していた「`secret_key_base` が空文字列になる」フレakyテストを抑止するため、`Rails::Application::Configuration` の `secret_key_base` まわりの扱いを調整したPRです。`secret_key_base` が不正な状態（空文字列など）で使われないよう、防御的なロジックを追加・整理しています。"
+    },
+    {
+      "number": 56506,
+      "title": "Deprecate delayed_job Active Job adapter {#pr-56506}",
+      "url": "https://github.com/rails/rails/pull/56506",
+      "mergedAt": "2026-01-04T00:00:00.000Z",
+      "author": "morgoth",
+      "authorUrl": "https://github.com/morgoth",
+      "summary": "1. 概要 (1–2文で)  \nRails の Active Job における `delayed_job` アダプタが非推奨 (deprecate) としてマークされました。今後のバージョンで削除される可能性があるため、他のキューイングバックエンドへの移行が推奨されます。"
+    },
+    {
+      "number": 56509,
+      "title": "Update mandrill's document URL in Action Mailbox basics [ci skip] {#pr-56509}",
+      "url": "https://github.com/rails/rails/pull/56509",
+      "mergedAt": "2026-01-04T00:00:00.000Z",
+      "author": "unasuke",
+      "authorUrl": "https://github.com/unasuke",
+      "summary": "1. 概要 (1-2文で)  \nAction Mailbox ガイド内で参照していた Mandrill（Mailchimp Transactional）の受信メール処理ドキュメントURLが、現行の公式ドキュメントURLに差し替えられたPRです。内容としてはドキュメント中のリンク1箇所のみを更新する、極めて小さな変更です。"
+    },
+    {
+      "number": 56512,
+      "title": "Remove minitest-ci {#pr-56512}",
+      "url": "https://github.com/rails/rails/pull/56512",
+      "mergedAt": "2026-01-04T00:00:00.000Z",
+      "author": "byroot",
+      "authorUrl": "https://github.com/byroot",
+      "summary": "1. 概要 (1-2文で)  \nRails のテスト用に導入されていた `minitest-ci` が、長らく壊れたまま使われていなかったため、依存関係と設定ごと削除されました。これにより Ruby 4.0 実行時に出ていた CGI に関する警告も解消されます。"
+    },
+    {
+      "number": 56511,
+      "title": "Drop support for Ruby 3.2 {#pr-56511}",
+      "url": "https://github.com/rails/rails/pull/56511",
+      "mergedAt": "2026-01-04T00:00:00.000Z",
+      "author": "byroot",
+      "authorUrl": "https://github.com/byroot",
+      "summary": "1. 概要 (1-2文で)  \nRails 8.2 以降で Ruby 3.2 のサポートを正式に打ち切る PR で、サポート対象 Ruby バージョンの下限が 3.3 以上に引き上げられています。Ruby 3.2 固有のコードは存在しないため、実質的には「対応バージョン宣言」と CI 対象からの除外のみです。"
+    },
+    {
+      "number": 56510,
+      "title": "Update gems incompatible with Ruby 4.0 {#pr-56510}",
+      "url": "https://github.com/rails/rails/pull/56510",
+      "mergedAt": "2026-01-04T00:00:00.000Z",
+      "author": "byroot",
+      "authorUrl": "https://github.com/byroot",
+      "summary": "1. 概要 (1-2文で)  \nこのPRは、Ruby 4.0 で `bundle install` を実行した際に互換性問題を起こす gem をアップデートし、Rails リポジトリ全体が Ruby 4.0 でもバンドル・ビルドできるようにしたものです。併せて、`tools/strict_warnings.rb` に最小限の追記が行われています。"
+    },
+    {
+      "number": 56476,
+      "title": "Add LeakChecker to tools and fail on ENV leaks {#pr-56476}",
+      "url": "https://github.com/rails/rails/pull/56476",
+      "mergedAt": "2026-01-04T00:00:00.000Z",
+      "author": "zzak",
+      "authorUrl": "https://github.com/zzak",
+      "summary": "1. 概要 (1-2文で)  \nRails のテストスイートに「環境変数のリーク検出」を行う `LeakChecker` ツールが追加され、テスト実行中に汚染された `ENV` があれば失敗させる仕組みが導入されました。あわせて、既存テストで検出された `ENV` リークも修正されています。"
+    },
+    {
+      "number": 56500,
+      "title": "Fix detected LeakChecker ENV leaks {#pr-56500}",
+      "url": "https://github.com/rails/rails/pull/56500",
+      "mergedAt": "2026-01-04T00:00:00.000Z",
+      "author": "zzak",
+      "authorUrl": "https://github.com/zzak",
+      "summary": "1. 概要 (1-2文で)  \nこのPRは、Rails のテストにおいて `ENV` の変更がテスト間でリークしている問題を、LeakChecker に検知されないように修正したものです。主にテストコード内での環境変数の扱い方を見直し、「設定したら必ず元に戻す」形に統一しています。"
+    },
     {
       "number": 56471,
       "title": "Override inspect in Combined, Env & Encrypted Configurations {#pr-56471}",
@@ -379,78 +451,6 @@
       "author": "Tretent",
       "authorUrl": "https://github.com/Tretent",
       "summary": "1. 概要 (1-2文で)  \nこのPRは、Railsガイドの「Wishlist」モデルのコード例に対して、他モデルと同様に「変更箇所のハイライト」を付けるドキュメント修正です。アプリケーションコードや挙動には一切影響せず、ガイドの可読性・一貫性を高めるための変更です。\n\n2. 変更内容の詳細(あればサンプルコードも含めて)  \n- 対象ファイル: `guides/source/wishlists.md`  \n- 変更行数: +1 / -1（実質的にはコードブロック内のマークアップ修正）\n\n背景として、ガイドのセクション 2.2 で `Wishlist` モデルに変更を加える流れが説明されているものの、他モデル（例: User, Product など）のコード例のように「どの行が新規・変更行か」がハイライトされていませんでした。\n\nこのPRでは、その `Wishlist` モデルのコードブロックに対して、以下のような「差分ハイライト用マークアップ」を追加・修正しています（イメージ）:\n\n```diff\n-```ruby\n+```ruby\n class Wishlist < ApplicationRecord\n-  has_many :items\n+  has_many :items  # この行をハイライトするような記法に変更\n end\n```\n\n実際には、Railsガイドが採用している「ガイド内差分表示用の記法」（例: `# BEGIN_HIGHLIGHT` / `# END_HIGHLIGHT`、行頭の `+` / `-` など）を用いて、`Wishlist` モデルの「新しく追加された行」が読者に分かりやすく強調されるようにしています。  \n※正確な記法はガイド内の他モデルの例に合わせて統一されています。\n\n3. 影響範囲・注意点  \n- 実コード、ライブラリ、フレームワークの挙動への影響はありません（完全にドキュメントのみの変更）。\n- CHANGELOG の更新も不要と明示されています。\n- 影響範囲は Rails Guides の「wishlists」ページ（`guides/source/wishlists.md`）に限定され、ガイド閲覧時の見え方が少し改善されるだけです。\n- テストへの影響はなく、既存テストもドキュメントの内容に依存していないため、特別な検証は不要です。\n\n4. 参考情報 (あれば)  \n- PRタイトル: `[ci skip] Highlight wishlist model changes`  \n  - `[ci skip]` が付いていることからも、コード変更がなくCIを回す必要がないドキュメント専用PRであることが分かります。\n- 類似のハイライトは、Railsガイド中の他のモデル定義サンプル（例: `guides/source/active_record_basics.md` 等）で既に使われており、これに揃える形で `Wishlist` モデルにも適用されたと考えられます。"
-    },
-    {
-      "number": 56385,
-      "title": "In MT6, test_order -> run_order. Add AS::TC#run_order as needed",
-      "url": "https://github.com/rails/rails/pull/56385",
-      "mergedAt": "2025-12-17T00:00:00.000Z",
-      "author": "zenspider",
-      "authorUrl": "https://github.com/zenspider",
-      "summary": "1. 概要 (1-2文で)  \nMinitest 6 で `test_order` が `run_order` にリネームされる変更に対応するため、Rails 側で `ActiveSupport::TestCase` に `run_order` を追加し、Minitest のバージョン差を吸収するブリッジを入れた PR です。Rails 全体でメソッド名を置き換えるのではなく、`AS::TC#test_order` を通じて `MT::Test#run_order` を呼び出せるようにして互換性を保ちます。"
-    },
-    {
-      "number": 56380,
-      "title": "[ci skip] Fix SQL and console commands for email field",
-      "url": "https://github.com/rails/rails/pull/56380",
-      "mergedAt": "2025-12-16T00:00:00.000Z",
-      "author": "Tretent",
-      "authorUrl": "https://github.com/Tretent",
-      "summary": "1. 概要 (1–2文で)  \nRailsガイド「sign_up_and_settings.md」の11.1節で、カラム名の記述ミス（`email`）を正しい `email_address` に修正したドキュメント専用PRです。実装コードや挙動には一切変更がなく、ガイドの内容と実際のスキーマ定義の不整合を解消しています。"
-    },
-    {
-      "number": 56377,
-      "title": "Remove unused requires from ActiveRecord inheritance and enum",
-      "url": "https://github.com/rails/rails/pull/56377",
-      "mergedAt": "2025-12-16T00:00:00.000Z",
-      "author": "Saidbek",
-      "authorUrl": "https://github.com/Saidbek",
-      "summary": "1. 概要 (1-2文で)  \nActive Record の `inheritance.rb` と `enum.rb` から、現在は使われていない `require` が2つ削除された PR です。機能的な挙動は変えずに、不要な依存を整理してコードを軽量化しています。"
-    },
-    {
-      "number": 56357,
-      "title": "Only emit logs if logger is defined",
-      "url": "https://github.com/rails/rails/pull/56357",
-      "mergedAt": "2025-12-16T00:00:00.000Z",
-      "author": "claudiob",
-      "authorUrl": "https://github.com/claudiob",
-      "summary": "1. 概要 (1-2文で)  \nRails の `ActiveSupport::EventReporter::LogSubscriber` が `logger=nil` の場合に `NoMethodError (undefined method 'debug?' for nil)` を起こしていた問題を、logger が存在する場合のみログを出力するようにして修正した PR です。`config.action_view.logger = nil` のように一部コンポーネントで明示的に logger を無効化していても、/up などのエンドポイントで例外が出なくなります。"
-    },
-    {
-      "number": 56202,
-      "title": "Prepping rails for minitest 6",
-      "url": "https://github.com/rails/rails/pull/56202",
-      "mergedAt": "2025-12-16T00:00:00.000Z",
-      "author": "zenspider",
-      "authorUrl": "https://github.com/zenspider",
-      "summary": "1. 概要 (1-2文で)  \nRails のテスト周りを、次期 minitest 6 でも問題なく動作するように調整した PR です。minitest 5 との後方互換性を維持しつつ、Rails 側の拡張・フック・並列実行・ラインフィルタリングなどを minitest 6 の仕様に合わせて整備しています。"
-    },
-    {
-      "number": 56368,
-      "title": "Refactor `File.atomic_write`",
-      "url": "https://github.com/rails/rails/pull/56368",
-      "mergedAt": "2025-12-15T00:00:00.000Z",
-      "author": "byroot",
-      "authorUrl": "https://github.com/byroot",
-      "summary": "1. 概要 (1–2文で)  \n`File.atomic_write` の一時ファイル生成ロジックが整理され、SecureRandom を用いて衝突を事実上不可能にしつつ、万一の競合は `EXCL` フラグ付きオープンで防ぐようになりました。あわせて、ディレクトリごとのパーミッション推測ロジックが削除され、「必要ならブロック内で自分で chmod/chown する」方針に簡素化されています。"
-    },
-    {
-      "number": 56369,
-      "title": "Support but deprecate `skip_before_action :verify_authenticity_token`",
-      "url": "https://github.com/rails/rails/pull/56369",
-      "mergedAt": "2025-12-15T00:00:00.000Z",
-      "author": "rosa",
-      "authorUrl": "https://github.com/rosa",
-      "summary": "1. 概要 (1-2文で)  \nこのPRは、Rails 7.2 で `verify_authenticity_token` が `verify_request_for_forgery_protection` に改名された後も、既存コードで広く使われている `skip_before_action :verify_authenticity_token` が引き続き動くようにしつつ、非推奨として扱うための仕組みを追加したものです。`skip_before_action :verify_authenticity_token` で forgery protection をオフにした場合、今後はデprecation警告が出るようになります。"
-    },
-    {
-      "number": 56365,
-      "title": "Include MRI prerelease string in generated `.ruby-version`",
-      "url": "https://github.com/rails/rails/pull/56365",
-      "mergedAt": "2025-12-15T00:00:00.000Z",
-      "author": "jeromedalbert",
-      "authorUrl": "https://github.com/jeromedalbert",
-      "summary": "1. 概要 (1-2文で)  \nRails の `rails new` が生成する `.ruby-version` について、MRI のプレリリース版（例: `4.0.0-preview2`）を使っている場合に、プレリリースのサフィックス（`-preview2` など）を含めて正しく出力するように修正した PR です。これにより、`asdf` や `mise` などの Ruby バージョンマネージャーでエラーになりにくくなります。"
     }
   ]
 }
