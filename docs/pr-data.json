@@ -1,7 +1,88 @@
 {
-  "lastUpdated": "2026-01-05T00:12:22.931Z",
+  "lastUpdated": "2026-01-06T00:11:57.855Z",
   "totalCount": 50,
   "items": [
+    {
+      "number": 56517,
+      "title": "Fix deprecation horizon for AJ adapters {#pr-56517}",
+      "url": "https://github.com/rails/rails/pull/56517",
+      "mergedAt": "2026-01-05T00:00:00.000Z",
+      "author": "morgoth",
+      "authorUrl": "https://github.com/morgoth",
+      "summary": "1. 概要 (1-2文で)  \nActive Job の `backburner` / `sneakers` キューアダプタについて、「いつ非推奨になるか」のバージョン表記を修正し、Rails 8.2 で非推奨とする方針に揃えた PR です。実装そのものの挙動変更ではなく、非推奨スケジュール（deprecation horizon）の明確化・整合性のための微修正です。"
+    },
+    {
+      "number": 56519,
+      "title": "Use the random suffix in the atomic temp file name {#pr-56519}",
+      "url": "https://github.com/rails/rails/pull/56519",
+      "mergedAt": "2026-01-05T00:00:00.000Z",
+      "author": "djmb",
+      "authorUrl": "https://github.com/djmb",
+      "summary": "1. 概要 (1-2文で)  \n`File.atomic_write` で一時ファイル名にランダムな suffix が反映されていなかった不具合を修正し、同一ファイルへ並行書き込みした際に一時ファイル名が衝突しないようにしました。これにより、マルチプロセス／マルチスレッド環境での原子的なファイル書き込みの安全性が向上しています。"
+    },
+    {
+      "number": 56522,
+      "title": "Don't set Vary when forgery protection is skipped {#pr-56522}",
+      "url": "https://github.com/rails/rails/pull/56522",
+      "mergedAt": "2026-01-05T00:00:00.000Z",
+      "author": "djmb",
+      "authorUrl": "https://github.com/djmb",
+      "summary": "1. 概要 (1-2文で)  \nこのPRは、「リクエストフォージェリ保護（CSRF保護）」をスキップしたアクションでは、レスポンスヘッダ `Vary` に `\"Sec-Fetch-Site\"` を追加しないようにする変更です。これにより、CSRF保護が無効なエンドポイントで不要なキャッシュ分割（Varyによるバリアント増加）が起こらないようになります。"
+    },
+    {
+      "number": 56518,
+      "title": "Remove deprecated sidekiq Active Job adapter {#pr-56518}",
+      "url": "https://github.com/rails/rails/pull/56518",
+      "mergedAt": "2026-01-05T00:00:00.000Z",
+      "author": "morgoth",
+      "authorUrl": "https://github.com/morgoth",
+      "summary": "1. 概要 (1–2文で)  \nRails 本体に含まれていた「非推奨の Sidekiq ActiveJob アダプタ」が削除され、今後は Sidekiq gem 側が提供するアダプタを使う前提になりました。これにより Rails コアから Sidekiq 依存・コード・テストがほぼ一掃されています。"
+    },
+    {
+      "number": 56516,
+      "title": "Fix Rails::Application usage of error reporter middleware {#pr-56516}",
+      "url": "https://github.com/rails/rails/pull/56516",
+      "mergedAt": "2026-01-05T00:00:00.000Z",
+      "author": "etiennebarrie",
+      "authorUrl": "https://github.com/etiennebarrie",
+      "summary": "1. 概要 (1-2文で)  \nRails::Application がエラーレポーター用ミドルウェアを誤った形で呼び出していた問題を修正し、`error_reporter` に渡したコンテキスト情報が正しく保持されるようになりました。これにより、ミドルウェア経由のエラー報告でも `report` と同等の情報が利用できます。"
+    },
+    {
+      "number": 56515,
+      "title": "remove redundant require for erb {#pr-56515}",
+      "url": "https://github.com/rails/rails/pull/56515",
+      "mergedAt": "2026-01-05T00:00:00.000Z",
+      "author": "yskkin",
+      "authorUrl": "https://github.com/yskkin",
+      "summary": "1. 概要 (1-2文で)  \nRails アプリケーションの初期化処理から、不要になっていた `erb` の `require` 行を削除した PRです。`erb` は必要な箇所（`ActiveSupport::ConfigurationFile`）側で遅延ロードされるようになっているため、重複した読み込みを整理しています。"
+    },
+    {
+      "number": 56489,
+      "title": "[ci skip] [docs] Mark Exception#as_json as nodoc {#pr-56489}",
+      "url": "https://github.com/rails/rails/pull/56489",
+      "mergedAt": "2026-01-05T00:00:00.000Z",
+      "author": "Yuhi-Sato",
+      "authorUrl": "https://github.com/Yuhi-Sato",
+      "summary": "1. 概要 (1-2文で)  \nActive Support の core_ext に定義されている `Exception#as_json` を、公開APIではなく内部実装として扱うためにドキュメントから非公開（`:nodoc:`）にする変更です。コードの動作には一切影響せず、あくまでドキュメント上の扱いを整理しただけの PR です。"
+    },
+    {
+      "number": 56499,
+      "title": "[ci skip] Fix typo in railties/CHANGELOG.md, defaults -> default {#pr-56499}",
+      "url": "https://github.com/rails/rails/pull/56499",
+      "mergedAt": "2026-01-05T00:00:00.000Z",
+      "author": "coderhs",
+      "authorUrl": "https://github.com/coderhs",
+      "summary": "1. 概要 (1-2文で)  \nRailties の CHANGELOG.md に記載されていた英語のタイポ「By defaults」を「By default」に修正するドキュメントのみの変更です。コードや挙動には一切影響しない、表記揺れ／誤記の修正 PR です。\n\n2. 変更内容の詳細(あればサンプルコードも含めて)  \n- 対象ファイル: `railties/CHANGELOG.md`\n- 変更内容: 文章中の「By defaults」を「By default」に修正  \n\n具体的には、以下のような 1 行の変更です（イメージ）:\n\n```diff\n- * By defaults, generators will create ...\n+ * By default, generators will create ...\n```\n\nCHANGELOG の記述を正しい英語に整えただけであり、API 仕様や機能説明の意味を変えるものではありません。\n\n3. 影響範囲・注意点  \n- 影響範囲:\n  - 実行時の挙動・ビルド・テストには一切影響ありません。\n  - 変更対象はドキュメント（CHANGELOG）だけです。\n- 注意点:\n  - この PR に関連するコード変更は無いため、Rails アプリケーションの更新作業やマイグレーション対応は不要です。\n  - CI を走らせていないことを示す `[ci skip]` タグがタイトルに付いていますが、ドキュメントのみの変更であるため妥当な指定です。\n\n4. 参考情報 (あれば)  \n- PR: https://github.com/rails/rails/pull/56499  \n- 該当ファイル: `railties/CHANGELOG.md`  \n- 「By default」は「デフォルトでは〜」という意味の標準的な表現であり、この修正により CHANGELOG の英語として自然な形になっています。"
+    },
+    {
+      "number": 56514,
+      "title": "Fix rescue typo {#pr-56514}",
+      "url": "https://github.com/rails/rails/pull/56514",
+      "mergedAt": "2026-01-05T00:00:00.000Z",
+      "author": "morgoth",
+      "authorUrl": "https://github.com/morgoth",
+      "summary": "1. 概要 (1-2文で)  \nこのPRは、`actionpack` のテストコード内にある `rescue` 句のタイポ（誤記）を修正したものです。アプリケーション本体の挙動には影響せず、テストの記述を正しくするための微修正です。\n\n2. 変更内容の詳細(あればサンプルコードも含めて)  \n- 変更ファイル: `actionpack/test/dispatch/debug_exceptions_test.rb`  \n- 変更行数: 1行追加・1行削除（実質1行の書き換え）\n\n具体的には、`debug_exceptions_test` 内で例外処理を行っているテストコードの `rescue` 句にタイポがあり、それを正しいクラス名（もしくは適切な例外指定）に修正しています。\n\nイメージとしては、以下のような変更です（※擬似例・実際のクラス名はPR本文参照）:\n\n```ruby\n# 修正前（誤ったクラスや名前）\nassert_nothing_raised do\n  # ...\nrescue DebugExeptions # ← タイポ\n  flunk \"Should not raise\"\nend\n\n# 修正後（正しいクラスや名前）\nassert_nothing_raised do\n  # ...\nrescue DebugExceptions # ← 正しい綴りに修正\n  flunk \"Should not raise\"\nend\n```\n\nもしくは、Rails のテストでよくあるパターンとして、意図しない例外を拾ってテストを失敗させるための `rescue` 句で、例外クラス名・モジュール名の綴りが間違っていたものを修正している、という性質の変更です。\n\nこのPRには `[ci skip]` が付いているため、CI は明示的には実行されていませんが、テスト補助コードの単純修正であることから、安全な変更と判断されていると考えられます。\n\n3. 影響範囲・注意点  \n- 影響範囲:\n  - Rails の **テストコード (`actionpack/test/dispatch/debug_exceptions_test.rb`) のみ** に限定。\n  - ランタイムの挙動や、本番アプリケーションの動作には影響しません。\n  - `ActionDispatch::DebugExceptions` まわりのテストが、意図した例外クラスを正しく捕捉できるようになります。\n- 注意点:\n  - 自前で Rails のテストスイートを流している場合、これ以前のバージョンでは「本来想定していた例外が rescue されない」「逆に rescue が効いていない」などのテストの不安定要因があった可能性があります。\n  - CI を厳密に見ているプロジェクトでは、テストの期待動作がより正しくなることで、将来の変更でテストが新たに落ちる可能性はあります（＝今まで取りこぼしていた失敗が顕在化する可能性）。ただし今回のPR単体では新たな不具合を生み出す性質のものではありません。\n\n4. 参考情報 (あれば)  \n- 該当ファイル:  \n  `actionpack/test/dispatch/debug_exceptions_test.rb`  \n  - `ActionDispatch::DebugExceptions` の挙動（スタックトレース・エラーページ表示・例外ラッピングなど）を検証するテスト群。\n- 関連コンポーネント:  \n  - `ActionDispatch::DebugExceptions`（開発・テスト用のエラーハンドリングミドルウェア）  \n- 本PRは純粋にタイポ修正であり、仕様変更や公開APIの振る舞い変更は伴っていません。"
+    },
     {
       "number": 56513,
       "title": "Attempt to fix secret_key_base test failure {#pr-56513}",
@@ -370,87 +451,6 @@
       "author": "zenspider",
       "authorUrl": "https://github.com/zenspider",
       "summary": "1. 概要 (1-2文で)  \nRails のテスト周りの依存関係として使っている minitest を 6.0 以上に引き上げ、あわせて minitest-mock を追加し、それに伴って発生したテスト関連の不整合や不具合を修正した PR です。主に ActiveSupport のテスト補助モジュールと並列実行周り、およびガイド用テストヘルパに対する調整が含まれます。"
-    },
-    {
-      "number": 56403,
-      "title": "Add Rails.app alias for Rails.application",
-      "url": "https://github.com/rails/rails/pull/56403",
-      "mergedAt": "2025-12-19T00:00:00.000Z",
-      "author": "dhh",
-      "authorUrl": "https://github.com/dhh",
-      "summary": "1. 概要 (1–2文で)  \nRails に `Rails.application` の短縮エイリアスとして `Rails.app` が追加され、コアコード・ジェネレータ・ガイド内の一部参照もそれに合わせて置き換えられました。これにより、`Rails.application.credentials` などの長くなりがちな呼び出しが、`Rails.app.credentials` のように簡潔に書けるようになります。"
-    },
-    {
-      "number": 56398,
-      "title": "Remove duplicate unique index for token migrations",
-      "url": "https://github.com/rails/rails/pull/56398",
-      "mergedAt": "2025-12-18T00:00:00.000Z",
-      "author": "zzak",
-      "authorUrl": "https://github.com/zzak",
-      "summary": "1. 概要 (1-2文で)  \nRails の migration / model generator が「token」カラムに対して重複した unique index を作ってしまう問題を修正し、生成されるマイグレーションから不要な重複 index を取り除いた PR です。これにより、`add_index` と `index: { unique: true }` の二重指定などによるエラーや冗長な定義が解消されます。"
-    },
-    {
-      "number": 56400,
-      "title": "Yield key to `ActionController::Parameters#fetch`",
-      "url": "https://github.com/rails/rails/pull/56400",
-      "mergedAt": "2025-12-18T00:00:00.000Z",
-      "author": "seanpdoyle",
-      "authorUrl": "https://github.com/seanpdoyle",
-      "summary": "1. 概要 (1-2文で)  \nActionController::Parameters#fetch が、存在しないキーに対してブロックを呼ぶ際に「キー自体」を引数として渡すように変更され、Ruby の Hash#fetch と同じインターフェースになりました。Strong Parameters を Hash 互換として扱うコードの挙動が、より一貫したものになります。"
-    },
-    {
-      "number": 56386,
-      "title": "Consolidate use of Ruby versions in templates",
-      "url": "https://github.com/rails/rails/pull/56386",
-      "mergedAt": "2025-12-18T00:00:00.000Z",
-      "author": "jeromedalbert",
-      "authorUrl": "https://github.com/jeromedalbert",
-      "summary": "1. 概要 (1-2文で)  \nRails の各種テンプレート内で使われている Ruby バージョン指定の方法を統一し、「どの値をどの用途で使うか」を整理した PR です。`version_manager_ruby_version` と `Gem.ruby_version` を状況に応じて使い分けることで、テンプレート生成時の Ruby バージョン指定がより一貫性のあるものになりました。"
-    },
-    {
-      "number": 56389,
-      "title": "[Bug] Fix input[type=file] accept attribute array value separator as `,`",
-      "url": "https://github.com/rails/rails/pull/56389",
-      "mergedAt": "2025-12-18T00:00:00.000Z",
-      "author": "bogdan",
-      "authorUrl": "https://github.com/bogdan",
-      "summary": "1. 概要 (1-2文で)  \n`file_field` ヘルパで複数指定された `accept` 属性値の区切り文字が、仕様どおりカンマ区切り（`,`）になるように修正したバグフィックスです。これにより、`input[type=\"file\"]` の `accept` 属性が HTML 仕様およびブラウザ実装に沿った形で出力されます。"
-    },
-    {
-      "number": 56387,
-      "title": "[ci skip] Document top level bin/test",
-      "url": "https://github.com/rails/rails/pull/56387",
-      "mergedAt": "2025-12-17T00:00:00.000Z",
-      "author": "jeromedalbert",
-      "authorUrl": "https://github.com/jeromedalbert",
-      "summary": "1. 概要 (1-2文で)  \nRails リポジトリの最上位ディレクトリに追加された `bin/test` の使い方を、コントリビューションガイドに追記したドキュメント専用のPRです。サブディレクトリに `cd` しなくてもテストを実行できることを公式に説明し、コントリビューターのテスト体験を改善しています。"
-    },
-    {
-      "number": 56393,
-      "title": "Implement exclude keys for ActionController::Live execution sharing",
-      "url": "https://github.com/rails/rails/pull/56393",
-      "mergedAt": "2025-12-17T00:00:00.000Z",
-      "author": "eileencodes",
-      "authorUrl": "https://github.com/eileencodes",
-      "summary": "1. 概要 (1-2文で)  \nActionController::Live でスレッド間に共有される「実行コンテキスト(Execution State)」から、特定のキーを除外できる設定が追加されました。これにより、DB の writer/replica 切り替えなど「スレッド間で共有したくないコンテキスト」をアプリ側で制御できるようになります。"
-    },
-    {
-      "number": 56392,
-      "title": "Fix false deprecation warnings when using `protect_from_forgery` with `prepend: true`",
-      "url": "https://github.com/rails/rails/pull/56392",
-      "mergedAt": "2025-12-17T00:00:00.000Z",
-      "author": "george-ma",
-      "authorUrl": "https://github.com/george-ma",
-      "summary": "1. 概要 (1-2文で)  \n`protect_from_forgery prepend: true` を使った場合に、本来問題ないのに「非推奨警告」が誤って出てしまうバグを修正した PR です。`verify_authenticity_token` と `verify_request_for_forgery_protection` のコールバック順序を調整し、正しく deprecation 判定が行われるようにしています。"
-    },
-    {
-      "number": 56390,
-      "title": "[ci skip] Highlight wishlist model changes",
-      "url": "https://github.com/rails/rails/pull/56390",
-      "mergedAt": "2025-12-17T00:00:00.000Z",
-      "author": "Tretent",
-      "authorUrl": "https://github.com/Tretent",
-      "summary": "1. 概要 (1-2文で)  \nこのPRは、Railsガイドの「Wishlist」モデルのコード例に対して、他モデルと同様に「変更箇所のハイライト」を付けるドキュメント修正です。アプリケーションコードや挙動には一切影響せず、ガイドの可読性・一貫性を高めるための変更です。\n\n2. 変更内容の詳細(あればサンプルコードも含めて)  \n- 対象ファイル: `guides/source/wishlists.md`  \n- 変更行数: +1 / -1（実質的にはコードブロック内のマークアップ修正）\n\n背景として、ガイドのセクション 2.2 で `Wishlist` モデルに変更を加える流れが説明されているものの、他モデル（例: User, Product など）のコード例のように「どの行が新規・変更行か」がハイライトされていませんでした。\n\nこのPRでは、その `Wishlist` モデルのコードブロックに対して、以下のような「差分ハイライト用マークアップ」を追加・修正しています（イメージ）:\n\n```diff\n-```ruby\n+```ruby\n class Wishlist < ApplicationRecord\n-  has_many :items\n+  has_many :items  # この行をハイライトするような記法に変更\n end\n```\n\n実際には、Railsガイドが採用している「ガイド内差分表示用の記法」（例: `# BEGIN_HIGHLIGHT` / `# END_HIGHLIGHT`、行頭の `+` / `-` など）を用いて、`Wishlist` モデルの「新しく追加された行」が読者に分かりやすく強調されるようにしています。  \n※正確な記法はガイド内の他モデルの例に合わせて統一されています。\n\n3. 影響範囲・注意点  \n- 実コード、ライブラリ、フレームワークの挙動への影響はありません（完全にドキュメントのみの変更）。\n- CHANGELOG の更新も不要と明示されています。\n- 影響範囲は Rails Guides の「wishlists」ページ（`guides/source/wishlists.md`）に限定され、ガイド閲覧時の見え方が少し改善されるだけです。\n- テストへの影響はなく、既存テストもドキュメントの内容に依存していないため、特別な検証は不要です。\n\n4. 参考情報 (あれば)  \n- PRタイトル: `[ci skip] Highlight wishlist model changes`  \n  - `[ci skip]` が付いていることからも、コード変更がなくCIを回す必要がないドキュメント専用PRであることが分かります。\n- 類似のハイライトは、Railsガイド中の他のモデル定義サンプル（例: `guides/source/active_record_basics.md` 等）で既に使われており、これに揃える形で `Wishlist` モデルにも適用されたと考えられます。"
     }
   ]
 }
