@@ -1,7 +1,70 @@
 {
-  "lastUpdated": "2026-01-06T00:11:57.855Z",
+  "lastUpdated": "2026-01-07T00:10:32.406Z",
   "totalCount": 50,
   "items": [
+    {
+      "number": 56526,
+      "title": "Remove unnecessary `defined?` check for RubyVM::YJIT.enable {#pr-56526}",
+      "url": "https://github.com/rails/rails/pull/56526",
+      "mergedAt": "2026-01-06T00:00:00.000Z",
+      "author": "yahonda",
+      "authorUrl": "https://github.com/yahonda",
+      "summary": "1. 概要 (1-2文で)  \nRails main ブランチが Ruby 3.3.0 以上を必須としたことに伴い、`RubyVM::YJIT.enable` の存在チェック (`defined?`) を削除してコードを簡略化した PR です。Ruby 3.3 以降では `RubyVM::YJIT.enable` が常に存在するため、ガードが不要になっています。"
+    },
+    {
+      "number": 56488,
+      "title": "Ensure version_manager_ruby_version tests work in rbenv/rvm environments {#pr-56488}",
+      "url": "https://github.com/rails/rails/pull/56488",
+      "mergedAt": "2026-01-06T00:00:00.000Z",
+      "author": "zzak",
+      "authorUrl": "https://github.com/zzak",
+      "summary": "1. 概要 (1-2文で)  \n`version_manager_ruby_version` に関するテストが、rbenv / rvm 環境でローカル実行すると落ちてしまう問題を修正した PR です。主にテスト側での Ruby バージョン検出の前提を見直し、実行環境（rbenv/rvm）の影響を受けないようにしています。"
+    },
+    {
+      "number": 56524,
+      "title": "Fix Rails.app.revision to check git repo in app root {#pr-56524}",
+      "url": "https://github.com/rails/rails/pull/56524",
+      "mergedAt": "2026-01-06T00:00:00.000Z",
+      "author": "Saidbek",
+      "authorUrl": "https://github.com/Saidbek",
+      "summary": "1. 概要 (1-2文で)  \n`Rails.app.revision` がアプリケーションのルートディレクトリではなく「現在の作業ディレクトリ」を基準に `.git` を探していた問題を修正し、常にアプリケーションルートの Git 情報を参照するようにした PR です。これにより、別ディレクトリから Rails アプリを起動しても正しいリビジョンが取得されます。"
+    },
+    {
+      "number": 56306,
+      "title": "Fix text overflow in interstitial notes on mobile {#pr-56306}",
+      "url": "https://github.com/rails/rails/pull/56306",
+      "mergedAt": "2026-01-06T00:00:00.000Z",
+      "author": "shivamsinghchahar",
+      "authorUrl": "https://github.com/shivamsinghchahar",
+      "summary": "1. 概要 (1-2文で)  \nRails ガイドの「インタースティシャルな注意書き（notes）」内にある長い `<code>` テキストが、モバイル表示時に横にはみ出してしまう問題を CSS で修正した PRです。flex コンテナ内で段落が正しく縮小されるようにし、テキストのオーバーフローと横スクロールを防いでいます。"
+    },
+    {
+      "number": 56379,
+      "title": "fix: Reset the schema_search_path during pg reconnect and reset {#pr-56379}",
+      "url": "https://github.com/rails/rails/pull/56379",
+      "mergedAt": "2026-01-06T00:00:00.000Z",
+      "author": "eglitobias",
+      "authorUrl": "https://github.com/eglitobias",
+      "summary": "1. 概要 (1-2文で)  \nPostgreSQL / PostGIS アダプタで、接続リセットや再接続後に `schema_search_path` が再適用されず、デフォルトの `\"$user\", public` に戻ってしまうバグを修正した PR です。Rails 8.1 以降で `reconnect!` やプール経由のリセットを行っても、`database.yml` で設定した `schema_search_path` が確実に再設定されるようになります。"
+    },
+    {
+      "number": 56447,
+      "title": "Fix enum validation to allow Float values {#pr-56447}",
+      "url": "https://github.com/rails/rails/pull/56447",
+      "mergedAt": "2026-01-06T00:00:00.000Z",
+      "author": "Saidbek",
+      "authorUrl": "https://github.com/Saidbek",
+      "summary": "1. 概要 (1-2文で)  \nRails 8.1 系で導入された enum 定義値のバリデーションに不備があり、Float を使った enum が `ArgumentError` で落ちるようになっていた問題を修正する PRです。Rails 7.x や 8.0.x で動いていた「Float 値の enum 定義」を、8.1.1 以降でも再び利用できるようにします。"
+    },
+    {
+      "number": 54468,
+      "title": "Make ActiveStorage::Service responsible for checksums {#pr-54468}",
+      "url": "https://github.com/rails/rails/pull/54468",
+      "mergedAt": "2026-01-06T00:00:00.000Z",
+      "author": "mrpasquini",
+      "authorUrl": "https://github.com/mrpasquini",
+      "summary": "1. 概要 (1-2文で)  \nActive Storage の「どのハッシュアルゴリズムでチェックサム（整合性チェック）を計算するか」という責務を `ActiveStorage::Service` 側に集約し、サービスごとに適切なアルゴリズムを選べるようにした PR です。併せて S3 サービスで SHA256 をサポートし、ダウンロード検証ロジックや JS 側のダイレクトアップロード用チェックサム計算も整理・拡張されています。"
+    },
     {
       "number": 56517,
       "title": "Fix deprecation horizon for AJ adapters {#pr-56517}",
@@ -388,69 +451,6 @@
       "author": "morgoth",
       "authorUrl": "https://github.com/morgoth",
       "summary": "1. 概要 (1-2文で)  \n`ActiveSupport::CombinedConfiguration` のコメント内に書かれていたサンプルコードの条件式が、実際には到達しない（無意味な）`||` を含んでいたため、正しい挙動を反映した形に修正されたドキュメント的変更です。実行コードの挙動そのものではなく、コメント中の例示コードの論理を整えるためのフォローアップ PR です。"
-    },
-    {
-      "number": 56412,
-      "title": "Fixed bin/rails notes command to work with CSS /**/ comments {#pr-56412}",
-      "url": "https://github.com/rails/rails/pull/56412",
-      "mergedAt": "2025-12-21T00:00:00.000Z",
-      "author": "davidrhyswhite",
-      "authorUrl": "https://github.com/davidrhyswhite",
-      "summary": "1. 概要 (1-2文で)  \n`bin/rails notes` コマンドが `.css` ファイル内の `TODO` / `FIXME` / `OPTIMIZE` などを正しく検出できていなかったバグを修正した PR です。CSS のコメント形式 `/* ... */` に対応する正規表現へ変更し、期待どおりスタイルシート内のノートを拾えるようにしています。"
-    },
-    {
-      "number": 56410,
-      "title": "Add block support to ActionController::Parameters#merge {#pr-56410}",
-      "url": "https://github.com/rails/rails/pull/56410",
-      "mergedAt": "2025-12-21T00:00:00.000Z",
-      "author": "Saidbek",
-      "authorUrl": "https://github.com/Saidbek",
-      "summary": "1. 概要 (1-2文で)  \n`ActionController::Parameters#merge` にブロック引数のサポートが追加され、`Hash#merge` や `Parameters#merge!` と同じインターフェースで使えるようになりました。これにより、パラメータ同士のマージ時にキー競合の解決ロジックをブロックで記述できます。"
-    },
-    {
-      "number": 56404,
-      "title": "Add Rails.app.creds to provide combined credentials lookup in ENV and encrypted file",
-      "url": "https://github.com/rails/rails/pull/56404",
-      "mergedAt": "2025-12-20T00:00:00.000Z",
-      "author": "dhh",
-      "authorUrl": "https://github.com/dhh",
-      "summary": "1. 概要 (1-2文で)  \nRails 8系(?) に、ENV と encrypted credentials を意識せずに一元的に参照できる `Rails.app.creds` が追加されました。これにより、鍵の保管場所を ENV と credentials の間で移行・併用してもアプリケーションコードを変更せずに済む設計になります。"
-    },
-    {
-      "number": 56409,
-      "title": "Remove support for psych < 4",
-      "url": "https://github.com/rails/rails/pull/56409",
-      "mergedAt": "2025-12-20T00:00:00.000Z",
-      "author": "byroot",
-      "authorUrl": "https://github.com/byroot",
-      "summary": "1. 概要 (1-2文で)  \nPsych 4未満（古いYAMLライブラリ）への対応コードをRails本体から削除し、「Psych 4以上のみサポート」に整理したPRです。これによりYAML関連の分岐や互換コードが減り、実装とテストがシンプルになっています。"
-    },
-    {
-      "number": 56408,
-      "title": "Make minitest-mock a hard dependency again",
-      "url": "https://github.com/rails/rails/pull/56408",
-      "mergedAt": "2025-12-20T00:00:00.000Z",
-      "author": "byroot",
-      "authorUrl": "https://github.com/byroot",
-      "summary": "1. 概要 (1-2文で)  \nRails 自身のテストスイートで使っている `minitest-mock` を「必須依存関係（hard dependency）」に戻す PR です。以前行った「soft dependency 化」の変更をリバートし、Rails テスト実行時に `minitest/mock` を必ず読み込む形に統一しています。"
-    },
-    {
-      "number": 53335,
-      "title": "Deprecate built-in snekaers adapter",
-      "url": "https://github.com/rails/rails/pull/53335",
-      "mergedAt": "2025-12-19T00:00:00.000Z",
-      "author": "dixpac",
-      "authorUrl": "https://github.com/dixpac",
-      "summary": "1. 概要 (1-2文で)  \nRails の Active Job に含まれていた built-in の `sneakers` アダプタが非推奨（deprecate）扱いになり、代わりに後継である `kicks` gem の利用が推奨されるようになりました。これに伴い、非推奨警告の追加と関連テスト、CHANGELOG の更新が行われています。"
-    },
-    {
-      "number": 56207,
-      "title": "Bump minitest to V6",
-      "url": "https://github.com/rails/rails/pull/56207",
-      "mergedAt": "2025-12-19T00:00:00.000Z",
-      "author": "zenspider",
-      "authorUrl": "https://github.com/zenspider",
-      "summary": "1. 概要 (1-2文で)  \nRails のテスト周りの依存関係として使っている minitest を 6.0 以上に引き上げ、あわせて minitest-mock を追加し、それに伴って発生したテスト関連の不整合や不具合を修正した PR です。主に ActiveSupport のテスト補助モジュールと並列実行周り、およびガイド用テストヘルパに対する調整が含まれます。"
     }
   ]
 }
