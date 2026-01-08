@@ -1,7 +1,79 @@
 {
-  "lastUpdated": "2026-01-07T00:10:32.406Z",
+  "lastUpdated": "2026-01-08T00:13:47.631Z",
   "totalCount": 50,
   "items": [
+    {
+      "number": 56548,
+      "title": "refactor(test): consolidate test helper configuration into support module {#pr-56548}",
+      "url": "https://github.com/rails/rails/pull/56548",
+      "mergedAt": "2026-01-07T00:00:00.000Z",
+      "author": "seuros",
+      "authorUrl": "https://github.com/seuros",
+      "summary": "1. 概要 (1-2文で)  \nこのPRは、Active Record のテスト用ヘルパ設定を専用のサポートモジュール群に整理・集約し、`QUOTED_TYPE` などの定数や設定をグローバルではなく `ARTest` 名前空間配下に移動したリファクタリングです。テスト構成の分離と見通しを良くしつつ、既存テストの挙動は維持することを目的としています。"
+    },
+    {
+      "number": 56547,
+      "title": "Fix class variable initialization for type mapping callbacks {#pr-56547}",
+      "url": "https://github.com/rails/rails/pull/56547",
+      "mergedAt": "2026-01-07T00:00:00.000Z",
+      "author": "seuros",
+      "authorUrl": "https://github.com/seuros",
+      "summary": "1. 概要 (1-2文で)  \nPostgreSQL アダプタの「型マッピング用コールバック」を保持するクラス変数の初期化方法を修正し、前回のPRでテストを個別実行した際に失敗していた問題を解消する変更です。クラス変数の初期化タイミング／方法が原因で、環境によって状態が不安定になるのを防ぐ目的の修正です。"
+    },
+    {
+      "number": 56496,
+      "title": "Add PostgreSQLAdapter.register_type_mapping {#pr-56496}",
+      "url": "https://github.com/rails/rails/pull/56496",
+      "mergedAt": "2026-01-07T00:00:00.000Z",
+      "author": "seuros",
+      "authorUrl": "https://github.com/seuros",
+      "summary": "1. 概要 (1-2文で)  \nPostgreSQLAdapter に、外部 gem が独自の PostgreSQL 型を「正規のインターフェイス」で登録できる `register_type_mapping` メソッドが追加されました。これにより、postgis や vector などの gem がアダプタを monkey patch せずに型マッピングを拡張できるようになります。"
+    },
+    {
+      "number": 56012,
+      "title": "Memoize IAM client and set authorization to ADC for GCS Active Storage service {#pr-56012}",
+      "url": "https://github.com/rails/rails/pull/56012",
+      "mergedAt": "2026-01-07T00:00:00.000Z",
+      "author": "jmalcic",
+      "authorUrl": "https://github.com/jmalcic",
+      "summary": "1. 概要 (1-2文で)  \nGoogle Cloud Storage 用 Active Storage サービスにおいて、`iam: true` 指定時の署名付きURL生成が #55353 により壊れていた問題を、IAM クライアントの認証を元の「ADC (Application Default Credentials) を使う」挙動に戻しつつ、IAM クライアントをメモ化して過剰な ADC 呼び出しを避ける形で修正した PR です。  \nあわせて、この挙動を検証するテストと CHANGELOG が追加されています。"
+    },
+    {
+      "number": 56534,
+      "title": "Fix SQLite3 schema dump for non-autoincrement integer primary keys {#pr-56534}",
+      "url": "https://github.com/rails/rails/pull/56534",
+      "mergedAt": "2026-01-07T00:00:00.000Z",
+      "author": "khasinski",
+      "authorUrl": "https://github.com/khasinski",
+      "summary": "1. 概要 (1-2文で)  \nSQLite3 を使って `id: :integer, default: nil` な主キーを持つテーブルを作成した場合に、schema.rb へのダンプ・復元時に誤って AUTOINCREMENT 付きの主キーに変わってしまう不具合を修正した PR です。`sqlite_master` を参照して実際に AUTOINCREMENT が付与されているかどうかを判定し、スキーマダンプ時に `id: :integer, default: nil` を正しく出力するようになりました。"
+    },
+    {
+      "number": 56535,
+      "title": "[Backport 8-1-stable] Fix PostgreSQL schema_search_path after reconnect and reset {#pr-56535}",
+      "url": "https://github.com/rails/rails/pull/56535",
+      "mergedAt": "2026-01-07T00:00:00.000Z",
+      "author": "eglitobias",
+      "authorUrl": "https://github.com/eglitobias",
+      "summary": "1. 概要 (1–2文で)  \nRails 8.1系のPostgreSQLアダプタで、「再接続後や接続リセット後に `schema_search_path` が正しく復元されない」不具合を修正するパッチを `8-1-stable` ブランチにバックポートしたPRです。これにより、マルチスキーマ運用や `schema_search_path` を前提としたアプリで、再接続時にも一貫したスキーマ検索パスが保証されます。"
+    },
+    {
+      "number": 56533,
+      "title": "Revert \"Remove unnecessary `defined?` check for RubyVM::YJIT.enable\" {#pr-56533}",
+      "url": "https://github.com/rails/rails/pull/56533",
+      "mergedAt": "2026-01-07T00:00:00.000Z",
+      "author": "yahonda",
+      "authorUrl": "https://github.com/yahonda",
+      "summary": "1. 概要 (1-2文で)  \nこのPRは、「RubyVM::YJIT.enable の前に `defined?` チェックを削除した」前回の変更 (#56526) を取り消し、元の `defined?(RubyVM::YJIT)` チェック付きのコードに戻しています。Rails 起動時に YJIT を有効化する処理まわりの安全性・互換性を確保するためのリバートです。"
+    },
+    {
+      "number": 56527,
+      "title": "Remove Ruby < 3.3 compatibility code {#pr-56527}",
+      "url": "https://github.com/rails/rails/pull/56527",
+      "mergedAt": "2026-01-07T00:00:00.000Z",
+      "author": "yahonda",
+      "authorUrl": "https://github.com/yahonda",
+      "summary": "1. 概要 (1-2文で)  \nこのPRは、Rails main ブランチが Ruby 3.3 以上を必須とする方針に合わせて、Ruby 3.2 以下向けの互換コードを削除したものです。主に `SecureRandom`、`Range#overlap?`、`Fiber#kill` 周りの分岐・ポリフィルが取り除かれています。"
+    },
     {
       "number": 56526,
       "title": "Remove unnecessary `defined?` check for RubyVM::YJIT.enable {#pr-56526}",
@@ -379,78 +451,6 @@
       "author": "zzak",
       "authorUrl": "https://github.com/zzak",
       "summary": "1. 概要 (1–2文で)  \nRails 8.0-stable ブランチに対して、Minitest 6 への対応を行うバックポート PRです。Gemfile の依存関係更新に加え、Minitest 6 での非互換点（autorun、並列実行、ラインフィルタなど）に追随するためのテスト基盤コードの修正が含まれます。"
-    },
-    {
-      "number": 56439,
-      "title": "[ci skip] Clarify behavior of monday and sunday methods in guides {#pr-56439}",
-      "url": "https://github.com/rails/rails/pull/56439",
-      "mergedAt": "2025-12-23T00:00:00.000Z",
-      "author": "Yuhi-Sato",
-      "authorUrl": "https://github.com/Yuhi-Sato",
-      "summary": "1. 概要 (1-2文で)  \nこのPRは、Railsガイドの `Date`/`ActiveSupport` 拡張に関するドキュメントを修正し、`monday` と `sunday` メソッドの挙動をより正確に説明したものです。コードの挙動自体は変えず、「常に前の月曜日／次の日曜日」ではなく「同じ日付を返す場合がある」ことを明示しました。"
-    },
-    {
-      "number": 56429,
-      "title": "Fixes for default handling in CombinedConfiguration {#pr-56429}",
-      "url": "https://github.com/rails/rails/pull/56429",
-      "mergedAt": "2025-12-23T00:00:00.000Z",
-      "author": "jordan-brough",
-      "authorUrl": "https://github.com/jordan-brough",
-      "summary": "1. 概要 (1-2文で)  \n`CombinedConfiguration` まわりの「default」値の扱いに関するバグ修正です。`env_configuration` と `encrypted_configuration` の両方で「遅延評価」と「false を正しく扱う」ように挙動が統一されました。"
-    },
-    {
-      "number": 56431,
-      "title": "Add \"Missing key: ...\" to `KeyError` message in EncryptedConfiguration {#pr-56431}",
-      "url": "https://github.com/rails/rails/pull/56431",
-      "mergedAt": "2025-12-22T00:00:00.000Z",
-      "author": "jordan-brough",
-      "authorUrl": "https://github.com/jordan-brough",
-      "summary": "1. 概要 (1-2文で)  \nEncryptedConfiguration で `KeyError` を発生させる際のエラーメッセージに、「Missing key: ...」という具体的なキー名を含めるようにした PR です。既に `CombinedConfiguration` で行っている挙動と揃えるための、開発者向けの利便性改善です。"
-    },
-    {
-      "number": 56432,
-      "title": "Fix `assert_equal` invocations in bug report templates {#pr-56432}",
-      "url": "https://github.com/rails/rails/pull/56432",
-      "mergedAt": "2025-12-22T00:00:00.000Z",
-      "author": "callmesangio",
-      "authorUrl": "https://github.com/callmesangio",
-      "summary": "1. 概要 (1-2文で)  \nRails のバグ報告テンプレート内で使われている `assert_equal` の引数の順番ミス（`actual, expected`）を、正しい順番（`expected, actual`）に修正した PR です。テストコードの書き方のサンプルとして配布されているテンプレートの品質を整えるための、ドキュメント／ガイド系の小さな修正です。"
-    },
-    {
-      "number": 56423,
-      "title": "Fix link to jemalloc repo [ci skip]  {#pr-56423}",
-      "url": "https://github.com/rails/rails/pull/56423",
-      "mergedAt": "2025-12-22T00:00:00.000Z",
-      "author": "andreimaxim",
-      "authorUrl": "https://github.com/andreimaxim",
-      "summary": "1. 概要 (1-2文で)  \nRailsガイド「tuning_performance_for_deployment.md」に記載されていた jemalloc のリンク先が、アーカイブされた旧リポジトリを指していた問題を修正し、現行の正しいリポジトリへのリンクに差し替えたPRです。ドキュメントのみの更新で、Rails本体のコードや挙動には変更はありません。\n\n2. 変更内容の詳細  \n- 対象ファイル: `guides/source/tuning_performance_for_deployment.md`  \n- 変更内容は 1 行だけで、「jemalloc への参照リンク」の URL を修正するものです。  \n\nガイドでは、アプリケーションのパフォーマンスチューニング／デプロイ時の最適化において jemalloc を利用することが推奨されており、その際に参照すべき jemalloc プロジェクトの GitHub リポジトリURLが掲載されています。  \n元々は「アーカイブ済みの旧リポジトリ」を指していたため、読者が「もうメンテされていないのでは？」と誤解する可能性がありました。  \nこのPRでは、そのリンクを「現在メンテナンスされている（または正しい公式の）jemalloc リポジトリ」へ更新しています。\n\n※実際の差分イメージ（URLのみ変更・擬似例）:\n```diff\n- 詳細は jemalloc のリポジトリ https://github.com/old-archived/jemalloc を参照してください。\n+ 詳細は jemalloc のリポジトリ https://github.com/jemalloc/jemalloc を参照してください。\n```\n\n3. 影響範囲・注意点  \n- 影響範囲:\n  - Rails ガイドを読む開発者が、最新かつサポートされている jemalloc のリポジトリに直接アクセスできるようになります。\n  - Rails 本体のコード、API、挙動、パフォーマンスには一切影響ありません（ドキュメントのみの変更）。\n- 注意点:\n  - jemalloc の導入・設定手順そのものはこのPRでは変更されていないため、利用環境や OS ごとのビルド・導入方法は、リンク先の README / ドキュメントを改めて確認する必要があります。\n  - すでに古いリンクをブックマーク等している場合は、今後は新しいリンクを参照することが推奨されます。\n\n4. 参考情報 (あれば)  \n- 関連Issue: `Fixes #56388`  \n  - ガイドがアーカイブ済みリポジトリを指していることへの報告・改善要望に対応したものです。  \n- jemalloc 公式リポジトリ（想定）:  \n  - https://github.com/jemalloc/jemalloc  \n  ※正確なURLは、マージ済みのガイド (`tuning_performance_for_deployment.md`) を確認してください。"
-    },
-    {
-      "number": 56415,
-      "title": "Ensure batched preloaded associations accounts for klass when grouping to avoid issues with STI {#pr-56415}",
-      "url": "https://github.com/rails/rails/pull/56415",
-      "mergedAt": "2025-12-21T00:00:00.000Z",
-      "author": "zzak",
-      "authorUrl": "https://github.com/zzak",
-      "summary": "1. 概要 (1-2文で)\n- ActiveRecord の関連プリロード（`includes` など）のバッチ処理において、STI や `class_name` を伴う関連で正しいクラスが使われない問題を修正し、グルーピング時に「レコードのクラス情報」も考慮するようにした PR です。\n- これにより、`SpecialAuthor` / `SpecialBook` のような STI / テーブル共有モデルを含む複雑な関連を `includes` したときでも、期待どおりのモデルクラスで関連オブジェクトがロードされます。"
-    },
-    {
-      "number": 56416,
-      "title": "Fix rerun command on CI for railties {#pr-56416}",
-      "url": "https://github.com/rails/rails/pull/56416",
-      "mergedAt": "2025-12-21T00:00:00.000Z",
-      "author": "byroot",
-      "authorUrl": "https://github.com/byroot",
-      "summary": "1. 概要 (1-2文で)  \nこのPRは、Rails の `railties` において CI 上で `rake test TESTOPTS=\"--rerun …\"` を利用した際の「失敗テストの再実行」機能が正しく動作するように修正したものです。テストレポーターと Rake タスクの連携を調整し、rerun 用のコマンドが壊れないようにしています。"
-    },
-    {
-      "number": 56411,
-      "title": "Fix code in comment example {#pr-56411}",
-      "url": "https://github.com/rails/rails/pull/56411",
-      "mergedAt": "2025-12-21T00:00:00.000Z",
-      "author": "morgoth",
-      "authorUrl": "https://github.com/morgoth",
-      "summary": "1. 概要 (1-2文で)  \n`ActiveSupport::CombinedConfiguration` のコメント内に書かれていたサンプルコードの条件式が、実際には到達しない（無意味な）`||` を含んでいたため、正しい挙動を反映した形に修正されたドキュメント的変更です。実行コードの挙動そのものではなく、コメント中の例示コードの論理を整えるためのフォローアップ PR です。"
     }
   ]
 }
