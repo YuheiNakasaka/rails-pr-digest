@@ -1,7 +1,88 @@
 {
-  "lastUpdated": "2026-01-08T00:13:47.631Z",
+  "lastUpdated": "2026-01-09T00:11:48.615Z",
   "totalCount": 50,
   "items": [
+    {
+      "number": 56561,
+      "title": "Deprecate protect_from_forgery without explicit strategy {#pr-56561}",
+      "url": "https://github.com/rails/rails/pull/56561",
+      "mergedAt": "2026-01-08T00:00:00.000Z",
+      "author": "Saidbek",
+      "authorUrl": "https://github.com/Saidbek",
+      "summary": "1. 概要 (1-2文で)  \nRails 8.2 で `protect_from_forgery` を引数なしで呼び出す書き方が非推奨になり、今後は必ず明示的に戦略（`with: :exception` など）を指定することが推奨されます。これにより、`config.action_controller.default_protect_from_forgery` との挙動の不一致をなくし、CSRF 対策の設定を明確にするのが目的です。"
+    },
+    {
+      "number": 56523,
+      "title": "CI: Add `libvips` package to generated `ci.yml` {#pr-56523}",
+      "url": "https://github.com/rails/rails/pull/56523",
+      "mergedAt": "2026-01-08T00:00:00.000Z",
+      "author": "stevepolitodesign",
+      "authorUrl": "https://github.com/stevepolitodesign",
+      "summary": "1. 概要 (1-2文で)  \nRails アプリ生成時に自動で作られる GitHub Actions 用 `ci.yml` に、Active Storage を使う場合は画像処理ライブラリ `libvips` をインストールするステップを追加する変更です。`--skip-active-storage` を付けた場合は従来どおり `libvips` は含まれません。"
+    },
+    {
+      "number": 56529,
+      "title": "Clarify that column default values don't apply to existing records [ci skip] {#pr-56529}",
+      "url": "https://github.com/rails/rails/pull/56529",
+      "mergedAt": "2026-01-08T00:00:00.000Z",
+      "author": "yujiteshima",
+      "authorUrl": "https://github.com/yujiteshima",
+      "summary": "1. 概要 (1-2文で)  \nActive Record Migrations ガイドの `default` オプションの説明に、「デフォルト値は新規レコードにのみ適用され、既存レコードは変わらない」ことを明示的に追記したドキュメント修正の PR です。既存のカラム追加や変更時に「既存レコードも自動的にデフォルト値で更新される」と誤解しないようにするのが目的です。"
+    },
+    {
+      "number": 56487,
+      "title": "Improve authentication generator test template {#pr-56487}",
+      "url": "https://github.com/rails/rails/pull/56487",
+      "mergedAt": "2026-01-08T00:00:00.000Z",
+      "author": "callmesangio",
+      "authorUrl": "https://github.com/callmesangio",
+      "summary": "1. 概要 (1-2文で)  \nRails の認証 generator が生成する `sessions_controller_test.rb` のテンプレートが微修正され、ファイル名の拡張子を `.tt` に揃えるとともに、テストコード内の不要な `User.take` 呼び出しがインスタンス変数に差し替えられました。主にメンテナンス性・一貫性・テストの明瞭さ向上を目的とした小さな改善です。"
+    },
+    {
+      "number": 56427,
+      "title": "[ci skip] Fix API docs of `AS::Inflector.humanize` and `String#humanize` {#pr-56427}",
+      "url": "https://github.com/rails/rails/pull/56427",
+      "mergedAt": "2026-01-08T00:00:00.000Z",
+      "author": "callmesangio",
+      "authorUrl": "https://github.com/callmesangio",
+      "summary": "1. 概要 (1-2文で)  \n`ActiveSupport::Inflector.humanize` と `String#humanize` のドキュメントに誤解を招く表現があったため、`keep_id_suffix` オプションの実際の挙動（末尾 `_id` を削除しないが、大文字化はしない）に合わせて説明とサンプルが修正された PR です。コードの挙動自体は変わっておらず、ドキュメントのみの更新です。"
+    },
+    {
+      "number": 56542,
+      "title": "Enable Arel::TreeManagers to use Table's engine {#pr-56542}",
+      "url": "https://github.com/rails/rails/pull/56542",
+      "mergedAt": "2026-01-08T00:00:00.000Z",
+      "author": "hmcguire-shopify",
+      "authorUrl": "https://github.com/hmcguire-shopify",
+      "summary": "1. 概要 (1-2文で)  \nArel の `TreeManager` 系クラス（`SelectManager`, `InsertManager`, `UpdateManager`, `DeleteManager`）が、初期化時に渡された `Arel::Table` の `engine` を自動的に利用して SQL をコンパイルするようになりました。これにより、複数 DB アダプタ利用時でも、明示的にエンジンを渡さなくても適切なアダプタで `to_sql` が実行されます。"
+    },
+    {
+      "number": 56556,
+      "title": "Fix postgresql/schema_dumper relation_name appending the wrong schema… {#pr-56556}",
+      "url": "https://github.com/rails/rails/pull/56556",
+      "mergedAt": "2026-01-08T00:00:00.000Z",
+      "author": "chiperific",
+      "authorUrl": "https://github.com/chiperific",
+      "summary": "1. 概要 (1-2文で)  \nPostgreSQL 用の `schema_dumper` が、テーブルの `schema` を誤って付与してしまう不具合を修正した PRです。複数スキーマ環境で `schema.rb` をダンプする際、正しいスキーマ名でリレーションを表現できるようになります。"
+    },
+    {
+      "number": 56551,
+      "title": "Improve uniqueness validation query building by adding case-sensitive operators to Arel {#pr-56551}",
+      "url": "https://github.com/rails/rails/pull/56551",
+      "mergedAt": "2026-01-08T00:00:00.000Z",
+      "author": "Saidbek",
+      "authorUrl": "https://github.com/Saidbek",
+      "summary": "1. 概要 (1-2文で)\nRails の一意性バリデーションがクエリ AST を組み立てる段階で DB コネクションを取得してしまう問題を解消するため、Arel に「大文字小文字を区別／非区別する比較演算ノード」が追加されました。これにより、ユニークネスバリデーションのクエリ生成が、DB 接続に依存せずに行えるようになります。"
+    },
+    {
+      "number": 56541,
+      "title": "Remove system tests from default CI template {#pr-56541}",
+      "url": "https://github.com/rails/rails/pull/56541",
+      "mergedAt": "2026-01-08T00:00:00.000Z",
+      "author": "eileencodes",
+      "authorUrl": "https://github.com/eileencodes",
+      "summary": "1. 概要 (1–2文で)  \nRails の新規アプリ生成時に使われるデフォルトの CI 設定テンプレートから、システムテストを実行する設定がデフォルトでは外され、コメントアウトされたブロックとして扱われるようになりました。これは、別 PR (#56272) によりシステムテストが標準生成されなくなった変更と整合を取るための対応です。"
+    },
     {
       "number": 56548,
       "title": "refactor(test): consolidate test helper configuration into support module {#pr-56548}",
@@ -370,87 +451,6 @@
       "author": "yahonda",
       "authorUrl": "https://github.com/yahonda",
       "summary": "1. 概要 (1-2文で)  \nRails の開発用 Dev Container（`.devcontainer`）で使用する Ruby のバージョンが 3.x 系などから Ruby 4.0.0 に更新されました。VS Code Dev Containers / GitHub Codespaces などで Rails を開発する際、デフォルトで Ruby 4.0.0 が使われるようになります。"
-    },
-    {
-      "number": 56474,
-      "title": "Add `ActionDispatch::Request#bearer_token` to extract the bearer token {#pr-56474}",
-      "url": "https://github.com/rails/rails/pull/56474",
-      "mergedAt": "2025-12-28T00:00:00.000Z",
-      "author": "dhh",
-      "authorUrl": "https://github.com/dhh",
-      "summary": "1. 概要 (1-2文で)  \n`ActionDispatch::Request` に `#bearer_token` メソッドが追加され、`Authorization` ヘッダから Bearer トークンを簡単かつ統一的に取得できるようになりました。主に API や MCP (Model Context Protocol) リクエストでのトークン認証を想定したユーティリティです。"
-    },
-    {
-      "number": 55788,
-      "title": "[Activejob] Enable enqueue_after_transaction_commit by default with ActiveRecord and validate invalid configurations {#pr-55788}",
-      "url": "https://github.com/rails/rails/pull/55788",
-      "mergedAt": "2025-12-28T00:00:00.000Z",
-      "author": "mugitti9",
-      "authorUrl": "https://github.com/mugitti9",
-      "summary": "1. 概要 (1-2文で)  \nActiveJobの `enqueue_after_transaction_commit` のデフォルト値が、ActiveRecord 利用時には `true` になるように変更され、トランザクション内でenqueueされたジョブはコミット後にキュー投入される挙動が標準になります。併せて、ActiveRecordがない環境で `enqueue_after_transaction_commit = true` を設定するとエラーにするバリデーションが追加されました。"
-    },
-    {
-      "number": 56455,
-      "title": "Allow Rails.app.creds to access .env values in dev {#pr-56455}",
-      "url": "https://github.com/rails/rails/pull/56455",
-      "mergedAt": "2025-12-28T00:00:00.000Z",
-      "author": "dhh",
-      "authorUrl": "https://github.com/dhh",
-      "summary": "1. 概要 (1-2文で)  \nRails 7.2(?) 以降の開発環境において、`Rails.app.creds` から `.env` ファイルの値を参照できるようになり、ENV / `.env` / 暗号化 credentials を統一的な優先順位で扱えるようになりました。これにより、開発時の秘密情報管理や外部ツール連携 (例: 1Password CLI) が、credentials API に一本化されます。"
-    },
-    {
-      "number": 56183,
-      "title": "Document how to enable Rate Limiting in tests {#pr-56183}",
-      "url": "https://github.com/rails/rails/pull/56183",
-      "mergedAt": "2025-12-27T00:00:00.000Z",
-      "author": "Kerrick",
-      "authorUrl": "https://github.com/Kerrick",
-      "summary": "1. 概要 (1-2文で)  \nこのPRは、Railsの`rate_limit`をテスト環境で有効にするための設定方法を公式ドキュメントに追記したものです。デフォルトのテスト用キャッシュ (`NullStore`) のままだとレートリミットが動作しない、という「ハマりどころ」を明示的に説明しています。"
-    },
-    {
-      "number": 56433,
-      "title": "don't create unused routes in authentication generator {#pr-56433}",
-      "url": "https://github.com/rails/rails/pull/56433",
-      "mergedAt": "2025-12-23T00:00:00.000Z",
-      "author": "gregmolnar",
-      "authorUrl": "https://github.com/gregmolnar",
-      "summary": "1. 概要 (1-2文で)  \nRails の認証用ジェネレータが、実際には使われていない RESTful ルートまで routes.rb に生成していた問題を修正し、必要なルートだけを生成するようにした PR です。これにより、不要なルーティングが減り、生成されるアプリのルーティングがシンプルかつ意図に沿ったものになります。"
-    },
-    {
-      "number": 56442,
-      "title": "Pin Minitest to version 5 on 7-2-stable {#pr-56442}",
-      "url": "https://github.com/rails/rails/pull/56442",
-      "mergedAt": "2025-12-23T00:00:00.000Z",
-      "author": "yahonda",
-      "authorUrl": "https://github.com/yahonda",
-      "summary": "1. 概要 (1-2文で)  \nRails 7.2 系（7-2-stable ブランチ）で利用する Minitest のバージョンを「5 系」に固定し、Minitest 6 への自動アップデートを防ぐ変更です。理由は、Minitest 6 が Ruby 3.2 以上を要求するのに対し、Rails 7.2 は Ruby 3.1 をサポート対象としているためです。"
-    },
-    {
-      "number": 56440,
-      "title": "Fix `live_streaming_excluded_keys` docs [ci skip] {#pr-56440}",
-      "url": "https://github.com/rails/rails/pull/56440",
-      "mergedAt": "2025-12-23T00:00:00.000Z",
-      "author": "zzak",
-      "authorUrl": "https://github.com/zzak",
-      "summary": "1. 概要 (1-2文で)  \n`ActionController::Live` の `live_streaming_excluded_keys` に関するドキュメントの誤りが修正されました。実装に合わせて説明が正しくなるように調整しただけで、挙動そのものの変更はありません。"
-    },
-    {
-      "number": 56434,
-      "title": "[8-1-stable] Minitest 6 support {#pr-56434}",
-      "url": "https://github.com/rails/rails/pull/56434",
-      "mergedAt": "2025-12-23T00:00:00.000Z",
-      "author": "zzak",
-      "authorUrl": "https://github.com/zzak",
-      "summary": "1. 概要 (1–2文で)  \nこのPRは、Rails 8.1 系 (`8-1-stable` ブランチ) に Minitest 6 対応をバックポートしたものです。Minitest 6 での非互換・仕様変更に追従しつつ、`rails test` や ActiveSupport::TestCase まわりの動作が壊れないように調整しています。"
-    },
-    {
-      "number": 56435,
-      "title": "[8-0-stable] Minitest 6 support {#pr-56435}",
-      "url": "https://github.com/rails/rails/pull/56435",
-      "mergedAt": "2025-12-23T00:00:00.000Z",
-      "author": "zzak",
-      "authorUrl": "https://github.com/zzak",
-      "summary": "1. 概要 (1–2文で)  \nRails 8.0-stable ブランチに対して、Minitest 6 への対応を行うバックポート PRです。Gemfile の依存関係更新に加え、Minitest 6 での非互換点（autorun、並列実行、ラインフィルタなど）に追随するためのテスト基盤コードの修正が含まれます。"
     }
   ]
 }
