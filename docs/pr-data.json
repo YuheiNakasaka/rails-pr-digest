@@ -1,7 +1,25 @@
 {
-  "lastUpdated": "2026-01-11T00:09:58.771Z",
+  "lastUpdated": "2026-01-12T00:10:12.081Z",
   "totalCount": 50,
   "items": [
+    {
+      "number": 56578,
+      "title": "Fix reverting `change_table bulk: true` with table names prefixes and suffixes {#pr-56578}",
+      "url": "https://github.com/rails/rails/pull/56578",
+      "mergedAt": "2026-01-11T00:00:00.000Z",
+      "author": "fatkodima",
+      "authorUrl": "https://github.com/fatkodima",
+      "summary": "1. 概要 (1-2文で)  \n`change_table bulk: true` を使ったマイグレーションを「テーブル名の prefix / suffix を使っている環境で `revert` する」ときに誤動作していた問題を修正した PR です。`ActiveRecord::Migration::CommandRecorder` がテーブル名を正しく扱えていなかった点が直され、対応するテストが追加されています。"
+    },
+    {
+      "number": 56571,
+      "title": "Remove explicit Rake version constraint from Gemfile {#pr-56571}",
+      "url": "https://github.com/rails/rails/pull/56571",
+      "mergedAt": "2026-01-11T00:00:00.000Z",
+      "author": "yahonda",
+      "authorUrl": "https://github.com/yahonda",
+      "summary": "1. 概要 (1-2文で)  \nRails の Gemfile から `rake >= 13` という明示的なバージョン指定を削除し、Ruby 3.3 以降に同梱される Rake 13.1.0 に依存する形に整理した PRです。これにより、不要なバージョン制約をなくし、Ruby 本体のバンドルされた gem による標準構成に寄せています。"
+    },
     {
       "number": 56546,
       "title": "Fix Errors#added? with callback options in query {#pr-56546}",
@@ -433,24 +451,6 @@
       "author": "morgoth",
       "authorUrl": "https://github.com/morgoth",
       "summary": "1. 概要 (1-2文で)  \nActive Job のキューアダプタ定義から、存在しない「sucker_punch」関連の autoload 設定が1行削除されました。  \n古いコミットの「消し残し」を整理する、挙動にはほぼ影響しないリファクタリングです。"
-    },
-    {
-      "number": 56490,
-      "title": "Add Rails.app.revision {#pr-56490}",
-      "url": "https://github.com/rails/rails/pull/56490",
-      "mergedAt": "2025-12-31T00:00:00.000Z",
-      "author": "byroot",
-      "authorUrl": "https://github.com/byroot",
-      "summary": "1. 概要 (1–2文で)  \n`Rails.app.revision` という新しいAPIが追加され、アプリケーションの「リビジョン(デプロイごとの識別子)」をRails側からシンプルに参照できるようになりました。デプロイトラッキング、エラーレポート、監視、キャッシュキーなどで、統一的にアプリのバージョン/リビジョンを扱うための仕組みです。"
-    },
-    {
-      "number": 56484,
-      "title": "Remove deprecated fetch cast type {#pr-56484}",
-      "url": "https://github.com/rails/rails/pull/56484",
-      "mergedAt": "2025-12-30T00:00:00.000Z",
-      "author": "seuros",
-      "authorUrl": "https://github.com/seuros",
-      "summary": "1. 概要 (1-2文で)  \nRails 8.1 以降では schema cache dump に常に `cast_type` が含まれるようになったため、接続オブジェクトから `cast_type`（キャスト用の型情報）をフォールバック取得する古い互換コードが削除されました。これにより Active Record の型キャスト周りの実装が簡素化され、古いバージョン向けのデプリケート経路が整理されています。"
     }
   ]
 }
