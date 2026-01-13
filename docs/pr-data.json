@@ -1,7 +1,61 @@
 {
-  "lastUpdated": "2026-01-12T00:10:12.081Z",
+  "lastUpdated": "2026-01-13T00:10:02.148Z",
   "totalCount": 50,
   "items": [
+    {
+      "number": 56558,
+      "title": "Wrap setting `ActionController::Live` config in load hook {#pr-56558}",
+      "url": "https://github.com/rails/rails/pull/56558",
+      "mergedAt": "2026-01-12T00:00:00.000Z",
+      "author": "adrianna-chang-shopify",
+      "authorUrl": "https://github.com/adrianna-chang-shopify",
+      "summary": "1. 概要 (1-2文で)  \n`ActionController::Live` の設定処理を load hook で包むことで、「実際に `ActionController::Live` を使うまでロードしない」ように遅延ロード化した PR です。これにより、単に `ActionController` をロードしただけでは Live 機能一式が読み込まれず、不要なオートロードや依存の読み込みを避けられます。"
+    },
+    {
+      "number": 56580,
+      "title": "Make CSRF header-only protection compatible with local installs using HTTP {#pr-56580}",
+      "url": "https://github.com/rails/rails/pull/56580",
+      "mergedAt": "2026-01-12T00:00:00.000Z",
+      "author": "rosa",
+      "authorUrl": "https://github.com/rosa",
+      "summary": "1. 概要 (1-2文で)  \nCSRF の「ヘッダーのみ保護（header‑only protection）」を使っている Rails アプリでも、HTTPS を使っていないローカル環境（LAN 内アクセスなど）で非 GET リクエストが正しく通るようにする変更です。ブラウザが `Sec-Fetch-Site` ヘッダーを送れない「非 Secure Context」環境向けの互換性改善で、`Origin` チェックは引き続き行われます。"
+    },
+    {
+      "number": 56554,
+      "title": "Fix `invalid option: --trace` error when running railties tests {#pr-56554}",
+      "url": "https://github.com/rails/rails/pull/56554",
+      "mergedAt": "2026-01-12T00:00:00.000Z",
+      "author": "yujiteshima",
+      "authorUrl": "https://github.com/yujiteshima",
+      "summary": "1. 概要 (1-2文で)  \n`railties` ディレクトリで `bundle exec rake test --trace` を実行した際、テスト完了後の終了時に `invalid option: --trace` が発生していた問題を修正するPRです。`test:isolated` 実行後に `ARGV` をクリアすることで、Minitest の `at_exit` フックが Rake 用のオプション `--trace` を誤って解釈しないようにしています。"
+    },
+    {
+      "number": 56574,
+      "title": "Clean up ENV leaks continued {#pr-56574}",
+      "url": "https://github.com/rails/rails/pull/56574",
+      "mergedAt": "2026-01-12T00:00:00.000Z",
+      "author": "zzak",
+      "authorUrl": "https://github.com/zzak",
+      "summary": "1. 概要 (1-2文で)  \nこのPRは、テストやRakeタスク実行時に環境変数 (`ENV`) が他テストやプロセスに漏れないようにするためのクリーンアップ対応を進めたものです。主に Rails のテストコード側で `ENV` の設定／復元方法を整理し、環境依存の副作用を減らしています。"
+    },
+    {
+      "number": 56583,
+      "title": "Update comment as Proc support is removed in revision [ci skip] {#pr-56583}",
+      "url": "https://github.com/rails/rails/pull/56583",
+      "mergedAt": "2026-01-12T00:00:00.000Z",
+      "author": "tahsin352",
+      "authorUrl": "https://github.com/tahsin352",
+      "summary": "1. 概要 (1-2文で)  \n`config.revision` に関するコメント文を、Proc（ラムダ）による指定サポートが削除された現状に合わせて修正したドキュメント的変更のPRです。コードの挙動は変わらず、説明コメントのみが最新仕様に追従しています。"
+    },
+    {
+      "number": 56579,
+      "title": "Fix reverting `change_table bulk: true` with indexes {#pr-56579}",
+      "url": "https://github.com/rails/rails/pull/56579",
+      "mergedAt": "2026-01-12T00:00:00.000Z",
+      "author": "fatkodima",
+      "authorUrl": "https://github.com/fatkodima",
+      "summary": "1. 概要 (1-2文で)  \n`change_table bulk: true` を使ったマイグレーションにインデックス操作が含まれている場合、`rails db:rollback` などでのリバートが正しく動かない不具合を修正する PR です。`SchemaStatements` と `CommandRecorder` の挙動を調整し、テストを更新して期待どおりに巻き戻せるようにしています。"
+    },
     {
       "number": 56578,
       "title": "Fix reverting `change_table bulk: true` with table names prefixes and suffixes {#pr-56578}",
@@ -397,60 +451,6 @@
       "author": "byroot",
       "authorUrl": "https://github.com/byroot",
       "summary": "1. 概要 (1-2文で)  \nこのPRは、Ruby 4.0 で `bundle install` を実行した際に互換性問題を起こす gem をアップデートし、Rails リポジトリ全体が Ruby 4.0 でもバンドル・ビルドできるようにしたものです。併せて、`tools/strict_warnings.rb` に最小限の追記が行われています。"
-    },
-    {
-      "number": 56476,
-      "title": "Add LeakChecker to tools and fail on ENV leaks {#pr-56476}",
-      "url": "https://github.com/rails/rails/pull/56476",
-      "mergedAt": "2026-01-04T00:00:00.000Z",
-      "author": "zzak",
-      "authorUrl": "https://github.com/zzak",
-      "summary": "1. 概要 (1-2文で)  \nRails のテストスイートに「環境変数のリーク検出」を行う `LeakChecker` ツールが追加され、テスト実行中に汚染された `ENV` があれば失敗させる仕組みが導入されました。あわせて、既存テストで検出された `ENV` リークも修正されています。"
-    },
-    {
-      "number": 56500,
-      "title": "Fix detected LeakChecker ENV leaks {#pr-56500}",
-      "url": "https://github.com/rails/rails/pull/56500",
-      "mergedAt": "2026-01-04T00:00:00.000Z",
-      "author": "zzak",
-      "authorUrl": "https://github.com/zzak",
-      "summary": "1. 概要 (1-2文で)  \nこのPRは、Rails のテストにおいて `ENV` の変更がテスト間でリークしている問題を、LeakChecker に検知されないように修正したものです。主にテストコード内での環境変数の扱い方を見直し、「設定したら必ず元に戻す」形に統一しています。"
-    },
-    {
-      "number": 56471,
-      "title": "Override inspect in Combined, Env & Encrypted Configurations {#pr-56471}",
-      "url": "https://github.com/rails/rails/pull/56471",
-      "mergedAt": "2026-01-03T00:00:00.000Z",
-      "author": "siaw23",
-      "authorUrl": "https://github.com/siaw23",
-      "summary": "1. 概要 (1-2文で)  \nRails の `CombinedConfiguration`, `EnvConfiguration`, `EncryptedConfiguration` の `inspect` 出力から、実際のシークレット値や ENV の中身を隠し、キー名だけが見えるようにした変更です。コンソール・ログ・エラーレポート等で機密情報が漏洩するリスクを減らすセキュリティ改善です。"
-    },
-    {
-      "number": 53334,
-      "title": "Deprecate built-in ActiveJob backburner adapter {#pr-53334}",
-      "url": "https://github.com/rails/rails/pull/53334",
-      "mergedAt": "2026-01-03T00:00:00.000Z",
-      "author": "dixpac",
-      "authorUrl": "https://github.com/dixpac",
-      "summary": "1. 概要 (1-2文で)  \nActive Job に組み込みで用意されている Backburner アダプタが「非推奨（deprecate）」としてマークされました。今後のバージョンで削除される可能性が高く、別のアダプタや実装への移行が推奨されます。"
-    },
-    {
-      "number": 56508,
-      "title": "Remove proc support in config.revision {#pr-56508}",
-      "url": "https://github.com/rails/rails/pull/56508",
-      "mergedAt": "2026-01-03T00:00:00.000Z",
-      "author": "byroot",
-      "authorUrl": "https://github.com/byroot",
-      "summary": "1. 概要 (1-2文で)  \n`config.revision` で Proc（ラムダ / ブロック）を指定するサポートが削除され、常に「その場で評価された値」を設定する前提の API に整理されました。これにより設定方法がシンプルになり、ガイドやテストもそれに合わせて縮小されています。"
-    },
-    {
-      "number": 56507,
-      "title": "Remove non existing autoload for sucker punch {#pr-56507}",
-      "url": "https://github.com/rails/rails/pull/56507",
-      "mergedAt": "2026-01-02T00:00:00.000Z",
-      "author": "morgoth",
-      "authorUrl": "https://github.com/morgoth",
-      "summary": "1. 概要 (1-2文で)  \nActive Job のキューアダプタ定義から、存在しない「sucker_punch」関連の autoload 設定が1行削除されました。  \n古いコミットの「消し残し」を整理する、挙動にはほぼ影響しないリファクタリングです。"
     }
   ]
 }
