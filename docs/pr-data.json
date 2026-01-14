@@ -1,7 +1,43 @@
 {
-  "lastUpdated": "2026-01-13T00:10:02.148Z",
+  "lastUpdated": "2026-01-14T00:11:00.080Z",
   "totalCount": 50,
   "items": [
+    {
+      "number": 56585,
+      "title": "Improve the ScreenshotHelper docs {#pr-56585}",
+      "url": "https://github.com/rails/rails/pull/56585",
+      "mergedAt": "2026-01-13T00:00:00.000Z",
+      "author": "codergeek121",
+      "authorUrl": "https://github.com/codergeek121",
+      "summary": "1. 概要 (1-2文で)  \n`ActionDispatch::SystemTesting::TestHelpers::ScreenshotHelper` のドキュメントが改善され、HTML スクリーンショットを有効化するための環境変数 `RAILS_SYSTEM_TESTING_SCREENSHOT_HTML` の具体的な設定値（`1`）が明示されました。実装自体の挙動変更はなく、ドキュメントの明確化のみです。"
+    },
+    {
+      "number": 56590,
+      "title": "[8-0-stable] Add missing `with_info_handler` removed in ec62932ee7 {#pr-56590}",
+      "url": "https://github.com/rails/rails/pull/56590",
+      "mergedAt": "2026-01-13T00:00:00.000Z",
+      "author": "zzak",
+      "authorUrl": "https://github.com/zzak",
+      "summary": "1. 概要 (1-2文で)  \nRails 8.0-stable ブランチで、`ActiveSupport::Testing::Parallelization::Worker` から誤って削除されていた `with_info_handler` メソッドが復活・再定義されました。並列テスト実行時の情報ハンドラ設定まわりの挙動を、以前の想定どおりに戻す修正です。"
+    },
+    {
+      "number": 56591,
+      "title": "[8-1-stable] Add missing `with_info_handler` removed in 0f8014a0ff {#pr-56591}",
+      "url": "https://github.com/rails/rails/pull/56591",
+      "mergedAt": "2026-01-13T00:00:00.000Z",
+      "author": "zzak",
+      "authorUrl": "https://github.com/zzak",
+      "summary": "1. 概要 (1-2文で)  \nRails 8.1-stable ブランチの ActiveSupport テスト並列実行用ワーカーにおいて、以前のコミットで誤って削除されていた `with_info_handler` 呼び出しが復元されました。これにより、並列テスト実行時の情報ハンドラ（ログや進捗など）の扱いが再び正しく行われるようになります。"
+    },
+    {
+      "number": 56568,
+      "title": "[ci-skip] Fix broken code examples in AR finder methods doc {#pr-56568}",
+      "url": "https://github.com/rails/rails/pull/56568",
+      "mergedAt": "2026-01-13T00:00:00.000Z",
+      "author": "Saidbek",
+      "authorUrl": "https://github.com/Saidbek",
+      "summary": "1. 概要 (1-2文で)  \nActive Record の finder メソッドのドキュメント内で使われていた、SQLのプレースホルダ構文が誤っていたコード例を修正したPRです。実装コード自体には手を入れておらず、ドキュメント用のサンプルコードのみが修正されています。"
+    },
     {
       "number": 56558,
       "title": "Wrap setting `ActionController::Live` config in load hook {#pr-56558}",
@@ -415,42 +451,6 @@
       "author": "morgoth",
       "authorUrl": "https://github.com/morgoth",
       "summary": "1. 概要 (1–2文で)  \nRails の Active Job における `delayed_job` アダプタが非推奨 (deprecate) としてマークされました。今後のバージョンで削除される可能性があるため、他のキューイングバックエンドへの移行が推奨されます。"
-    },
-    {
-      "number": 56509,
-      "title": "Update mandrill's document URL in Action Mailbox basics [ci skip] {#pr-56509}",
-      "url": "https://github.com/rails/rails/pull/56509",
-      "mergedAt": "2026-01-04T00:00:00.000Z",
-      "author": "unasuke",
-      "authorUrl": "https://github.com/unasuke",
-      "summary": "1. 概要 (1-2文で)  \nAction Mailbox ガイド内で参照していた Mandrill（Mailchimp Transactional）の受信メール処理ドキュメントURLが、現行の公式ドキュメントURLに差し替えられたPRです。内容としてはドキュメント中のリンク1箇所のみを更新する、極めて小さな変更です。"
-    },
-    {
-      "number": 56512,
-      "title": "Remove minitest-ci {#pr-56512}",
-      "url": "https://github.com/rails/rails/pull/56512",
-      "mergedAt": "2026-01-04T00:00:00.000Z",
-      "author": "byroot",
-      "authorUrl": "https://github.com/byroot",
-      "summary": "1. 概要 (1-2文で)  \nRails のテスト用に導入されていた `minitest-ci` が、長らく壊れたまま使われていなかったため、依存関係と設定ごと削除されました。これにより Ruby 4.0 実行時に出ていた CGI に関する警告も解消されます。"
-    },
-    {
-      "number": 56511,
-      "title": "Drop support for Ruby 3.2 {#pr-56511}",
-      "url": "https://github.com/rails/rails/pull/56511",
-      "mergedAt": "2026-01-04T00:00:00.000Z",
-      "author": "byroot",
-      "authorUrl": "https://github.com/byroot",
-      "summary": "1. 概要 (1-2文で)  \nRails 8.2 以降で Ruby 3.2 のサポートを正式に打ち切る PR で、サポート対象 Ruby バージョンの下限が 3.3 以上に引き上げられています。Ruby 3.2 固有のコードは存在しないため、実質的には「対応バージョン宣言」と CI 対象からの除外のみです。"
-    },
-    {
-      "number": 56510,
-      "title": "Update gems incompatible with Ruby 4.0 {#pr-56510}",
-      "url": "https://github.com/rails/rails/pull/56510",
-      "mergedAt": "2026-01-04T00:00:00.000Z",
-      "author": "byroot",
-      "authorUrl": "https://github.com/byroot",
-      "summary": "1. 概要 (1-2文で)  \nこのPRは、Ruby 4.0 で `bundle install` を実行した際に互換性問題を起こす gem をアップデートし、Rails リポジトリ全体が Ruby 4.0 でもバンドル・ビルドできるようにしたものです。併せて、`tools/strict_warnings.rb` に最小限の追記が行われています。"
     }
   ]
 }
