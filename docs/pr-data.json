@@ -1,7 +1,61 @@
 {
-  "lastUpdated": "2026-01-14T00:11:00.080Z",
+  "lastUpdated": "2026-01-15T00:11:49.910Z",
   "totalCount": 50,
   "items": [
+    {
+      "number": 56351,
+      "title": "[Docs] Document swappable migration backend behaviour {#pr-56351}",
+      "url": "https://github.com/rails/rails/pull/56351",
+      "mergedAt": "2026-01-14T00:00:00.000Z",
+      "author": "adrianna-chang-shopify",
+      "authorUrl": "https://github.com/adrianna-chang-shopify",
+      "summary": "1. 概要 (1-2文で)  \nRailsの「Swappable Migration Strategies（差し替え可能なマイグレーション実行バックエンド）」機能について、ガイドとAPIドキュメントを充実させたPRです。実装自体の挙動変更はほぼなく、`ExecutionStrategy`／`DefaultStrategy`クラスの正式な説明と、使い方・カスタマイズ方法が明文化されています。"
+    },
+    {
+      "number": 56613,
+      "title": "Remove unused connection arg {#pr-56613}",
+      "url": "https://github.com/rails/rails/pull/56613",
+      "mergedAt": "2026-01-14T00:00:00.000Z",
+      "author": "skipkayhil",
+      "authorUrl": "https://github.com/skipkayhil",
+      "summary": "1. 概要 (1-2文で)  \nこのPRは、Active Record の属性タイプ関連コードから「使われていない `connection` 引数」を削除し、メソッドシグネチャを整理したものです。挙動自体は変えずに、以前の変更 (#56484) の取りこぼしをクリーンアップしています。"
+    },
+    {
+      "number": 56609,
+      "title": "Add input validation to Array#in_groups {#pr-56609}",
+      "url": "https://github.com/rails/rails/pull/56609",
+      "mergedAt": "2026-01-14T00:00:00.000Z",
+      "author": "Saidbek",
+      "authorUrl": "https://github.com/Saidbek",
+      "summary": "1. 概要 (1–2文で)  \n`Array#in_groups` に、`Array#in_groups_of` と同等の入力バリデーションが追加され、無効な引数を渡した際に、これまでの「よく分からないエラー」ではなく明確な例外が発生するようになりました。これにより、誤った引数指定時のデバッグが容易になります。"
+    },
+    {
+      "number": 56601,
+      "title": "Allow retry_on wait procs to accept error as a second argument {#pr-56601}",
+      "url": "https://github.com/rails/rails/pull/56601",
+      "mergedAt": "2026-01-14T00:00:00.000Z",
+      "author": "jpcamara",
+      "authorUrl": "https://github.com/jpcamara",
+      "summary": "1. 概要 (1-2文で)  \nActive Job の `retry_on` オプションに渡す `wait` Proc が、これまでの「実行回数」だけでなく「発生したエラーオブジェクト」も受け取れるようになりました。これにより、エラー内容に応じた柔軟なリトライ待ち時間の制御が可能になります（既存コードとの互換性は維持）。"
+    },
+    {
+      "number": 56587,
+      "title": "Deprecate Resque Active Job adapter {#pr-56587}",
+      "url": "https://github.com/rails/rails/pull/56587",
+      "mergedAt": "2026-01-14T00:00:00.000Z",
+      "author": "morgoth",
+      "authorUrl": "https://github.com/morgoth",
+      "summary": "1. 概要 (1-2文で)  \nRails に同梱されていた Active Job の Resque アダプタが「deprecated（非推奨）」になり、今後は resque gem 側に含まれるアダプタを使うよう誘導する変更です。機能自体はすぐになくなるわけではありませんが、将来的な削除に向けた移行案内の位置づけです。"
+    },
+    {
+      "number": 56607,
+      "title": "Fix RACK_ENV environment leak in ActionCable ClientTest {#pr-56607}",
+      "url": "https://github.com/rails/rails/pull/56607",
+      "mergedAt": "2026-01-14T00:00:00.000Z",
+      "author": "Saidbek",
+      "authorUrl": "https://github.com/Saidbek",
+      "summary": "1. 概要 (1-2文で)  \nAction Cable の `ClientTest` 実行時に、Puma が設定した `RACK_ENV` 環境変数がテスト後も残り続けてしまう問題を修正した PRです。これにより、`LeakChecker` による「Environment leak detected: Added variables: RACK_ENV」というエラーが発生しなくなります。"
+    },
     {
       "number": 56585,
       "title": "Improve the ScreenshotHelper docs {#pr-56585}",
@@ -397,60 +451,6 @@
       "author": "etiennebarrie",
       "authorUrl": "https://github.com/etiennebarrie",
       "summary": "1. 概要 (1-2文で)  \nRails::Application がエラーレポーター用ミドルウェアを誤った形で呼び出していた問題を修正し、`error_reporter` に渡したコンテキスト情報が正しく保持されるようになりました。これにより、ミドルウェア経由のエラー報告でも `report` と同等の情報が利用できます。"
-    },
-    {
-      "number": 56515,
-      "title": "remove redundant require for erb {#pr-56515}",
-      "url": "https://github.com/rails/rails/pull/56515",
-      "mergedAt": "2026-01-05T00:00:00.000Z",
-      "author": "yskkin",
-      "authorUrl": "https://github.com/yskkin",
-      "summary": "1. 概要 (1-2文で)  \nRails アプリケーションの初期化処理から、不要になっていた `erb` の `require` 行を削除した PRです。`erb` は必要な箇所（`ActiveSupport::ConfigurationFile`）側で遅延ロードされるようになっているため、重複した読み込みを整理しています。"
-    },
-    {
-      "number": 56489,
-      "title": "[ci skip] [docs] Mark Exception#as_json as nodoc {#pr-56489}",
-      "url": "https://github.com/rails/rails/pull/56489",
-      "mergedAt": "2026-01-05T00:00:00.000Z",
-      "author": "Yuhi-Sato",
-      "authorUrl": "https://github.com/Yuhi-Sato",
-      "summary": "1. 概要 (1-2文で)  \nActive Support の core_ext に定義されている `Exception#as_json` を、公開APIではなく内部実装として扱うためにドキュメントから非公開（`:nodoc:`）にする変更です。コードの動作には一切影響せず、あくまでドキュメント上の扱いを整理しただけの PR です。"
-    },
-    {
-      "number": 56499,
-      "title": "[ci skip] Fix typo in railties/CHANGELOG.md, defaults -> default {#pr-56499}",
-      "url": "https://github.com/rails/rails/pull/56499",
-      "mergedAt": "2026-01-05T00:00:00.000Z",
-      "author": "coderhs",
-      "authorUrl": "https://github.com/coderhs",
-      "summary": "1. 概要 (1-2文で)  \nRailties の CHANGELOG.md に記載されていた英語のタイポ「By defaults」を「By default」に修正するドキュメントのみの変更です。コードや挙動には一切影響しない、表記揺れ／誤記の修正 PR です。\n\n2. 変更内容の詳細(あればサンプルコードも含めて)  \n- 対象ファイル: `railties/CHANGELOG.md`\n- 変更内容: 文章中の「By defaults」を「By default」に修正  \n\n具体的には、以下のような 1 行の変更です（イメージ）:\n\n```diff\n- * By defaults, generators will create ...\n+ * By default, generators will create ...\n```\n\nCHANGELOG の記述を正しい英語に整えただけであり、API 仕様や機能説明の意味を変えるものではありません。\n\n3. 影響範囲・注意点  \n- 影響範囲:\n  - 実行時の挙動・ビルド・テストには一切影響ありません。\n  - 変更対象はドキュメント（CHANGELOG）だけです。\n- 注意点:\n  - この PR に関連するコード変更は無いため、Rails アプリケーションの更新作業やマイグレーション対応は不要です。\n  - CI を走らせていないことを示す `[ci skip]` タグがタイトルに付いていますが、ドキュメントのみの変更であるため妥当な指定です。\n\n4. 参考情報 (あれば)  \n- PR: https://github.com/rails/rails/pull/56499  \n- 該当ファイル: `railties/CHANGELOG.md`  \n- 「By default」は「デフォルトでは〜」という意味の標準的な表現であり、この修正により CHANGELOG の英語として自然な形になっています。"
-    },
-    {
-      "number": 56514,
-      "title": "Fix rescue typo {#pr-56514}",
-      "url": "https://github.com/rails/rails/pull/56514",
-      "mergedAt": "2026-01-05T00:00:00.000Z",
-      "author": "morgoth",
-      "authorUrl": "https://github.com/morgoth",
-      "summary": "1. 概要 (1-2文で)  \nこのPRは、`actionpack` のテストコード内にある `rescue` 句のタイポ（誤記）を修正したものです。アプリケーション本体の挙動には影響せず、テストの記述を正しくするための微修正です。\n\n2. 変更内容の詳細(あればサンプルコードも含めて)  \n- 変更ファイル: `actionpack/test/dispatch/debug_exceptions_test.rb`  \n- 変更行数: 1行追加・1行削除（実質1行の書き換え）\n\n具体的には、`debug_exceptions_test` 内で例外処理を行っているテストコードの `rescue` 句にタイポがあり、それを正しいクラス名（もしくは適切な例外指定）に修正しています。\n\nイメージとしては、以下のような変更です（※擬似例・実際のクラス名はPR本文参照）:\n\n```ruby\n# 修正前（誤ったクラスや名前）\nassert_nothing_raised do\n  # ...\nrescue DebugExeptions # ← タイポ\n  flunk \"Should not raise\"\nend\n\n# 修正後（正しいクラスや名前）\nassert_nothing_raised do\n  # ...\nrescue DebugExceptions # ← 正しい綴りに修正\n  flunk \"Should not raise\"\nend\n```\n\nもしくは、Rails のテストでよくあるパターンとして、意図しない例外を拾ってテストを失敗させるための `rescue` 句で、例外クラス名・モジュール名の綴りが間違っていたものを修正している、という性質の変更です。\n\nこのPRには `[ci skip]` が付いているため、CI は明示的には実行されていませんが、テスト補助コードの単純修正であることから、安全な変更と判断されていると考えられます。\n\n3. 影響範囲・注意点  \n- 影響範囲:\n  - Rails の **テストコード (`actionpack/test/dispatch/debug_exceptions_test.rb`) のみ** に限定。\n  - ランタイムの挙動や、本番アプリケーションの動作には影響しません。\n  - `ActionDispatch::DebugExceptions` まわりのテストが、意図した例外クラスを正しく捕捉できるようになります。\n- 注意点:\n  - 自前で Rails のテストスイートを流している場合、これ以前のバージョンでは「本来想定していた例外が rescue されない」「逆に rescue が効いていない」などのテストの不安定要因があった可能性があります。\n  - CI を厳密に見ているプロジェクトでは、テストの期待動作がより正しくなることで、将来の変更でテストが新たに落ちる可能性はあります（＝今まで取りこぼしていた失敗が顕在化する可能性）。ただし今回のPR単体では新たな不具合を生み出す性質のものではありません。\n\n4. 参考情報 (あれば)  \n- 該当ファイル:  \n  `actionpack/test/dispatch/debug_exceptions_test.rb`  \n  - `ActionDispatch::DebugExceptions` の挙動（スタックトレース・エラーページ表示・例外ラッピングなど）を検証するテスト群。\n- 関連コンポーネント:  \n  - `ActionDispatch::DebugExceptions`（開発・テスト用のエラーハンドリングミドルウェア）  \n- 本PRは純粋にタイポ修正であり、仕様変更や公開APIの振る舞い変更は伴っていません。"
-    },
-    {
-      "number": 56513,
-      "title": "Attempt to fix secret_key_base test failure {#pr-56513}",
-      "url": "https://github.com/rails/rails/pull/56513",
-      "mergedAt": "2026-01-04T00:00:00.000Z",
-      "author": "byroot",
-      "authorUrl": "https://github.com/byroot",
-      "summary": "1. 概要 (1-2文で)  \nテスト環境でごくまれに発生していた「`secret_key_base` が空文字列になる」フレakyテストを抑止するため、`Rails::Application::Configuration` の `secret_key_base` まわりの扱いを調整したPRです。`secret_key_base` が不正な状態（空文字列など）で使われないよう、防御的なロジックを追加・整理しています。"
-    },
-    {
-      "number": 56506,
-      "title": "Deprecate delayed_job Active Job adapter {#pr-56506}",
-      "url": "https://github.com/rails/rails/pull/56506",
-      "mergedAt": "2026-01-04T00:00:00.000Z",
-      "author": "morgoth",
-      "authorUrl": "https://github.com/morgoth",
-      "summary": "1. 概要 (1–2文で)  \nRails の Active Job における `delayed_job` アダプタが非推奨 (deprecate) としてマークされました。今後のバージョンで削除される可能性があるため、他のキューイングバックエンドへの移行が推奨されます。"
     }
   ]
 }
