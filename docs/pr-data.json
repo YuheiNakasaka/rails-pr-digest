@@ -1,7 +1,52 @@
 {
-  "lastUpdated": "2026-01-16T00:09:22.176Z",
+  "lastUpdated": "2026-01-17T00:12:19.867Z",
   "totalCount": 50,
   "items": [
+    {
+      "number": 56629,
+      "title": "Deprecate queue_classic Active Job adapter {#pr-56629}",
+      "url": "https://github.com/rails/rails/pull/56629",
+      "mergedAt": "2026-01-16T00:00:00.000Z",
+      "author": "morgoth",
+      "authorUrl": "https://github.com/morgoth",
+      "summary": "1. 概要 (1-2文で)  \nRails の Active Job が提供していた `queue_classic` アダプタが「非推奨（deprecated）」としてマークされました。`queue_classic` は事実上メンテナンスが止まっており、今後 Rails 本体から取り除かれる方向であることが明示されています。"
+    },
+    {
+      "number": 56625,
+      "title": "Report `render stream` errors to `Rails.error` {#pr-56625}",
+      "url": "https://github.com/rails/rails/pull/56625",
+      "mergedAt": "2026-01-16T00:00:00.000Z",
+      "author": "byroot",
+      "authorUrl": "https://github.com/byroot",
+      "summary": "1. 概要 (1-2文で)  \nRailsの「ストリーミングレンダリング (`render stream`) 中に発生した例外」を、単なるログ出力だけでなく `Rails.error` に報告するようにしたPRです。これにより、Sentry等のエラー監視ツールがストリーミング中のエラーも拾いやすくなります。"
+    },
+    {
+      "number": 56626,
+      "title": "Optimize String#squish {#pr-56626}",
+      "url": "https://github.com/rails/rails/pull/56626",
+      "mergedAt": "2026-01-16T00:00:00.000Z",
+      "author": "byroot",
+      "authorUrl": "https://github.com/byroot",
+      "summary": "1. 概要 (1-2文で)  \n`String#squish` の内部実装で使っている正規表現を変更し、単一の半角スペース `\" \"` にはマッチしないようにすることで、実行頻度の高いケースでのパフォーマンスを大幅に改善した PR です。計測例では約 2 倍高速になっています。"
+    },
+    {
+      "number": 56622,
+      "title": "Fix ActionView::TestCase expose variables assigned in setup {#pr-56622}",
+      "url": "https://github.com/rails/rails/pull/56622",
+      "mergedAt": "2026-01-16T00:00:00.000Z",
+      "author": "byroot",
+      "authorUrl": "https://github.com/byroot",
+      "summary": "1. 概要 (1-2文で)  \nActionView::TestCase で `setup` 内などで代入したインスタンス変数が、ビューで参照できなくなっていた不具合を修正する PR です。テストケース内でのインスタンス変数の扱いを元の（期待される）挙動に戻し、ビューに正しく「露出」されるようにしています。"
+    },
+    {
+      "number": 56620,
+      "title": "Pin connection_pool to version 2 on 7-2-stable {#pr-56620}",
+      "url": "https://github.com/rails/rails/pull/56620",
+      "mergedAt": "2026-01-16T00:00:00.000Z",
+      "author": "yahonda",
+      "authorUrl": "https://github.com/yahonda",
+      "summary": "1. 概要 (1-2文で)  \nRails 7.2 の安定ブランチ（7-2-stable）で CI が落ちないようにするため、`connection_pool` のバージョンを 2 系に固定（pin）した PR です。Rails 7.2 は Ruby 3.1 をサポートしている一方で、`connection_pool` 3 系が Ruby 3.2 以上必須になったことへの対応です。"
+    },
     {
       "number": 56351,
       "title": "[Docs] Document swappable migration backend behaviour {#pr-56351}",
@@ -406,51 +451,6 @@
       "author": "mrpasquini",
       "authorUrl": "https://github.com/mrpasquini",
       "summary": "1. 概要 (1-2文で)  \nActive Storage の「どのハッシュアルゴリズムでチェックサム（整合性チェック）を計算するか」という責務を `ActiveStorage::Service` 側に集約し、サービスごとに適切なアルゴリズムを選べるようにした PR です。併せて S3 サービスで SHA256 をサポートし、ダウンロード検証ロジックや JS 側のダイレクトアップロード用チェックサム計算も整理・拡張されています。"
-    },
-    {
-      "number": 56517,
-      "title": "Fix deprecation horizon for AJ adapters {#pr-56517}",
-      "url": "https://github.com/rails/rails/pull/56517",
-      "mergedAt": "2026-01-05T00:00:00.000Z",
-      "author": "morgoth",
-      "authorUrl": "https://github.com/morgoth",
-      "summary": "1. 概要 (1-2文で)  \nActive Job の `backburner` / `sneakers` キューアダプタについて、「いつ非推奨になるか」のバージョン表記を修正し、Rails 8.2 で非推奨とする方針に揃えた PR です。実装そのものの挙動変更ではなく、非推奨スケジュール（deprecation horizon）の明確化・整合性のための微修正です。"
-    },
-    {
-      "number": 56519,
-      "title": "Use the random suffix in the atomic temp file name {#pr-56519}",
-      "url": "https://github.com/rails/rails/pull/56519",
-      "mergedAt": "2026-01-05T00:00:00.000Z",
-      "author": "djmb",
-      "authorUrl": "https://github.com/djmb",
-      "summary": "1. 概要 (1-2文で)  \n`File.atomic_write` で一時ファイル名にランダムな suffix が反映されていなかった不具合を修正し、同一ファイルへ並行書き込みした際に一時ファイル名が衝突しないようにしました。これにより、マルチプロセス／マルチスレッド環境での原子的なファイル書き込みの安全性が向上しています。"
-    },
-    {
-      "number": 56522,
-      "title": "Don't set Vary when forgery protection is skipped {#pr-56522}",
-      "url": "https://github.com/rails/rails/pull/56522",
-      "mergedAt": "2026-01-05T00:00:00.000Z",
-      "author": "djmb",
-      "authorUrl": "https://github.com/djmb",
-      "summary": "1. 概要 (1-2文で)  \nこのPRは、「リクエストフォージェリ保護（CSRF保護）」をスキップしたアクションでは、レスポンスヘッダ `Vary` に `\"Sec-Fetch-Site\"` を追加しないようにする変更です。これにより、CSRF保護が無効なエンドポイントで不要なキャッシュ分割（Varyによるバリアント増加）が起こらないようになります。"
-    },
-    {
-      "number": 56518,
-      "title": "Remove deprecated sidekiq Active Job adapter {#pr-56518}",
-      "url": "https://github.com/rails/rails/pull/56518",
-      "mergedAt": "2026-01-05T00:00:00.000Z",
-      "author": "morgoth",
-      "authorUrl": "https://github.com/morgoth",
-      "summary": "1. 概要 (1–2文で)  \nRails 本体に含まれていた「非推奨の Sidekiq ActiveJob アダプタ」が削除され、今後は Sidekiq gem 側が提供するアダプタを使う前提になりました。これにより Rails コアから Sidekiq 依存・コード・テストがほぼ一掃されています。"
-    },
-    {
-      "number": 56516,
-      "title": "Fix Rails::Application usage of error reporter middleware {#pr-56516}",
-      "url": "https://github.com/rails/rails/pull/56516",
-      "mergedAt": "2026-01-05T00:00:00.000Z",
-      "author": "etiennebarrie",
-      "authorUrl": "https://github.com/etiennebarrie",
-      "summary": "1. 概要 (1-2文で)  \nRails::Application がエラーレポーター用ミドルウェアを誤った形で呼び出していた問題を修正し、`error_reporter` に渡したコンテキスト情報が正しく保持されるようになりました。これにより、ミドルウェア経由のエラー報告でも `report` と同等の情報が利用できます。"
     }
   ]
 }
