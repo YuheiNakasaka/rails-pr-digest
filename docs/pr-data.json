@@ -1,7 +1,34 @@
 {
-  "lastUpdated": "2026-01-18T00:09:59.555Z",
+  "lastUpdated": "2026-01-19T00:10:50.848Z",
   "totalCount": 50,
   "items": [
+    {
+      "number": 56631,
+      "title": "Remove dead compatibility code with ripper {#pr-56631}",
+      "url": "https://github.com/rails/rails/pull/56631",
+      "mergedAt": "2026-01-18T00:00:00.000Z",
+      "author": "Earlopain",
+      "authorUrl": "https://github.com/Earlopain",
+      "summary": "1. 概要 (1-2文で)  \nRails の Ruby 要求バージョンが 3.3 になり、標準で Prism が入る前提になったため、`ripper` ベースの互換コードを削除し、ソース解析・テンプレート依存関係解析などを Prism 前提の実装に整理した PR です。  \nこれによりコード量が大きく削減され、パーサ周りの分岐・互換レイヤがシンプルになっています。"
+    },
+    {
+      "number": 56628,
+      "title": "Fix outdated ActiveRecord finder docs. [ci skip] {#pr-56628}",
+      "url": "https://github.com/rails/rails/pull/56628",
+      "mergedAt": "2026-01-18T00:00:00.000Z",
+      "author": "mdh",
+      "authorUrl": "https://github.com/mdh",
+      "summary": "1. 概要 (1-2文で)  \nActiveRecord::FinderMethods のドキュメントに残っていた古い `where` の配列形式の記法を、現在推奨されるハッシュ記法に統一した PR です。コードの挙動変更はなく、ドキュメントのみの更新です。"
+    },
+    {
+      "number": 56639,
+      "title": "Console `reload!` will reset the console's executor, when present {#pr-56639}",
+      "url": "https://github.com/rails/rails/pull/56639",
+      "mergedAt": "2026-01-18T00:00:00.000Z",
+      "author": "bensheldon",
+      "authorUrl": "https://github.com/bensheldon",
+      "summary": "1. 概要 (1-2文で)  \nRails コンソールで `reload!` を実行したときに、コンソール用にラップされている Executor（スレッドローカルなどの実行コンテキストを管理する仕組み）もリセットされるようになりました。これにより、長時間同じコンソールセッションを使い続けた際の Executor 周りの状態を簡単にリフレッシュできるようになります。"
+    },
     {
       "number": 56629,
       "title": "Deprecate queue_classic Active Job adapter {#pr-56629}",
@@ -424,33 +451,6 @@
       "author": "shivamsinghchahar",
       "authorUrl": "https://github.com/shivamsinghchahar",
       "summary": "1. 概要 (1-2文で)  \nRails ガイドの「インタースティシャルな注意書き（notes）」内にある長い `<code>` テキストが、モバイル表示時に横にはみ出してしまう問題を CSS で修正した PRです。flex コンテナ内で段落が正しく縮小されるようにし、テキストのオーバーフローと横スクロールを防いでいます。"
-    },
-    {
-      "number": 56379,
-      "title": "fix: Reset the schema_search_path during pg reconnect and reset {#pr-56379}",
-      "url": "https://github.com/rails/rails/pull/56379",
-      "mergedAt": "2026-01-06T00:00:00.000Z",
-      "author": "eglitobias",
-      "authorUrl": "https://github.com/eglitobias",
-      "summary": "1. 概要 (1-2文で)  \nPostgreSQL / PostGIS アダプタで、接続リセットや再接続後に `schema_search_path` が再適用されず、デフォルトの `\"$user\", public` に戻ってしまうバグを修正した PR です。Rails 8.1 以降で `reconnect!` やプール経由のリセットを行っても、`database.yml` で設定した `schema_search_path` が確実に再設定されるようになります。"
-    },
-    {
-      "number": 56447,
-      "title": "Fix enum validation to allow Float values {#pr-56447}",
-      "url": "https://github.com/rails/rails/pull/56447",
-      "mergedAt": "2026-01-06T00:00:00.000Z",
-      "author": "Saidbek",
-      "authorUrl": "https://github.com/Saidbek",
-      "summary": "1. 概要 (1-2文で)  \nRails 8.1 系で導入された enum 定義値のバリデーションに不備があり、Float を使った enum が `ArgumentError` で落ちるようになっていた問題を修正する PRです。Rails 7.x や 8.0.x で動いていた「Float 値の enum 定義」を、8.1.1 以降でも再び利用できるようにします。"
-    },
-    {
-      "number": 54468,
-      "title": "Make ActiveStorage::Service responsible for checksums {#pr-54468}",
-      "url": "https://github.com/rails/rails/pull/54468",
-      "mergedAt": "2026-01-06T00:00:00.000Z",
-      "author": "mrpasquini",
-      "authorUrl": "https://github.com/mrpasquini",
-      "summary": "1. 概要 (1-2文で)  \nActive Storage の「どのハッシュアルゴリズムでチェックサム（整合性チェック）を計算するか」という責務を `ActiveStorage::Service` 側に集約し、サービスごとに適切なアルゴリズムを選べるようにした PR です。併せて S3 サービスで SHA256 をサポートし、ダウンロード検証ロジックや JS 側のダイレクトアップロード用チェックサム計算も整理・拡張されています。"
     }
   ]
 }
