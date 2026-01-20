@@ -1,7 +1,34 @@
 {
-  "lastUpdated": "2026-01-19T00:10:50.848Z",
+  "lastUpdated": "2026-01-20T00:11:02.698Z",
   "totalCount": 50,
   "items": [
+    {
+      "number": 56645,
+      "title": "[8-1-stable] Handle Ruby 4.1 stabby lambda in Proc#source_location start_column {#pr-56645}",
+      "url": "https://github.com/rails/rails/pull/56645",
+      "mergedAt": "2026-01-19T00:00:00.000Z",
+      "author": "zzak",
+      "authorUrl": "https://github.com/zzak",
+      "summary": "1. 概要 (1-2文で)  \nRails 8.1 系のテスト用アサーションが、Ruby 4.1 における「stabby lambda（->）」の `Proc#source_location` / `start_column` の挙動に対応するためのバックポートです。`8-1-stable` ブランチに、既に main 側に入っている修正 (#56624) を取り込んでいます。"
+    },
+    {
+      "number": 56644,
+      "title": "[8-0-stable] Handle Ruby 4.1 stabby lambda in Proc#source_location start_column {#pr-56644}",
+      "url": "https://github.com/rails/rails/pull/56644",
+      "mergedAt": "2026-01-19T00:00:00.000Z",
+      "author": "zzak",
+      "authorUrl": "https://github.com/zzak",
+      "summary": "1. 概要 (1-2文で)  \nRuby 4.1 で導入される stabby lambda (`-> {}` 形式) に対して、`Proc#source_location` が返す「開始カラム(start_column)」の扱いをテスト側で正しく解釈できるようにする修正を、Rails 8.0 の安定ブランチへバックポートした PR です。ActiveSupport のテスト用アサーション(`ActiveSupport::Testing::Assertions`)に、Ruby 4.1 向けの対応が追加されています。"
+    },
+    {
+      "number": 56624,
+      "title": "Handle Ruby 4.1 stabby lambda in Proc#source_location start_column {#pr-56624}",
+      "url": "https://github.com/rails/rails/pull/56624",
+      "mergedAt": "2026-01-19T00:00:00.000Z",
+      "author": "zzak",
+      "authorUrl": "https://github.com/zzak",
+      "summary": "1. 概要 (1-2文で)  \nRuby 4.1 で `->`（stabby lambda）の `Proc#source_location` のカラム位置が変わったことで、Rails のテスト用アサーションメッセージが壊れていた問題を回避する修正です。`assert_changes` / `assert_no_changes` / `assert_difference` などで、ブロックとして渡された lambda の「本体だけ」を従来通り表示できるようにしています。"
+    },
     {
       "number": 56631,
       "title": "Remove dead compatibility code with ripper {#pr-56631}",
@@ -424,33 +451,6 @@
       "author": "yahonda",
       "authorUrl": "https://github.com/yahonda",
       "summary": "1. 概要 (1-2文で)  \nRails main ブランチが Ruby 3.3.0 以上を必須としたことに伴い、`RubyVM::YJIT.enable` の存在チェック (`defined?`) を削除してコードを簡略化した PR です。Ruby 3.3 以降では `RubyVM::YJIT.enable` が常に存在するため、ガードが不要になっています。"
-    },
-    {
-      "number": 56488,
-      "title": "Ensure version_manager_ruby_version tests work in rbenv/rvm environments {#pr-56488}",
-      "url": "https://github.com/rails/rails/pull/56488",
-      "mergedAt": "2026-01-06T00:00:00.000Z",
-      "author": "zzak",
-      "authorUrl": "https://github.com/zzak",
-      "summary": "1. 概要 (1-2文で)  \n`version_manager_ruby_version` に関するテストが、rbenv / rvm 環境でローカル実行すると落ちてしまう問題を修正した PR です。主にテスト側での Ruby バージョン検出の前提を見直し、実行環境（rbenv/rvm）の影響を受けないようにしています。"
-    },
-    {
-      "number": 56524,
-      "title": "Fix Rails.app.revision to check git repo in app root {#pr-56524}",
-      "url": "https://github.com/rails/rails/pull/56524",
-      "mergedAt": "2026-01-06T00:00:00.000Z",
-      "author": "Saidbek",
-      "authorUrl": "https://github.com/Saidbek",
-      "summary": "1. 概要 (1-2文で)  \n`Rails.app.revision` がアプリケーションのルートディレクトリではなく「現在の作業ディレクトリ」を基準に `.git` を探していた問題を修正し、常にアプリケーションルートの Git 情報を参照するようにした PR です。これにより、別ディレクトリから Rails アプリを起動しても正しいリビジョンが取得されます。"
-    },
-    {
-      "number": 56306,
-      "title": "Fix text overflow in interstitial notes on mobile {#pr-56306}",
-      "url": "https://github.com/rails/rails/pull/56306",
-      "mergedAt": "2026-01-06T00:00:00.000Z",
-      "author": "shivamsinghchahar",
-      "authorUrl": "https://github.com/shivamsinghchahar",
-      "summary": "1. 概要 (1-2文で)  \nRails ガイドの「インタースティシャルな注意書き（notes）」内にある長い `<code>` テキストが、モバイル表示時に横にはみ出してしまう問題を CSS で修正した PRです。flex コンテナ内で段落が正しく縮小されるようにし、テキストのオーバーフローと横スクロールを防いでいます。"
     }
   ]
 }
