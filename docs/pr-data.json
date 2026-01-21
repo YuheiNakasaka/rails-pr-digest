@@ -1,7 +1,16 @@
 {
-  "lastUpdated": "2026-01-20T00:11:02.698Z",
+  "lastUpdated": "2026-01-21T00:10:10.254Z",
   "totalCount": 50,
   "items": [
+    {
+      "number": 56647,
+      "title": "Load minitest server plugin to run `minitest` with `--bisect` option {#pr-56647}",
+      "url": "https://github.com/rails/rails/pull/56647",
+      "mergedAt": "2026-01-20T00:00:00.000Z",
+      "author": "yahonda",
+      "authorUrl": "https://github.com/yahonda",
+      "summary": "1. 概要 (1-2文で)  \nRails のテストランナーが、Minitest 6 の `--bisect` オプションを正しく使えるように、Minitest の server プラグインを明示的にロードする変更です。これにより、`minitest_bisect` 使用時に発生していた `invalid option: --server` エラーが解消されます。"
+    },
     {
       "number": 56645,
       "title": "[8-1-stable] Handle Ruby 4.1 stabby lambda in Proc#source_location start_column {#pr-56645}",
@@ -442,15 +451,6 @@
       "author": "yahonda",
       "authorUrl": "https://github.com/yahonda",
       "summary": "1. 概要 (1-2文で)  \nこのPRは、Rails main ブランチが Ruby 3.3 以上を必須とする方針に合わせて、Ruby 3.2 以下向けの互換コードを削除したものです。主に `SecureRandom`、`Range#overlap?`、`Fiber#kill` 周りの分岐・ポリフィルが取り除かれています。"
-    },
-    {
-      "number": 56526,
-      "title": "Remove unnecessary `defined?` check for RubyVM::YJIT.enable {#pr-56526}",
-      "url": "https://github.com/rails/rails/pull/56526",
-      "mergedAt": "2026-01-06T00:00:00.000Z",
-      "author": "yahonda",
-      "authorUrl": "https://github.com/yahonda",
-      "summary": "1. 概要 (1-2文で)  \nRails main ブランチが Ruby 3.3.0 以上を必須としたことに伴い、`RubyVM::YJIT.enable` の存在チェック (`defined?`) を削除してコードを簡略化した PR です。Ruby 3.3 以降では `RubyVM::YJIT.enable` が常に存在するため、ガードが不要になっています。"
     }
   ]
 }
