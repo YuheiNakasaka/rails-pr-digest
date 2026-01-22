@@ -1,7 +1,52 @@
 {
-  "lastUpdated": "2026-01-21T00:10:10.254Z",
+  "lastUpdated": "2026-01-22T00:11:38.588Z",
   "totalCount": 50,
   "items": [
+    {
+      "number": 56636,
+      "title": "Detect JS package manager from lockfiles in generators {#pr-56636}",
+      "url": "https://github.com/rails/rails/pull/56636",
+      "mergedAt": "2026-01-21T00:00:00.000Z",
+      "author": "dfl",
+      "authorUrl": "https://github.com/dfl",
+      "summary": "1. 概要 (1-2文で)\nRails のジェネレータ（ActionText, ActionCable など）が、プロジェクト内の lockfile から JavaScript のパッケージマネージャ（bun / pnpm / npm / yarn）を自動判別してコマンドを実行するようになりました。これにより「常に yarn 前提」だった動作が解消され、npm や pnpm 等を使うプロジェクトでも手作業の修正が不要になります。"
+    },
+    {
+      "number": 56552,
+      "title": "[ci skip] Add sample code on API docs about Active Job Continuation Configuration {#pr-56552}",
+      "url": "https://github.com/rails/rails/pull/56552",
+      "mergedAt": "2026-01-21T00:00:00.000Z",
+      "author": "igaiga",
+      "authorUrl": "https://github.com/igaiga",
+      "summary": "1. 概要 (1-2文で)  \nActive Job の「Continuation」機能に関する API ドキュメントに、具体的な設定例（サンプルコード）が追加された PRです。挙動や API 仕様には変更を加えず、使い方を分かりやすくするためのドキュメント強化が目的です。"
+    },
+    {
+      "number": 56250,
+      "title": "Deduplicate logic for internal params handling in Action Controller log subscriber {#pr-56250}",
+      "url": "https://github.com/rails/rails/pull/56250",
+      "mergedAt": "2026-01-21T00:00:00.000Z",
+      "author": "lovro-bikic",
+      "authorUrl": "https://github.com/lovro-bikic",
+      "summary": "1. 概要 (1-2文で)  \nActionController のログ周りで「内部パラメータ（internal params）」を除外する処理が二重に書かれていたため、その重複を解消し、`StructuredEventSubscriber#start_processing` 側に一本化した PR です。結果として、ログ出力時のパラメータフィルタリングの責務が整理され、コードが簡潔になりました。"
+    },
+    {
+      "number": 56401,
+      "title": "[ci skip] Highlight Subscriber model changes {#pr-56401}",
+      "url": "https://github.com/rails/rails/pull/56401",
+      "mergedAt": "2026-01-21T00:00:00.000Z",
+      "author": "Tretent",
+      "authorUrl": "https://github.com/Tretent",
+      "summary": "1. 概要 (1-2文で)  \nRailsガイド「wishlists.md」の中で、`Subscriber`モデルに対するコード変更部分にハイライト指定が漏れていた箇所を修正し、他モデルと同様に変更行が強調表示されるようにしたドキュメント専用のPRです。コードや挙動には一切影響せず、ガイドの可読性・一貫性のみを改善しています。"
+    },
+    {
+      "number": 56651,
+      "title": "Fix comment doc in ActionText::Attachable [ci skip] {#pr-56651}",
+      "url": "https://github.com/rails/rails/pull/56651",
+      "mergedAt": "2026-01-21T00:00:00.000Z",
+      "author": "OutlawAndy",
+      "authorUrl": "https://github.com/OutlawAndy",
+      "summary": "1. 概要 (1-2文で)  \nAction Text の `ActionText::Attachable` モジュール内にある `to_editor_content_attachment_partial_path` のコメントドキュメント（サンプルコード）が、実装と食い違っていたため、それを修正するドキュメント専用の PR です。コードの挙動自体は変わっておらず、コメント上の例示だけが正しい形に揃えられています。"
+    },
     {
       "number": 56647,
       "title": "Load minitest server plugin to run `minitest` with `--bisect` option {#pr-56647}",
@@ -406,51 +451,6 @@
       "author": "seuros",
       "authorUrl": "https://github.com/seuros",
       "summary": "1. 概要 (1-2文で)  \nPostgreSQLAdapter に、外部 gem が独自の PostgreSQL 型を「正規のインターフェイス」で登録できる `register_type_mapping` メソッドが追加されました。これにより、postgis や vector などの gem がアダプタを monkey patch せずに型マッピングを拡張できるようになります。"
-    },
-    {
-      "number": 56012,
-      "title": "Memoize IAM client and set authorization to ADC for GCS Active Storage service {#pr-56012}",
-      "url": "https://github.com/rails/rails/pull/56012",
-      "mergedAt": "2026-01-07T00:00:00.000Z",
-      "author": "jmalcic",
-      "authorUrl": "https://github.com/jmalcic",
-      "summary": "1. 概要 (1-2文で)  \nGoogle Cloud Storage 用 Active Storage サービスにおいて、`iam: true` 指定時の署名付きURL生成が #55353 により壊れていた問題を、IAM クライアントの認証を元の「ADC (Application Default Credentials) を使う」挙動に戻しつつ、IAM クライアントをメモ化して過剰な ADC 呼び出しを避ける形で修正した PR です。  \nあわせて、この挙動を検証するテストと CHANGELOG が追加されています。"
-    },
-    {
-      "number": 56534,
-      "title": "Fix SQLite3 schema dump for non-autoincrement integer primary keys {#pr-56534}",
-      "url": "https://github.com/rails/rails/pull/56534",
-      "mergedAt": "2026-01-07T00:00:00.000Z",
-      "author": "khasinski",
-      "authorUrl": "https://github.com/khasinski",
-      "summary": "1. 概要 (1-2文で)  \nSQLite3 を使って `id: :integer, default: nil` な主キーを持つテーブルを作成した場合に、schema.rb へのダンプ・復元時に誤って AUTOINCREMENT 付きの主キーに変わってしまう不具合を修正した PR です。`sqlite_master` を参照して実際に AUTOINCREMENT が付与されているかどうかを判定し、スキーマダンプ時に `id: :integer, default: nil` を正しく出力するようになりました。"
-    },
-    {
-      "number": 56535,
-      "title": "[Backport 8-1-stable] Fix PostgreSQL schema_search_path after reconnect and reset {#pr-56535}",
-      "url": "https://github.com/rails/rails/pull/56535",
-      "mergedAt": "2026-01-07T00:00:00.000Z",
-      "author": "eglitobias",
-      "authorUrl": "https://github.com/eglitobias",
-      "summary": "1. 概要 (1–2文で)  \nRails 8.1系のPostgreSQLアダプタで、「再接続後や接続リセット後に `schema_search_path` が正しく復元されない」不具合を修正するパッチを `8-1-stable` ブランチにバックポートしたPRです。これにより、マルチスキーマ運用や `schema_search_path` を前提としたアプリで、再接続時にも一貫したスキーマ検索パスが保証されます。"
-    },
-    {
-      "number": 56533,
-      "title": "Revert \"Remove unnecessary `defined?` check for RubyVM::YJIT.enable\" {#pr-56533}",
-      "url": "https://github.com/rails/rails/pull/56533",
-      "mergedAt": "2026-01-07T00:00:00.000Z",
-      "author": "yahonda",
-      "authorUrl": "https://github.com/yahonda",
-      "summary": "1. 概要 (1-2文で)  \nこのPRは、「RubyVM::YJIT.enable の前に `defined?` チェックを削除した」前回の変更 (#56526) を取り消し、元の `defined?(RubyVM::YJIT)` チェック付きのコードに戻しています。Rails 起動時に YJIT を有効化する処理まわりの安全性・互換性を確保するためのリバートです。"
-    },
-    {
-      "number": 56527,
-      "title": "Remove Ruby < 3.3 compatibility code {#pr-56527}",
-      "url": "https://github.com/rails/rails/pull/56527",
-      "mergedAt": "2026-01-07T00:00:00.000Z",
-      "author": "yahonda",
-      "authorUrl": "https://github.com/yahonda",
-      "summary": "1. 概要 (1-2文で)  \nこのPRは、Rails main ブランチが Ruby 3.3 以上を必須とする方針に合わせて、Ruby 3.2 以下向けの互換コードを削除したものです。主に `SecureRandom`、`Range#overlap?`、`Fiber#kill` 周りの分岐・ポリフィルが取り除かれています。"
     }
   ]
 }
