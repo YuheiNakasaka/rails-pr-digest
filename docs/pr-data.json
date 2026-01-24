@@ -1,7 +1,43 @@
 {
-  "lastUpdated": "2026-01-23T00:12:19.895Z",
+  "lastUpdated": "2026-01-24T00:12:07.687Z",
   "totalCount": 50,
   "items": [
+    {
+      "number": 56666,
+      "title": "Skip unique index lookup for insert_all! since it doesn't need conflict target {#pr-56666}",
+      "url": "https://github.com/rails/rails/pull/56666",
+      "mergedAt": "2026-01-23T00:00:00.000Z",
+      "author": "kirs",
+      "authorUrl": "https://github.com/kirs",
+      "summary": "1. 概要 (1-2文で)  \n`insert_all!` が常にユニークインデックスを探しに行っていた挙動を修正し、実際には `ON CONFLICT` を使わないケースではユニークインデックスを必須にしないようにした PR です。これにより、特に複合主キーを持つテーブルで `model.primary_key` とスキーマ上の主キーがずれている場合に発生していた不要な例外が解消されます。"
+    },
+    {
+      "number": 56652,
+      "title": "Explicitly use Marshal serializer for MemCacheStore Dalli client {#pr-56652}",
+      "url": "https://github.com/rails/rails/pull/56652",
+      "mergedAt": "2026-01-23T00:00:00.000Z",
+      "author": "zzak",
+      "authorUrl": "https://github.com/zzak",
+      "summary": "1. 概要 (1–2文で)  \nRails の `ActiveSupport::Cache::MemCacheStore` が Dalli 4 系で出る「serializer 自動選択」の警告を避けるために、Rails 側で Dalli クライアントに対して明示的に `Marshal` シリアライザを指定するようにした PRです。これにより、もともとユーザーが変更できなかったシリアライザ設定を Rails がはっきり固定し、Dalli の警告を抑止します。"
+    },
+    {
+      "number": 56667,
+      "title": "Use the released version of net-smtp in bug report templates {#pr-56667}",
+      "url": "https://github.com/rails/rails/pull/56667",
+      "mergedAt": "2026-01-23T00:00:00.000Z",
+      "author": "yahonda",
+      "authorUrl": "https://github.com/yahonda",
+      "summary": "1. 概要 (1-2文で)  \nRails のバグ報告テンプレート（`action_mailbox.rb` と `action_mailer.rb`）で、`net-smtp` の扱いを「リリース済み gem を使う」形に戻した PR です。以前の変更でテンプレート側に書かれていた一部設定を打ち消し、Gemfile 側の状態と整合を取っています。"
+    },
+    {
+      "number": 56657,
+      "title": "Prefer connected? for connection validity checks {#pr-56657}",
+      "url": "https://github.com/rails/rails/pull/56657",
+      "mergedAt": "2026-01-23T00:00:00.000Z",
+      "author": "matthewd",
+      "authorUrl": "https://github.com/matthewd",
+      "summary": "1. 概要 (1-2文で)  \nActiveRecord の DB 接続の「有効性チェック」において、`active?` ではなく `connected?` を優先的に使うように変更し、「一度ダメになった接続はその後も使えない」と記録して扱うようにした PR です。これにより、「すでに壊れている」ことが判明したコネクションを再利用しない挙動がより明確になります。"
+    },
     {
       "number": 56663,
       "title": "Upgrade from bundler 2.7.2 to 4.0.4 {#pr-56663}",
@@ -415,42 +451,6 @@
       "author": "stevepolitodesign",
       "authorUrl": "https://github.com/stevepolitodesign",
       "summary": "1. 概要 (1-2文で)  \nRails アプリ生成時に自動で作られる GitHub Actions 用 `ci.yml` に、Active Storage を使う場合は画像処理ライブラリ `libvips` をインストールするステップを追加する変更です。`--skip-active-storage` を付けた場合は従来どおり `libvips` は含まれません。"
-    },
-    {
-      "number": 56529,
-      "title": "Clarify that column default values don't apply to existing records [ci skip] {#pr-56529}",
-      "url": "https://github.com/rails/rails/pull/56529",
-      "mergedAt": "2026-01-08T00:00:00.000Z",
-      "author": "yujiteshima",
-      "authorUrl": "https://github.com/yujiteshima",
-      "summary": "1. 概要 (1-2文で)  \nActive Record Migrations ガイドの `default` オプションの説明に、「デフォルト値は新規レコードにのみ適用され、既存レコードは変わらない」ことを明示的に追記したドキュメント修正の PR です。既存のカラム追加や変更時に「既存レコードも自動的にデフォルト値で更新される」と誤解しないようにするのが目的です。"
-    },
-    {
-      "number": 56487,
-      "title": "Improve authentication generator test template {#pr-56487}",
-      "url": "https://github.com/rails/rails/pull/56487",
-      "mergedAt": "2026-01-08T00:00:00.000Z",
-      "author": "callmesangio",
-      "authorUrl": "https://github.com/callmesangio",
-      "summary": "1. 概要 (1-2文で)  \nRails の認証 generator が生成する `sessions_controller_test.rb` のテンプレートが微修正され、ファイル名の拡張子を `.tt` に揃えるとともに、テストコード内の不要な `User.take` 呼び出しがインスタンス変数に差し替えられました。主にメンテナンス性・一貫性・テストの明瞭さ向上を目的とした小さな改善です。"
-    },
-    {
-      "number": 56427,
-      "title": "[ci skip] Fix API docs of `AS::Inflector.humanize` and `String#humanize` {#pr-56427}",
-      "url": "https://github.com/rails/rails/pull/56427",
-      "mergedAt": "2026-01-08T00:00:00.000Z",
-      "author": "callmesangio",
-      "authorUrl": "https://github.com/callmesangio",
-      "summary": "1. 概要 (1-2文で)  \n`ActiveSupport::Inflector.humanize` と `String#humanize` のドキュメントに誤解を招く表現があったため、`keep_id_suffix` オプションの実際の挙動（末尾 `_id` を削除しないが、大文字化はしない）に合わせて説明とサンプルが修正された PR です。コードの挙動自体は変わっておらず、ドキュメントのみの更新です。"
-    },
-    {
-      "number": 56542,
-      "title": "Enable Arel::TreeManagers to use Table's engine {#pr-56542}",
-      "url": "https://github.com/rails/rails/pull/56542",
-      "mergedAt": "2026-01-08T00:00:00.000Z",
-      "author": "hmcguire-shopify",
-      "authorUrl": "https://github.com/hmcguire-shopify",
-      "summary": "1. 概要 (1-2文で)  \nArel の `TreeManager` 系クラス（`SelectManager`, `InsertManager`, `UpdateManager`, `DeleteManager`）が、初期化時に渡された `Arel::Table` の `engine` を自動的に利用して SQL をコンパイルするようになりました。これにより、複数 DB アダプタ利用時でも、明示的にエンジンを渡さなくても適切なアダプタで `to_sql` が実行されます。"
     }
   ]
 }
