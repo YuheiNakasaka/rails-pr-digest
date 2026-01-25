@@ -1,7 +1,16 @@
 {
-  "lastUpdated": "2026-01-24T00:12:07.687Z",
+  "lastUpdated": "2026-01-25T00:10:57.749Z",
   "totalCount": 50,
   "items": [
+    {
+      "number": 56672,
+      "title": "Add changelog for 6f9cbce21d8ec2de86c37b5a37073bac6d5f1d83 to Action Cable and Action Text {#pr-56672}",
+      "url": "https://github.com/rails/rails/pull/56672",
+      "mergedAt": "2026-01-24T00:00:00.000Z",
+      "author": "zzak",
+      "authorUrl": "https://github.com/zzak",
+      "summary": "1. 概要 (1-2文で)  \nこのPRは、既に他のコンポーネント（Railties）にのみ追加されていた変更内容（コミット: 6f9cbce21d8e...）について、Action Cable と Action Text 向けのCHANGELOG記載を追加し、フレームワーク全体で変更履歴の整合性を取るものです。コードの挙動自体は変えず、ドキュメント（CHANGELOG）のみを更新しています。"
+    },
     {
       "number": 56666,
       "title": "Skip unique index lookup for insert_all! since it doesn't need conflict target {#pr-56666}",
@@ -442,15 +451,6 @@
       "author": "Saidbek",
       "authorUrl": "https://github.com/Saidbek",
       "summary": "1. 概要 (1-2文で)  \nRails 8.2 で `protect_from_forgery` を引数なしで呼び出す書き方が非推奨になり、今後は必ず明示的に戦略（`with: :exception` など）を指定することが推奨されます。これにより、`config.action_controller.default_protect_from_forgery` との挙動の不一致をなくし、CSRF 対策の設定を明確にするのが目的です。"
-    },
-    {
-      "number": 56523,
-      "title": "CI: Add `libvips` package to generated `ci.yml` {#pr-56523}",
-      "url": "https://github.com/rails/rails/pull/56523",
-      "mergedAt": "2026-01-08T00:00:00.000Z",
-      "author": "stevepolitodesign",
-      "authorUrl": "https://github.com/stevepolitodesign",
-      "summary": "1. 概要 (1-2文で)  \nRails アプリ生成時に自動で作られる GitHub Actions 用 `ci.yml` に、Active Storage を使う場合は画像処理ライブラリ `libvips` をインストールするステップを追加する変更です。`--skip-active-storage` を付けた場合は従来どおり `libvips` は含まれません。"
     }
   ]
 }
