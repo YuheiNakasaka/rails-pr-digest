@@ -1,7 +1,43 @@
 {
-  "lastUpdated": "2026-01-25T00:10:57.749Z",
+  "lastUpdated": "2026-01-26T00:11:49.444Z",
   "totalCount": 50,
   "items": [
+    {
+      "number": 56668,
+      "title": "chore: Update outdated GitHub Actions versions {#pr-56668}",
+      "url": "https://github.com/rails/rails/pull/56668",
+      "mergedAt": "2026-01-25T00:00:00.000Z",
+      "author": "pgoslatara",
+      "authorUrl": "https://github.com/pgoslatara",
+      "summary": "1. 概要 (1-2文で)  \nこのPRは、Railsリポジトリ内で使用している複数のGitHub Actionsを最新メジャーバージョンに更新するメンテナンス目的の変更です。アプリケーションコードやテストコードには手を入れず、CI／運用ワークフローの信頼性と追従性を高めるための更新になります。"
+    },
+    {
+      "number": 56679,
+      "title": "Fix overlapping acronyms order dependency in underscore {#pr-56679}",
+      "url": "https://github.com/rails/rails/pull/56679",
+      "mergedAt": "2026-01-25T00:00:00.000Z",
+      "author": "Saidbek",
+      "authorUrl": "https://github.com/Saidbek",
+      "summary": "1. 概要 (1-2文で)  \nRails の `ActiveSupport::Inflector.underscore` が、重なり合う略語（例: `USD` と `USDC`）定義時に登録順によって結果が変わってしまう問題を修正した PR です。略語を正規表現に組み込む際に「長い略語を優先的にマッチさせる」ようにし、順序依存をなくしています。"
+    },
+    {
+      "number": 56678,
+      "title": "Disable console query cache by default {#pr-56678}",
+      "url": "https://github.com/rails/rails/pull/56678",
+      "mergedAt": "2026-01-25T00:00:00.000Z",
+      "author": "camallen",
+      "authorUrl": "https://github.com/camallen",
+      "summary": "1. 概要 (1-2文で)  \nRailsコンソールで、デフォルトでは有効になってしまっていたクエリキャッシュを「無効」に戻す変更です。必要な場合のみ `--query-cache` (短縮: `-q`) オプションで明示的に有効化できるようになります。"
+    },
+    {
+      "number": 56670,
+      "title": "[ci skip] Fix guides for db:prepare {#pr-56670}",
+      "url": "https://github.com/rails/rails/pull/56670",
+      "mergedAt": "2026-01-25T00:00:00.000Z",
+      "author": "schmijos",
+      "authorUrl": "https://github.com/schmijos",
+      "summary": "1. 概要 (1-2文で)  \nこのPRは、`rails db:prepare` の挙動に関するRailsガイドの記述を、実際の実装どおり「マイグレーション実行＋スキーマダンプを行う」ことが明確に伝わるよう修正したドキュメント更新です。コード本体の挙動は変わっておらず、ガイドの説明だけが実装に合わせて整合性を取られています。"
+    },
     {
       "number": 56672,
       "title": "Add changelog for 6f9cbce21d8ec2de86c37b5a37073bac6d5f1d83 to Action Cable and Action Text {#pr-56672}",
@@ -415,42 +451,6 @@
       "author": "yahonda",
       "authorUrl": "https://github.com/yahonda",
       "summary": "1. 概要 (1-2文で)  \nRails の Gemfile から `rake >= 13` という明示的なバージョン指定を削除し、Ruby 3.3 以降に同梱される Rake 13.1.0 に依存する形に整理した PRです。これにより、不要なバージョン制約をなくし、Ruby 本体のバンドルされた gem による標準構成に寄せています。"
-    },
-    {
-      "number": 56546,
-      "title": "Fix Errors#added? with callback options in query {#pr-56546}",
-      "url": "https://github.com/rails/rails/pull/56546",
-      "mergedAt": "2026-01-09T00:00:00.000Z",
-      "author": "khasinski",
-      "authorUrl": "https://github.com/khasinski",
-      "summary": "1. 概要 (1-2文で)  \nRails の `ActiveModel::Errors#added?` が、エラー追加時と同じコールバックオプション（`allow_nil`, `if`, `unless` など）を指定して問い合わせた場合に常に `false` になっていたバグが修正されました。これにより `errors.add` と `errors.added?` 間のオプション付き照合が正しく対称に動作するようになります。"
-    },
-    {
-      "number": 56564,
-      "title": "Remove X-XSS-Protection from default headers {#pr-56564}",
-      "url": "https://github.com/rails/rails/pull/56564",
-      "mergedAt": "2026-01-09T00:00:00.000Z",
-      "author": "byroot",
-      "authorUrl": "https://github.com/byroot",
-      "summary": "1. 概要 (1–2文で)  \nRailsがデフォルトで送出していた `X-XSS-Protection` レスポンスヘッダを削除する変更です。Rails 8.2 向けの設定・ガイドもそれに合わせて更新され、今後はこのヘッダを自動的には付与しません。"
-    },
-    {
-      "number": 56251,
-      "title": "Adds template-file rendering examples in the bug report test-template for ActionView {#pr-56251}",
-      "url": "https://github.com/rails/rails/pull/56251",
-      "mergedAt": "2026-01-09T00:00:00.000Z",
-      "author": "shivabhusal",
-      "authorUrl": "https://github.com/shivabhusal",
-      "summary": "1. 概要 (1-2文で)  \nAction View向けのバグ報告テンプレートに、「テンプレートファイルのレンダリング問題」を再現しやすくするための具体的な書き方・例が追加されました。これにより、View周りの不具合報告からすぐに実行可能なテストを作りやすくなり、再現性・解析効率の向上が期待できます。"
-    },
-    {
-      "number": 56561,
-      "title": "Deprecate protect_from_forgery without explicit strategy {#pr-56561}",
-      "url": "https://github.com/rails/rails/pull/56561",
-      "mergedAt": "2026-01-08T00:00:00.000Z",
-      "author": "Saidbek",
-      "authorUrl": "https://github.com/Saidbek",
-      "summary": "1. 概要 (1-2文で)  \nRails 8.2 で `protect_from_forgery` を引数なしで呼び出す書き方が非推奨になり、今後は必ず明示的に戦略（`with: :exception` など）を指定することが推奨されます。これにより、`config.action_controller.default_protect_from_forgery` との挙動の不一致をなくし、CSRF 対策の設定を明確にするのが目的です。"
     }
   ]
 }
