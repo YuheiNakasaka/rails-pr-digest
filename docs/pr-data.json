@@ -1,7 +1,34 @@
 {
-  "lastUpdated": "2026-01-27T00:10:05.092Z",
+  "lastUpdated": "2026-01-28T00:10:53.258Z",
   "totalCount": 50,
   "items": [
+    {
+      "number": 56687,
+      "title": "Remove unused delegate loading from MemCacheStore {#pr-56687}",
+      "url": "https://github.com/rails/rails/pull/56687",
+      "mergedAt": "2026-01-27T00:00:00.000Z",
+      "author": "Saidbek",
+      "authorUrl": "https://github.com/Saidbek",
+      "summary": "1. 概要 (1-2文で)  \nMemCacheStore 内で使われていない `require \"delegate\"` を削除し、不要な依存を取り除いた PR です。機能的な挙動変更はなく、コードのクリーンアップに該当します。"
+    },
+    {
+      "number": 56686,
+      "title": "[Changelog] Fix overlapping acronyms order dependency in underscore#56679 {#pr-56686}",
+      "url": "https://github.com/rails/rails/pull/56686",
+      "mergedAt": "2026-01-27T00:00:00.000Z",
+      "author": "Saidbek",
+      "authorUrl": "https://github.com/Saidbek",
+      "summary": "1. 概要 (1-2文で)  \nActive Support の `underscore` における「重なり合う略語（acronym）」の展開順序依存バグを修正したことを、CHANGELOG に追記する PR です。  \nコード本体には手を入れず、既にマージ済みの修正内容をドキュメントとして明示しただけの変更です。"
+    },
+    {
+      "number": 56282,
+      "title": "Fix #56232: Clean output directory when generating guides to remove stale output files and add guide generation tests {#pr-56282}",
+      "url": "https://github.com/rails/rails/pull/56282",
+      "mergedAt": "2026-01-27T00:00:00.000Z",
+      "author": "harsh183",
+      "authorUrl": "https://github.com/harsh183",
+      "summary": "1. 概要 (1-2文で)  \nRails ガイド生成時に、出力ディレクトリ内に古い HTML ファイルなどが残り続ける問題を修正し、新しい生成前に出力ディレクトリをクリーンアップするようにしました。あわせてガイド生成処理に対するテストが追加され、挙動が自動テストで担保されるようになっています。"
+    },
     {
       "number": 56668,
       "title": "chore: Update outdated GitHub Actions versions {#pr-56668}",
@@ -424,33 +451,6 @@
       "author": "tahsin352",
       "authorUrl": "https://github.com/tahsin352",
       "summary": "1. 概要 (1-2文で)  \n`config.revision` に関するコメント文を、Proc（ラムダ）による指定サポートが削除された現状に合わせて修正したドキュメント的変更のPRです。コードの挙動は変わらず、説明コメントのみが最新仕様に追従しています。"
-    },
-    {
-      "number": 56579,
-      "title": "Fix reverting `change_table bulk: true` with indexes {#pr-56579}",
-      "url": "https://github.com/rails/rails/pull/56579",
-      "mergedAt": "2026-01-12T00:00:00.000Z",
-      "author": "fatkodima",
-      "authorUrl": "https://github.com/fatkodima",
-      "summary": "1. 概要 (1-2文で)  \n`change_table bulk: true` を使ったマイグレーションにインデックス操作が含まれている場合、`rails db:rollback` などでのリバートが正しく動かない不具合を修正する PR です。`SchemaStatements` と `CommandRecorder` の挙動を調整し、テストを更新して期待どおりに巻き戻せるようにしています。"
-    },
-    {
-      "number": 56578,
-      "title": "Fix reverting `change_table bulk: true` with table names prefixes and suffixes {#pr-56578}",
-      "url": "https://github.com/rails/rails/pull/56578",
-      "mergedAt": "2026-01-11T00:00:00.000Z",
-      "author": "fatkodima",
-      "authorUrl": "https://github.com/fatkodima",
-      "summary": "1. 概要 (1-2文で)  \n`change_table bulk: true` を使ったマイグレーションを「テーブル名の prefix / suffix を使っている環境で `revert` する」ときに誤動作していた問題を修正した PR です。`ActiveRecord::Migration::CommandRecorder` がテーブル名を正しく扱えていなかった点が直され、対応するテストが追加されています。"
-    },
-    {
-      "number": 56571,
-      "title": "Remove explicit Rake version constraint from Gemfile {#pr-56571}",
-      "url": "https://github.com/rails/rails/pull/56571",
-      "mergedAt": "2026-01-11T00:00:00.000Z",
-      "author": "yahonda",
-      "authorUrl": "https://github.com/yahonda",
-      "summary": "1. 概要 (1-2文で)  \nRails の Gemfile から `rake >= 13` という明示的なバージョン指定を削除し、Ruby 3.3 以降に同梱される Rake 13.1.0 に依存する形に整理した PRです。これにより、不要なバージョン制約をなくし、Ruby 本体のバンドルされた gem による標準構成に寄せています。"
     }
   ]
 }
