@@ -1,7 +1,25 @@
 {
-  "lastUpdated": "2026-01-29T00:11:01.906Z",
+  "lastUpdated": "2026-01-30T00:11:47.605Z",
   "totalCount": 50,
   "items": [
+    {
+      "number": 56694,
+      "title": "Update typemap for timezone during type_casted_binds {#pr-56694}",
+      "url": "https://github.com/rails/rails/pull/56694",
+      "mergedAt": "2026-01-29T00:00:00.000Z",
+      "author": "matthewd",
+      "authorUrl": "https://github.com/matthewd",
+      "summary": "1. 概要 (1-2文で)  \nPostgreSQL アダプタで、**バインド変数を type cast するタイミングで timezone 用 typemap を確実に更新するようにした PR**です。  \n現時点の挙動は変えず、今後の timezone/型関連の変更に備えて、責務と呼び出し位置を整理しています。"
+    },
+    {
+      "number": 56693,
+      "title": "Combine duplicate `if respond_to?(:action_view)` {#pr-56693}",
+      "url": "https://github.com/rails/rails/pull/56693",
+      "mergedAt": "2026-01-29T00:00:00.000Z",
+      "author": "r7kamura",
+      "authorUrl": "https://github.com/r7kamura",
+      "summary": "1. 概要 (1-2文で)  \nRails の `Rails::Application::Configuration` 周辺で、`if respond_to?(:action_view)` が重複していた箇所をまとめる小規模なリファクタリングです。挙動は変えずに、コードの読みやすさと自然さを改善しています。"
+    },
     {
       "number": 56687,
       "title": "Remove unused delegate loading from MemCacheStore {#pr-56687}",
@@ -433,24 +451,6 @@
       "author": "yujiteshima",
       "authorUrl": "https://github.com/yujiteshima",
       "summary": "1. 概要 (1-2文で)  \n`railties` ディレクトリで `bundle exec rake test --trace` を実行した際、テスト完了後の終了時に `invalid option: --trace` が発生していた問題を修正するPRです。`test:isolated` 実行後に `ARGV` をクリアすることで、Minitest の `at_exit` フックが Rake 用のオプション `--trace` を誤って解釈しないようにしています。"
-    },
-    {
-      "number": 56574,
-      "title": "Clean up ENV leaks continued {#pr-56574}",
-      "url": "https://github.com/rails/rails/pull/56574",
-      "mergedAt": "2026-01-12T00:00:00.000Z",
-      "author": "zzak",
-      "authorUrl": "https://github.com/zzak",
-      "summary": "1. 概要 (1-2文で)  \nこのPRは、テストやRakeタスク実行時に環境変数 (`ENV`) が他テストやプロセスに漏れないようにするためのクリーンアップ対応を進めたものです。主に Rails のテストコード側で `ENV` の設定／復元方法を整理し、環境依存の副作用を減らしています。"
-    },
-    {
-      "number": 56583,
-      "title": "Update comment as Proc support is removed in revision [ci skip] {#pr-56583}",
-      "url": "https://github.com/rails/rails/pull/56583",
-      "mergedAt": "2026-01-12T00:00:00.000Z",
-      "author": "tahsin352",
-      "authorUrl": "https://github.com/tahsin352",
-      "summary": "1. 概要 (1-2文で)  \n`config.revision` に関するコメント文を、Proc（ラムダ）による指定サポートが削除された現状に合わせて修正したドキュメント的変更のPRです。コードの挙動は変わらず、説明コメントのみが最新仕様に追従しています。"
     }
   ]
 }
