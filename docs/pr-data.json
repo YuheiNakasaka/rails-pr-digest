@@ -1,7 +1,25 @@
 {
-  "lastUpdated": "2026-01-30T00:11:47.605Z",
+  "lastUpdated": "2026-01-31T00:11:45.227Z",
   "totalCount": 50,
   "items": [
+    {
+      "number": 56692,
+      "title": "Improve diagnostics UI to make nested stack traces more discoverable {#pr-56692}",
+      "url": "https://github.com/rails/rails/pull/56692",
+      "mergedAt": "2026-01-30T00:00:00.000Z",
+      "author": "mctaylorpants",
+      "authorUrl": "https://github.com/mctaylorpants",
+      "summary": "1. 概要 (1-2文で)  \nRails のエラーページ（diagnostics ページ）で、ネストした例外のスタックトレースが「クリックで展開できること」に気づきやすくなるよう、UI に小さな矢印アイコンを追加する変更です。純粋に見た目と操作性だけの改善で、サーバサイドの挙動や API には影響しません。"
+    },
+    {
+      "number": 56696,
+      "title": "Add documentation for foreign key options to add_reference [ci skip] {#pr-56696}",
+      "url": "https://github.com/rails/rails/pull/56696",
+      "mergedAt": "2026-01-30T00:00:00.000Z",
+      "author": "wakairo",
+      "authorUrl": "https://github.com/wakairo",
+      "summary": "1. 概要 (1-2文で)  \n`add_reference` のドキュメントに、`foreign_key:` オプションとして `add_foreign_key` と同じオプションを渡せることを明示するリンクを追加した PR です。実装挙動の変更はなく、API ドキュメントだけを改善する変更です。"
+    },
     {
       "number": 56694,
       "title": "Update typemap for timezone during type_casted_binds {#pr-56694}",
@@ -433,24 +451,6 @@
       "author": "adrianna-chang-shopify",
       "authorUrl": "https://github.com/adrianna-chang-shopify",
       "summary": "1. 概要 (1-2文で)  \n`ActionController::Live` の設定処理を load hook で包むことで、「実際に `ActionController::Live` を使うまでロードしない」ように遅延ロード化した PR です。これにより、単に `ActionController` をロードしただけでは Live 機能一式が読み込まれず、不要なオートロードや依存の読み込みを避けられます。"
-    },
-    {
-      "number": 56580,
-      "title": "Make CSRF header-only protection compatible with local installs using HTTP {#pr-56580}",
-      "url": "https://github.com/rails/rails/pull/56580",
-      "mergedAt": "2026-01-12T00:00:00.000Z",
-      "author": "rosa",
-      "authorUrl": "https://github.com/rosa",
-      "summary": "1. 概要 (1-2文で)  \nCSRF の「ヘッダーのみ保護（header‑only protection）」を使っている Rails アプリでも、HTTPS を使っていないローカル環境（LAN 内アクセスなど）で非 GET リクエストが正しく通るようにする変更です。ブラウザが `Sec-Fetch-Site` ヘッダーを送れない「非 Secure Context」環境向けの互換性改善で、`Origin` チェックは引き続き行われます。"
-    },
-    {
-      "number": 56554,
-      "title": "Fix `invalid option: --trace` error when running railties tests {#pr-56554}",
-      "url": "https://github.com/rails/rails/pull/56554",
-      "mergedAt": "2026-01-12T00:00:00.000Z",
-      "author": "yujiteshima",
-      "authorUrl": "https://github.com/yujiteshima",
-      "summary": "1. 概要 (1-2文で)  \n`railties` ディレクトリで `bundle exec rake test --trace` を実行した際、テスト完了後の終了時に `invalid option: --trace` が発生していた問題を修正するPRです。`test:isolated` 実行後に `ARGV` をクリアすることで、Minitest の `at_exit` フックが Rake 用のオプション `--trace` を誤って解釈しないようにしています。"
     }
   ]
 }
