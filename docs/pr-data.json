@@ -1,7 +1,16 @@
 {
-  "lastUpdated": "2026-01-31T00:11:45.227Z",
+  "lastUpdated": "2026-02-01T00:12:37.828Z",
   "totalCount": 50,
   "items": [
+    {
+      "number": 56711,
+      "title": "Fix code block for product show view the correct change in guide {#pr-56711}",
+      "url": "https://github.com/rails/rails/pull/56711",
+      "mergedAt": "2026-01-31T00:00:00.000Z",
+      "author": "arceus3115",
+      "authorUrl": "https://github.com/arceus3115",
+      "summary": "1. 概要 (1-2文で)  \nこのPRは、Railsガイド「Getting Started」の `getting_started.md` 内にある *product の show ビュー* のコード例を、実際の推奨実装と一致するように1行だけ修正したドキュメント変更です。アプリケーションコード自体には一切手を入れておらず、ガイドのコードブロックの齟齬を解消するためのものです。"
+    },
     {
       "number": 56692,
       "title": "Improve diagnostics UI to make nested stack traces more discoverable {#pr-56692}",
@@ -442,15 +451,6 @@
       "author": "Saidbek",
       "authorUrl": "https://github.com/Saidbek",
       "summary": "1. 概要 (1-2文で)  \nActive Record の finder メソッドのドキュメント内で使われていた、SQLのプレースホルダ構文が誤っていたコード例を修正したPRです。実装コード自体には手を入れておらず、ドキュメント用のサンプルコードのみが修正されています。"
-    },
-    {
-      "number": 56558,
-      "title": "Wrap setting `ActionController::Live` config in load hook {#pr-56558}",
-      "url": "https://github.com/rails/rails/pull/56558",
-      "mergedAt": "2026-01-12T00:00:00.000Z",
-      "author": "adrianna-chang-shopify",
-      "authorUrl": "https://github.com/adrianna-chang-shopify",
-      "summary": "1. 概要 (1-2文で)  \n`ActionController::Live` の設定処理を load hook で包むことで、「実際に `ActionController::Live` を使うまでロードしない」ように遅延ロード化した PR です。これにより、単に `ActionController` をロードしただけでは Live 機能一式が読み込まれず、不要なオートロードや依存の読み込みを避けられます。"
     }
   ]
 }
