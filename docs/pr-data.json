@@ -1,7 +1,43 @@
 {
-  "lastUpdated": "2026-02-01T00:12:37.828Z",
+  "lastUpdated": "2026-02-02T00:12:32.612Z",
   "totalCount": 50,
   "items": [
+    {
+      "number": 56712,
+      "title": "[ci skip] Fix typo in test/guide stategy -> strategy {#pr-56712}",
+      "url": "https://github.com/rails/rails/pull/56712",
+      "mergedAt": "2026-02-01T00:00:00.000Z",
+      "author": "coderhs",
+      "authorUrl": "https://github.com/coderhs",
+      "summary": "1. 概要 (1-2文で)  \nRailsのテストコードとガイド文書内にあった「stategy / statetgy」というタイポが、正しい「strategy」に修正されたPRです。機能追加や挙動変更は一切なく、ドキュメントおよびテストの表記を整えるメンテナンス目的の変更です。"
+    },
+    {
+      "number": 56426,
+      "title": "Make `rescue_from_handled.action_controller` store the full backtrace {#pr-56426}",
+      "url": "https://github.com/rails/rails/pull/56426",
+      "mergedAt": "2026-02-01T00:00:00.000Z",
+      "author": "zzak",
+      "authorUrl": "https://github.com/zzak",
+      "summary": "1. 概要 (1-2文で)  \n`config.action_controller.rescue_from_event_backtrace` を `:array` に設定した場合、`rescue_from_handled.action_controller` 通知ペイロードにも「フルバックトレース（配列）」が載るようにした変更です。併せて、バックトレースから `Rails.root` を削った形で保持する処理や、関連設定・ガイド・テストの整備が行われています。"
+    },
+    {
+      "number": 56454,
+      "title": "Add `unique_by` option to `insert_all!` {#pr-56454}",
+      "url": "https://github.com/rails/rails/pull/56454",
+      "mergedAt": "2026-02-01T00:00:00.000Z",
+      "author": "chaadow",
+      "authorUrl": "https://github.com/chaadow",
+      "summary": "1. 概要 (1-2文で)  \n`ActiveRecord::Relation#insert_all!` に `unique_by:` オプションが追加され、既に対応済みだった `insert_all` と同等のインターフェイスになりました。これにより、一括INSERT時に使用するユニークインデックスを `insert_all!` 側でも明示的に指定できるようになります。"
+    },
+    {
+      "number": 56681,
+      "title": "Make `ActionText::Attachable#read_attribute_for_serialization` public {#pr-56681}",
+      "url": "https://github.com/rails/rails/pull/56681",
+      "mergedAt": "2026-02-01T00:00:00.000Z",
+      "author": "sallyhall",
+      "authorUrl": "https://github.com/sallyhall",
+      "summary": "1. 概要 (1-2文で)  \n`ActionText::Attachable` がオーバーライドしている `read_attribute_for_serialization` メソッドを `public` に変更し、元の `ActiveModel::Serialization` 側の可視性と揃えた PR です。これにより、`active_model_serializers` で `ActionText::Attachable` を含むモデルをシリアライズした際に発生していたエラーが解消されます。"
+    },
     {
       "number": 56711,
       "title": "Fix code block for product show view the correct change in guide {#pr-56711}",
@@ -415,42 +451,6 @@
       "author": "Saidbek",
       "authorUrl": "https://github.com/Saidbek",
       "summary": "1. 概要 (1-2文で)  \nAction Cable の `ClientTest` 実行時に、Puma が設定した `RACK_ENV` 環境変数がテスト後も残り続けてしまう問題を修正した PRです。これにより、`LeakChecker` による「Environment leak detected: Added variables: RACK_ENV」というエラーが発生しなくなります。"
-    },
-    {
-      "number": 56585,
-      "title": "Improve the ScreenshotHelper docs {#pr-56585}",
-      "url": "https://github.com/rails/rails/pull/56585",
-      "mergedAt": "2026-01-13T00:00:00.000Z",
-      "author": "codergeek121",
-      "authorUrl": "https://github.com/codergeek121",
-      "summary": "1. 概要 (1-2文で)  \n`ActionDispatch::SystemTesting::TestHelpers::ScreenshotHelper` のドキュメントが改善され、HTML スクリーンショットを有効化するための環境変数 `RAILS_SYSTEM_TESTING_SCREENSHOT_HTML` の具体的な設定値（`1`）が明示されました。実装自体の挙動変更はなく、ドキュメントの明確化のみです。"
-    },
-    {
-      "number": 56590,
-      "title": "[8-0-stable] Add missing `with_info_handler` removed in ec62932ee7 {#pr-56590}",
-      "url": "https://github.com/rails/rails/pull/56590",
-      "mergedAt": "2026-01-13T00:00:00.000Z",
-      "author": "zzak",
-      "authorUrl": "https://github.com/zzak",
-      "summary": "1. 概要 (1-2文で)  \nRails 8.0-stable ブランチで、`ActiveSupport::Testing::Parallelization::Worker` から誤って削除されていた `with_info_handler` メソッドが復活・再定義されました。並列テスト実行時の情報ハンドラ設定まわりの挙動を、以前の想定どおりに戻す修正です。"
-    },
-    {
-      "number": 56591,
-      "title": "[8-1-stable] Add missing `with_info_handler` removed in 0f8014a0ff {#pr-56591}",
-      "url": "https://github.com/rails/rails/pull/56591",
-      "mergedAt": "2026-01-13T00:00:00.000Z",
-      "author": "zzak",
-      "authorUrl": "https://github.com/zzak",
-      "summary": "1. 概要 (1-2文で)  \nRails 8.1-stable ブランチの ActiveSupport テスト並列実行用ワーカーにおいて、以前のコミットで誤って削除されていた `with_info_handler` 呼び出しが復元されました。これにより、並列テスト実行時の情報ハンドラ（ログや進捗など）の扱いが再び正しく行われるようになります。"
-    },
-    {
-      "number": 56568,
-      "title": "[ci-skip] Fix broken code examples in AR finder methods doc {#pr-56568}",
-      "url": "https://github.com/rails/rails/pull/56568",
-      "mergedAt": "2026-01-13T00:00:00.000Z",
-      "author": "Saidbek",
-      "authorUrl": "https://github.com/Saidbek",
-      "summary": "1. 概要 (1-2文で)  \nActive Record の finder メソッドのドキュメント内で使われていた、SQLのプレースホルダ構文が誤っていたコード例を修正したPRです。実装コード自体には手を入れておらず、ドキュメント用のサンプルコードのみが修正されています。"
     }
   ]
 }
