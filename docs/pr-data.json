@@ -1,7 +1,34 @@
 {
-  "lastUpdated": "2026-02-02T00:12:32.612Z",
+  "lastUpdated": "2026-02-03T00:13:45.749Z",
   "totalCount": 50,
   "items": [
+    {
+      "number": 56683,
+      "title": "Pass sql query to query log tags {#pr-56683}",
+      "url": "https://github.com/rails/rails/pull/56683",
+      "mergedAt": "2026-02-02T00:00:00.000Z",
+      "author": "fatkodima",
+      "authorUrl": "https://github.com/fatkodima",
+      "summary": "1. 概要 (1–2文で)  \nActive Record の「クエリログタグ (query_log_tags)」に、実行される SQL 文字列がコンテキストとして渡されるようになりました。これにより、SQL 内容に応じた柔軟なタグ付けやデバッグ情報の付与が簡単に行えます。"
+    },
+    {
+      "number": 56695,
+      "title": "Use a single temporary connection pool when checking test schema {#pr-56695}",
+      "url": "https://github.com/rails/rails/pull/56695",
+      "mergedAt": "2026-02-02T00:00:00.000Z",
+      "author": "ilianah",
+      "authorUrl": "https://github.com/ilianah",
+      "summary": "1. 概要 (1-2文で)  \nテスト用スキーマのチェック時に、1つの DB 設定につき「2つ」作られていた一時的なコネクションプールを「1つ」に統合し、同じプールを使い回すようにした PR です。これにより、テスト時のスキーマ・マイグレーション確認処理のオーバーヘッドが削減されます。"
+    },
+    {
+      "number": 56715,
+      "title": "[ci skip] Fix formatting of backtrace description in configuring.md {#pr-56715}",
+      "url": "https://github.com/rails/rails/pull/56715",
+      "mergedAt": "2026-02-02T00:00:00.000Z",
+      "author": "coderhs",
+      "authorUrl": "https://github.com/coderhs",
+      "summary": "1. 概要 (1-2文で)  \nconfiguring.md ガイド内の backtrace 説明文に含まれていた不要な英単語 \"the\" を削除し、文章のフォーマット／文法を整えたドキュメント修正です。コードや挙動には一切影響せず、ドキュメントのみの微修正です。\n\n2. 変更内容の詳細(あればサンプルコードも含めて)  \n- 対象ファイル: `guides/source/configuring.md`  \n- 変更点は1行のみで、backtrace に関する説明文中の「extra `the`」(余分な \"the\") を削除しています。  \n- 例 (イメージ):  \n  ```diff\n- This option controls the the format of the backtrace output...\n+ This option controls the format of the backtrace output...\n  ```\n  のように、英語として不自然な重複を取り除き、読みやすい表現に修正しています。  \n- PR タイトルに `[ci skip]` が付いていることからも分かる通り、テストやビルドは不要な単純なドキュメント修正として扱われています。\n\n3. 影響範囲・注意点  \n- Rails 本体のコード、設定オプション、API 仕様などには一切変更はありません。  \n- 既存アプリケーション、設定ファイル (`config/environments/*.rb` など)、実行時の backtrace 表示やログ出力の挙動にも影響はありません。  \n- 影響は Rails ガイドの読み手 (特に backtrace / エラー出力の設定方法を確認する開発者) に限定され、文章がわずかに読みやすくなっただけです。\n\n4. 参考情報 (あれば)  \n- PR: https://github.com/rails/rails/pull/56715  \n- 対象ガイド: Rails Guides「Configuring Rails Applications」(configuring.md)  \n  - backtrace の設定方法や関連オプションを確認する際に参照するドキュメントの一部の文言修正です。"
+    },
     {
       "number": 56712,
       "title": "[ci skip] Fix typo in test/guide stategy -> strategy {#pr-56712}",
@@ -424,33 +451,6 @@
       "author": "Saidbek",
       "authorUrl": "https://github.com/Saidbek",
       "summary": "1. 概要 (1–2文で)  \n`Array#in_groups` に、`Array#in_groups_of` と同等の入力バリデーションが追加され、無効な引数を渡した際に、これまでの「よく分からないエラー」ではなく明確な例外が発生するようになりました。これにより、誤った引数指定時のデバッグが容易になります。"
-    },
-    {
-      "number": 56601,
-      "title": "Allow retry_on wait procs to accept error as a second argument {#pr-56601}",
-      "url": "https://github.com/rails/rails/pull/56601",
-      "mergedAt": "2026-01-14T00:00:00.000Z",
-      "author": "jpcamara",
-      "authorUrl": "https://github.com/jpcamara",
-      "summary": "1. 概要 (1-2文で)  \nActive Job の `retry_on` オプションに渡す `wait` Proc が、これまでの「実行回数」だけでなく「発生したエラーオブジェクト」も受け取れるようになりました。これにより、エラー内容に応じた柔軟なリトライ待ち時間の制御が可能になります（既存コードとの互換性は維持）。"
-    },
-    {
-      "number": 56587,
-      "title": "Deprecate Resque Active Job adapter {#pr-56587}",
-      "url": "https://github.com/rails/rails/pull/56587",
-      "mergedAt": "2026-01-14T00:00:00.000Z",
-      "author": "morgoth",
-      "authorUrl": "https://github.com/morgoth",
-      "summary": "1. 概要 (1-2文で)  \nRails に同梱されていた Active Job の Resque アダプタが「deprecated（非推奨）」になり、今後は resque gem 側に含まれるアダプタを使うよう誘導する変更です。機能自体はすぐになくなるわけではありませんが、将来的な削除に向けた移行案内の位置づけです。"
-    },
-    {
-      "number": 56607,
-      "title": "Fix RACK_ENV environment leak in ActionCable ClientTest {#pr-56607}",
-      "url": "https://github.com/rails/rails/pull/56607",
-      "mergedAt": "2026-01-14T00:00:00.000Z",
-      "author": "Saidbek",
-      "authorUrl": "https://github.com/Saidbek",
-      "summary": "1. 概要 (1-2文で)  \nAction Cable の `ClientTest` 実行時に、Puma が設定した `RACK_ENV` 環境変数がテスト後も残り続けてしまう問題を修正した PRです。これにより、`LeakChecker` による「Environment leak detected: Added variables: RACK_ENV」というエラーが発生しなくなります。"
     }
   ]
 }
