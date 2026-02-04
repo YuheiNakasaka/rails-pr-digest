@@ -1,7 +1,43 @@
 {
-  "lastUpdated": "2026-02-03T00:13:45.749Z",
+  "lastUpdated": "2026-02-04T00:11:27.757Z",
   "totalCount": 50,
   "items": [
+    {
+      "number": 56725,
+      "title": "Fix broken links to YJIT documentation [ci skip] {#pr-56725}",
+      "url": "https://github.com/rails/rails/pull/56725",
+      "mergedAt": "2026-02-03T00:00:00.000Z",
+      "author": "ykttdn",
+      "authorUrl": "https://github.com/ykttdn",
+      "summary": "1. 概要 (1–2文で)  \nRails Guides（パフォーマンスチューニングガイド）内で、YJITドキュメントへのリンクが Ruby 本体側の変更により壊れていたため、正しい YJIT ドキュメント URL に更新した PRです。コードの挙動や機能には影響せず、ドキュメントのリンク修正のみを行っています。"
+    },
+    {
+      "number": 56705,
+      "title": "Fix AM::Serialization#read_attribute_for_serialization doc {#pr-56705}",
+      "url": "https://github.com/rails/rails/pull/56705",
+      "mergedAt": "2026-02-03T00:00:00.000Z",
+      "author": "p8",
+      "authorUrl": "https://github.com/p8",
+      "summary": "1. 概要 (1-2文で)  \nActiveModel::Serialization の `read_attribute_for_serialization` を、`alias` ベースの定義から通常メソッドとして定義し直すことで、公式ドキュメントに正しく掲載されるようにするとともに、引数を「キー1つ」に限定する PR です。挙動は従来と変えず、インターフェイスの明示化とドキュメント改善を目的としています。"
+    },
+    {
+      "number": 56724,
+      "title": "Remove useless connection verification when pinning connection {#pr-56724}",
+      "url": "https://github.com/rails/rails/pull/56724",
+      "mergedAt": "2026-02-03T00:00:00.000Z",
+      "author": "byroot",
+      "authorUrl": "https://github.com/byroot",
+      "summary": "1. 概要 (1-2文で)  \nこのPRでは、コネクションを「ピン留め」するときに毎回行っていた `verify!` 呼び出しを削除し、既に実装されている「最近使われたコネクションは再検証しない」ロジックに一元化することで、無駄なコネクション検証をなくしています。結果として、不要なクエリ（例: `SELECT 1`）の発行が減り、Active Record のコネクション管理がわずかに効率化されます。"
+    },
+    {
+      "number": 56716,
+      "title": "[ci skip] Correct typo in ActiveRecord changelog {#pr-56716}",
+      "url": "https://github.com/rails/rails/pull/56716",
+      "mergedAt": "2026-02-03T00:00:00.000Z",
+      "author": "coderhs",
+      "authorUrl": "https://github.com/coderhs",
+      "summary": "1. 概要 (1-2文で)  \nこのPRは、Active Record の CHANGELOG に記載されていたデータベース接続に関する文言のタイポ（誤記）を修正するものです。コードや挙動の変更は一切なく、ドキュメントのみの修正です。\n\n2. 変更内容の詳細  \n- 対象ファイル: `activerecord/CHANGELOG.md`  \n- 変更内容は 1 行のテキスト修正のみで、データベース接続（connections）に関する説明文中のスペルミスや用語の誤りを正しい表記に直しています。  \n- [ci skip] がタイトルに含まれている通り、ドキュメント変更のみのため CI を走らせない PR です。  \n\n実際のコードや API のシグネチャ、設定オプションなどは一切変更されていません。  \nCHANGELOG 上の例示コードや、接続管理に関する説明の「単語」レベルの修正に留まると考えてよいです。\n\n3. 影響範囲・注意点  \n- ランタイム挙動: 影響なし  \n  - Active Record の接続管理やクエリ実行、トランザクション動作などには一切変更がありません。  \n- マイグレーション・設定: 変更不要  \n  - `database.yml` などの設定ファイルの見直しや、アプリケーション側のコード修正も不要です。  \n- CHANGELOG の読み取り:  \n  - 今後、該当バージョンの変更点を確認する際に、より正確な記述に基づいて挙動を理解できるようになります。  \n  - 既に CHANGELOG を参照していた場合は、「あれ？文脈的におかしいな」と感じていた箇所が自然な表現に直っている程度の差分です。\n\n4. 参考情報 (あれば)  \n- このPRはドキュメント修正専用のため、Rails をバージョンアップしても今回の変更が原因で不具合が出ることはありません。  \n- 実際の接続管理ロジックや API の仕様を確認したい場合は、CHANGELOG よりも以下を優先するとよいです:  \n  - `activerecord` の公式ガイド: 「Active Record Basics」「Active Record Connection Handling」関連セクション  \n  - 対象バージョンの API ドキュメント (`ActiveRecord::Base.connection`, `ActiveRecord::ConnectionAdapters` など)"
+    },
     {
       "number": 56683,
       "title": "Pass sql query to query log tags {#pr-56683}",
@@ -415,42 +451,6 @@
       "author": "byroot",
       "authorUrl": "https://github.com/byroot",
       "summary": "1. 概要 (1-2文で)  \nActionView::TestCase で `setup` 内などで代入したインスタンス変数が、ビューで参照できなくなっていた不具合を修正する PR です。テストケース内でのインスタンス変数の扱いを元の（期待される）挙動に戻し、ビューに正しく「露出」されるようにしています。"
-    },
-    {
-      "number": 56620,
-      "title": "Pin connection_pool to version 2 on 7-2-stable {#pr-56620}",
-      "url": "https://github.com/rails/rails/pull/56620",
-      "mergedAt": "2026-01-16T00:00:00.000Z",
-      "author": "yahonda",
-      "authorUrl": "https://github.com/yahonda",
-      "summary": "1. 概要 (1-2文で)  \nRails 7.2 の安定ブランチ（7-2-stable）で CI が落ちないようにするため、`connection_pool` のバージョンを 2 系に固定（pin）した PR です。Rails 7.2 は Ruby 3.1 をサポートしている一方で、`connection_pool` 3 系が Ruby 3.2 以上必須になったことへの対応です。"
-    },
-    {
-      "number": 56351,
-      "title": "[Docs] Document swappable migration backend behaviour {#pr-56351}",
-      "url": "https://github.com/rails/rails/pull/56351",
-      "mergedAt": "2026-01-14T00:00:00.000Z",
-      "author": "adrianna-chang-shopify",
-      "authorUrl": "https://github.com/adrianna-chang-shopify",
-      "summary": "1. 概要 (1-2文で)  \nRailsの「Swappable Migration Strategies（差し替え可能なマイグレーション実行バックエンド）」機能について、ガイドとAPIドキュメントを充実させたPRです。実装自体の挙動変更はほぼなく、`ExecutionStrategy`／`DefaultStrategy`クラスの正式な説明と、使い方・カスタマイズ方法が明文化されています。"
-    },
-    {
-      "number": 56613,
-      "title": "Remove unused connection arg {#pr-56613}",
-      "url": "https://github.com/rails/rails/pull/56613",
-      "mergedAt": "2026-01-14T00:00:00.000Z",
-      "author": "skipkayhil",
-      "authorUrl": "https://github.com/skipkayhil",
-      "summary": "1. 概要 (1-2文で)  \nこのPRは、Active Record の属性タイプ関連コードから「使われていない `connection` 引数」を削除し、メソッドシグネチャを整理したものです。挙動自体は変えずに、以前の変更 (#56484) の取りこぼしをクリーンアップしています。"
-    },
-    {
-      "number": 56609,
-      "title": "Add input validation to Array#in_groups {#pr-56609}",
-      "url": "https://github.com/rails/rails/pull/56609",
-      "mergedAt": "2026-01-14T00:00:00.000Z",
-      "author": "Saidbek",
-      "authorUrl": "https://github.com/Saidbek",
-      "summary": "1. 概要 (1–2文で)  \n`Array#in_groups` に、`Array#in_groups_of` と同等の入力バリデーションが追加され、無効な引数を渡した際に、これまでの「よく分からないエラー」ではなく明確な例外が発生するようになりました。これにより、誤った引数指定時のデバッグが容易になります。"
     }
   ]
 }
