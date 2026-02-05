@@ -1,7 +1,34 @@
 {
-  "lastUpdated": "2026-02-04T00:11:27.757Z",
+  "lastUpdated": "2026-02-05T00:13:30.966Z",
   "totalCount": 50,
   "items": [
+    {
+      "number": 56734,
+      "title": "Make AM::AttributeSet::YAMLEncoder a Module {#pr-56734}",
+      "url": "https://github.com/rails/rails/pull/56734",
+      "mergedAt": "2026-02-04T00:00:00.000Z",
+      "author": "hmcguire-shopify",
+      "authorUrl": "https://github.com/hmcguire-shopify",
+      "summary": "1. 概要 (1-2文で)  \nActiveModel の `AttributeSet::YAMLEncoder` をクラスからモジュールに変更し、Active Record モデルごとに生成されていたエンコーダ用オブジェクトを不要にしてメモリ使用とスキーマリロード時の扱いを簡素化した変更です。`default_types` のキャッシュは既にモデルクラス側に持っているため、専用クラスをインスタンス化する必要がなくなったことをコード構造に反映しています。"
+    },
+    {
+      "number": 56733,
+      "title": "Docs: Update pgAdmin name; fix foreign key wording {#pr-56733}",
+      "url": "https://github.com/rails/rails/pull/56733",
+      "mergedAt": "2026-02-04T00:00:00.000Z",
+      "author": "eglitobias",
+      "authorUrl": "https://github.com/eglitobias",
+      "summary": "1. 概要 (1-2文で)  \nActive Record Migrationsガイドの文言を、現状に即した・より正確なものにするためのドキュメント修正です。  \n具体的には、「PgAdmin III」という古い名称を「pgAdmin」に更新し、外部キーの例で誤解を招く「reviewers」を「authors」に修正しています。"
+    },
+    {
+      "number": 56727,
+      "title": "Use schema cache for primary key lookup during insert {#pr-56727}",
+      "url": "https://github.com/rails/rails/pull/56727",
+      "mergedAt": "2026-02-04T00:00:00.000Z",
+      "author": "matthewd",
+      "authorUrl": "https://github.com/matthewd",
+      "summary": "1. 概要 (1-2文で)  \nActive Record が INSERT 時にプライマリキー名を特定する処理で、スキーマキャッシュ（`schema_cache`）を利用するようにした変更です。これにより、モデル側から PK 名が渡されないケースでも、都度 DB に問い合わせずキャッシュ済みのスキーマ情報から PK を引けるようになります。"
+    },
     {
       "number": 56725,
       "title": "Fix broken links to YJIT documentation [ci skip] {#pr-56725}",
@@ -424,33 +451,6 @@
       "author": "morgoth",
       "authorUrl": "https://github.com/morgoth",
       "summary": "1. 概要 (1-2文で)  \nRails の Active Job が提供していた `queue_classic` アダプタが「非推奨（deprecated）」としてマークされました。`queue_classic` は事実上メンテナンスが止まっており、今後 Rails 本体から取り除かれる方向であることが明示されています。"
-    },
-    {
-      "number": 56625,
-      "title": "Report `render stream` errors to `Rails.error` {#pr-56625}",
-      "url": "https://github.com/rails/rails/pull/56625",
-      "mergedAt": "2026-01-16T00:00:00.000Z",
-      "author": "byroot",
-      "authorUrl": "https://github.com/byroot",
-      "summary": "1. 概要 (1-2文で)  \nRailsの「ストリーミングレンダリング (`render stream`) 中に発生した例外」を、単なるログ出力だけでなく `Rails.error` に報告するようにしたPRです。これにより、Sentry等のエラー監視ツールがストリーミング中のエラーも拾いやすくなります。"
-    },
-    {
-      "number": 56626,
-      "title": "Optimize String#squish {#pr-56626}",
-      "url": "https://github.com/rails/rails/pull/56626",
-      "mergedAt": "2026-01-16T00:00:00.000Z",
-      "author": "byroot",
-      "authorUrl": "https://github.com/byroot",
-      "summary": "1. 概要 (1-2文で)  \n`String#squish` の内部実装で使っている正規表現を変更し、単一の半角スペース `\" \"` にはマッチしないようにすることで、実行頻度の高いケースでのパフォーマンスを大幅に改善した PR です。計測例では約 2 倍高速になっています。"
-    },
-    {
-      "number": 56622,
-      "title": "Fix ActionView::TestCase expose variables assigned in setup {#pr-56622}",
-      "url": "https://github.com/rails/rails/pull/56622",
-      "mergedAt": "2026-01-16T00:00:00.000Z",
-      "author": "byroot",
-      "authorUrl": "https://github.com/byroot",
-      "summary": "1. 概要 (1-2文で)  \nActionView::TestCase で `setup` 内などで代入したインスタンス変数が、ビューで参照できなくなっていた不具合を修正する PR です。テストケース内でのインスタンス変数の扱いを元の（期待される）挙動に戻し、ビューに正しく「露出」されるようにしています。"
     }
   ]
 }
