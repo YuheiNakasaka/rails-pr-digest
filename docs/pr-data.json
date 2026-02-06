@@ -1,7 +1,34 @@
 {
-  "lastUpdated": "2026-02-05T00:13:30.966Z",
+  "lastUpdated": "2026-02-06T00:11:29.481Z",
   "totalCount": 50,
   "items": [
+    {
+      "number": 56741,
+      "title": "Update Bundler to 4.0.6 {#pr-56741}",
+      "url": "https://github.com/rails/rails/pull/56741",
+      "mergedAt": "2026-02-05T00:00:00.000Z",
+      "author": "yahonda",
+      "authorUrl": "https://github.com/yahonda",
+      "summary": "1. 概要 (1-2文で)  \nBundler のバージョンを 4.0.4 から 4.0.6 に更新し、`bundle update <gem>` が正常に動作せず「Could not find compatible versions」で失敗していた問題を解消する PR です。Rails 本体のコードではなく、Gemfile.lock の Bundler バージョン指定のみを更新しています。"
+    },
+    {
+      "number": 56729,
+      "title": "Better handle cache deserialization errors {#pr-56729}",
+      "url": "https://github.com/rails/rails/pull/56729",
+      "mergedAt": "2026-02-05T00:00:00.000Z",
+      "author": "byroot",
+      "authorUrl": "https://github.com/byroot",
+      "summary": "1. 概要 (1-2文で)  \nRails のキャッシュ復元（デシリアライズ）時に例外が発生した場合、それを「キャッシュミス」として扱うように振る舞いを明確化・強化した PR です。memcached などが切り詰められた（truncated）レスポンスを返すような稀なケースでも、アプリ本体が例外で落ちにくくなるようにしています。"
+    },
+    {
+      "number": 54982,
+      "title": "Update Propshaft setup instructions in The Asset Pipeline guide [ci skip] {#pr-54982}",
+      "url": "https://github.com/rails/rails/pull/54982",
+      "mergedAt": "2026-02-05T00:00:00.000Z",
+      "author": "letsEstel",
+      "authorUrl": "https://github.com/letsEstel",
+      "summary": "1. 概要 (1-2文で)  \nRailsガイド「The Asset Pipeline」の Propshaft セットアップ手順が、実行しても画面上の変化が分かりにくかった問題を解消するために改善されました。具体的には、チュートリアルの中でホームページとルート定義を追加し、Propshaft を使ったアセット読み込みが実際に確認できるようにしています。"
+    },
     {
       "number": 56734,
       "title": "Make AM::AttributeSet::YAMLEncoder a Module {#pr-56734}",
@@ -424,33 +451,6 @@
       "author": "Earlopain",
       "authorUrl": "https://github.com/Earlopain",
       "summary": "1. 概要 (1-2文で)  \nRails の Ruby 要求バージョンが 3.3 になり、標準で Prism が入る前提になったため、`ripper` ベースの互換コードを削除し、ソース解析・テンプレート依存関係解析などを Prism 前提の実装に整理した PR です。  \nこれによりコード量が大きく削減され、パーサ周りの分岐・互換レイヤがシンプルになっています。"
-    },
-    {
-      "number": 56628,
-      "title": "Fix outdated ActiveRecord finder docs. [ci skip] {#pr-56628}",
-      "url": "https://github.com/rails/rails/pull/56628",
-      "mergedAt": "2026-01-18T00:00:00.000Z",
-      "author": "mdh",
-      "authorUrl": "https://github.com/mdh",
-      "summary": "1. 概要 (1-2文で)  \nActiveRecord::FinderMethods のドキュメントに残っていた古い `where` の配列形式の記法を、現在推奨されるハッシュ記法に統一した PR です。コードの挙動変更はなく、ドキュメントのみの更新です。"
-    },
-    {
-      "number": 56639,
-      "title": "Console `reload!` will reset the console's executor, when present {#pr-56639}",
-      "url": "https://github.com/rails/rails/pull/56639",
-      "mergedAt": "2026-01-18T00:00:00.000Z",
-      "author": "bensheldon",
-      "authorUrl": "https://github.com/bensheldon",
-      "summary": "1. 概要 (1-2文で)  \nRails コンソールで `reload!` を実行したときに、コンソール用にラップされている Executor（スレッドローカルなどの実行コンテキストを管理する仕組み）もリセットされるようになりました。これにより、長時間同じコンソールセッションを使い続けた際の Executor 周りの状態を簡単にリフレッシュできるようになります。"
-    },
-    {
-      "number": 56629,
-      "title": "Deprecate queue_classic Active Job adapter {#pr-56629}",
-      "url": "https://github.com/rails/rails/pull/56629",
-      "mergedAt": "2026-01-16T00:00:00.000Z",
-      "author": "morgoth",
-      "authorUrl": "https://github.com/morgoth",
-      "summary": "1. 概要 (1-2文で)  \nRails の Active Job が提供していた `queue_classic` アダプタが「非推奨（deprecated）」としてマークされました。`queue_classic` は事実上メンテナンスが止まっており、今後 Rails 本体から取り除かれる方向であることが明示されています。"
     }
   ]
 }
