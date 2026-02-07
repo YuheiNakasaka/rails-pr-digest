@@ -1,7 +1,43 @@
 {
-  "lastUpdated": "2026-02-06T00:11:29.481Z",
+  "lastUpdated": "2026-02-07T00:13:31.259Z",
   "totalCount": 50,
   "items": [
+    {
+      "number": 56730,
+      "title": "Mark `ActiveRecord::Relation#values` as nodoc {#pr-56730}",
+      "url": "https://github.com/rails/rails/pull/56730",
+      "mergedAt": "2026-02-06T00:00:00.000Z",
+      "author": "p8",
+      "authorUrl": "https://github.com/p8",
+      "summary": "1. 概要 (1-2文で)  \n`ActiveRecord::Relation#values` メソッドを Rails の公式ドキュメントから非公開（nodoc）扱いとする変更です。これにより、このメソッドは内部実装用として位置づけられ、アプリケーションコードからの利用は推奨されないことが明確になりました。"
+    },
+    {
+      "number": 56703,
+      "title": "Fix ThroughReflection#association_primary_key with composite keys {#pr-56703}",
+      "url": "https://github.com/rails/rails/pull/56703",
+      "mergedAt": "2026-02-06T00:00:00.000Z",
+      "author": "felix-d",
+      "authorUrl": "https://github.com/felix-d",
+      "summary": "1. 概要 (1-2文で)  \n`has_many :through` などで参照される `ThroughReflection#association_primary_key` が複合主キーを正しく扱えていなかった問題を修正するPRです。`primary_key: [:col1, :col2]` のような定義でも `_ids` リーダーメソッドが正しく動作するようになります。"
+    },
+    {
+      "number": 56742,
+      "title": "Read from `ENV['REVISION']` if present {#pr-56742}",
+      "url": "https://github.com/rails/rails/pull/56742",
+      "mergedAt": "2026-02-06T00:00:00.000Z",
+      "author": "cocoahero",
+      "authorUrl": "https://github.com/cocoahero",
+      "summary": "1. 概要 (1-2文で)  \nRails のアプリケーションリビジョン取得ロジック (`Rails.application.revision`) が拡張され、`ENV[\"REVISION\"]` が設定されていればそれを最優先で利用するようになりました。これにより、多くのデプロイプロバイダが採用している「環境変数でリビジョンを渡す」方式を Rails が素直にサポートします。"
+    },
+    {
+      "number": 56745,
+      "title": "Bump Ruby version to 4.0.1 in devcontainer {#pr-56745}",
+      "url": "https://github.com/rails/rails/pull/56745",
+      "mergedAt": "2026-02-06T00:00:00.000Z",
+      "author": "yahonda",
+      "authorUrl": "https://github.com/yahonda",
+      "summary": "1. 概要 (1–2文で)  \nRails の開発用コンテナ(devcontainer)で使用する Ruby のバージョンが 4.0.0 などの旧バージョンから 4.0.1 に更新されました。ローカルで devcontainer を使って Rails を開発する際の実行環境が、公式 devcontainer リポジトリに追加された Ruby 4.0.1 に追従する形で整備された変更です。"
+    },
     {
       "number": 56741,
       "title": "Update Bundler to 4.0.6 {#pr-56741}",
@@ -415,42 +451,6 @@
       "author": "yahonda",
       "authorUrl": "https://github.com/yahonda",
       "summary": "1. 概要 (1-2文で)  \nRails のテストランナーが、Minitest 6 の `--bisect` オプションを正しく使えるように、Minitest の server プラグインを明示的にロードする変更です。これにより、`minitest_bisect` 使用時に発生していた `invalid option: --server` エラーが解消されます。"
-    },
-    {
-      "number": 56645,
-      "title": "[8-1-stable] Handle Ruby 4.1 stabby lambda in Proc#source_location start_column {#pr-56645}",
-      "url": "https://github.com/rails/rails/pull/56645",
-      "mergedAt": "2026-01-19T00:00:00.000Z",
-      "author": "zzak",
-      "authorUrl": "https://github.com/zzak",
-      "summary": "1. 概要 (1-2文で)  \nRails 8.1 系のテスト用アサーションが、Ruby 4.1 における「stabby lambda（->）」の `Proc#source_location` / `start_column` の挙動に対応するためのバックポートです。`8-1-stable` ブランチに、既に main 側に入っている修正 (#56624) を取り込んでいます。"
-    },
-    {
-      "number": 56644,
-      "title": "[8-0-stable] Handle Ruby 4.1 stabby lambda in Proc#source_location start_column {#pr-56644}",
-      "url": "https://github.com/rails/rails/pull/56644",
-      "mergedAt": "2026-01-19T00:00:00.000Z",
-      "author": "zzak",
-      "authorUrl": "https://github.com/zzak",
-      "summary": "1. 概要 (1-2文で)  \nRuby 4.1 で導入される stabby lambda (`-> {}` 形式) に対して、`Proc#source_location` が返す「開始カラム(start_column)」の扱いをテスト側で正しく解釈できるようにする修正を、Rails 8.0 の安定ブランチへバックポートした PR です。ActiveSupport のテスト用アサーション(`ActiveSupport::Testing::Assertions`)に、Ruby 4.1 向けの対応が追加されています。"
-    },
-    {
-      "number": 56624,
-      "title": "Handle Ruby 4.1 stabby lambda in Proc#source_location start_column {#pr-56624}",
-      "url": "https://github.com/rails/rails/pull/56624",
-      "mergedAt": "2026-01-19T00:00:00.000Z",
-      "author": "zzak",
-      "authorUrl": "https://github.com/zzak",
-      "summary": "1. 概要 (1-2文で)  \nRuby 4.1 で `->`（stabby lambda）の `Proc#source_location` のカラム位置が変わったことで、Rails のテスト用アサーションメッセージが壊れていた問題を回避する修正です。`assert_changes` / `assert_no_changes` / `assert_difference` などで、ブロックとして渡された lambda の「本体だけ」を従来通り表示できるようにしています。"
-    },
-    {
-      "number": 56631,
-      "title": "Remove dead compatibility code with ripper {#pr-56631}",
-      "url": "https://github.com/rails/rails/pull/56631",
-      "mergedAt": "2026-01-18T00:00:00.000Z",
-      "author": "Earlopain",
-      "authorUrl": "https://github.com/Earlopain",
-      "summary": "1. 概要 (1-2文で)  \nRails の Ruby 要求バージョンが 3.3 になり、標準で Prism が入る前提になったため、`ripper` ベースの互換コードを削除し、ソース解析・テンプレート依存関係解析などを Prism 前提の実装に整理した PR です。  \nこれによりコード量が大きく削減され、パーサ周りの分岐・互換レイヤがシンプルになっています。"
     }
   ]
 }
