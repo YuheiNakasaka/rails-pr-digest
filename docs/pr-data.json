@@ -1,7 +1,25 @@
 {
-  "lastUpdated": "2026-02-08T00:16:25.004Z",
+  "lastUpdated": "2026-02-09T00:13:52.061Z",
   "totalCount": 50,
   "items": [
+    {
+      "number": 56753,
+      "title": "Upgrade to Dalli 5 {#pr-56753}",
+      "url": "https://github.com/rails/rails/pull/56753",
+      "mergedAt": "2026-02-08T00:00:00.000Z",
+      "author": "byroot",
+      "authorUrl": "https://github.com/byroot",
+      "summary": "1. 概要 (1-2文で)  \nこのPRは、Railsが使用する Memcached クライアント gem「Dalli」をバージョン5系にアップグレードし、それに伴って `MemCacheStore` 向けのテストを Dalli 5 の振る舞いに合わせて修正したものです。併せて、直前の変更(#56721)や関連Issue(#56704)で発生していた不具合を解消しています。"
+    },
+    {
+      "number": 56751,
+      "title": "Pin dalli gem to version 4.x {#pr-56751}",
+      "url": "https://github.com/rails/rails/pull/56751",
+      "mergedAt": "2026-02-08T00:00:00.000Z",
+      "author": "yahonda",
+      "authorUrl": "https://github.com/yahonda",
+      "summary": "1. 概要 (1-2文で)  \nRails の依存関係として利用している memcached クライアント gem「dalli」を、5.x 系ではなく 4.x 系に固定（pin）する PR です。dalli 5.0.0 でバイナリプロトコルが削除されたことにより Rails のテストで `Dalli::Protocol::Binary` が見つからず落ちる問題を、一時的にバージョンを固定することで回避しています。"
+    },
     {
       "number": 56730,
       "title": "Mark `ActiveRecord::Relation#values` as nodoc {#pr-56730}",
@@ -433,24 +451,6 @@
       "author": "Tretent",
       "authorUrl": "https://github.com/Tretent",
       "summary": "1. 概要 (1-2文で)  \nRailsガイド「wishlists.md」の中で、`Subscriber`モデルに対するコード変更部分にハイライト指定が漏れていた箇所を修正し、他モデルと同様に変更行が強調表示されるようにしたドキュメント専用のPRです。コードや挙動には一切影響せず、ガイドの可読性・一貫性のみを改善しています。"
-    },
-    {
-      "number": 56651,
-      "title": "Fix comment doc in ActionText::Attachable [ci skip] {#pr-56651}",
-      "url": "https://github.com/rails/rails/pull/56651",
-      "mergedAt": "2026-01-21T00:00:00.000Z",
-      "author": "OutlawAndy",
-      "authorUrl": "https://github.com/OutlawAndy",
-      "summary": "1. 概要 (1-2文で)  \nAction Text の `ActionText::Attachable` モジュール内にある `to_editor_content_attachment_partial_path` のコメントドキュメント（サンプルコード）が、実装と食い違っていたため、それを修正するドキュメント専用の PR です。コードの挙動自体は変わっておらず、コメント上の例示だけが正しい形に揃えられています。"
-    },
-    {
-      "number": 56647,
-      "title": "Load minitest server plugin to run `minitest` with `--bisect` option {#pr-56647}",
-      "url": "https://github.com/rails/rails/pull/56647",
-      "mergedAt": "2026-01-20T00:00:00.000Z",
-      "author": "yahonda",
-      "authorUrl": "https://github.com/yahonda",
-      "summary": "1. 概要 (1-2文で)  \nRails のテストランナーが、Minitest 6 の `--bisect` オプションを正しく使えるように、Minitest の server プラグインを明示的にロードする変更です。これにより、`minitest_bisect` 使用時に発生していた `invalid option: --server` エラーが解消されます。"
     }
   ]
 }
