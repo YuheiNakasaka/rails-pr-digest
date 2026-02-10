@@ -1,7 +1,25 @@
 {
-  "lastUpdated": "2026-02-09T00:13:52.061Z",
+  "lastUpdated": "2026-02-10T00:17:09.479Z",
   "totalCount": 50,
   "items": [
+    {
+      "number": 56732,
+      "title": "Add extension point to customize transaction for persistence methods {#pr-56732}",
+      "url": "https://github.com/rails/rails/pull/56732",
+      "mergedAt": "2026-02-09T00:00:00.000Z",
+      "author": "ipvalverde",
+      "authorUrl": "https://github.com/ipvalverde",
+      "summary": "1. 概要 (1–2文で)  \nRails の Active Record において、`save` / `destroy` などの永続化メソッドが内部で張る「暗黙のトランザクション」を、モデル単位でカスタマイズできる拡張ポイントが追加されました。これにより、トランザクション分離レベルやロールバック処理などを、`with_transaction_returning_status` をモンキーパッチせずに安全に制御できます。"
+    },
+    {
+      "number": 56739,
+      "title": "Fix Logger documentation link in Active Record README {#pr-56739}",
+      "url": "https://github.com/rails/rails/pull/56739",
+      "mergedAt": "2026-02-09T00:00:00.000Z",
+      "author": "toilaloc",
+      "authorUrl": "https://github.com/toilaloc",
+      "summary": "1. 概要 (1–2文で)  \nActive Record の README に記載されていた Ruby の Logger クラスへのリンクが 404 になっていたため、正しいドキュメント URL に差し替えた PR です。コード本体の挙動には一切影響せず、ドキュメントの品質向上のみを目的としています。"
+    },
     {
       "number": 56753,
       "title": "Upgrade to Dalli 5 {#pr-56753}",
@@ -433,24 +451,6 @@
       "author": "igaiga",
       "authorUrl": "https://github.com/igaiga",
       "summary": "1. 概要 (1-2文で)  \nActive Job の「Continuation」機能に関する API ドキュメントに、具体的な設定例（サンプルコード）が追加された PRです。挙動や API 仕様には変更を加えず、使い方を分かりやすくするためのドキュメント強化が目的です。"
-    },
-    {
-      "number": 56250,
-      "title": "Deduplicate logic for internal params handling in Action Controller log subscriber {#pr-56250}",
-      "url": "https://github.com/rails/rails/pull/56250",
-      "mergedAt": "2026-01-21T00:00:00.000Z",
-      "author": "lovro-bikic",
-      "authorUrl": "https://github.com/lovro-bikic",
-      "summary": "1. 概要 (1-2文で)  \nActionController のログ周りで「内部パラメータ（internal params）」を除外する処理が二重に書かれていたため、その重複を解消し、`StructuredEventSubscriber#start_processing` 側に一本化した PR です。結果として、ログ出力時のパラメータフィルタリングの責務が整理され、コードが簡潔になりました。"
-    },
-    {
-      "number": 56401,
-      "title": "[ci skip] Highlight Subscriber model changes {#pr-56401}",
-      "url": "https://github.com/rails/rails/pull/56401",
-      "mergedAt": "2026-01-21T00:00:00.000Z",
-      "author": "Tretent",
-      "authorUrl": "https://github.com/Tretent",
-      "summary": "1. 概要 (1-2文で)  \nRailsガイド「wishlists.md」の中で、`Subscriber`モデルに対するコード変更部分にハイライト指定が漏れていた箇所を修正し、他モデルと同様に変更行が強調表示されるようにしたドキュメント専用のPRです。コードや挙動には一切影響せず、ガイドの可読性・一貫性のみを改善しています。"
     }
   ]
 }
