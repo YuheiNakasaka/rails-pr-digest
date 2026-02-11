@@ -1,7 +1,34 @@
 {
-  "lastUpdated": "2026-02-10T00:17:09.479Z",
+  "lastUpdated": "2026-02-11T00:18:01.975Z",
   "totalCount": 50,
   "items": [
+    {
+      "number": 56748,
+      "title": "Consistently raise deprecation warnings in CI {#pr-56748}",
+      "url": "https://github.com/rails/rails/pull/56748",
+      "mergedAt": "2026-02-10T00:00:00.000Z",
+      "author": "skipkayhil",
+      "authorUrl": "https://github.com/skipkayhil",
+      "summary": "1. 概要 (1-2文で)  \nRails の各フレームワーク（Action Pack / Action View / Action Mailer / Active Model / Active Record）で、CI 環境における「非推奨機能(deprecation)の扱い」を、Active Support と同様に「ログではなく例外を投げてテストを落とす」挙動に統一した PR です。  \nこれにより、CI 上で非推奨機能の利用が見逃されにくくなり、非推奨化を導入した PR の時点で対応を強制しやすくなります。"
+    },
+    {
+      "number": 56762,
+      "title": "ActiveSupport::ParameterFilter: optimize redundant patterns out {#pr-56762}",
+      "url": "https://github.com/rails/rails/pull/56762",
+      "mergedAt": "2026-02-10T00:00:00.000Z",
+      "author": "byroot",
+      "authorUrl": "https://github.com/byroot",
+      "summary": "1. 概要 (1-2文で)  \nActiveSupport::ParameterFilter のプリコンパイル処理で、意味的に重複しているフィルタパターンを取り除く最適化が追加されました。これにより、特に Active Record Encryption によって大量の深いフィルタが自動登録されるケースで、パラメータフィルタリングの性能劣化を抑えられます。"
+    },
+    {
+      "number": 56759,
+      "title": "Avoid combinatory explosion of `Rails.app.config.filter_parameters` {#pr-56759}",
+      "url": "https://github.com/rails/rails/pull/56759",
+      "mergedAt": "2026-02-10T00:00:00.000Z",
+      "author": "byroot",
+      "authorUrl": "https://github.com/byroot",
+      "summary": "1. 概要 (1-2文で)  \nRails 8.1 で `Rails.application.config.filter_parameters` と Active Record の暗号化属性が組み合わさることで、フィルタ対象の属性リストが爆発的に増え、ログ・イベントのフィルタ処理が極端に遅くなる問題がありました。  \nこのPRは、その「組み合わせ爆発」が起きないように `filter_attributes` の扱いを修正し、フィルタ処理のパフォーマンスを大幅に改善します。"
+    },
     {
       "number": 56732,
       "title": "Add extension point to customize transaction for persistence methods {#pr-56732}",
@@ -424,33 +451,6 @@
       "author": "eglitobias",
       "authorUrl": "https://github.com/eglitobias",
       "summary": "1. 概要 (1-2文で)  \nこのPRは、Railsガイド(ドキュメント)内の誤字、表現ゆれ、軽微な不正確さを修正するものです。コード本体の挙動やAPI仕様には変更がなく、あくまでドキュメント品質向上のみが目的です。"
-    },
-    {
-      "number": 56655,
-      "title": "Detect bun JS package manager when using text-based lockfile {#pr-56655}",
-      "url": "https://github.com/rails/rails/pull/56655",
-      "mergedAt": "2026-01-22T00:00:00.000Z",
-      "author": "bai",
-      "authorUrl": "https://github.com/bai",
-      "summary": "1. 概要 (1-2文で)  \nRails の JavaScript パッケージマネージャ自動検出ロジックにおいて、bun のロックファイルとして旧形式の `bun.lockb` だけでなく、新しいテキスト形式の `bun.lock` も検出対象に追加した PR です。これにより、現行の bun プロジェクトでも Rails が正しく「bun を使用している」と認識できるようになります。"
-    },
-    {
-      "number": 56636,
-      "title": "Detect JS package manager from lockfiles in generators {#pr-56636}",
-      "url": "https://github.com/rails/rails/pull/56636",
-      "mergedAt": "2026-01-21T00:00:00.000Z",
-      "author": "dfl",
-      "authorUrl": "https://github.com/dfl",
-      "summary": "1. 概要 (1-2文で)\nRails のジェネレータ（ActionText, ActionCable など）が、プロジェクト内の lockfile から JavaScript のパッケージマネージャ（bun / pnpm / npm / yarn）を自動判別してコマンドを実行するようになりました。これにより「常に yarn 前提」だった動作が解消され、npm や pnpm 等を使うプロジェクトでも手作業の修正が不要になります。"
-    },
-    {
-      "number": 56552,
-      "title": "[ci skip] Add sample code on API docs about Active Job Continuation Configuration {#pr-56552}",
-      "url": "https://github.com/rails/rails/pull/56552",
-      "mergedAt": "2026-01-21T00:00:00.000Z",
-      "author": "igaiga",
-      "authorUrl": "https://github.com/igaiga",
-      "summary": "1. 概要 (1-2文で)  \nActive Job の「Continuation」機能に関する API ドキュメントに、具体的な設定例（サンプルコード）が追加された PRです。挙動や API 仕様には変更を加えず、使い方を分かりやすくするためのドキュメント強化が目的です。"
     }
   ]
 }
