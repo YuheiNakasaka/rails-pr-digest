@@ -1,7 +1,70 @@
 {
-  "lastUpdated": "2026-02-11T00:18:01.975Z",
+  "lastUpdated": "2026-02-12T00:15:36.198Z",
   "totalCount": 50,
   "items": [
+    {
+      "number": 56201,
+      "title": "Load hook guard {#pr-56201}",
+      "url": "https://github.com/rails/rails/pull/56201",
+      "mergedAt": "2026-02-11T00:00:00.000Z",
+      "author": "gmcgibbon",
+      "authorUrl": "https://github.com/gmcgibbon",
+      "summary": "1. 概要 (1–2文で)  \nRails の `ActiveSupport.on_load` フックが「アプリ初期化前」に実行されてしまう問題を検知するため、`Rails::Railtie` にロードフック用のガード機構 `guard_load_hooks` が追加されました。これにより、フレームワーク自身および Railtie/Engine を持つ gem が、フックの早期実行をログ出力や例外で検知できるようになります。"
+    },
+    {
+      "number": 56778,
+      "title": "Deprecate Mail::Address.wrap {#pr-56778}",
+      "url": "https://github.com/rails/rails/pull/56778",
+      "mergedAt": "2026-02-11T00:00:00.000Z",
+      "author": "gmcgibbon",
+      "authorUrl": "https://github.com/gmcgibbon",
+      "summary": "1. 概要 (1-2文で)  \n`Mail::Address.wrap` が Rails 8.2 で削除予定の非推奨APIとしてマークされました。Action Mailbox 側でこのメソッドを使っている箇所とテスト・CHANGELOGに、非推奨であることが明示されています。"
+    },
+    {
+      "number": 56767,
+      "title": "Don't eagerly cache JSON Encoder in ActiveRecord::Type::Json {#pr-56767}",
+      "url": "https://github.com/rails/rails/pull/56767",
+      "mergedAt": "2026-02-11T00:00:00.000Z",
+      "author": "xathien",
+      "authorUrl": "https://github.com/xathien",
+      "summary": "1. 概要 (1-2文で)  \nActiveRecord::Type::Json が JSON エンコーダを「クラス読み込み時に自前でキャッシュ」するのをやめ、ActiveSupport::JSON 側のキャッシュ済みエンコーダと `without_escaping` オプションをそのまま使うように変更した PRです。これにより、アプリ側で JSON エンコーダを後から上書き（カスタマイズ）できるようになります。"
+    },
+    {
+      "number": 56761,
+      "title": "EventReporter: filter events before building the payload {#pr-56761}",
+      "url": "https://github.com/rails/rails/pull/56761",
+      "mergedAt": "2026-02-11T00:00:00.000Z",
+      "author": "byroot",
+      "authorUrl": "https://github.com/byroot",
+      "summary": "1. 概要 (1-2文で)  \nこのPRは、`ActiveSupport::EventReporter` で「イベントペイロードのフィルタリング」を、**ペイロード構築の後ではなく前に行う**ように変更し、無駄なオブジェクト生成コストを削減するものです。これにより、AS::Notifications 由来の「フィルタによる最適化」が、実際にオーバーヘッド削減として意味を持つようになります。"
+    },
+    {
+      "number": 56769,
+      "title": "Bump Valkey Redis Image version to 9 {#pr-56769}",
+      "url": "https://github.com/rails/rails/pull/56769",
+      "mergedAt": "2026-02-11T00:00:00.000Z",
+      "author": "akhilgkrishnan",
+      "authorUrl": "https://github.com/akhilgkrishnan",
+      "summary": "1. 概要 (1-2文で)  \nValkey の Redis コンテナイメージのバージョンを、Rails リポジトリ内で使っている devcontainer と CI 設定一式で「9」系の最新版に統一して引き上げた PRです。開発用コンテナ、Rails アプリ／プラグイン ジェネレータのテンプレート、そしてそれらを検証するテストが、すべて Valkey 9 を前提に動くようになります。"
+    },
+    {
+      "number": 56768,
+      "title": "Fix Marshal deserialisation of Integer type from Rails 8.0 {#pr-56768}",
+      "url": "https://github.com/rails/rails/pull/56768",
+      "mergedAt": "2026-02-11T00:00:00.000Z",
+      "author": "RemoteCTO",
+      "authorUrl": "https://github.com/RemoteCTO",
+      "summary": "1. 概要 (1-2文で)  \nRails 8.0 で Marshal シリアライズした `ActiveModel::Type::Integer` オブジェクトを Rails 8.1 でデシリアライズすると `NoMethodError: undefined method '<=' for nil` が発生するリグレッションを修正した PRです。8.0 → 8.1 へのアップグレード時に、キャッシュ等に Marshal された型オブジェクトが残っている環境での互換性問題を解消します。"
+    },
+    {
+      "number": 56763,
+      "title": "Fix rdoc code formatting {#pr-56763}",
+      "url": "https://github.com/rails/rails/pull/56763",
+      "mergedAt": "2026-02-11T00:00:00.000Z",
+      "author": "tjschuck",
+      "authorUrl": "https://github.com/tjschuck",
+      "summary": "1. 概要 (1-2文で)  \nRails の `ActionView::Helpers::TextHelper#highlight` の RDoc コメント内のコード例について、インラインコードのマークアップ方法を `+...+` から `<tt>...</tt>` に変更し、公式ドキュメント上でコードが正しく整形・表示されるようにする修正です。機能仕様や挙動には一切変更はなく、ドキュメント表示のみを直す PR です。"
+    },
     {
       "number": 56748,
       "title": "Consistently raise deprecation warnings in CI {#pr-56748}",
@@ -388,69 +451,6 @@
       "author": "zzak",
       "authorUrl": "https://github.com/zzak",
       "summary": "1. 概要 (1–2文で)  \nRails の `ActiveSupport::Cache::MemCacheStore` が Dalli 4 系で出る「serializer 自動選択」の警告を避けるために、Rails 側で Dalli クライアントに対して明示的に `Marshal` シリアライザを指定するようにした PRです。これにより、もともとユーザーが変更できなかったシリアライザ設定を Rails がはっきり固定し、Dalli の警告を抑止します。"
-    },
-    {
-      "number": 56667,
-      "title": "Use the released version of net-smtp in bug report templates {#pr-56667}",
-      "url": "https://github.com/rails/rails/pull/56667",
-      "mergedAt": "2026-01-23T00:00:00.000Z",
-      "author": "yahonda",
-      "authorUrl": "https://github.com/yahonda",
-      "summary": "1. 概要 (1-2文で)  \nRails のバグ報告テンプレート（`action_mailbox.rb` と `action_mailer.rb`）で、`net-smtp` の扱いを「リリース済み gem を使う」形に戻した PR です。以前の変更でテンプレート側に書かれていた一部設定を打ち消し、Gemfile 側の状態と整合を取っています。"
-    },
-    {
-      "number": 56657,
-      "title": "Prefer connected? for connection validity checks {#pr-56657}",
-      "url": "https://github.com/rails/rails/pull/56657",
-      "mergedAt": "2026-01-23T00:00:00.000Z",
-      "author": "matthewd",
-      "authorUrl": "https://github.com/matthewd",
-      "summary": "1. 概要 (1-2文で)  \nActiveRecord の DB 接続の「有効性チェック」において、`active?` ではなく `connected?` を優先的に使うように変更し、「一度ダメになった接続はその後も使えない」と記録して扱うようにした PR です。これにより、「すでに壊れている」ことが判明したコネクションを再利用しない挙動がより明確になります。"
-    },
-    {
-      "number": 56663,
-      "title": "Upgrade from bundler 2.7.2 to 4.0.4 {#pr-56663}",
-      "url": "https://github.com/rails/rails/pull/56663",
-      "mergedAt": "2026-01-22T00:00:00.000Z",
-      "author": "larouxn",
-      "authorUrl": "https://github.com/larouxn",
-      "summary": "1. 概要 (1-2文で)  \nRails本体の開発環境で使用する Bundler のバージョンが 2.7.2 から 4.0.4 に更新された PR です。コード変更は `Gemfile.lock` の Bundler バージョン指定を 1 行変更したのみの、極小のメンテナンス更新です。"
-    },
-    {
-      "number": 56665,
-      "title": "Add &block params to `ActionController` methods using yield {#pr-56665}",
-      "url": "https://github.com/rails/rails/pull/56665",
-      "mergedAt": "2026-01-22T00:00:00.000Z",
-      "author": "dduugg",
-      "authorUrl": "https://github.com/dduugg",
-      "summary": "1. 概要 (1-2文で)\n- `ActionController` 内で `yield` や `block_given?` を使っているにもかかわらずメソッド引数に `&block` が明示されていなかった箇所に、すべて `&block` パラメータを追加した PR です。  \n- 実行時の挙動は一切変えず、静的解析ツール（特に Sorbet）やドキュメント生成、シグネチャの一貫性を改善するメンテナンス目的の変更です。"
-    },
-    {
-      "number": 56656,
-      "title": "Update Dockerfile.test fixture to use Ruby 3.3 {#pr-56656}",
-      "url": "https://github.com/rails/rails/pull/56656",
-      "mergedAt": "2026-01-22T00:00:00.000Z",
-      "author": "Saidbek",
-      "authorUrl": "https://github.com/Saidbek",
-      "summary": "1. 概要 (1-2文で)  \nRails のテスト用フィクスチャ `Dockerfile.test` が、使用する Ruby バージョンを 3.2.2 から 3.3.0 に更新する PR です。  \nこれは、別 PR (#56511) で Ruby 3.2 サポートが正式にドロップされ、Rails の要求する最小 Ruby バージョンが 3.3 になったことに合わせた追従変更です。"
-    },
-    {
-      "number": 56660,
-      "title": "Fix: Correct typo in routing guide [ci skip] {#pr-56660}",
-      "url": "https://github.com/rails/rails/pull/56660",
-      "mergedAt": "2026-01-22T00:00:00.000Z",
-      "author": "mutumagitonga",
-      "authorUrl": "https://github.com/mutumagitonga",
-      "summary": "1. 概要 (1-2文で)  \nRailsのルーティングガイド内に記載されていたヘルパーメソッド名のタイプミス（`new_photos_path`）を、正しい名前（`new_photo_path` など）に修正したドキュメント専用のPRです。コード本体への変更はなく、ガイドの記述だけが1行修正されています。"
-    },
-    {
-      "number": 56661,
-      "title": "Fix typos and minor errors in guides [ci skip] {#pr-56661}",
-      "url": "https://github.com/rails/rails/pull/56661",
-      "mergedAt": "2026-01-22T00:00:00.000Z",
-      "author": "eglitobias",
-      "authorUrl": "https://github.com/eglitobias",
-      "summary": "1. 概要 (1-2文で)  \nこのPRは、Railsガイド(ドキュメント)内の誤字、表現ゆれ、軽微な不正確さを修正するものです。コード本体の挙動やAPI仕様には変更がなく、あくまでドキュメント品質向上のみが目的です。"
     }
   ]
 }
