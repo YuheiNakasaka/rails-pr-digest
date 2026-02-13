@@ -1,7 +1,16 @@
 {
-  "lastUpdated": "2026-02-12T00:15:36.198Z",
+  "lastUpdated": "2026-02-13T00:14:40.321Z",
   "totalCount": 50,
   "items": [
+    {
+      "number": 56777,
+      "title": "Remove the deprecated `ActiveSupport::Multibyte::Chars` class {#pr-56777}",
+      "url": "https://github.com/rails/rails/pull/56777",
+      "mergedAt": "2026-02-12T00:00:00.000Z",
+      "author": "byroot",
+      "authorUrl": "https://github.com/byroot",
+      "summary": "1. 概要 (1-2文で)  \nこのPRでは、非推奨となっていた `ActiveSupport::Multibyte::Chars` クラスと関連コード／テストが Rails 本体から完全に削除されました。あわせて ActiveRecord のクォート処理からも `Multibyte::Chars` 依存が取り除かれ、マルチバイト文字列処理は Ruby の標準文字列機能＋既存の ActiveSupport 拡張に一本化されています。"
+    },
     {
       "number": 56201,
       "title": "Load hook guard {#pr-56201}",
@@ -442,15 +451,6 @@
       "author": "kirs",
       "authorUrl": "https://github.com/kirs",
       "summary": "1. 概要 (1-2文で)  \n`insert_all!` が常にユニークインデックスを探しに行っていた挙動を修正し、実際には `ON CONFLICT` を使わないケースではユニークインデックスを必須にしないようにした PR です。これにより、特に複合主キーを持つテーブルで `model.primary_key` とスキーマ上の主キーがずれている場合に発生していた不要な例外が解消されます。"
-    },
-    {
-      "number": 56652,
-      "title": "Explicitly use Marshal serializer for MemCacheStore Dalli client {#pr-56652}",
-      "url": "https://github.com/rails/rails/pull/56652",
-      "mergedAt": "2026-01-23T00:00:00.000Z",
-      "author": "zzak",
-      "authorUrl": "https://github.com/zzak",
-      "summary": "1. 概要 (1–2文で)  \nRails の `ActiveSupport::Cache::MemCacheStore` が Dalli 4 系で出る「serializer 自動選択」の警告を避けるために、Rails 側で Dalli クライアントに対して明示的に `Marshal` シリアライザを指定するようにした PRです。これにより、もともとユーザーが変更できなかったシリアライザ設定を Rails がはっきり固定し、Dalli の警告を抑止します。"
     }
   ]
 }
