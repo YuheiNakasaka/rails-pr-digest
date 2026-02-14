@@ -1,7 +1,79 @@
 {
-  "lastUpdated": "2026-02-13T00:14:40.321Z",
+  "lastUpdated": "2026-02-14T00:15:13.386Z",
   "totalCount": 50,
   "items": [
+    {
+      "number": 56794,
+      "title": "Add non-interactive exec subcommand to devcontainer tool {#pr-56794}",
+      "url": "https://github.com/rails/rails/pull/56794",
+      "mergedAt": "2026-02-13T00:00:00.000Z",
+      "author": "bheeshmar",
+      "authorUrl": "https://github.com/bheeshmar",
+      "summary": "1. 概要 (1-2文で)  \nRails の開発用 devcontainer ツールに、TTY を伴わない非対話的な `exec` サブコマンドが追加され、ホスト側からコンテナ内でコマンドを実行できるようになりました。あわせて `mise` を有効化してから実行することで、`ruby` や `bundle` などのツールが確実に PATH に乗るようにしています。"
+    },
+    {
+      "number": 49821,
+      "title": "Move route helper method_missing to ActionController::TestCase {#pr-49821}",
+      "url": "https://github.com/rails/rails/pull/49821",
+      "mergedAt": "2026-02-13T00:00:00.000Z",
+      "author": "gmcgibbon",
+      "authorUrl": "https://github.com/gmcgibbon",
+      "summary": "1. 概要 (1-2文で)  \nこのPRは、ルーティング関連テストで使われていた `method_missing` ベースのルートヘルパー委譲処理を、「すべてのテスト」から「コントローラテスト専用」に整理した変更です。結果として、Integration Test はこれまで通り `integration_session` を経由し、Controller Test だけが `method_missing` による URL ヘルパー解決を行うようになります。"
+    },
+    {
+      "number": 56783,
+      "title": "Fix ActiveStorage::Blob content type methods to handle nil {#pr-56783}",
+      "url": "https://github.com/rails/rails/pull/56783",
+      "mergedAt": "2026-02-13T00:00:00.000Z",
+      "author": "kudoas",
+      "authorUrl": "https://github.com/kudoas",
+      "summary": "1. 概要 (1-2文で)  \nActiveStorage::Blob のコンテンツタイプ判定系メソッド（`image?` など）が `content_type: nil` を持つレコードで `NoMethodError` を起こしていた問題を修正した PR です。`purge_later` で未添付 Blob をクリーンアップする際に落ちるケースを、`nil` を安全に扱うことで防いでいます。"
+    },
+    {
+      "number": 53417,
+      "title": "Remove storage from gitignore if skip_active_storage and database is not sqlite3 {#pr-53417}",
+      "url": "https://github.com/rails/rails/pull/53417",
+      "mergedAt": "2026-02-13T00:00:00.000Z",
+      "author": "vinibispo",
+      "authorUrl": "https://github.com/vinibispo",
+      "summary": "1. 概要 (1-2文で)  \nRailsアプリ生成時に `--skip-active-storage` かつ DB が sqlite3 以外の場合、`storage` ディレクトリ関連のエントリを `.gitignore` / `.dockerignore` から外すようにした PR です。これにより Active Storage を使わない構成で、誤って `storage` を無視してしまう問題 (#53413) を解消しています。"
+    },
+    {
+      "number": 56772,
+      "title": "Bump Github Action cache version to 5 {#pr-56772}",
+      "url": "https://github.com/rails/rails/pull/56772",
+      "mergedAt": "2026-02-13T00:00:00.000Z",
+      "author": "akhilgkrishnan",
+      "authorUrl": "https://github.com/akhilgkrishnan",
+      "summary": "1. 概要 (1-2文で)  \nRails が生成する GitHub Actions 用 CI 設定テンプレートにおいて、`actions/cache` のバージョン指定を v5 系に更新した PRです。アプリ／プラグイン生成時に作られる `.github/workflows/ci.yml` で、最新世代のキャッシュアクションが使われるようになります。"
+    },
+    {
+      "number": 56773,
+      "title": "Bump Github Action upload-artifact version to 6 {#pr-56773}",
+      "url": "https://github.com/rails/rails/pull/56773",
+      "mergedAt": "2026-02-13T00:00:00.000Z",
+      "author": "akhilgkrishnan",
+      "authorUrl": "https://github.com/akhilgkrishnan",
+      "summary": "1. 概要 (1-2文で)  \nGitHub Actions の `actions/upload-artifact` を v6 に更新するための、CI 用テンプレート修正 PRです。Railsアプリ・プラグイン生成時に出力される GitHub Actions ワークフローのバージョン指定だけを更新しており、機能的な挙動変更はほぼありません。"
+    },
+    {
+      "number": 56785,
+      "title": "Fix JSONGemCoderEncoder to call to_s on original hash key {#pr-56785}",
+      "url": "https://github.com/rails/rails/pull/56785",
+      "mergedAt": "2026-02-13T00:00:00.000Z",
+      "author": "drsharp",
+      "authorUrl": "https://github.com/drsharp",
+      "summary": "1. 概要 (1-2文で)  \nRails 8.1.0 で導入された `JSONGemCoderEncoder` により、`as_json` が Hash を返すオブジェクトをハッシュキーに使った場合の JSON シリアライズが壊れていた問題を修正する PRです。ハッシュキー変換時に `as_json` の戻り値ではなく「元のキーオブジェクト」に対して `to_s` を呼ぶように戻すことで、7.2/8.0 と同等の挙動に復元しています。"
+    },
+    {
+      "number": 56787,
+      "title": "Add action mailer load hook in broken configuration test {#pr-56787}",
+      "url": "https://github.com/rails/rails/pull/56787",
+      "mergedAt": "2026-02-13T00:00:00.000Z",
+      "author": "gmcgibbon",
+      "authorUrl": "https://github.com/gmcgibbon",
+      "summary": "1. 概要 (1-2文で)  \nこのPRは、「壊れた設定 (broken configuration)」を扱うテストで発生していた Action Mailer の load hook に関するエラーを解消するための、テストコードの小さな修正です。アプリ本体の挙動変更はなく、テストの安定性・正しさを確保するためのメンテナンス的変更です。"
+    },
     {
       "number": 56777,
       "title": "Remove the deprecated `ActiveSupport::Multibyte::Chars` class {#pr-56777}",
@@ -379,78 +451,6 @@
       "author": "Saidbek",
       "authorUrl": "https://github.com/Saidbek",
       "summary": "1. 概要 (1-2文で)  \nMemCacheStore 内で使われていない `require \"delegate\"` を削除し、不要な依存を取り除いた PR です。機能的な挙動変更はなく、コードのクリーンアップに該当します。"
-    },
-    {
-      "number": 56686,
-      "title": "[Changelog] Fix overlapping acronyms order dependency in underscore#56679 {#pr-56686}",
-      "url": "https://github.com/rails/rails/pull/56686",
-      "mergedAt": "2026-01-27T00:00:00.000Z",
-      "author": "Saidbek",
-      "authorUrl": "https://github.com/Saidbek",
-      "summary": "1. 概要 (1-2文で)  \nActive Support の `underscore` における「重なり合う略語（acronym）」の展開順序依存バグを修正したことを、CHANGELOG に追記する PR です。  \nコード本体には手を入れず、既にマージ済みの修正内容をドキュメントとして明示しただけの変更です。"
-    },
-    {
-      "number": 56282,
-      "title": "Fix #56232: Clean output directory when generating guides to remove stale output files and add guide generation tests {#pr-56282}",
-      "url": "https://github.com/rails/rails/pull/56282",
-      "mergedAt": "2026-01-27T00:00:00.000Z",
-      "author": "harsh183",
-      "authorUrl": "https://github.com/harsh183",
-      "summary": "1. 概要 (1-2文で)  \nRails ガイド生成時に、出力ディレクトリ内に古い HTML ファイルなどが残り続ける問題を修正し、新しい生成前に出力ディレクトリをクリーンアップするようにしました。あわせてガイド生成処理に対するテストが追加され、挙動が自動テストで担保されるようになっています。"
-    },
-    {
-      "number": 56668,
-      "title": "chore: Update outdated GitHub Actions versions {#pr-56668}",
-      "url": "https://github.com/rails/rails/pull/56668",
-      "mergedAt": "2026-01-25T00:00:00.000Z",
-      "author": "pgoslatara",
-      "authorUrl": "https://github.com/pgoslatara",
-      "summary": "1. 概要 (1-2文で)  \nこのPRは、Railsリポジトリ内で使用している複数のGitHub Actionsを最新メジャーバージョンに更新するメンテナンス目的の変更です。アプリケーションコードやテストコードには手を入れず、CI／運用ワークフローの信頼性と追従性を高めるための更新になります。"
-    },
-    {
-      "number": 56679,
-      "title": "Fix overlapping acronyms order dependency in underscore {#pr-56679}",
-      "url": "https://github.com/rails/rails/pull/56679",
-      "mergedAt": "2026-01-25T00:00:00.000Z",
-      "author": "Saidbek",
-      "authorUrl": "https://github.com/Saidbek",
-      "summary": "1. 概要 (1-2文で)  \nRails の `ActiveSupport::Inflector.underscore` が、重なり合う略語（例: `USD` と `USDC`）定義時に登録順によって結果が変わってしまう問題を修正した PR です。略語を正規表現に組み込む際に「長い略語を優先的にマッチさせる」ようにし、順序依存をなくしています。"
-    },
-    {
-      "number": 56678,
-      "title": "Disable console query cache by default {#pr-56678}",
-      "url": "https://github.com/rails/rails/pull/56678",
-      "mergedAt": "2026-01-25T00:00:00.000Z",
-      "author": "camallen",
-      "authorUrl": "https://github.com/camallen",
-      "summary": "1. 概要 (1-2文で)  \nRailsコンソールで、デフォルトでは有効になってしまっていたクエリキャッシュを「無効」に戻す変更です。必要な場合のみ `--query-cache` (短縮: `-q`) オプションで明示的に有効化できるようになります。"
-    },
-    {
-      "number": 56670,
-      "title": "[ci skip] Fix guides for db:prepare {#pr-56670}",
-      "url": "https://github.com/rails/rails/pull/56670",
-      "mergedAt": "2026-01-25T00:00:00.000Z",
-      "author": "schmijos",
-      "authorUrl": "https://github.com/schmijos",
-      "summary": "1. 概要 (1-2文で)  \nこのPRは、`rails db:prepare` の挙動に関するRailsガイドの記述を、実際の実装どおり「マイグレーション実行＋スキーマダンプを行う」ことが明確に伝わるよう修正したドキュメント更新です。コード本体の挙動は変わっておらず、ガイドの説明だけが実装に合わせて整合性を取られています。"
-    },
-    {
-      "number": 56672,
-      "title": "Add changelog for 6f9cbce21d8ec2de86c37b5a37073bac6d5f1d83 to Action Cable and Action Text {#pr-56672}",
-      "url": "https://github.com/rails/rails/pull/56672",
-      "mergedAt": "2026-01-24T00:00:00.000Z",
-      "author": "zzak",
-      "authorUrl": "https://github.com/zzak",
-      "summary": "1. 概要 (1-2文で)  \nこのPRは、既に他のコンポーネント（Railties）にのみ追加されていた変更内容（コミット: 6f9cbce21d8e...）について、Action Cable と Action Text 向けのCHANGELOG記載を追加し、フレームワーク全体で変更履歴の整合性を取るものです。コードの挙動自体は変えず、ドキュメント（CHANGELOG）のみを更新しています。"
-    },
-    {
-      "number": 56666,
-      "title": "Skip unique index lookup for insert_all! since it doesn't need conflict target {#pr-56666}",
-      "url": "https://github.com/rails/rails/pull/56666",
-      "mergedAt": "2026-01-23T00:00:00.000Z",
-      "author": "kirs",
-      "authorUrl": "https://github.com/kirs",
-      "summary": "1. 概要 (1-2文で)  \n`insert_all!` が常にユニークインデックスを探しに行っていた挙動を修正し、実際には `ON CONFLICT` を使わないケースではユニークインデックスを必須にしないようにした PR です。これにより、特に複合主キーを持つテーブルで `model.primary_key` とスキーマ上の主キーがずれている場合に発生していた不要な例外が解消されます。"
     }
   ]
 }
