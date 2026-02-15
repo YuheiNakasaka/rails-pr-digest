@@ -1,7 +1,34 @@
 {
-  "lastUpdated": "2026-02-14T00:15:13.386Z",
+  "lastUpdated": "2026-02-15T00:13:00.957Z",
   "totalCount": 50,
   "items": [
+    {
+      "number": 56801,
+      "title": "Improve #hash methods {#pr-56801}",
+      "url": "https://github.com/rails/rails/pull/56801",
+      "mergedAt": "2026-02-14T00:00:00.000Z",
+      "author": "byroot",
+      "authorUrl": "https://github.com/byroot",
+      "summary": "1. 概要 (1–2文で)  \nこのPRは、Active Record の各種クラスで定義されている `#hash` メソッドの実装を見直し、Ruby 3.2 以降で最適化された `Array#hash` を素直に利用する形に変更するものです。これにより、独自のハッシュ値の手動合成をやめて、シンプルでパフォーマンス的にも有利な実装に統一しています。"
+    },
+    {
+      "number": 56800,
+      "title": "[ci skip] Fix typo: skippped -> skipped {#pr-56800}",
+      "url": "https://github.com/rails/rails/pull/56800",
+      "mergedAt": "2026-02-14T00:00:00.000Z",
+      "author": "coderhs",
+      "authorUrl": "https://github.com/coderhs",
+      "summary": "1. 概要 (1-2文で)  \nこのPRは、Rails のテストコード内にある文字列のタイポ「skippped」を正しい綴り「skipped」に修正するものです。機能や挙動の変更はなく、純粋なスペル修正のみです。"
+    },
+    {
+      "number": 56797,
+      "title": "Include virtual? in Column#== and Column#hash for SQLite3 and PostgreSQL {#pr-56797}",
+      "url": "https://github.com/rails/rails/pull/56797",
+      "mergedAt": "2026-02-14T00:00:00.000Z",
+      "author": "uberjay",
+      "authorUrl": "https://github.com/uberjay",
+      "summary": "1. 概要 (1-2文で)  \nSQLite3 / PostgreSQL アダプタにおいて、カラム同士の同一性判定（`==` と `hash`）に仮想カラム（GENERATED / virtual）かどうかを含める変更です。これにより、仮想カラムと通常カラムが誤って同一とみなされて INSERT / UPDATE 対象から外れてしまう不具合が解消されます。"
+    },
     {
       "number": 56794,
       "title": "Add non-interactive exec subcommand to devcontainer tool {#pr-56794}",
@@ -424,33 +451,6 @@
       "author": "wakairo",
       "authorUrl": "https://github.com/wakairo",
       "summary": "1. 概要 (1-2文で)  \n`add_reference` のドキュメントに、`foreign_key:` オプションとして `add_foreign_key` と同じオプションを渡せることを明示するリンクを追加した PR です。実装挙動の変更はなく、API ドキュメントだけを改善する変更です。"
-    },
-    {
-      "number": 56694,
-      "title": "Update typemap for timezone during type_casted_binds {#pr-56694}",
-      "url": "https://github.com/rails/rails/pull/56694",
-      "mergedAt": "2026-01-29T00:00:00.000Z",
-      "author": "matthewd",
-      "authorUrl": "https://github.com/matthewd",
-      "summary": "1. 概要 (1-2文で)  \nPostgreSQL アダプタで、**バインド変数を type cast するタイミングで timezone 用 typemap を確実に更新するようにした PR**です。  \n現時点の挙動は変えず、今後の timezone/型関連の変更に備えて、責務と呼び出し位置を整理しています。"
-    },
-    {
-      "number": 56693,
-      "title": "Combine duplicate `if respond_to?(:action_view)` {#pr-56693}",
-      "url": "https://github.com/rails/rails/pull/56693",
-      "mergedAt": "2026-01-29T00:00:00.000Z",
-      "author": "r7kamura",
-      "authorUrl": "https://github.com/r7kamura",
-      "summary": "1. 概要 (1-2文で)  \nRails の `Rails::Application::Configuration` 周辺で、`if respond_to?(:action_view)` が重複していた箇所をまとめる小規模なリファクタリングです。挙動は変えずに、コードの読みやすさと自然さを改善しています。"
-    },
-    {
-      "number": 56687,
-      "title": "Remove unused delegate loading from MemCacheStore {#pr-56687}",
-      "url": "https://github.com/rails/rails/pull/56687",
-      "mergedAt": "2026-01-27T00:00:00.000Z",
-      "author": "Saidbek",
-      "authorUrl": "https://github.com/Saidbek",
-      "summary": "1. 概要 (1-2文で)  \nMemCacheStore 内で使われていない `require \"delegate\"` を削除し、不要な依存を取り除いた PR です。機能的な挙動変更はなく、コードのクリーンアップに該当します。"
     }
   ]
 }
