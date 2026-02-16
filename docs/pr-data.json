@@ -1,7 +1,25 @@
 {
-  "lastUpdated": "2026-02-15T00:13:00.957Z",
+  "lastUpdated": "2026-02-16T00:13:15.965Z",
   "totalCount": 50,
   "items": [
+    {
+      "number": 56790,
+      "title": "Skip test_via_to_sql_with_complicating_connection for PostgreSQL 19+ {#pr-56790}",
+      "url": "https://github.com/rails/rails/pull/56790",
+      "mergedAt": "2026-02-15T00:00:00.000Z",
+      "author": "yahonda",
+      "authorUrl": "https://github.com/yahonda",
+      "summary": "1. 概要 (1-2文で)  \nPostgreSQL 19以降では `standard_conforming_strings = OFF` を設定できなくなったため、それに依存している `test_via_to_sql_with_complicating_connection` テストを、PostgreSQL 19+ 環境ではスキップするようにしたPRです。これにより、PostgreSQL 19dev 上での Active Record テストスイートがエラーなく通るように調整しています。"
+    },
+    {
+      "number": 56430,
+      "title": "Fix & standardize comments for CombinedConfiguration {#pr-56430}",
+      "url": "https://github.com/rails/rails/pull/56430",
+      "mergedAt": "2026-02-15T00:00:00.000Z",
+      "author": "jordan-brough",
+      "authorUrl": "https://github.com/jordan-brough",
+      "summary": "1. 概要 (1-2文で)  \nCombinedConfiguration / EncryptedConfiguration / EnvConfiguration のコメントが整理・統一され、挙動の説明（特に「nil は欠損とみなす」点）が明確化されました。  \nコードのロジック変更はほぼなく、ドキュメンテーションの精度と一貫性を高めるための PR です。"
+    },
     {
       "number": 56801,
       "title": "Improve #hash methods {#pr-56801}",
@@ -433,24 +451,6 @@
       "author": "arceus3115",
       "authorUrl": "https://github.com/arceus3115",
       "summary": "1. 概要 (1-2文で)  \nこのPRは、Railsガイド「Getting Started」の `getting_started.md` 内にある *product の show ビュー* のコード例を、実際の推奨実装と一致するように1行だけ修正したドキュメント変更です。アプリケーションコード自体には一切手を入れておらず、ガイドのコードブロックの齟齬を解消するためのものです。"
-    },
-    {
-      "number": 56692,
-      "title": "Improve diagnostics UI to make nested stack traces more discoverable {#pr-56692}",
-      "url": "https://github.com/rails/rails/pull/56692",
-      "mergedAt": "2026-01-30T00:00:00.000Z",
-      "author": "mctaylorpants",
-      "authorUrl": "https://github.com/mctaylorpants",
-      "summary": "1. 概要 (1-2文で)  \nRails のエラーページ（diagnostics ページ）で、ネストした例外のスタックトレースが「クリックで展開できること」に気づきやすくなるよう、UI に小さな矢印アイコンを追加する変更です。純粋に見た目と操作性だけの改善で、サーバサイドの挙動や API には影響しません。"
-    },
-    {
-      "number": 56696,
-      "title": "Add documentation for foreign key options to add_reference [ci skip] {#pr-56696}",
-      "url": "https://github.com/rails/rails/pull/56696",
-      "mergedAt": "2026-01-30T00:00:00.000Z",
-      "author": "wakairo",
-      "authorUrl": "https://github.com/wakairo",
-      "summary": "1. 概要 (1-2文で)  \n`add_reference` のドキュメントに、`foreign_key:` オプションとして `add_foreign_key` と同じオプションを渡せることを明示するリンクを追加した PR です。実装挙動の変更はなく、API ドキュメントだけを改善する変更です。"
     }
   ]
 }
