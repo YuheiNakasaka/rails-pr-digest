@@ -1,7 +1,106 @@
 {
-  "lastUpdated": "2026-02-16T00:13:15.965Z",
+  "lastUpdated": "2026-02-17T00:16:19.726Z",
   "totalCount": 50,
   "items": [
+    {
+      "number": 56820,
+      "title": "[ci skip] Improve API documentation for ActionDispatch::Integration::Session#process {#pr-56820}",
+      "url": "https://github.com/rails/rails/pull/56820",
+      "mergedAt": "2026-02-16T00:00:00.000Z",
+      "author": "ybiquitous",
+      "authorUrl": "https://github.com/ybiquitous",
+      "summary": "1. 概要 (1-2文で)  \n`ActionDispatch::Integration::Session#process` の API ドキュメントを、読みやすく正しくレンダリングされるように微修正した PR です。動作仕様や振る舞いは変えず、テスト用リクエストメソッドのドキュメント表現のみが改善されています。"
+    },
+    {
+      "number": 56823,
+      "title": "Remove unused \"open-uri\" require from AppBase {#pr-56823}",
+      "url": "https://github.com/rails/rails/pull/56823",
+      "mergedAt": "2026-02-16T00:00:00.000Z",
+      "author": "skipkayhil",
+      "authorUrl": "https://github.com/skipkayhil",
+      "summary": "1. 概要 (1-2文で)  \nRails のアプリケーションジェネレータ基底クラス (`AppBase`) から、実際には使われていない `open-uri` の `require` が削除されました。16年前の実装の名残で、現在のコードパスでは参照されていないためクリーンアップされています。"
+    },
+    {
+      "number": 56803,
+      "title": "Fix in_batches use_ranges with limit producing negative LIMIT {#pr-56803}",
+      "url": "https://github.com/rails/rails/pull/56803",
+      "mergedAt": "2026-02-16T00:00:00.000Z",
+      "author": "daffo",
+      "authorUrl": "https://github.com/daffo",
+      "summary": "1. 概要 (1-2文で)  \n`in_batches(use_ranges: true)` を、すでに `.limit` が付いた Relation に対して使った際に、バッチサイズと limit が割り切れないと `LIMIT must not be negative` エラーになる不具合を修正する PR です。`remaining` 計算に使う内部カウンタが更新されず負の LIMIT が生成されていたのを、Relation の `limit` を変えるタイミングで内部の `batch_limit` も同期させることで防いでいます。"
+    },
+    {
+      "number": 56750,
+      "title": "ActionController::UnknownHttpMethod returns 500 instead of 405 in Rails 7.2 #56740 {#pr-56750}",
+      "url": "https://github.com/rails/rails/pull/56750",
+      "mergedAt": "2026-02-16T00:00:00.000Z",
+      "author": "nicolasva",
+      "authorUrl": "https://github.com/nicolasva",
+      "summary": "1. 概要 (1-2文で)  \nRails 7.2 で、無効な HTTP メソッドを受け取った際に本来は 405 を返すべきところが、場合によって 500 になってしまう不具合を修正した PRです。`DebugExceptions` ミドルウェア内部で `UnknownHttpMethod` が二重に発生して rescue されず、上位まで伝播してしまう問題を抑止しています。"
+    },
+    {
+      "number": 56806,
+      "title": "[ci skip] Add documentation: deprecations and notable changes to 8.2 release notes {#pr-56806}",
+      "url": "https://github.com/rails/rails/pull/56806",
+      "mergedAt": "2026-02-16T00:00:00.000Z",
+      "author": "FKauwe",
+      "authorUrl": "https://github.com/FKauwe",
+      "summary": "1. 概要 (1-2文で)  \nRails 8.2 のリリースノートに、各コンポーネントの非推奨・削除項目と「notable changes（重要な変更）」を追記したドキュメント更新のPRです。コード自体は一切変更せず、CHANGELOG をもとにリリースノートを整理・明文化したものです。"
+    },
+    {
+      "number": 56760,
+      "title": "Fix Ruby code block syntax highlighting for getting_started.md document [ci skip] {#pr-56760}",
+      "url": "https://github.com/rails/rails/pull/56760",
+      "mergedAt": "2026-02-16T00:00:00.000Z",
+      "author": "johnhailu",
+      "authorUrl": "https://github.com/johnhailu",
+      "summary": "1. 概要 (1-2文で)  \nRailsガイド「Getting Started with Rails」の Markdown 内で、Ruby のコードブロックに対するシンタックスハイライト指定が誤っていた箇所を修正した PR です。コード例自体の挙動やフレームワークの機能には影響せず、ガイドの表示品質のみを改善しています。"
+    },
+    {
+      "number": 56792,
+      "title": "Bump MySQL Image version to 8.4 {#pr-56792}",
+      "url": "https://github.com/rails/rails/pull/56792",
+      "mergedAt": "2026-02-16T00:00:00.000Z",
+      "author": "akhilgkrishnan",
+      "authorUrl": "https://github.com/akhilgkrishnan",
+      "summary": "1. 概要 (1-2文で)  \nこのPRは、Railsアプリ生成時に使われる MySQL の Docker イメージバージョンを「最新の 8.4 系」に更新するものです。変更は `config/deploy.yml` のテンプレート内のイメージタグを 1 行だけ差し替える、極小の更新です。"
+    },
+    {
+      "number": 56816,
+      "title": "Fix `Column#hash` to use the correct instance variable {#pr-56816}",
+      "url": "https://github.com/rails/rails/pull/56816",
+      "mergedAt": "2026-02-16T00:00:00.000Z",
+      "author": "kamipo",
+      "authorUrl": "https://github.com/kamipo",
+      "summary": "1. 概要 (1-2文で)  \nPostgreSQL・SQLite3 用の `ActiveRecord::ConnectionAdapters::Column` クラスにおいて、`#hash` メソッドが誤ったインスタンス変数を参照していた問題を修正する PR です。これにより、`Column` オブジェクトのハッシュ値が意図した属性に基づいて正しく計算されるようになります。"
+    },
+    {
+      "number": 56802,
+      "title": "Fix SQLite3 column equality for `rowid` aliases {#pr-56802}",
+      "url": "https://github.com/rails/rails/pull/56802",
+      "mergedAt": "2026-02-16T00:00:00.000Z",
+      "author": "afurm",
+      "authorUrl": "https://github.com/afurm",
+      "summary": "1. 概要 (1-2文で)  \nSQLite3 のカラムオブジェクト同士の比較 (`ActiveRecord::ConnectionAdapters::SQLite3::Column#==`) において、`rowid` の扱いが `hash` と不整合だったバグを修正し、`rowid` の違いをきちんと等価性判定に含めるようにした PR です。これにより、`rowid` セマンティクスが異なるカラム同士が誤って「同じカラム」とみなされる問題が解消されます。"
+    },
+    {
+      "number": 56717,
+      "title": "Skip ROLLBACK statement following TransactionRollbackError {#pr-56717}",
+      "url": "https://github.com/rails/rails/pull/56717",
+      "mergedAt": "2026-02-16T00:00:00.000Z",
+      "author": "sorah",
+      "authorUrl": "https://github.com/sorah",
+      "summary": "1. 概要 (1-2文で)  \n`COMMIT` 時に `TransactionRollbackError`（例: `SerializationFailure`）が発生した場合に、その直後の不要な `ROLLBACK` を発行しないようにし、PostgreSQL/libpq からの「WARNING: there is no transaction in progress」ログが出ないようにした PR です。これにより、Aurora DSQL や SERIALIZABLE トランザクション使用時でも、ログ抑制に頼らずにクリーンなログ運用がしやすくなります。"
+    },
+    {
+      "number": 56813,
+      "title": "Fix small typo for an active record load hook {#pr-56813}",
+      "url": "https://github.com/rails/rails/pull/56813",
+      "mergedAt": "2026-02-16T00:00:00.000Z",
+      "author": "chaadow",
+      "authorUrl": "https://github.com/chaadow",
+      "summary": "1. 概要 (1-2文で)  \nActive Record の load hook 名のタイポ（スペルミス）をテストコード内で修正した PR です。  \n本体機能ではなく、`railties` の設定テスト（`configuration_test.rb`）のみが 1 行だけ修正されています。"
+    },
     {
       "number": 56790,
       "title": "Skip test_via_to_sql_with_complicating_connection for PostgreSQL 19+ {#pr-56790}",
@@ -352,105 +451,6 @@
       "author": "ykttdn",
       "authorUrl": "https://github.com/ykttdn",
       "summary": "1. 概要 (1–2文で)  \nRails Guides（パフォーマンスチューニングガイド）内で、YJITドキュメントへのリンクが Ruby 本体側の変更により壊れていたため、正しい YJIT ドキュメント URL に更新した PRです。コードの挙動や機能には影響せず、ドキュメントのリンク修正のみを行っています。"
-    },
-    {
-      "number": 56705,
-      "title": "Fix AM::Serialization#read_attribute_for_serialization doc {#pr-56705}",
-      "url": "https://github.com/rails/rails/pull/56705",
-      "mergedAt": "2026-02-03T00:00:00.000Z",
-      "author": "p8",
-      "authorUrl": "https://github.com/p8",
-      "summary": "1. 概要 (1-2文で)  \nActiveModel::Serialization の `read_attribute_for_serialization` を、`alias` ベースの定義から通常メソッドとして定義し直すことで、公式ドキュメントに正しく掲載されるようにするとともに、引数を「キー1つ」に限定する PR です。挙動は従来と変えず、インターフェイスの明示化とドキュメント改善を目的としています。"
-    },
-    {
-      "number": 56724,
-      "title": "Remove useless connection verification when pinning connection {#pr-56724}",
-      "url": "https://github.com/rails/rails/pull/56724",
-      "mergedAt": "2026-02-03T00:00:00.000Z",
-      "author": "byroot",
-      "authorUrl": "https://github.com/byroot",
-      "summary": "1. 概要 (1-2文で)  \nこのPRでは、コネクションを「ピン留め」するときに毎回行っていた `verify!` 呼び出しを削除し、既に実装されている「最近使われたコネクションは再検証しない」ロジックに一元化することで、無駄なコネクション検証をなくしています。結果として、不要なクエリ（例: `SELECT 1`）の発行が減り、Active Record のコネクション管理がわずかに効率化されます。"
-    },
-    {
-      "number": 56716,
-      "title": "[ci skip] Correct typo in ActiveRecord changelog {#pr-56716}",
-      "url": "https://github.com/rails/rails/pull/56716",
-      "mergedAt": "2026-02-03T00:00:00.000Z",
-      "author": "coderhs",
-      "authorUrl": "https://github.com/coderhs",
-      "summary": "1. 概要 (1-2文で)  \nこのPRは、Active Record の CHANGELOG に記載されていたデータベース接続に関する文言のタイポ（誤記）を修正するものです。コードや挙動の変更は一切なく、ドキュメントのみの修正です。\n\n2. 変更内容の詳細  \n- 対象ファイル: `activerecord/CHANGELOG.md`  \n- 変更内容は 1 行のテキスト修正のみで、データベース接続（connections）に関する説明文中のスペルミスや用語の誤りを正しい表記に直しています。  \n- [ci skip] がタイトルに含まれている通り、ドキュメント変更のみのため CI を走らせない PR です。  \n\n実際のコードや API のシグネチャ、設定オプションなどは一切変更されていません。  \nCHANGELOG 上の例示コードや、接続管理に関する説明の「単語」レベルの修正に留まると考えてよいです。\n\n3. 影響範囲・注意点  \n- ランタイム挙動: 影響なし  \n  - Active Record の接続管理やクエリ実行、トランザクション動作などには一切変更がありません。  \n- マイグレーション・設定: 変更不要  \n  - `database.yml` などの設定ファイルの見直しや、アプリケーション側のコード修正も不要です。  \n- CHANGELOG の読み取り:  \n  - 今後、該当バージョンの変更点を確認する際に、より正確な記述に基づいて挙動を理解できるようになります。  \n  - 既に CHANGELOG を参照していた場合は、「あれ？文脈的におかしいな」と感じていた箇所が自然な表現に直っている程度の差分です。\n\n4. 参考情報 (あれば)  \n- このPRはドキュメント修正専用のため、Rails をバージョンアップしても今回の変更が原因で不具合が出ることはありません。  \n- 実際の接続管理ロジックや API の仕様を確認したい場合は、CHANGELOG よりも以下を優先するとよいです:  \n  - `activerecord` の公式ガイド: 「Active Record Basics」「Active Record Connection Handling」関連セクション  \n  - 対象バージョンの API ドキュメント (`ActiveRecord::Base.connection`, `ActiveRecord::ConnectionAdapters` など)"
-    },
-    {
-      "number": 56683,
-      "title": "Pass sql query to query log tags {#pr-56683}",
-      "url": "https://github.com/rails/rails/pull/56683",
-      "mergedAt": "2026-02-02T00:00:00.000Z",
-      "author": "fatkodima",
-      "authorUrl": "https://github.com/fatkodima",
-      "summary": "1. 概要 (1–2文で)  \nActive Record の「クエリログタグ (query_log_tags)」に、実行される SQL 文字列がコンテキストとして渡されるようになりました。これにより、SQL 内容に応じた柔軟なタグ付けやデバッグ情報の付与が簡単に行えます。"
-    },
-    {
-      "number": 56695,
-      "title": "Use a single temporary connection pool when checking test schema {#pr-56695}",
-      "url": "https://github.com/rails/rails/pull/56695",
-      "mergedAt": "2026-02-02T00:00:00.000Z",
-      "author": "ilianah",
-      "authorUrl": "https://github.com/ilianah",
-      "summary": "1. 概要 (1-2文で)  \nテスト用スキーマのチェック時に、1つの DB 設定につき「2つ」作られていた一時的なコネクションプールを「1つ」に統合し、同じプールを使い回すようにした PR です。これにより、テスト時のスキーマ・マイグレーション確認処理のオーバーヘッドが削減されます。"
-    },
-    {
-      "number": 56715,
-      "title": "[ci skip] Fix formatting of backtrace description in configuring.md {#pr-56715}",
-      "url": "https://github.com/rails/rails/pull/56715",
-      "mergedAt": "2026-02-02T00:00:00.000Z",
-      "author": "coderhs",
-      "authorUrl": "https://github.com/coderhs",
-      "summary": "1. 概要 (1-2文で)  \nconfiguring.md ガイド内の backtrace 説明文に含まれていた不要な英単語 \"the\" を削除し、文章のフォーマット／文法を整えたドキュメント修正です。コードや挙動には一切影響せず、ドキュメントのみの微修正です。\n\n2. 変更内容の詳細(あればサンプルコードも含めて)  \n- 対象ファイル: `guides/source/configuring.md`  \n- 変更点は1行のみで、backtrace に関する説明文中の「extra `the`」(余分な \"the\") を削除しています。  \n- 例 (イメージ):  \n  ```diff\n- This option controls the the format of the backtrace output...\n+ This option controls the format of the backtrace output...\n  ```\n  のように、英語として不自然な重複を取り除き、読みやすい表現に修正しています。  \n- PR タイトルに `[ci skip]` が付いていることからも分かる通り、テストやビルドは不要な単純なドキュメント修正として扱われています。\n\n3. 影響範囲・注意点  \n- Rails 本体のコード、設定オプション、API 仕様などには一切変更はありません。  \n- 既存アプリケーション、設定ファイル (`config/environments/*.rb` など)、実行時の backtrace 表示やログ出力の挙動にも影響はありません。  \n- 影響は Rails ガイドの読み手 (特に backtrace / エラー出力の設定方法を確認する開発者) に限定され、文章がわずかに読みやすくなっただけです。\n\n4. 参考情報 (あれば)  \n- PR: https://github.com/rails/rails/pull/56715  \n- 対象ガイド: Rails Guides「Configuring Rails Applications」(configuring.md)  \n  - backtrace の設定方法や関連オプションを確認する際に参照するドキュメントの一部の文言修正です。"
-    },
-    {
-      "number": 56712,
-      "title": "[ci skip] Fix typo in test/guide stategy -> strategy {#pr-56712}",
-      "url": "https://github.com/rails/rails/pull/56712",
-      "mergedAt": "2026-02-01T00:00:00.000Z",
-      "author": "coderhs",
-      "authorUrl": "https://github.com/coderhs",
-      "summary": "1. 概要 (1-2文で)  \nRailsのテストコードとガイド文書内にあった「stategy / statetgy」というタイポが、正しい「strategy」に修正されたPRです。機能追加や挙動変更は一切なく、ドキュメントおよびテストの表記を整えるメンテナンス目的の変更です。"
-    },
-    {
-      "number": 56426,
-      "title": "Make `rescue_from_handled.action_controller` store the full backtrace {#pr-56426}",
-      "url": "https://github.com/rails/rails/pull/56426",
-      "mergedAt": "2026-02-01T00:00:00.000Z",
-      "author": "zzak",
-      "authorUrl": "https://github.com/zzak",
-      "summary": "1. 概要 (1-2文で)  \n`config.action_controller.rescue_from_event_backtrace` を `:array` に設定した場合、`rescue_from_handled.action_controller` 通知ペイロードにも「フルバックトレース（配列）」が載るようにした変更です。併せて、バックトレースから `Rails.root` を削った形で保持する処理や、関連設定・ガイド・テストの整備が行われています。"
-    },
-    {
-      "number": 56454,
-      "title": "Add `unique_by` option to `insert_all!` {#pr-56454}",
-      "url": "https://github.com/rails/rails/pull/56454",
-      "mergedAt": "2026-02-01T00:00:00.000Z",
-      "author": "chaadow",
-      "authorUrl": "https://github.com/chaadow",
-      "summary": "1. 概要 (1-2文で)  \n`ActiveRecord::Relation#insert_all!` に `unique_by:` オプションが追加され、既に対応済みだった `insert_all` と同等のインターフェイスになりました。これにより、一括INSERT時に使用するユニークインデックスを `insert_all!` 側でも明示的に指定できるようになります。"
-    },
-    {
-      "number": 56681,
-      "title": "Make `ActionText::Attachable#read_attribute_for_serialization` public {#pr-56681}",
-      "url": "https://github.com/rails/rails/pull/56681",
-      "mergedAt": "2026-02-01T00:00:00.000Z",
-      "author": "sallyhall",
-      "authorUrl": "https://github.com/sallyhall",
-      "summary": "1. 概要 (1-2文で)  \n`ActionText::Attachable` がオーバーライドしている `read_attribute_for_serialization` メソッドを `public` に変更し、元の `ActiveModel::Serialization` 側の可視性と揃えた PR です。これにより、`active_model_serializers` で `ActionText::Attachable` を含むモデルをシリアライズした際に発生していたエラーが解消されます。"
-    },
-    {
-      "number": 56711,
-      "title": "Fix code block for product show view the correct change in guide {#pr-56711}",
-      "url": "https://github.com/rails/rails/pull/56711",
-      "mergedAt": "2026-01-31T00:00:00.000Z",
-      "author": "arceus3115",
-      "authorUrl": "https://github.com/arceus3115",
-      "summary": "1. 概要 (1-2文で)  \nこのPRは、Railsガイド「Getting Started」の `getting_started.md` 内にある *product の show ビュー* のコード例を、実際の推奨実装と一致するように1行だけ修正したドキュメント変更です。アプリケーションコード自体には一切手を入れておらず、ガイドのコードブロックの齟齬を解消するためのものです。"
     }
   ]
 }
