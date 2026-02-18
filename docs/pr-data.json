@@ -1,7 +1,61 @@
 {
-  "lastUpdated": "2026-02-17T00:16:19.726Z",
+  "lastUpdated": "2026-02-18T00:14:16.655Z",
   "totalCount": 50,
   "items": [
+    {
+      "number": 56822,
+      "title": "More railties test balancing {#pr-56822}",
+      "url": "https://github.com/rails/rails/pull/56822",
+      "mergedAt": "2026-02-17T00:00:00.000Z",
+      "author": "skipkayhil",
+      "authorUrl": "https://github.com/skipkayhil",
+      "summary": "1. 概要 (1-2文で)  \nRails の railties テストタスクにおける「テスト時間の見積もり（重み）」が調整され、CI でのテスト並列実行時のバランスが改善されています。特に、実行時間が長い `configuration_test` / `console_test` / `sprockets_assets_test` / `query_logs_test` の扱いが見直されています。"
+    },
+    {
+      "number": 56833,
+      "title": "Fix misspellings around load hook guard {#pr-56833}",
+      "url": "https://github.com/rails/rails/pull/56833",
+      "mergedAt": "2026-02-17T00:00:00.000Z",
+      "author": "flavorjones",
+      "authorUrl": "https://github.com/flavorjones",
+      "summary": "1. 概要 (1-2文で)  \nこのPRは、#56201 で導入された「load hook guard」まわりの英単語の綴りミス（typo）を修正するものです。挙動の変更はなく、ドキュメントおよびコード内のコメント／メッセージレベルの修正のみです。"
+    },
+    {
+      "number": 56832,
+      "title": "Restore core_ext/benchmark.rb as a silent shim (8-1-stable) {#pr-56832}",
+      "url": "https://github.com/rails/rails/pull/56832",
+      "mergedAt": "2026-02-17T00:00:00.000Z",
+      "author": "jeremy",
+      "authorUrl": "https://github.com/jeremy",
+      "summary": "1. 概要 (1-2文で)  \nRails 8.1系で一度非推奨・実質削除されかけていた `active_support/core_ext/benchmark` を、「何もしないが存在はする」互換用シム(shim)として復活させたPRです。これにより、`require \"active_support/core_ext/benchmark\"` を行っている既存コードが壊れないようにしつつ、現時点では追加メソッドは提供しません。"
+    },
+    {
+      "number": 56831,
+      "title": "Restore core_ext/benchmark.rb as a silent shim {#pr-56831}",
+      "url": "https://github.com/rails/rails/pull/56831",
+      "mergedAt": "2026-02-17T00:00:00.000Z",
+      "author": "jeremy",
+      "authorUrl": "https://github.com/jeremy",
+      "summary": "1. 概要 (1-2文で)  \n`core_ext/benchmark.rb` から唯一の拡張メソッド `Benchmark.ms` が削除された後も、「Benchmark関連の拡張を置くための場所」としてこのファイルを存続させるようにしたPRです。実質的な機能追加・削除はなく、「静かな(shim)空ファイル」として残すことで、将来の拡張や既存コードとの互換性を確保しています。"
+    },
+    {
+      "number": 56798,
+      "title": "Mark AutoFilteredParameters as :nodoc: {#pr-56798}",
+      "url": "https://github.com/rails/rails/pull/56798",
+      "mergedAt": "2026-02-17T00:00:00.000Z",
+      "author": "gmcgibbon",
+      "authorUrl": "https://github.com/gmcgibbon",
+      "summary": "1. 概要 (1-2文で)  \nActive Record の暗号化機能内部で使われている `AutoFilteredParameters` モジュールを、YARD/RDoc で公開 API ドキュメントに載せないよう `:nodoc:` 指定にした PRです。外部利用を想定しない内部実装であることを明示し、将来的な削除に備える位置づけです。"
+    },
+    {
+      "number": 56825,
+      "title": "Fix eagerly loading ActiveModel::Attributes {#pr-56825}",
+      "url": "https://github.com/rails/rails/pull/56825",
+      "mergedAt": "2026-02-17T00:00:00.000Z",
+      "author": "skipkayhil",
+      "authorUrl": "https://github.com/skipkayhil",
+      "summary": "1. 概要 (1-2文で)  \nActiveModel::Attributes のオートロード設定の仕方により、Attributes が「遅延読み込み(lazy load)」されずに即座にロードされてしまっていた問題を修正した PR です。Normalization からの参照が原因で eager load されていたため、オートロード定義の場所を移動し、正しく遅延読み込みされるようにしています。"
+    },
     {
       "number": 56820,
       "title": "[ci skip] Improve API documentation for ActionDispatch::Integration::Session#process {#pr-56820}",
@@ -397,60 +451,6 @@
       "author": "yahonda",
       "authorUrl": "https://github.com/yahonda",
       "summary": "1. 概要 (1-2文で)  \nBundler のバージョンを 4.0.4 から 4.0.6 に更新し、`bundle update <gem>` が正常に動作せず「Could not find compatible versions」で失敗していた問題を解消する PR です。Rails 本体のコードではなく、Gemfile.lock の Bundler バージョン指定のみを更新しています。"
-    },
-    {
-      "number": 56729,
-      "title": "Better handle cache deserialization errors {#pr-56729}",
-      "url": "https://github.com/rails/rails/pull/56729",
-      "mergedAt": "2026-02-05T00:00:00.000Z",
-      "author": "byroot",
-      "authorUrl": "https://github.com/byroot",
-      "summary": "1. 概要 (1-2文で)  \nRails のキャッシュ復元（デシリアライズ）時に例外が発生した場合、それを「キャッシュミス」として扱うように振る舞いを明確化・強化した PR です。memcached などが切り詰められた（truncated）レスポンスを返すような稀なケースでも、アプリ本体が例外で落ちにくくなるようにしています。"
-    },
-    {
-      "number": 54982,
-      "title": "Update Propshaft setup instructions in The Asset Pipeline guide [ci skip] {#pr-54982}",
-      "url": "https://github.com/rails/rails/pull/54982",
-      "mergedAt": "2026-02-05T00:00:00.000Z",
-      "author": "letsEstel",
-      "authorUrl": "https://github.com/letsEstel",
-      "summary": "1. 概要 (1-2文で)  \nRailsガイド「The Asset Pipeline」の Propshaft セットアップ手順が、実行しても画面上の変化が分かりにくかった問題を解消するために改善されました。具体的には、チュートリアルの中でホームページとルート定義を追加し、Propshaft を使ったアセット読み込みが実際に確認できるようにしています。"
-    },
-    {
-      "number": 56734,
-      "title": "Make AM::AttributeSet::YAMLEncoder a Module {#pr-56734}",
-      "url": "https://github.com/rails/rails/pull/56734",
-      "mergedAt": "2026-02-04T00:00:00.000Z",
-      "author": "hmcguire-shopify",
-      "authorUrl": "https://github.com/hmcguire-shopify",
-      "summary": "1. 概要 (1-2文で)  \nActiveModel の `AttributeSet::YAMLEncoder` をクラスからモジュールに変更し、Active Record モデルごとに生成されていたエンコーダ用オブジェクトを不要にしてメモリ使用とスキーマリロード時の扱いを簡素化した変更です。`default_types` のキャッシュは既にモデルクラス側に持っているため、専用クラスをインスタンス化する必要がなくなったことをコード構造に反映しています。"
-    },
-    {
-      "number": 56733,
-      "title": "Docs: Update pgAdmin name; fix foreign key wording {#pr-56733}",
-      "url": "https://github.com/rails/rails/pull/56733",
-      "mergedAt": "2026-02-04T00:00:00.000Z",
-      "author": "eglitobias",
-      "authorUrl": "https://github.com/eglitobias",
-      "summary": "1. 概要 (1-2文で)  \nActive Record Migrationsガイドの文言を、現状に即した・より正確なものにするためのドキュメント修正です。  \n具体的には、「PgAdmin III」という古い名称を「pgAdmin」に更新し、外部キーの例で誤解を招く「reviewers」を「authors」に修正しています。"
-    },
-    {
-      "number": 56727,
-      "title": "Use schema cache for primary key lookup during insert {#pr-56727}",
-      "url": "https://github.com/rails/rails/pull/56727",
-      "mergedAt": "2026-02-04T00:00:00.000Z",
-      "author": "matthewd",
-      "authorUrl": "https://github.com/matthewd",
-      "summary": "1. 概要 (1-2文で)  \nActive Record が INSERT 時にプライマリキー名を特定する処理で、スキーマキャッシュ（`schema_cache`）を利用するようにした変更です。これにより、モデル側から PK 名が渡されないケースでも、都度 DB に問い合わせずキャッシュ済みのスキーマ情報から PK を引けるようになります。"
-    },
-    {
-      "number": 56725,
-      "title": "Fix broken links to YJIT documentation [ci skip] {#pr-56725}",
-      "url": "https://github.com/rails/rails/pull/56725",
-      "mergedAt": "2026-02-03T00:00:00.000Z",
-      "author": "ykttdn",
-      "authorUrl": "https://github.com/ykttdn",
-      "summary": "1. 概要 (1–2文で)  \nRails Guides（パフォーマンスチューニングガイド）内で、YJITドキュメントへのリンクが Ruby 本体側の変更により壊れていたため、正しい YJIT ドキュメント URL に更新した PRです。コードの挙動や機能には影響せず、ドキュメントのリンク修正のみを行っています。"
     }
   ]
 }
