@@ -1,7 +1,43 @@
 {
-  "lastUpdated": "2026-02-18T00:14:16.655Z",
+  "lastUpdated": "2026-02-19T00:15:03.426Z",
   "totalCount": 50,
   "items": [
+    {
+      "number": 56791,
+      "title": "Materialize transactions before instrumentation {#pr-56791}",
+      "url": "https://github.com/rails/rails/pull/56791",
+      "mergedAt": "2026-02-19T00:00:00.000Z",
+      "author": "djmb",
+      "authorUrl": "https://github.com/djmb",
+      "summary": "1. 概要 (1-2文で)  \nこのPRは、Active Record の「遅延トランザクション (lazy transaction materialization)」使用時に、BEGIN/SAVEPOINT のクエリ時間が二重計測されてしまうバグを修正するものです。トランザクションの実体化をログ計測処理の前に行うように変更し、sql.active_record の計測結果が実際のクエリ単位に正しく対応するようにしています。"
+    },
+    {
+      "number": 56837,
+      "title": "Don't filter StructuredEventSubscriber payloads {#pr-56837}",
+      "url": "https://github.com/rails/rails/pull/56837",
+      "mergedAt": "2026-02-18T00:00:00.000Z",
+      "author": "djmb",
+      "authorUrl": "https://github.com/djmb",
+      "summary": "1. 概要 (1-2文で)  \nEventReporter がイベント payload を一律に ParameterFilter でフィルタリングしていたため、SQL のクエリ名など内部メタデータまでマスクされてしまう問題を修正した PR です。`EventReporter#notify` / `#debug` に `filter:` オプションを導入し、フレームワーク内部で使う StructuredEventSubscriber から送出されるイベントについてはフィルタリングを無効化するようにしています。"
+    },
+    {
+      "number": 55770,
+      "title": "Introduce `this_week?`, `this_month?`, and `this_year?` to Date/Time {#pr-55770}",
+      "url": "https://github.com/rails/rails/pull/55770",
+      "mergedAt": "2026-02-18T00:00:00.000Z",
+      "author": "MatheusRich",
+      "authorUrl": "https://github.com/MatheusRich",
+      "summary": "1. 概要 (1-2文で)  \n`Date` / `Time` / `DateTime` に対して、現在の週・月・年に属しているかを判定するための `this_week?` / `this_month?` / `this_year?` メソッドが追加されました。`today?` / `tomorrow?` / `yesterday?` と同様に、現在時点を基準にした期間判定が簡潔に書けるようになります。"
+    },
+    {
+      "number": 56805,
+      "title": "Optimize calculating remote IP address {#pr-56805}",
+      "url": "https://github.com/rails/rails/pull/56805",
+      "mergedAt": "2026-02-18T00:00:00.000Z",
+      "author": "fatkodima",
+      "authorUrl": "https://github.com/fatkodima",
+      "summary": "1. 概要 (1-2文で)  \n`ActionDispatch::RemoteIp` のクライアント IP アドレス算出処理が最適化され、Rack ミドルウェアから IP を取り出すコストが大幅に削減されました。これにより、`rack-attack` など IP ベースで判定するミドルウェア使用時のリクエスト処理時間・メモリアロケーションが改善します。"
+    },
     {
       "number": 56822,
       "title": "More railties test balancing {#pr-56822}",
@@ -415,42 +451,6 @@
       "author": "p8",
       "authorUrl": "https://github.com/p8",
       "summary": "1. 概要 (1-2文で)  \n`ActiveRecord::Relation#values` メソッドを Rails の公式ドキュメントから非公開（nodoc）扱いとする変更です。これにより、このメソッドは内部実装用として位置づけられ、アプリケーションコードからの利用は推奨されないことが明確になりました。"
-    },
-    {
-      "number": 56703,
-      "title": "Fix ThroughReflection#association_primary_key with composite keys {#pr-56703}",
-      "url": "https://github.com/rails/rails/pull/56703",
-      "mergedAt": "2026-02-06T00:00:00.000Z",
-      "author": "felix-d",
-      "authorUrl": "https://github.com/felix-d",
-      "summary": "1. 概要 (1-2文で)  \n`has_many :through` などで参照される `ThroughReflection#association_primary_key` が複合主キーを正しく扱えていなかった問題を修正するPRです。`primary_key: [:col1, :col2]` のような定義でも `_ids` リーダーメソッドが正しく動作するようになります。"
-    },
-    {
-      "number": 56742,
-      "title": "Read from `ENV['REVISION']` if present {#pr-56742}",
-      "url": "https://github.com/rails/rails/pull/56742",
-      "mergedAt": "2026-02-06T00:00:00.000Z",
-      "author": "cocoahero",
-      "authorUrl": "https://github.com/cocoahero",
-      "summary": "1. 概要 (1-2文で)  \nRails のアプリケーションリビジョン取得ロジック (`Rails.application.revision`) が拡張され、`ENV[\"REVISION\"]` が設定されていればそれを最優先で利用するようになりました。これにより、多くのデプロイプロバイダが採用している「環境変数でリビジョンを渡す」方式を Rails が素直にサポートします。"
-    },
-    {
-      "number": 56745,
-      "title": "Bump Ruby version to 4.0.1 in devcontainer {#pr-56745}",
-      "url": "https://github.com/rails/rails/pull/56745",
-      "mergedAt": "2026-02-06T00:00:00.000Z",
-      "author": "yahonda",
-      "authorUrl": "https://github.com/yahonda",
-      "summary": "1. 概要 (1–2文で)  \nRails の開発用コンテナ(devcontainer)で使用する Ruby のバージョンが 4.0.0 などの旧バージョンから 4.0.1 に更新されました。ローカルで devcontainer を使って Rails を開発する際の実行環境が、公式 devcontainer リポジトリに追加された Ruby 4.0.1 に追従する形で整備された変更です。"
-    },
-    {
-      "number": 56741,
-      "title": "Update Bundler to 4.0.6 {#pr-56741}",
-      "url": "https://github.com/rails/rails/pull/56741",
-      "mergedAt": "2026-02-05T00:00:00.000Z",
-      "author": "yahonda",
-      "authorUrl": "https://github.com/yahonda",
-      "summary": "1. 概要 (1-2文で)  \nBundler のバージョンを 4.0.4 から 4.0.6 に更新し、`bundle update <gem>` が正常に動作せず「Could not find compatible versions」で失敗していた問題を解消する PR です。Rails 本体のコードではなく、Gemfile.lock の Bundler バージョン指定のみを更新しています。"
     }
   ]
 }
