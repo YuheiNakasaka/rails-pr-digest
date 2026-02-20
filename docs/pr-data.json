@@ -1,7 +1,16 @@
 {
-  "lastUpdated": "2026-02-19T00:15:03.426Z",
+  "lastUpdated": "2026-02-20T00:11:55.434Z",
   "totalCount": 50,
   "items": [
+    {
+      "number": 56774,
+      "title": "Add parallel step groups to CI runner {#pr-56774}",
+      "url": "https://github.com/rails/rails/pull/56774",
+      "mergedAt": "2026-02-19T00:00:00.000Z",
+      "author": "djmb",
+      "authorUrl": "https://github.com/djmb",
+      "summary": "1. 概要 (1-2文で)  \nRails の CI ランナー (`ActiveSupport::ContinuousIntegration`) に「ステップグループ」を導入し、グループ単位でステップを並列実行できるようにした変更です。これにより、Rubocop / Brakeman / テストなど互いに依存しない処理を並列化して CI の実行時間を短縮できます。"
+    },
     {
       "number": 56791,
       "title": "Materialize transactions before instrumentation {#pr-56791}",
@@ -442,15 +451,6 @@
       "author": "yahonda",
       "authorUrl": "https://github.com/yahonda",
       "summary": "1. 概要 (1-2文で)  \nRails の依存関係として利用している memcached クライアント gem「dalli」を、5.x 系ではなく 4.x 系に固定（pin）する PR です。dalli 5.0.0 でバイナリプロトコルが削除されたことにより Rails のテストで `Dalli::Protocol::Binary` が見つからず落ちる問題を、一時的にバージョンを固定することで回避しています。"
-    },
-    {
-      "number": 56730,
-      "title": "Mark `ActiveRecord::Relation#values` as nodoc {#pr-56730}",
-      "url": "https://github.com/rails/rails/pull/56730",
-      "mergedAt": "2026-02-06T00:00:00.000Z",
-      "author": "p8",
-      "authorUrl": "https://github.com/p8",
-      "summary": "1. 概要 (1-2文で)  \n`ActiveRecord::Relation#values` メソッドを Rails の公式ドキュメントから非公開（nodoc）扱いとする変更です。これにより、このメソッドは内部実装用として位置づけられ、アプリケーションコードからの利用は推奨されないことが明確になりました。"
     }
   ]
 }
