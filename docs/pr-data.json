@@ -1,7 +1,97 @@
 {
-  "lastUpdated": "2026-02-24T00:12:27.936Z",
+  "lastUpdated": "2026-02-25T00:17:47.935Z",
   "totalCount": 50,
   "items": [
+    {
+      "number": 56871,
+      "title": "Fix Action Text `to_markdown` edge cases for code blocks, links, and URI safety {#pr-56871}",
+      "url": "https://github.com/rails/rails/pull/56871",
+      "mergedAt": "2026-02-24T00:00:00.000Z",
+      "author": "flavorjones",
+      "authorUrl": "https://github.com/flavorjones",
+      "summary": "1. 概要 (1-2文で)  \nAction Text の `to_markdown` が、コードブロック・リンク・URI 安全性まわりの細かい不具合や抜けをいくつか抱えていたのをまとめて修正し、Markdown としてより正しく、安全な出力になるようにした PR です。特に `<pre><code>` などのコードの整形・リンク文字列/URL のエスケープ・`javascript:` など危険な URI のブロックが堅牢化されています。"
+    },
+    {
+      "number": 56749,
+      "title": "Move protected_environments to ActiveRecord module {#pr-56749}",
+      "url": "https://github.com/rails/rails/pull/56749",
+      "mergedAt": "2026-02-24T00:00:00.000Z",
+      "author": "skipkayhil",
+      "authorUrl": "https://github.com/skipkayhil",
+      "summary": "1. 概要 (1-2文で)  \n`protected_environments` の設定場所を `ActiveRecord::Base` からトップレベルの `ActiveRecord` モジュールに移し、「実質グローバルな設定」であることを実装に反映した変更です。従来の `class_attribute` 風な API は非推奨になりつつも、後方互換性のために引き続き動作します。"
+    },
+    {
+      "number": 56779,
+      "title": "Optimize `ActiveRecord::Base.new` to conditionally remove STI checks {#pr-56779}",
+      "url": "https://github.com/rails/rails/pull/56779",
+      "mergedAt": "2026-02-24T00:00:00.000Z",
+      "author": "flavorjones",
+      "authorUrl": "https://github.com/flavorjones",
+      "summary": "1. 概要 (1-2文で)  \nActiveRecord の `Base.new` が、STI を使っていないモデルでは余計な STI 判定を通らずに Ruby 標準の `Class.new` をそのまま使えるよう最適化されました。これにより、非 STI モデルのインスタンス生成が Ruby 3.3〜4.0 で 8〜17% 程度高速化され、Ruby 4 では「fast path allocation」最適化も有効になります。"
+    },
+    {
+      "number": 56858,
+      "title": "Add `to_markdown` to Action Text, mirroring `to_plain_text` {#pr-56858}",
+      "url": "https://github.com/rails/rails/pull/56858",
+      "mergedAt": "2026-02-24T00:00:00.000Z",
+      "author": "flavorjones",
+      "authorUrl": "https://github.com/flavorjones",
+      "summary": "1. 概要 (1–2文で)  \nAction Text のリッチテキストを Markdown 形式に変換する `to_markdown` が追加され、既存の `to_plain_text` と同様に使えるようになりました。HTML の装飾をできるだけ保持しつつ、安全かつ高速に Markdown へエクスポートできる機能です。"
+    },
+    {
+      "number": 56868,
+      "title": "Fix deprecation of sidekiq/testing in integration test adapter at 8-1-stable {#pr-56868}",
+      "url": "https://github.com/rails/rails/pull/56868",
+      "mergedAt": "2026-02-24T00:00:00.000Z",
+      "author": "yahonda",
+      "authorUrl": "https://github.com/yahonda",
+      "summary": "1. 概要 (1-2文で)  \nRails 8.1 系の Active Job の Sidekiq 統合テスト用アダプタで、`require \"sidekiq/testing\"` による非推奨警告が出ないように修正した PRです。Sidekiq 8.1.1 以降の新しいテスト API に合わせるための追従変更です。"
+    },
+    {
+      "number": 56263,
+      "title": "Add RAILS_HOST_APP_PATH support for editor links in devcontainer/Docker environments {#pr-56263}",
+      "url": "https://github.com/rails/rails/pull/56263",
+      "mergedAt": "2026-02-24T00:00:00.000Z",
+      "author": "elalemanyo",
+      "authorUrl": "https://github.com/elalemanyo",
+      "summary": "1. 概要 (1-2文で)  \nRails のエラーページに表示される「エディタで開く」リンクが、devcontainer や Docker コンテナ内で動作するようにするため、`RAILS_HOST_APP_PATH` という新しい環境変数が追加されました。これにより、コンテナ内部パスをホスト側のパスに変換した URL を生成できるようになります。"
+    },
+    {
+      "number": 56828,
+      "title": "fix: breaking support of hyphen in table names  {#pr-56828}",
+      "url": "https://github.com/rails/rails/pull/56828",
+      "mergedAt": "2026-02-24T00:00:00.000Z",
+      "author": "djezzzl",
+      "authorUrl": "https://github.com/djezzzl",
+      "summary": "1. 概要 (1-2文で)  \nRails 8系で「ハイフンを含むテーブル名」を使うと `exec_insert` 実行時に失敗していた問題を、テーブル名のパース処理を修正することで直したPRです。正しくクオートされた `\"table-with-hyphen\"` のようなテーブル名でも、従来通り `exec_insert` が動作するようになります。"
+    },
+    {
+      "number": 56865,
+      "title": "Use instance_variables_to_inspect instead of custom inspect methods {#pr-56865}",
+      "url": "https://github.com/rails/rails/pull/56865",
+      "mergedAt": "2026-02-24T00:00:00.000Z",
+      "author": "byroot",
+      "authorUrl": "https://github.com/byroot",
+      "summary": "1. 概要 (1-2文で)  \nRails内部で定義されていた多数のカスタム`inspect`メソッドをやめ、共通ヘルパ `instance_variables_to_inspect` を使った統一的な実装に置き換えるPRです。これにより、オブジェクトのデバッグ表示（`#inspect`）の一貫性が増し、保守性・後方互換性の管理がしやすくなっています。"
+    },
+    {
+      "number": 56817,
+      "title": "Fix SQLite3 column equality for stored vs virtual generated columns {#pr-56817}",
+      "url": "https://github.com/rails/rails/pull/56817",
+      "mergedAt": "2026-02-24T00:00:00.000Z",
+      "author": "afurm",
+      "authorUrl": "https://github.com/afurm",
+      "summary": "1. 概要 (1-2文で)  \nSQLite3 アダプタで、生成カラム（generated columns）の比較ロジックに不整合があり、`:stored` と `:virtual` が「== では同じだが hash は違う」という状態になっていた問題を修正する PR です。これにより、生成カラムの等価判定とハッシュ値が一貫し、Hash や Set での利用時のバグを防ぎます。"
+    },
+    {
+      "number": 56862,
+      "title": "Fix deprecation of sidekiq/testing/inline {#pr-56862}",
+      "url": "https://github.com/rails/rails/pull/56862",
+      "mergedAt": "2026-02-24T00:00:00.000Z",
+      "author": "skipkayhil",
+      "authorUrl": "https://github.com/skipkayhil",
+      "summary": "1. 概要 (1-2文で)  \nSidekiq 8.1.1 以降で `sidekiq/testing/inline` が非推奨化された影響により、これまで暗黙的に行われていた `sidekiq` 本体の読み込みが行われなくなった問題を修正した PR です。Rails の Active Job テストで Sidekiq の inline テストアダプタを使う際に、明示的に `sidekiq` を require するようにしています。"
+    },
     {
       "number": 56774,
       "title": "Add parallel step groups to CI runner {#pr-56774}",
@@ -361,96 +451,6 @@
       "author": "byroot",
       "authorUrl": "https://github.com/byroot",
       "summary": "1. 概要 (1-2文で)  \nこのPRは、`ActiveSupport::EventReporter` で「イベントペイロードのフィルタリング」を、**ペイロード構築の後ではなく前に行う**ように変更し、無駄なオブジェクト生成コストを削減するものです。これにより、AS::Notifications 由来の「フィルタによる最適化」が、実際にオーバーヘッド削減として意味を持つようになります。"
-    },
-    {
-      "number": 56769,
-      "title": "Bump Valkey Redis Image version to 9 {#pr-56769}",
-      "url": "https://github.com/rails/rails/pull/56769",
-      "mergedAt": "2026-02-11T00:00:00.000Z",
-      "author": "akhilgkrishnan",
-      "authorUrl": "https://github.com/akhilgkrishnan",
-      "summary": "1. 概要 (1-2文で)  \nValkey の Redis コンテナイメージのバージョンを、Rails リポジトリ内で使っている devcontainer と CI 設定一式で「9」系の最新版に統一して引き上げた PRです。開発用コンテナ、Rails アプリ／プラグイン ジェネレータのテンプレート、そしてそれらを検証するテストが、すべて Valkey 9 を前提に動くようになります。"
-    },
-    {
-      "number": 56768,
-      "title": "Fix Marshal deserialisation of Integer type from Rails 8.0 {#pr-56768}",
-      "url": "https://github.com/rails/rails/pull/56768",
-      "mergedAt": "2026-02-11T00:00:00.000Z",
-      "author": "RemoteCTO",
-      "authorUrl": "https://github.com/RemoteCTO",
-      "summary": "1. 概要 (1-2文で)  \nRails 8.0 で Marshal シリアライズした `ActiveModel::Type::Integer` オブジェクトを Rails 8.1 でデシリアライズすると `NoMethodError: undefined method '<=' for nil` が発生するリグレッションを修正した PRです。8.0 → 8.1 へのアップグレード時に、キャッシュ等に Marshal された型オブジェクトが残っている環境での互換性問題を解消します。"
-    },
-    {
-      "number": 56763,
-      "title": "Fix rdoc code formatting {#pr-56763}",
-      "url": "https://github.com/rails/rails/pull/56763",
-      "mergedAt": "2026-02-11T00:00:00.000Z",
-      "author": "tjschuck",
-      "authorUrl": "https://github.com/tjschuck",
-      "summary": "1. 概要 (1-2文で)  \nRails の `ActionView::Helpers::TextHelper#highlight` の RDoc コメント内のコード例について、インラインコードのマークアップ方法を `+...+` から `<tt>...</tt>` に変更し、公式ドキュメント上でコードが正しく整形・表示されるようにする修正です。機能仕様や挙動には一切変更はなく、ドキュメント表示のみを直す PR です。"
-    },
-    {
-      "number": 56748,
-      "title": "Consistently raise deprecation warnings in CI {#pr-56748}",
-      "url": "https://github.com/rails/rails/pull/56748",
-      "mergedAt": "2026-02-10T00:00:00.000Z",
-      "author": "skipkayhil",
-      "authorUrl": "https://github.com/skipkayhil",
-      "summary": "1. 概要 (1-2文で)  \nRails の各フレームワーク（Action Pack / Action View / Action Mailer / Active Model / Active Record）で、CI 環境における「非推奨機能(deprecation)の扱い」を、Active Support と同様に「ログではなく例外を投げてテストを落とす」挙動に統一した PR です。  \nこれにより、CI 上で非推奨機能の利用が見逃されにくくなり、非推奨化を導入した PR の時点で対応を強制しやすくなります。"
-    },
-    {
-      "number": 56762,
-      "title": "ActiveSupport::ParameterFilter: optimize redundant patterns out {#pr-56762}",
-      "url": "https://github.com/rails/rails/pull/56762",
-      "mergedAt": "2026-02-10T00:00:00.000Z",
-      "author": "byroot",
-      "authorUrl": "https://github.com/byroot",
-      "summary": "1. 概要 (1-2文で)  \nActiveSupport::ParameterFilter のプリコンパイル処理で、意味的に重複しているフィルタパターンを取り除く最適化が追加されました。これにより、特に Active Record Encryption によって大量の深いフィルタが自動登録されるケースで、パラメータフィルタリングの性能劣化を抑えられます。"
-    },
-    {
-      "number": 56759,
-      "title": "Avoid combinatory explosion of `Rails.app.config.filter_parameters` {#pr-56759}",
-      "url": "https://github.com/rails/rails/pull/56759",
-      "mergedAt": "2026-02-10T00:00:00.000Z",
-      "author": "byroot",
-      "authorUrl": "https://github.com/byroot",
-      "summary": "1. 概要 (1-2文で)  \nRails 8.1 で `Rails.application.config.filter_parameters` と Active Record の暗号化属性が組み合わさることで、フィルタ対象の属性リストが爆発的に増え、ログ・イベントのフィルタ処理が極端に遅くなる問題がありました。  \nこのPRは、その「組み合わせ爆発」が起きないように `filter_attributes` の扱いを修正し、フィルタ処理のパフォーマンスを大幅に改善します。"
-    },
-    {
-      "number": 56732,
-      "title": "Add extension point to customize transaction for persistence methods {#pr-56732}",
-      "url": "https://github.com/rails/rails/pull/56732",
-      "mergedAt": "2026-02-09T00:00:00.000Z",
-      "author": "ipvalverde",
-      "authorUrl": "https://github.com/ipvalverde",
-      "summary": "1. 概要 (1–2文で)  \nRails の Active Record において、`save` / `destroy` などの永続化メソッドが内部で張る「暗黙のトランザクション」を、モデル単位でカスタマイズできる拡張ポイントが追加されました。これにより、トランザクション分離レベルやロールバック処理などを、`with_transaction_returning_status` をモンキーパッチせずに安全に制御できます。"
-    },
-    {
-      "number": 56739,
-      "title": "Fix Logger documentation link in Active Record README {#pr-56739}",
-      "url": "https://github.com/rails/rails/pull/56739",
-      "mergedAt": "2026-02-09T00:00:00.000Z",
-      "author": "toilaloc",
-      "authorUrl": "https://github.com/toilaloc",
-      "summary": "1. 概要 (1–2文で)  \nActive Record の README に記載されていた Ruby の Logger クラスへのリンクが 404 になっていたため、正しいドキュメント URL に差し替えた PR です。コード本体の挙動には一切影響せず、ドキュメントの品質向上のみを目的としています。"
-    },
-    {
-      "number": 56753,
-      "title": "Upgrade to Dalli 5 {#pr-56753}",
-      "url": "https://github.com/rails/rails/pull/56753",
-      "mergedAt": "2026-02-08T00:00:00.000Z",
-      "author": "byroot",
-      "authorUrl": "https://github.com/byroot",
-      "summary": "1. 概要 (1-2文で)  \nこのPRは、Railsが使用する Memcached クライアント gem「Dalli」をバージョン5系にアップグレードし、それに伴って `MemCacheStore` 向けのテストを Dalli 5 の振る舞いに合わせて修正したものです。併せて、直前の変更(#56721)や関連Issue(#56704)で発生していた不具合を解消しています。"
-    },
-    {
-      "number": 56751,
-      "title": "Pin dalli gem to version 4.x {#pr-56751}",
-      "url": "https://github.com/rails/rails/pull/56751",
-      "mergedAt": "2026-02-08T00:00:00.000Z",
-      "author": "yahonda",
-      "authorUrl": "https://github.com/yahonda",
-      "summary": "1. 概要 (1-2文で)  \nRails の依存関係として利用している memcached クライアント gem「dalli」を、5.x 系ではなく 4.x 系に固定（pin）する PR です。dalli 5.0.0 でバイナリプロトコルが削除されたことにより Rails のテストで `Dalli::Protocol::Binary` が見つからず落ちる問題を、一時的にバージョンを固定することで回避しています。"
     }
   ]
 }
