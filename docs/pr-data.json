@@ -1,7 +1,61 @@
 {
-  "lastUpdated": "2026-02-25T00:17:47.935Z",
+  "lastUpdated": "2026-02-26T00:13:16.191Z",
   "totalCount": 50,
   "items": [
+    {
+      "number": 56880,
+      "title": "Avoid nesting Arel Or Nodes {#pr-56880}",
+      "url": "https://github.com/rails/rails/pull/56880",
+      "mergedAt": "2026-02-25T00:00:00.000Z",
+      "author": "skipkayhil",
+      "authorUrl": "https://github.com/skipkayhil",
+      "summary": "1. 概要 (1-2文で)  \nこのPRでは、Arelの `Or` ノードを「2項(Binary)の入れ子」で使っていた箇所を、「多項(Nary)」としてフラットに扱うように修正し、Arelツリーのネストを浅くして `StackTooDeep` エラーの発生可能性を下げています。内部実装の変更であり、アプリケーション側のAPIやクエリ結果は変えずに、パフォーマンスと安定性を向上させる目的の修正です。"
+    },
+    {
+      "number": 56873,
+      "title": "Escape markdown metacharacters in text nodes and attachment captions {#pr-56873}",
+      "url": "https://github.com/rails/rails/pull/56873",
+      "mergedAt": "2026-02-25T00:00:00.000Z",
+      "author": "flavorjones",
+      "authorUrl": "https://github.com/flavorjones",
+      "summary": "1. 概要 (1-2文で)  \nAction Text の HTML→Markdown 変換時に、通常テキストや添付ファイルのキャプション等に含まれる Markdown メタ文字（`*`, `#`, `[]` など）が意図せず Markdown として解釈されないよう、バックスラッシュでエスケープする仕組みを導入した PR です。  \n同時に、添付ファイルが自前で生成する Markdown については新しいタグでラップして「非エスケープ領域」として扱い、元の Markdown を維持できるようにしています。"
+    },
+    {
+      "number": 56881,
+      "title": "Fix using private lookup_cast_type in SQLite tests [8-0-stable] {#pr-56881}",
+      "url": "https://github.com/rails/rails/pull/56881",
+      "mergedAt": "2026-02-25T00:00:00.000Z",
+      "author": "skipkayhil",
+      "authorUrl": "https://github.com/skipkayhil",
+      "summary": "1. 概要 (1-2文で)  \nRails 8.0 系の SQLite アダプタのテストで、`Column#initialize` に存在しない `cast_type` を前提としたプライベートメソッドを使っていた問題を解消し、より単純な形に書き直した PR です。8.1 以降で導入された API に依存していたテストコードを、8.0 の仕様に合わせて修正しています。"
+    },
+    {
+      "number": 56854,
+      "title": "Render MissingAttachable as \"☒\" in plain text {#pr-56854}",
+      "url": "https://github.com/rails/rails/pull/56854",
+      "mergedAt": "2026-02-25T00:00:00.000Z",
+      "author": "flavorjones",
+      "authorUrl": "https://github.com/flavorjones",
+      "summary": "1. 概要 (1-2文で)  \nAction Text で「存在しない／削除された添付ファイル (MissingAttachable)」をプレーンテキスト出力する際、これまで空文字列になっていたのを、HTML と同様に「☒」(U+2612) を出力するようにした修正です。これにより、添付が欠損していることがプレーンテキストでも明示的に分かるようになります。"
+    },
+    {
+      "number": 56875,
+      "title": "Cleanup RAILS_HOST_APP_PATH related tests {#pr-56875}",
+      "url": "https://github.com/rails/rails/pull/56875",
+      "mergedAt": "2026-02-25T00:00:00.000Z",
+      "author": "byroot",
+      "authorUrl": "https://github.com/byroot",
+      "summary": "1. 概要 (1-2文で)  \n`RAILS_HOST_APP_PATH` を直接 `ENV` から読むのをやめ、定数に切り出したうえでテストではその定数をスタブする形に整理した PR です。これによりテストがよりシンプルかつ安定し、環境変数依存のテスト構造が改善されています。"
+    },
+    {
+      "number": 56867,
+      "title": "Fix Ruby 4.0 delegator warning for inspect on DelegateClass subclasses {#pr-56867}",
+      "url": "https://github.com/rails/rails/pull/56867",
+      "mergedAt": "2026-02-25T00:00:00.000Z",
+      "author": "hammadxcm",
+      "authorUrl": "https://github.com/hammadxcm",
+      "summary": "1. 概要 (1-2文で)  \nRuby 4.0 で追加された `Kernel#instance_variables_to_inspect` により、`DelegateClass` を継承した Rails のクラスで `inspect` を委譲している箇所から警告が出る問題を解消する PR です。`inspect` を Kernel に丸投げしている 2 クラスに対して、プライベートメソッド `instance_variables_to_inspect` を定義し、デリゲータ自身のインスタンス変数を返すようにしています。"
+    },
     {
       "number": 56871,
       "title": "Fix Action Text `to_markdown` edge cases for code blocks, links, and URI safety {#pr-56871}",
@@ -397,60 +451,6 @@
       "author": "drsharp",
       "authorUrl": "https://github.com/drsharp",
       "summary": "1. 概要 (1-2文で)  \nRails 8.1.0 で導入された `JSONGemCoderEncoder` により、`as_json` が Hash を返すオブジェクトをハッシュキーに使った場合の JSON シリアライズが壊れていた問題を修正する PRです。ハッシュキー変換時に `as_json` の戻り値ではなく「元のキーオブジェクト」に対して `to_s` を呼ぶように戻すことで、7.2/8.0 と同等の挙動に復元しています。"
-    },
-    {
-      "number": 56787,
-      "title": "Add action mailer load hook in broken configuration test {#pr-56787}",
-      "url": "https://github.com/rails/rails/pull/56787",
-      "mergedAt": "2026-02-13T00:00:00.000Z",
-      "author": "gmcgibbon",
-      "authorUrl": "https://github.com/gmcgibbon",
-      "summary": "1. 概要 (1-2文で)  \nこのPRは、「壊れた設定 (broken configuration)」を扱うテストで発生していた Action Mailer の load hook に関するエラーを解消するための、テストコードの小さな修正です。アプリ本体の挙動変更はなく、テストの安定性・正しさを確保するためのメンテナンス的変更です。"
-    },
-    {
-      "number": 56777,
-      "title": "Remove the deprecated `ActiveSupport::Multibyte::Chars` class {#pr-56777}",
-      "url": "https://github.com/rails/rails/pull/56777",
-      "mergedAt": "2026-02-12T00:00:00.000Z",
-      "author": "byroot",
-      "authorUrl": "https://github.com/byroot",
-      "summary": "1. 概要 (1-2文で)  \nこのPRでは、非推奨となっていた `ActiveSupport::Multibyte::Chars` クラスと関連コード／テストが Rails 本体から完全に削除されました。あわせて ActiveRecord のクォート処理からも `Multibyte::Chars` 依存が取り除かれ、マルチバイト文字列処理は Ruby の標準文字列機能＋既存の ActiveSupport 拡張に一本化されています。"
-    },
-    {
-      "number": 56201,
-      "title": "Load hook guard {#pr-56201}",
-      "url": "https://github.com/rails/rails/pull/56201",
-      "mergedAt": "2026-02-11T00:00:00.000Z",
-      "author": "gmcgibbon",
-      "authorUrl": "https://github.com/gmcgibbon",
-      "summary": "1. 概要 (1–2文で)  \nRails の `ActiveSupport.on_load` フックが「アプリ初期化前」に実行されてしまう問題を検知するため、`Rails::Railtie` にロードフック用のガード機構 `guard_load_hooks` が追加されました。これにより、フレームワーク自身および Railtie/Engine を持つ gem が、フックの早期実行をログ出力や例外で検知できるようになります。"
-    },
-    {
-      "number": 56778,
-      "title": "Deprecate Mail::Address.wrap {#pr-56778}",
-      "url": "https://github.com/rails/rails/pull/56778",
-      "mergedAt": "2026-02-11T00:00:00.000Z",
-      "author": "gmcgibbon",
-      "authorUrl": "https://github.com/gmcgibbon",
-      "summary": "1. 概要 (1-2文で)  \n`Mail::Address.wrap` が Rails 8.2 で削除予定の非推奨APIとしてマークされました。Action Mailbox 側でこのメソッドを使っている箇所とテスト・CHANGELOGに、非推奨であることが明示されています。"
-    },
-    {
-      "number": 56767,
-      "title": "Don't eagerly cache JSON Encoder in ActiveRecord::Type::Json {#pr-56767}",
-      "url": "https://github.com/rails/rails/pull/56767",
-      "mergedAt": "2026-02-11T00:00:00.000Z",
-      "author": "xathien",
-      "authorUrl": "https://github.com/xathien",
-      "summary": "1. 概要 (1-2文で)  \nActiveRecord::Type::Json が JSON エンコーダを「クラス読み込み時に自前でキャッシュ」するのをやめ、ActiveSupport::JSON 側のキャッシュ済みエンコーダと `without_escaping` オプションをそのまま使うように変更した PRです。これにより、アプリ側で JSON エンコーダを後から上書き（カスタマイズ）できるようになります。"
-    },
-    {
-      "number": 56761,
-      "title": "EventReporter: filter events before building the payload {#pr-56761}",
-      "url": "https://github.com/rails/rails/pull/56761",
-      "mergedAt": "2026-02-11T00:00:00.000Z",
-      "author": "byroot",
-      "authorUrl": "https://github.com/byroot",
-      "summary": "1. 概要 (1-2文で)  \nこのPRは、`ActiveSupport::EventReporter` で「イベントペイロードのフィルタリング」を、**ペイロード構築の後ではなく前に行う**ように変更し、無駄なオブジェクト生成コストを削減するものです。これにより、AS::Notifications 由来の「フィルタによる最適化」が、実際にオーバーヘッド削減として意味を持つようになります。"
     }
   ]
 }
