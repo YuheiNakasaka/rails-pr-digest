@@ -1,7 +1,34 @@
 {
-  "lastUpdated": "2026-02-26T00:13:16.191Z",
+  "lastUpdated": "2026-02-27T00:14:43.260Z",
   "totalCount": 50,
   "items": [
+    {
+      "number": 56889,
+      "title": "Fix ExecutionContext corruption during reload {#pr-56889}",
+      "url": "https://github.com/rails/rails/pull/56889",
+      "mergedAt": "2026-02-26T00:00:00.000Z",
+      "author": "alpaca-tc",
+      "authorUrl": "https://github.com/alpaca-tc",
+      "summary": "1. 概要 (1-2文で)  \nRails のコードリロード時（特に test 環境で `config.enable_reloading = true` かつ Spring 推奨設定を使うケース）に、`ActiveSupport::ExecutionContext` の内部状態が壊れて `CurrentAttributes` などで `NoMethodError` が起きる不具合を修正する PR です。`reload!` 時のコンテキストリセット方法を変更し、「スタックの深さは保ったまま中身だけを消す」挙動にすることで問題を解消しています。"
+    },
+    {
+      "number": 56887,
+      "title": "Add `content_type` parameter to `http_authentication` methods {#pr-56887}",
+      "url": "https://github.com/rails/rails/pull/56887",
+      "mergedAt": "2026-02-26T00:00:00.000Z",
+      "author": "ilianah",
+      "authorUrl": "https://github.com/ilianah",
+      "summary": "1. 概要 (1-2文で)  \nHTTP Basic/Digest/Token 認証の 401 応答で `Content-Type` をカスタマイズできるように、`request_http_*_authentication` に `content_type` オプションが追加されました。あわせて、これまで下位メソッドにはあった `message` 引数が `http_basic_authenticate_with` からも指定できるように公開されています。"
+    },
+    {
+      "number": 56883,
+      "title": "Revert \"Load minitest server plugin to run `minitest` with `--bisect` option\" {#pr-56883}",
+      "url": "https://github.com/rails/rails/pull/56883",
+      "mergedAt": "2026-02-26T00:00:00.000Z",
+      "author": "yahonda",
+      "authorUrl": "https://github.com/yahonda",
+      "summary": "1. 概要 (1-2文で)  \nRails 側で `minitest --bisect` を使うために入れていたワークアラウンドを削除し、純粋に minitest 本体の `--bisect` サポートに任せるように戻した PRです。これにより、Rails のテスト実行時に独自の minitest server plugin ロード処理は行われなくなります。"
+    },
     {
       "number": 56880,
       "title": "Avoid nesting Arel Or Nodes {#pr-56880}",
@@ -424,33 +451,6 @@
       "author": "vinibispo",
       "authorUrl": "https://github.com/vinibispo",
       "summary": "1. 概要 (1-2文で)  \nRailsアプリ生成時に `--skip-active-storage` かつ DB が sqlite3 以外の場合、`storage` ディレクトリ関連のエントリを `.gitignore` / `.dockerignore` から外すようにした PR です。これにより Active Storage を使わない構成で、誤って `storage` を無視してしまう問題 (#53413) を解消しています。"
-    },
-    {
-      "number": 56772,
-      "title": "Bump Github Action cache version to 5 {#pr-56772}",
-      "url": "https://github.com/rails/rails/pull/56772",
-      "mergedAt": "2026-02-13T00:00:00.000Z",
-      "author": "akhilgkrishnan",
-      "authorUrl": "https://github.com/akhilgkrishnan",
-      "summary": "1. 概要 (1-2文で)  \nRails が生成する GitHub Actions 用 CI 設定テンプレートにおいて、`actions/cache` のバージョン指定を v5 系に更新した PRです。アプリ／プラグイン生成時に作られる `.github/workflows/ci.yml` で、最新世代のキャッシュアクションが使われるようになります。"
-    },
-    {
-      "number": 56773,
-      "title": "Bump Github Action upload-artifact version to 6 {#pr-56773}",
-      "url": "https://github.com/rails/rails/pull/56773",
-      "mergedAt": "2026-02-13T00:00:00.000Z",
-      "author": "akhilgkrishnan",
-      "authorUrl": "https://github.com/akhilgkrishnan",
-      "summary": "1. 概要 (1-2文で)  \nGitHub Actions の `actions/upload-artifact` を v6 に更新するための、CI 用テンプレート修正 PRです。Railsアプリ・プラグイン生成時に出力される GitHub Actions ワークフローのバージョン指定だけを更新しており、機能的な挙動変更はほぼありません。"
-    },
-    {
-      "number": 56785,
-      "title": "Fix JSONGemCoderEncoder to call to_s on original hash key {#pr-56785}",
-      "url": "https://github.com/rails/rails/pull/56785",
-      "mergedAt": "2026-02-13T00:00:00.000Z",
-      "author": "drsharp",
-      "authorUrl": "https://github.com/drsharp",
-      "summary": "1. 概要 (1-2文で)  \nRails 8.1.0 で導入された `JSONGemCoderEncoder` により、`as_json` が Hash を返すオブジェクトをハッシュキーに使った場合の JSON シリアライズが壊れていた問題を修正する PRです。ハッシュキー変換時に `as_json` の戻り値ではなく「元のキーオブジェクト」に対して `to_s` を呼ぶように戻すことで、7.2/8.0 と同等の挙動に復元しています。"
     }
   ]
 }
