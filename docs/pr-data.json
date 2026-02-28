@@ -1,7 +1,52 @@
 {
-  "lastUpdated": "2026-02-27T00:14:43.260Z",
+  "lastUpdated": "2026-02-28T00:11:33.589Z",
   "totalCount": 50,
   "items": [
+    {
+      "number": 56896,
+      "title": "Improve Trix support for Action Text `to_markdown` conversion {#pr-56896}",
+      "url": "https://github.com/rails/rails/pull/56896",
+      "mergedAt": "2026-02-27T00:00:00.000Z",
+      "author": "flavorjones",
+      "authorUrl": "https://github.com/flavorjones",
+      "summary": "1. 概要 (1-2文で)  \nTrix が生成する HTML に対して `ActionText::MarkdownConversion` の変換精度を上げる PRです。`<del>`（取り消し線）、Trix 特有の `<div> + <br>` ベースのレイアウト、および pretty-print された HTML による不要な空白・改行の混入に対応しています。"
+    },
+    {
+      "number": 56901,
+      "title": "Don't guard action_dispatch_request and action_cable load hooks {#pr-56901}",
+      "url": "https://github.com/rails/rails/pull/56901",
+      "mergedAt": "2026-02-27T00:00:00.000Z",
+      "author": "gmcgibbon",
+      "authorUrl": "https://github.com/gmcgibbon",
+      "summary": "1. 概要 (1-2文で)  \n本PRは、`action_dispatch_request` と `action_cable` のロードフック（`ActiveSupport.on_load`）周りから「ガード条件」を外し、これらがアプリ起動時にすでにロードされてしまうケースでも確実にフックが実行されるようにする変更です。あわせて、Action Cable サーバーを読み込む際にケーブルチャンネルが正しくロードされるよう、コールバックの順序・内容も整理しています。"
+    },
+    {
+      "number": 56894,
+      "title": "Action Text `to_markdown` generates markdown links for blob {#pr-56894}",
+      "url": "https://github.com/rails/rails/pull/56894",
+      "mergedAt": "2026-02-27T00:00:00.000Z",
+      "author": "flavorjones",
+      "authorUrl": "https://github.com/flavorjones",
+      "summary": "1. 概要 (1-2文で)\n- Action Text の `to_markdown` が Active Storage の Blob 添付を「実際の Markdown リンク（画像は `![title](url)`、ファイルは `[title](url)`）」として出力するようになり、これまでの単なる `[caption]` プレースホルダを置き換えました。  \n- URL 生成にはリクエスト単位のレンダリングコンテキストが使われ、マルチテナントなどで `host` / `protocol` / `script_name` が動的に変わるケースにも対応します。"
+    },
+    {
+      "number": 56898,
+      "title": "Keep pinned connections in the pool after disconnect {#pr-56898}",
+      "url": "https://github.com/rails/rails/pull/56898",
+      "mergedAt": "2026-02-27T00:00:00.000Z",
+      "author": "byroot",
+      "authorUrl": "https://github.com/byroot",
+      "summary": "1. 概要 (1-2文で)  \nこのPRは、Active Record のコネクションプールから「ピン留め(pinned)された接続」が `disconnect` 時に不適切に扱われてしまい、プールが不正な状態になる問題を修正しています。`disconnect` 後でも、ピン留めされた接続がプール内の状態として矛盾しないように挙動を調整した、1 行だけの小さな修正です。"
+    },
+    {
+      "number": 56891,
+      "title": "Fix collection caching to preserve store default expires_in {#pr-56891}",
+      "url": "https://github.com/rails/rails/pull/56891",
+      "mergedAt": "2026-02-27T00:00:00.000Z",
+      "author": "pietervisser",
+      "authorUrl": "https://github.com/pietervisser",
+      "summary": "1. 概要 (1-2文で)  \n`ActionView::PartialRenderer` のコレクションキャッシュで、`expires_in` を常に `write_multi` に渡してしまい、キャッシュストア側のデフォルト有効期限を潰していたリグレッションが修正されました。`expires_in` が明示的に指定されたときだけ `write_multi` に渡されるようになり、デフォルト設定が正しく尊重されます。"
+    },
     {
       "number": 56889,
       "title": "Fix ExecutionContext corruption during reload {#pr-56889}",
@@ -406,51 +451,6 @@
       "author": "coderhs",
       "authorUrl": "https://github.com/coderhs",
       "summary": "1. 概要 (1-2文で)  \nこのPRは、Rails のテストコード内にある文字列のタイポ「skippped」を正しい綴り「skipped」に修正するものです。機能や挙動の変更はなく、純粋なスペル修正のみです。"
-    },
-    {
-      "number": 56797,
-      "title": "Include virtual? in Column#== and Column#hash for SQLite3 and PostgreSQL {#pr-56797}",
-      "url": "https://github.com/rails/rails/pull/56797",
-      "mergedAt": "2026-02-14T00:00:00.000Z",
-      "author": "uberjay",
-      "authorUrl": "https://github.com/uberjay",
-      "summary": "1. 概要 (1-2文で)  \nSQLite3 / PostgreSQL アダプタにおいて、カラム同士の同一性判定（`==` と `hash`）に仮想カラム（GENERATED / virtual）かどうかを含める変更です。これにより、仮想カラムと通常カラムが誤って同一とみなされて INSERT / UPDATE 対象から外れてしまう不具合が解消されます。"
-    },
-    {
-      "number": 56794,
-      "title": "Add non-interactive exec subcommand to devcontainer tool {#pr-56794}",
-      "url": "https://github.com/rails/rails/pull/56794",
-      "mergedAt": "2026-02-13T00:00:00.000Z",
-      "author": "bheeshmar",
-      "authorUrl": "https://github.com/bheeshmar",
-      "summary": "1. 概要 (1-2文で)  \nRails の開発用 devcontainer ツールに、TTY を伴わない非対話的な `exec` サブコマンドが追加され、ホスト側からコンテナ内でコマンドを実行できるようになりました。あわせて `mise` を有効化してから実行することで、`ruby` や `bundle` などのツールが確実に PATH に乗るようにしています。"
-    },
-    {
-      "number": 49821,
-      "title": "Move route helper method_missing to ActionController::TestCase {#pr-49821}",
-      "url": "https://github.com/rails/rails/pull/49821",
-      "mergedAt": "2026-02-13T00:00:00.000Z",
-      "author": "gmcgibbon",
-      "authorUrl": "https://github.com/gmcgibbon",
-      "summary": "1. 概要 (1-2文で)  \nこのPRは、ルーティング関連テストで使われていた `method_missing` ベースのルートヘルパー委譲処理を、「すべてのテスト」から「コントローラテスト専用」に整理した変更です。結果として、Integration Test はこれまで通り `integration_session` を経由し、Controller Test だけが `method_missing` による URL ヘルパー解決を行うようになります。"
-    },
-    {
-      "number": 56783,
-      "title": "Fix ActiveStorage::Blob content type methods to handle nil {#pr-56783}",
-      "url": "https://github.com/rails/rails/pull/56783",
-      "mergedAt": "2026-02-13T00:00:00.000Z",
-      "author": "kudoas",
-      "authorUrl": "https://github.com/kudoas",
-      "summary": "1. 概要 (1-2文で)  \nActiveStorage::Blob のコンテンツタイプ判定系メソッド（`image?` など）が `content_type: nil` を持つレコードで `NoMethodError` を起こしていた問題を修正した PR です。`purge_later` で未添付 Blob をクリーンアップする際に落ちるケースを、`nil` を安全に扱うことで防いでいます。"
-    },
-    {
-      "number": 53417,
-      "title": "Remove storage from gitignore if skip_active_storage and database is not sqlite3 {#pr-53417}",
-      "url": "https://github.com/rails/rails/pull/53417",
-      "mergedAt": "2026-02-13T00:00:00.000Z",
-      "author": "vinibispo",
-      "authorUrl": "https://github.com/vinibispo",
-      "summary": "1. 概要 (1-2文で)  \nRailsアプリ生成時に `--skip-active-storage` かつ DB が sqlite3 以外の場合、`storage` ディレクトリ関連のエントリを `.gitignore` / `.dockerignore` から外すようにした PR です。これにより Active Storage を使わない構成で、誤って `storage` を無視してしまう問題 (#53413) を解消しています。"
     }
   ]
 }
