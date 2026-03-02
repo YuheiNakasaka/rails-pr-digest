@@ -1,7 +1,25 @@
 {
-  "lastUpdated": "2026-03-01T00:12:20.234Z",
+  "lastUpdated": "2026-03-02T00:12:08.020Z",
   "totalCount": 50,
   "items": [
+    {
+      "number": 56903,
+      "title": "Fix flaky test: sql.active_record event count in transaction instrumentation tests {#pr-56903}",
+      "url": "https://github.com/rails/rails/pull/56903",
+      "mergedAt": "2026-03-01T00:00:00.000Z",
+      "author": "flavorjones",
+      "authorUrl": "https://github.com/flavorjones",
+      "summary": "1. 概要 (1-2文で)  \nトランザクション計測用テストで、`sql.active_record` のイベント件数を厳密にカウントしている箇所が、スキーマキャッシュの状態に依存して CI でフレ flaky になる問題を修正した PRです。テスト開始前に `Topic` 関連のスキーマ情報をウォームアップしておくことで、想定外の SCHEMA クエリがイベント数に混入しないようにしています。"
+    },
+    {
+      "number": 56902,
+      "title": "Fix IsolatedExecutionState.share_with() call in AC::Live {#pr-56902}",
+      "url": "https://github.com/rails/rails/pull/56902",
+      "mergedAt": "2026-03-01T00:00:00.000Z",
+      "author": "tavianator",
+      "authorUrl": "https://github.com/tavianator",
+      "summary": "1. 概要 (1-2文で)  \nActionController::Live が `isolation_level = :fiber` のときに誤ったコンテキストを `IsolatedExecutionState.share_with` に渡していたバグを修正し、正しい「元のコンテキスト」を共有するようにした PR です。これにより、Fiber ベースの並行実行時でも IsolatedExecutionState（スレッドローカルや CurrentAttributes 等を含む実行コンテキスト）が正しく引き継がれます。"
+    },
     {
       "number": 56896,
       "title": "Improve Trix support for Action Text `to_markdown` conversion {#pr-56896}",
@@ -433,24 +451,6 @@
       "author": "jordan-brough",
       "authorUrl": "https://github.com/jordan-brough",
       "summary": "1. 概要 (1-2文で)  \nCombinedConfiguration / EncryptedConfiguration / EnvConfiguration のコメントが整理・統一され、挙動の説明（特に「nil は欠損とみなす」点）が明確化されました。  \nコードのロジック変更はほぼなく、ドキュメンテーションの精度と一貫性を高めるための PR です。"
-    },
-    {
-      "number": 56801,
-      "title": "Improve #hash methods {#pr-56801}",
-      "url": "https://github.com/rails/rails/pull/56801",
-      "mergedAt": "2026-02-14T00:00:00.000Z",
-      "author": "byroot",
-      "authorUrl": "https://github.com/byroot",
-      "summary": "1. 概要 (1–2文で)  \nこのPRは、Active Record の各種クラスで定義されている `#hash` メソッドの実装を見直し、Ruby 3.2 以降で最適化された `Array#hash` を素直に利用する形に変更するものです。これにより、独自のハッシュ値の手動合成をやめて、シンプルでパフォーマンス的にも有利な実装に統一しています。"
-    },
-    {
-      "number": 56800,
-      "title": "[ci skip] Fix typo: skippped -> skipped {#pr-56800}",
-      "url": "https://github.com/rails/rails/pull/56800",
-      "mergedAt": "2026-02-14T00:00:00.000Z",
-      "author": "coderhs",
-      "authorUrl": "https://github.com/coderhs",
-      "summary": "1. 概要 (1-2文で)  \nこのPRは、Rails のテストコード内にある文字列のタイポ「skippped」を正しい綴り「skipped」に修正するものです。機能や挙動の変更はなく、純粋なスペル修正のみです。"
     }
   ]
 }
