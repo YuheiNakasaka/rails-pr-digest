@@ -1,7 +1,16 @@
 {
-  "lastUpdated": "2026-03-03T00:13:34.291Z",
+  "lastUpdated": "2026-03-04T00:11:55.277Z",
   "totalCount": 50,
   "items": [
+    {
+      "number": 56879,
+      "title": "Fixed guard around AS::TC.run_order {#pr-56879}",
+      "url": "https://github.com/rails/rails/pull/56879",
+      "mergedAt": "2026-03-03T00:00:00.000Z",
+      "author": "zenspider",
+      "authorUrl": "https://github.com/zenspider",
+      "summary": "1. 概要 (1-2文で)  \nActiveSupport::TestCase の `run_order` 周りのガード条件が誤っていた／不十分だったのを 1行の修正で正した PR です。テストの実行順序設定に関する条件分岐が、想定通りのケースでのみ動作するようになります。"
+    },
     {
       "number": 56906,
       "title": "Fix Encoding::CompatibilityError with non-ASCII strict locals defaults {#pr-56906}",
@@ -442,15 +451,6 @@
       "author": "afurm",
       "authorUrl": "https://github.com/afurm",
       "summary": "1. 概要 (1-2文で)  \nSQLite3 のカラムオブジェクト同士の比較 (`ActiveRecord::ConnectionAdapters::SQLite3::Column#==`) において、`rowid` の扱いが `hash` と不整合だったバグを修正し、`rowid` の違いをきちんと等価性判定に含めるようにした PR です。これにより、`rowid` セマンティクスが異なるカラム同士が誤って「同じカラム」とみなされる問題が解消されます。"
-    },
-    {
-      "number": 56717,
-      "title": "Skip ROLLBACK statement following TransactionRollbackError {#pr-56717}",
-      "url": "https://github.com/rails/rails/pull/56717",
-      "mergedAt": "2026-02-16T00:00:00.000Z",
-      "author": "sorah",
-      "authorUrl": "https://github.com/sorah",
-      "summary": "1. 概要 (1-2文で)  \n`COMMIT` 時に `TransactionRollbackError`（例: `SerializationFailure`）が発生した場合に、その直後の不要な `ROLLBACK` を発行しないようにし、PostgreSQL/libpq からの「WARNING: there is no transaction in progress」ログが出ないようにした PR です。これにより、Aurora DSQL や SERIALIZABLE トランザクション使用時でも、ログ抑制に頼らずにクリーンなログ運用がしやすくなります。"
     }
   ]
 }
