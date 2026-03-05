@@ -1,7 +1,16 @@
 {
-  "lastUpdated": "2026-03-04T00:11:55.277Z",
+  "lastUpdated": "2026-03-05T00:12:32.750Z",
   "totalCount": 50,
   "items": [
+    {
+      "number": 56911,
+      "title": "array_position requires PostgreSQL 9.5 {#pr-56911}",
+      "url": "https://github.com/rails/rails/pull/56911",
+      "mergedAt": "2026-03-04T00:00:00.000Z",
+      "author": "toy",
+      "authorUrl": "https://github.com/toy",
+      "summary": "1. 概要 (1-2文で)  \nこのPRは、Active Record が内部で利用している PostgreSQL 関数 `array_position` が PostgreSQL 9.5 以降でしか使えないことを踏まえ、PostgreSQL アダプタのバージョンチェックとドキュメントを「9.4 まで」から「9.5 まで」に更新するものです。実質的には「Rails の PostgreSQL サポート下限が 9.5 である」ことをコードとガイドに明示した調整です。"
+    },
     {
       "number": 56879,
       "title": "Fixed guard around AS::TC.run_order {#pr-56879}",
@@ -442,15 +451,6 @@
       "author": "kamipo",
       "authorUrl": "https://github.com/kamipo",
       "summary": "1. 概要 (1-2文で)  \nPostgreSQL・SQLite3 用の `ActiveRecord::ConnectionAdapters::Column` クラスにおいて、`#hash` メソッドが誤ったインスタンス変数を参照していた問題を修正する PR です。これにより、`Column` オブジェクトのハッシュ値が意図した属性に基づいて正しく計算されるようになります。"
-    },
-    {
-      "number": 56802,
-      "title": "Fix SQLite3 column equality for `rowid` aliases {#pr-56802}",
-      "url": "https://github.com/rails/rails/pull/56802",
-      "mergedAt": "2026-02-16T00:00:00.000Z",
-      "author": "afurm",
-      "authorUrl": "https://github.com/afurm",
-      "summary": "1. 概要 (1-2文で)  \nSQLite3 のカラムオブジェクト同士の比較 (`ActiveRecord::ConnectionAdapters::SQLite3::Column#==`) において、`rowid` の扱いが `hash` と不整合だったバグを修正し、`rowid` の違いをきちんと等価性判定に含めるようにした PR です。これにより、`rowid` セマンティクスが異なるカラム同士が誤って「同じカラム」とみなされる問題が解消されます。"
     }
   ]
 }
