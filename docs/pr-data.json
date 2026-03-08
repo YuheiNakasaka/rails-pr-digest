@@ -1,7 +1,16 @@
 {
-  "lastUpdated": "2026-03-07T00:11:17.404Z",
+  "lastUpdated": "2026-03-08T00:11:17.700Z",
   "totalCount": 50,
   "items": [
+    {
+      "number": 56943,
+      "title": "Address test_validates_comparison_of_incomparables failure with Ruby 4.1.0dev {#pr-56943}",
+      "url": "https://github.com/rails/rails/pull/56943",
+      "mergedAt": "2026-03-07T00:00:00.000Z",
+      "author": "yahonda",
+      "authorUrl": "https://github.com/yahonda",
+      "summary": "1. 概要 (1-2文で)  \nこのPRは、Ruby 4.1.0dev で `validates_comparison_of_incomparables` のテストが落ちる問題に対応し、Ruby 本体側でエラー文言が変わったことを反映するためにテスト期待値を調整したものです。Rails 本体の挙動ではなく、比較バリデーションに関するテスト側のみの修正です。"
+    },
     {
       "number": 56927,
       "title": "Fix stale Rack::Sendfile reference in DebugLocks documentation {#pr-56927}",
@@ -442,15 +451,6 @@
       "author": "FKauwe",
       "authorUrl": "https://github.com/FKauwe",
       "summary": "1. 概要 (1-2文で)  \nRails 8.2 のリリースノートに、各コンポーネントの非推奨・削除項目と「notable changes（重要な変更）」を追記したドキュメント更新のPRです。コード自体は一切変更せず、CHANGELOG をもとにリリースノートを整理・明文化したものです。"
-    },
-    {
-      "number": 56760,
-      "title": "Fix Ruby code block syntax highlighting for getting_started.md document [ci skip] {#pr-56760}",
-      "url": "https://github.com/rails/rails/pull/56760",
-      "mergedAt": "2026-02-16T00:00:00.000Z",
-      "author": "johnhailu",
-      "authorUrl": "https://github.com/johnhailu",
-      "summary": "1. 概要 (1-2文で)  \nRailsガイド「Getting Started with Rails」の Markdown 内で、Ruby のコードブロックに対するシンタックスハイライト指定が誤っていた箇所を修正した PR です。コード例自体の挙動やフレームワークの機能には影響せず、ガイドの表示品質のみを改善しています。"
     }
   ]
 }
