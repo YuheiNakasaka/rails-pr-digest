@@ -1,7 +1,34 @@
 {
-  "lastUpdated": "2026-03-09T00:11:19.485Z",
+  "lastUpdated": "2026-03-10T00:10:36.621Z",
   "totalCount": 50,
   "items": [
+    {
+      "number": 56932,
+      "title": "Fix dbconsole NotImplementedError message {#pr-56932}",
+      "url": "https://github.com/rails/rails/pull/56932",
+      "mergedAt": "2026-03-09T00:00:00.000Z",
+      "author": "eglitobias",
+      "authorUrl": "https://github.com/eglitobias",
+      "summary": "1. 概要 (1-2文で)  \nActiveRecord の抽象アダプタ `AbstractAdapter.dbconsole` が投げる `NotImplementedError` のエラーメッセージを修正し、「Class should define …」という曖昧な文言を、実際のアダプタクラス名が出るように改善した PR です。機能追加や挙動変更ではなく、開発者向けのエラーメッセージの改善のみが行われています。"
+    },
+    {
+      "number": 56941,
+      "title": "Remove foreign_key coercision in counter_cache {#pr-56941}",
+      "url": "https://github.com/rails/rails/pull/56941",
+      "mergedAt": "2026-03-09T00:00:00.000Z",
+      "author": "skipkayhil",
+      "authorUrl": "https://github.com/skipkayhil",
+      "summary": "1. 概要 (1-2文で)  \n`counter_cache` の内部実装から、`Reflection#foreign_key` に対する `to_s` / `to_sym` による型変換（強制変換）が削除されました。  \n`foreign_key` は常に凍結済みの文字列またはその配列であることが前提とされ、その前提に合わせてコードが簡潔化されています。"
+    },
+    {
+      "number": 56951,
+      "title": "Fix default value of `raise_on_missing_required_finder_order_columns` configuration. {#pr-56951}",
+      "url": "https://github.com/rails/rails/pull/56951",
+      "mergedAt": "2026-03-09T00:00:00.000Z",
+      "author": "r-plus",
+      "authorUrl": "https://github.com/r-plus",
+      "summary": "1. 概要 (1-2文で)  \n`ActiveRecord.raise_on_missing_required_finder_order_columns` のデフォルト値が、ガイドに書かれている `false` ではなく `nil` になっていた問題を修正し、明示的に `false` をデフォルトとする PR です。挙動としては `nil` と `false` はどちらも falsy なので動作は変わりませんが、ドキュメントと実装を揃えるための修正です。"
+    },
     {
       "number": 56943,
       "title": "Address test_validates_comparison_of_incomparables failure with Ruby 4.1.0dev {#pr-56943}",
@@ -424,33 +451,6 @@
       "author": "skipkayhil",
       "authorUrl": "https://github.com/skipkayhil",
       "summary": "1. 概要 (1-2文で)  \nRails のアプリケーションジェネレータ基底クラス (`AppBase`) から、実際には使われていない `open-uri` の `require` が削除されました。16年前の実装の名残で、現在のコードパスでは参照されていないためクリーンアップされています。"
-    },
-    {
-      "number": 56803,
-      "title": "Fix in_batches use_ranges with limit producing negative LIMIT {#pr-56803}",
-      "url": "https://github.com/rails/rails/pull/56803",
-      "mergedAt": "2026-02-16T00:00:00.000Z",
-      "author": "daffo",
-      "authorUrl": "https://github.com/daffo",
-      "summary": "1. 概要 (1-2文で)  \n`in_batches(use_ranges: true)` を、すでに `.limit` が付いた Relation に対して使った際に、バッチサイズと limit が割り切れないと `LIMIT must not be negative` エラーになる不具合を修正する PR です。`remaining` 計算に使う内部カウンタが更新されず負の LIMIT が生成されていたのを、Relation の `limit` を変えるタイミングで内部の `batch_limit` も同期させることで防いでいます。"
-    },
-    {
-      "number": 56750,
-      "title": "ActionController::UnknownHttpMethod returns 500 instead of 405 in Rails 7.2 #56740 {#pr-56750}",
-      "url": "https://github.com/rails/rails/pull/56750",
-      "mergedAt": "2026-02-16T00:00:00.000Z",
-      "author": "nicolasva",
-      "authorUrl": "https://github.com/nicolasva",
-      "summary": "1. 概要 (1-2文で)  \nRails 7.2 で、無効な HTTP メソッドを受け取った際に本来は 405 を返すべきところが、場合によって 500 になってしまう不具合を修正した PRです。`DebugExceptions` ミドルウェア内部で `UnknownHttpMethod` が二重に発生して rescue されず、上位まで伝播してしまう問題を抑止しています。"
-    },
-    {
-      "number": 56806,
-      "title": "[ci skip] Add documentation: deprecations and notable changes to 8.2 release notes {#pr-56806}",
-      "url": "https://github.com/rails/rails/pull/56806",
-      "mergedAt": "2026-02-16T00:00:00.000Z",
-      "author": "FKauwe",
-      "authorUrl": "https://github.com/FKauwe",
-      "summary": "1. 概要 (1-2文で)  \nRails 8.2 のリリースノートに、各コンポーネントの非推奨・削除項目と「notable changes（重要な変更）」を追記したドキュメント更新のPRです。コード自体は一切変更せず、CHANGELOG をもとにリリースノートを整理・明文化したものです。"
     }
   ]
 }
