@@ -1,7 +1,16 @@
 {
-  "lastUpdated": "2026-03-10T00:10:36.621Z",
+  "lastUpdated": "2026-03-11T00:09:43.841Z",
   "totalCount": 50,
   "items": [
+    {
+      "number": 56956,
+      "title": "Simplify applicable `actionpack` tests with `NotificationAssertions` helpers {#pr-56956}",
+      "url": "https://github.com/rails/rails/pull/56956",
+      "mergedAt": "2026-03-10T00:00:00.000Z",
+      "author": "larouxn",
+      "authorUrl": "https://github.com/larouxn",
+      "summary": "1. 概要 (1-2文で)  \n`actionpack` の `redirect_test.rb` 内で `ActiveSupport::Notifications` を直接扱っていたテストを、`ActiveSupport::Testing::NotificationAssertions` ヘルパーを使う形に書き換え、テストコードを簡潔かつ安全にした PR です。通知の購読・解除やアサーションの記述がヘルパーに集約され、重複コードや ensure ブロックが削減されています。"
+    },
     {
       "number": 56932,
       "title": "Fix dbconsole NotImplementedError message {#pr-56932}",
@@ -442,15 +451,6 @@
       "author": "ybiquitous",
       "authorUrl": "https://github.com/ybiquitous",
       "summary": "1. 概要 (1-2文で)  \n`ActionDispatch::Integration::Session#process` の API ドキュメントを、読みやすく正しくレンダリングされるように微修正した PR です。動作仕様や振る舞いは変えず、テスト用リクエストメソッドのドキュメント表現のみが改善されています。"
-    },
-    {
-      "number": 56823,
-      "title": "Remove unused \"open-uri\" require from AppBase {#pr-56823}",
-      "url": "https://github.com/rails/rails/pull/56823",
-      "mergedAt": "2026-02-16T00:00:00.000Z",
-      "author": "skipkayhil",
-      "authorUrl": "https://github.com/skipkayhil",
-      "summary": "1. 概要 (1-2文で)  \nRails のアプリケーションジェネレータ基底クラス (`AppBase`) から、実際には使われていない `open-uri` の `require` が削除されました。16年前の実装の名残で、現在のコードパスでは参照されていないためクリーンアップされています。"
     }
   ]
 }
