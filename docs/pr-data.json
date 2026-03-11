@@ -1,7 +1,16 @@
 {
-  "lastUpdated": "2026-03-11T00:09:43.841Z",
+  "lastUpdated": "2026-03-11T15:26:27.619Z",
   "totalCount": 50,
   "items": [
+    {
+      "number": 56958,
+      "title": "Remove create tests from passwords_controller_test.rb if ActionMailer::Railtie is not defined {#pr-56958}",
+      "url": "https://github.com/rails/rails/pull/56958",
+      "mergedAt": "2026-03-11T00:00:00.000Z",
+      "author": "ssjr",
+      "authorUrl": "https://github.com/ssjr",
+      "summary": "1. 概要 (1-2文で)  \nRails アプリを `--skip-action-mailer` オプション付きで作成した場合に、`rails g authentication` が生成するパスワード関連テストで Action Mailer 依存のテストが落ちていた問題を修正する PR です。ActionMailer::Railtie が未定義のときは、`PasswordsController#create` に関するメール送信テストを生成しないようにしました。"
+    },
     {
       "number": 56956,
       "title": "Simplify applicable `actionpack` tests with `NotificationAssertions` helpers {#pr-56956}",
@@ -442,15 +451,6 @@
       "author": "skipkayhil",
       "authorUrl": "https://github.com/skipkayhil",
       "summary": "1. 概要 (1-2文で)  \nActiveModel::Attributes のオートロード設定の仕方により、Attributes が「遅延読み込み(lazy load)」されずに即座にロードされてしまっていた問題を修正した PR です。Normalization からの参照が原因で eager load されていたため、オートロード定義の場所を移動し、正しく遅延読み込みされるようにしています。"
-    },
-    {
-      "number": 56820,
-      "title": "[ci skip] Improve API documentation for ActionDispatch::Integration::Session#process {#pr-56820}",
-      "url": "https://github.com/rails/rails/pull/56820",
-      "mergedAt": "2026-02-16T00:00:00.000Z",
-      "author": "ybiquitous",
-      "authorUrl": "https://github.com/ybiquitous",
-      "summary": "1. 概要 (1-2文で)  \n`ActionDispatch::Integration::Session#process` の API ドキュメントを、読みやすく正しくレンダリングされるように微修正した PR です。動作仕様や振る舞いは変えず、テスト用リクエストメソッドのドキュメント表現のみが改善されています。"
     }
   ]
 }

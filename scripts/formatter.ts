@@ -23,6 +23,14 @@ export function getMonthlyFilename(date = new Date()): string {
 }
 
 /**
+ * Escape angle brackets that Vue's template compiler would interpret as components.
+ * e.g., Array<String> → Array&lt;String>
+ */
+export function sanitizeForVitePress(text: string): string {
+  return text.replace(/<(\/?)([A-Z])/g, "&lt;$1$2");
+}
+
+/**
  * Format PR entry for markdown
  */
 export function formatPREntry(
@@ -44,7 +52,7 @@ export function formatPREntry(
 
 **マージ日**: ${date} | **作成者**: [@${pr.user?.login ?? "unknown"}](${pr.user?.html_url ?? "#"})
 
-${summary}
+${sanitizeForVitePress(summary)}
 
 ---
 `;

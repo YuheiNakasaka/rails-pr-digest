@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { formatPREntry, getMonthlyFilename, getYearMonth } from "./formatter";
+import { formatPREntry, getMonthlyFilename, getYearMonth, sanitizeForVitePress } from "./formatter";
 
 describe("formatter", () => {
   describe("getYearMonth", () => {
@@ -98,6 +98,26 @@ describe("formatter", () => {
       expect(result).toContain("Test PR {#pr-12345}");
     });
 
+    it("should sanitize Vue component-like tags in summary", () => {
+      const mockPR = {
+        number: 99999,
+        title: "Test PR",
+        html_url: "https://github.com/rails/rails/pull/99999",
+        merged_at: "2025-11-24T10:00:00Z",
+        user: {
+          login: "testuser",
+          html_url: "https://github.com/testuser",
+        },
+      };
+      const summary = "Returns Array<String> and Map<Key, Value>.";
+
+      const result = formatPREntry(mockPR, summary);
+
+      expect(result).toContain("Array&lt;String>");
+      expect(result).toContain("Map&lt;Key, Value>");
+      expect(result).not.toContain("Array<String>");
+    });
+
     it("should handle PR with null user", () => {
       const mockPR = {
         number: 12345,
@@ -112,6 +132,28 @@ describe("formatter", () => {
 
       expect(result).toContain("[@unknown]");
       expect(result).toContain("{#pr-12345}");
+    });
+  });
+
+  describe("sanitizeForVitePress", () => {
+    it("should escape Array<String> to Array&lt;String>", () => {
+      expect(sanitizeForVitePress("Array<String>")).toBe("Array&lt;String>");
+    });
+
+    it("should escape Map<Key, Value>", () => {
+      expect(sanitizeForVitePress("Map<Key, Value>")).toBe("Map&lt;Key, Value>");
+    });
+
+    it("should not escape standard HTML like <div>", () => {
+      expect(sanitizeForVitePress("<div>hello</div>")).toBe("<div>hello</div>");
+    });
+
+    it("should not modify content without angle brackets", () => {
+      expect(sanitizeForVitePress("plain text")).toBe("plain text");
+    });
+
+    it("should escape closing tags like </Component>", () => {
+      expect(sanitizeForVitePress("</Component>")).toBe("&lt;/Component>");
     });
   });
 });
