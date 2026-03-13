@@ -1,7 +1,52 @@
 {
-  "lastUpdated": "2026-03-12T00:10:47.533Z",
+  "lastUpdated": "2026-03-13T00:13:27.813Z",
   "totalCount": 50,
   "items": [
+    {
+      "number": 56909,
+      "title": "Validate URI scheme in Action Text markdown link conversion {#pr-56909}",
+      "url": "https://github.com/rails/rails/pull/56909",
+      "mergedAt": "2026-03-12T00:00:00.000Z",
+      "author": "flavorjones",
+      "authorUrl": "https://github.com/flavorjones",
+      "summary": "1. 概要 (1-2文で)  \nAction Text がリッチテキストを Markdown に変換する際、リンクの URI スキームを検証していなかった問題を修正し、`javascript:` や `data:text/html` など危険なスキームを Markdown に出力しないようにした PRです。HTML パイプラインと Markdown パイプラインの安全性・挙動の一貫性を高める修正です。"
+    },
+    {
+      "number": 56970,
+      "title": "Fix parsing SQLite virtual tables without parenthesis {#pr-56970}",
+      "url": "https://github.com/rails/rails/pull/56970",
+      "mergedAt": "2026-03-12T00:00:00.000Z",
+      "author": "nicolasva",
+      "authorUrl": "https://github.com/nicolasva",
+      "summary": "1. 概要 (1-2文で)  \nSQLite の仮想テーブル定義をパースするロジックが、`USING` 句に括弧がないケースを正しく扱えていなかった問題を修正した PR です。これにより、`CREATE VIRTUAL TABLE ... USING module arg1, arg2` のような定義でも、Active Record が正しくメタ情報を取得できるようになります。"
+    },
+    {
+      "number": 56963,
+      "title": "Restore previous instrumenter after `execute_or_skip` {#pr-56963}",
+      "url": "https://github.com/rails/rails/pull/56963",
+      "mergedAt": "2026-03-12T00:00:00.000Z",
+      "author": "rosa",
+      "authorUrl": "https://github.com/rosa",
+      "summary": "1. 概要 (1-2文で)  \n`async_load` / `async_pick` などの非同期クエリ実行時に、`ActiveSupport::IsolatedExecutionState[:active_record_instrumenter]` が元に戻らず、「そのスレッドで以後発生する `sql.active_record` 通知がロギングされなくなる」不具合を修正したPRです。特に `async_query_executor = :global_thread_pool` + `fallback_policy = :caller_runs` という構成で、スレッドプール飽和時にメインスレッドが汚染される問題を防ぎます。"
+    },
+    {
+      "number": 56964,
+      "title": "Restore previous instrumenter after `execute_or_skip` {#pr-56964}",
+      "url": "https://github.com/rails/rails/pull/56964",
+      "mergedAt": "2026-03-12T00:00:00.000Z",
+      "author": "rosa",
+      "authorUrl": "https://github.com/rosa",
+      "summary": "1. 概要 (1-2文で)  \n`ActiveRecord::FutureResult#execute_or_skip` 実行時に `ActiveSupport::IsolatedExecutionState[:active_record_instrumenter]` を一時的に `EventBuffer` に差し替えたあと、元のインストゥルメンタを正しく復元するようにしたバグ修正です。これにより、スレッドプール飽和時にリクエストスレッド上でタスクが実行された場合でも、`sql.active_record` 通知が失われずに済むようになります。"
+    },
+    {
+      "number": 56965,
+      "title": "Restore previous instrumenter after `execute_or_skip` {#pr-56965}",
+      "url": "https://github.com/rails/rails/pull/56965",
+      "mergedAt": "2026-03-12T00:00:00.000Z",
+      "author": "rosa",
+      "authorUrl": "https://github.com/rosa",
+      "summary": "1. 概要 (1-2文で)  \n`ActiveRecord::FutureResult#execute_or_skip` 実行時に `ActiveSupport::IsolatedExecutionState[:active_record_instrumenter]` を一時的に `EventBuffer` に差し替えたあと、元のインストルメンターを復元していなかったバグを修正する PR です。スレッドプール飽和時に `caller_runs` でリクエストスレッド上で async ロードが実行されると、以降そのスレッドで発火する `sql.active_record` 通知が二度と購読者に届かなくなる問題を防ぎます。"
+    },
     {
       "number": 56958,
       "title": "Remove create tests from passwords_controller_test.rb if ActionMailer::Railtie is not defined {#pr-56958}",
@@ -406,51 +451,6 @@
       "author": "skipkayhil",
       "authorUrl": "https://github.com/skipkayhil",
       "summary": "1. 概要 (1-2文で)  \nRails の railties テストタスクにおける「テスト時間の見積もり（重み）」が調整され、CI でのテスト並列実行時のバランスが改善されています。特に、実行時間が長い `configuration_test` / `console_test` / `sprockets_assets_test` / `query_logs_test` の扱いが見直されています。"
-    },
-    {
-      "number": 56833,
-      "title": "Fix misspellings around load hook guard {#pr-56833}",
-      "url": "https://github.com/rails/rails/pull/56833",
-      "mergedAt": "2026-02-17T00:00:00.000Z",
-      "author": "flavorjones",
-      "authorUrl": "https://github.com/flavorjones",
-      "summary": "1. 概要 (1-2文で)  \nこのPRは、#56201 で導入された「load hook guard」まわりの英単語の綴りミス（typo）を修正するものです。挙動の変更はなく、ドキュメントおよびコード内のコメント／メッセージレベルの修正のみです。"
-    },
-    {
-      "number": 56832,
-      "title": "Restore core_ext/benchmark.rb as a silent shim (8-1-stable) {#pr-56832}",
-      "url": "https://github.com/rails/rails/pull/56832",
-      "mergedAt": "2026-02-17T00:00:00.000Z",
-      "author": "jeremy",
-      "authorUrl": "https://github.com/jeremy",
-      "summary": "1. 概要 (1-2文で)  \nRails 8.1系で一度非推奨・実質削除されかけていた `active_support/core_ext/benchmark` を、「何もしないが存在はする」互換用シム(shim)として復活させたPRです。これにより、`require \"active_support/core_ext/benchmark\"` を行っている既存コードが壊れないようにしつつ、現時点では追加メソッドは提供しません。"
-    },
-    {
-      "number": 56831,
-      "title": "Restore core_ext/benchmark.rb as a silent shim {#pr-56831}",
-      "url": "https://github.com/rails/rails/pull/56831",
-      "mergedAt": "2026-02-17T00:00:00.000Z",
-      "author": "jeremy",
-      "authorUrl": "https://github.com/jeremy",
-      "summary": "1. 概要 (1-2文で)  \n`core_ext/benchmark.rb` から唯一の拡張メソッド `Benchmark.ms` が削除された後も、「Benchmark関連の拡張を置くための場所」としてこのファイルを存続させるようにしたPRです。実質的な機能追加・削除はなく、「静かな(shim)空ファイル」として残すことで、将来の拡張や既存コードとの互換性を確保しています。"
-    },
-    {
-      "number": 56798,
-      "title": "Mark AutoFilteredParameters as :nodoc: {#pr-56798}",
-      "url": "https://github.com/rails/rails/pull/56798",
-      "mergedAt": "2026-02-17T00:00:00.000Z",
-      "author": "gmcgibbon",
-      "authorUrl": "https://github.com/gmcgibbon",
-      "summary": "1. 概要 (1-2文で)  \nActive Record の暗号化機能内部で使われている `AutoFilteredParameters` モジュールを、YARD/RDoc で公開 API ドキュメントに載せないよう `:nodoc:` 指定にした PRです。外部利用を想定しない内部実装であることを明示し、将来的な削除に備える位置づけです。"
-    },
-    {
-      "number": 56825,
-      "title": "Fix eagerly loading ActiveModel::Attributes {#pr-56825}",
-      "url": "https://github.com/rails/rails/pull/56825",
-      "mergedAt": "2026-02-17T00:00:00.000Z",
-      "author": "skipkayhil",
-      "authorUrl": "https://github.com/skipkayhil",
-      "summary": "1. 概要 (1-2文で)  \nActiveModel::Attributes のオートロード設定の仕方により、Attributes が「遅延読み込み(lazy load)」されずに即座にロードされてしまっていた問題を修正した PR です。Normalization からの参照が原因で eager load されていたため、オートロード定義の場所を移動し、正しく遅延読み込みされるようにしています。"
     }
   ]
 }
