@@ -1,7 +1,61 @@
 {
-  "lastUpdated": "2026-03-13T00:13:27.813Z",
+  "lastUpdated": "2026-03-14T00:14:12.795Z",
   "totalCount": 50,
   "items": [
+    {
+      "number": 56974,
+      "title": "Simplify applicable `activesupport` tests with `NotificationAssertions` helpers {#pr-56974}",
+      "url": "https://github.com/rails/rails/pull/56974",
+      "mergedAt": "2026-03-13T00:00:00.000Z",
+      "author": "larouxn",
+      "authorUrl": "https://github.com/larouxn",
+      "summary": "1. 概要 (1-2文で)  \n`ActiveSupport::Notifications` を使ったキャッシュ関連テストを、`ActiveSupport::Testing::NotificationAssertions` ヘルパーで書き換えて簡潔・安全にした PR です。手動でのサブスクライバ管理やインスタンス変数ベースのイベント収集をやめ、共通ヘルパーによる記述に統一しています。"
+    },
+    {
+      "number": 56975,
+      "title": "Simplify applicable `activerecord` tests with `NotificationAssertions` helpers {#pr-56975}",
+      "url": "https://github.com/rails/rails/pull/56975",
+      "mergedAt": "2026-03-13T00:00:00.000Z",
+      "author": "larouxn",
+      "authorUrl": "https://github.com/larouxn",
+      "summary": "1. 概要 (1-2文で)  \n`activerecord` の一部テストで、`ActiveSupport::Notifications` を直接扱っていた箇所を、`ActiveSupport::Testing::NotificationAssertions` ヘルパーに置き換えて簡潔にした PR です。これにより通知購読の登録/解除やアサーションが共通化され、テストコードが短く・安全になっています。"
+    },
+    {
+      "number": 56972,
+      "title": "Add MySQL lock option and extend algorithm to column DDL operations {#pr-56972}",
+      "url": "https://github.com/rails/rails/pull/56972",
+      "mergedAt": "2026-03-13T00:00:00.000Z",
+      "author": "dominikdarnel",
+      "authorUrl": "https://github.com/dominikdarnel",
+      "summary": "1. 概要 (1-2文で)  \nこのPRは、Rails の MySQL アダプタに `lock:` オプションを追加し、これまでインデックス操作にしか使えなかった `algorithm:` オプションをカラム操作（`add_column` など）にも拡張するものです。これにより、MySQL のオンラインDDL機能（`ALGORITHM` / `LOCK`）を Rails のマイグレーションDSLから直接制御できるようになります。"
+    },
+    {
+      "number": 56945,
+      "title": "ActiveRecord: Support Postgres `RESET` on readonly queries {#pr-56945}",
+      "url": "https://github.com/rails/rails/pull/56945",
+      "mergedAt": "2026-03-13T00:00:00.000Z",
+      "author": "frodsan",
+      "authorUrl": "https://github.com/frodsan",
+      "summary": "1. 概要 (1-2文で)  \nPostgreSQL アダプタで `prevent_writes: true`（読み取り専用コンテキスト）でも `RESET` コマンドを実行できるようにした PR です。これにより、接続を「書き込み禁止」にしていても、セッションパラメータをデフォルトに戻すための `RESET` が ReadOnly エラーにならず通るようになります。"
+    },
+    {
+      "number": 56967,
+      "title": "Optimize generated Dockerfile build performance {#pr-56967}",
+      "url": "https://github.com/rails/rails/pull/56967",
+      "mergedAt": "2026-03-13T00:00:00.000Z",
+      "author": "damln",
+      "authorUrl": "https://github.com/damln",
+      "summary": "1. 概要 (1-2文で)  \nRails が `rails new` で生成する Dockerfile テンプレートと、そのテスト用 Dockerfile のビルドを高速化するための最適化 PRです。不要なレイヤーを減らし、`COPY --chown` を適切に使うことで、実測で 1 分前後のビルド時間短縮が見込まれます。"
+    },
+    {
+      "number": 56977,
+      "title": "Fix SQLite virtual tables not ignored by `ignore_tables` {#pr-56977}",
+      "url": "https://github.com/rails/rails/pull/56977",
+      "mergedAt": "2026-03-13T00:00:00.000Z",
+      "author": "hschne",
+      "authorUrl": "https://github.com/hschne",
+      "summary": "1. 概要 (1-2文で)  \nSQLite の仮想テーブル（virtual tables）が `ActiveRecord::SchemaDumper.ignore_tables` で無視されない問題を修正する PR です。これにより、スキーマダンプ（`schema.rb` の生成など）から、指定した SQLite 仮想テーブルも正しく除外できるようになりました。"
+    },
     {
       "number": 56909,
       "title": "Validate URI scheme in Action Text markdown link conversion {#pr-56909}",
@@ -397,60 +451,6 @@
       "author": "skipkayhil",
       "authorUrl": "https://github.com/skipkayhil",
       "summary": "1. 概要 (1-2文で)  \nSidekiq 8.1.1 以降で `sidekiq/testing/inline` が非推奨化された影響により、これまで暗黙的に行われていた `sidekiq` 本体の読み込みが行われなくなった問題を修正した PR です。Rails の Active Job テストで Sidekiq の inline テストアダプタを使う際に、明示的に `sidekiq` を require するようにしています。"
-    },
-    {
-      "number": 56774,
-      "title": "Add parallel step groups to CI runner {#pr-56774}",
-      "url": "https://github.com/rails/rails/pull/56774",
-      "mergedAt": "2026-02-19T00:00:00.000Z",
-      "author": "djmb",
-      "authorUrl": "https://github.com/djmb",
-      "summary": "1. 概要 (1-2文で)  \nRails の CI ランナー (`ActiveSupport::ContinuousIntegration`) に「ステップグループ」を導入し、グループ単位でステップを並列実行できるようにした変更です。これにより、Rubocop / Brakeman / テストなど互いに依存しない処理を並列化して CI の実行時間を短縮できます。"
-    },
-    {
-      "number": 56791,
-      "title": "Materialize transactions before instrumentation {#pr-56791}",
-      "url": "https://github.com/rails/rails/pull/56791",
-      "mergedAt": "2026-02-19T00:00:00.000Z",
-      "author": "djmb",
-      "authorUrl": "https://github.com/djmb",
-      "summary": "1. 概要 (1-2文で)  \nこのPRは、Active Record の「遅延トランザクション (lazy transaction materialization)」使用時に、BEGIN/SAVEPOINT のクエリ時間が二重計測されてしまうバグを修正するものです。トランザクションの実体化をログ計測処理の前に行うように変更し、sql.active_record の計測結果が実際のクエリ単位に正しく対応するようにしています。"
-    },
-    {
-      "number": 56837,
-      "title": "Don't filter StructuredEventSubscriber payloads {#pr-56837}",
-      "url": "https://github.com/rails/rails/pull/56837",
-      "mergedAt": "2026-02-18T00:00:00.000Z",
-      "author": "djmb",
-      "authorUrl": "https://github.com/djmb",
-      "summary": "1. 概要 (1-2文で)  \nEventReporter がイベント payload を一律に ParameterFilter でフィルタリングしていたため、SQL のクエリ名など内部メタデータまでマスクされてしまう問題を修正した PR です。`EventReporter#notify` / `#debug` に `filter:` オプションを導入し、フレームワーク内部で使う StructuredEventSubscriber から送出されるイベントについてはフィルタリングを無効化するようにしています。"
-    },
-    {
-      "number": 55770,
-      "title": "Introduce `this_week?`, `this_month?`, and `this_year?` to Date/Time {#pr-55770}",
-      "url": "https://github.com/rails/rails/pull/55770",
-      "mergedAt": "2026-02-18T00:00:00.000Z",
-      "author": "MatheusRich",
-      "authorUrl": "https://github.com/MatheusRich",
-      "summary": "1. 概要 (1-2文で)  \n`Date` / `Time` / `DateTime` に対して、現在の週・月・年に属しているかを判定するための `this_week?` / `this_month?` / `this_year?` メソッドが追加されました。`today?` / `tomorrow?` / `yesterday?` と同様に、現在時点を基準にした期間判定が簡潔に書けるようになります。"
-    },
-    {
-      "number": 56805,
-      "title": "Optimize calculating remote IP address {#pr-56805}",
-      "url": "https://github.com/rails/rails/pull/56805",
-      "mergedAt": "2026-02-18T00:00:00.000Z",
-      "author": "fatkodima",
-      "authorUrl": "https://github.com/fatkodima",
-      "summary": "1. 概要 (1-2文で)  \n`ActionDispatch::RemoteIp` のクライアント IP アドレス算出処理が最適化され、Rack ミドルウェアから IP を取り出すコストが大幅に削減されました。これにより、`rack-attack` など IP ベースで判定するミドルウェア使用時のリクエスト処理時間・メモリアロケーションが改善します。"
-    },
-    {
-      "number": 56822,
-      "title": "More railties test balancing {#pr-56822}",
-      "url": "https://github.com/rails/rails/pull/56822",
-      "mergedAt": "2026-02-17T00:00:00.000Z",
-      "author": "skipkayhil",
-      "authorUrl": "https://github.com/skipkayhil",
-      "summary": "1. 概要 (1-2文で)  \nRails の railties テストタスクにおける「テスト時間の見積もり（重み）」が調整され、CI でのテスト並列実行時のバランスが改善されています。特に、実行時間が長い `configuration_test` / `console_test` / `sprockets_assets_test` / `query_logs_test` の扱いが見直されています。"
     }
   ]
 }
