@@ -1,7 +1,34 @@
 {
-  "lastUpdated": "2026-03-15T00:13:29.698Z",
+  "lastUpdated": "2026-03-16T00:15:36.431Z",
   "totalCount": 50,
   "items": [
+    {
+      "number": 56992,
+      "title": "Deprecate require_dependency {#pr-56992}",
+      "url": "https://github.com/rails/rails/pull/56992",
+      "mergedAt": "2026-03-15T00:00:00.000Z",
+      "author": "fxn",
+      "authorUrl": "https://github.com/fxn",
+      "summary": "1. 概要 (1-2文で)  \n`require_dependency` が「非推奨 (deprecate)」になり、将来的な削除に向けた準備が始まりました。クラシックオートローダからの移行や Rails < 7.0 サポートのために残されていた API を正式に廃止方向へ進める変更です。"
+    },
+    {
+      "number": 56986,
+      "title": "Further reduce internal usage of cattr_accessor and mattr_accessor {#pr-56986}",
+      "url": "https://github.com/rails/rails/pull/56986",
+      "mergedAt": "2026-03-15T00:00:00.000Z",
+      "author": "byroot",
+      "authorUrl": "https://github.com/byroot",
+      "summary": "1. 概要 (1-2文で)  \nRails内部で `cattr_accessor` / `mattr_accessor`（クラス変数ベースのアクセサ）の利用をさらに減らし、主に「クラスインスタンス変数」や `class_attribute` への移行を進めたPRです。クラス変数の共有挙動による思わぬ副作用を避け、より直感的で安全な設定・状態管理に寄せるリファクタリングになります。"
+    },
+    {
+      "number": 56983,
+      "title": "[ci skip] Update CHANGELOG with transform_keys! overwrite precedence note {#pr-56983}",
+      "url": "https://github.com/rails/rails/pull/56983",
+      "mergedAt": "2026-03-15T00:00:00.000Z",
+      "author": "diaphragm",
+      "authorUrl": "https://github.com/diaphragm",
+      "summary": "1. 概要 (1-2文で)  \nこのPRは、Rails 8.0.3 で行われた `ActiveSupport::HashWithIndifferentAccess#transform_keys!` のバグ修正に伴い、「キー変換時にキーが衝突した場合の上書き優先順位」が変わったことを CHANGELOG に明記するドキュメント修正です。挙動は Ruby 標準の `Hash#transform_keys!` に合わせて「あと勝ち」になっており、その仕様変更をサンプル付きで説明しています。"
+    },
     {
       "number": 56974,
       "title": "Simplify applicable `activesupport` tests with `NotificationAssertions` helpers {#pr-56974}",
@@ -424,33 +451,6 @@
       "author": "djezzzl",
       "authorUrl": "https://github.com/djezzzl",
       "summary": "1. 概要 (1-2文で)  \nRails 8系で「ハイフンを含むテーブル名」を使うと `exec_insert` 実行時に失敗していた問題を、テーブル名のパース処理を修正することで直したPRです。正しくクオートされた `\"table-with-hyphen\"` のようなテーブル名でも、従来通り `exec_insert` が動作するようになります。"
-    },
-    {
-      "number": 56865,
-      "title": "Use instance_variables_to_inspect instead of custom inspect methods {#pr-56865}",
-      "url": "https://github.com/rails/rails/pull/56865",
-      "mergedAt": "2026-02-24T00:00:00.000Z",
-      "author": "byroot",
-      "authorUrl": "https://github.com/byroot",
-      "summary": "1. 概要 (1-2文で)  \nRails内部で定義されていた多数のカスタム`inspect`メソッドをやめ、共通ヘルパ `instance_variables_to_inspect` を使った統一的な実装に置き換えるPRです。これにより、オブジェクトのデバッグ表示（`#inspect`）の一貫性が増し、保守性・後方互換性の管理がしやすくなっています。"
-    },
-    {
-      "number": 56817,
-      "title": "Fix SQLite3 column equality for stored vs virtual generated columns {#pr-56817}",
-      "url": "https://github.com/rails/rails/pull/56817",
-      "mergedAt": "2026-02-24T00:00:00.000Z",
-      "author": "afurm",
-      "authorUrl": "https://github.com/afurm",
-      "summary": "1. 概要 (1-2文で)  \nSQLite3 アダプタで、生成カラム（generated columns）の比較ロジックに不整合があり、`:stored` と `:virtual` が「== では同じだが hash は違う」という状態になっていた問題を修正する PR です。これにより、生成カラムの等価判定とハッシュ値が一貫し、Hash や Set での利用時のバグを防ぎます。"
-    },
-    {
-      "number": 56862,
-      "title": "Fix deprecation of sidekiq/testing/inline {#pr-56862}",
-      "url": "https://github.com/rails/rails/pull/56862",
-      "mergedAt": "2026-02-24T00:00:00.000Z",
-      "author": "skipkayhil",
-      "authorUrl": "https://github.com/skipkayhil",
-      "summary": "1. 概要 (1-2文で)  \nSidekiq 8.1.1 以降で `sidekiq/testing/inline` が非推奨化された影響により、これまで暗黙的に行われていた `sidekiq` 本体の読み込みが行われなくなった問題を修正した PR です。Rails の Active Job テストで Sidekiq の inline テストアダプタを使う際に、明示的に `sidekiq` を require するようにしています。"
     }
   ]
 }
