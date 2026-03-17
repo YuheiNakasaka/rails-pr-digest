@@ -1,7 +1,61 @@
 {
-  "lastUpdated": "2026-03-16T00:15:36.431Z",
+  "lastUpdated": "2026-03-17T00:13:45.027Z",
   "totalCount": 50,
   "items": [
+    {
+      "number": 56994,
+      "title": "Drop workaround for mail gem version < 2.8 {#pr-56994}",
+      "url": "https://github.com/rails/rails/pull/56994",
+      "mergedAt": "2026-03-16T00:00:00.000Z",
+      "author": "yahonda",
+      "authorUrl": "https://github.com/yahonda",
+      "summary": "1. 概要 (1-2文で)  \nAction Mailbox が依存する mail gem の下限バージョンがすでに 2.8 以上になっているため、mail < 2.8 向けに入っていたワークアラウンド（互換コード）を削除した PR です。結果として、コードがシンプルになり、サポート対象が実質的に mail 2.8 以降に揃えられました。"
+    },
+    {
+      "number": 56980,
+      "title": "Bump bundler from 4.0.6 to 4.0.8 {#pr-56980}",
+      "url": "https://github.com/rails/rails/pull/56980",
+      "mergedAt": "2026-03-16T00:00:00.000Z",
+      "author": "larouxn",
+      "authorUrl": "https://github.com/larouxn",
+      "summary": "1. 概要 (1-2文で)  \nRails リポジトリで使用している Bundler のバージョンを 4.0.6 から 4.0.8 に更新した PRです。これにより、`bundle install` などで利用される Bundler が最新のパッチバージョンになります。"
+    },
+    {
+      "number": 56926,
+      "title": "ActionText: support block children in editor elements alongside value {#pr-56926}",
+      "url": "https://github.com/rails/rails/pull/56926",
+      "mergedAt": "2026-03-16T00:00:00.000Z",
+      "author": "jorgemanrubia",
+      "authorUrl": "https://github.com/jorgemanrubia",
+      "summary": "1. 概要 (1-2文で)  \nActionText のエディタヘルパーで、`value` 引数とは別にブロックで渡した内容を「エディタ要素の子要素」として同時に扱えるようになりました。Trix エディタについては、従来どおり「`value` が無い場合はブロック内容を初期値として使う」という挙動も維持されています。"
+    },
+    {
+      "number": 56990,
+      "title": "fix(guides): bin/jobs start was not copying {#pr-56990}",
+      "url": "https://github.com/rails/rails/pull/56990",
+      "mergedAt": "2026-03-16T00:00:00.000Z",
+      "author": "j01nb0k",
+      "authorUrl": "https://github.com/j01nb0k",
+      "summary": "1. 概要 (1-2文で)  \nRailsガイド「Active Job Basics」の中にある `bin/jobs start` のコマンド例が、シェル上で想定どおりコピー・実行できない状態になっていた問題を修正したPRです。原因は、ガイドのコードブロックから「`$` プロンプト記号」が抜けていたことによる単純なドキュメント上のミスです。"
+    },
+    {
+      "number": 56987,
+      "title": "Add tests for ActiveModel::Name#human `count` argument {#pr-56987}",
+      "url": "https://github.com/rails/rails/pull/56987",
+      "mergedAt": "2026-03-16T00:00:00.000Z",
+      "author": "nicolasva",
+      "authorUrl": "https://github.com/nicolasva",
+      "summary": "1. 概要 (1-2文で)  \nActiveModel::Name#human に渡せる `count` 引数が、I18n の複数形ルールに沿って正しく扱われることを確認するテストが追加されています。機能変更ではなく、既存仕様のテスト補完が目的のPRです。"
+    },
+    {
+      "number": 56989,
+      "title": "Simplify `activerecord` tests with `NotificationAssertions` helpers {#pr-56989}",
+      "url": "https://github.com/rails/rails/pull/56989",
+      "mergedAt": "2026-03-16T00:00:00.000Z",
+      "author": "Saidbek",
+      "authorUrl": "https://github.com/Saidbek",
+      "summary": "1. 概要 (1-2文で)  \n`activerecord` のテストで、これまでバラバラに書かれていた `ActiveSupport::Notifications.subscribed` ベースのコードを、共通ヘルパ `NotificationAssertions`（`assert_notification` / `capture_notifications`）に置き換えてシンプルにした PR です。テストの可読性と一貫性を高めるためのリファクタリングであり、挙動や API 仕様の変更はありません。"
+    },
     {
       "number": 56992,
       "title": "Deprecate require_dependency {#pr-56992}",
@@ -397,60 +451,6 @@
       "author": "flavorjones",
       "authorUrl": "https://github.com/flavorjones",
       "summary": "1. 概要 (1-2文で)  \nAction Text の `to_markdown` が、コードブロック・リンク・URI 安全性まわりの細かい不具合や抜けをいくつか抱えていたのをまとめて修正し、Markdown としてより正しく、安全な出力になるようにした PR です。特に `<pre><code>` などのコードの整形・リンク文字列/URL のエスケープ・`javascript:` など危険な URI のブロックが堅牢化されています。"
-    },
-    {
-      "number": 56749,
-      "title": "Move protected_environments to ActiveRecord module {#pr-56749}",
-      "url": "https://github.com/rails/rails/pull/56749",
-      "mergedAt": "2026-02-24T00:00:00.000Z",
-      "author": "skipkayhil",
-      "authorUrl": "https://github.com/skipkayhil",
-      "summary": "1. 概要 (1-2文で)  \n`protected_environments` の設定場所を `ActiveRecord::Base` からトップレベルの `ActiveRecord` モジュールに移し、「実質グローバルな設定」であることを実装に反映した変更です。従来の `class_attribute` 風な API は非推奨になりつつも、後方互換性のために引き続き動作します。"
-    },
-    {
-      "number": 56779,
-      "title": "Optimize `ActiveRecord::Base.new` to conditionally remove STI checks {#pr-56779}",
-      "url": "https://github.com/rails/rails/pull/56779",
-      "mergedAt": "2026-02-24T00:00:00.000Z",
-      "author": "flavorjones",
-      "authorUrl": "https://github.com/flavorjones",
-      "summary": "1. 概要 (1-2文で)  \nActiveRecord の `Base.new` が、STI を使っていないモデルでは余計な STI 判定を通らずに Ruby 標準の `Class.new` をそのまま使えるよう最適化されました。これにより、非 STI モデルのインスタンス生成が Ruby 3.3〜4.0 で 8〜17% 程度高速化され、Ruby 4 では「fast path allocation」最適化も有効になります。"
-    },
-    {
-      "number": 56858,
-      "title": "Add `to_markdown` to Action Text, mirroring `to_plain_text` {#pr-56858}",
-      "url": "https://github.com/rails/rails/pull/56858",
-      "mergedAt": "2026-02-24T00:00:00.000Z",
-      "author": "flavorjones",
-      "authorUrl": "https://github.com/flavorjones",
-      "summary": "1. 概要 (1–2文で)  \nAction Text のリッチテキストを Markdown 形式に変換する `to_markdown` が追加され、既存の `to_plain_text` と同様に使えるようになりました。HTML の装飾をできるだけ保持しつつ、安全かつ高速に Markdown へエクスポートできる機能です。"
-    },
-    {
-      "number": 56868,
-      "title": "Fix deprecation of sidekiq/testing in integration test adapter at 8-1-stable {#pr-56868}",
-      "url": "https://github.com/rails/rails/pull/56868",
-      "mergedAt": "2026-02-24T00:00:00.000Z",
-      "author": "yahonda",
-      "authorUrl": "https://github.com/yahonda",
-      "summary": "1. 概要 (1-2文で)  \nRails 8.1 系の Active Job の Sidekiq 統合テスト用アダプタで、`require \"sidekiq/testing\"` による非推奨警告が出ないように修正した PRです。Sidekiq 8.1.1 以降の新しいテスト API に合わせるための追従変更です。"
-    },
-    {
-      "number": 56263,
-      "title": "Add RAILS_HOST_APP_PATH support for editor links in devcontainer/Docker environments {#pr-56263}",
-      "url": "https://github.com/rails/rails/pull/56263",
-      "mergedAt": "2026-02-24T00:00:00.000Z",
-      "author": "elalemanyo",
-      "authorUrl": "https://github.com/elalemanyo",
-      "summary": "1. 概要 (1-2文で)  \nRails のエラーページに表示される「エディタで開く」リンクが、devcontainer や Docker コンテナ内で動作するようにするため、`RAILS_HOST_APP_PATH` という新しい環境変数が追加されました。これにより、コンテナ内部パスをホスト側のパスに変換した URL を生成できるようになります。"
-    },
-    {
-      "number": 56828,
-      "title": "fix: breaking support of hyphen in table names  {#pr-56828}",
-      "url": "https://github.com/rails/rails/pull/56828",
-      "mergedAt": "2026-02-24T00:00:00.000Z",
-      "author": "djezzzl",
-      "authorUrl": "https://github.com/djezzzl",
-      "summary": "1. 概要 (1-2文で)  \nRails 8系で「ハイフンを含むテーブル名」を使うと `exec_insert` 実行時に失敗していた問題を、テーブル名のパース処理を修正することで直したPRです。正しくクオートされた `\"table-with-hyphen\"` のようなテーブル名でも、従来通り `exec_insert` が動作するようになります。"
     }
   ]
 }
