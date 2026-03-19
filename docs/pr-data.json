@@ -1,7 +1,25 @@
 {
-  "lastUpdated": "2026-03-18T00:14:18.337Z",
+  "lastUpdated": "2026-03-19T00:13:44.135Z",
   "totalCount": 50,
   "items": [
+    {
+      "number": 56998,
+      "title": "Use `flat_map` in ContentSecurityPolicy {#pr-56998}",
+      "url": "https://github.com/rails/rails/pull/56998",
+      "mergedAt": "2026-03-18T00:00:00.000Z",
+      "author": "p8",
+      "authorUrl": "https://github.com/p8",
+      "summary": "1. 概要 (1-2文で)  \nRails の `ContentSecurityPolicy` 実装において、`validate` 内で `flat_map` を使うことで配列のフラット化処理を整理し、`build_directive` の戻り値を `validate` の戻り値に依存しないようにする小さなリファクタリングが行われました。挙動は変えずに、コードの明確性と保守性を高める変更です。"
+    },
+    {
+      "number": 57003,
+      "title": "Fix PostgreSQL column equality for generated types {#pr-57003}",
+      "url": "https://github.com/rails/rails/pull/57003",
+      "mergedAt": "2026-03-18T00:00:00.000Z",
+      "author": "Saidbek",
+      "authorUrl": "https://github.com/Saidbek",
+      "summary": "1. 概要 (1-2文で)  \nPostgreSQL の generated column（生成列）の「格納型（stored/virtual）」が異なる場合に、`PostgreSQL::Column` の `==` と `hash` の挙動が食い違っていたバグを修正する PR です。`==` と `hash` が同じ情報（`generated` 属性）に基づいて判定されるようにし、Hash/Set での不整合を解消しています。"
+    },
     {
       "number": 57001,
       "title": "Fix PostgresqlDbConsoleTest reports Environment leak detected {#pr-57001}",
@@ -433,24 +451,6 @@
       "author": "flavorjones",
       "authorUrl": "https://github.com/flavorjones",
       "summary": "1. 概要 (1-2文で)  \nAction Text で「存在しない／削除された添付ファイル (MissingAttachable)」をプレーンテキスト出力する際、これまで空文字列になっていたのを、HTML と同様に「☒」(U+2612) を出力するようにした修正です。これにより、添付が欠損していることがプレーンテキストでも明示的に分かるようになります。"
-    },
-    {
-      "number": 56875,
-      "title": "Cleanup RAILS_HOST_APP_PATH related tests {#pr-56875}",
-      "url": "https://github.com/rails/rails/pull/56875",
-      "mergedAt": "2026-02-25T00:00:00.000Z",
-      "author": "byroot",
-      "authorUrl": "https://github.com/byroot",
-      "summary": "1. 概要 (1-2文で)  \n`RAILS_HOST_APP_PATH` を直接 `ENV` から読むのをやめ、定数に切り出したうえでテストではその定数をスタブする形に整理した PR です。これによりテストがよりシンプルかつ安定し、環境変数依存のテスト構造が改善されています。"
-    },
-    {
-      "number": 56867,
-      "title": "Fix Ruby 4.0 delegator warning for inspect on DelegateClass subclasses {#pr-56867}",
-      "url": "https://github.com/rails/rails/pull/56867",
-      "mergedAt": "2026-02-25T00:00:00.000Z",
-      "author": "hammadxcm",
-      "authorUrl": "https://github.com/hammadxcm",
-      "summary": "1. 概要 (1-2文で)  \nRuby 4.0 で追加された `Kernel#instance_variables_to_inspect` により、`DelegateClass` を継承した Rails のクラスで `inspect` を委譲している箇所から警告が出る問題を解消する PR です。`inspect` を Kernel に丸投げしている 2 クラスに対して、プライベートメソッド `instance_variables_to_inspect` を定義し、デリゲータ自身のインスタンス変数を返すようにしています。"
     }
   ]
 }
