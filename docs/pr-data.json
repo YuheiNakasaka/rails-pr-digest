@@ -1,7 +1,43 @@
 {
-  "lastUpdated": "2026-03-21T00:11:33.351Z",
+  "lastUpdated": "2026-03-22T00:13:17.203Z",
   "totalCount": 50,
   "items": [
+    {
+      "number": 57022,
+      "title": "Fix `insert_all` and `upsert_all` log messages for anonymous classes {#pr-57022}",
+      "url": "https://github.com/rails/rails/pull/57022",
+      "mergedAt": "2026-03-21T00:00:00.000Z",
+      "author": "byroot",
+      "authorUrl": "https://github.com/byroot",
+      "summary": "1. 概要 (1-2文で)  \n`insert_all` / `upsert_all` 実行時のログ出力で、匿名クラス（anonymous class）の場合でも人間が読めるモデル名が出るように修正したPRです。これにより、例えば `AnonymousBook Bulk Insert` / `AnonymousBook Bulk Upsert` のような分かりやすいログメッセージになります。"
+    },
+    {
+      "number": 57010,
+      "title": "Fix invalid HTML in routing error template {#pr-57010}",
+      "url": "https://github.com/rails/rails/pull/57010",
+      "mergedAt": "2026-03-21T00:00:00.000Z",
+      "author": "pardeyke",
+      "authorUrl": "https://github.com/pardeyke",
+      "summary": "1. 概要 (1-2文で)  \nRails のルーティングエラー用レスキューテンプレート（routing_error.html.erb）の HTML 構造が W3C/WHATWG の仕様上不正だったため、`<p>` タグ内からブロック要素（`<h2>` / `<ol>`）を取り除き、正しい HTML 構造になるように修正した PR です。  \nこれにより、ブラウザやツールによっては崩れていた DOM 構造が、仕様に沿った形で安定して解釈されるようになります。"
+    },
+    {
+      "number": 57017,
+      "title": "LogSubscriber: Avoid repeated `respond_to?` calls {#pr-57017}",
+      "url": "https://github.com/rails/rails/pull/57017",
+      "mergedAt": "2026-03-21T00:00:00.000Z",
+      "author": "byroot",
+      "authorUrl": "https://github.com/byroot",
+      "summary": "1. 概要 (1-2文で)  \n`ActiveSupport::LogSubscriber` が、イベントハンドラ呼び出し時に毎回 `respond_to?` を実行していたのをやめ、事前に「どのメソッドが存在するか」をキャッシュすることでオーバーヘッドを削減する変更です。結果としてログ購読処理のパフォーマンスがわずかに向上し、多数の通知が発生する環境での無駄なメソッド存在チェックが減ります。"
+    },
+    {
+      "number": 57020,
+      "title": "Fix lazy ivars causing different model shapes {#pr-57020}",
+      "url": "https://github.com/rails/rails/pull/57020",
+      "mergedAt": "2026-03-21T00:00:00.000Z",
+      "author": "hmcguire-shopify",
+      "authorUrl": "https://github.com/hmcguire-shopify",
+      "summary": "1. 概要 (1-2文で)  \nActiveRecord::Base のサブクラスで、インスタンス変数が「遅延で」定義されることによってクラスごとに異なるオブジェクトシェイプ（shape）が発生していた問題を解消し、すべてのモデルクラスで同一の shape になるようにした PR です。  \nこれにより、Lobsters ベンチマークにおいて ActiveRecord モデルの shape が 3 種類から 1 種類に減り、Ruby VM の最適化（JIT など）に有利になります。"
+    },
     {
       "number": 57008,
       "title": "Remove unused requires from ActiveSupport::JSON::Decoding {#pr-57008}",
@@ -415,42 +451,6 @@
       "author": "alpaca-tc",
       "authorUrl": "https://github.com/alpaca-tc",
       "summary": "1. 概要 (1-2文で)  \nRails のコードリロード時（特に test 環境で `config.enable_reloading = true` かつ Spring 推奨設定を使うケース）に、`ActiveSupport::ExecutionContext` の内部状態が壊れて `CurrentAttributes` などで `NoMethodError` が起きる不具合を修正する PR です。`reload!` 時のコンテキストリセット方法を変更し、「スタックの深さは保ったまま中身だけを消す」挙動にすることで問題を解消しています。"
-    },
-    {
-      "number": 56887,
-      "title": "Add `content_type` parameter to `http_authentication` methods {#pr-56887}",
-      "url": "https://github.com/rails/rails/pull/56887",
-      "mergedAt": "2026-02-26T00:00:00.000Z",
-      "author": "ilianah",
-      "authorUrl": "https://github.com/ilianah",
-      "summary": "1. 概要 (1-2文で)  \nHTTP Basic/Digest/Token 認証の 401 応答で `Content-Type` をカスタマイズできるように、`request_http_*_authentication` に `content_type` オプションが追加されました。あわせて、これまで下位メソッドにはあった `message` 引数が `http_basic_authenticate_with` からも指定できるように公開されています。"
-    },
-    {
-      "number": 56883,
-      "title": "Revert \"Load minitest server plugin to run `minitest` with `--bisect` option\" {#pr-56883}",
-      "url": "https://github.com/rails/rails/pull/56883",
-      "mergedAt": "2026-02-26T00:00:00.000Z",
-      "author": "yahonda",
-      "authorUrl": "https://github.com/yahonda",
-      "summary": "1. 概要 (1-2文で)  \nRails 側で `minitest --bisect` を使うために入れていたワークアラウンドを削除し、純粋に minitest 本体の `--bisect` サポートに任せるように戻した PRです。これにより、Rails のテスト実行時に独自の minitest server plugin ロード処理は行われなくなります。"
-    },
-    {
-      "number": 56880,
-      "title": "Avoid nesting Arel Or Nodes {#pr-56880}",
-      "url": "https://github.com/rails/rails/pull/56880",
-      "mergedAt": "2026-02-25T00:00:00.000Z",
-      "author": "skipkayhil",
-      "authorUrl": "https://github.com/skipkayhil",
-      "summary": "1. 概要 (1-2文で)  \nこのPRでは、Arelの `Or` ノードを「2項(Binary)の入れ子」で使っていた箇所を、「多項(Nary)」としてフラットに扱うように修正し、Arelツリーのネストを浅くして `StackTooDeep` エラーの発生可能性を下げています。内部実装の変更であり、アプリケーション側のAPIやクエリ結果は変えずに、パフォーマンスと安定性を向上させる目的の修正です。"
-    },
-    {
-      "number": 56873,
-      "title": "Escape markdown metacharacters in text nodes and attachment captions {#pr-56873}",
-      "url": "https://github.com/rails/rails/pull/56873",
-      "mergedAt": "2026-02-25T00:00:00.000Z",
-      "author": "flavorjones",
-      "authorUrl": "https://github.com/flavorjones",
-      "summary": "1. 概要 (1-2文で)  \nAction Text の HTML→Markdown 変換時に、通常テキストや添付ファイルのキャプション等に含まれる Markdown メタ文字（`*`, `#`, `[]` など）が意図せず Markdown として解釈されないよう、バックスラッシュでエスケープする仕組みを導入した PR です。  \n同時に、添付ファイルが自前で生成する Markdown については新しいタグでラップして「非エスケープ領域」として扱い、元の Markdown を維持できるようにしています。"
     }
   ]
 }
