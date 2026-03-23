@@ -1,7 +1,16 @@
 {
-  "lastUpdated": "2026-03-22T00:13:17.203Z",
+  "lastUpdated": "2026-03-23T00:14:21.328Z",
   "totalCount": 50,
   "items": [
+    {
+      "number": 57028,
+      "title": "Require Ruby 3.3.1 {#pr-57028}",
+      "url": "https://github.com/rails/rails/pull/57028",
+      "mergedAt": "2026-03-22T00:00:00.000Z",
+      "author": "byroot",
+      "authorUrl": "https://github.com/byroot",
+      "summary": "1. 概要 (1–2文で)  \nRails本体および関連コンポーネントの対応Rubyバージョンを「3.3.0 以上」から「3.3.1 以上」に引き上げるPRです。理由は、Ruby 3.3.0 に Rails の一部機能を壊すバグがあり、かつCIで複数パッチバージョンをサポートするコストを負えないためです。"
+    },
     {
       "number": 57022,
       "title": "Fix `insert_all` and `upsert_all` log messages for anonymous classes {#pr-57022}",
@@ -442,15 +451,6 @@
       "author": "pietervisser",
       "authorUrl": "https://github.com/pietervisser",
       "summary": "1. 概要 (1-2文で)  \n`ActionView::PartialRenderer` のコレクションキャッシュで、`expires_in` を常に `write_multi` に渡してしまい、キャッシュストア側のデフォルト有効期限を潰していたリグレッションが修正されました。`expires_in` が明示的に指定されたときだけ `write_multi` に渡されるようになり、デフォルト設定が正しく尊重されます。"
-    },
-    {
-      "number": 56889,
-      "title": "Fix ExecutionContext corruption during reload {#pr-56889}",
-      "url": "https://github.com/rails/rails/pull/56889",
-      "mergedAt": "2026-02-26T00:00:00.000Z",
-      "author": "alpaca-tc",
-      "authorUrl": "https://github.com/alpaca-tc",
-      "summary": "1. 概要 (1-2文で)  \nRails のコードリロード時（特に test 環境で `config.enable_reloading = true` かつ Spring 推奨設定を使うケース）に、`ActiveSupport::ExecutionContext` の内部状態が壊れて `CurrentAttributes` などで `NoMethodError` が起きる不具合を修正する PR です。`reload!` 時のコンテキストリセット方法を変更し、「スタックの深さは保ったまま中身だけを消す」挙動にすることで問題を解消しています。"
     }
   ]
 }
