@@ -1,7 +1,25 @@
 {
-  "lastUpdated": "2026-03-28T00:17:57.046Z",
+  "lastUpdated": "2026-03-29T00:15:17.217Z",
   "totalCount": 50,
   "items": [
+    {
+      "number": 57013,
+      "title": "Predefine the well-known Postgres type OIDs {#pr-57013}",
+      "url": "https://github.com/rails/rails/pull/57013",
+      "mergedAt": "2026-03-28T00:00:00.000Z",
+      "author": "matthewd",
+      "authorUrl": "https://github.com/matthewd",
+      "summary": "1. 概要 (1-2文で)  \nPostgreSQL の組み込み型について、`pg_type` を毎回問い合わせて OID を取得するのをやめ、Rails 側に「よく知られた型 OID」の一覧を同梱して接続時に即座にロードできるようにした変更です。ユーザー定義型や拡張で初めて未知の型に遭遇したときにのみ、これまで通り `pg_type` をクエリして補完する遅延ロード方式へと切り替えています。"
+    },
+    {
+      "number": 57029,
+      "title": "Document with_rich_text_* methods {#pr-57029}",
+      "url": "https://github.com/rails/rails/pull/57029",
+      "mergedAt": "2026-03-28T00:00:00.000Z",
+      "author": "p8",
+      "authorUrl": "https://github.com/p8",
+      "summary": "1. 概要 (1-2文で)  \nAction Text の `with_rich_text_*` 系メソッド（`with_rich_text_body` など）が公式にドキュメント化されるよう、`ActionText::Attribute` に Yard コメントが追加された PRです。機能追加や挙動変更ではなく、「どう使うか」が Rails API ドキュメントにきちんと出るように整理したドキュメント改善です。"
+    },
     {
       "number": 57082,
       "title": "Document that `:if` and `:unless` options on validations accept arrays [ci skip] {#pr-57082}",
@@ -433,24 +451,6 @@
       "author": "damln",
       "authorUrl": "https://github.com/damln",
       "summary": "1. 概要 (1-2文で)  \nRails が `rails new` で生成する Dockerfile テンプレートと、そのテスト用 Dockerfile のビルドを高速化するための最適化 PRです。不要なレイヤーを減らし、`COPY --chown` を適切に使うことで、実測で 1 分前後のビルド時間短縮が見込まれます。"
-    },
-    {
-      "number": 56977,
-      "title": "Fix SQLite virtual tables not ignored by `ignore_tables` {#pr-56977}",
-      "url": "https://github.com/rails/rails/pull/56977",
-      "mergedAt": "2026-03-13T00:00:00.000Z",
-      "author": "hschne",
-      "authorUrl": "https://github.com/hschne",
-      "summary": "1. 概要 (1-2文で)  \nSQLite の仮想テーブル（virtual tables）が `ActiveRecord::SchemaDumper.ignore_tables` で無視されない問題を修正する PR です。これにより、スキーマダンプ（`schema.rb` の生成など）から、指定した SQLite 仮想テーブルも正しく除外できるようになりました。"
-    },
-    {
-      "number": 56909,
-      "title": "Validate URI scheme in Action Text markdown link conversion {#pr-56909}",
-      "url": "https://github.com/rails/rails/pull/56909",
-      "mergedAt": "2026-03-12T00:00:00.000Z",
-      "author": "flavorjones",
-      "authorUrl": "https://github.com/flavorjones",
-      "summary": "1. 概要 (1-2文で)  \nAction Text がリッチテキストを Markdown に変換する際、リンクの URI スキームを検証していなかった問題を修正し、`javascript:` や `data:text/html` など危険なスキームを Markdown に出力しないようにした PRです。HTML パイプラインと Markdown パイプラインの安全性・挙動の一貫性を高める修正です。"
     }
   ]
 }
