@@ -1,7 +1,16 @@
 {
-  "lastUpdated": "2026-03-29T00:15:17.217Z",
+  "lastUpdated": "2026-03-30T00:15:21.086Z",
   "totalCount": 50,
   "items": [
+    {
+      "number": 57090,
+      "title": "Fix duplicated word in configuring guide {#pr-57090}",
+      "url": "https://github.com/rails/rails/pull/57090",
+      "mergedAt": "2026-03-29T00:00:00.000Z",
+      "author": "55728",
+      "authorUrl": "https://github.com/55728",
+      "summary": "1. 概要 (1-2文で)  \nRailsガイド「Configuring Rails Applications」の `config.action_on_early_load_hook` に関する記述から、誤って重複していた \"when\" という単語を削除するドキュメント修正PRです。アプリケーションコードや挙動には一切影響せず、ガイド文言のみが整備されています。"
+    },
     {
       "number": 57013,
       "title": "Predefine the well-known Postgres type OIDs {#pr-57013}",
@@ -442,15 +451,6 @@
       "author": "frodsan",
       "authorUrl": "https://github.com/frodsan",
       "summary": "1. 概要 (1-2文で)  \nPostgreSQL アダプタで `prevent_writes: true`（読み取り専用コンテキスト）でも `RESET` コマンドを実行できるようにした PR です。これにより、接続を「書き込み禁止」にしていても、セッションパラメータをデフォルトに戻すための `RESET` が ReadOnly エラーにならず通るようになります。"
-    },
-    {
-      "number": 56967,
-      "title": "Optimize generated Dockerfile build performance {#pr-56967}",
-      "url": "https://github.com/rails/rails/pull/56967",
-      "mergedAt": "2026-03-13T00:00:00.000Z",
-      "author": "damln",
-      "authorUrl": "https://github.com/damln",
-      "summary": "1. 概要 (1-2文で)  \nRails が `rails new` で生成する Dockerfile テンプレートと、そのテスト用 Dockerfile のビルドを高速化するための最適化 PRです。不要なレイヤーを減らし、`COPY --chown` を適切に使うことで、実測で 1 分前後のビルド時間短縮が見込まれます。"
     }
   ]
 }
