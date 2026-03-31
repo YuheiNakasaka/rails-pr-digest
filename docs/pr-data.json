@@ -1,7 +1,34 @@
 {
-  "lastUpdated": "2026-03-30T00:15:21.086Z",
+  "lastUpdated": "2026-03-31T00:16:14.389Z",
   "totalCount": 50,
   "items": [
+    {
+      "number": 57096,
+      "title": "Ignore schemas when validating table name lengths for PostgreSQL {#pr-57096}",
+      "url": "https://github.com/rails/rails/pull/57096",
+      "mergedAt": "2026-03-30T00:00:00.000Z",
+      "author": "fatkodima",
+      "authorUrl": "https://github.com/fatkodima",
+      "summary": "1. 概要 (1-2文で)  \nPostgreSQL でテーブル名の長さを検証する際に、`schema_name.table_name` のようなスキーマ部分を含めず、**純粋なテーブル名だけで長さチェックするように修正した PR**です。これにより、スキーマ名を含めたフル修飾名が 63 文字を超えていても、テーブル名自体が PostgreSQL の制限以内ならマイグレーションが通るようになります。"
+    },
+    {
+      "number": 57097,
+      "title": "ActiveStorage: skip associated tests when a dependency is missing {#pr-57097}",
+      "url": "https://github.com/rails/rails/pull/57097",
+      "mergedAt": "2026-03-30T00:00:00.000Z",
+      "author": "byroot",
+      "authorUrl": "https://github.com/byroot",
+      "summary": "1. 概要 (1-2文で)  \nActive Storage の一部テスト（動画アナライザ／プレビュー、MuPDF プレビュー）について、必要な外部依存ライブラリがインストールされていない環境ではテスト自体をスキップするようにした変更です。これにより、Active Storage の小変更を行う際に、全ての外部ツールをローカルに入れなくてもテストが実行しやすくなります。"
+    },
+    {
+      "number": 57094,
+      "title": "Delay engine route building {#pr-57094}",
+      "url": "https://github.com/rails/rails/pull/57094",
+      "mergedAt": "2026-03-30T00:00:00.000Z",
+      "author": "byroot",
+      "authorUrl": "https://github.com/byroot",
+      "summary": "1. 概要 (1-2文で)  \nRails Engine が `routes do ... end` を評価するタイミングを遅延させ、`make_routes_lazy` 最適化が正しく効くようにした変更です。  \nこれにより、`graphql` など Engine 内で直接 `routes do` を呼んでいるライブラリでも、ルーティングの遅延構築によるパフォーマンス改善が適用されます。"
+    },
     {
       "number": 57090,
       "title": "Fix duplicated word in configuring guide {#pr-57090}",
@@ -424,33 +451,6 @@
       "author": "larouxn",
       "authorUrl": "https://github.com/larouxn",
       "summary": "1. 概要 (1-2文で)  \n`ActiveSupport::Notifications` を使ったキャッシュ関連テストを、`ActiveSupport::Testing::NotificationAssertions` ヘルパーで書き換えて簡潔・安全にした PR です。手動でのサブスクライバ管理やインスタンス変数ベースのイベント収集をやめ、共通ヘルパーによる記述に統一しています。"
-    },
-    {
-      "number": 56975,
-      "title": "Simplify applicable `activerecord` tests with `NotificationAssertions` helpers {#pr-56975}",
-      "url": "https://github.com/rails/rails/pull/56975",
-      "mergedAt": "2026-03-13T00:00:00.000Z",
-      "author": "larouxn",
-      "authorUrl": "https://github.com/larouxn",
-      "summary": "1. 概要 (1-2文で)  \n`activerecord` の一部テストで、`ActiveSupport::Notifications` を直接扱っていた箇所を、`ActiveSupport::Testing::NotificationAssertions` ヘルパーに置き換えて簡潔にした PR です。これにより通知購読の登録/解除やアサーションが共通化され、テストコードが短く・安全になっています。"
-    },
-    {
-      "number": 56972,
-      "title": "Add MySQL lock option and extend algorithm to column DDL operations {#pr-56972}",
-      "url": "https://github.com/rails/rails/pull/56972",
-      "mergedAt": "2026-03-13T00:00:00.000Z",
-      "author": "dominikdarnel",
-      "authorUrl": "https://github.com/dominikdarnel",
-      "summary": "1. 概要 (1-2文で)  \nこのPRは、Rails の MySQL アダプタに `lock:` オプションを追加し、これまでインデックス操作にしか使えなかった `algorithm:` オプションをカラム操作（`add_column` など）にも拡張するものです。これにより、MySQL のオンラインDDL機能（`ALGORITHM` / `LOCK`）を Rails のマイグレーションDSLから直接制御できるようになります。"
-    },
-    {
-      "number": 56945,
-      "title": "ActiveRecord: Support Postgres `RESET` on readonly queries {#pr-56945}",
-      "url": "https://github.com/rails/rails/pull/56945",
-      "mergedAt": "2026-03-13T00:00:00.000Z",
-      "author": "frodsan",
-      "authorUrl": "https://github.com/frodsan",
-      "summary": "1. 概要 (1-2文で)  \nPostgreSQL アダプタで `prevent_writes: true`（読み取り専用コンテキスト）でも `RESET` コマンドを実行できるようにした PR です。これにより、接続を「書き込み禁止」にしていても、セッションパラメータをデフォルトに戻すための `RESET` が ReadOnly エラーにならず通るようになります。"
     }
   ]
 }
