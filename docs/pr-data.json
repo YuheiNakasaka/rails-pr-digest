@@ -1,7 +1,52 @@
 {
-  "lastUpdated": "2026-03-31T00:16:14.389Z",
+  "lastUpdated": "2026-04-01T00:16:58.964Z",
   "totalCount": 50,
   "items": [
+    {
+      "number": 56664,
+      "title": "Fix inverse_of on composite keys in ActiveRecord::Associations::Association#inversable?  {#pr-56664}",
+      "url": "https://github.com/rails/rails/pull/56664",
+      "mergedAt": "2026-03-31T00:00:00.000Z",
+      "author": "masom",
+      "authorUrl": "https://github.com/masom",
+      "summary": "要約エラー: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors."
+    },
+    {
+      "number": 57103,
+      "title": "Update ActiveRecord::Associations::Preloader::Association.owners_by_key to handle composite keys {#pr-57103}",
+      "url": "https://github.com/rails/rails/pull/57103",
+      "mergedAt": "2026-03-31T00:00:00.000Z",
+      "author": "rosew",
+      "authorUrl": "https://github.com/rosew",
+      "summary": "要約エラー: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors."
+    },
+    {
+      "number": 55991,
+      "title": "Add AGENTS.md with Rails codebase guide for AI coding agents {#pr-55991}",
+      "url": "https://github.com/rails/rails/pull/55991",
+      "mergedAt": "2026-03-31T00:00:00.000Z",
+      "author": "rafaelfranca",
+      "authorUrl": "https://github.com/rafaelfranca",
+      "summary": "要約エラー: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors."
+    },
+    {
+      "number": 57105,
+      "title": "Speedup ActiveRecord::LogSubscriber#sql_color {#pr-57105}",
+      "url": "https://github.com/rails/rails/pull/57105",
+      "mergedAt": "2026-03-31T00:00:00.000Z",
+      "author": "byroot",
+      "authorUrl": "https://github.com/byroot",
+      "summary": "要約エラー: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors."
+    },
+    {
+      "number": 57106,
+      "title": "Add missing require openssl to ActiveStorage {#pr-57106}",
+      "url": "https://github.com/rails/rails/pull/57106",
+      "mergedAt": "2026-03-31T00:00:00.000Z",
+      "author": "fatkodima",
+      "authorUrl": "https://github.com/fatkodima",
+      "summary": "要約エラー: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors."
+    },
     {
       "number": 57096,
       "title": "Ignore schemas when validating table name lengths for PostgreSQL {#pr-57096}",
@@ -406,51 +451,6 @@
       "author": "nicolasva",
       "authorUrl": "https://github.com/nicolasva",
       "summary": "1. 概要 (1-2文で)  \nActiveModel::Name#human に渡せる `count` 引数が、I18n の複数形ルールに沿って正しく扱われることを確認するテストが追加されています。機能変更ではなく、既存仕様のテスト補完が目的のPRです。"
-    },
-    {
-      "number": 56989,
-      "title": "Simplify `activerecord` tests with `NotificationAssertions` helpers {#pr-56989}",
-      "url": "https://github.com/rails/rails/pull/56989",
-      "mergedAt": "2026-03-16T00:00:00.000Z",
-      "author": "Saidbek",
-      "authorUrl": "https://github.com/Saidbek",
-      "summary": "1. 概要 (1-2文で)  \n`activerecord` のテストで、これまでバラバラに書かれていた `ActiveSupport::Notifications.subscribed` ベースのコードを、共通ヘルパ `NotificationAssertions`（`assert_notification` / `capture_notifications`）に置き換えてシンプルにした PR です。テストの可読性と一貫性を高めるためのリファクタリングであり、挙動や API 仕様の変更はありません。"
-    },
-    {
-      "number": 56992,
-      "title": "Deprecate require_dependency {#pr-56992}",
-      "url": "https://github.com/rails/rails/pull/56992",
-      "mergedAt": "2026-03-15T00:00:00.000Z",
-      "author": "fxn",
-      "authorUrl": "https://github.com/fxn",
-      "summary": "1. 概要 (1-2文で)  \n`require_dependency` が「非推奨 (deprecate)」になり、将来的な削除に向けた準備が始まりました。クラシックオートローダからの移行や Rails < 7.0 サポートのために残されていた API を正式に廃止方向へ進める変更です。"
-    },
-    {
-      "number": 56986,
-      "title": "Further reduce internal usage of cattr_accessor and mattr_accessor {#pr-56986}",
-      "url": "https://github.com/rails/rails/pull/56986",
-      "mergedAt": "2026-03-15T00:00:00.000Z",
-      "author": "byroot",
-      "authorUrl": "https://github.com/byroot",
-      "summary": "1. 概要 (1-2文で)  \nRails内部で `cattr_accessor` / `mattr_accessor`（クラス変数ベースのアクセサ）の利用をさらに減らし、主に「クラスインスタンス変数」や `class_attribute` への移行を進めたPRです。クラス変数の共有挙動による思わぬ副作用を避け、より直感的で安全な設定・状態管理に寄せるリファクタリングになります。"
-    },
-    {
-      "number": 56983,
-      "title": "[ci skip] Update CHANGELOG with transform_keys! overwrite precedence note {#pr-56983}",
-      "url": "https://github.com/rails/rails/pull/56983",
-      "mergedAt": "2026-03-15T00:00:00.000Z",
-      "author": "diaphragm",
-      "authorUrl": "https://github.com/diaphragm",
-      "summary": "1. 概要 (1-2文で)  \nこのPRは、Rails 8.0.3 で行われた `ActiveSupport::HashWithIndifferentAccess#transform_keys!` のバグ修正に伴い、「キー変換時にキーが衝突した場合の上書き優先順位」が変わったことを CHANGELOG に明記するドキュメント修正です。挙動は Ruby 標準の `Hash#transform_keys!` に合わせて「あと勝ち」になっており、その仕様変更をサンプル付きで説明しています。"
-    },
-    {
-      "number": 56974,
-      "title": "Simplify applicable `activesupport` tests with `NotificationAssertions` helpers {#pr-56974}",
-      "url": "https://github.com/rails/rails/pull/56974",
-      "mergedAt": "2026-03-13T00:00:00.000Z",
-      "author": "larouxn",
-      "authorUrl": "https://github.com/larouxn",
-      "summary": "1. 概要 (1-2文で)  \n`ActiveSupport::Notifications` を使ったキャッシュ関連テストを、`ActiveSupport::Testing::NotificationAssertions` ヘルパーで書き換えて簡潔・安全にした PR です。手動でのサブスクライバ管理やインスタンス変数ベースのイベント収集をやめ、共通ヘルパーによる記述に統一しています。"
     }
   ]
 }
