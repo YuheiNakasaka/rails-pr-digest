@@ -1,7 +1,25 @@
 {
-  "lastUpdated": "2026-04-01T00:16:58.964Z",
+  "lastUpdated": "2026-04-02T00:14:01.017Z",
   "totalCount": 50,
   "items": [
+    {
+      "number": 57115,
+      "title": "Allow to prepend AS::Notification subscribers {#pr-57115}",
+      "url": "https://github.com/rails/rails/pull/57115",
+      "mergedAt": "2026-04-01T00:00:00.000Z",
+      "author": "federico-carrocera",
+      "authorUrl": "https://github.com/federico-carrocera",
+      "summary": "要約エラー: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors."
+    },
+    {
+      "number": 57108,
+      "title": "ActiveSupport::Cache add a fast path for string keys {#pr-57108}",
+      "url": "https://github.com/rails/rails/pull/57108",
+      "mergedAt": "2026-04-01T00:00:00.000Z",
+      "author": "byroot",
+      "authorUrl": "https://github.com/byroot",
+      "summary": "要約エラー: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors."
+    },
     {
       "number": 56664,
       "title": "Fix inverse_of on composite keys in ActiveRecord::Associations::Association#inversable?  {#pr-56664}",
@@ -433,24 +451,6 @@
       "author": "jorgemanrubia",
       "authorUrl": "https://github.com/jorgemanrubia",
       "summary": "1. 概要 (1-2文で)  \nActionText のエディタヘルパーで、`value` 引数とは別にブロックで渡した内容を「エディタ要素の子要素」として同時に扱えるようになりました。Trix エディタについては、従来どおり「`value` が無い場合はブロック内容を初期値として使う」という挙動も維持されています。"
-    },
-    {
-      "number": 56990,
-      "title": "fix(guides): bin/jobs start was not copying {#pr-56990}",
-      "url": "https://github.com/rails/rails/pull/56990",
-      "mergedAt": "2026-03-16T00:00:00.000Z",
-      "author": "j01nb0k",
-      "authorUrl": "https://github.com/j01nb0k",
-      "summary": "1. 概要 (1-2文で)  \nRailsガイド「Active Job Basics」の中にある `bin/jobs start` のコマンド例が、シェル上で想定どおりコピー・実行できない状態になっていた問題を修正したPRです。原因は、ガイドのコードブロックから「`$` プロンプト記号」が抜けていたことによる単純なドキュメント上のミスです。"
-    },
-    {
-      "number": 56987,
-      "title": "Add tests for ActiveModel::Name#human `count` argument {#pr-56987}",
-      "url": "https://github.com/rails/rails/pull/56987",
-      "mergedAt": "2026-03-16T00:00:00.000Z",
-      "author": "nicolasva",
-      "authorUrl": "https://github.com/nicolasva",
-      "summary": "1. 概要 (1-2文で)  \nActiveModel::Name#human に渡せる `count` 引数が、I18n の複数形ルールに沿って正しく扱われることを確認するテストが追加されています。機能変更ではなく、既存仕様のテスト補完が目的のPRです。"
     }
   ]
 }
