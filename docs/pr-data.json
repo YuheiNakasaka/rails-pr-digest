@@ -1,7 +1,16 @@
 {
-  "lastUpdated": "2026-04-02T00:14:01.017Z",
+  "lastUpdated": "2026-04-03T00:20:01.905Z",
   "totalCount": 50,
   "items": [
+    {
+      "number": 57126,
+      "title": "Removed unnecessary code since minimum ruby required is 3.3.1 {#pr-57126}",
+      "url": "https://github.com/rails/rails/pull/57126",
+      "mergedAt": "2026-04-02T00:00:00.000Z",
+      "author": "adityapandit17",
+      "authorUrl": "https://github.com/adityapandit17",
+      "summary": "要約エラー: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors."
+    },
     {
       "number": 57115,
       "title": "Allow to prepend AS::Notification subscribers {#pr-57115}",
@@ -442,15 +451,6 @@
       "author": "larouxn",
       "authorUrl": "https://github.com/larouxn",
       "summary": "1. 概要 (1-2文で)  \nRails リポジトリで使用している Bundler のバージョンを 4.0.6 から 4.0.8 に更新した PRです。これにより、`bundle install` などで利用される Bundler が最新のパッチバージョンになります。"
-    },
-    {
-      "number": 56926,
-      "title": "ActionText: support block children in editor elements alongside value {#pr-56926}",
-      "url": "https://github.com/rails/rails/pull/56926",
-      "mergedAt": "2026-03-16T00:00:00.000Z",
-      "author": "jorgemanrubia",
-      "authorUrl": "https://github.com/jorgemanrubia",
-      "summary": "1. 概要 (1-2文で)  \nActionText のエディタヘルパーで、`value` 引数とは別にブロックで渡した内容を「エディタ要素の子要素」として同時に扱えるようになりました。Trix エディタについては、従来どおり「`value` が無い場合はブロック内容を初期値として使う」という挙動も維持されています。"
     }
   ]
 }
