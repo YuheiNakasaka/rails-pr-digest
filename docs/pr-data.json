@@ -1,7 +1,25 @@
 {
-  "lastUpdated": "2026-04-03T00:20:01.905Z",
+  "lastUpdated": "2026-04-04T00:13:45.499Z",
   "totalCount": 50,
   "items": [
+    {
+      "number": 57130,
+      "title": "Fix belongs_to validation condition for composite foreign keys {#pr-57130}",
+      "url": "https://github.com/rails/rails/pull/57130",
+      "mergedAt": "2026-04-03T00:00:00.000Z",
+      "author": "felix-d",
+      "authorUrl": "https://github.com/felix-d",
+      "summary": "要約エラー: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors."
+    },
+    {
+      "number": 57133,
+      "title": "Fix docs of Rails.{error,event} {#pr-57133}",
+      "url": "https://github.com/rails/rails/pull/57133",
+      "mergedAt": "2026-04-03T00:00:00.000Z",
+      "author": "fxn",
+      "authorUrl": "https://github.com/fxn",
+      "summary": "要約エラー: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors."
+    },
     {
       "number": 57126,
       "title": "Removed unnecessary code since minimum ruby required is 3.3.1 {#pr-57126}",
@@ -433,24 +451,6 @@
       "author": "joaoGabriel55",
       "authorUrl": "https://github.com/joaoGabriel55",
       "summary": "1. 概要 (1-2文で)  \nPostgresqlDbConsoleTest で環境変数（ENV）のリークを検出する `LeakChecker` とのライフサイクルの噛み合わせ不良によりテストが失敗していた問題を、ENV のバックアップ／復元方法を変更することで修正した PRです。テストコードのみの変更で、本体の挙動には影響しません。"
-    },
-    {
-      "number": 56994,
-      "title": "Drop workaround for mail gem version < 2.8 {#pr-56994}",
-      "url": "https://github.com/rails/rails/pull/56994",
-      "mergedAt": "2026-03-16T00:00:00.000Z",
-      "author": "yahonda",
-      "authorUrl": "https://github.com/yahonda",
-      "summary": "1. 概要 (1-2文で)  \nAction Mailbox が依存する mail gem の下限バージョンがすでに 2.8 以上になっているため、mail < 2.8 向けに入っていたワークアラウンド（互換コード）を削除した PR です。結果として、コードがシンプルになり、サポート対象が実質的に mail 2.8 以降に揃えられました。"
-    },
-    {
-      "number": 56980,
-      "title": "Bump bundler from 4.0.6 to 4.0.8 {#pr-56980}",
-      "url": "https://github.com/rails/rails/pull/56980",
-      "mergedAt": "2026-03-16T00:00:00.000Z",
-      "author": "larouxn",
-      "authorUrl": "https://github.com/larouxn",
-      "summary": "1. 概要 (1-2文で)  \nRails リポジトリで使用している Bundler のバージョンを 4.0.6 から 4.0.8 に更新した PRです。これにより、`bundle install` などで利用される Bundler が最新のパッチバージョンになります。"
     }
   ]
 }
