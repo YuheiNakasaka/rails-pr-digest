@@ -1,7 +1,16 @@
 {
-  "lastUpdated": "2026-04-05T00:14:37.338Z",
+  "lastUpdated": "2026-04-06T00:15:49.871Z",
   "totalCount": 50,
   "items": [
+    {
+      "number": 57111,
+      "title": "Bump Ruby version to 4.0.2 in devcontainers {#pr-57111}",
+      "url": "https://github.com/rails/rails/pull/57111",
+      "mergedAt": "2026-04-05T00:00:00.000Z",
+      "author": "adityapandit17",
+      "authorUrl": "https://github.com/adityapandit17",
+      "summary": "要約エラー: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors."
+    },
     {
       "number": 57130,
       "title": "Fix belongs_to validation condition for composite foreign keys {#pr-57130}",
@@ -442,15 +451,6 @@
       "author": "Saidbek",
       "authorUrl": "https://github.com/Saidbek",
       "summary": "1. 概要 (1-2文で)  \nPostgreSQL の generated column（生成列）の「格納型（stored/virtual）」が異なる場合に、`PostgreSQL::Column` の `==` と `hash` の挙動が食い違っていたバグを修正する PR です。`==` と `hash` が同じ情報（`generated` 属性）に基づいて判定されるようにし、Hash/Set での不整合を解消しています。"
-    },
-    {
-      "number": 57001,
-      "title": "Fix PostgresqlDbConsoleTest reports Environment leak detected {#pr-57001}",
-      "url": "https://github.com/rails/rails/pull/57001",
-      "mergedAt": "2026-03-17T00:00:00.000Z",
-      "author": "joaoGabriel55",
-      "authorUrl": "https://github.com/joaoGabriel55",
-      "summary": "1. 概要 (1-2文で)  \nPostgresqlDbConsoleTest で環境変数（ENV）のリークを検出する `LeakChecker` とのライフサイクルの噛み合わせ不良によりテストが失敗していた問題を、ENV のバックアップ／復元方法を変更することで修正した PRです。テストコードのみの変更で、本体の挙動には影響しません。"
     }
   ]
 }
