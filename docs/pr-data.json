@@ -1,7 +1,16 @@
 {
-  "lastUpdated": "2026-04-06T00:15:49.871Z",
+  "lastUpdated": "2026-04-07T00:16:15.278Z",
   "totalCount": 50,
   "items": [
+    {
+      "number": 57124,
+      "title": "Add request.safe_method? and request.unsafe_method? {#pr-57124}",
+      "url": "https://github.com/rails/rails/pull/57124",
+      "mergedAt": "2026-04-06T00:00:00.000Z",
+      "author": "thehale",
+      "authorUrl": "https://github.com/thehale",
+      "summary": "要約エラー: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors."
+    },
     {
       "number": 57111,
       "title": "Bump Ruby version to 4.0.2 in devcontainers {#pr-57111}",
@@ -442,15 +451,6 @@
       "author": "p8",
       "authorUrl": "https://github.com/p8",
       "summary": "1. 概要 (1-2文で)  \nRails の `ContentSecurityPolicy` 実装において、`validate` 内で `flat_map` を使うことで配列のフラット化処理を整理し、`build_directive` の戻り値を `validate` の戻り値に依存しないようにする小さなリファクタリングが行われました。挙動は変えずに、コードの明確性と保守性を高める変更です。"
-    },
-    {
-      "number": 57003,
-      "title": "Fix PostgreSQL column equality for generated types {#pr-57003}",
-      "url": "https://github.com/rails/rails/pull/57003",
-      "mergedAt": "2026-03-18T00:00:00.000Z",
-      "author": "Saidbek",
-      "authorUrl": "https://github.com/Saidbek",
-      "summary": "1. 概要 (1-2文で)  \nPostgreSQL の generated column（生成列）の「格納型（stored/virtual）」が異なる場合に、`PostgreSQL::Column` の `==` と `hash` の挙動が食い違っていたバグを修正する PR です。`==` と `hash` が同じ情報（`generated` 属性）に基づいて判定されるようにし、Hash/Set での不整合を解消しています。"
     }
   ]
 }
