@@ -1,7 +1,25 @@
 {
-  "lastUpdated": "2026-04-08T00:16:53.225Z",
+  "lastUpdated": "2026-04-09T00:13:31.864Z",
   "totalCount": 50,
   "items": [
+    {
+      "number": 56775,
+      "title": "Update Action Cable origin check to respect X-Forwarded-Host {#pr-56775}",
+      "url": "https://github.com/rails/rails/pull/56775",
+      "mergedAt": "2026-04-08T00:00:00.000Z",
+      "author": "jordan-brough",
+      "authorUrl": "https://github.com/jordan-brough",
+      "summary": "要約エラー: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors."
+    },
+    {
+      "number": 57157,
+      "title": "Get rid of rails-ujs.js {#pr-57157}",
+      "url": "https://github.com/rails/rails/pull/57157",
+      "mergedAt": "2026-04-08T00:00:00.000Z",
+      "author": "byroot",
+      "authorUrl": "https://github.com/byroot",
+      "summary": "要約エラー: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors."
+    },
     {
       "number": 57124,
       "title": "Add request.safe_method? and request.unsafe_method? {#pr-57124}",
@@ -433,24 +451,6 @@
       "author": "Saidbek",
       "authorUrl": "https://github.com/Saidbek",
       "summary": "1. 概要 (1-2文で)  \nActiveSupport::JSON::Decoding 内で、現在は一切使われていない `require` を2つ削除したPRです。機能追加や挙動変更は行われておらず、不要な依存を整理するリファクタリングです。"
-    },
-    {
-      "number": 57000,
-      "title": "Batch SQL statements when creating tables. {#pr-57000}",
-      "url": "https://github.com/rails/rails/pull/57000",
-      "mergedAt": "2026-03-19T00:00:00.000Z",
-      "author": "andrewn617",
-      "authorUrl": "https://github.com/andrewn617",
-      "summary": "1. 概要 (1-2文で)  \nこのPRは、`create_table` 時に発行する複数の SQL を一括送信（バッチ）することで、特に巨大なスキーマを持つアプリケーションで `db:schema:load` などのパフォーマンスを大幅に改善する変更です。PostgreSQL で 1000+ テーブルのケースでは、スキーマロードが約 120 秒から約 25 秒まで短縮された事例が示されています。"
-    },
-    {
-      "number": 56998,
-      "title": "Use `flat_map` in ContentSecurityPolicy {#pr-56998}",
-      "url": "https://github.com/rails/rails/pull/56998",
-      "mergedAt": "2026-03-18T00:00:00.000Z",
-      "author": "p8",
-      "authorUrl": "https://github.com/p8",
-      "summary": "1. 概要 (1-2文で)  \nRails の `ContentSecurityPolicy` 実装において、`validate` 内で `flat_map` を使うことで配列のフラット化処理を整理し、`build_directive` の戻り値を `validate` の戻り値に依存しないようにする小さなリファクタリングが行われました。挙動は変えずに、コードの明確性と保守性を高める変更です。"
     }
   ]
 }
