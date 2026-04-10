@@ -1,7 +1,25 @@
 {
-  "lastUpdated": "2026-04-09T00:13:31.864Z",
+  "lastUpdated": "2026-04-10T00:16:32.560Z",
   "totalCount": 50,
   "items": [
+    {
+      "number": 57140,
+      "title": "Fix GET+JSON+params in integration tests for API-only apps {#pr-57140}",
+      "url": "https://github.com/rails/rails/pull/57140",
+      "mergedAt": "2026-04-09T00:00:00.000Z",
+      "author": "Mordorreal",
+      "authorUrl": "https://github.com/Mordorreal",
+      "summary": "要約エラー: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors."
+    },
+    {
+      "number": 57160,
+      "title": "Fix typos in documentation for Active Storage, Action View, Active Record, and upgrading guide {#pr-57160}",
+      "url": "https://github.com/rails/rails/pull/57160",
+      "mergedAt": "2026-04-09T00:00:00.000Z",
+      "author": "rimedelis",
+      "authorUrl": "https://github.com/rimedelis",
+      "summary": "要約エラー: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors."
+    },
     {
       "number": 56775,
       "title": "Update Action Cable origin check to respect X-Forwarded-Host {#pr-56775}",
@@ -433,24 +451,6 @@
       "author": "byroot",
       "authorUrl": "https://github.com/byroot",
       "summary": "1. 概要 (1-2文で)  \n`ActiveSupport::LogSubscriber` が、イベントハンドラ呼び出し時に毎回 `respond_to?` を実行していたのをやめ、事前に「どのメソッドが存在するか」をキャッシュすることでオーバーヘッドを削減する変更です。結果としてログ購読処理のパフォーマンスがわずかに向上し、多数の通知が発生する環境での無駄なメソッド存在チェックが減ります。"
-    },
-    {
-      "number": 57020,
-      "title": "Fix lazy ivars causing different model shapes {#pr-57020}",
-      "url": "https://github.com/rails/rails/pull/57020",
-      "mergedAt": "2026-03-21T00:00:00.000Z",
-      "author": "hmcguire-shopify",
-      "authorUrl": "https://github.com/hmcguire-shopify",
-      "summary": "1. 概要 (1-2文で)  \nActiveRecord::Base のサブクラスで、インスタンス変数が「遅延で」定義されることによってクラスごとに異なるオブジェクトシェイプ（shape）が発生していた問題を解消し、すべてのモデルクラスで同一の shape になるようにした PR です。  \nこれにより、Lobsters ベンチマークにおいて ActiveRecord モデルの shape が 3 種類から 1 種類に減り、Ruby VM の最適化（JIT など）に有利になります。"
-    },
-    {
-      "number": 57008,
-      "title": "Remove unused requires from ActiveSupport::JSON::Decoding {#pr-57008}",
-      "url": "https://github.com/rails/rails/pull/57008",
-      "mergedAt": "2026-03-19T00:00:00.000Z",
-      "author": "Saidbek",
-      "authorUrl": "https://github.com/Saidbek",
-      "summary": "1. 概要 (1-2文で)  \nActiveSupport::JSON::Decoding 内で、現在は一切使われていない `require` を2つ削除したPRです。機能追加や挙動変更は行われておらず、不要な依存を整理するリファクタリングです。"
     }
   ]
 }
