@@ -1,7 +1,16 @@
 {
-  "lastUpdated": "2026-04-10T00:16:32.560Z",
+  "lastUpdated": "2026-04-11T00:15:00.540Z",
   "totalCount": 50,
   "items": [
+    {
+      "number": 57166,
+      "title": "Use hash lookup for exact-match regexp filters in ParameterFilter {#pr-57166}",
+      "url": "https://github.com/rails/rails/pull/57166",
+      "mergedAt": "2026-04-10T00:00:00.000Z",
+      "author": "alexcwatt",
+      "authorUrl": "https://github.com/alexcwatt",
+      "summary": "要約エラー: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors."
+    },
     {
       "number": 57140,
       "title": "Fix GET+JSON+params in integration tests for API-only apps {#pr-57140}",
@@ -442,15 +451,6 @@
       "author": "pardeyke",
       "authorUrl": "https://github.com/pardeyke",
       "summary": "1. 概要 (1-2文で)  \nRails のルーティングエラー用レスキューテンプレート（routing_error.html.erb）の HTML 構造が W3C/WHATWG の仕様上不正だったため、`<p>` タグ内からブロック要素（`<h2>` / `<ol>`）を取り除き、正しい HTML 構造になるように修正した PR です。  \nこれにより、ブラウザやツールによっては崩れていた DOM 構造が、仕様に沿った形で安定して解釈されるようになります。"
-    },
-    {
-      "number": 57017,
-      "title": "LogSubscriber: Avoid repeated `respond_to?` calls {#pr-57017}",
-      "url": "https://github.com/rails/rails/pull/57017",
-      "mergedAt": "2026-03-21T00:00:00.000Z",
-      "author": "byroot",
-      "authorUrl": "https://github.com/byroot",
-      "summary": "1. 概要 (1-2文で)  \n`ActiveSupport::LogSubscriber` が、イベントハンドラ呼び出し時に毎回 `respond_to?` を実行していたのをやめ、事前に「どのメソッドが存在するか」をキャッシュすることでオーバーヘッドを削減する変更です。結果としてログ購読処理のパフォーマンスがわずかに向上し、多数の通知が発生する環境での無駄なメソッド存在チェックが減ります。"
     }
   ]
 }
