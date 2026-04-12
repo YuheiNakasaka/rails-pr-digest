@@ -1,7 +1,16 @@
 {
-  "lastUpdated": "2026-04-11T00:15:00.540Z",
+  "lastUpdated": "2026-04-12T00:16:55.666Z",
   "totalCount": 50,
   "items": [
+    {
+      "number": 55865,
+      "title": "Make the warning about active storage redirect and proxy mode stronger {#pr-55865}",
+      "url": "https://github.com/rails/rails/pull/55865",
+      "mergedAt": "2026-04-11T00:00:00.000Z",
+      "author": "pwim",
+      "authorUrl": "https://github.com/pwim",
+      "summary": "要約エラー: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors."
+    },
     {
       "number": 57166,
       "title": "Use hash lookup for exact-match regexp filters in ParameterFilter {#pr-57166}",
@@ -442,15 +451,6 @@
       "author": "byroot",
       "authorUrl": "https://github.com/byroot",
       "summary": "1. 概要 (1-2文で)  \n`insert_all` / `upsert_all` 実行時のログ出力で、匿名クラス（anonymous class）の場合でも人間が読めるモデル名が出るように修正したPRです。これにより、例えば `AnonymousBook Bulk Insert` / `AnonymousBook Bulk Upsert` のような分かりやすいログメッセージになります。"
-    },
-    {
-      "number": 57010,
-      "title": "Fix invalid HTML in routing error template {#pr-57010}",
-      "url": "https://github.com/rails/rails/pull/57010",
-      "mergedAt": "2026-03-21T00:00:00.000Z",
-      "author": "pardeyke",
-      "authorUrl": "https://github.com/pardeyke",
-      "summary": "1. 概要 (1-2文で)  \nRails のルーティングエラー用レスキューテンプレート（routing_error.html.erb）の HTML 構造が W3C/WHATWG の仕様上不正だったため、`<p>` タグ内からブロック要素（`<h2>` / `<ol>`）を取り除き、正しい HTML 構造になるように修正した PR です。  \nこれにより、ブラウザやツールによっては崩れていた DOM 構造が、仕様に沿った形で安定して解釈されるようになります。"
     }
   ]
 }
