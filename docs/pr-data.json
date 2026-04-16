@@ -1,7 +1,34 @@
 {
-  "lastUpdated": "2026-04-15T00:21:07.449Z",
+  "lastUpdated": "2026-04-16T00:21:32.863Z",
   "totalCount": 50,
   "items": [
+    {
+      "number": 57156,
+      "title": "Query command for read-only database queries {#pr-57156}",
+      "url": "https://github.com/rails/rails/pull/57156",
+      "mergedAt": "2026-04-15T00:00:00.000Z",
+      "author": "lewispb",
+      "authorUrl": "https://github.com/lewispb",
+      "summary": "要約エラー: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors."
+    },
+    {
+      "number": 57179,
+      "title": "Make the warning about active storage redirect and proxy mode stronge… {#pr-57179}",
+      "url": "https://github.com/rails/rails/pull/57179",
+      "mergedAt": "2026-04-15T00:00:00.000Z",
+      "author": "p8",
+      "authorUrl": "https://github.com/p8",
+      "summary": "要約エラー: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors."
+    },
+    {
+      "number": 57188,
+      "title": "Add charset=utf-8 to Content-Type for static CSS and HTML files {#pr-57188}",
+      "url": "https://github.com/rails/rails/pull/57188",
+      "mergedAt": "2026-04-15T00:00:00.000Z",
+      "author": "flavorjones",
+      "authorUrl": "https://github.com/flavorjones",
+      "summary": "要約エラー: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors."
+    },
     {
       "number": 55865,
       "title": "Make the warning about active storage redirect and proxy mode stronger {#pr-55865}",
@@ -424,33 +451,6 @@
       "author": "hammadxcm",
       "authorUrl": "https://github.com/hammadxcm",
       "summary": "1. 概要 (1-2文で)  \n`ActiveSupport::IsolatedExecutionState` の公開メソッド `#key?`, `#delete`, `#context` に対して、これまで不足していたテストが追加されました。機能追加や仕様変更ではなく、テストカバレッジを補完するためのPRです。"
-    },
-    {
-      "number": 57033,
-      "title": "[ci skip] Fix punctuation in Rails autoloading and reloading constants docs {#pr-57033}",
-      "url": "https://github.com/rails/rails/pull/57033",
-      "mergedAt": "2026-03-23T00:00:00.000Z",
-      "author": "written-fresh",
-      "authorUrl": "https://github.com/written-fresh",
-      "summary": "1. 概要 (1-2文で)  \nこのPRは、Railsガイド「autoloading and reloading constants」のドキュメント内にある句読点の誤りを修正するものです。コードや挙動の変更は一切なく、ドキュメント表現のみが微修正されています。\n\n2. 変更内容の詳細  \n- 対象ファイル: `guides/source/autoloading_and_reloading_constants.md`  \n- 差分: 1行の修正（1行追加・1行削除の実質置き換え）  \n- 具体的な内容は英語ドキュメントの句読点（ピリオドやカンマなど）の誤りを正しい形に修正しただけであり、文意や説明内容自体は変わっていません。  \n- 技術的なサンプルコードや設定例などは変更されていません。\n\n3. 影響範囲・注意点  \n- 影響範囲:\n  - Rails本体のオートローディング/リローディングの挙動には一切影響しません。\n  - 生成されるガイド（HTML版など）の表示テキストのみが僅かに変わります。\n- 注意点:\n  - アプリケーションのアップデート時に、このPRによってコードの修正が必要になるケースはありません。\n  - CIを回していない（`[ci skip]`）ことからも分かる通り、あくまでドキュメント上の表記修正であると判断できます。\n\n4. 参考情報 (あれば)  \n- PR番号: https://github.com/rails/rails/pull/57033  \n- 対象ガイド: Rails Guides – “Autoloading and Reloading Constants”  \n  （Zeitwerk ベースの autoloading の説明があるセクションで、概念理解に影響しないレベルの句読点修正です。）"
-    },
-    {
-      "number": 57028,
-      "title": "Require Ruby 3.3.1 {#pr-57028}",
-      "url": "https://github.com/rails/rails/pull/57028",
-      "mergedAt": "2026-03-22T00:00:00.000Z",
-      "author": "byroot",
-      "authorUrl": "https://github.com/byroot",
-      "summary": "1. 概要 (1–2文で)  \nRails本体および関連コンポーネントの対応Rubyバージョンを「3.3.0 以上」から「3.3.1 以上」に引き上げるPRです。理由は、Ruby 3.3.0 に Rails の一部機能を壊すバグがあり、かつCIで複数パッチバージョンをサポートするコストを負えないためです。"
-    },
-    {
-      "number": 57022,
-      "title": "Fix `insert_all` and `upsert_all` log messages for anonymous classes {#pr-57022}",
-      "url": "https://github.com/rails/rails/pull/57022",
-      "mergedAt": "2026-03-21T00:00:00.000Z",
-      "author": "byroot",
-      "authorUrl": "https://github.com/byroot",
-      "summary": "1. 概要 (1-2文で)  \n`insert_all` / `upsert_all` 実行時のログ出力で、匿名クラス（anonymous class）の場合でも人間が読めるモデル名が出るように修正したPRです。これにより、例えば `AnonymousBook Bulk Insert` / `AnonymousBook Bulk Upsert` のような分かりやすいログメッセージになります。"
     }
   ]
 }
