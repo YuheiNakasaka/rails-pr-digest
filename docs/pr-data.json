@@ -1,7 +1,43 @@
 {
-  "lastUpdated": "2026-04-16T00:21:32.863Z",
+  "lastUpdated": "2026-04-17T00:20:00.308Z",
   "totalCount": 50,
   "items": [
+    {
+      "number": 57187,
+      "title": "Fix `reset_counters` when using string ids {#pr-57187}",
+      "url": "https://github.com/rails/rails/pull/57187",
+      "mergedAt": "2026-04-16T00:00:00.000Z",
+      "author": "fatkodima",
+      "authorUrl": "https://github.com/fatkodima",
+      "summary": "要約エラー: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors."
+    },
+    {
+      "number": 57184,
+      "title": "Add offline fallback page to the PWA scaffold {#pr-57184}",
+      "url": "https://github.com/rails/rails/pull/57184",
+      "mergedAt": "2026-04-16T00:00:00.000Z",
+      "author": "JuanVqz",
+      "authorUrl": "https://github.com/JuanVqz",
+      "summary": "要約エラー: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors."
+    },
+    {
+      "number": 57190,
+      "title": "Fix io copy stream raises type error when writing {#pr-57190}",
+      "url": "https://github.com/rails/rails/pull/57190",
+      "mergedAt": "2026-04-16T00:00:00.000Z",
+      "author": "joaoGabriel55",
+      "authorUrl": "https://github.com/joaoGabriel55",
+      "summary": "要約エラー: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors."
+    },
+    {
+      "number": 57195,
+      "title": "Remove stale rails-ujs labeler rule {#pr-57195}",
+      "url": "https://github.com/rails/rails/pull/57195",
+      "mergedAt": "2026-04-16T00:00:00.000Z",
+      "author": "Saidbek",
+      "authorUrl": "https://github.com/Saidbek",
+      "summary": "要約エラー: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors."
+    },
     {
       "number": 57156,
       "title": "Query command for read-only database queries {#pr-57156}",
@@ -415,42 +451,6 @@
       "author": "willnet",
       "authorUrl": "https://github.com/willnet",
       "summary": "1. 概要 (1-2文で)  \n`number_to_delimited` などの数値区切り系ヘルパーで、オプション未指定時にも常に高速化された経路（fast path）が使われるようにデフォルト動作が修正されました。これにより、従来は暗黙に実行されていた低速な処理が、明示的に指定した場合にのみ使われるようになります。"
-    },
-    {
-      "number": 57054,
-      "title": "Cherry-pick security release commits onto main branch {#pr-57054}",
-      "url": "https://github.com/rails/rails/pull/57054",
-      "mergedAt": "2026-03-23T00:00:00.000Z",
-      "author": "jhawthorn",
-      "authorUrl": "https://github.com/jhawthorn",
-      "summary": "1. 概要 (1–2文)  \nこのPRは、セキュリティリリースで入った修正を `main` ブランチにチェリーピックしたもので、主に Active Storage 周りのファイルアクセス／ダウンロードの安全性向上と、Action View のタグ生成・HTMLセーフティ関連の修正が含まれています。例外画面テンプレートや `String#html_safe` 周りも含めて、XSS/ディレクトリトラバーサル等の脆弱性を防ぐための変更と、それを担保するテスト追加が中心です。"
-    },
-    {
-      "number": 56877,
-      "title": "Fix FrozenError when deriving foreign key from inverse with composite foreign key {#pr-56877}",
-      "url": "https://github.com/rails/rails/pull/56877",
-      "mergedAt": "2026-03-23T00:00:00.000Z",
-      "author": "kirs",
-      "authorUrl": "https://github.com/kirs",
-      "summary": "1. 概要 (1-2文で)  \n`belongs_to` 側が複合外部キー（配列の `foreign_key`）を持ち、その逆側の `has_one` / `has_many` が `inverse_of` から外部キーを導出する場合に `FrozenError` が発生していたバグを修正する PR です。  \n凍結済みの配列に対して破壊的メソッド `map!` を呼び出していた実装を、非破壊的な `map { ... }.freeze` に置き換えることでエラーを回避しています。"
-    },
-    {
-      "number": 57031,
-      "title": "Add test coverage for ActiveModel::Errors#where {#pr-57031}",
-      "url": "https://github.com/rails/rails/pull/57031",
-      "mergedAt": "2026-03-23T00:00:00.000Z",
-      "author": "hammadxcm",
-      "authorUrl": "https://github.com/hammadxcm",
-      "summary": "1. 概要 (1-2文で)  \n`ActiveModel::Errors#where` に対する専用テストが追加され、属性・タイプ・オプションごとのフィルタリング挙動が網羅的に検証されるようになりました。これにより、既存の公開APIの振る舞いがテストで明示され、将来的なリグレッション防止に役立ちます。"
-    },
-    {
-      "number": 57032,
-      "title": "Add test coverage for IsolatedExecutionState#key?, #delete, and #context {#pr-57032}",
-      "url": "https://github.com/rails/rails/pull/57032",
-      "mergedAt": "2026-03-23T00:00:00.000Z",
-      "author": "hammadxcm",
-      "authorUrl": "https://github.com/hammadxcm",
-      "summary": "1. 概要 (1-2文で)  \n`ActiveSupport::IsolatedExecutionState` の公開メソッド `#key?`, `#delete`, `#context` に対して、これまで不足していたテストが追加されました。機能追加や仕様変更ではなく、テストカバレッジを補完するためのPRです。"
     }
   ]
 }
