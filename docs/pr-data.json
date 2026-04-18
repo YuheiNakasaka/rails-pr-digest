@@ -1,7 +1,16 @@
 {
-  "lastUpdated": "2026-04-17T00:20:00.308Z",
+  "lastUpdated": "2026-04-18T00:17:26.985Z",
   "totalCount": 50,
   "items": [
+    {
+      "number": 57199,
+      "title": "Optimize merging `ActiveRecord::Relation` extensions {#pr-57199}",
+      "url": "https://github.com/rails/rails/pull/57199",
+      "mergedAt": "2026-04-17T00:00:00.000Z",
+      "author": "fatkodima",
+      "authorUrl": "https://github.com/fatkodima",
+      "summary": "要約エラー: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors."
+    },
     {
       "number": 57187,
       "title": "Fix `reset_counters` when using string ids {#pr-57187}",
@@ -442,15 +451,6 @@
       "author": "clayharmon",
       "authorUrl": "https://github.com/clayharmon",
       "summary": "1. 概要 (1-2文で)  \nMySQL のエラーコード 1046「No database selected」を、`ActiveRecord::ConnectionFailed` として扱うようにした変更です。これにより、接続プール使用時などに TCP 接続がサイレントに張り替わった場合でも、Rails の自動リトライ機構が働くようになります。"
-    },
-    {
-      "number": 57069,
-      "title": "Make fast behavior the default for NumberToDelimitedConverter {#pr-57069}",
-      "url": "https://github.com/rails/rails/pull/57069",
-      "mergedAt": "2026-03-26T00:00:00.000Z",
-      "author": "willnet",
-      "authorUrl": "https://github.com/willnet",
-      "summary": "1. 概要 (1-2文で)  \n`number_to_delimited` などの数値区切り系ヘルパーで、オプション未指定時にも常に高速化された経路（fast path）が使われるようにデフォルト動作が修正されました。これにより、従来は暗黙に実行されていた低速な処理が、明示的に指定した場合にのみ使われるようになります。"
     }
   ]
 }
