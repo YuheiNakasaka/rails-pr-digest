@@ -1,7 +1,52 @@
 {
-  "lastUpdated": "2026-04-18T00:17:26.985Z",
+  "lastUpdated": "2026-04-19T00:18:24.090Z",
   "totalCount": 50,
   "items": [
+    {
+      "number": 57194,
+      "title": "Clarify TimeZone#parse docs for invalid strings {#pr-57194}",
+      "url": "https://github.com/rails/rails/pull/57194",
+      "mergedAt": "2026-04-18T00:00:00.000Z",
+      "author": "Saidbek",
+      "authorUrl": "https://github.com/Saidbek",
+      "summary": "要約エラー: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors."
+    },
+    {
+      "number": 57200,
+      "title": "Fixed the bug where RuntimeError: can't add a new key into hash during iteration occurs. {#pr-57200}",
+      "url": "https://github.com/rails/rails/pull/57200",
+      "mergedAt": "2026-04-18T00:00:00.000Z",
+      "author": "prg-iomash",
+      "authorUrl": "https://github.com/prg-iomash",
+      "summary": "要約エラー: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors."
+    },
+    {
+      "number": 57201,
+      "title": "Fix TTOU hanging Rails when ffmpeg is spawned for video previews {#pr-57201}",
+      "url": "https://github.com/rails/rails/pull/57201",
+      "mergedAt": "2026-04-18T00:00:00.000Z",
+      "author": "jdelStrother",
+      "authorUrl": "https://github.com/jdelStrother",
+      "summary": "要約エラー: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors."
+    },
+    {
+      "number": 57207,
+      "title": "Fix nested `with_connection(prevent_permanent_checkout: true)` incorrectly clearing sticky lease set by `lease_connection` {#pr-57207}",
+      "url": "https://github.com/rails/rails/pull/57207",
+      "mergedAt": "2026-04-18T00:00:00.000Z",
+      "author": "bensheldon",
+      "authorUrl": "https://github.com/bensheldon",
+      "summary": "要約エラー: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors."
+    },
+    {
+      "number": 57204,
+      "title": "Let add_column raise if :null is true for PKs {#pr-57204}",
+      "url": "https://github.com/rails/rails/pull/57204",
+      "mergedAt": "2026-04-18T00:00:00.000Z",
+      "author": "fxn",
+      "authorUrl": "https://github.com/fxn",
+      "summary": "要約エラー: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors."
+    },
     {
       "number": 57199,
       "title": "Optimize merging `ActiveRecord::Relation` extensions {#pr-57199}",
@@ -406,51 +451,6 @@
       "author": "hammadxcm",
       "authorUrl": "https://github.com/hammadxcm",
       "summary": "1. 概要 (1-2文で)  \n`ActiveSupport::EnvironmentInquirer` に用意されている `development?`, `test?`, `production?` の各述語メソッドに対して、これまで不足していたテストを追加する PR です。合わせて、カスタム環境（例: `\"staging\"`）での振る舞いが `StringInquirer` にフォールバックすることや、`local?` が非ローカル環境で `false` を返すことも明示的にテストしています。"
-    },
-    {
-      "number": 57071,
-      "title": "Fix titleize to capitalize unicode lowercase letters {#pr-57071}",
-      "url": "https://github.com/rails/rails/pull/57071",
-      "mergedAt": "2026-03-27T00:00:00.000Z",
-      "author": "EldinGuzin",
-      "authorUrl": "https://github.com/EldinGuzin",
-      "summary": "1. 概要 (1-2文で)  \nRails の `ActiveSupport::Inflector#titleize` が、ASCII 以外の小文字（đ, é, ü, ñ, ć など）も正しく先頭大文字化できるように、正規表現を `[a-z]` から Unicode の小文字クラス `\\p{Ll}` に変更した PR です。これにより、多言語テキストでのタイトル化処理が期待通りに動作します。"
-    },
-    {
-      "number": 57074,
-      "title": "Update yarn install command to support immutable and frozen-lockfile in Dockerfile.tt {#pr-57074}",
-      "url": "https://github.com/rails/rails/pull/57074",
-      "mergedAt": "2026-03-27T00:00:00.000Z",
-      "author": "javier-menendez",
-      "authorUrl": "https://github.com/javier-menendez",
-      "summary": "1. 概要 (1-2文で)  \nRails のアプリ生成時に使われる `Dockerfile.tt` の Yarn インストールコマンドが更新され、Yarn が Corepack 管理かどうかに応じて `--immutable` または `--frozen-lockfile` を使い分けるようになりました。これにより、Yarn 1 系／Yarn 2+（Berry）や Corepack 利用など、さまざまな環境でより安全かつ互換性の高いインストールが行えるようになります。"
-    },
-    {
-      "number": 57063,
-      "title": "[ci skip] Improve readability of note about redefining the `id` column {#pr-57063}",
-      "url": "https://github.com/rails/rails/pull/57063",
-      "mergedAt": "2026-03-26T00:00:00.000Z",
-      "author": "GyuhaWang",
-      "authorUrl": "https://github.com/GyuhaWang",
-      "summary": "1. 概要 (1-2文で)  \nActive Record Basics ガイド内で、「`id` カラムを再定義した場合の挙動」を説明している注意書きのエラーメッセージ表記を、1行で見やすくなるように整形したドキュメント変更です。コードや挙動には一切手を加えていません。\n\n2. 変更内容の詳細(あればサンプルコードも含めて)  \n- 対象ファイル: `guides/source/active_record_basics.md`  \n- 「`id` カラムを自前で定義したときに Active Record がどのようなエラーを出すか」を示す注意書き部分にある **エラーメッセージの表記** が、複数行に分割されていて読みにくかったため、1行にまとめる変更が行われました。  \n- 実際の diff は概ね以下のようなイメージです（内容は同じで、改行位置のみ変更）:\n\n  ```md\n  **Before (イメージ)**\n\n  Note: If you redefine `id` column, Rails will raise an error like:\n  `ActiveRecord::UnknownPrimaryKey:\n  Unknown primary key for table users in model User.`\n\n  **After (イメージ)**\n\n  Note: If you redefine `id` column, Rails will raise an error like:\n  `ActiveRecord::UnknownPrimaryKey: Unknown primary key for table users in model User.`\n  ```\n\n- これにより、ガイドを読むときにエラーメッセージ全体を一目で把握できるようになります。\n\n3. 影響範囲・注意点  \n- 影響範囲は **Rails ガイドの文章表現のみ** で、フレームワーク本体の挙動・API・パブリックインターフェイスには変更ありません。  \n- `id` カラム再定義時に `ActiveRecord::UnknownPrimaryKey` が発生するという仕様やそのメッセージ内容自体は従来どおりです。  \n- コードや既存アプリケーションへの互換性の影響はありません。テストや CHANGELOG の更新も不要なレベルのドキュメント修正として扱われています。\n\n4. 参考情報 (あれば)  \n- 該当ガイド: Active Record Basics（`id` カラムの扱いと主キーの説明セクション）  \n- エラークラス: `ActiveRecord::UnknownPrimaryKey`  \n- PR: #57063 “[ci skip] Improve readability of note about redefining the `id` column”"
-    },
-    {
-      "number": 57064,
-      "title": "Bump Github Action upload-artifactversion to 7 {#pr-57064}",
-      "url": "https://github.com/rails/rails/pull/57064",
-      "mergedAt": "2026-03-26T00:00:00.000Z",
-      "author": "neumayr",
-      "authorUrl": "https://github.com/neumayr",
-      "summary": "1. 概要 (1-2文で)  \nRails が生成する GitHub Actions CI ワークフローテンプレートにおいて、`actions/upload-artifact` のバージョン指定を最新の `v7` に更新する PR です。アプリケーションとプラグインの両方の GitHub CI テンプレートが対象です。"
-    },
-    {
-      "number": 57067,
-      "title": "Classify mysql error 1046 (ER_NO_DB_ERROR) as ConnectionFailed {#pr-57067}",
-      "url": "https://github.com/rails/rails/pull/57067",
-      "mergedAt": "2026-03-26T00:00:00.000Z",
-      "author": "clayharmon",
-      "authorUrl": "https://github.com/clayharmon",
-      "summary": "1. 概要 (1-2文で)  \nMySQL のエラーコード 1046「No database selected」を、`ActiveRecord::ConnectionFailed` として扱うようにした変更です。これにより、接続プール使用時などに TCP 接続がサイレントに張り替わった場合でも、Rails の自動リトライ機構が働くようになります。"
     }
   ]
 }
