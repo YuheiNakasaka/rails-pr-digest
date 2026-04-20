@@ -1,7 +1,16 @@
 {
-  "lastUpdated": "2026-04-19T00:18:24.090Z",
+  "lastUpdated": "2026-04-20T00:18:17.845Z",
   "totalCount": 50,
   "items": [
+    {
+      "number": 57203,
+      "title": "Fix incorrect indefinite article 'a' before vowel sounds {#pr-57203}",
+      "url": "https://github.com/rails/rails/pull/57203",
+      "mergedAt": "2026-04-19T00:00:00.000Z",
+      "author": "55728",
+      "authorUrl": "https://github.com/55728",
+      "summary": "要約エラー: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors."
+    },
     {
       "number": 57194,
       "title": "Clarify TimeZone#parse docs for invalid strings {#pr-57194}",
@@ -442,15 +451,6 @@
       "author": "hammadxcm",
       "authorUrl": "https://github.com/hammadxcm",
       "summary": "1. 概要 (1-2文で)  \n`ActiveModel::Error#strict_match?` に対して専用のテストが追加され、属性・タイプ・オプションが「完全一致」しているかを判定する挙動が明示的に保証されるようになりました。機能追加や仕様変更ではなく、既存のパブリック API のテスト補完のみです。"
-    },
-    {
-      "number": 57045,
-      "title": "Add test coverage for EnvironmentInquirer predicates {#pr-57045}",
-      "url": "https://github.com/rails/rails/pull/57045",
-      "mergedAt": "2026-03-27T00:00:00.000Z",
-      "author": "hammadxcm",
-      "authorUrl": "https://github.com/hammadxcm",
-      "summary": "1. 概要 (1-2文で)  \n`ActiveSupport::EnvironmentInquirer` に用意されている `development?`, `test?`, `production?` の各述語メソッドに対して、これまで不足していたテストを追加する PR です。合わせて、カスタム環境（例: `\"staging\"`）での振る舞いが `StringInquirer` にフォールバックすることや、`local?` が非ローカル環境で `false` を返すことも明示的にテストしています。"
     }
   ]
 }
