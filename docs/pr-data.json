@@ -1,7 +1,16 @@
 {
-  "lastUpdated": "2026-04-20T00:18:17.845Z",
+  "lastUpdated": "2026-04-21T00:20:20.619Z",
   "totalCount": 50,
   "items": [
+    {
+      "number": 57210,
+      "title": "Revert \"Clarify TimeZone#parse docs for invalid strings\" {#pr-57210}",
+      "url": "https://github.com/rails/rails/pull/57210",
+      "mergedAt": "2026-04-20T00:00:00.000Z",
+      "author": "byroot",
+      "authorUrl": "https://github.com/byroot",
+      "summary": "要約エラー: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors."
+    },
     {
       "number": 57203,
       "title": "Fix incorrect indefinite article 'a' before vowel sounds {#pr-57203}",
@@ -442,15 +451,6 @@
       "author": "hammadxcm",
       "authorUrl": "https://github.com/hammadxcm",
       "summary": "1. 概要 (1-2文で)  \nActiveModel::Errors#delete が本来サポートしている `type` と `options` を指定した削除挙動について、新たにテストが追加された PR です。これにより、既存機能のフィルタリングロジックに対して直接的なテストカバレッジが付きました。"
-    },
-    {
-      "number": 57043,
-      "title": "Add test coverage for ActiveModel::Error#strict_match? {#pr-57043}",
-      "url": "https://github.com/rails/rails/pull/57043",
-      "mergedAt": "2026-03-27T00:00:00.000Z",
-      "author": "hammadxcm",
-      "authorUrl": "https://github.com/hammadxcm",
-      "summary": "1. 概要 (1-2文で)  \n`ActiveModel::Error#strict_match?` に対して専用のテストが追加され、属性・タイプ・オプションが「完全一致」しているかを判定する挙動が明示的に保証されるようになりました。機能追加や仕様変更ではなく、既存のパブリック API のテスト補完のみです。"
     }
   ]
 }
