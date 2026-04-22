@@ -1,7 +1,16 @@
 {
-  "lastUpdated": "2026-04-22T03:52:48.279Z",
+  "lastUpdated": "2026-04-22T05:00:39.810Z",
   "totalCount": 50,
   "items": [
+    {
+      "number": 55282,
+      "title": "Bump required PostgreSQL version to 10.0 {#pr-55282}",
+      "url": "https://github.com/rails/rails/pull/55282",
+      "mergedAt": "2026-04-22T00:00:00.000Z",
+      "author": "yahonda",
+      "authorUrl": "https://github.com/yahonda",
+      "summary": "1. 概要 (1-2文で)  \nRails が公式にサポートする PostgreSQL の最小バージョンを「9.3 以上」から「10 以上」に引き上げた PR です。これにより、今後リリースされる PostgreSQL 18 以降や pg gem 1.6.x との互換性を確保します。"
+    },
     {
       "number": 57096,
       "title": "Ignore schemas when validating table name lengths for PostgreSQL {#pr-57096}",
@@ -442,15 +451,6 @@
       "author": "diaphragm",
       "authorUrl": "https://github.com/diaphragm",
       "summary": "1. 概要 (1-2文で)  \nこのPRは、Rails 8.0.3 で行われた `ActiveSupport::HashWithIndifferentAccess#transform_keys!` のバグ修正に伴い、「キー変換時にキーが衝突した場合の上書き優先順位」が変わったことを CHANGELOG に明記するドキュメント修正です。挙動は Ruby 標準の `Hash#transform_keys!` に合わせて「あと勝ち」になっており、その仕様変更をサンプル付きで説明しています。"
-    },
-    {
-      "number": 56974,
-      "title": "Simplify applicable `activesupport` tests with `NotificationAssertions` helpers {#pr-56974}",
-      "url": "https://github.com/rails/rails/pull/56974",
-      "mergedAt": "2026-03-13T00:00:00.000Z",
-      "author": "larouxn",
-      "authorUrl": "https://github.com/larouxn",
-      "summary": "1. 概要 (1-2文で)  \n`ActiveSupport::Notifications` を使ったキャッシュ関連テストを、`ActiveSupport::Testing::NotificationAssertions` ヘルパーで書き換えて簡潔・安全にした PR です。手動でのサブスクライバ管理やインスタンス変数ベースのイベント収集をやめ、共通ヘルパーによる記述に統一しています。"
     }
   ]
 }
