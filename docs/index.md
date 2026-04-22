@@ -8,7 +8,7 @@ hero:
   actions:
     - theme: brand
       text: 最新のPRを見る
-      link: /monthly/2026-03.md
+      link: /monthly/2026-04.md
     - theme: alt
       text: 月別アーカイブ
       link: /monthly/
