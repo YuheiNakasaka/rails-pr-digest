@@ -1,5 +1,456 @@
 {
-  "lastUpdated": "2026-04-01T00:48:40.638Z",
-  "totalCount": 0,
-  "items": []
+  "lastUpdated": "2026-04-22T03:52:48.279Z",
+  "totalCount": 50,
+  "items": [
+    {
+      "number": 57096,
+      "title": "Ignore schemas when validating table name lengths for PostgreSQL {#pr-57096}",
+      "url": "https://github.com/rails/rails/pull/57096",
+      "mergedAt": "2026-03-30T00:00:00.000Z",
+      "author": "fatkodima",
+      "authorUrl": "https://github.com/fatkodima",
+      "summary": "1. 概要 (1-2文で)  \nPostgreSQL でテーブル名の長さを検証する際に、`schema_name.table_name` のようなスキーマ部分を含めず、**純粋なテーブル名だけで長さチェックするように修正した PR**です。これにより、スキーマ名を含めたフル修飾名が 63 文字を超えていても、テーブル名自体が PostgreSQL の制限以内ならマイグレーションが通るようになります。"
+    },
+    {
+      "number": 57097,
+      "title": "ActiveStorage: skip associated tests when a dependency is missing {#pr-57097}",
+      "url": "https://github.com/rails/rails/pull/57097",
+      "mergedAt": "2026-03-30T00:00:00.000Z",
+      "author": "byroot",
+      "authorUrl": "https://github.com/byroot",
+      "summary": "1. 概要 (1-2文で)  \nActive Storage の一部テスト（動画アナライザ／プレビュー、MuPDF プレビュー）について、必要な外部依存ライブラリがインストールされていない環境ではテスト自体をスキップするようにした変更です。これにより、Active Storage の小変更を行う際に、全ての外部ツールをローカルに入れなくてもテストが実行しやすくなります。"
+    },
+    {
+      "number": 57094,
+      "title": "Delay engine route building {#pr-57094}",
+      "url": "https://github.com/rails/rails/pull/57094",
+      "mergedAt": "2026-03-30T00:00:00.000Z",
+      "author": "byroot",
+      "authorUrl": "https://github.com/byroot",
+      "summary": "1. 概要 (1-2文で)  \nRails Engine が `routes do ... end` を評価するタイミングを遅延させ、`make_routes_lazy` 最適化が正しく効くようにした変更です。  \nこれにより、`graphql` など Engine 内で直接 `routes do` を呼んでいるライブラリでも、ルーティングの遅延構築によるパフォーマンス改善が適用されます。"
+    },
+    {
+      "number": 57090,
+      "title": "Fix duplicated word in configuring guide {#pr-57090}",
+      "url": "https://github.com/rails/rails/pull/57090",
+      "mergedAt": "2026-03-29T00:00:00.000Z",
+      "author": "55728",
+      "authorUrl": "https://github.com/55728",
+      "summary": "1. 概要 (1-2文で)  \nRailsガイド「Configuring Rails Applications」の `config.action_on_early_load_hook` に関する記述から、誤って重複していた \"when\" という単語を削除するドキュメント修正PRです。アプリケーションコードや挙動には一切影響せず、ガイド文言のみが整備されています。"
+    },
+    {
+      "number": 57013,
+      "title": "Predefine the well-known Postgres type OIDs {#pr-57013}",
+      "url": "https://github.com/rails/rails/pull/57013",
+      "mergedAt": "2026-03-28T00:00:00.000Z",
+      "author": "matthewd",
+      "authorUrl": "https://github.com/matthewd",
+      "summary": "1. 概要 (1-2文で)  \nPostgreSQL の組み込み型について、`pg_type` を毎回問い合わせて OID を取得するのをやめ、Rails 側に「よく知られた型 OID」の一覧を同梱して接続時に即座にロードできるようにした変更です。ユーザー定義型や拡張で初めて未知の型に遭遇したときにのみ、これまで通り `pg_type` をクエリして補完する遅延ロード方式へと切り替えています。"
+    },
+    {
+      "number": 57029,
+      "title": "Document with_rich_text_* methods {#pr-57029}",
+      "url": "https://github.com/rails/rails/pull/57029",
+      "mergedAt": "2026-03-28T00:00:00.000Z",
+      "author": "p8",
+      "authorUrl": "https://github.com/p8",
+      "summary": "1. 概要 (1-2文で)  \nAction Text の `with_rich_text_*` 系メソッド（`with_rich_text_body` など）が公式にドキュメント化されるよう、`ActionText::Attribute` に Yard コメントが追加された PRです。機能追加や挙動変更ではなく、「どう使うか」が Rails API ドキュメントにきちんと出るように整理したドキュメント改善です。"
+    },
+    {
+      "number": 57082,
+      "title": "Document that `:if` and `:unless` options on validations accept arrays [ci skip] {#pr-57082}",
+      "url": "https://github.com/rails/rails/pull/57082",
+      "mergedAt": "2026-03-27T00:00:00.000Z",
+      "author": "cgunther",
+      "authorUrl": "https://github.com/cgunther",
+      "summary": "1. 概要 (1-2文で)  \n`ActiveModel` のバリデーションにおける `:if` / `:unless` オプションが「配列を受け付ける」ことを、公式ドキュメント側に明示的に追記したPRです。挙動自体はすでに存在していたもので、実装変更ではなくドキュメントの補強です。"
+    },
+    {
+      "number": 57050,
+      "title": "Combine per-validator and top-level :if/:unless/:on in validates {#pr-57050}",
+      "url": "https://github.com/rails/rails/pull/57050",
+      "mergedAt": "2026-03-27T00:00:00.000Z",
+      "author": "Mordorreal",
+      "authorUrl": "https://github.com/Mordorreal",
+      "summary": "1. 概要 (1-2文で)  \n`validates` でトップレベルとバリデータ単位の `:if` / `:unless` / `:on` オプションを同時に指定した場合に、これらを「上書き」ではなく「結合」するように挙動が変更されました。これにより、期待どおり「両方の条件を満たしたときだけバリデーションが走る」ようになります。"
+    },
+    {
+      "number": 57080,
+      "title": "Deprecate `schema_order` option in PostgreSQL database configurations {#pr-57080}",
+      "url": "https://github.com/rails/rails/pull/57080",
+      "mergedAt": "2026-03-27T00:00:00.000Z",
+      "author": "eileencodes",
+      "authorUrl": "https://github.com/eileencodes",
+      "summary": "1. 概要 (1-2文で)  \nPostgreSQL 用のデータベース設定オプション `schema_order` が非推奨となり、今後は `schema_search_path` を使うように変更されました。`schema_order` は過去の名前の名残であり、現行の命名に統一するための整理です。"
+    },
+    {
+      "number": 57077,
+      "title": "Deprecate the `strict` option in MySQL database configurations {#pr-57077}",
+      "url": "https://github.com/rails/rails/pull/57077",
+      "mergedAt": "2026-03-27T00:00:00.000Z",
+      "author": "eileencodes",
+      "authorUrl": "https://github.com/eileencodes",
+      "summary": "1. 概要 (1-2文で)  \nMySQL 用のデータベース設定オプション `strict` が非推奨になり、代わりに `variables: { sql_mode: ... }` を直接指定する形に整理された PR です。Rails が推奨しない「非 strict モード」のための特別なショートカットを廃止し、設定方法を一本化しています。"
+    },
+    {
+      "number": 57070,
+      "title": "Consolidate configure_connection and allow skipping individual settings {#pr-57070}",
+      "url": "https://github.com/rails/rails/pull/57070",
+      "mergedAt": "2026-03-27T00:00:00.000Z",
+      "author": "eileencodes",
+      "authorUrl": "https://github.com/eileencodes",
+      "summary": "1. 概要 (1-2文で)  \nPostgreSQL / MySQL 接続時のセッション設定処理が「1つの設定ハッシュを作って一括適用する」形にリファクタされ、サーバ側の現状値を確認して不要な `SET` クエリをスキップするようになりました。さらに、特定の設定を `false` にすることで「Rails からはその設定を一切触らない」ようにできるオプションが追加され、`set_standard_conforming_strings` は非推奨になりました。"
+    },
+    {
+      "number": 57053,
+      "title": "Fix parallel test shutdown hang when workers die during Server#shutdown {#pr-57053}",
+      "url": "https://github.com/rails/rails/pull/57053",
+      "mergedAt": "2026-03-27T00:00:00.000Z",
+      "author": "markedmondson",
+      "authorUrl": "https://github.com/markedmondson",
+      "summary": "1. 概要 (1-2文で)  \nRails の並列テスト実行時に、`Server#shutdown` 中にワーカープロセスが死んだ場合にシャットダウン処理がハングする問題を修正した PR です。`wait_for_active_workers` ループ内で定期的に子プロセスの終了を回収することで、ゾンビプロセスによる無限待ちを防ぎます。"
+    },
+    {
+      "number": 57047,
+      "title": "Add test coverage for Error#initialize_dup, #hash, and #detail {#pr-57047}",
+      "url": "https://github.com/rails/rails/pull/57047",
+      "mergedAt": "2026-03-27T00:00:00.000Z",
+      "author": "hammadxcm",
+      "authorUrl": "https://github.com/hammadxcm",
+      "summary": "1. 概要 (1-2文で)  \nActiveModel::Error のテスト不足だったメソッド（`initialize_dup`, `hash`, `detail`）に対して、専用のテストが追加されました。挙動の仕様をテストで明文化することで、`error.rb` のテストカバレッジが実質的に埋められています。"
+    },
+    {
+      "number": 57044,
+      "title": "Add test coverage for ActiveModel::Errors#import {#pr-57044}",
+      "url": "https://github.com/rails/rails/pull/57044",
+      "mergedAt": "2026-03-27T00:00:00.000Z",
+      "author": "hammadxcm",
+      "authorUrl": "https://github.com/hammadxcm",
+      "summary": "1. 概要 (1-2文で)  \nActiveModel::Errors の公開メソッド `import` に対して、これまで存在しなかった専用のテストが追加されました。機能追加や挙動変更はなく、既存の挙動を明示的に保証するためのテストのみの変更です。"
+    },
+    {
+      "number": 57048,
+      "title": "Add test coverage for NestedError#inner_error, #raw_type, and #options {#pr-57048}",
+      "url": "https://github.com/rails/rails/pull/57048",
+      "mergedAt": "2026-03-27T00:00:00.000Z",
+      "author": "hammadxcm",
+      "authorUrl": "https://github.com/hammadxcm",
+      "summary": "1. 概要 (1-2文で)  \n`ActiveModel::NestedError` が持つ `inner_error`, `raw_type`, `options` の3つのアクセサに対して、これまで不足していた専用テストを追加するPRです。振る舞い自体の変更はなく、テストカバレッジを補強するだけの変更です。"
+    },
+    {
+      "number": 57049,
+      "title": "Add test coverage for Errors#to_hash with full_messages and #uniq! {#pr-57049}",
+      "url": "https://github.com/rails/rails/pull/57049",
+      "mergedAt": "2026-03-27T00:00:00.000Z",
+      "author": "hammadxcm",
+      "authorUrl": "https://github.com/hammadxcm",
+      "summary": "1. 概要 (1-2文で)  \nActiveModel::Errors に対して、これまで直接はテストされていなかった `to_hash(true)` と `uniq!` の挙動を確認するテストが追加されています。挙動変更はなく、テストカバレッジの補完のみです。"
+    },
+    {
+      "number": 57046,
+      "title": "Add test coverage for Errors#delete with type and options {#pr-57046}",
+      "url": "https://github.com/rails/rails/pull/57046",
+      "mergedAt": "2026-03-27T00:00:00.000Z",
+      "author": "hammadxcm",
+      "authorUrl": "https://github.com/hammadxcm",
+      "summary": "1. 概要 (1-2文で)  \nActiveModel::Errors#delete が本来サポートしている `type` と `options` を指定した削除挙動について、新たにテストが追加された PR です。これにより、既存機能のフィルタリングロジックに対して直接的なテストカバレッジが付きました。"
+    },
+    {
+      "number": 57043,
+      "title": "Add test coverage for ActiveModel::Error#strict_match? {#pr-57043}",
+      "url": "https://github.com/rails/rails/pull/57043",
+      "mergedAt": "2026-03-27T00:00:00.000Z",
+      "author": "hammadxcm",
+      "authorUrl": "https://github.com/hammadxcm",
+      "summary": "1. 概要 (1-2文で)  \n`ActiveModel::Error#strict_match?` に対して専用のテストが追加され、属性・タイプ・オプションが「完全一致」しているかを判定する挙動が明示的に保証されるようになりました。機能追加や仕様変更ではなく、既存のパブリック API のテスト補完のみです。"
+    },
+    {
+      "number": 57045,
+      "title": "Add test coverage for EnvironmentInquirer predicates {#pr-57045}",
+      "url": "https://github.com/rails/rails/pull/57045",
+      "mergedAt": "2026-03-27T00:00:00.000Z",
+      "author": "hammadxcm",
+      "authorUrl": "https://github.com/hammadxcm",
+      "summary": "1. 概要 (1-2文で)  \n`ActiveSupport::EnvironmentInquirer` に用意されている `development?`, `test?`, `production?` の各述語メソッドに対して、これまで不足していたテストを追加する PR です。合わせて、カスタム環境（例: `\"staging\"`）での振る舞いが `StringInquirer` にフォールバックすることや、`local?` が非ローカル環境で `false` を返すことも明示的にテストしています。"
+    },
+    {
+      "number": 57071,
+      "title": "Fix titleize to capitalize unicode lowercase letters {#pr-57071}",
+      "url": "https://github.com/rails/rails/pull/57071",
+      "mergedAt": "2026-03-27T00:00:00.000Z",
+      "author": "EldinGuzin",
+      "authorUrl": "https://github.com/EldinGuzin",
+      "summary": "1. 概要 (1-2文で)  \nRails の `ActiveSupport::Inflector#titleize` が、ASCII 以外の小文字（đ, é, ü, ñ, ć など）も正しく先頭大文字化できるように、正規表現を `[a-z]` から Unicode の小文字クラス `\\p{Ll}` に変更した PR です。これにより、多言語テキストでのタイトル化処理が期待通りに動作します。"
+    },
+    {
+      "number": 57074,
+      "title": "Update yarn install command to support immutable and frozen-lockfile in Dockerfile.tt {#pr-57074}",
+      "url": "https://github.com/rails/rails/pull/57074",
+      "mergedAt": "2026-03-27T00:00:00.000Z",
+      "author": "javier-menendez",
+      "authorUrl": "https://github.com/javier-menendez",
+      "summary": "1. 概要 (1-2文で)  \nRails のアプリ生成時に使われる `Dockerfile.tt` の Yarn インストールコマンドが更新され、Yarn が Corepack 管理かどうかに応じて `--immutable` または `--frozen-lockfile` を使い分けるようになりました。これにより、Yarn 1 系／Yarn 2+（Berry）や Corepack 利用など、さまざまな環境でより安全かつ互換性の高いインストールが行えるようになります。"
+    },
+    {
+      "number": 57063,
+      "title": "[ci skip] Improve readability of note about redefining the `id` column {#pr-57063}",
+      "url": "https://github.com/rails/rails/pull/57063",
+      "mergedAt": "2026-03-26T00:00:00.000Z",
+      "author": "GyuhaWang",
+      "authorUrl": "https://github.com/GyuhaWang",
+      "summary": "1. 概要 (1-2文で)  \nActive Record Basics ガイド内で、「`id` カラムを再定義した場合の挙動」を説明している注意書きのエラーメッセージ表記を、1行で見やすくなるように整形したドキュメント変更です。コードや挙動には一切手を加えていません。\n\n2. 変更内容の詳細(あればサンプルコードも含めて)  \n- 対象ファイル: `guides/source/active_record_basics.md`  \n- 「`id` カラムを自前で定義したときに Active Record がどのようなエラーを出すか」を示す注意書き部分にある **エラーメッセージの表記** が、複数行に分割されていて読みにくかったため、1行にまとめる変更が行われました。  \n- 実際の diff は概ね以下のようなイメージです（内容は同じで、改行位置のみ変更）:\n\n  ```md\n  **Before (イメージ)**\n\n  Note: If you redefine `id` column, Rails will raise an error like:\n  `ActiveRecord::UnknownPrimaryKey:\n  Unknown primary key for table users in model User.`\n\n  **After (イメージ)**\n\n  Note: If you redefine `id` column, Rails will raise an error like:\n  `ActiveRecord::UnknownPrimaryKey: Unknown primary key for table users in model User.`\n  ```\n\n- これにより、ガイドを読むときにエラーメッセージ全体を一目で把握できるようになります。\n\n3. 影響範囲・注意点  \n- 影響範囲は **Rails ガイドの文章表現のみ** で、フレームワーク本体の挙動・API・パブリックインターフェイスには変更ありません。  \n- `id` カラム再定義時に `ActiveRecord::UnknownPrimaryKey` が発生するという仕様やそのメッセージ内容自体は従来どおりです。  \n- コードや既存アプリケーションへの互換性の影響はありません。テストや CHANGELOG の更新も不要なレベルのドキュメント修正として扱われています。\n\n4. 参考情報 (あれば)  \n- 該当ガイド: Active Record Basics（`id` カラムの扱いと主キーの説明セクション）  \n- エラークラス: `ActiveRecord::UnknownPrimaryKey`  \n- PR: #57063 “[ci skip] Improve readability of note about redefining the `id` column”"
+    },
+    {
+      "number": 57064,
+      "title": "Bump Github Action upload-artifactversion to 7 {#pr-57064}",
+      "url": "https://github.com/rails/rails/pull/57064",
+      "mergedAt": "2026-03-26T00:00:00.000Z",
+      "author": "neumayr",
+      "authorUrl": "https://github.com/neumayr",
+      "summary": "1. 概要 (1-2文で)  \nRails が生成する GitHub Actions CI ワークフローテンプレートにおいて、`actions/upload-artifact` のバージョン指定を最新の `v7` に更新する PR です。アプリケーションとプラグインの両方の GitHub CI テンプレートが対象です。"
+    },
+    {
+      "number": 57067,
+      "title": "Classify mysql error 1046 (ER_NO_DB_ERROR) as ConnectionFailed {#pr-57067}",
+      "url": "https://github.com/rails/rails/pull/57067",
+      "mergedAt": "2026-03-26T00:00:00.000Z",
+      "author": "clayharmon",
+      "authorUrl": "https://github.com/clayharmon",
+      "summary": "1. 概要 (1-2文で)  \nMySQL のエラーコード 1046「No database selected」を、`ActiveRecord::ConnectionFailed` として扱うようにした変更です。これにより、接続プール使用時などに TCP 接続がサイレントに張り替わった場合でも、Rails の自動リトライ機構が働くようになります。"
+    },
+    {
+      "number": 57069,
+      "title": "Make fast behavior the default for NumberToDelimitedConverter {#pr-57069}",
+      "url": "https://github.com/rails/rails/pull/57069",
+      "mergedAt": "2026-03-26T00:00:00.000Z",
+      "author": "willnet",
+      "authorUrl": "https://github.com/willnet",
+      "summary": "1. 概要 (1-2文で)  \n`number_to_delimited` などの数値区切り系ヘルパーで、オプション未指定時にも常に高速化された経路（fast path）が使われるようにデフォルト動作が修正されました。これにより、従来は暗黙に実行されていた低速な処理が、明示的に指定した場合にのみ使われるようになります。"
+    },
+    {
+      "number": 57054,
+      "title": "Cherry-pick security release commits onto main branch {#pr-57054}",
+      "url": "https://github.com/rails/rails/pull/57054",
+      "mergedAt": "2026-03-23T00:00:00.000Z",
+      "author": "jhawthorn",
+      "authorUrl": "https://github.com/jhawthorn",
+      "summary": "1. 概要 (1–2文)  \nこのPRは、セキュリティリリースで入った修正を `main` ブランチにチェリーピックしたもので、主に Active Storage 周りのファイルアクセス／ダウンロードの安全性向上と、Action View のタグ生成・HTMLセーフティ関連の修正が含まれています。例外画面テンプレートや `String#html_safe` 周りも含めて、XSS/ディレクトリトラバーサル等の脆弱性を防ぐための変更と、それを担保するテスト追加が中心です。"
+    },
+    {
+      "number": 56877,
+      "title": "Fix FrozenError when deriving foreign key from inverse with composite foreign key {#pr-56877}",
+      "url": "https://github.com/rails/rails/pull/56877",
+      "mergedAt": "2026-03-23T00:00:00.000Z",
+      "author": "kirs",
+      "authorUrl": "https://github.com/kirs",
+      "summary": "1. 概要 (1-2文で)  \n`belongs_to` 側が複合外部キー（配列の `foreign_key`）を持ち、その逆側の `has_one` / `has_many` が `inverse_of` から外部キーを導出する場合に `FrozenError` が発生していたバグを修正する PR です。  \n凍結済みの配列に対して破壊的メソッド `map!` を呼び出していた実装を、非破壊的な `map { ... }.freeze` に置き換えることでエラーを回避しています。"
+    },
+    {
+      "number": 57031,
+      "title": "Add test coverage for ActiveModel::Errors#where {#pr-57031}",
+      "url": "https://github.com/rails/rails/pull/57031",
+      "mergedAt": "2026-03-23T00:00:00.000Z",
+      "author": "hammadxcm",
+      "authorUrl": "https://github.com/hammadxcm",
+      "summary": "1. 概要 (1-2文で)  \n`ActiveModel::Errors#where` に対する専用テストが追加され、属性・タイプ・オプションごとのフィルタリング挙動が網羅的に検証されるようになりました。これにより、既存の公開APIの振る舞いがテストで明示され、将来的なリグレッション防止に役立ちます。"
+    },
+    {
+      "number": 57032,
+      "title": "Add test coverage for IsolatedExecutionState#key?, #delete, and #context {#pr-57032}",
+      "url": "https://github.com/rails/rails/pull/57032",
+      "mergedAt": "2026-03-23T00:00:00.000Z",
+      "author": "hammadxcm",
+      "authorUrl": "https://github.com/hammadxcm",
+      "summary": "1. 概要 (1-2文で)  \n`ActiveSupport::IsolatedExecutionState` の公開メソッド `#key?`, `#delete`, `#context` に対して、これまで不足していたテストが追加されました。機能追加や仕様変更ではなく、テストカバレッジを補完するためのPRです。"
+    },
+    {
+      "number": 57033,
+      "title": "[ci skip] Fix punctuation in Rails autoloading and reloading constants docs {#pr-57033}",
+      "url": "https://github.com/rails/rails/pull/57033",
+      "mergedAt": "2026-03-23T00:00:00.000Z",
+      "author": "written-fresh",
+      "authorUrl": "https://github.com/written-fresh",
+      "summary": "1. 概要 (1-2文で)  \nこのPRは、Railsガイド「autoloading and reloading constants」のドキュメント内にある句読点の誤りを修正するものです。コードや挙動の変更は一切なく、ドキュメント表現のみが微修正されています。\n\n2. 変更内容の詳細  \n- 対象ファイル: `guides/source/autoloading_and_reloading_constants.md`  \n- 差分: 1行の修正（1行追加・1行削除の実質置き換え）  \n- 具体的な内容は英語ドキュメントの句読点（ピリオドやカンマなど）の誤りを正しい形に修正しただけであり、文意や説明内容自体は変わっていません。  \n- 技術的なサンプルコードや設定例などは変更されていません。\n\n3. 影響範囲・注意点  \n- 影響範囲:\n  - Rails本体のオートローディング/リローディングの挙動には一切影響しません。\n  - 生成されるガイド（HTML版など）の表示テキストのみが僅かに変わります。\n- 注意点:\n  - アプリケーションのアップデート時に、このPRによってコードの修正が必要になるケースはありません。\n  - CIを回していない（`[ci skip]`）ことからも分かる通り、あくまでドキュメント上の表記修正であると判断できます。\n\n4. 参考情報 (あれば)  \n- PR番号: https://github.com/rails/rails/pull/57033  \n- 対象ガイド: Rails Guides – “Autoloading and Reloading Constants”  \n  （Zeitwerk ベースの autoloading の説明があるセクションで、概念理解に影響しないレベルの句読点修正です。）"
+    },
+    {
+      "number": 57028,
+      "title": "Require Ruby 3.3.1 {#pr-57028}",
+      "url": "https://github.com/rails/rails/pull/57028",
+      "mergedAt": "2026-03-22T00:00:00.000Z",
+      "author": "byroot",
+      "authorUrl": "https://github.com/byroot",
+      "summary": "1. 概要 (1–2文で)  \nRails本体および関連コンポーネントの対応Rubyバージョンを「3.3.0 以上」から「3.3.1 以上」に引き上げるPRです。理由は、Ruby 3.3.0 に Rails の一部機能を壊すバグがあり、かつCIで複数パッチバージョンをサポートするコストを負えないためです。"
+    },
+    {
+      "number": 57022,
+      "title": "Fix `insert_all` and `upsert_all` log messages for anonymous classes {#pr-57022}",
+      "url": "https://github.com/rails/rails/pull/57022",
+      "mergedAt": "2026-03-21T00:00:00.000Z",
+      "author": "byroot",
+      "authorUrl": "https://github.com/byroot",
+      "summary": "1. 概要 (1-2文で)  \n`insert_all` / `upsert_all` 実行時のログ出力で、匿名クラス（anonymous class）の場合でも人間が読めるモデル名が出るように修正したPRです。これにより、例えば `AnonymousBook Bulk Insert` / `AnonymousBook Bulk Upsert` のような分かりやすいログメッセージになります。"
+    },
+    {
+      "number": 57010,
+      "title": "Fix invalid HTML in routing error template {#pr-57010}",
+      "url": "https://github.com/rails/rails/pull/57010",
+      "mergedAt": "2026-03-21T00:00:00.000Z",
+      "author": "pardeyke",
+      "authorUrl": "https://github.com/pardeyke",
+      "summary": "1. 概要 (1-2文で)  \nRails のルーティングエラー用レスキューテンプレート（routing_error.html.erb）の HTML 構造が W3C/WHATWG の仕様上不正だったため、`<p>` タグ内からブロック要素（`<h2>` / `<ol>`）を取り除き、正しい HTML 構造になるように修正した PR です。  \nこれにより、ブラウザやツールによっては崩れていた DOM 構造が、仕様に沿った形で安定して解釈されるようになります。"
+    },
+    {
+      "number": 57017,
+      "title": "LogSubscriber: Avoid repeated `respond_to?` calls {#pr-57017}",
+      "url": "https://github.com/rails/rails/pull/57017",
+      "mergedAt": "2026-03-21T00:00:00.000Z",
+      "author": "byroot",
+      "authorUrl": "https://github.com/byroot",
+      "summary": "1. 概要 (1-2文で)  \n`ActiveSupport::LogSubscriber` が、イベントハンドラ呼び出し時に毎回 `respond_to?` を実行していたのをやめ、事前に「どのメソッドが存在するか」をキャッシュすることでオーバーヘッドを削減する変更です。結果としてログ購読処理のパフォーマンスがわずかに向上し、多数の通知が発生する環境での無駄なメソッド存在チェックが減ります。"
+    },
+    {
+      "number": 57020,
+      "title": "Fix lazy ivars causing different model shapes {#pr-57020}",
+      "url": "https://github.com/rails/rails/pull/57020",
+      "mergedAt": "2026-03-21T00:00:00.000Z",
+      "author": "hmcguire-shopify",
+      "authorUrl": "https://github.com/hmcguire-shopify",
+      "summary": "1. 概要 (1-2文で)  \nActiveRecord::Base のサブクラスで、インスタンス変数が「遅延で」定義されることによってクラスごとに異なるオブジェクトシェイプ（shape）が発生していた問題を解消し、すべてのモデルクラスで同一の shape になるようにした PR です。  \nこれにより、Lobsters ベンチマークにおいて ActiveRecord モデルの shape が 3 種類から 1 種類に減り、Ruby VM の最適化（JIT など）に有利になります。"
+    },
+    {
+      "number": 57008,
+      "title": "Remove unused requires from ActiveSupport::JSON::Decoding {#pr-57008}",
+      "url": "https://github.com/rails/rails/pull/57008",
+      "mergedAt": "2026-03-19T00:00:00.000Z",
+      "author": "Saidbek",
+      "authorUrl": "https://github.com/Saidbek",
+      "summary": "1. 概要 (1-2文で)  \nActiveSupport::JSON::Decoding 内で、現在は一切使われていない `require` を2つ削除したPRです。機能追加や挙動変更は行われておらず、不要な依存を整理するリファクタリングです。"
+    },
+    {
+      "number": 57000,
+      "title": "Batch SQL statements when creating tables. {#pr-57000}",
+      "url": "https://github.com/rails/rails/pull/57000",
+      "mergedAt": "2026-03-19T00:00:00.000Z",
+      "author": "andrewn617",
+      "authorUrl": "https://github.com/andrewn617",
+      "summary": "1. 概要 (1-2文で)  \nこのPRは、`create_table` 時に発行する複数の SQL を一括送信（バッチ）することで、特に巨大なスキーマを持つアプリケーションで `db:schema:load` などのパフォーマンスを大幅に改善する変更です。PostgreSQL で 1000+ テーブルのケースでは、スキーマロードが約 120 秒から約 25 秒まで短縮された事例が示されています。"
+    },
+    {
+      "number": 56998,
+      "title": "Use `flat_map` in ContentSecurityPolicy {#pr-56998}",
+      "url": "https://github.com/rails/rails/pull/56998",
+      "mergedAt": "2026-03-18T00:00:00.000Z",
+      "author": "p8",
+      "authorUrl": "https://github.com/p8",
+      "summary": "1. 概要 (1-2文で)  \nRails の `ContentSecurityPolicy` 実装において、`validate` 内で `flat_map` を使うことで配列のフラット化処理を整理し、`build_directive` の戻り値を `validate` の戻り値に依存しないようにする小さなリファクタリングが行われました。挙動は変えずに、コードの明確性と保守性を高める変更です。"
+    },
+    {
+      "number": 57003,
+      "title": "Fix PostgreSQL column equality for generated types {#pr-57003}",
+      "url": "https://github.com/rails/rails/pull/57003",
+      "mergedAt": "2026-03-18T00:00:00.000Z",
+      "author": "Saidbek",
+      "authorUrl": "https://github.com/Saidbek",
+      "summary": "1. 概要 (1-2文で)  \nPostgreSQL の generated column（生成列）の「格納型（stored/virtual）」が異なる場合に、`PostgreSQL::Column` の `==` と `hash` の挙動が食い違っていたバグを修正する PR です。`==` と `hash` が同じ情報（`generated` 属性）に基づいて判定されるようにし、Hash/Set での不整合を解消しています。"
+    },
+    {
+      "number": 57001,
+      "title": "Fix PostgresqlDbConsoleTest reports Environment leak detected {#pr-57001}",
+      "url": "https://github.com/rails/rails/pull/57001",
+      "mergedAt": "2026-03-17T00:00:00.000Z",
+      "author": "joaoGabriel55",
+      "authorUrl": "https://github.com/joaoGabriel55",
+      "summary": "1. 概要 (1-2文で)  \nPostgresqlDbConsoleTest で環境変数（ENV）のリークを検出する `LeakChecker` とのライフサイクルの噛み合わせ不良によりテストが失敗していた問題を、ENV のバックアップ／復元方法を変更することで修正した PRです。テストコードのみの変更で、本体の挙動には影響しません。"
+    },
+    {
+      "number": 56994,
+      "title": "Drop workaround for mail gem version < 2.8 {#pr-56994}",
+      "url": "https://github.com/rails/rails/pull/56994",
+      "mergedAt": "2026-03-16T00:00:00.000Z",
+      "author": "yahonda",
+      "authorUrl": "https://github.com/yahonda",
+      "summary": "1. 概要 (1-2文で)  \nAction Mailbox が依存する mail gem の下限バージョンがすでに 2.8 以上になっているため、mail < 2.8 向けに入っていたワークアラウンド（互換コード）を削除した PR です。結果として、コードがシンプルになり、サポート対象が実質的に mail 2.8 以降に揃えられました。"
+    },
+    {
+      "number": 56980,
+      "title": "Bump bundler from 4.0.6 to 4.0.8 {#pr-56980}",
+      "url": "https://github.com/rails/rails/pull/56980",
+      "mergedAt": "2026-03-16T00:00:00.000Z",
+      "author": "larouxn",
+      "authorUrl": "https://github.com/larouxn",
+      "summary": "1. 概要 (1-2文で)  \nRails リポジトリで使用している Bundler のバージョンを 4.0.6 から 4.0.8 に更新した PRです。これにより、`bundle install` などで利用される Bundler が最新のパッチバージョンになります。"
+    },
+    {
+      "number": 56926,
+      "title": "ActionText: support block children in editor elements alongside value {#pr-56926}",
+      "url": "https://github.com/rails/rails/pull/56926",
+      "mergedAt": "2026-03-16T00:00:00.000Z",
+      "author": "jorgemanrubia",
+      "authorUrl": "https://github.com/jorgemanrubia",
+      "summary": "1. 概要 (1-2文で)  \nActionText のエディタヘルパーで、`value` 引数とは別にブロックで渡した内容を「エディタ要素の子要素」として同時に扱えるようになりました。Trix エディタについては、従来どおり「`value` が無い場合はブロック内容を初期値として使う」という挙動も維持されています。"
+    },
+    {
+      "number": 56990,
+      "title": "fix(guides): bin/jobs start was not copying {#pr-56990}",
+      "url": "https://github.com/rails/rails/pull/56990",
+      "mergedAt": "2026-03-16T00:00:00.000Z",
+      "author": "j01nb0k",
+      "authorUrl": "https://github.com/j01nb0k",
+      "summary": "1. 概要 (1-2文で)  \nRailsガイド「Active Job Basics」の中にある `bin/jobs start` のコマンド例が、シェル上で想定どおりコピー・実行できない状態になっていた問題を修正したPRです。原因は、ガイドのコードブロックから「`$` プロンプト記号」が抜けていたことによる単純なドキュメント上のミスです。"
+    },
+    {
+      "number": 56987,
+      "title": "Add tests for ActiveModel::Name#human `count` argument {#pr-56987}",
+      "url": "https://github.com/rails/rails/pull/56987",
+      "mergedAt": "2026-03-16T00:00:00.000Z",
+      "author": "nicolasva",
+      "authorUrl": "https://github.com/nicolasva",
+      "summary": "1. 概要 (1-2文で)  \nActiveModel::Name#human に渡せる `count` 引数が、I18n の複数形ルールに沿って正しく扱われることを確認するテストが追加されています。機能変更ではなく、既存仕様のテスト補完が目的のPRです。"
+    },
+    {
+      "number": 56989,
+      "title": "Simplify `activerecord` tests with `NotificationAssertions` helpers {#pr-56989}",
+      "url": "https://github.com/rails/rails/pull/56989",
+      "mergedAt": "2026-03-16T00:00:00.000Z",
+      "author": "Saidbek",
+      "authorUrl": "https://github.com/Saidbek",
+      "summary": "1. 概要 (1-2文で)  \n`activerecord` のテストで、これまでバラバラに書かれていた `ActiveSupport::Notifications.subscribed` ベースのコードを、共通ヘルパ `NotificationAssertions`（`assert_notification` / `capture_notifications`）に置き換えてシンプルにした PR です。テストの可読性と一貫性を高めるためのリファクタリングであり、挙動や API 仕様の変更はありません。"
+    },
+    {
+      "number": 56992,
+      "title": "Deprecate require_dependency {#pr-56992}",
+      "url": "https://github.com/rails/rails/pull/56992",
+      "mergedAt": "2026-03-15T00:00:00.000Z",
+      "author": "fxn",
+      "authorUrl": "https://github.com/fxn",
+      "summary": "1. 概要 (1-2文で)  \n`require_dependency` が「非推奨 (deprecate)」になり、将来的な削除に向けた準備が始まりました。クラシックオートローダからの移行や Rails < 7.0 サポートのために残されていた API を正式に廃止方向へ進める変更です。"
+    },
+    {
+      "number": 56986,
+      "title": "Further reduce internal usage of cattr_accessor and mattr_accessor {#pr-56986}",
+      "url": "https://github.com/rails/rails/pull/56986",
+      "mergedAt": "2026-03-15T00:00:00.000Z",
+      "author": "byroot",
+      "authorUrl": "https://github.com/byroot",
+      "summary": "1. 概要 (1-2文で)  \nRails内部で `cattr_accessor` / `mattr_accessor`（クラス変数ベースのアクセサ）の利用をさらに減らし、主に「クラスインスタンス変数」や `class_attribute` への移行を進めたPRです。クラス変数の共有挙動による思わぬ副作用を避け、より直感的で安全な設定・状態管理に寄せるリファクタリングになります。"
+    },
+    {
+      "number": 56983,
+      "title": "[ci skip] Update CHANGELOG with transform_keys! overwrite precedence note {#pr-56983}",
+      "url": "https://github.com/rails/rails/pull/56983",
+      "mergedAt": "2026-03-15T00:00:00.000Z",
+      "author": "diaphragm",
+      "authorUrl": "https://github.com/diaphragm",
+      "summary": "1. 概要 (1-2文で)  \nこのPRは、Rails 8.0.3 で行われた `ActiveSupport::HashWithIndifferentAccess#transform_keys!` のバグ修正に伴い、「キー変換時にキーが衝突した場合の上書き優先順位」が変わったことを CHANGELOG に明記するドキュメント修正です。挙動は Ruby 標準の `Hash#transform_keys!` に合わせて「あと勝ち」になっており、その仕様変更をサンプル付きで説明しています。"
+    },
+    {
+      "number": 56974,
+      "title": "Simplify applicable `activesupport` tests with `NotificationAssertions` helpers {#pr-56974}",
+      "url": "https://github.com/rails/rails/pull/56974",
+      "mergedAt": "2026-03-13T00:00:00.000Z",
+      "author": "larouxn",
+      "authorUrl": "https://github.com/larouxn",
+      "summary": "1. 概要 (1-2文で)  \n`ActiveSupport::Notifications` を使ったキャッシュ関連テストを、`ActiveSupport::Testing::NotificationAssertions` ヘルパーで書き換えて簡潔・安全にした PR です。手動でのサブスクライバ管理やインスタンス変数ベースのイベント収集をやめ、共通ヘルパーによる記述に統一しています。"
+    }
+  ]
 }
