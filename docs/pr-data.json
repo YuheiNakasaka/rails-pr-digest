@@ -1,5 +1,456 @@
 {
-  "lastUpdated": "2026-04-22T03:17:30.952Z",
+  "lastUpdated": "2026-04-22T03:36:33.372Z",
   "totalCount": 50,
-  "items": []
+  "items": [
+    {
+      "number": 57210,
+      "title": "Revert \"Clarify TimeZone#parse docs for invalid strings\" {#pr-57210}",
+      "url": "https://github.com/rails/rails/pull/57210",
+      "mergedAt": "2026-04-20T00:00:00.000Z",
+      "author": "byroot",
+      "authorUrl": "https://github.com/byroot",
+      "summary": "要約エラー: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors."
+    },
+    {
+      "number": 57203,
+      "title": "Fix incorrect indefinite article 'a' before vowel sounds {#pr-57203}",
+      "url": "https://github.com/rails/rails/pull/57203",
+      "mergedAt": "2026-04-19T00:00:00.000Z",
+      "author": "55728",
+      "authorUrl": "https://github.com/55728",
+      "summary": "要約エラー: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors."
+    },
+    {
+      "number": 57194,
+      "title": "Clarify TimeZone#parse docs for invalid strings {#pr-57194}",
+      "url": "https://github.com/rails/rails/pull/57194",
+      "mergedAt": "2026-04-18T00:00:00.000Z",
+      "author": "Saidbek",
+      "authorUrl": "https://github.com/Saidbek",
+      "summary": "要約エラー: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors."
+    },
+    {
+      "number": 57200,
+      "title": "Fixed the bug where RuntimeError: can't add a new key into hash during iteration occurs. {#pr-57200}",
+      "url": "https://github.com/rails/rails/pull/57200",
+      "mergedAt": "2026-04-18T00:00:00.000Z",
+      "author": "prg-iomash",
+      "authorUrl": "https://github.com/prg-iomash",
+      "summary": "要約エラー: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors."
+    },
+    {
+      "number": 57201,
+      "title": "Fix TTOU hanging Rails when ffmpeg is spawned for video previews {#pr-57201}",
+      "url": "https://github.com/rails/rails/pull/57201",
+      "mergedAt": "2026-04-18T00:00:00.000Z",
+      "author": "jdelStrother",
+      "authorUrl": "https://github.com/jdelStrother",
+      "summary": "要約エラー: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors."
+    },
+    {
+      "number": 57207,
+      "title": "Fix nested `with_connection(prevent_permanent_checkout: true)` incorrectly clearing sticky lease set by `lease_connection` {#pr-57207}",
+      "url": "https://github.com/rails/rails/pull/57207",
+      "mergedAt": "2026-04-18T00:00:00.000Z",
+      "author": "bensheldon",
+      "authorUrl": "https://github.com/bensheldon",
+      "summary": "要約エラー: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors."
+    },
+    {
+      "number": 57204,
+      "title": "Let add_column raise if :null is true for PKs {#pr-57204}",
+      "url": "https://github.com/rails/rails/pull/57204",
+      "mergedAt": "2026-04-18T00:00:00.000Z",
+      "author": "fxn",
+      "authorUrl": "https://github.com/fxn",
+      "summary": "要約エラー: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors."
+    },
+    {
+      "number": 57199,
+      "title": "Optimize merging `ActiveRecord::Relation` extensions {#pr-57199}",
+      "url": "https://github.com/rails/rails/pull/57199",
+      "mergedAt": "2026-04-17T00:00:00.000Z",
+      "author": "fatkodima",
+      "authorUrl": "https://github.com/fatkodima",
+      "summary": "要約エラー: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors."
+    },
+    {
+      "number": 57187,
+      "title": "Fix `reset_counters` when using string ids {#pr-57187}",
+      "url": "https://github.com/rails/rails/pull/57187",
+      "mergedAt": "2026-04-16T00:00:00.000Z",
+      "author": "fatkodima",
+      "authorUrl": "https://github.com/fatkodima",
+      "summary": "要約エラー: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors."
+    },
+    {
+      "number": 57184,
+      "title": "Add offline fallback page to the PWA scaffold {#pr-57184}",
+      "url": "https://github.com/rails/rails/pull/57184",
+      "mergedAt": "2026-04-16T00:00:00.000Z",
+      "author": "JuanVqz",
+      "authorUrl": "https://github.com/JuanVqz",
+      "summary": "要約エラー: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors."
+    },
+    {
+      "number": 57190,
+      "title": "Fix io copy stream raises type error when writing {#pr-57190}",
+      "url": "https://github.com/rails/rails/pull/57190",
+      "mergedAt": "2026-04-16T00:00:00.000Z",
+      "author": "joaoGabriel55",
+      "authorUrl": "https://github.com/joaoGabriel55",
+      "summary": "要約エラー: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors."
+    },
+    {
+      "number": 57195,
+      "title": "Remove stale rails-ujs labeler rule {#pr-57195}",
+      "url": "https://github.com/rails/rails/pull/57195",
+      "mergedAt": "2026-04-16T00:00:00.000Z",
+      "author": "Saidbek",
+      "authorUrl": "https://github.com/Saidbek",
+      "summary": "要約エラー: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors."
+    },
+    {
+      "number": 57156,
+      "title": "Query command for read-only database queries {#pr-57156}",
+      "url": "https://github.com/rails/rails/pull/57156",
+      "mergedAt": "2026-04-15T00:00:00.000Z",
+      "author": "lewispb",
+      "authorUrl": "https://github.com/lewispb",
+      "summary": "要約エラー: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors."
+    },
+    {
+      "number": 57179,
+      "title": "Make the warning about active storage redirect and proxy mode stronge… {#pr-57179}",
+      "url": "https://github.com/rails/rails/pull/57179",
+      "mergedAt": "2026-04-15T00:00:00.000Z",
+      "author": "p8",
+      "authorUrl": "https://github.com/p8",
+      "summary": "要約エラー: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors."
+    },
+    {
+      "number": 57188,
+      "title": "Add charset=utf-8 to Content-Type for static CSS and HTML files {#pr-57188}",
+      "url": "https://github.com/rails/rails/pull/57188",
+      "mergedAt": "2026-04-15T00:00:00.000Z",
+      "author": "flavorjones",
+      "authorUrl": "https://github.com/flavorjones",
+      "summary": "要約エラー: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors."
+    },
+    {
+      "number": 55865,
+      "title": "Make the warning about active storage redirect and proxy mode stronger {#pr-55865}",
+      "url": "https://github.com/rails/rails/pull/55865",
+      "mergedAt": "2026-04-11T00:00:00.000Z",
+      "author": "pwim",
+      "authorUrl": "https://github.com/pwim",
+      "summary": "要約エラー: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors."
+    },
+    {
+      "number": 57166,
+      "title": "Use hash lookup for exact-match regexp filters in ParameterFilter {#pr-57166}",
+      "url": "https://github.com/rails/rails/pull/57166",
+      "mergedAt": "2026-04-10T00:00:00.000Z",
+      "author": "alexcwatt",
+      "authorUrl": "https://github.com/alexcwatt",
+      "summary": "要約エラー: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors."
+    },
+    {
+      "number": 57140,
+      "title": "Fix GET+JSON+params in integration tests for API-only apps {#pr-57140}",
+      "url": "https://github.com/rails/rails/pull/57140",
+      "mergedAt": "2026-04-09T00:00:00.000Z",
+      "author": "Mordorreal",
+      "authorUrl": "https://github.com/Mordorreal",
+      "summary": "要約エラー: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors."
+    },
+    {
+      "number": 57160,
+      "title": "Fix typos in documentation for Active Storage, Action View, Active Record, and upgrading guide {#pr-57160}",
+      "url": "https://github.com/rails/rails/pull/57160",
+      "mergedAt": "2026-04-09T00:00:00.000Z",
+      "author": "rimedelis",
+      "authorUrl": "https://github.com/rimedelis",
+      "summary": "要約エラー: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors."
+    },
+    {
+      "number": 56775,
+      "title": "Update Action Cable origin check to respect X-Forwarded-Host {#pr-56775}",
+      "url": "https://github.com/rails/rails/pull/56775",
+      "mergedAt": "2026-04-08T00:00:00.000Z",
+      "author": "jordan-brough",
+      "authorUrl": "https://github.com/jordan-brough",
+      "summary": "要約エラー: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors."
+    },
+    {
+      "number": 57157,
+      "title": "Get rid of rails-ujs.js {#pr-57157}",
+      "url": "https://github.com/rails/rails/pull/57157",
+      "mergedAt": "2026-04-08T00:00:00.000Z",
+      "author": "byroot",
+      "authorUrl": "https://github.com/byroot",
+      "summary": "要約エラー: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors."
+    },
+    {
+      "number": 57124,
+      "title": "Add request.safe_method? and request.unsafe_method? {#pr-57124}",
+      "url": "https://github.com/rails/rails/pull/57124",
+      "mergedAt": "2026-04-06T00:00:00.000Z",
+      "author": "thehale",
+      "authorUrl": "https://github.com/thehale",
+      "summary": "要約エラー: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors."
+    },
+    {
+      "number": 57111,
+      "title": "Bump Ruby version to 4.0.2 in devcontainers {#pr-57111}",
+      "url": "https://github.com/rails/rails/pull/57111",
+      "mergedAt": "2026-04-05T00:00:00.000Z",
+      "author": "adityapandit17",
+      "authorUrl": "https://github.com/adityapandit17",
+      "summary": "要約エラー: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors."
+    },
+    {
+      "number": 57130,
+      "title": "Fix belongs_to validation condition for composite foreign keys {#pr-57130}",
+      "url": "https://github.com/rails/rails/pull/57130",
+      "mergedAt": "2026-04-03T00:00:00.000Z",
+      "author": "felix-d",
+      "authorUrl": "https://github.com/felix-d",
+      "summary": "要約エラー: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors."
+    },
+    {
+      "number": 57133,
+      "title": "Fix docs of Rails.{error,event} {#pr-57133}",
+      "url": "https://github.com/rails/rails/pull/57133",
+      "mergedAt": "2026-04-03T00:00:00.000Z",
+      "author": "fxn",
+      "authorUrl": "https://github.com/fxn",
+      "summary": "要約エラー: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors."
+    },
+    {
+      "number": 57126,
+      "title": "Removed unnecessary code since minimum ruby required is 3.3.1 {#pr-57126}",
+      "url": "https://github.com/rails/rails/pull/57126",
+      "mergedAt": "2026-04-02T00:00:00.000Z",
+      "author": "adityapandit17",
+      "authorUrl": "https://github.com/adityapandit17",
+      "summary": "要約エラー: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors."
+    },
+    {
+      "number": 57115,
+      "title": "Allow to prepend AS::Notification subscribers {#pr-57115}",
+      "url": "https://github.com/rails/rails/pull/57115",
+      "mergedAt": "2026-04-01T00:00:00.000Z",
+      "author": "federico-carrocera",
+      "authorUrl": "https://github.com/federico-carrocera",
+      "summary": "要約エラー: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors."
+    },
+    {
+      "number": 57108,
+      "title": "ActiveSupport::Cache add a fast path for string keys {#pr-57108}",
+      "url": "https://github.com/rails/rails/pull/57108",
+      "mergedAt": "2026-04-01T00:00:00.000Z",
+      "author": "byroot",
+      "authorUrl": "https://github.com/byroot",
+      "summary": "要約エラー: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors."
+    },
+    {
+      "number": 56664,
+      "title": "Fix inverse_of on composite keys in ActiveRecord::Associations::Association#inversable?  {#pr-56664}",
+      "url": "https://github.com/rails/rails/pull/56664",
+      "mergedAt": "2026-03-31T00:00:00.000Z",
+      "author": "masom",
+      "authorUrl": "https://github.com/masom",
+      "summary": "要約エラー: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors."
+    },
+    {
+      "number": 57103,
+      "title": "Update ActiveRecord::Associations::Preloader::Association.owners_by_key to handle composite keys {#pr-57103}",
+      "url": "https://github.com/rails/rails/pull/57103",
+      "mergedAt": "2026-03-31T00:00:00.000Z",
+      "author": "rosew",
+      "authorUrl": "https://github.com/rosew",
+      "summary": "要約エラー: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors."
+    },
+    {
+      "number": 55991,
+      "title": "Add AGENTS.md with Rails codebase guide for AI coding agents {#pr-55991}",
+      "url": "https://github.com/rails/rails/pull/55991",
+      "mergedAt": "2026-03-31T00:00:00.000Z",
+      "author": "rafaelfranca",
+      "authorUrl": "https://github.com/rafaelfranca",
+      "summary": "要約エラー: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors."
+    },
+    {
+      "number": 57105,
+      "title": "Speedup ActiveRecord::LogSubscriber#sql_color {#pr-57105}",
+      "url": "https://github.com/rails/rails/pull/57105",
+      "mergedAt": "2026-03-31T00:00:00.000Z",
+      "author": "byroot",
+      "authorUrl": "https://github.com/byroot",
+      "summary": "要約エラー: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors."
+    },
+    {
+      "number": 57106,
+      "title": "Add missing require openssl to ActiveStorage {#pr-57106}",
+      "url": "https://github.com/rails/rails/pull/57106",
+      "mergedAt": "2026-03-31T00:00:00.000Z",
+      "author": "fatkodima",
+      "authorUrl": "https://github.com/fatkodima",
+      "summary": "要約エラー: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors."
+    },
+    {
+      "number": 57096,
+      "title": "Ignore schemas when validating table name lengths for PostgreSQL {#pr-57096}",
+      "url": "https://github.com/rails/rails/pull/57096",
+      "mergedAt": "2026-03-30T00:00:00.000Z",
+      "author": "fatkodima",
+      "authorUrl": "https://github.com/fatkodima",
+      "summary": "1. 概要 (1-2文で)  \nPostgreSQL でテーブル名の長さを検証する際に、`schema_name.table_name` のようなスキーマ部分を含めず、**純粋なテーブル名だけで長さチェックするように修正した PR**です。これにより、スキーマ名を含めたフル修飾名が 63 文字を超えていても、テーブル名自体が PostgreSQL の制限以内ならマイグレーションが通るようになります。"
+    },
+    {
+      "number": 57097,
+      "title": "ActiveStorage: skip associated tests when a dependency is missing {#pr-57097}",
+      "url": "https://github.com/rails/rails/pull/57097",
+      "mergedAt": "2026-03-30T00:00:00.000Z",
+      "author": "byroot",
+      "authorUrl": "https://github.com/byroot",
+      "summary": "1. 概要 (1-2文で)  \nActive Storage の一部テスト（動画アナライザ／プレビュー、MuPDF プレビュー）について、必要な外部依存ライブラリがインストールされていない環境ではテスト自体をスキップするようにした変更です。これにより、Active Storage の小変更を行う際に、全ての外部ツールをローカルに入れなくてもテストが実行しやすくなります。"
+    },
+    {
+      "number": 57094,
+      "title": "Delay engine route building {#pr-57094}",
+      "url": "https://github.com/rails/rails/pull/57094",
+      "mergedAt": "2026-03-30T00:00:00.000Z",
+      "author": "byroot",
+      "authorUrl": "https://github.com/byroot",
+      "summary": "1. 概要 (1-2文で)  \nRails Engine が `routes do ... end` を評価するタイミングを遅延させ、`make_routes_lazy` 最適化が正しく効くようにした変更です。  \nこれにより、`graphql` など Engine 内で直接 `routes do` を呼んでいるライブラリでも、ルーティングの遅延構築によるパフォーマンス改善が適用されます。"
+    },
+    {
+      "number": 57090,
+      "title": "Fix duplicated word in configuring guide {#pr-57090}",
+      "url": "https://github.com/rails/rails/pull/57090",
+      "mergedAt": "2026-03-29T00:00:00.000Z",
+      "author": "55728",
+      "authorUrl": "https://github.com/55728",
+      "summary": "1. 概要 (1-2文で)  \nRailsガイド「Configuring Rails Applications」の `config.action_on_early_load_hook` に関する記述から、誤って重複していた \"when\" という単語を削除するドキュメント修正PRです。アプリケーションコードや挙動には一切影響せず、ガイド文言のみが整備されています。"
+    },
+    {
+      "number": 57013,
+      "title": "Predefine the well-known Postgres type OIDs {#pr-57013}",
+      "url": "https://github.com/rails/rails/pull/57013",
+      "mergedAt": "2026-03-28T00:00:00.000Z",
+      "author": "matthewd",
+      "authorUrl": "https://github.com/matthewd",
+      "summary": "1. 概要 (1-2文で)  \nPostgreSQL の組み込み型について、`pg_type` を毎回問い合わせて OID を取得するのをやめ、Rails 側に「よく知られた型 OID」の一覧を同梱して接続時に即座にロードできるようにした変更です。ユーザー定義型や拡張で初めて未知の型に遭遇したときにのみ、これまで通り `pg_type` をクエリして補完する遅延ロード方式へと切り替えています。"
+    },
+    {
+      "number": 57029,
+      "title": "Document with_rich_text_* methods {#pr-57029}",
+      "url": "https://github.com/rails/rails/pull/57029",
+      "mergedAt": "2026-03-28T00:00:00.000Z",
+      "author": "p8",
+      "authorUrl": "https://github.com/p8",
+      "summary": "1. 概要 (1-2文で)  \nAction Text の `with_rich_text_*` 系メソッド（`with_rich_text_body` など）が公式にドキュメント化されるよう、`ActionText::Attribute` に Yard コメントが追加された PRです。機能追加や挙動変更ではなく、「どう使うか」が Rails API ドキュメントにきちんと出るように整理したドキュメント改善です。"
+    },
+    {
+      "number": 57082,
+      "title": "Document that `:if` and `:unless` options on validations accept arrays [ci skip] {#pr-57082}",
+      "url": "https://github.com/rails/rails/pull/57082",
+      "mergedAt": "2026-03-27T00:00:00.000Z",
+      "author": "cgunther",
+      "authorUrl": "https://github.com/cgunther",
+      "summary": "1. 概要 (1-2文で)  \n`ActiveModel` のバリデーションにおける `:if` / `:unless` オプションが「配列を受け付ける」ことを、公式ドキュメント側に明示的に追記したPRです。挙動自体はすでに存在していたもので、実装変更ではなくドキュメントの補強です。"
+    },
+    {
+      "number": 57050,
+      "title": "Combine per-validator and top-level :if/:unless/:on in validates {#pr-57050}",
+      "url": "https://github.com/rails/rails/pull/57050",
+      "mergedAt": "2026-03-27T00:00:00.000Z",
+      "author": "Mordorreal",
+      "authorUrl": "https://github.com/Mordorreal",
+      "summary": "1. 概要 (1-2文で)  \n`validates` でトップレベルとバリデータ単位の `:if` / `:unless` / `:on` オプションを同時に指定した場合に、これらを「上書き」ではなく「結合」するように挙動が変更されました。これにより、期待どおり「両方の条件を満たしたときだけバリデーションが走る」ようになります。"
+    },
+    {
+      "number": 57080,
+      "title": "Deprecate `schema_order` option in PostgreSQL database configurations {#pr-57080}",
+      "url": "https://github.com/rails/rails/pull/57080",
+      "mergedAt": "2026-03-27T00:00:00.000Z",
+      "author": "eileencodes",
+      "authorUrl": "https://github.com/eileencodes",
+      "summary": "1. 概要 (1-2文で)  \nPostgreSQL 用のデータベース設定オプション `schema_order` が非推奨となり、今後は `schema_search_path` を使うように変更されました。`schema_order` は過去の名前の名残であり、現行の命名に統一するための整理です。"
+    },
+    {
+      "number": 57077,
+      "title": "Deprecate the `strict` option in MySQL database configurations {#pr-57077}",
+      "url": "https://github.com/rails/rails/pull/57077",
+      "mergedAt": "2026-03-27T00:00:00.000Z",
+      "author": "eileencodes",
+      "authorUrl": "https://github.com/eileencodes",
+      "summary": "1. 概要 (1-2文で)  \nMySQL 用のデータベース設定オプション `strict` が非推奨になり、代わりに `variables: { sql_mode: ... }` を直接指定する形に整理された PR です。Rails が推奨しない「非 strict モード」のための特別なショートカットを廃止し、設定方法を一本化しています。"
+    },
+    {
+      "number": 57070,
+      "title": "Consolidate configure_connection and allow skipping individual settings {#pr-57070}",
+      "url": "https://github.com/rails/rails/pull/57070",
+      "mergedAt": "2026-03-27T00:00:00.000Z",
+      "author": "eileencodes",
+      "authorUrl": "https://github.com/eileencodes",
+      "summary": "1. 概要 (1-2文で)  \nPostgreSQL / MySQL 接続時のセッション設定処理が「1つの設定ハッシュを作って一括適用する」形にリファクタされ、サーバ側の現状値を確認して不要な `SET` クエリをスキップするようになりました。さらに、特定の設定を `false` にすることで「Rails からはその設定を一切触らない」ようにできるオプションが追加され、`set_standard_conforming_strings` は非推奨になりました。"
+    },
+    {
+      "number": 57053,
+      "title": "Fix parallel test shutdown hang when workers die during Server#shutdown {#pr-57053}",
+      "url": "https://github.com/rails/rails/pull/57053",
+      "mergedAt": "2026-03-27T00:00:00.000Z",
+      "author": "markedmondson",
+      "authorUrl": "https://github.com/markedmondson",
+      "summary": "1. 概要 (1-2文で)  \nRails の並列テスト実行時に、`Server#shutdown` 中にワーカープロセスが死んだ場合にシャットダウン処理がハングする問題を修正した PR です。`wait_for_active_workers` ループ内で定期的に子プロセスの終了を回収することで、ゾンビプロセスによる無限待ちを防ぎます。"
+    },
+    {
+      "number": 57047,
+      "title": "Add test coverage for Error#initialize_dup, #hash, and #detail {#pr-57047}",
+      "url": "https://github.com/rails/rails/pull/57047",
+      "mergedAt": "2026-03-27T00:00:00.000Z",
+      "author": "hammadxcm",
+      "authorUrl": "https://github.com/hammadxcm",
+      "summary": "1. 概要 (1-2文で)  \nActiveModel::Error のテスト不足だったメソッド（`initialize_dup`, `hash`, `detail`）に対して、専用のテストが追加されました。挙動の仕様をテストで明文化することで、`error.rb` のテストカバレッジが実質的に埋められています。"
+    },
+    {
+      "number": 57044,
+      "title": "Add test coverage for ActiveModel::Errors#import {#pr-57044}",
+      "url": "https://github.com/rails/rails/pull/57044",
+      "mergedAt": "2026-03-27T00:00:00.000Z",
+      "author": "hammadxcm",
+      "authorUrl": "https://github.com/hammadxcm",
+      "summary": "1. 概要 (1-2文で)  \nActiveModel::Errors の公開メソッド `import` に対して、これまで存在しなかった専用のテストが追加されました。機能追加や挙動変更はなく、既存の挙動を明示的に保証するためのテストのみの変更です。"
+    },
+    {
+      "number": 57048,
+      "title": "Add test coverage for NestedError#inner_error, #raw_type, and #options {#pr-57048}",
+      "url": "https://github.com/rails/rails/pull/57048",
+      "mergedAt": "2026-03-27T00:00:00.000Z",
+      "author": "hammadxcm",
+      "authorUrl": "https://github.com/hammadxcm",
+      "summary": "1. 概要 (1-2文で)  \n`ActiveModel::NestedError` が持つ `inner_error`, `raw_type`, `options` の3つのアクセサに対して、これまで不足していた専用テストを追加するPRです。振る舞い自体の変更はなく、テストカバレッジを補強するだけの変更です。"
+    },
+    {
+      "number": 57049,
+      "title": "Add test coverage for Errors#to_hash with full_messages and #uniq! {#pr-57049}",
+      "url": "https://github.com/rails/rails/pull/57049",
+      "mergedAt": "2026-03-27T00:00:00.000Z",
+      "author": "hammadxcm",
+      "authorUrl": "https://github.com/hammadxcm",
+      "summary": "1. 概要 (1-2文で)  \nActiveModel::Errors に対して、これまで直接はテストされていなかった `to_hash(true)` と `uniq!` の挙動を確認するテストが追加されています。挙動変更はなく、テストカバレッジの補完のみです。"
+    },
+    {
+      "number": 57046,
+      "title": "Add test coverage for Errors#delete with type and options {#pr-57046}",
+      "url": "https://github.com/rails/rails/pull/57046",
+      "mergedAt": "2026-03-27T00:00:00.000Z",
+      "author": "hammadxcm",
+      "authorUrl": "https://github.com/hammadxcm",
+      "summary": "1. 概要 (1-2文で)  \nActiveModel::Errors#delete が本来サポートしている `type` と `options` を指定した削除挙動について、新たにテストが追加された PR です。これにより、既存機能のフィルタリングロジックに対して直接的なテストカバレッジが付きました。"
+    }
+  ]
 }
