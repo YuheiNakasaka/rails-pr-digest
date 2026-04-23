@@ -1,7 +1,25 @@
 {
-  "lastUpdated": "2026-04-22T05:03:36.272Z",
+  "lastUpdated": "2026-04-23T00:23:06.135Z",
   "totalCount": 50,
   "items": [
+    {
+      "number": 57220,
+      "title": "Guides: remove outdated link to Action Cable examples {#pr-57220}",
+      "url": "https://github.com/rails/rails/pull/57220",
+      "mergedAt": "2026-04-22T00:00:00.000Z",
+      "author": "tjschuck",
+      "authorUrl": "https://github.com/tjschuck",
+      "summary": "1. 概要 (1-2文で)  \nRailsガイド「Action Cable Overview」から、9年間更新されておらずアーカイブされた外部リポジトリ（actioncable-examples）へのリンクが削除されました。これにより、公式ガイドから古い・メンテされていない情報源への誘導がなくなります。"
+    },
+    {
+      "number": 57212,
+      "title": "[ci skip] Fix a typo in the ActionMailbox basics docs {#pr-57212}",
+      "url": "https://github.com/rails/rails/pull/57212",
+      "mergedAt": "2026-04-22T00:00:00.000Z",
+      "author": "mgriffin",
+      "authorUrl": "https://github.com/mgriffin",
+      "summary": "1. 概要 (1-2文で)  \nAction Mailbox の「Basics」ガイド内にあった英文のタイポ（`and` → `an`）を修正するドキュメント専用のPRです。コードや挙動の変更は一切なく、テストガイドの文章を自然な英語に整えています。\n\n2. 変更内容の詳細  \n\n- 対象ファイル: `guides/source/action_mailbox_basics.md`  \n- 変更内容は1行のみで、テストヘルパーを使った受信メールテストの説明文から、文法上の誤りを修正しています。\n\n修正前（イメージ）:\n```md\nHere is and example of testing an inbound email with Action Mailbox TestHelpers\n```\n\n修正後:\n```md\nHere is an example of testing an inbound email with Action Mailbox TestHelpers\n```\n\n意味としては「Action Mailbox の TestHelpers を使って受信メールをテストする例は次のとおりです」という文で、`and` というタイプミスを正しい冠詞 `an` に直しただけです。\n\n3. 影響範囲・注意点  \n\n- **ランタイム動作への影響なし**  \n  - アプリケーションコード、Action Mailbox の実装、テストコードには一切変更がありません。  \n  - バージョンアップに伴う互換性問題やマイグレーションは不要です。\n- **開発者ドキュメントの読みやすさ向上のみ**  \n  - 英語ドキュメントが少し読みやすくなった、というレベルの変更です。  \n  - 既存のガイドの手順・サンプルコードの意味は変わりません。\n\n4. 参考情報 (あれば)  \n\n- PR: https://github.com/rails/rails/pull/57212  \n- 関連ドキュメント: `Action Mailbox Basics` ガイド  \n  - Action Mailbox のテストに関するセクションで、`ActionMailbox::TestHelper` などを使った受信メールテストの書き方を説明している部分の文言修正です。"
+    },
     {
       "number": 55282,
       "title": "Bump required PostgreSQL version to 10.0 {#pr-55282}",
@@ -433,24 +451,6 @@
       "author": "fxn",
       "authorUrl": "https://github.com/fxn",
       "summary": "1. 概要 (1-2文で)  \n`require_dependency` が「非推奨 (deprecate)」になり、将来的な削除に向けた準備が始まりました。クラシックオートローダからの移行や Rails < 7.0 サポートのために残されていた API を正式に廃止方向へ進める変更です。"
-    },
-    {
-      "number": 56986,
-      "title": "Further reduce internal usage of cattr_accessor and mattr_accessor {#pr-56986}",
-      "url": "https://github.com/rails/rails/pull/56986",
-      "mergedAt": "2026-03-15T00:00:00.000Z",
-      "author": "byroot",
-      "authorUrl": "https://github.com/byroot",
-      "summary": "1. 概要 (1-2文で)  \nRails内部で `cattr_accessor` / `mattr_accessor`（クラス変数ベースのアクセサ）の利用をさらに減らし、主に「クラスインスタンス変数」や `class_attribute` への移行を進めたPRです。クラス変数の共有挙動による思わぬ副作用を避け、より直感的で安全な設定・状態管理に寄せるリファクタリングになります。"
-    },
-    {
-      "number": 56983,
-      "title": "[ci skip] Update CHANGELOG with transform_keys! overwrite precedence note {#pr-56983}",
-      "url": "https://github.com/rails/rails/pull/56983",
-      "mergedAt": "2026-03-15T00:00:00.000Z",
-      "author": "diaphragm",
-      "authorUrl": "https://github.com/diaphragm",
-      "summary": "1. 概要 (1-2文で)  \nこのPRは、Rails 8.0.3 で行われた `ActiveSupport::HashWithIndifferentAccess#transform_keys!` のバグ修正に伴い、「キー変換時にキーが衝突した場合の上書き優先順位」が変わったことを CHANGELOG に明記するドキュメント修正です。挙動は Ruby 標準の `Hash#transform_keys!` に合わせて「あと勝ち」になっており、その仕様変更をサンプル付きで説明しています。"
     }
   ]
 }
