@@ -1,7 +1,25 @@
 {
-  "lastUpdated": "2026-04-25T00:18:42.638Z",
+  "lastUpdated": "2026-04-26T00:20:13.534Z",
   "totalCount": 50,
   "items": [
+    {
+      "number": 57227,
+      "title": "Fix duplicate entries accumulating in `aliases_by_attribute_name` {#pr-57227}",
+      "url": "https://github.com/rails/rails/pull/57227",
+      "mergedAt": "2026-04-25T00:00:00.000Z",
+      "author": "njakobsen",
+      "authorUrl": "https://github.com/njakobsen",
+      "summary": "1. 概要 (1-2文で)  \n`alias_attribute` が同じエイリアスを何度も登録した場合に内部配列に重複が蓄積し、その結果 `define_attribute_methods` が同じメソッドを何度も再生成してしまう問題を修正する PR です。Rails 7.1 以降で `table_name` を繰り返し変更するようなパターンで、クエリ時間やオブジェクト生成数がどんどん増大していた回帰バグを解消します。"
+    },
+    {
+      "number": 57245,
+      "title": "Fix `find_signed` for models with a composite primary key {#pr-57245}",
+      "url": "https://github.com/rails/rails/pull/57245",
+      "mergedAt": "2026-04-25T00:00:00.000Z",
+      "author": "55728",
+      "authorUrl": "https://github.com/55728",
+      "summary": "1. 概要 (1-2文で)  \n`ActiveRecord::SignedId#find_signed` が複合主キー(CPK)を持つモデルで `ArgumentError` を投げていた不具合を修正し、`find_signed!` および通常の `find` と同等に動作するようにした PR です。これにより、サインインリンクやパスワードリセットなどで CPK モデルの signed_id を安全に利用できます。"
+    },
     {
       "number": 57220,
       "title": "Guides: remove outdated link to Action Cable examples {#pr-57220}",
@@ -433,24 +451,6 @@
       "author": "nicolasva",
       "authorUrl": "https://github.com/nicolasva",
       "summary": "1. 概要 (1-2文で)  \nActiveModel::Name#human に渡せる `count` 引数が、I18n の複数形ルールに沿って正しく扱われることを確認するテストが追加されています。機能変更ではなく、既存仕様のテスト補完が目的のPRです。"
-    },
-    {
-      "number": 56989,
-      "title": "Simplify `activerecord` tests with `NotificationAssertions` helpers {#pr-56989}",
-      "url": "https://github.com/rails/rails/pull/56989",
-      "mergedAt": "2026-03-16T00:00:00.000Z",
-      "author": "Saidbek",
-      "authorUrl": "https://github.com/Saidbek",
-      "summary": "1. 概要 (1-2文で)  \n`activerecord` のテストで、これまでバラバラに書かれていた `ActiveSupport::Notifications.subscribed` ベースのコードを、共通ヘルパ `NotificationAssertions`（`assert_notification` / `capture_notifications`）に置き換えてシンプルにした PR です。テストの可読性と一貫性を高めるためのリファクタリングであり、挙動や API 仕様の変更はありません。"
-    },
-    {
-      "number": 56992,
-      "title": "Deprecate require_dependency {#pr-56992}",
-      "url": "https://github.com/rails/rails/pull/56992",
-      "mergedAt": "2026-03-15T00:00:00.000Z",
-      "author": "fxn",
-      "authorUrl": "https://github.com/fxn",
-      "summary": "1. 概要 (1-2文で)  \n`require_dependency` が「非推奨 (deprecate)」になり、将来的な削除に向けた準備が始まりました。クラシックオートローダからの移行や Rails < 7.0 サポートのために残されていた API を正式に廃止方向へ進める変更です。"
     }
   ]
 }
