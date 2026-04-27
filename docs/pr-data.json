@@ -1,7 +1,25 @@
 {
-  "lastUpdated": "2026-04-26T00:20:13.534Z",
+  "lastUpdated": "2026-04-27T00:20:49.021Z",
   "totalCount": 50,
   "items": [
+    {
+      "number": 57246,
+      "title": "Optimize `ActiveRecord::Relation#extending!` to skip work when called with empty modules {#pr-57246}",
+      "url": "https://github.com/rails/rails/pull/57246",
+      "mergedAt": "2026-04-26T00:00:00.000Z",
+      "author": "bogdan",
+      "authorUrl": "https://github.com/bogdan",
+      "summary": "1. 概要 (1-2文で)  \n`ActiveRecord::Relation#extending!` が、空のモジュール配列やブロックなしで呼ばれた場合に即座に何もせず return するよう最適化された PR です。これにより、`merge_multi_values` を含むあらゆる呼び出し元で、不要な処理を避けてパフォーマンスを改善しています。"
+    },
+    {
+      "number": 54829,
+      "title": "Allow using aliases for unions in `from` clause {#pr-54829}",
+      "url": "https://github.com/rails/rails/pull/54829",
+      "mergedAt": "2026-04-26T00:00:00.000Z",
+      "author": "fatkodima",
+      "authorUrl": "https://github.com/fatkodima",
+      "summary": "1. 概要 (1-2文で)  \nRails の `ActiveRecord::Relation#from` に対し、`UNION` を使ったサブクエリにテーブルエイリアスを付けて利用できるようにする修正です。これにより、`from(union, :some_models)` のような呼び出しで、PostgreSQL などで発生していた「missing FROM-clause entry」エラーが解消されます。"
+    },
     {
       "number": 57227,
       "title": "Fix duplicate entries accumulating in `aliases_by_attribute_name` {#pr-57227}",
@@ -433,24 +451,6 @@
       "author": "jorgemanrubia",
       "authorUrl": "https://github.com/jorgemanrubia",
       "summary": "1. 概要 (1-2文で)  \nActionText のエディタヘルパーで、`value` 引数とは別にブロックで渡した内容を「エディタ要素の子要素」として同時に扱えるようになりました。Trix エディタについては、従来どおり「`value` が無い場合はブロック内容を初期値として使う」という挙動も維持されています。"
-    },
-    {
-      "number": 56990,
-      "title": "fix(guides): bin/jobs start was not copying {#pr-56990}",
-      "url": "https://github.com/rails/rails/pull/56990",
-      "mergedAt": "2026-03-16T00:00:00.000Z",
-      "author": "j01nb0k",
-      "authorUrl": "https://github.com/j01nb0k",
-      "summary": "1. 概要 (1-2文で)  \nRailsガイド「Active Job Basics」の中にある `bin/jobs start` のコマンド例が、シェル上で想定どおりコピー・実行できない状態になっていた問題を修正したPRです。原因は、ガイドのコードブロックから「`$` プロンプト記号」が抜けていたことによる単純なドキュメント上のミスです。"
-    },
-    {
-      "number": 56987,
-      "title": "Add tests for ActiveModel::Name#human `count` argument {#pr-56987}",
-      "url": "https://github.com/rails/rails/pull/56987",
-      "mergedAt": "2026-03-16T00:00:00.000Z",
-      "author": "nicolasva",
-      "authorUrl": "https://github.com/nicolasva",
-      "summary": "1. 概要 (1-2文で)  \nActiveModel::Name#human に渡せる `count` 引数が、I18n の複数形ルールに沿って正しく扱われることを確認するテストが追加されています。機能変更ではなく、既存仕様のテスト補完が目的のPRです。"
     }
   ]
 }
