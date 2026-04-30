@@ -1,7 +1,16 @@
 {
-  "lastUpdated": "2026-04-29T00:25:03.592Z",
+  "lastUpdated": "2026-04-30T00:24:45.717Z",
   "totalCount": 50,
   "items": [
+    {
+      "number": 57176,
+      "title": "Make becomes preserve marked_for_destruction {#pr-57176}",
+      "url": "https://github.com/rails/rails/pull/57176",
+      "mergedAt": "2026-04-29T00:00:00.000Z",
+      "author": "genezys",
+      "authorUrl": "https://github.com/genezys",
+      "summary": "1. 概要 (1-2文で)  \n`ActiveRecord::Persistence#becomes` を使用してオブジェクトを別クラスのインスタンスに変換した際に、  \n- `marked_for_destruction` の状態  \n- ロード済み関連（associations）上の変更  \nが失われないようにするバグ修正・挙動改善の PR です。"
+    },
     {
       "number": 57252,
       "title": "Enable frozen string literal by default {#pr-57252}",
@@ -442,15 +451,6 @@
       "author": "Saidbek",
       "authorUrl": "https://github.com/Saidbek",
       "summary": "1. 概要 (1-2文で)  \nPostgreSQL の generated column（生成列）の「格納型（stored/virtual）」が異なる場合に、`PostgreSQL::Column` の `==` と `hash` の挙動が食い違っていたバグを修正する PR です。`==` と `hash` が同じ情報（`generated` 属性）に基づいて判定されるようにし、Hash/Set での不整合を解消しています。"
-    },
-    {
-      "number": 57001,
-      "title": "Fix PostgresqlDbConsoleTest reports Environment leak detected {#pr-57001}",
-      "url": "https://github.com/rails/rails/pull/57001",
-      "mergedAt": "2026-03-17T00:00:00.000Z",
-      "author": "joaoGabriel55",
-      "authorUrl": "https://github.com/joaoGabriel55",
-      "summary": "1. 概要 (1-2文で)  \nPostgresqlDbConsoleTest で環境変数（ENV）のリークを検出する `LeakChecker` とのライフサイクルの噛み合わせ不良によりテストが失敗していた問題を、ENV のバックアップ／復元方法を変更することで修正した PRです。テストコードのみの変更で、本体の挙動には影響しません。"
     }
   ]
 }
