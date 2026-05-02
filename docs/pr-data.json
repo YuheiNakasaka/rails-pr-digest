@@ -1,7 +1,25 @@
 {
-  "lastUpdated": "2026-05-01T00:25:53.371Z",
+  "lastUpdated": "2026-05-02T00:24:04.416Z",
   "totalCount": 50,
   "items": [
+    {
+      "number": 57269,
+      "title": "Defer ViewReloader build when no view paths are registered {#pr-57269}",
+      "url": "https://github.com/rails/rails/pull/57269",
+      "mergedAt": "2026-05-01T00:00:00.000Z",
+      "author": "Korri",
+      "authorUrl": "https://github.com/Korri",
+      "summary": "1. 概要 (1-2文で)  \nView 用のファイル更新監視（ViewReloader / FileUpdateChecker）の生成タイミングをさらに遅延させ、「まだ view path が1つも登録されていない状態」で `updated?` が呼ばれた場合でも不要な watcher を作らないようにした PRです。これにより、特に Spring 利用時のテスト実行など、開発環境での起動〜初回リクエスト前の無駄なディレクトリ走査が大幅に削減されます。"
+    },
+    {
+      "number": 57283,
+      "title": "Avoid assert_nil for Mime::NullType request format {#pr-57283}",
+      "url": "https://github.com/rails/rails/pull/57283",
+      "mergedAt": "2026-05-01T00:00:00.000Z",
+      "author": "mugitti9",
+      "authorUrl": "https://github.com/mugitti9",
+      "summary": "1. 概要 (1-2文で)  \nRailsのテストコードで、未知のフォーマット要求時の `request.format` を `assert_nil` で検証していた箇所を、`Mime::NullType` を前提とした検証に変更し、最新の Minitest の挙動変更に追従したテスト専用の修正です。実行時の挙動や公開APIには影響せず、テストの互換性・堅牢性を高めるための変更です。"
+    },
     {
       "number": 57176,
       "title": "Make becomes preserve marked_for_destruction {#pr-57176}",
@@ -433,24 +451,6 @@
       "author": "andrewn617",
       "authorUrl": "https://github.com/andrewn617",
       "summary": "1. 概要 (1-2文で)  \nこのPRは、`create_table` 時に発行する複数の SQL を一括送信（バッチ）することで、特に巨大なスキーマを持つアプリケーションで `db:schema:load` などのパフォーマンスを大幅に改善する変更です。PostgreSQL で 1000+ テーブルのケースでは、スキーマロードが約 120 秒から約 25 秒まで短縮された事例が示されています。"
-    },
-    {
-      "number": 56998,
-      "title": "Use `flat_map` in ContentSecurityPolicy {#pr-56998}",
-      "url": "https://github.com/rails/rails/pull/56998",
-      "mergedAt": "2026-03-18T00:00:00.000Z",
-      "author": "p8",
-      "authorUrl": "https://github.com/p8",
-      "summary": "1. 概要 (1-2文で)  \nRails の `ContentSecurityPolicy` 実装において、`validate` 内で `flat_map` を使うことで配列のフラット化処理を整理し、`build_directive` の戻り値を `validate` の戻り値に依存しないようにする小さなリファクタリングが行われました。挙動は変えずに、コードの明確性と保守性を高める変更です。"
-    },
-    {
-      "number": 57003,
-      "title": "Fix PostgreSQL column equality for generated types {#pr-57003}",
-      "url": "https://github.com/rails/rails/pull/57003",
-      "mergedAt": "2026-03-18T00:00:00.000Z",
-      "author": "Saidbek",
-      "authorUrl": "https://github.com/Saidbek",
-      "summary": "1. 概要 (1-2文で)  \nPostgreSQL の generated column（生成列）の「格納型（stored/virtual）」が異なる場合に、`PostgreSQL::Column` の `==` と `hash` の挙動が食い違っていたバグを修正する PR です。`==` と `hash` が同じ情報（`generated` 属性）に基づいて判定されるようにし、Hash/Set での不整合を解消しています。"
     }
   ]
 }
