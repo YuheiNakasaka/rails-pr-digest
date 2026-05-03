@@ -1,7 +1,16 @@
 {
-  "lastUpdated": "2026-05-02T00:24:04.416Z",
+  "lastUpdated": "2026-05-03T00:23:32.161Z",
   "totalCount": 50,
   "items": [
+    {
+      "number": 57291,
+      "title": "[ci skip] Fix typos in test descriptions {#pr-57291}",
+      "url": "https://github.com/rails/rails/pull/57291",
+      "mergedAt": "2026-05-02T00:00:00.000Z",
+      "author": "jackbowlin",
+      "authorUrl": "https://github.com/jackbowlin",
+      "summary": "1. 概要 (1-2文で)  \nこのPRは、テストコード内の説明文字列（テスト名）のスペルミスを修正したものです。テストの挙動やアプリケーションコードには一切変更はなく、影響は極めて限定的です。"
+    },
     {
       "number": 57269,
       "title": "Defer ViewReloader build when no view paths are registered {#pr-57269}",
@@ -442,15 +451,6 @@
       "author": "Saidbek",
       "authorUrl": "https://github.com/Saidbek",
       "summary": "1. 概要 (1-2文で)  \nActiveSupport::JSON::Decoding 内で、現在は一切使われていない `require` を2つ削除したPRです。機能追加や挙動変更は行われておらず、不要な依存を整理するリファクタリングです。"
-    },
-    {
-      "number": 57000,
-      "title": "Batch SQL statements when creating tables. {#pr-57000}",
-      "url": "https://github.com/rails/rails/pull/57000",
-      "mergedAt": "2026-03-19T00:00:00.000Z",
-      "author": "andrewn617",
-      "authorUrl": "https://github.com/andrewn617",
-      "summary": "1. 概要 (1-2文で)  \nこのPRは、`create_table` 時に発行する複数の SQL を一括送信（バッチ）することで、特に巨大なスキーマを持つアプリケーションで `db:schema:load` などのパフォーマンスを大幅に改善する変更です。PostgreSQL で 1000+ テーブルのケースでは、スキーマロードが約 120 秒から約 25 秒まで短縮された事例が示されています。"
     }
   ]
 }
