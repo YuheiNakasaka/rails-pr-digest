@@ -1,7 +1,151 @@
 {
-  "lastUpdated": "2026-05-05T00:24:47.547Z",
+  "lastUpdated": "2026-05-06T00:27:34.481Z",
   "totalCount": 50,
   "items": [
+    {
+      "number": 57271,
+      "title": "Gracefully handle `nil` during multi-parameter assignment {#pr-57271}",
+      "url": "https://github.com/rails/rails/pull/57271",
+      "mergedAt": "2026-05-05T00:00:00.000Z",
+      "author": "seanpdoyle",
+      "authorUrl": "https://github.com/seanpdoyle",
+      "summary": "1. 概要 (1-2文で)  \nマルチパラメータ属性（例: `Date` カラム）の代入時に、これまで `\"\"` のときだけ正常に「値なし」として扱われていた挙動を、`nil` に対しても例外なく同様に扱えるようにした修正です。`nil` を渡した際に発生していた `NoMethodError: undefined method 'empty?' for nil` を解消します。"
+    },
+    {
+      "number": 50889,
+      "title": "Introduce `ActiveSupport::TestCase.around` {#pr-50889}",
+      "url": "https://github.com/rails/rails/pull/50889",
+      "mergedAt": "2026-05-05T00:00:00.000Z",
+      "author": "seanpdoyle",
+      "authorUrl": "https://github.com/seanpdoyle",
+      "summary": "1. 概要 (1-2文で)  \nRails の `ActiveSupport::TestCase` に `around` コールバック（フック）が追加され、各テストの `setup`〜`teardown` を1つの「囲い込み」処理として扱えるようになりました。これにより、RSpec などで馴染みのある「around フック」を Rails 標準のテストでもシンプルに使えるようになります。"
+    },
+    {
+      "number": 50320,
+      "title": "Tag Builders: render keywords as dasherized HTML attributes {#pr-50320}",
+      "url": "https://github.com/rails/rails/pull/50320",
+      "mergedAt": "2026-05-05T00:00:00.000Z",
+      "author": "seanpdoyle",
+      "authorUrl": "https://github.com/seanpdoyle",
+      "summary": "1. 概要 (1-2文で)  \nRails の `tag` ヘルパー等で、属性にネストした Hash を渡したときに、キーを「ダッシュ区切り(dasherize)した HTML 属性名」として展開して出力できるようになりました。これにより、Stimulus/Turbo の `data-*` だけでなく、Alpine.js の `x-*` や htmx の `hx-*` 形式の属性も、Ruby 側で自然なハッシュ記法のまま生成しやすくなっています。"
+    },
+    {
+      "number": 57240,
+      "title": "Move generated kamal gem into development group {#pr-57240}",
+      "url": "https://github.com/rails/rails/pull/57240",
+      "mergedAt": "2026-05-05T00:00:00.000Z",
+      "author": "jaykava",
+      "authorUrl": "https://github.com/jaykava",
+      "summary": "1. 概要 (1-2文で)  \nRails のアプリケーション生成時に自動で追加される `kamal` gem を、トップレベルではなく `group :development` 内に移動する変更です。これにより、Kamal が本番環境の Bundle からデフォルトで外れ、開発時専用のデプロイツールとして扱われます。"
+    },
+    {
+      "number": 57301,
+      "title": "Document `_came_from_user?` and `_for_database` attribute method suffixes [ci skip] {#pr-57301}",
+      "url": "https://github.com/rails/rails/pull/57301",
+      "mergedAt": "2026-05-05T00:00:00.000Z",
+      "author": "joaomarcos96",
+      "authorUrl": "https://github.com/joaomarcos96",
+      "summary": "1. 概要 (1-2文で)  \nRails の `ActiveRecord::AttributeMethods::BeforeTypeCast` が内部的に提供している `*_for_database` と `*_came_from_user?` という属性メソッドサフィックスについて、公式ドキュメントに追記した PR です。挙動の変更は一切なく、ドキュメントとコメントの整備のみです。"
+    },
+    {
+      "number": 57129,
+      "title": "Use Hash#each_key instead of Hash#keys.each {#pr-57129}",
+      "url": "https://github.com/rails/rails/pull/57129",
+      "mergedAt": "2026-05-05T00:00:00.000Z",
+      "author": "ashwin47",
+      "authorUrl": "https://github.com/ashwin47",
+      "summary": "1. 概要 (1-2文で)  \nRails内部で、`Hash#keys.each` を使っていた箇所の一部を `Hash#each_key` に置き換え、余計な配列生成を避けることでパフォーマンスとメモリ効率をわずかに改善するリファクタリングです。ハッシュを反復中に変更しない箇所のみを安全に置き換えており、挙動の変更はほぼありません。"
+    },
+    {
+      "number": 55826,
+      "title": "Add conflicting record ID to `validates_uniqueness_of` error details {#pr-55826}",
+      "url": "https://github.com/rails/rails/pull/55826",
+      "mergedAt": "2026-05-05T00:00:00.000Z",
+      "author": "bvicenzo",
+      "authorUrl": "https://github.com/bvicenzo",
+      "summary": "1. 概要 (1-2文で)  \n`validates_uniqueness_of` / `validates :field, uniqueness: true` の検証に失敗した場合、`errors.details` に「衝突している既存レコードの主キーID(existing_id)」が含まれるようになりました。これにより、どのレコードと一意制制約がぶつかったかをアプリ側で特定しやすくなります。"
+    },
+    {
+      "number": 57247,
+      "title": "Use ** in .dockerignore template for recursive directory exclusions {#pr-57247}",
+      "url": "https://github.com/rails/rails/pull/57247",
+      "mergedAt": "2026-05-05T00:00:00.000Z",
+      "author": "bogdan",
+      "authorUrl": "https://github.com/bogdan",
+      "summary": "1. 概要 (1-2文で)  \nRails が `rails new --docker` などで生成する `.dockerignore` テンプレートを修正し、`/log/*` や `/tmp/*` といった「1階層だけマッチするパターン」を `/log/**` のような「再帰的にすべてのサブディレクトリを含めてマッチするパターン」に変更した PR です。これにより、ログ・tmp・storage などの配下にある深い階層のファイルも Docker build context から確実に除外されるようになります。"
+    },
+    {
+      "number": 57208,
+      "title": "Add `ActiveJob::Attributes` to persist data between steps {#pr-57208}",
+      "url": "https://github.com/rails/rails/pull/57208",
+      "mergedAt": "2026-05-05T00:00:00.000Z",
+      "author": "bdewater-thatch",
+      "authorUrl": "https://github.com/bdewater-thatch",
+      "summary": "1. 概要 (1-2文で)  \nRails 8.1で導入された Active Job Continuation（マルチステップジョブ）に対して、ステップ間で一時的なデータを安全に保持できる `ActiveJob::Attributes` が追加されました。Active Model Attributes をベースに、ジョブのシリアライズ／デシリアライズを意識せずに型付き属性を使って値を永続化できます。"
+    },
+    {
+      "number": 56450,
+      "title": "Fix ActionMailer::Base.mail dispatch in 8.1+ {#pr-56450}",
+      "url": "https://github.com/rails/rails/pull/56450",
+      "mergedAt": "2026-05-05T00:00:00.000Z",
+      "author": "afurm",
+      "authorUrl": "https://github.com/afurm",
+      "summary": "1. 概要 (1-2文で)  \nRails 8.1 で `ActionMailer::Base.mail` をクラスメソッドとして直接呼び出した際に `ActionNotFound` が発生するリグレッションを修正し、8.0 と同じ挙動（クラスレベル配送）を復元する PR です。`mail` が ActionMailer の「アクション」として常に認識されるようにし、その挙動を担保する回帰テストが追加されています。"
+    },
+    {
+      "number": 57288,
+      "title": "Define `as_json` on `ActiveStorage::Attached::One` and `Attached::Many` {#pr-57288}",
+      "url": "https://github.com/rails/rails/pull/57288",
+      "mergedAt": "2026-05-05T00:00:00.000Z",
+      "author": "onyxblade",
+      "authorUrl": "https://github.com/onyxblade",
+      "summary": "1. 概要 (1-2文で)  \n`has_one_attached` / `has_many_attached` の名前が実カラム（あるいは ignored_columns に入ったカラム）と衝突しているときに、`record.to_json` で `SystemStackError`（無限再帰）が発生するバグを修正するPRです。`ActiveStorage::Attached::One` / `Many` に明示的な `as_json` を定義し、レコードの JSON シリアライズ時に安全に変換されるようにしました。"
+    },
+    {
+      "number": 57162,
+      "title": "Skip CreateUsers migration when User model already exists {#pr-57162}",
+      "url": "https://github.com/rails/rails/pull/57162",
+      "mergedAt": "2026-05-05T00:00:00.000Z",
+      "author": "johntopley",
+      "authorUrl": "https://github.com/johntopley",
+      "summary": "1. 概要 (1-2文で)  \nRails の `rails generate authentication` で、すでに `User` モデルが存在する場合に `CreateUsers` マイグレーションを自動生成しないようにし、「table already exists」エラーを避ける修正です。既存アプリに後から認証機能を追加しやすくなる変更です。"
+    },
+    {
+      "number": 57298,
+      "title": "Fix `eager_load` for CPK models with explicit `select` {#pr-57298}",
+      "url": "https://github.com/rails/rails/pull/57298",
+      "mergedAt": "2026-05-05T00:00:00.000Z",
+      "author": "fatkodima",
+      "authorUrl": "https://github.com/fatkodima",
+      "summary": "1. 概要 (1-2文で)  \n複合主キー（CPK: Composite Primary Key）を持つモデルに対して、`select` を明示したクエリに `eager_load` を使うと正しく動かない不具合が修正されました。`eager_load` 時の主キー列の扱いを見直し、CPK モデルでも関連を正しくプリロードできるようになっています。"
+    },
+    {
+      "number": 57255,
+      "title": "Update AGENTS.md to remove PR reference {#pr-57255}",
+      "url": "https://github.com/rails/rails/pull/57255",
+      "mergedAt": "2026-05-05T00:00:00.000Z",
+      "author": "nateberkopec",
+      "authorUrl": "https://github.com/nateberkopec",
+      "summary": "1. 概要 (1-2文で)  \nこのPRは、`AGENTS.md` に含まれていた特定のプルリクエスト（PR）への言及を削除する、ドキュメントのみの微修正です。Rails本体の機能や挙動には一切変更がありません。"
+    },
+    {
+      "number": 57280,
+      "title": "Fix ActionCable Overview JS example: localStorage.get → getItem {#pr-57280}",
+      "url": "https://github.com/rails/rails/pull/57280",
+      "mergedAt": "2026-05-05T00:00:00.000Z",
+      "author": "Edilbek",
+      "authorUrl": "https://github.com/Edilbek",
+      "summary": "1. 概要 (1–2文で)  \nAction Cableガイド内の JavaScript サンプルコードで、`localStorage` の誤った呼び出し方 (`get`) を正しい `getItem` に修正したドキュメント変更です。ブラウザでコピペして動く形になるように、動的 WebSocket URL の例を実用的なコードに直しています。\n\n2. 変更内容の詳細  \n\n対象ファイル: `guides/source/action_cable_overview.md` の「Connect Consumer」セクション内 `getWebSocketURL` の例。\n\nもともとのガイドでは (概念的には) こんなコードになっていました:\n\n```js\nfunction getWebSocketURL() {\n  const token = localStorage.get('auth-token') // ← これが誤り\n  return `wss://example.com/cable?token=${token}`\n}\n```\n\nこの PR で以下のように修正されています:\n\n```js\nfunction getWebSocketURL() {\n  const token = localStorage.getItem('auth-token') // ← 正しい Web Storage API\n  return `wss://example.com/cable?token=${token}`\n}\n```\n\n技術的背景:\n- ブラウザの Web Storage API (`Storage` インターフェイス) は `getItem(key: string): string | null` を提供します。\n- `localStorage.get` というメソッドは存在しないため、サンプルをそのまま実行すると  \n  `TypeError: localStorage.get is not a function` が発生します。\n- これを `getItem` に直すことで、Action Cable の接続 URL を `localStorage` のトークンで動的に組み立てる例が、実際にブラウザで動くコードになります。\n\n3. 影響範囲・注意点  \n\n- 影響範囲:\n  - Rails 本体のランタイム動作には一切影響なし (ガイド文書のみの変更)。\n  - Action Cable の「概要」ガイドを読みながら実装する開発者が、ブラウザ上でエラーに遭遇しなくなる。\n\n- 注意点:\n  - すでにドキュメントを参考にして `localStorage.get(...)` を書いてしまっているコードがある場合は、手元の実装を `getItem(...)` に修正する必要があります。\n  - `getItem` はキーが存在しない場合 `null` を返すため、本番コードでは `null` チェックや未ログイン時のハンドリングを追加することが推奨されます (例: トークンがなければ接続しない、ログイン画面へ誘導するなど)。\n\n4. 参考情報 (あれば)  \n\n- Web Storage API 仕様:  \n  https://developer.mozilla.org/en-US/docs/Web/API/Storage/getItem\n- 該当ガイド (最新 edge):  \n  https://edgeguides.rubyonrails.org/action_cable_overview.html (「Connect Consumer」セクションの WebSocket URL 例)"
+    },
+    {
+      "number": 56209,
+      "title": "Update Configurable deprecaton warning {#pr-56209}",
+      "url": "https://github.com/rails/rails/pull/56209",
+      "mergedAt": "2026-05-05T00:00:00.000Z",
+      "author": "skipkayhil",
+      "authorUrl": "https://github.com/skipkayhil",
+      "summary": "1. 概要 (1-2文で)  \nRails の `ActiveSupport::Configurable` を非推奨にする際に表示される警告文が、「`class_attribute` を使え」と単一の代替手段だけを示していたのをやめ、複数の代替案を提案する、より中立的な文言に変更した PR です。機能的な変更はなく、あくまで deprecation warning のメッセージ内容のみが更新されています。"
+    },
     {
       "number": 57285,
       "title": "Deactivate ViewReloader hooks when reloaders are cleared {#pr-57285}",
@@ -307,150 +451,6 @@
       "author": "hammadxcm",
       "authorUrl": "https://github.com/hammadxcm",
       "summary": "1. 概要 (1-2文で)  \n`ActiveModel::Error#strict_match?` に対して専用のテストが追加され、属性・タイプ・オプションが「完全一致」しているかを判定する挙動が明示的に保証されるようになりました。機能追加や仕様変更ではなく、既存のパブリック API のテスト補完のみです。"
-    },
-    {
-      "number": 57045,
-      "title": "Add test coverage for EnvironmentInquirer predicates {#pr-57045}",
-      "url": "https://github.com/rails/rails/pull/57045",
-      "mergedAt": "2026-03-27T00:00:00.000Z",
-      "author": "hammadxcm",
-      "authorUrl": "https://github.com/hammadxcm",
-      "summary": "1. 概要 (1-2文で)  \n`ActiveSupport::EnvironmentInquirer` に用意されている `development?`, `test?`, `production?` の各述語メソッドに対して、これまで不足していたテストを追加する PR です。合わせて、カスタム環境（例: `\"staging\"`）での振る舞いが `StringInquirer` にフォールバックすることや、`local?` が非ローカル環境で `false` を返すことも明示的にテストしています。"
-    },
-    {
-      "number": 57071,
-      "title": "Fix titleize to capitalize unicode lowercase letters {#pr-57071}",
-      "url": "https://github.com/rails/rails/pull/57071",
-      "mergedAt": "2026-03-27T00:00:00.000Z",
-      "author": "EldinGuzin",
-      "authorUrl": "https://github.com/EldinGuzin",
-      "summary": "1. 概要 (1-2文で)  \nRails の `ActiveSupport::Inflector#titleize` が、ASCII 以外の小文字（đ, é, ü, ñ, ć など）も正しく先頭大文字化できるように、正規表現を `[a-z]` から Unicode の小文字クラス `\\p{Ll}` に変更した PR です。これにより、多言語テキストでのタイトル化処理が期待通りに動作します。"
-    },
-    {
-      "number": 57074,
-      "title": "Update yarn install command to support immutable and frozen-lockfile in Dockerfile.tt {#pr-57074}",
-      "url": "https://github.com/rails/rails/pull/57074",
-      "mergedAt": "2026-03-27T00:00:00.000Z",
-      "author": "javier-menendez",
-      "authorUrl": "https://github.com/javier-menendez",
-      "summary": "1. 概要 (1-2文で)  \nRails のアプリ生成時に使われる `Dockerfile.tt` の Yarn インストールコマンドが更新され、Yarn が Corepack 管理かどうかに応じて `--immutable` または `--frozen-lockfile` を使い分けるようになりました。これにより、Yarn 1 系／Yarn 2+（Berry）や Corepack 利用など、さまざまな環境でより安全かつ互換性の高いインストールが行えるようになります。"
-    },
-    {
-      "number": 57063,
-      "title": "[ci skip] Improve readability of note about redefining the `id` column {#pr-57063}",
-      "url": "https://github.com/rails/rails/pull/57063",
-      "mergedAt": "2026-03-26T00:00:00.000Z",
-      "author": "GyuhaWang",
-      "authorUrl": "https://github.com/GyuhaWang",
-      "summary": "1. 概要 (1-2文で)  \nActive Record Basics ガイド内で、「`id` カラムを再定義した場合の挙動」を説明している注意書きのエラーメッセージ表記を、1行で見やすくなるように整形したドキュメント変更です。コードや挙動には一切手を加えていません。\n\n2. 変更内容の詳細(あればサンプルコードも含めて)  \n- 対象ファイル: `guides/source/active_record_basics.md`  \n- 「`id` カラムを自前で定義したときに Active Record がどのようなエラーを出すか」を示す注意書き部分にある **エラーメッセージの表記** が、複数行に分割されていて読みにくかったため、1行にまとめる変更が行われました。  \n- 実際の diff は概ね以下のようなイメージです（内容は同じで、改行位置のみ変更）:\n\n  ```md\n  **Before (イメージ)**\n\n  Note: If you redefine `id` column, Rails will raise an error like:\n  `ActiveRecord::UnknownPrimaryKey:\n  Unknown primary key for table users in model User.`\n\n  **After (イメージ)**\n\n  Note: If you redefine `id` column, Rails will raise an error like:\n  `ActiveRecord::UnknownPrimaryKey: Unknown primary key for table users in model User.`\n  ```\n\n- これにより、ガイドを読むときにエラーメッセージ全体を一目で把握できるようになります。\n\n3. 影響範囲・注意点  \n- 影響範囲は **Rails ガイドの文章表現のみ** で、フレームワーク本体の挙動・API・パブリックインターフェイスには変更ありません。  \n- `id` カラム再定義時に `ActiveRecord::UnknownPrimaryKey` が発生するという仕様やそのメッセージ内容自体は従来どおりです。  \n- コードや既存アプリケーションへの互換性の影響はありません。テストや CHANGELOG の更新も不要なレベルのドキュメント修正として扱われています。\n\n4. 参考情報 (あれば)  \n- 該当ガイド: Active Record Basics（`id` カラムの扱いと主キーの説明セクション）  \n- エラークラス: `ActiveRecord::UnknownPrimaryKey`  \n- PR: #57063 “[ci skip] Improve readability of note about redefining the `id` column”"
-    },
-    {
-      "number": 57064,
-      "title": "Bump Github Action upload-artifactversion to 7 {#pr-57064}",
-      "url": "https://github.com/rails/rails/pull/57064",
-      "mergedAt": "2026-03-26T00:00:00.000Z",
-      "author": "neumayr",
-      "authorUrl": "https://github.com/neumayr",
-      "summary": "1. 概要 (1-2文で)  \nRails が生成する GitHub Actions CI ワークフローテンプレートにおいて、`actions/upload-artifact` のバージョン指定を最新の `v7` に更新する PR です。アプリケーションとプラグインの両方の GitHub CI テンプレートが対象です。"
-    },
-    {
-      "number": 57067,
-      "title": "Classify mysql error 1046 (ER_NO_DB_ERROR) as ConnectionFailed {#pr-57067}",
-      "url": "https://github.com/rails/rails/pull/57067",
-      "mergedAt": "2026-03-26T00:00:00.000Z",
-      "author": "clayharmon",
-      "authorUrl": "https://github.com/clayharmon",
-      "summary": "1. 概要 (1-2文で)  \nMySQL のエラーコード 1046「No database selected」を、`ActiveRecord::ConnectionFailed` として扱うようにした変更です。これにより、接続プール使用時などに TCP 接続がサイレントに張り替わった場合でも、Rails の自動リトライ機構が働くようになります。"
-    },
-    {
-      "number": 57069,
-      "title": "Make fast behavior the default for NumberToDelimitedConverter {#pr-57069}",
-      "url": "https://github.com/rails/rails/pull/57069",
-      "mergedAt": "2026-03-26T00:00:00.000Z",
-      "author": "willnet",
-      "authorUrl": "https://github.com/willnet",
-      "summary": "1. 概要 (1-2文で)  \n`number_to_delimited` などの数値区切り系ヘルパーで、オプション未指定時にも常に高速化された経路（fast path）が使われるようにデフォルト動作が修正されました。これにより、従来は暗黙に実行されていた低速な処理が、明示的に指定した場合にのみ使われるようになります。"
-    },
-    {
-      "number": 57054,
-      "title": "Cherry-pick security release commits onto main branch {#pr-57054}",
-      "url": "https://github.com/rails/rails/pull/57054",
-      "mergedAt": "2026-03-23T00:00:00.000Z",
-      "author": "jhawthorn",
-      "authorUrl": "https://github.com/jhawthorn",
-      "summary": "1. 概要 (1–2文)  \nこのPRは、セキュリティリリースで入った修正を `main` ブランチにチェリーピックしたもので、主に Active Storage 周りのファイルアクセス／ダウンロードの安全性向上と、Action View のタグ生成・HTMLセーフティ関連の修正が含まれています。例外画面テンプレートや `String#html_safe` 周りも含めて、XSS/ディレクトリトラバーサル等の脆弱性を防ぐための変更と、それを担保するテスト追加が中心です。"
-    },
-    {
-      "number": 56877,
-      "title": "Fix FrozenError when deriving foreign key from inverse with composite foreign key {#pr-56877}",
-      "url": "https://github.com/rails/rails/pull/56877",
-      "mergedAt": "2026-03-23T00:00:00.000Z",
-      "author": "kirs",
-      "authorUrl": "https://github.com/kirs",
-      "summary": "1. 概要 (1-2文で)  \n`belongs_to` 側が複合外部キー（配列の `foreign_key`）を持ち、その逆側の `has_one` / `has_many` が `inverse_of` から外部キーを導出する場合に `FrozenError` が発生していたバグを修正する PR です。  \n凍結済みの配列に対して破壊的メソッド `map!` を呼び出していた実装を、非破壊的な `map { ... }.freeze` に置き換えることでエラーを回避しています。"
-    },
-    {
-      "number": 57031,
-      "title": "Add test coverage for ActiveModel::Errors#where {#pr-57031}",
-      "url": "https://github.com/rails/rails/pull/57031",
-      "mergedAt": "2026-03-23T00:00:00.000Z",
-      "author": "hammadxcm",
-      "authorUrl": "https://github.com/hammadxcm",
-      "summary": "1. 概要 (1-2文で)  \n`ActiveModel::Errors#where` に対する専用テストが追加され、属性・タイプ・オプションごとのフィルタリング挙動が網羅的に検証されるようになりました。これにより、既存の公開APIの振る舞いがテストで明示され、将来的なリグレッション防止に役立ちます。"
-    },
-    {
-      "number": 57032,
-      "title": "Add test coverage for IsolatedExecutionState#key?, #delete, and #context {#pr-57032}",
-      "url": "https://github.com/rails/rails/pull/57032",
-      "mergedAt": "2026-03-23T00:00:00.000Z",
-      "author": "hammadxcm",
-      "authorUrl": "https://github.com/hammadxcm",
-      "summary": "1. 概要 (1-2文で)  \n`ActiveSupport::IsolatedExecutionState` の公開メソッド `#key?`, `#delete`, `#context` に対して、これまで不足していたテストが追加されました。機能追加や仕様変更ではなく、テストカバレッジを補完するためのPRです。"
-    },
-    {
-      "number": 57033,
-      "title": "[ci skip] Fix punctuation in Rails autoloading and reloading constants docs {#pr-57033}",
-      "url": "https://github.com/rails/rails/pull/57033",
-      "mergedAt": "2026-03-23T00:00:00.000Z",
-      "author": "written-fresh",
-      "authorUrl": "https://github.com/written-fresh",
-      "summary": "1. 概要 (1-2文で)  \nこのPRは、Railsガイド「autoloading and reloading constants」のドキュメント内にある句読点の誤りを修正するものです。コードや挙動の変更は一切なく、ドキュメント表現のみが微修正されています。\n\n2. 変更内容の詳細  \n- 対象ファイル: `guides/source/autoloading_and_reloading_constants.md`  \n- 差分: 1行の修正（1行追加・1行削除の実質置き換え）  \n- 具体的な内容は英語ドキュメントの句読点（ピリオドやカンマなど）の誤りを正しい形に修正しただけであり、文意や説明内容自体は変わっていません。  \n- 技術的なサンプルコードや設定例などは変更されていません。\n\n3. 影響範囲・注意点  \n- 影響範囲:\n  - Rails本体のオートローディング/リローディングの挙動には一切影響しません。\n  - 生成されるガイド（HTML版など）の表示テキストのみが僅かに変わります。\n- 注意点:\n  - アプリケーションのアップデート時に、このPRによってコードの修正が必要になるケースはありません。\n  - CIを回していない（`[ci skip]`）ことからも分かる通り、あくまでドキュメント上の表記修正であると判断できます。\n\n4. 参考情報 (あれば)  \n- PR番号: https://github.com/rails/rails/pull/57033  \n- 対象ガイド: Rails Guides – “Autoloading and Reloading Constants”  \n  （Zeitwerk ベースの autoloading の説明があるセクションで、概念理解に影響しないレベルの句読点修正です。）"
-    },
-    {
-      "number": 57028,
-      "title": "Require Ruby 3.3.1 {#pr-57028}",
-      "url": "https://github.com/rails/rails/pull/57028",
-      "mergedAt": "2026-03-22T00:00:00.000Z",
-      "author": "byroot",
-      "authorUrl": "https://github.com/byroot",
-      "summary": "1. 概要 (1–2文で)  \nRails本体および関連コンポーネントの対応Rubyバージョンを「3.3.0 以上」から「3.3.1 以上」に引き上げるPRです。理由は、Ruby 3.3.0 に Rails の一部機能を壊すバグがあり、かつCIで複数パッチバージョンをサポートするコストを負えないためです。"
-    },
-    {
-      "number": 57022,
-      "title": "Fix `insert_all` and `upsert_all` log messages for anonymous classes {#pr-57022}",
-      "url": "https://github.com/rails/rails/pull/57022",
-      "mergedAt": "2026-03-21T00:00:00.000Z",
-      "author": "byroot",
-      "authorUrl": "https://github.com/byroot",
-      "summary": "1. 概要 (1-2文で)  \n`insert_all` / `upsert_all` 実行時のログ出力で、匿名クラス（anonymous class）の場合でも人間が読めるモデル名が出るように修正したPRです。これにより、例えば `AnonymousBook Bulk Insert` / `AnonymousBook Bulk Upsert` のような分かりやすいログメッセージになります。"
-    },
-    {
-      "number": 57010,
-      "title": "Fix invalid HTML in routing error template {#pr-57010}",
-      "url": "https://github.com/rails/rails/pull/57010",
-      "mergedAt": "2026-03-21T00:00:00.000Z",
-      "author": "pardeyke",
-      "authorUrl": "https://github.com/pardeyke",
-      "summary": "1. 概要 (1-2文で)  \nRails のルーティングエラー用レスキューテンプレート（routing_error.html.erb）の HTML 構造が W3C/WHATWG の仕様上不正だったため、`<p>` タグ内からブロック要素（`<h2>` / `<ol>`）を取り除き、正しい HTML 構造になるように修正した PR です。  \nこれにより、ブラウザやツールによっては崩れていた DOM 構造が、仕様に沿った形で安定して解釈されるようになります。"
-    },
-    {
-      "number": 57017,
-      "title": "LogSubscriber: Avoid repeated `respond_to?` calls {#pr-57017}",
-      "url": "https://github.com/rails/rails/pull/57017",
-      "mergedAt": "2026-03-21T00:00:00.000Z",
-      "author": "byroot",
-      "authorUrl": "https://github.com/byroot",
-      "summary": "1. 概要 (1-2文で)  \n`ActiveSupport::LogSubscriber` が、イベントハンドラ呼び出し時に毎回 `respond_to?` を実行していたのをやめ、事前に「どのメソッドが存在するか」をキャッシュすることでオーバーヘッドを削減する変更です。結果としてログ購読処理のパフォーマンスがわずかに向上し、多数の通知が発生する環境での無駄なメソッド存在チェックが減ります。"
     }
   ]
 }
