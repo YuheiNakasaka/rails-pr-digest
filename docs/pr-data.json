@@ -1,7 +1,43 @@
 {
-  "lastUpdated": "2026-05-06T00:27:34.481Z",
+  "lastUpdated": "2026-05-07T00:24:59.532Z",
   "totalCount": 50,
   "items": [
+    {
+      "number": 52137,
+      "title": "Add datalist_tag to create datalist form elements {#pr-52137}",
+      "url": "https://github.com/rails/rails/pull/52137",
+      "mergedAt": "2026-05-06T00:00:00.000Z",
+      "author": "willianveiga",
+      "authorUrl": "https://github.com/willianveiga",
+      "summary": "1. 概要 (1-2文で)  \nRails の `ActionView::Helpers::FormTagHelper` に、HTML の `<datalist>` 要素を簡潔に生成するための `datalist_tag` ヘルパーが追加されました。これにより `<option>` の配列から `datalist` を組み立てる処理を、素の `content_tag` 連打なしで記述できます。"
+    },
+    {
+      "number": 49368,
+      "title": "Action View: Document `TagBuilder` as part of the public interface {#pr-49368}",
+      "url": "https://github.com/rails/rails/pull/49368",
+      "mergedAt": "2026-05-06T00:00:00.000Z",
+      "author": "seanpdoyle",
+      "authorUrl": "https://github.com/seanpdoyle",
+      "summary": "1. 概要 (1-2文で)  \nActionView の `tag` ヘルパで内部的に使われている `ActionView::Helpers::TagHelper::TagBuilder` を「公式な公開API」として位置づけ直し、APIドキュメント検索からも辿れるようにした PR です。あわせて `TagBuilder` の責務を整理し、一部のメソッドを `@view_context` に委譲するようにして公開インターフェイスを絞り込んでいます。"
+    },
+    {
+      "number": 56384,
+      "title": "Add ActionController::Parameters#fetch_values for multi-key fetching {#pr-56384}",
+      "url": "https://github.com/rails/rails/pull/56384",
+      "mergedAt": "2026-05-06T00:00:00.000Z",
+      "author": "Saidbek",
+      "authorUrl": "https://github.com/Saidbek",
+      "summary": "1. 概要 (1-2文で)  \n`ActionController::Parameters` に、複数キーを一度に必須パラメータとして取得できる `#fetch_values` が追加されました。Ruby の `Hash#fetch_values` に近いインターフェイスで、複数パラメータ取得時のコードを簡潔に書けるようになります。"
+    },
+    {
+      "number": 57290,
+      "title": "Fix image analyzer reporting wrong dimensions for mirrored EXIF orientations {#pr-57290}",
+      "url": "https://github.com/rails/rails/pull/57290",
+      "mergedAt": "2026-05-06T00:00:00.000Z",
+      "author": "bogdan",
+      "authorUrl": "https://github.com/bogdan",
+      "summary": "1. 概要 (1-2文で)  \nActive Storage の画像アナライザ（Vips / ImageMagick）が、EXIF のミラー（反転）系オリエンテーションを持つ画像に対して width/height を誤って入れ替えて記録していたバグを修正する PR です。90°/270° 回転を含む 4 種類の EXIF orientation（5, 6, 7, 8）の場合だけ幅・高さを入れ替えるようにロジックを修正しています。"
+    },
     {
       "number": 57271,
       "title": "Gracefully handle `nil` during multi-parameter assignment {#pr-57271}",
@@ -415,42 +451,6 @@
       "author": "hammadxcm",
       "authorUrl": "https://github.com/hammadxcm",
       "summary": "1. 概要 (1-2文で)  \nActiveModel::Errors の公開メソッド `import` に対して、これまで存在しなかった専用のテストが追加されました。機能追加や挙動変更はなく、既存の挙動を明示的に保証するためのテストのみの変更です。"
-    },
-    {
-      "number": 57048,
-      "title": "Add test coverage for NestedError#inner_error, #raw_type, and #options {#pr-57048}",
-      "url": "https://github.com/rails/rails/pull/57048",
-      "mergedAt": "2026-03-27T00:00:00.000Z",
-      "author": "hammadxcm",
-      "authorUrl": "https://github.com/hammadxcm",
-      "summary": "1. 概要 (1-2文で)  \n`ActiveModel::NestedError` が持つ `inner_error`, `raw_type`, `options` の3つのアクセサに対して、これまで不足していた専用テストを追加するPRです。振る舞い自体の変更はなく、テストカバレッジを補強するだけの変更です。"
-    },
-    {
-      "number": 57049,
-      "title": "Add test coverage for Errors#to_hash with full_messages and #uniq! {#pr-57049}",
-      "url": "https://github.com/rails/rails/pull/57049",
-      "mergedAt": "2026-03-27T00:00:00.000Z",
-      "author": "hammadxcm",
-      "authorUrl": "https://github.com/hammadxcm",
-      "summary": "1. 概要 (1-2文で)  \nActiveModel::Errors に対して、これまで直接はテストされていなかった `to_hash(true)` と `uniq!` の挙動を確認するテストが追加されています。挙動変更はなく、テストカバレッジの補完のみです。"
-    },
-    {
-      "number": 57046,
-      "title": "Add test coverage for Errors#delete with type and options {#pr-57046}",
-      "url": "https://github.com/rails/rails/pull/57046",
-      "mergedAt": "2026-03-27T00:00:00.000Z",
-      "author": "hammadxcm",
-      "authorUrl": "https://github.com/hammadxcm",
-      "summary": "1. 概要 (1-2文で)  \nActiveModel::Errors#delete が本来サポートしている `type` と `options` を指定した削除挙動について、新たにテストが追加された PR です。これにより、既存機能のフィルタリングロジックに対して直接的なテストカバレッジが付きました。"
-    },
-    {
-      "number": 57043,
-      "title": "Add test coverage for ActiveModel::Error#strict_match? {#pr-57043}",
-      "url": "https://github.com/rails/rails/pull/57043",
-      "mergedAt": "2026-03-27T00:00:00.000Z",
-      "author": "hammadxcm",
-      "authorUrl": "https://github.com/hammadxcm",
-      "summary": "1. 概要 (1-2文で)  \n`ActiveModel::Error#strict_match?` に対して専用のテストが追加され、属性・タイプ・オプションが「完全一致」しているかを判定する挙動が明示的に保証されるようになりました。機能追加や仕様変更ではなく、既存のパブリック API のテスト補完のみです。"
     }
   ]
 }
