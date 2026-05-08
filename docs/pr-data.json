@@ -1,7 +1,97 @@
 {
-  "lastUpdated": "2026-05-07T00:24:59.532Z",
+  "lastUpdated": "2026-05-08T00:26:09.519Z",
   "totalCount": 50,
   "items": [
+    {
+      "number": 57304,
+      "title": "[ci skip] Fix getting started guide: remove autocomplete=\"off\" from authenticity_token example {#pr-57304}",
+      "url": "https://github.com/rails/rails/pull/57304",
+      "mergedAt": "2026-05-07T00:00:00.000Z",
+      "author": "ryu",
+      "authorUrl": "https://github.com/ryu",
+      "summary": "1. 概要 (1-2文で)  \nRails の Getting Started ガイド内にあるフォームのサンプルコードから、`authenticity_token` 用の hidden フィールドに付いていた `autocomplete=\"off\"` を削除し、実際の Rails 8.1.0 以降の出力に合わせてドキュメントを修正した PRです。機能追加や挙動変更ではなく、ドキュメントの追随・整合性を取るための変更です。"
+    },
+    {
+      "number": 57266,
+      "title": "Replace Europe/Kiev with Europe/Kyiv and Asia/Rangoon with Asia/Yangon {#pr-57266}",
+      "url": "https://github.com/rails/rails/pull/57266",
+      "mergedAt": "2026-05-07T00:00:00.000Z",
+      "author": "tsymbalenkovlad",
+      "authorUrl": "https://github.com/tsymbalenkovlad",
+      "summary": "1. 概要 (1-2文で)  \nRails のタイムゾーンマッピングから廃止された IANA タイムゾーン名「Europe/Kiev」「Asia/Rangoon」を使うのをやめ、「Europe/Kyiv」「Asia/Yangon」に置き換える PR です。既存の古い名称では `ActiveSupport::TimeZone` が解決できない問題へのフォローアップ対応です。"
+    },
+    {
+      "number": 57297,
+      "title": "Document Active Storage routes_prefix scope options {#pr-57297}",
+      "url": "https://github.com/rails/rails/pull/57297",
+      "mergedAt": "2026-05-07T00:00:00.000Z",
+      "author": "Ivanov-Anton",
+      "authorUrl": "https://github.com/Ivanov-Anton",
+      "summary": "1. 概要 (1-2文で)  \nActive Storage の `config.active_storage.routes_prefix` が、単なるパス文字列だけでなく `scope` が受け付けるあらゆるオプション（ハッシュなど）を受け取れることを公式ドキュメントに明記した PR です。これにより、サブドメイン制約などを含む柔軟なルーティング設定が「サポートされていること」がハッキリしました。"
+    },
+    {
+      "number": 57122,
+      "title": "railties: fix misleading production cache store comment {#pr-57122}",
+      "url": "https://github.com/rails/rails/pull/57122",
+      "mergedAt": "2026-05-07T00:00:00.000Z",
+      "author": "wwenrr",
+      "authorUrl": "https://github.com/wwenrr",
+      "summary": "1. 概要 (1-2文で)  \nRails が生成する `config/environments/production.rb` のコメント文が、実際のデフォルトキャッシュストア設定と食い違っていた問題を修正する PR です。実装は変えず、コメントだけを「メモリストア前提」から「ファイルストア前提」に合わせています。"
+    },
+    {
+      "number": 57317,
+      "title": "Ractor-safe class attribute implementation {#pr-57317}",
+      "url": "https://github.com/rails/rails/pull/57317",
+      "mergedAt": "2026-05-07T00:00:00.000Z",
+      "author": "jhawthorn",
+      "authorUrl": "https://github.com/jhawthorn",
+      "summary": "1. 概要 (1-2文で)  \nRails の `class_attribute` 実装が Ractor セーフになるように内部実装が変更され、Ractor でクラス属性を安全に扱えるようになりました。性能劣化は 10% 未満に抑えられつつ、singleton class に対して `instance_reader` が誤って定義される既存バグも修正されています。"
+    },
+    {
+      "number": 57318,
+      "title": "Add datalist to FormBuilder {#pr-57318}",
+      "url": "https://github.com/rails/rails/pull/57318",
+      "mergedAt": "2026-05-07T00:00:00.000Z",
+      "author": "tahsin352",
+      "authorUrl": "https://github.com/tahsin352",
+      "summary": "1. 概要 (1-2文で)  \nFormBuilder に HTML の `<datalist>` 要素を生成する `datalist` メソッドが追加され、`form_with` / `form_for` からオートコンプリート付きテキスト入力を素直な記述で扱えるようになりました。`text_field` との連携用に `id` が自動生成され、`list:` オプションで簡単に紐付けられます。"
+    },
+    {
+      "number": 56807,
+      "title": "Rails.cache.read: add support to new option delete: true {#pr-56807}",
+      "url": "https://github.com/rails/rails/pull/56807",
+      "mergedAt": "2026-05-07T00:00:00.000Z",
+      "author": "glaucocustodio",
+      "authorUrl": "https://github.com/glaucocustodio",
+      "summary": "1. 概要 (1-2文で)  \n`RedisCacheStore` の `Rails.cache.read` に `delete: true` オプションが追加され、Redis の `GETDEL` コマンドを使って「読み出しと削除」をアトミックに行えるようになりました。これにより「一度だけ読めればよい」ワンタイム読み取りパターンをレースコンディションなしで実装できます。"
+    },
+    {
+      "number": 57310,
+      "title": "fix: has_json accessors after requiring active_model {#pr-57310}",
+      "url": "https://github.com/rails/rails/pull/57310",
+      "mergedAt": "2026-05-07T00:00:00.000Z",
+      "author": "tellodaniel",
+      "authorUrl": "https://github.com/tellodaniel",
+      "summary": "1. 概要 (1-2文で)  \n`ActiveModel::SchematizedJson` が内部で `String#remove` を使っているにもかかわらず、対応する Active Support の拡張を require していなかった問題を修正した PRです。`has_json` アクセサを使うと `NoMethodError` が出るケースを、依存関係を明示的に require することで解消しています。"
+    },
+    {
+      "number": 57312,
+      "title": "Fix changelog url {#pr-57312}",
+      "url": "https://github.com/rails/rails/pull/57312",
+      "mergedAt": "2026-05-07T00:00:00.000Z",
+      "author": "morgoth",
+      "authorUrl": "https://github.com/morgoth",
+      "summary": "1. 概要 (1-2文で)  \nこのPRは、Action View の CHANGELOG に記載されていた URL の誤った変更を元に戻し、正しいリンク先に修正するものです。コード本体の挙動には影響せず、ドキュメント上のリンク整備のみを行っています。\n\n2. 変更内容の詳細  \n- 対象ファイル: `actionview/CHANGELOG.md`  \n- 変更点: 1行分の URL を「意図せず変更されてしまった状態」から元の正しい URL に差し戻しています。  \n- 具体的には、以前の PR（[#52137](https://github.com/rails/rails/pull/52137/changes)）で誤って変更された changelog 内のリンクが、今回の PR で正しい URL に修正されています。\n\nサンプル（イメージ）:\n\n```diff\n- See the changelog at https://example.com/wrong/path\n+ See the changelog at https://example.com/correct/path\n```\n\n※ 実際の URL は PR 本体を参照してください。\n\n3. 影響範囲・注意点  \n- ランタイムの挙動・ビルド結果・API 仕様などには一切影響しません。  \n- 影響範囲はドキュメント（`actionview/CHANGELOG.md`）内のリンク参照のみです。  \n- CHANGELOG から関連情報や diff を辿る際に、正しい URL にアクセスできるようになります。  \n- アプリケーション側で特別な対応は不要です。\n\n4. 参考情報 (あれば)  \n- 該当 PR: https://github.com/rails/rails/pull/57312  \n- 元になった不要変更を含む PR: https://github.com/rails/rails/pull/52137/changes  \n- 対象コンポーネント: Action View (`actionview` gem)"
+    },
+    {
+      "number": 57311,
+      "title": "Accept Active Record Encryption credentials as ENV {#pr-57311}",
+      "url": "https://github.com/rails/rails/pull/57311",
+      "mergedAt": "2026-05-07T00:00:00.000Z",
+      "author": "claudiob",
+      "authorUrl": "https://github.com/claudiob",
+      "summary": "1. 概要 (1-2文で)  \nActive Record Encryption で必要な `primary_key`, `deterministic_key`, `key_derivation_salt` を、`Rails.apps.creds` に加えて環境変数からも設定できるようになりました。これにより、Rails の資格情報ファイルを使わずに、12-factor 的な運用（環境変数ベース）で暗号化キーを扱いやすくなります。"
+    },
     {
       "number": 52137,
       "title": "Add datalist_tag to create datalist form elements {#pr-52137}",
@@ -361,96 +451,6 @@
       "author": "55728",
       "authorUrl": "https://github.com/55728",
       "summary": "1. 概要 (1-2文で)  \nRailsガイド「Configuring Rails Applications」の `config.action_on_early_load_hook` に関する記述から、誤って重複していた \"when\" という単語を削除するドキュメント修正PRです。アプリケーションコードや挙動には一切影響せず、ガイド文言のみが整備されています。"
-    },
-    {
-      "number": 57013,
-      "title": "Predefine the well-known Postgres type OIDs {#pr-57013}",
-      "url": "https://github.com/rails/rails/pull/57013",
-      "mergedAt": "2026-03-28T00:00:00.000Z",
-      "author": "matthewd",
-      "authorUrl": "https://github.com/matthewd",
-      "summary": "1. 概要 (1-2文で)  \nPostgreSQL の組み込み型について、`pg_type` を毎回問い合わせて OID を取得するのをやめ、Rails 側に「よく知られた型 OID」の一覧を同梱して接続時に即座にロードできるようにした変更です。ユーザー定義型や拡張で初めて未知の型に遭遇したときにのみ、これまで通り `pg_type` をクエリして補完する遅延ロード方式へと切り替えています。"
-    },
-    {
-      "number": 57029,
-      "title": "Document with_rich_text_* methods {#pr-57029}",
-      "url": "https://github.com/rails/rails/pull/57029",
-      "mergedAt": "2026-03-28T00:00:00.000Z",
-      "author": "p8",
-      "authorUrl": "https://github.com/p8",
-      "summary": "1. 概要 (1-2文で)  \nAction Text の `with_rich_text_*` 系メソッド（`with_rich_text_body` など）が公式にドキュメント化されるよう、`ActionText::Attribute` に Yard コメントが追加された PRです。機能追加や挙動変更ではなく、「どう使うか」が Rails API ドキュメントにきちんと出るように整理したドキュメント改善です。"
-    },
-    {
-      "number": 57082,
-      "title": "Document that `:if` and `:unless` options on validations accept arrays [ci skip] {#pr-57082}",
-      "url": "https://github.com/rails/rails/pull/57082",
-      "mergedAt": "2026-03-27T00:00:00.000Z",
-      "author": "cgunther",
-      "authorUrl": "https://github.com/cgunther",
-      "summary": "1. 概要 (1-2文で)  \n`ActiveModel` のバリデーションにおける `:if` / `:unless` オプションが「配列を受け付ける」ことを、公式ドキュメント側に明示的に追記したPRです。挙動自体はすでに存在していたもので、実装変更ではなくドキュメントの補強です。"
-    },
-    {
-      "number": 57050,
-      "title": "Combine per-validator and top-level :if/:unless/:on in validates {#pr-57050}",
-      "url": "https://github.com/rails/rails/pull/57050",
-      "mergedAt": "2026-03-27T00:00:00.000Z",
-      "author": "Mordorreal",
-      "authorUrl": "https://github.com/Mordorreal",
-      "summary": "1. 概要 (1-2文で)  \n`validates` でトップレベルとバリデータ単位の `:if` / `:unless` / `:on` オプションを同時に指定した場合に、これらを「上書き」ではなく「結合」するように挙動が変更されました。これにより、期待どおり「両方の条件を満たしたときだけバリデーションが走る」ようになります。"
-    },
-    {
-      "number": 57080,
-      "title": "Deprecate `schema_order` option in PostgreSQL database configurations {#pr-57080}",
-      "url": "https://github.com/rails/rails/pull/57080",
-      "mergedAt": "2026-03-27T00:00:00.000Z",
-      "author": "eileencodes",
-      "authorUrl": "https://github.com/eileencodes",
-      "summary": "1. 概要 (1-2文で)  \nPostgreSQL 用のデータベース設定オプション `schema_order` が非推奨となり、今後は `schema_search_path` を使うように変更されました。`schema_order` は過去の名前の名残であり、現行の命名に統一するための整理です。"
-    },
-    {
-      "number": 57077,
-      "title": "Deprecate the `strict` option in MySQL database configurations {#pr-57077}",
-      "url": "https://github.com/rails/rails/pull/57077",
-      "mergedAt": "2026-03-27T00:00:00.000Z",
-      "author": "eileencodes",
-      "authorUrl": "https://github.com/eileencodes",
-      "summary": "1. 概要 (1-2文で)  \nMySQL 用のデータベース設定オプション `strict` が非推奨になり、代わりに `variables: { sql_mode: ... }` を直接指定する形に整理された PR です。Rails が推奨しない「非 strict モード」のための特別なショートカットを廃止し、設定方法を一本化しています。"
-    },
-    {
-      "number": 57070,
-      "title": "Consolidate configure_connection and allow skipping individual settings {#pr-57070}",
-      "url": "https://github.com/rails/rails/pull/57070",
-      "mergedAt": "2026-03-27T00:00:00.000Z",
-      "author": "eileencodes",
-      "authorUrl": "https://github.com/eileencodes",
-      "summary": "1. 概要 (1-2文で)  \nPostgreSQL / MySQL 接続時のセッション設定処理が「1つの設定ハッシュを作って一括適用する」形にリファクタされ、サーバ側の現状値を確認して不要な `SET` クエリをスキップするようになりました。さらに、特定の設定を `false` にすることで「Rails からはその設定を一切触らない」ようにできるオプションが追加され、`set_standard_conforming_strings` は非推奨になりました。"
-    },
-    {
-      "number": 57053,
-      "title": "Fix parallel test shutdown hang when workers die during Server#shutdown {#pr-57053}",
-      "url": "https://github.com/rails/rails/pull/57053",
-      "mergedAt": "2026-03-27T00:00:00.000Z",
-      "author": "markedmondson",
-      "authorUrl": "https://github.com/markedmondson",
-      "summary": "1. 概要 (1-2文で)  \nRails の並列テスト実行時に、`Server#shutdown` 中にワーカープロセスが死んだ場合にシャットダウン処理がハングする問題を修正した PR です。`wait_for_active_workers` ループ内で定期的に子プロセスの終了を回収することで、ゾンビプロセスによる無限待ちを防ぎます。"
-    },
-    {
-      "number": 57047,
-      "title": "Add test coverage for Error#initialize_dup, #hash, and #detail {#pr-57047}",
-      "url": "https://github.com/rails/rails/pull/57047",
-      "mergedAt": "2026-03-27T00:00:00.000Z",
-      "author": "hammadxcm",
-      "authorUrl": "https://github.com/hammadxcm",
-      "summary": "1. 概要 (1-2文で)  \nActiveModel::Error のテスト不足だったメソッド（`initialize_dup`, `hash`, `detail`）に対して、専用のテストが追加されました。挙動の仕様をテストで明文化することで、`error.rb` のテストカバレッジが実質的に埋められています。"
-    },
-    {
-      "number": 57044,
-      "title": "Add test coverage for ActiveModel::Errors#import {#pr-57044}",
-      "url": "https://github.com/rails/rails/pull/57044",
-      "mergedAt": "2026-03-27T00:00:00.000Z",
-      "author": "hammadxcm",
-      "authorUrl": "https://github.com/hammadxcm",
-      "summary": "1. 概要 (1-2文で)  \nActiveModel::Errors の公開メソッド `import` に対して、これまで存在しなかった専用のテストが追加されました。機能追加や挙動変更はなく、既存の挙動を明示的に保証するためのテストのみの変更です。"
     }
   ]
 }
