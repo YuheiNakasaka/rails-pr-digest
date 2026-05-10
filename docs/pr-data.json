@@ -1,7 +1,43 @@
 {
-  "lastUpdated": "2026-05-09T00:27:43.649Z",
+  "lastUpdated": "2026-05-10T00:25:29.827Z",
   "totalCount": 50,
   "items": [
+    {
+      "number": 57328,
+      "title": "Fix some Active Record flakes {#pr-57328}",
+      "url": "https://github.com/rails/rails/pull/57328",
+      "mergedAt": "2026-05-09T00:00:00.000Z",
+      "author": "byroot",
+      "authorUrl": "https://github.com/byroot",
+      "summary": "1. 概要 (1-2文で)  \nActive Recordのテストがときどき落ちる「フレークテスト（flaky tests）」を減らすため、`ActiveRecord::RuntimeRegistry` と一部関連テストを微調整したPRです。主にスレッドローカルな状態管理やテスト用モデル定義の見直しによる安定性向上が目的で、アプリケーション側の挙動変更はほぼありません。"
+    },
+    {
+      "number": 57324,
+      "title": "Use wait_for helper in reaper and async query tests {#pr-57324}",
+      "url": "https://github.com/rails/rails/pull/57324",
+      "mergedAt": "2026-05-09T00:00:00.000Z",
+      "author": "bogdan",
+      "authorUrl": "https://github.com/bogdan",
+      "summary": "1. 概要 (1-2文で)  \nActive Record のテストコード内に残っていた独自実装のポーリングループを、テスト用ヘルパー `wait_for` に置き換えた PR です。これにより、テストがハングしたり、タイムアウト時に誤解を生むアサーションへ進んでしまう問題を防ぎ、失敗箇所が明確になります。"
+    },
+    {
+      "number": 57327,
+      "title": "Active Record connection pool tests avoid always skipped tests {#pr-57327}",
+      "url": "https://github.com/rails/rails/pull/57327",
+      "mergedAt": "2026-05-09T00:00:00.000Z",
+      "author": "byroot",
+      "authorUrl": "https://github.com/byroot",
+      "summary": "1. 概要 (1-2文で)  \nActive Record の connection pool に関するテストのうち、実行環境的に「常に skip されてしまうテスト」がそもそも定義されないように整理された PR です。これにより、テストスイートのノイズが減り、実際に実行されるテストだけが定義される構成になりました。"
+    },
+    {
+      "number": 57325,
+      "title": "Fix BigDecimal rendering failure in Arel tests {#pr-57325}",
+      "url": "https://github.com/rails/rails/pull/57325",
+      "mergedAt": "2026-05-09T00:00:00.000Z",
+      "author": "byroot",
+      "authorUrl": "https://github.com/byroot",
+      "summary": "1. 概要 (1-2文で)  \nArel の ToSQL ビジターが `BigDecimal` を文字列化する際、指数表記 (`0.214e1`) になってしまい、期待される通常の小数表記 (`2.14`) とズレてテストが落ちていた問題を修正する PR です。  \nテストコードと依存バージョンの微調整により、`BigDecimal` の SQL 文字列表現が期待どおり安定して比較できるようにしています。"
+    },
     {
       "number": 57136,
       "title": "Reject trailing dash in PostgreSQL adapter {#pr-57136}",
@@ -415,42 +451,6 @@
       "author": "mugitti9",
       "authorUrl": "https://github.com/mugitti9",
       "summary": "1. 概要 (1-2文で)  \nRailsのテストコードで、未知のフォーマット要求時の `request.format` を `assert_nil` で検証していた箇所を、`Mime::NullType` を前提とした検証に変更し、最新の Minitest の挙動変更に追従したテスト専用の修正です。実行時の挙動や公開APIには影響せず、テストの互換性・堅牢性を高めるための変更です。"
-    },
-    {
-      "number": 57176,
-      "title": "Make becomes preserve marked_for_destruction {#pr-57176}",
-      "url": "https://github.com/rails/rails/pull/57176",
-      "mergedAt": "2026-04-29T00:00:00.000Z",
-      "author": "genezys",
-      "authorUrl": "https://github.com/genezys",
-      "summary": "1. 概要 (1-2文で)  \n`ActiveRecord::Persistence#becomes` を使用してオブジェクトを別クラスのインスタンスに変換した際に、  \n- `marked_for_destruction` の状態  \n- ロード済み関連（associations）上の変更  \nが失われないようにするバグ修正・挙動改善の PR です。"
-    },
-    {
-      "number": 57252,
-      "title": "Enable frozen string literal by default {#pr-57252}",
-      "url": "https://github.com/rails/rails/pull/57252",
-      "mergedAt": "2026-04-27T00:00:00.000Z",
-      "author": "byroot",
-      "authorUrl": "https://github.com/byroot",
-      "summary": "1. 概要 (1-2文で)  \nRails が生成する新規アプリケーションで、「文字列リテラルの凍結（`frozen_string_literal`）」をデフォルト有効にする変更です。影響はアプリ自身のコードに限定され、Gem などの依存ライブラリにはデフォルトでは適用されません。"
-    },
-    {
-      "number": 56718,
-      "title": "Fix innermost constraint reseting previous constraints {#pr-56718}",
-      "url": "https://github.com/rails/rails/pull/56718",
-      "mergedAt": "2026-04-27T00:00:00.000Z",
-      "author": "petrenkorf",
-      "authorUrl": "https://github.com/petrenkorf",
-      "summary": "1. 概要 (1-2文で)  \n`ActionDispatch::Routing` の「constraints」のマージ処理が修正され、ネストした複数の constraint を定義した際に「一番内側だけが有効になる」不具合が解消されました。これにより、ネストされた constraints ブロックがすべて評価され、期待通りに複合条件として動作するようになります。"
-    },
-    {
-      "number": 57238,
-      "title": "Remove redundant libvips from Dockerfile build packages {#pr-57238}",
-      "url": "https://github.com/rails/rails/pull/57238",
-      "mergedAt": "2026-04-27T00:00:00.000Z",
-      "author": "rikki3",
-      "authorUrl": "https://github.com/rikki3",
-      "summary": "1. 概要 (1-2文で)  \nRails が生成する Dockerfile から、ビルドステージ側に重複して記述されていた `libvips` のインストールを削除した PRです。ベースイメージ側ですでに `libvips` を含んでいるため、不要な二重インストールを解消しています。"
     }
   ]
 }
