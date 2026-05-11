@@ -1,7 +1,52 @@
 {
-  "lastUpdated": "2026-05-10T00:25:29.827Z",
+  "lastUpdated": "2026-05-11T00:26:28.049Z",
   "totalCount": 50,
   "items": [
+    {
+      "number": 57333,
+      "title": "Disable freezing of NATIVE_DATABASE_TYPES for MySQL adapter {#pr-57333}",
+      "url": "https://github.com/rails/rails/pull/57333",
+      "mergedAt": "2026-05-10T00:00:00.000Z",
+      "author": "chaadow",
+      "authorUrl": "https://github.com/chaadow",
+      "summary": "1. 概要 (1-2文で)  \nMySQL アダプタの `NATIVE_DATABASE_TYPES` を凍結（freeze）しないように変更し、これを前提に上書き・拡張しているコード（例: neighbor gem）が `FrozenError` で落ちないようにした PR です。PostgreSQL アダプタと同様の挙動に揃えるフォローアップ変更でもあります。"
+    },
+    {
+      "number": 57332,
+      "title": "fix: unfreeze Date::DATE_FORMATS {#pr-57332}",
+      "url": "https://github.com/rails/rails/pull/57332",
+      "mergedAt": "2026-05-10T00:00:00.000Z",
+      "author": "luizkowalski",
+      "authorUrl": "https://github.com/luizkowalski",
+      "summary": "1. 概要 (1–2文で)  \n`Date::DATE_FORMATS` が凍結（freeze）されていたことで、アプリ側から日付フォーマットを追加できなくなっていた不具合を解消し、従来どおりフォーマットを後から登録できるようにした PR です。`Time` 周りの実装（`Time::DATE_FORMATS`）と整合を取る形で、意図しない freeze を取り消しています。"
+    },
+    {
+      "number": 57330,
+      "title": "Handle missing Mandrill ingress signatures {#pr-57330}",
+      "url": "https://github.com/rails/rails/pull/57330",
+      "mergedAt": "2026-05-10T00:00:00.000Z",
+      "author": "afurm",
+      "authorUrl": "https://github.com/afurm",
+      "summary": "1. 概要 (1-2文で)  \nAction Mailbox の Mandrill ingress で、署名ヘッダ `X-Mandrill-Signature` が欠落している場合に `NoMethodError` が発生していた問題を修正し、欠落時も正しく 401 Unauthorized を返すようにした PR です。これにより、署名改ざんと同様に署名欠落も認証失敗として安全に扱われます。"
+    },
+    {
+      "number": 57331,
+      "title": "Remove isolated test tasks {#pr-57331}",
+      "url": "https://github.com/rails/rails/pull/57331",
+      "mergedAt": "2026-05-10T00:00:00.000Z",
+      "author": "byroot",
+      "authorUrl": "https://github.com/byroot",
+      "summary": "1. 概要 (1-2文で)  \nRails 本体に定義されていた「テストを isolated（プロセス分離）して実行する系の Rake タスク」が一括で削除されました。  \nビルド時間のわりに得られるメリットが小さく、CI 構成も見直されたため、メンテナンス対象から外した形です。"
+    },
+    {
+      "number": 57323,
+      "title": "Enable `Style/MutableConstant` cop with `literals` style {#pr-57323}",
+      "url": "https://github.com/rails/rails/pull/57323",
+      "mergedAt": "2026-05-10T00:00:00.000Z",
+      "author": "paracycle",
+      "authorUrl": "https://github.com/paracycle",
+      "summary": "1. 概要 (1-2文で)  \n`Style/MutableConstant` Cop を RuboCop 設定で有効化し、「リテラルで定義される定数は基本的に凍結して不変にする」という方針を Rails 全体に適用した PRです。これにより、Ractor でクラス/モジュールを安全に共有しやすくし、Ractor-safe なフレームワーク化を進めています。"
+    },
     {
       "number": 57328,
       "title": "Fix some Active Record flakes {#pr-57328}",
@@ -406,51 +451,6 @@
       "author": "skipkayhil",
       "authorUrl": "https://github.com/skipkayhil",
       "summary": "1. 概要 (1-2文で)  \nRails の `ActiveSupport::Configurable` を非推奨にする際に表示される警告文が、「`class_attribute` を使え」と単一の代替手段だけを示していたのをやめ、複数の代替案を提案する、より中立的な文言に変更した PR です。機能的な変更はなく、あくまで deprecation warning のメッセージ内容のみが更新されています。"
-    },
-    {
-      "number": 57285,
-      "title": "Deactivate ViewReloader hooks when reloaders are cleared {#pr-57285}",
-      "url": "https://github.com/rails/rails/pull/57285",
-      "mergedAt": "2026-05-04T00:00:00.000Z",
-      "author": "ariens",
-      "authorUrl": "https://github.com/ariens",
-      "summary": "1. 概要 (1-2文で)  \nViewReloader が登録する「ビューの監視用フック」が `app.reloaders.clear` 実行後も残り続けて無駄なファイルスキャンを行っていた問題を修正し、リローダー削除時にフックも確実に解除されるようにした PR です。これにより、特に Spring のフォークワーカーなどで、不要な `Dir[]` / `File.mtime` 呼び出しが発生しなくなります。"
-    },
-    {
-      "number": 57289,
-      "title": "Raise ArgumentError when MemCacheStore is created with Dalli::Client {#pr-57289}",
-      "url": "https://github.com/rails/rails/pull/57289",
-      "mergedAt": "2026-05-04T00:00:00.000Z",
-      "author": "p8",
-      "authorUrl": "https://github.com/p8",
-      "summary": "1. 概要 (1-2文で)  \nRails の `ActiveSupport::Cache::MemCacheStore` に、`Dalli::Client` インスタンスを渡して初期化しようとした場合に `ArgumentError` を明示的に発生させる変更が入りました。これにより、すでに非推奨・削除されていた `Dalli::Client` ベースの初期化方法が、エラーメッセージどおりに完全に禁止されます。"
-    },
-    {
-      "number": 57291,
-      "title": "[ci skip] Fix typos in test descriptions {#pr-57291}",
-      "url": "https://github.com/rails/rails/pull/57291",
-      "mergedAt": "2026-05-02T00:00:00.000Z",
-      "author": "jackbowlin",
-      "authorUrl": "https://github.com/jackbowlin",
-      "summary": "1. 概要 (1-2文で)  \nこのPRは、テストコード内の説明文字列（テスト名）のスペルミスを修正したものです。テストの挙動やアプリケーションコードには一切変更はなく、影響は極めて限定的です。"
-    },
-    {
-      "number": 57269,
-      "title": "Defer ViewReloader build when no view paths are registered {#pr-57269}",
-      "url": "https://github.com/rails/rails/pull/57269",
-      "mergedAt": "2026-05-01T00:00:00.000Z",
-      "author": "Korri",
-      "authorUrl": "https://github.com/Korri",
-      "summary": "1. 概要 (1-2文で)  \nView 用のファイル更新監視（ViewReloader / FileUpdateChecker）の生成タイミングをさらに遅延させ、「まだ view path が1つも登録されていない状態」で `updated?` が呼ばれた場合でも不要な watcher を作らないようにした PRです。これにより、特に Spring 利用時のテスト実行など、開発環境での起動〜初回リクエスト前の無駄なディレクトリ走査が大幅に削減されます。"
-    },
-    {
-      "number": 57283,
-      "title": "Avoid assert_nil for Mime::NullType request format {#pr-57283}",
-      "url": "https://github.com/rails/rails/pull/57283",
-      "mergedAt": "2026-05-01T00:00:00.000Z",
-      "author": "mugitti9",
-      "authorUrl": "https://github.com/mugitti9",
-      "summary": "1. 概要 (1-2文で)  \nRailsのテストコードで、未知のフォーマット要求時の `request.format` を `assert_nil` で検証していた箇所を、`Mime::NullType` を前提とした検証に変更し、最新の Minitest の挙動変更に追従したテスト専用の修正です。実行時の挙動や公開APIには影響せず、テストの互換性・堅牢性を高めるための変更です。"
     }
   ]
 }
