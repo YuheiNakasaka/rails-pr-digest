@@ -1,7 +1,61 @@
 {
-  "lastUpdated": "2026-05-11T00:26:28.049Z",
+  "lastUpdated": "2026-05-12T00:27:34.536Z",
   "totalCount": 50,
   "items": [
+    {
+      "number": 36433,
+      "title": "Fix unexpected behavior for dependent: :purge {#pr-36433}",
+      "url": "https://github.com/rails/rails/pull/36433",
+      "mergedAt": "2026-05-11T00:00:00.000Z",
+      "author": "moveson",
+      "authorUrl": "https://github.com/moveson",
+      "summary": "1. 概要 (1-2文で)  \n`has_one_attached` / `has_many_attached` に `dependent: :purge` や `dependent: :purge_later` を指定した場合、親レコード削除時に添付ファイルが「detach（関連のみ削除）」されてしまっていた不具合を修正し、「実際に purge（blob も含め削除）」されるようにした PR です。これにより `dependent: :detach` / `:purge` / `:purge_later` がそれぞれ意図どおりに動作するようになります。"
+    },
+    {
+      "number": 50623,
+      "title": "Pass render options and block to calls to `#render_in` {#pr-50623}",
+      "url": "https://github.com/rails/rails/pull/50623",
+      "mergedAt": "2026-05-11T00:00:00.000Z",
+      "author": "seanpdoyle",
+      "authorUrl": "https://github.com/seanpdoyle",
+      "summary": "1. 概要 (1-2文で)  \n`render` にオブジェクトを渡したときに呼ばれる `#render_in` に対して、呼び出し元のオプション（locals など）とブロックを正しく引き渡せるようにした変更です。既存の `render_in(view_context)` というシグネチャは非推奨となり、今後はオプションとブロックを受け取る形への移行が求められます。"
+    },
+    {
+      "number": 57346,
+      "title": "Rewrite Arel tests using `ActiveSupport::TestCase` instead of `Minitest::Spec` {#pr-57346}",
+      "url": "https://github.com/rails/rails/pull/57346",
+      "mergedAt": "2026-05-11T00:00:00.000Z",
+      "author": "rafaelfranca",
+      "authorUrl": "https://github.com/rafaelfranca",
+      "summary": "1. 概要 (1-2文で)  \nRails の Arel 周辺テストを、`Minitest::Spec` スタイルから `ActiveSupport::TestCase` ベースのクラシックな xUnit スタイル (`test \"...\" do`) に全面書き換えした PRです。これにより megatest などで spec 構文をサポートする必要がなくなり、テスト基盤の統一とシンプル化が図られています。"
+    },
+    {
+      "number": 57347,
+      "title": "Document Active Job continuation instrumentation events {#pr-57347}",
+      "url": "https://github.com/rails/rails/pull/57347",
+      "mergedAt": "2026-05-11T00:00:00.000Z",
+      "author": "bdewater-thatch",
+      "authorUrl": "https://github.com/bdewater-thatch",
+      "summary": "1. 概要 (1-2文で)  \nActive Job の「ジョブ継続 (continuation)」機能で発火する Active Support Instrumentation のイベントについて、公式ガイド（active_support_instrumentation.md）にドキュメントを追加した PR です。機能自体の実装変更はなく、「どんなイベントがいつ、どういうペイロードで通知されるか」を明文化しています。"
+    },
+    {
+      "number": 57341,
+      "title": "Add tests for constants that are expected to be mutated {#pr-57341}",
+      "url": "https://github.com/rails/rails/pull/57341",
+      "mergedAt": "2026-05-11T00:00:00.000Z",
+      "author": "paracycle",
+      "authorUrl": "https://github.com/paracycle",
+      "summary": "1. 概要 (1-2文で)  \nRails本体で「本来ミューテート（変更）されることが前提の定数」に対して、その期待をテストで明示するPRです。  \nmutable な定数を一律に freeze した対応 (#57323) のあとに見つかった「実は変更されることが仕様」というケースをテストで保証し、今後のリグレッションを防ぐ目的があります。"
+    },
+    {
+      "number": 57336,
+      "title": "Fix broken link in changelog {#pr-57336}",
+      "url": "https://github.com/rails/rails/pull/57336",
+      "mergedAt": "2026-05-11T00:00:00.000Z",
+      "author": "RDIL",
+      "authorUrl": "https://github.com/RDIL",
+      "summary": "1. 概要 (1-2文で)  \nRails 4.0 のリリースノート内に記載されていたリンク切れを修正した PR です。コードの挙動には一切影響せず、ドキュメント（ガイド）の品質向上のみを目的としています。\n\n2. 変更内容の詳細  \n- 対象ファイル: `guides/source/4_0_release_notes.md`  \n- 変更内容: リリースノート中に含まれていた URL を、現在も有効にアクセスできるリンクへ差し替えています（1行の更新: 1行削除 + 1行追加）。  \n- 背景:  \n  - 2014年頃に書かれた Rails 4.0 リリースノート中のあるリンクが、その後のサイト構成変更などにより 404 になるなど「リンク切れ」状態になっていた。  \n  - PR 作成者は古いアプリのアップグレード作業中に該当リンク切れに気づき、同様に古いバージョンからのアップグレード情報を参照する開発者が困らないよう、リンクを修正した。  \n\n※変更対象は「文章中の URL のみ」であり、サンプルコードや設定例などの技術内容には変更はありません。\n\n3. 影響範囲・注意点  \n- 影響範囲:  \n  - Rails ガイド（特に Rails 4.0 Release Notes）を参照する開発者が対象です。  \n  - アプリケーションコード、API、挙動、互換性には一切影響しません。  \n- 注意点:  \n  - Rails 4.0 という既に古いバージョンのリリースノートの変更のため、現行バージョンでの挙動確認に直接関係するものではありませんが、レガシーアプリからのアップグレード調査時には、正しいリンク先に飛べるようになります。  \n  - ドキュメント生成（`guides` のビルド）でのみ反映される変更です。\n\n4. 参考情報 (あれば)  \n- PR: https://github.com/rails/rails/pull/57336  \n- Rails ガイド（貢献ガイドライン）:  \n  https://edgeguides.rubyonrails.org/contributing_to_ruby_on_rails.html#contributing-to-the-rails-documentation"
+    },
     {
       "number": 57333,
       "title": "Disable freezing of NATIVE_DATABASE_TYPES for MySQL adapter {#pr-57333}",
@@ -397,60 +451,6 @@
       "author": "afurm",
       "authorUrl": "https://github.com/afurm",
       "summary": "1. 概要 (1-2文で)  \nRails 8.1 で `ActionMailer::Base.mail` をクラスメソッドとして直接呼び出した際に `ActionNotFound` が発生するリグレッションを修正し、8.0 と同じ挙動（クラスレベル配送）を復元する PR です。`mail` が ActionMailer の「アクション」として常に認識されるようにし、その挙動を担保する回帰テストが追加されています。"
-    },
-    {
-      "number": 57288,
-      "title": "Define `as_json` on `ActiveStorage::Attached::One` and `Attached::Many` {#pr-57288}",
-      "url": "https://github.com/rails/rails/pull/57288",
-      "mergedAt": "2026-05-05T00:00:00.000Z",
-      "author": "onyxblade",
-      "authorUrl": "https://github.com/onyxblade",
-      "summary": "1. 概要 (1-2文で)  \n`has_one_attached` / `has_many_attached` の名前が実カラム（あるいは ignored_columns に入ったカラム）と衝突しているときに、`record.to_json` で `SystemStackError`（無限再帰）が発生するバグを修正するPRです。`ActiveStorage::Attached::One` / `Many` に明示的な `as_json` を定義し、レコードの JSON シリアライズ時に安全に変換されるようにしました。"
-    },
-    {
-      "number": 57162,
-      "title": "Skip CreateUsers migration when User model already exists {#pr-57162}",
-      "url": "https://github.com/rails/rails/pull/57162",
-      "mergedAt": "2026-05-05T00:00:00.000Z",
-      "author": "johntopley",
-      "authorUrl": "https://github.com/johntopley",
-      "summary": "1. 概要 (1-2文で)  \nRails の `rails generate authentication` で、すでに `User` モデルが存在する場合に `CreateUsers` マイグレーションを自動生成しないようにし、「table already exists」エラーを避ける修正です。既存アプリに後から認証機能を追加しやすくなる変更です。"
-    },
-    {
-      "number": 57298,
-      "title": "Fix `eager_load` for CPK models with explicit `select` {#pr-57298}",
-      "url": "https://github.com/rails/rails/pull/57298",
-      "mergedAt": "2026-05-05T00:00:00.000Z",
-      "author": "fatkodima",
-      "authorUrl": "https://github.com/fatkodima",
-      "summary": "1. 概要 (1-2文で)  \n複合主キー（CPK: Composite Primary Key）を持つモデルに対して、`select` を明示したクエリに `eager_load` を使うと正しく動かない不具合が修正されました。`eager_load` 時の主キー列の扱いを見直し、CPK モデルでも関連を正しくプリロードできるようになっています。"
-    },
-    {
-      "number": 57255,
-      "title": "Update AGENTS.md to remove PR reference {#pr-57255}",
-      "url": "https://github.com/rails/rails/pull/57255",
-      "mergedAt": "2026-05-05T00:00:00.000Z",
-      "author": "nateberkopec",
-      "authorUrl": "https://github.com/nateberkopec",
-      "summary": "1. 概要 (1-2文で)  \nこのPRは、`AGENTS.md` に含まれていた特定のプルリクエスト（PR）への言及を削除する、ドキュメントのみの微修正です。Rails本体の機能や挙動には一切変更がありません。"
-    },
-    {
-      "number": 57280,
-      "title": "Fix ActionCable Overview JS example: localStorage.get → getItem {#pr-57280}",
-      "url": "https://github.com/rails/rails/pull/57280",
-      "mergedAt": "2026-05-05T00:00:00.000Z",
-      "author": "Edilbek",
-      "authorUrl": "https://github.com/Edilbek",
-      "summary": "1. 概要 (1–2文で)  \nAction Cableガイド内の JavaScript サンプルコードで、`localStorage` の誤った呼び出し方 (`get`) を正しい `getItem` に修正したドキュメント変更です。ブラウザでコピペして動く形になるように、動的 WebSocket URL の例を実用的なコードに直しています。\n\n2. 変更内容の詳細  \n\n対象ファイル: `guides/source/action_cable_overview.md` の「Connect Consumer」セクション内 `getWebSocketURL` の例。\n\nもともとのガイドでは (概念的には) こんなコードになっていました:\n\n```js\nfunction getWebSocketURL() {\n  const token = localStorage.get('auth-token') // ← これが誤り\n  return `wss://example.com/cable?token=${token}`\n}\n```\n\nこの PR で以下のように修正されています:\n\n```js\nfunction getWebSocketURL() {\n  const token = localStorage.getItem('auth-token') // ← 正しい Web Storage API\n  return `wss://example.com/cable?token=${token}`\n}\n```\n\n技術的背景:\n- ブラウザの Web Storage API (`Storage` インターフェイス) は `getItem(key: string): string | null` を提供します。\n- `localStorage.get` というメソッドは存在しないため、サンプルをそのまま実行すると  \n  `TypeError: localStorage.get is not a function` が発生します。\n- これを `getItem` に直すことで、Action Cable の接続 URL を `localStorage` のトークンで動的に組み立てる例が、実際にブラウザで動くコードになります。\n\n3. 影響範囲・注意点  \n\n- 影響範囲:\n  - Rails 本体のランタイム動作には一切影響なし (ガイド文書のみの変更)。\n  - Action Cable の「概要」ガイドを読みながら実装する開発者が、ブラウザ上でエラーに遭遇しなくなる。\n\n- 注意点:\n  - すでにドキュメントを参考にして `localStorage.get(...)` を書いてしまっているコードがある場合は、手元の実装を `getItem(...)` に修正する必要があります。\n  - `getItem` はキーが存在しない場合 `null` を返すため、本番コードでは `null` チェックや未ログイン時のハンドリングを追加することが推奨されます (例: トークンがなければ接続しない、ログイン画面へ誘導するなど)。\n\n4. 参考情報 (あれば)  \n\n- Web Storage API 仕様:  \n  https://developer.mozilla.org/en-US/docs/Web/API/Storage/getItem\n- 該当ガイド (最新 edge):  \n  https://edgeguides.rubyonrails.org/action_cable_overview.html (「Connect Consumer」セクションの WebSocket URL 例)"
-    },
-    {
-      "number": 56209,
-      "title": "Update Configurable deprecaton warning {#pr-56209}",
-      "url": "https://github.com/rails/rails/pull/56209",
-      "mergedAt": "2026-05-05T00:00:00.000Z",
-      "author": "skipkayhil",
-      "authorUrl": "https://github.com/skipkayhil",
-      "summary": "1. 概要 (1-2文で)  \nRails の `ActiveSupport::Configurable` を非推奨にする際に表示される警告文が、「`class_attribute` を使え」と単一の代替手段だけを示していたのをやめ、複数の代替案を提案する、より中立的な文言に変更した PR です。機能的な変更はなく、あくまで deprecation warning のメッセージ内容のみが更新されています。"
     }
   ]
 }
