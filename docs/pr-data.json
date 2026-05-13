@@ -1,7 +1,61 @@
 {
-  "lastUpdated": "2026-05-12T00:27:34.536Z",
+  "lastUpdated": "2026-05-13T00:29:35.898Z",
   "totalCount": 50,
   "items": [
+    {
+      "number": 56872,
+      "title": "Add start_day argument to this_week? for consistency with all_week {#pr-56872}",
+      "url": "https://github.com/rails/rails/pull/56872",
+      "mergedAt": "2026-05-12T00:00:00.000Z",
+      "author": "55728",
+      "authorUrl": "https://github.com/55728",
+      "summary": "1. 概要 (1-2文で)  \n`Date/Time#this_week?` に `start_day` 引数が追加され、`all_week` / `beginning_of_week` / `end_of_week` と同様に呼び出しごとに週の開始曜日を指定できるようになりました。これにより、グローバルな `Date.beginning_of_week` を書き換えずに、ロケールや用途ごとに柔軟に「今週かどうか」を判定できます。"
+    },
+    {
+      "number": 57349,
+      "title": "Add default `#render_in` implementation to `ActiveModel::Conversion` {#pr-57349}",
+      "url": "https://github.com/rails/rails/pull/57349",
+      "mergedAt": "2026-05-12T00:00:00.000Z",
+      "author": "seanpdoyle",
+      "authorUrl": "https://github.com/seanpdoyle",
+      "summary": "1. 概要 (1-2文で)  \nActiveModel::Conversion にデフォルトの `#render_in` 実装が追加され、Active Model / Active Record オブジェクトを Action View がどのように HTML / JSON にレンダリングするかをモデル側でカスタマイズしやすくなりました。  \n既存の「partial + object」ベースのレンダリング挙動は保ったまま、`render model` / `render renderable: model` をフックできる統一的な入口が用意されています。"
+    },
+    {
+      "number": 57356,
+      "title": "Fix `ActionText::Editor::Tag#render_in` to accept kwargs {#pr-57356}",
+      "url": "https://github.com/rails/rails/pull/57356",
+      "mergedAt": "2026-05-12T00:00:00.000Z",
+      "author": "flavorjones",
+      "authorUrl": "https://github.com/flavorjones",
+      "summary": "1. 概要 (1-2文で)  \nAction Text の `ActionText::Editor::Tag#render_in` が、Action View 側の新しい呼び出し規約（kwargs 付き）に対応していなかったバグを修正した PRです。これにより、独自エディタアダプタのサブクラスが `super` を呼んだときに `ArgumentError` が発生する問題が解消されます。"
+    },
+    {
+      "number": 57342,
+      "title": "Disable freezing of NATIVE_DATABASE_TYPES for SQLite3 adapter {#pr-57342}",
+      "url": "https://github.com/rails/rails/pull/57342",
+      "mergedAt": "2026-05-12T00:00:00.000Z",
+      "author": "tahsin352",
+      "authorUrl": "https://github.com/tahsin352",
+      "summary": "1. 概要 (1-2文で)  \nSQLite3 アダプタの `NATIVE_DATABASE_TYPES` を `freeze` しないようにし、外部の gem などがこのハッシュを書き換えてカスタム型を登録できるように戻した PR です。  \nMySQL アダプタで行われた同種の対応 (#57333) を SQLite3 版でも行うフォローアップです。"
+    },
+    {
+      "number": 55978,
+      "title": "Enable `config.asset_host` to read from environment by default {#pr-55978}",
+      "url": "https://github.com/rails/rails/pull/55978",
+      "mergedAt": "2026-05-12T00:00:00.000Z",
+      "author": "stevepolitodesign",
+      "authorUrl": "https://github.com/stevepolitodesign",
+      "summary": "1. 概要 (1-2文で)  \nRails の `config.asset_host` がデフォルトで `ENV[\"CDN_HOST\"]` を参照するようになり、環境変数を設定するだけで CDN 経由で静的アセットを配信できるようになりました。`ENV[\"CDN_HOST\"]` が未設定の場合はこれまで通り `asset_host = nil` のままで、挙動は変わりません。"
+    },
+    {
+      "number": 57352,
+      "title": "Properly reset fixtures cache after non-transactional tests {#pr-57352}",
+      "url": "https://github.com/rails/rails/pull/57352",
+      "mergedAt": "2026-05-12T00:00:00.000Z",
+      "author": "byroot",
+      "authorUrl": "https://github.com/byroot",
+      "summary": "1. 概要 (1-2文で)  \nこのPRは、**トランザクションを使わないテスト実行後に、fixtures のキャッシュが正しくリセットされない問題を修正**し、ActiveRecord のテストフィクスチャ機構の一貫性を高めたものです。あわせて、この挙動を検証するテストと、リークチェッカー側のサポートを追加しています。"
+    },
     {
       "number": 36433,
       "title": "Fix unexpected behavior for dependent: :purge {#pr-36433}",
@@ -397,60 +451,6 @@
       "author": "jaykava",
       "authorUrl": "https://github.com/jaykava",
       "summary": "1. 概要 (1-2文で)  \nRails のアプリケーション生成時に自動で追加される `kamal` gem を、トップレベルではなく `group :development` 内に移動する変更です。これにより、Kamal が本番環境の Bundle からデフォルトで外れ、開発時専用のデプロイツールとして扱われます。"
-    },
-    {
-      "number": 57301,
-      "title": "Document `_came_from_user?` and `_for_database` attribute method suffixes [ci skip] {#pr-57301}",
-      "url": "https://github.com/rails/rails/pull/57301",
-      "mergedAt": "2026-05-05T00:00:00.000Z",
-      "author": "joaomarcos96",
-      "authorUrl": "https://github.com/joaomarcos96",
-      "summary": "1. 概要 (1-2文で)  \nRails の `ActiveRecord::AttributeMethods::BeforeTypeCast` が内部的に提供している `*_for_database` と `*_came_from_user?` という属性メソッドサフィックスについて、公式ドキュメントに追記した PR です。挙動の変更は一切なく、ドキュメントとコメントの整備のみです。"
-    },
-    {
-      "number": 57129,
-      "title": "Use Hash#each_key instead of Hash#keys.each {#pr-57129}",
-      "url": "https://github.com/rails/rails/pull/57129",
-      "mergedAt": "2026-05-05T00:00:00.000Z",
-      "author": "ashwin47",
-      "authorUrl": "https://github.com/ashwin47",
-      "summary": "1. 概要 (1-2文で)  \nRails内部で、`Hash#keys.each` を使っていた箇所の一部を `Hash#each_key` に置き換え、余計な配列生成を避けることでパフォーマンスとメモリ効率をわずかに改善するリファクタリングです。ハッシュを反復中に変更しない箇所のみを安全に置き換えており、挙動の変更はほぼありません。"
-    },
-    {
-      "number": 55826,
-      "title": "Add conflicting record ID to `validates_uniqueness_of` error details {#pr-55826}",
-      "url": "https://github.com/rails/rails/pull/55826",
-      "mergedAt": "2026-05-05T00:00:00.000Z",
-      "author": "bvicenzo",
-      "authorUrl": "https://github.com/bvicenzo",
-      "summary": "1. 概要 (1-2文で)  \n`validates_uniqueness_of` / `validates :field, uniqueness: true` の検証に失敗した場合、`errors.details` に「衝突している既存レコードの主キーID(existing_id)」が含まれるようになりました。これにより、どのレコードと一意制制約がぶつかったかをアプリ側で特定しやすくなります。"
-    },
-    {
-      "number": 57247,
-      "title": "Use ** in .dockerignore template for recursive directory exclusions {#pr-57247}",
-      "url": "https://github.com/rails/rails/pull/57247",
-      "mergedAt": "2026-05-05T00:00:00.000Z",
-      "author": "bogdan",
-      "authorUrl": "https://github.com/bogdan",
-      "summary": "1. 概要 (1-2文で)  \nRails が `rails new --docker` などで生成する `.dockerignore` テンプレートを修正し、`/log/*` や `/tmp/*` といった「1階層だけマッチするパターン」を `/log/**` のような「再帰的にすべてのサブディレクトリを含めてマッチするパターン」に変更した PR です。これにより、ログ・tmp・storage などの配下にある深い階層のファイルも Docker build context から確実に除外されるようになります。"
-    },
-    {
-      "number": 57208,
-      "title": "Add `ActiveJob::Attributes` to persist data between steps {#pr-57208}",
-      "url": "https://github.com/rails/rails/pull/57208",
-      "mergedAt": "2026-05-05T00:00:00.000Z",
-      "author": "bdewater-thatch",
-      "authorUrl": "https://github.com/bdewater-thatch",
-      "summary": "1. 概要 (1-2文で)  \nRails 8.1で導入された Active Job Continuation（マルチステップジョブ）に対して、ステップ間で一時的なデータを安全に保持できる `ActiveJob::Attributes` が追加されました。Active Model Attributes をベースに、ジョブのシリアライズ／デシリアライズを意識せずに型付き属性を使って値を永続化できます。"
-    },
-    {
-      "number": 56450,
-      "title": "Fix ActionMailer::Base.mail dispatch in 8.1+ {#pr-56450}",
-      "url": "https://github.com/rails/rails/pull/56450",
-      "mergedAt": "2026-05-05T00:00:00.000Z",
-      "author": "afurm",
-      "authorUrl": "https://github.com/afurm",
-      "summary": "1. 概要 (1-2文で)  \nRails 8.1 で `ActionMailer::Base.mail` をクラスメソッドとして直接呼び出した際に `ActionNotFound` が発生するリグレッションを修正し、8.0 と同じ挙動（クラスレベル配送）を復元する PR です。`mail` が ActionMailer の「アクション」として常に認識されるようにし、その挙動を担保する回帰テストが追加されています。"
     }
   ]
 }
