@@ -1,7 +1,43 @@
 {
-  "lastUpdated": "2026-05-13T00:29:35.898Z",
+  "lastUpdated": "2026-05-14T00:30:23.700Z",
   "totalCount": 50,
   "items": [
+    {
+      "number": 57359,
+      "title": "Fix formatting in Active Storage controller docs {#pr-57359}",
+      "url": "https://github.com/rails/rails/pull/57359",
+      "mergedAt": "2026-05-13T00:00:00.000Z",
+      "author": "p8",
+      "authorUrl": "https://github.com/p8",
+      "summary": "1. 概要 (1-2文で)  \nActive Storage のコントローラに書かれているドキュメントコメント内のインラインコード表記を、`+foo+` から `<tt>foo</tt>` に変更して、Rails API ドキュメント上での表示を整えた PRです。機能や挙動の変更は一切なく、ドキュメント表示の体裁を整えるだけの修正です。"
+    },
+    {
+      "number": 57357,
+      "title": "Remove reference to removed QueAdapter {#pr-57357}",
+      "url": "https://github.com/rails/rails/pull/57357",
+      "mergedAt": "2026-05-13T00:00:00.000Z",
+      "author": "p8",
+      "authorUrl": "https://github.com/p8",
+      "summary": "1. 概要 (1-2文で)  \nQueAdapter 本体がすでに削除されているにもかかわらず、`ActiveJob` 内に残っていた QueAdapter への参照を整理・削除する PR です。  \nこれにより、存在しないアダプタへの不整合な参照がなくなり、Active Job のキューアダプタ定義が実装と一致するようになりました。"
+    },
+    {
+      "number": 57351,
+      "title": "Document ActiveStorage::Blob#content_type and Blob#metadata {#pr-57351}",
+      "url": "https://github.com/rails/rails/pull/57351",
+      "mergedAt": "2026-05-13T00:00:00.000Z",
+      "author": "p8",
+      "authorUrl": "https://github.com/p8",
+      "summary": "1. 概要 (1–2文で)  \nActive Storage の `ActiveStorage::Blob#content_type` と `#metadata` について、「パブリックにサポートされているメソッドである」ことをコード上で明示するドキュメントコメントが追加されました。実行時の挙動やシグネチャは変わらず、仕様の位置づけが明確化されたドキュメント改善のPRです。"
+    },
+    {
+      "number": 57355,
+      "title": "Fix docs formatting for `ActionController::Live` [ci skip] {#pr-57355}",
+      "url": "https://github.com/rails/rails/pull/57355",
+      "mergedAt": "2026-05-13T00:00:00.000Z",
+      "author": "drjayvee",
+      "authorUrl": "https://github.com/drjayvee",
+      "summary": "1. 概要 (1-2文で)  \n`ActionController::Live` のクラスドキュメントの「書式崩れ」「読みづらさ」を修正するために、コメントのフォーマット（RDoc/YARD向け）を整理した PR です。コードの挙動や API は一切変更されておらず、生成ドキュメントの見た目と読みやすさだけが改善されています。"
+    },
     {
       "number": 56872,
       "title": "Add start_day argument to this_week? for consistency with all_week {#pr-56872}",
@@ -415,42 +451,6 @@
       "author": "bogdan",
       "authorUrl": "https://github.com/bogdan",
       "summary": "1. 概要 (1-2文で)  \nActive Storage の画像アナライザ（Vips / ImageMagick）が、EXIF のミラー（反転）系オリエンテーションを持つ画像に対して width/height を誤って入れ替えて記録していたバグを修正する PR です。90°/270° 回転を含む 4 種類の EXIF orientation（5, 6, 7, 8）の場合だけ幅・高さを入れ替えるようにロジックを修正しています。"
-    },
-    {
-      "number": 57271,
-      "title": "Gracefully handle `nil` during multi-parameter assignment {#pr-57271}",
-      "url": "https://github.com/rails/rails/pull/57271",
-      "mergedAt": "2026-05-05T00:00:00.000Z",
-      "author": "seanpdoyle",
-      "authorUrl": "https://github.com/seanpdoyle",
-      "summary": "1. 概要 (1-2文で)  \nマルチパラメータ属性（例: `Date` カラム）の代入時に、これまで `\"\"` のときだけ正常に「値なし」として扱われていた挙動を、`nil` に対しても例外なく同様に扱えるようにした修正です。`nil` を渡した際に発生していた `NoMethodError: undefined method 'empty?' for nil` を解消します。"
-    },
-    {
-      "number": 50889,
-      "title": "Introduce `ActiveSupport::TestCase.around` {#pr-50889}",
-      "url": "https://github.com/rails/rails/pull/50889",
-      "mergedAt": "2026-05-05T00:00:00.000Z",
-      "author": "seanpdoyle",
-      "authorUrl": "https://github.com/seanpdoyle",
-      "summary": "1. 概要 (1-2文で)  \nRails の `ActiveSupport::TestCase` に `around` コールバック（フック）が追加され、各テストの `setup`〜`teardown` を1つの「囲い込み」処理として扱えるようになりました。これにより、RSpec などで馴染みのある「around フック」を Rails 標準のテストでもシンプルに使えるようになります。"
-    },
-    {
-      "number": 50320,
-      "title": "Tag Builders: render keywords as dasherized HTML attributes {#pr-50320}",
-      "url": "https://github.com/rails/rails/pull/50320",
-      "mergedAt": "2026-05-05T00:00:00.000Z",
-      "author": "seanpdoyle",
-      "authorUrl": "https://github.com/seanpdoyle",
-      "summary": "1. 概要 (1-2文で)  \nRails の `tag` ヘルパー等で、属性にネストした Hash を渡したときに、キーを「ダッシュ区切り(dasherize)した HTML 属性名」として展開して出力できるようになりました。これにより、Stimulus/Turbo の `data-*` だけでなく、Alpine.js の `x-*` や htmx の `hx-*` 形式の属性も、Ruby 側で自然なハッシュ記法のまま生成しやすくなっています。"
-    },
-    {
-      "number": 57240,
-      "title": "Move generated kamal gem into development group {#pr-57240}",
-      "url": "https://github.com/rails/rails/pull/57240",
-      "mergedAt": "2026-05-05T00:00:00.000Z",
-      "author": "jaykava",
-      "authorUrl": "https://github.com/jaykava",
-      "summary": "1. 概要 (1-2文で)  \nRails のアプリケーション生成時に自動で追加される `kamal` gem を、トップレベルではなく `group :development` 内に移動する変更です。これにより、Kamal が本番環境の Bundle からデフォルトで外れ、開発時専用のデプロイツールとして扱われます。"
     }
   ]
 }
