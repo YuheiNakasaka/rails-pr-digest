@@ -1,7 +1,43 @@
 {
-  "lastUpdated": "2026-05-15T00:30:49.235Z",
+  "lastUpdated": "2026-05-16T00:25:29.279Z",
   "totalCount": 50,
   "items": [
+    {
+      "number": 56842,
+      "title": "Revert: Sort table columns by name when dumping schema {#pr-56842}",
+      "url": "https://github.com/rails/rails/pull/56842",
+      "mergedAt": "2026-05-15T00:00:00.000Z",
+      "author": "bert-mccutchen",
+      "authorUrl": "https://github.com/bert-mccutchen",
+      "summary": "1. 概要 (1-2文で)  \nスキーマダンプ時にテーブルのカラムを名前順にソートする挙動を導入した変更(#53281)を、丸ごと取り消すPRです。これにより、`schema.rb` などでのカラムの出力順は、従来どおり「DBが返す順序（定義順）」に戻ります。"
+    },
+    {
+      "number": 57374,
+      "title": "Revert \"Add default `#render_in` implementation to `ActiveModel::Conversion`\" {#pr-57374}",
+      "url": "https://github.com/rails/rails/pull/57374",
+      "mergedAt": "2026-05-15T00:00:00.000Z",
+      "author": "seanpdoyle",
+      "authorUrl": "https://github.com/seanpdoyle",
+      "summary": "1. 概要 (1-2文で)  \n`ActiveModel::Conversion` に追加されていたデフォルト実装の `#render_in` を、一旦まるごと巻き戻した PR です。まだ未リリースの機能だったため、コントローラ起点のパーシャル名前空間解決に関する問題を踏まえて、仕様を見直した上で再度出し直す方針になっています。"
+    },
+    {
+      "number": 57364,
+      "title": "Enumerate columns in SELECT when only_columns is set {#pr-57364}",
+      "url": "https://github.com/rails/rails/pull/57364",
+      "mergedAt": "2026-05-15T00:00:00.000Z",
+      "author": "sarub0b0",
+      "authorUrl": "https://github.com/sarub0b0",
+      "summary": "1. 概要 (1-2文で)  \n`only_columns` を設定したときに、SQL の `SELECT` 句が `table.*` のままになってしまう不具合を修正し、ドキュメントどおり「指定したカラムだけを取得する」挙動になるようにした PR です。`ignored_columns` 使用時と同様に、`only_columns` でも SELECT 句でカラムを列挙するようにしています。"
+    },
+    {
+      "number": 57372,
+      "title": "Remove caller supplied :object option in render_in ActiveModel helper {#pr-57372}",
+      "url": "https://github.com/rails/rails/pull/57372",
+      "mergedAt": "2026-05-15T00:00:00.000Z",
+      "author": "tahsin352",
+      "authorUrl": "https://github.com/tahsin352",
+      "summary": "1. 概要 (1-2文で)  \nActiveModel の `render_in` ヘルパーで、呼び出し元が `:object` オプションを渡しても無視し、常に `self` を描画対象オブジェクトとして使うようにした PR です。これにより、キーワード引数の重複エラーや、意図せず `self` が上書きされる挙動を防ぎます。"
+    },
     {
       "number": 48628,
       "title": "PostgreSQL reload virtual columns on update via RETURNING clause {#pr-48628}",
@@ -415,42 +451,6 @@
       "author": "Saidbek",
       "authorUrl": "https://github.com/Saidbek",
       "summary": "1. 概要 (1-2文で)  \n`activerecord` の一部テストで、手書きしていた `ActiveSupport::Notifications` の subscribe/unsubscribe ロジックを、共通の `NotificationAssertions` ヘルパー（`capture_notifications` など）に置き換えて簡潔にした PR です。テストの重複コードを減らし、通知の検証ロジックを統一するリファクタリングであり、挙動やパブリック API の仕様変更はありません。"
-    },
-    {
-      "number": 51244,
-      "title": "[Fix #50118] `:prepend` option not working with `run_after_transaction_callbacks_in_order_defined` config {#pr-51244}",
-      "url": "https://github.com/rails/rails/pull/51244",
-      "mergedAt": "2026-05-08T00:00:00.000Z",
-      "author": "joshuay03",
-      "authorUrl": "https://github.com/joshuay03",
-      "summary": "1. 概要 (1-2文で)  \n`config.active_record.run_after_transaction_callbacks_in_order_defined = true` を有効にしている場合でも、`after_commit` / `after_rollback` に渡した `prepend: true` オプションが正しく効くようにしたバグ修正です。トランザクション後コールバックの実行順に関する仕様どおりの挙動が保証されるようになりました。"
-    },
-    {
-      "number": 57316,
-      "title": "Reject malformed Mailgun ingress timestamps {#pr-57316}",
-      "url": "https://github.com/rails/rails/pull/57316",
-      "mergedAt": "2026-05-08T00:00:00.000Z",
-      "author": "afurm",
-      "authorUrl": "https://github.com/afurm",
-      "summary": "1. 概要 (1-2文で)  \nMailgun 用 Action Mailbox ingress が、壊れた形式の `timestamp` を受け取ったときに 500 エラーになっていた問題を修正し、認証失敗（401/403 想定）として処理するようにした PR です。  \nHMAC 計算には従来どおり生の文字列を使い、別途パースしたタイムスタンプで時刻の妥当性チェックを行うことで、パースエラーを例外ではなく「認証失敗」として扱うようにしています。"
-    },
-    {
-      "number": 57174,
-      "title": "Update EnvConfiguration class doc examples and drop stale commented require {#pr-57174}",
-      "url": "https://github.com/rails/rails/pull/57174",
-      "mergedAt": "2026-05-08T00:00:00.000Z",
-      "author": "Saidbek",
-      "authorUrl": "https://github.com/Saidbek",
-      "summary": "1. 概要 (1-2文で)  \nEnvConfiguration クラスの RDoc (ドキュメントコメント) に書かれている `option` / `envify` のサンプルコードが、実際の挙動に即した正しい ENV キー・`fetch` の使い方になるよう更新されました。あわせて、不要になっていたコメントアウトされた `require` 行が削除されています。"
-    },
-    {
-      "number": 57321,
-      "title": "Fix running AbstractMySQL tests when testing Trilogy and Mysql2 {#pr-57321}",
-      "url": "https://github.com/rails/rails/pull/57321",
-      "mergedAt": "2026-05-08T00:00:00.000Z",
-      "author": "byroot",
-      "authorUrl": "https://github.com/byroot",
-      "summary": "1. 概要 (1-2文で)  \nActive Record の MySQL 抽象テスト (`AbstractMySQL` テスト群) を、Trilogy アダプタと Mysql2 アダプタの両方で正しく実行できるように、テスト用のサポートコード (`activerecord/test/support/tools.rb`) が修正されています。主にテスト実行時のアダプタ切り替えロジック（またはアダプタ判定・ロード周り）の不備を解消する小さな変更です。"
     }
   ]
 }
