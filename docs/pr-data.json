@@ -1,7 +1,16 @@
 {
-  "lastUpdated": "2026-05-16T00:25:29.279Z",
+  "lastUpdated": "2026-05-17T00:26:23.693Z",
   "totalCount": 50,
   "items": [
+    {
+      "number": 43736,
+      "title": "Introduce `**options` argument in the `DestroyAssociationAsyncJob#perform` method {#pr-43736}",
+      "url": "https://github.com/rails/rails/pull/43736",
+      "mergedAt": "2026-05-16T00:00:00.000Z",
+      "author": "smt116",
+      "authorUrl": "https://github.com/smt116",
+      "summary": "1. 概要 (1-2文で)  \n`ActiveRecord::DestroyAssociationAsyncJob#perform` の引数に `**options` が追加され、将来的にオプションを拡張しても既存アプリを壊さないようにするための後方互換性改善が行われました。実質的な挙動は現状変わらず、ごく小さなシグネチャ変更のみです。"
+    },
     {
       "number": 56842,
       "title": "Revert: Sort table columns by name when dumping schema {#pr-56842}",
@@ -442,15 +451,6 @@
       "author": "bogdan",
       "authorUrl": "https://github.com/bogdan",
       "summary": "1. 概要 (1-2文で)  \n`activerecord` の一部テストが CI 上で無限にハングする可能性があった問題に対して、該当テストを含む複数のテストで待機処理をタイムアウト付きにするなどのリファクタリングを行い、「落ちるときはきちんと失敗として終了する」ようにした PR です。アプリケーションコードには影響せず、テスト専用の変更です。"
-    },
-    {
-      "number": 57320,
-      "title": "Simplify more `activerecord` tests with `NotificationAssertions` helpers {#pr-57320}",
-      "url": "https://github.com/rails/rails/pull/57320",
-      "mergedAt": "2026-05-08T00:00:00.000Z",
-      "author": "Saidbek",
-      "authorUrl": "https://github.com/Saidbek",
-      "summary": "1. 概要 (1-2文で)  \n`activerecord` の一部テストで、手書きしていた `ActiveSupport::Notifications` の subscribe/unsubscribe ロジックを、共通の `NotificationAssertions` ヘルパー（`capture_notifications` など）に置き換えて簡潔にした PR です。テストの重複コードを減らし、通知の検証ロジックを統一するリファクタリングであり、挙動やパブリック API の仕様変更はありません。"
     }
   ]
 }
