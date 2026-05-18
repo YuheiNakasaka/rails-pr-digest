@@ -1,7 +1,61 @@
 {
-  "lastUpdated": "2026-05-17T00:26:23.693Z",
+  "lastUpdated": "2026-05-18T00:29:36.786Z",
   "totalCount": 50,
   "items": [
+    {
+      "number": 57267,
+      "title": "Fix bulk job and email enqueueing methods with no arguments {#pr-57267}",
+      "url": "https://github.com/rails/rails/pull/57267",
+      "mergedAt": "2026-05-17T00:00:00.000Z",
+      "author": "fatkodima",
+      "authorUrl": "https://github.com/fatkodima",
+      "summary": "1. 概要 (1-2文で)  \nAction Mailer と Active Job の「引数なし」での一括エンキュー (`*_all`, `*_later` など) が正しく動作しない問題 (#57264) を、内部ロジックの配置を整理することで修正した PR です。実質的な仕様変更や挙動追加はなく、「コードの場所を変えてバグを解消した」リファクタリング寄りの修正です。"
+    },
+    {
+      "number": 54587,
+      "title": "Expose all `BatchEnumerator` attributes {#pr-54587}",
+      "url": "https://github.com/rails/rails/pull/54587",
+      "mergedAt": "2026-05-17T00:00:00.000Z",
+      "author": "fatkodima",
+      "authorUrl": "https://github.com/fatkodima",
+      "summary": "1. 概要 (1-2文で)  \n`ActiveRecord::Batches::BatchEnumerator` が内部的に持っていた `cursor`, `order`, `use_ranges` を、外部から読み取れる公開属性として追加し、バッチ処理の挙動に応じた高度なカスタマイズができるようになりました。これにより、バッチイテレーションの状態や戦略を外部のライブラリ／アプリケーションから参照可能になります。"
+    },
+    {
+      "number": 45201,
+      "title": "Adds ability to get the combined bytes_size of all attached blobs {#pr-45201}",
+      "url": "https://github.com/rails/rails/pull/45201",
+      "mergedAt": "2026-05-17T00:00:00.000Z",
+      "author": "sandip-mane",
+      "authorUrl": "https://github.com/sandip-mane",
+      "summary": "1. 概要 (1-2文で)  \nActive Storage の `has_many_attached` に対して、紐づいている複数ファイルの総サイズ(バイト数)を一括で取得できる `byte_size` メソッドが追加されました。これにより、`Gallery.new.photos.byte_size` のようにして、複数添付ファイルの合計容量を簡単に取得できます。"
+    },
+    {
+      "number": 44746,
+      "title": "Fix `ActiveRecord::QueryMethods#in_order_of` when passing an out-of-range Integer. {#pr-44746}",
+      "url": "https://github.com/rails/rails/pull/44746",
+      "mergedAt": "2026-05-17T00:00:00.000Z",
+      "author": "tejanium",
+      "authorUrl": "https://github.com/tejanium",
+      "summary": "1. 概要 (1–2文で)  \n`ActiveRecord::QueryMethods#in_order_of` に、整数型カラムに対して範囲外の整数を渡したときに `ActiveModel::RangeError` が発生する不具合があり、それを修正する PR です。修正後は、範囲外など「シリアライズ不可能な値」は無視され、エラーを出さずに `ORDER BY` 句が構築されます。"
+    },
+    {
+      "number": 57107,
+      "title": "[RF-Docs][ci-skip] Caching with Rails {#pr-57107}",
+      "url": "https://github.com/rails/rails/pull/57107",
+      "mergedAt": "2026-05-17T00:00:00.000Z",
+      "author": "Ridhwana",
+      "authorUrl": "https://github.com/Ridhwana",
+      "summary": "1. 概要 (1-2文で)  \nRails公式ガイド「Caching with Rails」の内容を、現行のRailsの挙動に合わせて大幅に書き直し・再構成したドキュメント改善PRです。既存の構成やトーンは維持しつつ、`Rails.cache`、フラグメントキャッシュ、Conditional GET、SQLキャッシュ、Solid Cache、ETagなどの解説がかなり具体的・実践的になりました。"
+    },
+    {
+      "number": 56341,
+      "title": "[RF Docs] Active Record Query Interface {#pr-56341}",
+      "url": "https://github.com/rails/rails/pull/56341",
+      "mergedAt": "2026-05-17T00:00:00.000Z",
+      "author": "Ridhwana",
+      "authorUrl": "https://github.com/Ridhwana",
+      "summary": "1. 概要 (1–2文で)\n- Active Record Query Interface ガイド全体を大幅に書き直し・整理し、用語・構成・サンプルコード・相互リンクを現状の Rails に合わせてアップデートしたドキュメント改善 PRです。  \n- 併せて `ActiveRecord::Relation#only` / `#except` まわりなど、クエリメソッドのドキュメントコメントも微調整され、複合主キーガイドとの連携も強化されています。"
+    },
     {
       "number": 43736,
       "title": "Introduce `**options` argument in the `DestroyAssociationAsyncJob#perform` method {#pr-43736}",
@@ -397,60 +451,6 @@
       "author": "byroot",
       "authorUrl": "https://github.com/byroot",
       "summary": "1. 概要 (1-2文で)  \nArel の ToSQL ビジターが `BigDecimal` を文字列化する際、指数表記 (`0.214e1`) になってしまい、期待される通常の小数表記 (`2.14`) とズレてテストが落ちていた問題を修正する PR です。  \nテストコードと依存バージョンの微調整により、`BigDecimal` の SQL 文字列表現が期待どおり安定して比較できるようにしています。"
-    },
-    {
-      "number": 57136,
-      "title": "Reject trailing dash in PostgreSQL adapter {#pr-57136}",
-      "url": "https://github.com/rails/rails/pull/57136",
-      "mergedAt": "2026-05-08T00:00:00.000Z",
-      "author": "yoLotus",
-      "authorUrl": "https://github.com/yoLotus",
-      "summary": "1. 概要 (1-2文で)  \nPostgreSQL アダプタが UUID の末尾に余分なハイフン (`-`) を含む文字列を誤って有効とみなしていたバグを修正し、正しく `ActiveRecord::RecordNotFound`（説明文では `NotFound` と書いていますが実際の例外クラスは通常これ）を発生させるようにした PR です。UUID のバリデーションに使う正規表現を修正し、Trailing dash を含む UUID を拒否するように変更されています。"
-    },
-    {
-      "number": 56575,
-      "title": "Support Multiple Arguments in `ActionController::Parameters#merge` in Consistent with Ruby's `Hash#merge` {#pr-56575}",
-      "url": "https://github.com/rails/rails/pull/56575",
-      "mergedAt": "2026-05-08T00:00:00.000Z",
-      "author": "berniechiu",
-      "authorUrl": "https://github.com/berniechiu",
-      "summary": "1. 概要 (1-2文で)  \n`ActionController::Parameters#merge` / `#merge!` が Ruby 3.2 以降の `Hash#merge` と同様に「複数引数」を受け取れるように拡張された PR です。Rails の Strong Parameters の API と Ruby 標準 Hash API の挙動を揃えることで、一貫性と使い勝手を向上させています。"
-    },
-    {
-      "number": 54189,
-      "title": "Allow configuring Active Storage base controller parent class {#pr-54189}",
-      "url": "https://github.com/rails/rails/pull/54189",
-      "mergedAt": "2026-05-08T00:00:00.000Z",
-      "author": "zzak",
-      "authorUrl": "https://github.com/zzak",
-      "summary": "1. 概要 (1-2文で)  \nActive Storage のコントローラ (`ActiveStorage::BaseController`) が継承する親クラスをアプリ側から設定できるようになり、`ActionController::API` を親にして API-only 構成でも利用しやすくなりました。これに伴い、新しい設定フラグとテストが追加されています。"
-    },
-    {
-      "number": 55134,
-      "title": "Move `prevent_writes` defaulting to params of role switching methods {#pr-55134}",
-      "url": "https://github.com/rails/rails/pull/55134",
-      "mergedAt": "2026-05-08T00:00:00.000Z",
-      "author": "joshuay03",
-      "authorUrl": "https://github.com/joshuay03",
-      "summary": "1. 概要 (1-2文で)  \nこのPRは、Active Record の接続ロール切り替え系メソッドにおける `prevent_writes` のデフォルト挙動を「メソッド本体で上書き」する形から「メソッド引数レベルで明示的に定義・検証」する形に変更し、`:reading` ロールで `prevent_writes: false` を指定した場合は `ArgumentError` を発生させるようにしたものです。あわせてドキュメントとテストが、この新しい仕様に合わせて整理・強化されています。"
-    },
-    {
-      "number": 57091,
-      "title": "Fix bug with escaped characters when \"Copy as text\" is clicked {#pr-57091}",
-      "url": "https://github.com/rails/rails/pull/57091",
-      "mergedAt": "2026-05-08T00:00:00.000Z",
-      "author": "bogdan",
-      "authorUrl": "https://github.com/bogdan",
-      "summary": "1. 概要 (1-2文で)  \nRails の例外画面にある「Copy as text」ボタンでコピーされるテキストに、HTML エスケープされた文字（`&#39;` など）が混ざってしまう不具合を修正した PR です。テキストの格納先を `<script>` 要素の body から `<textarea>` 要素の `value` に変更することで、自動エスケープを回避しています。"
-    },
-    {
-      "number": 57309,
-      "title": "Prevent test_checkout_fairness_by_group from hanging indefinitely {#pr-57309}",
-      "url": "https://github.com/rails/rails/pull/57309",
-      "mergedAt": "2026-05-08T00:00:00.000Z",
-      "author": "bogdan",
-      "authorUrl": "https://github.com/bogdan",
-      "summary": "1. 概要 (1-2文で)  \n`activerecord` の一部テストが CI 上で無限にハングする可能性があった問題に対して、該当テストを含む複数のテストで待機処理をタイムアウト付きにするなどのリファクタリングを行い、「落ちるときはきちんと失敗として終了する」ようにした PR です。アプリケーションコードには影響せず、テスト専用の変更です。"
     }
   ]
 }
