@@ -1,7 +1,79 @@
 {
-  "lastUpdated": "2026-05-18T00:29:36.786Z",
+  "lastUpdated": "2026-05-19T00:32:35.614Z",
   "totalCount": 50,
   "items": [
+    {
+      "number": 46486,
+      "title": "Preserve attachment changes when converting record to another class using STI {#pr-46486}",
+      "url": "https://github.com/rails/rails/pull/46486",
+      "mergedAt": "2026-05-18T00:00:00.000Z",
+      "author": "fatkodima",
+      "authorUrl": "https://github.com/fatkodima",
+      "summary": "1. 概要 (1-2文で)  \nSTI（Single Table Inheritance）でレコードの `type` を変更して別クラスに「キャスト」した際に、Active Storage の添付ファイル変更（添付・削除）が失われてしまう不具合を修正したPRです。`becomes` / `becomes!` を使ってクラスを変換した場合でも、添付ファイルの変更が正しく引き継がれるようになりました。"
+    },
+    {
+      "number": 57375,
+      "title": "Fix `number_to_phone` dropping only one char of a multi-char delimiter {#pr-57375}",
+      "url": "https://github.com/rails/rails/pull/57375",
+      "mergedAt": "2026-05-18T00:00:00.000Z",
+      "author": "55728",
+      "authorUrl": "https://github.com/55728",
+      "summary": "1. 概要 (1-2文で)  \n`number_to_phone` に複数文字の `:delimiter` を指定し、かつ市外局番なし（7桁程度）の番号を渡した場合に、先頭に区切り文字の“欠片”が残ってしまうバグを修正したPRです。`slice!(0, 1)` で1文字だけ削っていた処理を、指定された区切り文字列全体の長さぶん削るように変更しています。"
+    },
+    {
+      "number": 56918,
+      "title": "[RF-Docs] [ci-skip] Update the Rails on Rack guide {#pr-56918}",
+      "url": "https://github.com/rails/rails/pull/56918",
+      "mergedAt": "2026-05-18T00:00:00.000Z",
+      "author": "ayushn21",
+      "authorUrl": "https://github.com/ayushn21",
+      "summary": "1. 概要 (1-2文で)  \nRailsガイドの「Rails on Rack」章が大幅に書き直され、現行のRailsの挙動やミドルウェア構成に即した内容へアップデートされました。Railsサーバ起動プロセス、ミドルウェアスタック、Rack APIの高度な使い方、カスタムミドルウェアの組み込み方法などが整理・拡充されています。"
+    },
+    {
+      "number": 45705,
+      "title": "Add explicit regression tests for ActiveRecord::Migration's #say & #say_with_time {#pr-45705}",
+      "url": "https://github.com/rails/rails/pull/45705",
+      "mergedAt": "2026-05-18T00:00:00.000Z",
+      "author": "nfedyashev",
+      "authorUrl": "https://github.com/nfedyashev",
+      "summary": "1. 概要 (1-2文で)  \nActiveRecord::Migration の `#say` と `#say_with_time` に対して、明示的なリグレッションテストが追加されています。加えて、`say_with_time` をブロックなしで呼び出した場合に明示的なエラーになる挙動をテストで保証するようになっています。"
+    },
+    {
+      "number": 57370,
+      "title": "Prevent false leaked-connection reports during reaper maintenance {#pr-57370}",
+      "url": "https://github.com/rails/rails/pull/57370",
+      "mergedAt": "2026-05-18T00:00:00.000Z",
+      "author": "curi",
+      "authorUrl": "https://github.com/curi",
+      "summary": "1. 概要 (1-2文で)  \nActiveRecord のテスト用リーク検知 (`ActiveRecord::TestCase#check_connection_leaks`) が、コネクションプールの Reaper 実行中に誤って「リーク」と判定してしまう問題を修正する PRです。プールの `reaper_lock` と同期してリークチェックを行うことで、Reaper が正当な理由で保持しているコネクションを誤検知しないようにしています。"
+    },
+    {
+      "number": 57380,
+      "title": "Fix pre-serialized String values skipping cast in insert_all hot path {#pr-57380}",
+      "url": "https://github.com/rails/rails/pull/57380",
+      "mergedAt": "2026-05-18T00:00:00.000Z",
+      "author": "tahsin352",
+      "authorUrl": "https://github.com/tahsin352",
+      "summary": "1. 概要 (1-2文で)  \n`insert_all` の高速化パスで「シリアライズ済みの文字列」を受け取った場合に、値が二重エンコードされてしまう不具合を修正し、`create` と同じキャスト挙動になるようにした PR です。Hash/Array などの通常ケースでのパフォーマンス改善は維持しつつ、String の場合だけ `cast` をスキップしないようにしています。"
+    },
+    {
+      "number": 57382,
+      "title": "Remove support for Rails 6.1 Active Record Marshal format {#pr-57382}",
+      "url": "https://github.com/rails/rails/pull/57382",
+      "mergedAt": "2026-05-18T00:00:00.000Z",
+      "author": "byroot",
+      "authorUrl": "https://github.com/byroot",
+      "summary": "1. 概要 (1-2文で)  \nRails 7.2 以降で、Rails 6.1 時代の Active Record オブジェクトの Marshal フォーマット（シリアライズ形式）を**「正式にはサポート対象外」とする**変更です。これにより Active Record 内部表現を将来的に大きく変更しやすくします。"
+    },
+    {
+      "number": 56565,
+      "title": "Revert \"Sort schema cache columns and indexes per table when dumping\" {#pr-56565}",
+      "url": "https://github.com/rails/rails/pull/56565",
+      "mergedAt": "2026-05-18T00:00:00.000Z",
+      "author": "byroot",
+      "authorUrl": "https://github.com/byroot",
+      "summary": "1. 概要 (1-2文で)  \n`schema_cache.yml` 生成時にテーブルごとにカラム・インデックスをソートしていた変更 (#54960) を元に戻し、スキーマキャッシュ内では定義順を維持するようにした PR です。  \n理由は、スキーマキャッシュのソートが `pluck(\"*\")` などカラム順に依存する挙動を変えてしまい、実際にバグを引き起こし得るためです。"
+    },
     {
       "number": 57267,
       "title": "Fix bulk job and email enqueueing methods with no arguments {#pr-57267}",
@@ -379,78 +451,6 @@
       "author": "chaadow",
       "authorUrl": "https://github.com/chaadow",
       "summary": "1. 概要 (1-2文で)  \nMySQL アダプタの `NATIVE_DATABASE_TYPES` を凍結（freeze）しないように変更し、これを前提に上書き・拡張しているコード（例: neighbor gem）が `FrozenError` で落ちないようにした PR です。PostgreSQL アダプタと同様の挙動に揃えるフォローアップ変更でもあります。"
-    },
-    {
-      "number": 57332,
-      "title": "fix: unfreeze Date::DATE_FORMATS {#pr-57332}",
-      "url": "https://github.com/rails/rails/pull/57332",
-      "mergedAt": "2026-05-10T00:00:00.000Z",
-      "author": "luizkowalski",
-      "authorUrl": "https://github.com/luizkowalski",
-      "summary": "1. 概要 (1–2文で)  \n`Date::DATE_FORMATS` が凍結（freeze）されていたことで、アプリ側から日付フォーマットを追加できなくなっていた不具合を解消し、従来どおりフォーマットを後から登録できるようにした PR です。`Time` 周りの実装（`Time::DATE_FORMATS`）と整合を取る形で、意図しない freeze を取り消しています。"
-    },
-    {
-      "number": 57330,
-      "title": "Handle missing Mandrill ingress signatures {#pr-57330}",
-      "url": "https://github.com/rails/rails/pull/57330",
-      "mergedAt": "2026-05-10T00:00:00.000Z",
-      "author": "afurm",
-      "authorUrl": "https://github.com/afurm",
-      "summary": "1. 概要 (1-2文で)  \nAction Mailbox の Mandrill ingress で、署名ヘッダ `X-Mandrill-Signature` が欠落している場合に `NoMethodError` が発生していた問題を修正し、欠落時も正しく 401 Unauthorized を返すようにした PR です。これにより、署名改ざんと同様に署名欠落も認証失敗として安全に扱われます。"
-    },
-    {
-      "number": 57331,
-      "title": "Remove isolated test tasks {#pr-57331}",
-      "url": "https://github.com/rails/rails/pull/57331",
-      "mergedAt": "2026-05-10T00:00:00.000Z",
-      "author": "byroot",
-      "authorUrl": "https://github.com/byroot",
-      "summary": "1. 概要 (1-2文で)  \nRails 本体に定義されていた「テストを isolated（プロセス分離）して実行する系の Rake タスク」が一括で削除されました。  \nビルド時間のわりに得られるメリットが小さく、CI 構成も見直されたため、メンテナンス対象から外した形です。"
-    },
-    {
-      "number": 57323,
-      "title": "Enable `Style/MutableConstant` cop with `literals` style {#pr-57323}",
-      "url": "https://github.com/rails/rails/pull/57323",
-      "mergedAt": "2026-05-10T00:00:00.000Z",
-      "author": "paracycle",
-      "authorUrl": "https://github.com/paracycle",
-      "summary": "1. 概要 (1-2文で)  \n`Style/MutableConstant` Cop を RuboCop 設定で有効化し、「リテラルで定義される定数は基本的に凍結して不変にする」という方針を Rails 全体に適用した PRです。これにより、Ractor でクラス/モジュールを安全に共有しやすくし、Ractor-safe なフレームワーク化を進めています。"
-    },
-    {
-      "number": 57328,
-      "title": "Fix some Active Record flakes {#pr-57328}",
-      "url": "https://github.com/rails/rails/pull/57328",
-      "mergedAt": "2026-05-09T00:00:00.000Z",
-      "author": "byroot",
-      "authorUrl": "https://github.com/byroot",
-      "summary": "1. 概要 (1-2文で)  \nActive Recordのテストがときどき落ちる「フレークテスト（flaky tests）」を減らすため、`ActiveRecord::RuntimeRegistry` と一部関連テストを微調整したPRです。主にスレッドローカルな状態管理やテスト用モデル定義の見直しによる安定性向上が目的で、アプリケーション側の挙動変更はほぼありません。"
-    },
-    {
-      "number": 57324,
-      "title": "Use wait_for helper in reaper and async query tests {#pr-57324}",
-      "url": "https://github.com/rails/rails/pull/57324",
-      "mergedAt": "2026-05-09T00:00:00.000Z",
-      "author": "bogdan",
-      "authorUrl": "https://github.com/bogdan",
-      "summary": "1. 概要 (1-2文で)  \nActive Record のテストコード内に残っていた独自実装のポーリングループを、テスト用ヘルパー `wait_for` に置き換えた PR です。これにより、テストがハングしたり、タイムアウト時に誤解を生むアサーションへ進んでしまう問題を防ぎ、失敗箇所が明確になります。"
-    },
-    {
-      "number": 57327,
-      "title": "Active Record connection pool tests avoid always skipped tests {#pr-57327}",
-      "url": "https://github.com/rails/rails/pull/57327",
-      "mergedAt": "2026-05-09T00:00:00.000Z",
-      "author": "byroot",
-      "authorUrl": "https://github.com/byroot",
-      "summary": "1. 概要 (1-2文で)  \nActive Record の connection pool に関するテストのうち、実行環境的に「常に skip されてしまうテスト」がそもそも定義されないように整理された PR です。これにより、テストスイートのノイズが減り、実際に実行されるテストだけが定義される構成になりました。"
-    },
-    {
-      "number": 57325,
-      "title": "Fix BigDecimal rendering failure in Arel tests {#pr-57325}",
-      "url": "https://github.com/rails/rails/pull/57325",
-      "mergedAt": "2026-05-09T00:00:00.000Z",
-      "author": "byroot",
-      "authorUrl": "https://github.com/byroot",
-      "summary": "1. 概要 (1-2文で)  \nArel の ToSQL ビジターが `BigDecimal` を文字列化する際、指数表記 (`0.214e1`) になってしまい、期待される通常の小数表記 (`2.14`) とズレてテストが落ちていた問題を修正する PR です。  \nテストコードと依存バージョンの微調整により、`BigDecimal` の SQL 文字列表現が期待どおり安定して比較できるようにしています。"
     }
   ]
 }
