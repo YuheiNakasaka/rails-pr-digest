@@ -1,7 +1,70 @@
 {
-  "lastUpdated": "2026-05-19T00:32:35.614Z",
+  "lastUpdated": "2026-05-20T00:32:56.149Z",
   "totalCount": 50,
   "items": [
+    {
+      "number": 50431,
+      "title": "Add `exclusion_constraint_exists?` and `unique_constraint_exists?` helpers {#pr-50431}",
+      "url": "https://github.com/rails/rails/pull/50431",
+      "mergedAt": "2026-05-19T00:00:00.000Z",
+      "author": "fatkodima",
+      "authorUrl": "https://github.com/fatkodima",
+      "summary": "1. 概要 (1-2文で)  \nPostgreSQL アダプタに、排他制約（exclusion constraint）とユニーク制約（unique constraint）が既に存在するかをチェックするためのヘルパー `exclusion_constraint_exists?` と `unique_constraint_exists?` が追加されました。これにより、制約を「存在しなければ追加する」といった形で、より安全かつ冪等的にマイグレーションを書くことができます。"
+    },
+    {
+      "number": 57377,
+      "title": "Add `enforced:` option for foreign keys on PostgreSQL 18.4+ {#pr-57377}",
+      "url": "https://github.com/rails/rails/pull/57377",
+      "mergedAt": "2026-05-19T00:00:00.000Z",
+      "author": "yahonda",
+      "authorUrl": "https://github.com/yahonda",
+      "summary": "1. 概要 (1-2文で)  \nPostgreSQL 18.4 以降を対象に、Active Record の外部キーに `enforced:` オプションが追加され、「参照整合性チェックを一時的に無効化して後から再検証する」ことを Rails の API 経由で安全に行えるようになりました。これにより、これまで superuser 権限やトリガ無効化に頼っていたバルクロードなどのユースケースを、テーブル所有者権限のみで実現できます。"
+    },
+    {
+      "number": 57388,
+      "title": "`http_cache_forever` now accept an optional `last_modified:` keyword parameter. {#pr-57388}",
+      "url": "https://github.com/rails/rails/pull/57388",
+      "mergedAt": "2026-05-19T00:00:00.000Z",
+      "author": "byroot",
+      "authorUrl": "https://github.com/byroot",
+      "summary": "1. 概要 (1-2文で)  \n`http_cache_forever` がオプション引数 `last_modified:` を受け取れるようになり、デフォルトの日付(2011-01-01)の代わりに実際の更新時刻を使った長期キャッシュ制御が可能になりました。あわせて Active Storage の `ProxyController` で、この新オプションを使うように変更されています。"
+    },
+    {
+      "number": 46262,
+      "title": "Support proc and symbol for `NumericalityValidator`'s `:in` option {#pr-46262}",
+      "url": "https://github.com/rails/rails/pull/46262",
+      "mergedAt": "2026-05-19T00:00:00.000Z",
+      "author": "ThomasSevestre",
+      "authorUrl": "https://github.com/ThomasSevestre",
+      "summary": "1. 概要 (1-2文で)  \n`NumericalityValidator` の `:in` オプションで、固定の Range だけでなく「Proc（ラムダ）」と「シンボル（インスタンスメソッド参照）」も指定できるようになりました。これにより、モデルインスタンスの状態に応じて動的に数値の許容範囲を変えられます。"
+    },
+    {
+      "number": 57386,
+      "title": "Use `...` and anonymous splats when possible {#pr-57386}",
+      "url": "https://github.com/rails/rails/pull/57386",
+      "mergedAt": "2026-05-19T00:00:00.000Z",
+      "author": "byroot",
+      "authorUrl": "https://github.com/byroot",
+      "summary": "1. 概要 (1-2文で)  \nこのPRは、`activesupport` の `String` 拡張（output_safety関連）で、可変長引数の扱いを「`*args` から `...` / 匿名スプラット」へ書き換えるリファクタリングです。機能仕様は変えずに、わずかなオブジェクト生成削減と、よりモダンで読みやすいRubyコードに整理しています。"
+    },
+    {
+      "number": 57385,
+      "title": "fix `start_with_delimiter?` has a false-positive when the number coincidentally begins with the delimiter string in number_to_phone {#pr-57385}",
+      "url": "https://github.com/rails/rails/pull/57385",
+      "mergedAt": "2026-05-19T00:00:00.000Z",
+      "author": "tahsin352",
+      "authorUrl": "https://github.com/tahsin352",
+      "summary": "1. 概要 (1-2文で)  \nRails の `number_to_phone` で、電話番号の数字列がたまたま区切り文字（`delimiter`）と同じ並びで始まる場合に、先頭の数字が誤って削られてしまうバグを修正した PR です。先頭の区切り文字を事後的に削るロジックをやめ、`gsub` の置換ブロック内で「最初のグループが空かどうか」を見て直接出力を制御するように変更しています。"
+    },
+    {
+      "number": 57384,
+      "title": "Accept and discard unused block in `ReflectionProxy#all_includes` {#pr-57384}",
+      "url": "https://github.com/rails/rails/pull/57384",
+      "mergedAt": "2026-05-19T00:00:00.000Z",
+      "author": "joshuay03",
+      "authorUrl": "https://github.com/joshuay03",
+      "summary": "1. 概要 (1-2文で)  \nRuby 3.4 の `strict_unused_block` 警告に対応するため、Active Record の `ReflectionProxy#all_includes` が渡されたブロックを明示的に受け取りつつ破棄するように変更されました。挙動の変更はなく、警告を抑制するだけのメンテナンス的修正です。"
+    },
     {
       "number": 46486,
       "title": "Preserve attachment changes when converting record to another class using STI {#pr-46486}",
@@ -388,69 +451,6 @@
       "author": "byroot",
       "authorUrl": "https://github.com/byroot",
       "summary": "1. 概要 (1-2文で)  \nこのPRは、**トランザクションを使わないテスト実行後に、fixtures のキャッシュが正しくリセットされない問題を修正**し、ActiveRecord のテストフィクスチャ機構の一貫性を高めたものです。あわせて、この挙動を検証するテストと、リークチェッカー側のサポートを追加しています。"
-    },
-    {
-      "number": 36433,
-      "title": "Fix unexpected behavior for dependent: :purge {#pr-36433}",
-      "url": "https://github.com/rails/rails/pull/36433",
-      "mergedAt": "2026-05-11T00:00:00.000Z",
-      "author": "moveson",
-      "authorUrl": "https://github.com/moveson",
-      "summary": "1. 概要 (1-2文で)  \n`has_one_attached` / `has_many_attached` に `dependent: :purge` や `dependent: :purge_later` を指定した場合、親レコード削除時に添付ファイルが「detach（関連のみ削除）」されてしまっていた不具合を修正し、「実際に purge（blob も含め削除）」されるようにした PR です。これにより `dependent: :detach` / `:purge` / `:purge_later` がそれぞれ意図どおりに動作するようになります。"
-    },
-    {
-      "number": 50623,
-      "title": "Pass render options and block to calls to `#render_in` {#pr-50623}",
-      "url": "https://github.com/rails/rails/pull/50623",
-      "mergedAt": "2026-05-11T00:00:00.000Z",
-      "author": "seanpdoyle",
-      "authorUrl": "https://github.com/seanpdoyle",
-      "summary": "1. 概要 (1-2文で)  \n`render` にオブジェクトを渡したときに呼ばれる `#render_in` に対して、呼び出し元のオプション（locals など）とブロックを正しく引き渡せるようにした変更です。既存の `render_in(view_context)` というシグネチャは非推奨となり、今後はオプションとブロックを受け取る形への移行が求められます。"
-    },
-    {
-      "number": 57346,
-      "title": "Rewrite Arel tests using `ActiveSupport::TestCase` instead of `Minitest::Spec` {#pr-57346}",
-      "url": "https://github.com/rails/rails/pull/57346",
-      "mergedAt": "2026-05-11T00:00:00.000Z",
-      "author": "rafaelfranca",
-      "authorUrl": "https://github.com/rafaelfranca",
-      "summary": "1. 概要 (1-2文で)  \nRails の Arel 周辺テストを、`Minitest::Spec` スタイルから `ActiveSupport::TestCase` ベースのクラシックな xUnit スタイル (`test \"...\" do`) に全面書き換えした PRです。これにより megatest などで spec 構文をサポートする必要がなくなり、テスト基盤の統一とシンプル化が図られています。"
-    },
-    {
-      "number": 57347,
-      "title": "Document Active Job continuation instrumentation events {#pr-57347}",
-      "url": "https://github.com/rails/rails/pull/57347",
-      "mergedAt": "2026-05-11T00:00:00.000Z",
-      "author": "bdewater-thatch",
-      "authorUrl": "https://github.com/bdewater-thatch",
-      "summary": "1. 概要 (1-2文で)  \nActive Job の「ジョブ継続 (continuation)」機能で発火する Active Support Instrumentation のイベントについて、公式ガイド（active_support_instrumentation.md）にドキュメントを追加した PR です。機能自体の実装変更はなく、「どんなイベントがいつ、どういうペイロードで通知されるか」を明文化しています。"
-    },
-    {
-      "number": 57341,
-      "title": "Add tests for constants that are expected to be mutated {#pr-57341}",
-      "url": "https://github.com/rails/rails/pull/57341",
-      "mergedAt": "2026-05-11T00:00:00.000Z",
-      "author": "paracycle",
-      "authorUrl": "https://github.com/paracycle",
-      "summary": "1. 概要 (1-2文で)  \nRails本体で「本来ミューテート（変更）されることが前提の定数」に対して、その期待をテストで明示するPRです。  \nmutable な定数を一律に freeze した対応 (#57323) のあとに見つかった「実は変更されることが仕様」というケースをテストで保証し、今後のリグレッションを防ぐ目的があります。"
-    },
-    {
-      "number": 57336,
-      "title": "Fix broken link in changelog {#pr-57336}",
-      "url": "https://github.com/rails/rails/pull/57336",
-      "mergedAt": "2026-05-11T00:00:00.000Z",
-      "author": "RDIL",
-      "authorUrl": "https://github.com/RDIL",
-      "summary": "1. 概要 (1-2文で)  \nRails 4.0 のリリースノート内に記載されていたリンク切れを修正した PR です。コードの挙動には一切影響せず、ドキュメント（ガイド）の品質向上のみを目的としています。\n\n2. 変更内容の詳細  \n- 対象ファイル: `guides/source/4_0_release_notes.md`  \n- 変更内容: リリースノート中に含まれていた URL を、現在も有効にアクセスできるリンクへ差し替えています（1行の更新: 1行削除 + 1行追加）。  \n- 背景:  \n  - 2014年頃に書かれた Rails 4.0 リリースノート中のあるリンクが、その後のサイト構成変更などにより 404 になるなど「リンク切れ」状態になっていた。  \n  - PR 作成者は古いアプリのアップグレード作業中に該当リンク切れに気づき、同様に古いバージョンからのアップグレード情報を参照する開発者が困らないよう、リンクを修正した。  \n\n※変更対象は「文章中の URL のみ」であり、サンプルコードや設定例などの技術内容には変更はありません。\n\n3. 影響範囲・注意点  \n- 影響範囲:  \n  - Rails ガイド（特に Rails 4.0 Release Notes）を参照する開発者が対象です。  \n  - アプリケーションコード、API、挙動、互換性には一切影響しません。  \n- 注意点:  \n  - Rails 4.0 という既に古いバージョンのリリースノートの変更のため、現行バージョンでの挙動確認に直接関係するものではありませんが、レガシーアプリからのアップグレード調査時には、正しいリンク先に飛べるようになります。  \n  - ドキュメント生成（`guides` のビルド）でのみ反映される変更です。\n\n4. 参考情報 (あれば)  \n- PR: https://github.com/rails/rails/pull/57336  \n- Rails ガイド（貢献ガイドライン）:  \n  https://edgeguides.rubyonrails.org/contributing_to_ruby_on_rails.html#contributing-to-the-rails-documentation"
-    },
-    {
-      "number": 57333,
-      "title": "Disable freezing of NATIVE_DATABASE_TYPES for MySQL adapter {#pr-57333}",
-      "url": "https://github.com/rails/rails/pull/57333",
-      "mergedAt": "2026-05-10T00:00:00.000Z",
-      "author": "chaadow",
-      "authorUrl": "https://github.com/chaadow",
-      "summary": "1. 概要 (1-2文で)  \nMySQL アダプタの `NATIVE_DATABASE_TYPES` を凍結（freeze）しないように変更し、これを前提に上書き・拡張しているコード（例: neighbor gem）が `FrozenError` で落ちないようにした PR です。PostgreSQL アダプタと同様の挙動に揃えるフォローアップ変更でもあります。"
     }
   ]
 }
