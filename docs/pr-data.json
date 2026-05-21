@@ -1,7 +1,115 @@
 {
-  "lastUpdated": "2026-05-20T00:32:56.149Z",
+  "lastUpdated": "2026-05-21T00:35:02.398Z",
   "totalCount": 50,
   "items": [
+    {
+      "number": 57345,
+      "title": "Introduce `ActiveSupport::TimeFormats` and `ActiveSupport::DateFormats` for registering custom date formats {#pr-57345}",
+      "url": "https://github.com/rails/rails/pull/57345",
+      "mergedAt": "2026-05-20T00:00:00.000Z",
+      "author": "paracycle",
+      "authorUrl": "https://github.com/paracycle",
+      "summary": "1. 概要 (1-2文で)  \n`Time#to_fs` / `Date#to_fs` で使うカスタム日付フォーマットを、グローバル定数 `Time::DATE_FORMATS` / `Date::DATE_FORMATS` を直接いじらずに登録できる `ActiveSupport::TimeFormats` / `ActiveSupport::DateFormats` が導入されました。従来の定数ベースのカスタマイズは非推奨となり、次期Railsで削除予定です。"
+    },
+    {
+      "number": 53636,
+      "title": "fix referential_integrity for postgres partitioned tables {#pr-53636}",
+      "url": "https://github.com/rails/rails/pull/53636",
+      "mergedAt": "2026-05-20T00:00:00.000Z",
+      "author": "aandrieu",
+      "authorUrl": "https://github.com/aandrieu",
+      "summary": "1. 概要 (1-2文で)  \nPostgreSQL のパーティショニングされたテーブルに対して `ActiveRecord::FixtureSet.create_fixtures` などを利用した際、外部キー制約が意図せず `NOT VALID` になる不具合を修正する PR です。`referential_integrity` 実装内で行っていた制約の無効化 SQL を、対象テーブルにスコープするように変更しています。"
+    },
+    {
+      "number": 57367,
+      "title": "Prevent development welcome route from duplicating on route reload {#pr-57367}",
+      "url": "https://github.com/rails/rails/pull/57367",
+      "mergedAt": "2026-05-20T00:00:00.000Z",
+      "author": "curi",
+      "authorUrl": "https://github.com/curi",
+      "summary": "1. 概要 (1-2文で)  \n開発環境で `reload_routes!` などによりルーティングを再読み込みすると、Rails が内部的に用意している「開発用ウェルカムページ」の `GET /` ルートが毎回追加され、重複してしまう問題を解消する PR です。アプリ側で定義した root ルートの優先順位はこれまでどおり維持しつつ、内部ウェルカムルートの登録を「アプリ起動時の一度だけ」に制限しています。"
+    },
+    {
+      "number": 57340,
+      "title": "Add ActionController::Parameters#deep_transform_values {#pr-57340}",
+      "url": "https://github.com/rails/rails/pull/57340",
+      "mergedAt": "2026-05-20T00:00:00.000Z",
+      "author": "Edilbek",
+      "authorUrl": "https://github.com/Edilbek",
+      "summary": "1. 概要 (1-2文で)  \n`ActionController::Parameters` に `deep_transform_values` / `deep_transform_values!` が追加され、Strong Parameters の「許可状態(permitted?)」を保ったままネストした値を再帰的に変換できるようになりました。これにより、これまで必要だった `to_unsafe_h.deep_transform_values` によるガードレールの迂回が不要になります。"
+    },
+    {
+      "number": 57399,
+      "title": "doc: escape \"API\" for strong_parameters doc {#pr-57399}",
+      "url": "https://github.com/rails/rails/pull/57399",
+      "mergedAt": "2026-05-20T00:00:00.000Z",
+      "author": "okuramasafumi",
+      "authorUrl": "https://github.com/okuramasafumi",
+      "summary": "1. 概要 (1-2文で)  \nstrong_parameters のドキュメント中で、「API」という単語が誤ってリンク扱いになっていた問題を、Markdown エスケープによって修正した PR です。コードの挙動や API 仕様には一切変更はなく、純粋なドキュメント修正です。\n\n2. 変更内容の詳細(あればサンプルコードも含めて)  \n- 対象ファイル: `actionpack/lib/action_controller/metal/strong_parameters.rb`\n- strong_parameters のクラスコメント（YARD/rdoc用のドキュメントコメント）内にある「API」という単語が、そのまま書かれていることで自動的にリンクとして解釈されていました。\n- この PR では、その「API」をバックスラッシュ（`\\`）でエスケープして、ドキュメント生成時にリンクにならないようにしています。\n\nイメージとしては、ドキュメントコメント中の:\n\n```rdoc\nAPI\n```\n\nのような箇所が、以下のように変更された形です:\n\n```rdoc\n\\API\n```\n\nこれにより、rdoc/Markdown のパーサが「API」をリンク候補として扱わず、単なるテキストとして表示します。\n\n3. 影響範囲・注意点  \n- 影響範囲:\n  - Rails の公式ドキュメント（strong_parameters の API ドキュメント）の見た目のみが変わります。\n  - 生成される HTML ドキュメント上で、「API」という文字列がリンクではなくプレーンテキストとして表示されるようになります。\n- 注意点:\n  - 実行時の挙動、パブリック API、型、メソッドのシグネチャ等には一切変更がありません。\n  - テスト追加のチェックボックスにはチェックが入っていますが、この変更自体はドキュメントのみのため、特にテストは本質的には不要な種類の修正です。\n  - CHANGELOG の更新も不要な範囲（ドキュメントのみの微修正）として扱われています。\n\n4. 参考情報 (あれば)  \n- PR: https://github.com/rails/rails/pull/57399  \n- strong_parameters ドキュメントは「どのパラメータを許可するか」の説明で “API” という語を頻繁に使うため、余計な自動リンクを防ぐのは可読性向上・誤解回避のために有効です。"
+    },
+    {
+      "number": 57368,
+      "title": "Limit the size of strings we call `to_i` on in ActiveRecord {#pr-57368}",
+      "url": "https://github.com/rails/rails/pull/57368",
+      "mergedAt": "2026-05-20T00:00:00.000Z",
+      "author": "tenderlove",
+      "authorUrl": "https://github.com/tenderlove",
+      "summary": "1. 概要 (1-2文で)  \nこのPRは、ActiveRecord/ActiveModel が文字列を自動的に整数へ変換するときに、`to_i` をかける文字列長を制限し、超長い文字列による DoS の可能性を下げる変更です。カラムのバイトサイズに基づき、先頭 `_limit * 4` バイトだけを整数化の対象にします。"
+    },
+    {
+      "number": 57376,
+      "title": "Fix non-working time-only example in ActiveModel::Type::DateTime doc [ci skip] {#pr-57376}",
+      "url": "https://github.com/rails/rails/pull/57376",
+      "mergedAt": "2026-05-20T00:00:00.000Z",
+      "author": "55728",
+      "authorUrl": "https://github.com/55728",
+      "summary": "1. 概要 (1-2文で)  \nActiveModel の `:datetime` 型のドキュメントに「時刻だけの文字列も受け付ける」という誤った記述とサンプルがあったため、それを削除し、時刻のみを扱いたい場合は `:time` 型を使うよう誘導する修正です。実装には変更がなく、ドキュメントのみの修正です。"
+    },
+    {
+      "number": 50862,
+      "title": "Accept Tempfile as ActiveStorage attachable {#pr-50862}",
+      "url": "https://github.com/rails/rails/pull/50862",
+      "mergedAt": "2026-05-20T00:00:00.000Z",
+      "author": "shouichi",
+      "authorUrl": "https://github.com/shouichi",
+      "summary": "1. 概要 (1-2文で)  \nActive Storage の「添付可能オブジェクト(attachable)」として `Tempfile` が正式にサポートされました。これにより、`File` と同様に `Tempfile` をそのまま `has_one_attached` / `has_many_attached` に渡して添付できるようになります。"
+    },
+    {
+      "number": 57393,
+      "title": "Load image processing backend upfront {#pr-57393}",
+      "url": "https://github.com/rails/rails/pull/57393",
+      "mergedAt": "2026-05-20T00:00:00.000Z",
+      "author": "janko",
+      "authorUrl": "https://github.com/janko",
+      "summary": "1. 概要 (1-2文で)  \nこのPRは、Active Storage で初回の画像バリアント生成時に発生していた「画像処理バックエンドのロード遅延」をなくすため、ImageMagick / vips のバックエンドをあらかじめ `require` しておくようにした変更です。これにより、初回アクセスのレイテンシ低減と、prefork 型アプリサーバにおけるメモリ共有効率の向上が期待できます。"
+    },
+    {
+      "number": 57396,
+      "title": "Invalidate query cache when UPDATE goes through `update_with_result` {#pr-57396}",
+      "url": "https://github.com/rails/rails/pull/57396",
+      "mergedAt": "2026-05-20T00:00:00.000Z",
+      "author": "kylekeesling",
+      "authorUrl": "https://github.com/kylekeesling",
+      "summary": "1. 概要 (1-2文で)  \nPostgreSQL の GENERATED STORED カラムを持つテーブルで UPDATE が行われた際、`update_with_result` 経由の更新でもクエリキャッシュが正しく無効化されるようにした修正です。これにより、同一キャッシュスコープ内で UPDATE 後に古いレコードが返ってしまう不具合が解消されます。"
+    },
+    {
+      "number": 57378,
+      "title": "Use NOT ENFORCED in disable_referential_integrity on PostgreSQL 18.4+ {#pr-57378}",
+      "url": "https://github.com/rails/rails/pull/57378",
+      "mergedAt": "2026-05-20T00:00:00.000Z",
+      "author": "yahonda",
+      "authorUrl": "https://github.com/yahonda",
+      "summary": "1. 概要 (1-2文で)  \nPostgreSQL 18.4 以降を対象に、`disable_referential_integrity` が内部で外部キー制約を「NOT ENFORCED / ENFORCED」に切り替える方式に変更され、`DISABLE TRIGGER ALL` を使わなくなりました。これにより superuser 権限が不要になりつつ、トランザクションで安全に元の制約状態を復元できるようになっています。"
+    },
+    {
+      "number": 57394,
+      "title": "Stabilize `say_with_time` regression tests {#pr-57394}",
+      "url": "https://github.com/rails/rails/pull/57394",
+      "mergedAt": "2026-05-20T00:00:00.000Z",
+      "author": "yahonda",
+      "authorUrl": "https://github.com/yahonda",
+      "summary": "1. 概要 (1-2文で)  \n`say_with_time` の回帰テストが CI 環境でタイミングぶれにより不安定になっていた問題を、期待値を「固定文字列」から「フォーマットのみを保証する正規表現マッチ」に変更することで安定化した PR です。ログ出力の形式は維持したまま、経過時間の微小な違いでテストが落ちないようにしています。"
+    },
     {
       "number": 50431,
       "title": "Add `exclusion_constraint_exists?` and `unique_constraint_exists?` helpers {#pr-50431}",
@@ -343,114 +451,6 @@
       "author": "shes50103",
       "authorUrl": "https://github.com/shes50103",
       "summary": "1. 概要 (1-2文で)  \n`strict_loading` モードが有効な関連に対して `pluck` を呼んだ場合でも、他の場合と同様に strict loading 違反としてエラー or ログ出力されるように修正した PRです。  \nあわせて、「事前に preload されている関連」は strict loading 違反とみなされないように判定ロジックが調整されています。"
-    },
-    {
-      "number": 57358,
-      "title": "Document ActiveStorage::Blob#custom_metadata [ci-skip] {#pr-57358}",
-      "url": "https://github.com/rails/rails/pull/57358",
-      "mergedAt": "2026-05-14T00:00:00.000Z",
-      "author": "p8",
-      "authorUrl": "https://github.com/p8",
-      "summary": "1. 概要 (1-2文で)  \nActive Storage の `ActiveStorage::Blob#custom_metadata` / `#custom_metadata=` メソッドについて、既に存在していたものの公式に説明されていなかったため、コメントでドキュメントを追加した PR です。挙動や API 仕様の変更はなく、コード上のドキュメント整備のみです。"
-    },
-    {
-      "number": 57362,
-      "title": "[ci skip] Update the debugging guide to link the actively maintained Exception Notifier repo {#pr-57362}",
-      "url": "https://github.com/rails/rails/pull/57362",
-      "mergedAt": "2026-05-14T00:00:00.000Z",
-      "author": "KDunc11",
-      "authorUrl": "https://github.com/KDunc11",
-      "summary": "1. 概要 (1-2文で)  \nRailsガイド「debugging_rails_applications.md」に記載されていた Exception Notifier へのリンクが、メンテナンスされていないリポジトリを指していたため、現在アクティブにメンテナンスされているリポジトリへのリンクに差し替えたドキュメント修正PRです。コードや挙動の変更はなく、あくまでガイド文書の更新のみです。\n\n2. 変更内容の詳細(あればサンプルコードも含めて)  \n- 対象ファイル: `guides/source/debugging_rails_applications.md`  \n- 変更内容:  \n  - Exception Notifier の GitHub リポジトリ URL を、非メンテナンスのものから「現在アクティブにメンテされている Exception Notifier リポジトリ」に差し替え。  \n  - 具体的には 1 行のみの変更で、古いリンクを新しいリンクに置き換えています（ガイド上の説明文やサンプルコード等は変更なし）。\n\n（実際の diff イメージ）※URLは例示\n```diff\n- * Exception Notifier: https://github.com/old-org/exception_notifier\n+ * Exception Notifier: https://github.com/railsware/exception_notification\n```\n※ 実際の組織名・リポジトリ名は PR の差分に依存しますが、趣旨としては「正しい現行リポジトリに差し替え」という変更です。\n\n3. 影響範囲・注意点  \n- 影響範囲:\n  - Rails ガイドを読みながら例外通知の設定を行う開発者が、メンテされていない古い repo ではなく、現行でメンテされている Exception Notifier の実装・README にアクセスできるようになります。\n  - ランタイムの挙動・Rails 本体の API・テストなどには一切影響しません（ドキュメントのみ、CI スキップ指定 `[ci skip]` あり）。\n- 注意点:\n  - すでに旧リポジトリを参照して設定していた場合は、ガイド更新をきっかけに「どの repo を使うべきか」を見直したほうがよい可能性があります（依存 gem の更新状況やセキュリティ修正などの観点）。\n  - 本 PR 自体にはテストや CHANGELOG 更新は不要と判断されており、実質的には「参照先 URL の正規化」のみです。\n\n4. 参考情報 (あれば)  \n- Rails ガイド（英語版）: `guides/source/debugging_rails_applications.md`  \n- Exception Notifier（例外通知）の代表的な利用例（概念的な例）:\n  ```ruby\n  # Gemfile\n  gem 'exception_notification'\n\n  # config/environments/production.rb\n  Rails.application.configure do\n    config.middleware.use ExceptionNotification::Rack,\n      email: {\n        email_prefix: \"[MyApp ERROR] \",\n        sender_address: %{\"notifier\" <notifier@example.com>},\n        exception_recipients: %w[dev-team@example.com]\n      }\n  end\n  ```\n  このような設定方法を確認する際に、今回の PR によって開発が続いている最新版の README / Wiki を参照しやすくなります。"
-    },
-    {
-      "number": 57359,
-      "title": "Fix formatting in Active Storage controller docs {#pr-57359}",
-      "url": "https://github.com/rails/rails/pull/57359",
-      "mergedAt": "2026-05-13T00:00:00.000Z",
-      "author": "p8",
-      "authorUrl": "https://github.com/p8",
-      "summary": "1. 概要 (1-2文で)  \nActive Storage のコントローラに書かれているドキュメントコメント内のインラインコード表記を、`+foo+` から `<tt>foo</tt>` に変更して、Rails API ドキュメント上での表示を整えた PRです。機能や挙動の変更は一切なく、ドキュメント表示の体裁を整えるだけの修正です。"
-    },
-    {
-      "number": 57357,
-      "title": "Remove reference to removed QueAdapter {#pr-57357}",
-      "url": "https://github.com/rails/rails/pull/57357",
-      "mergedAt": "2026-05-13T00:00:00.000Z",
-      "author": "p8",
-      "authorUrl": "https://github.com/p8",
-      "summary": "1. 概要 (1-2文で)  \nQueAdapter 本体がすでに削除されているにもかかわらず、`ActiveJob` 内に残っていた QueAdapter への参照を整理・削除する PR です。  \nこれにより、存在しないアダプタへの不整合な参照がなくなり、Active Job のキューアダプタ定義が実装と一致するようになりました。"
-    },
-    {
-      "number": 57351,
-      "title": "Document ActiveStorage::Blob#content_type and Blob#metadata {#pr-57351}",
-      "url": "https://github.com/rails/rails/pull/57351",
-      "mergedAt": "2026-05-13T00:00:00.000Z",
-      "author": "p8",
-      "authorUrl": "https://github.com/p8",
-      "summary": "1. 概要 (1–2文で)  \nActive Storage の `ActiveStorage::Blob#content_type` と `#metadata` について、「パブリックにサポートされているメソッドである」ことをコード上で明示するドキュメントコメントが追加されました。実行時の挙動やシグネチャは変わらず、仕様の位置づけが明確化されたドキュメント改善のPRです。"
-    },
-    {
-      "number": 57355,
-      "title": "Fix docs formatting for `ActionController::Live` [ci skip] {#pr-57355}",
-      "url": "https://github.com/rails/rails/pull/57355",
-      "mergedAt": "2026-05-13T00:00:00.000Z",
-      "author": "drjayvee",
-      "authorUrl": "https://github.com/drjayvee",
-      "summary": "1. 概要 (1-2文で)  \n`ActionController::Live` のクラスドキュメントの「書式崩れ」「読みづらさ」を修正するために、コメントのフォーマット（RDoc/YARD向け）を整理した PR です。コードの挙動や API は一切変更されておらず、生成ドキュメントの見た目と読みやすさだけが改善されています。"
-    },
-    {
-      "number": 56872,
-      "title": "Add start_day argument to this_week? for consistency with all_week {#pr-56872}",
-      "url": "https://github.com/rails/rails/pull/56872",
-      "mergedAt": "2026-05-12T00:00:00.000Z",
-      "author": "55728",
-      "authorUrl": "https://github.com/55728",
-      "summary": "1. 概要 (1-2文で)  \n`Date/Time#this_week?` に `start_day` 引数が追加され、`all_week` / `beginning_of_week` / `end_of_week` と同様に呼び出しごとに週の開始曜日を指定できるようになりました。これにより、グローバルな `Date.beginning_of_week` を書き換えずに、ロケールや用途ごとに柔軟に「今週かどうか」を判定できます。"
-    },
-    {
-      "number": 57349,
-      "title": "Add default `#render_in` implementation to `ActiveModel::Conversion` {#pr-57349}",
-      "url": "https://github.com/rails/rails/pull/57349",
-      "mergedAt": "2026-05-12T00:00:00.000Z",
-      "author": "seanpdoyle",
-      "authorUrl": "https://github.com/seanpdoyle",
-      "summary": "1. 概要 (1-2文で)  \nActiveModel::Conversion にデフォルトの `#render_in` 実装が追加され、Active Model / Active Record オブジェクトを Action View がどのように HTML / JSON にレンダリングするかをモデル側でカスタマイズしやすくなりました。  \n既存の「partial + object」ベースのレンダリング挙動は保ったまま、`render model` / `render renderable: model` をフックできる統一的な入口が用意されています。"
-    },
-    {
-      "number": 57356,
-      "title": "Fix `ActionText::Editor::Tag#render_in` to accept kwargs {#pr-57356}",
-      "url": "https://github.com/rails/rails/pull/57356",
-      "mergedAt": "2026-05-12T00:00:00.000Z",
-      "author": "flavorjones",
-      "authorUrl": "https://github.com/flavorjones",
-      "summary": "1. 概要 (1-2文で)  \nAction Text の `ActionText::Editor::Tag#render_in` が、Action View 側の新しい呼び出し規約（kwargs 付き）に対応していなかったバグを修正した PRです。これにより、独自エディタアダプタのサブクラスが `super` を呼んだときに `ArgumentError` が発生する問題が解消されます。"
-    },
-    {
-      "number": 57342,
-      "title": "Disable freezing of NATIVE_DATABASE_TYPES for SQLite3 adapter {#pr-57342}",
-      "url": "https://github.com/rails/rails/pull/57342",
-      "mergedAt": "2026-05-12T00:00:00.000Z",
-      "author": "tahsin352",
-      "authorUrl": "https://github.com/tahsin352",
-      "summary": "1. 概要 (1-2文で)  \nSQLite3 アダプタの `NATIVE_DATABASE_TYPES` を `freeze` しないようにし、外部の gem などがこのハッシュを書き換えてカスタム型を登録できるように戻した PR です。  \nMySQL アダプタで行われた同種の対応 (#57333) を SQLite3 版でも行うフォローアップです。"
-    },
-    {
-      "number": 55978,
-      "title": "Enable `config.asset_host` to read from environment by default {#pr-55978}",
-      "url": "https://github.com/rails/rails/pull/55978",
-      "mergedAt": "2026-05-12T00:00:00.000Z",
-      "author": "stevepolitodesign",
-      "authorUrl": "https://github.com/stevepolitodesign",
-      "summary": "1. 概要 (1-2文で)  \nRails の `config.asset_host` がデフォルトで `ENV[\"CDN_HOST\"]` を参照するようになり、環境変数を設定するだけで CDN 経由で静的アセットを配信できるようになりました。`ENV[\"CDN_HOST\"]` が未設定の場合はこれまで通り `asset_host = nil` のままで、挙動は変わりません。"
-    },
-    {
-      "number": 57352,
-      "title": "Properly reset fixtures cache after non-transactional tests {#pr-57352}",
-      "url": "https://github.com/rails/rails/pull/57352",
-      "mergedAt": "2026-05-12T00:00:00.000Z",
-      "author": "byroot",
-      "authorUrl": "https://github.com/byroot",
-      "summary": "1. 概要 (1-2文で)  \nこのPRは、**トランザクションを使わないテスト実行後に、fixtures のキャッシュが正しくリセットされない問題を修正**し、ActiveRecord のテストフィクスチャ機構の一貫性を高めたものです。あわせて、この挙動を検証するテストと、リークチェッカー側のサポートを追加しています。"
     }
   ]
 }
