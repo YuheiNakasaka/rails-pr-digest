@@ -1,7 +1,196 @@
 {
-  "lastUpdated": "2026-05-21T00:35:02.398Z",
+  "lastUpdated": "2026-05-22T00:35:05.610Z",
   "totalCount": 50,
   "items": [
+    {
+      "number": 57209,
+      "title": "Fix label `for` not matching input `id` when collection value is nil {#pr-57209}",
+      "url": "https://github.com/rails/rails/pull/57209",
+      "mergedAt": "2026-05-21T00:00:00.000Z",
+      "author": "55728",
+      "authorUrl": "https://github.com/55728",
+      "summary": "1. 概要 (1–2文で)  \n`collection_radio_buttons` / `collection_check_boxes` のコレクション内に `nil` 値がある場合に、`label` の `for` 属性と対応する `input` の `id` が食い違ってしまう不具合を修正する PR です。`nil` のときに `for` 側だけ末尾に不要なアンダースコア（`_`）が付いていた問題を解消し、正しくクリックで選択できるようにしています。"
+    },
+    {
+      "number": 57400,
+      "title": "Reset `lock_version` after a nested savepoint rollback {#pr-57400}",
+      "url": "https://github.com/rails/rails/pull/57400",
+      "mergedAt": "2026-05-21T00:00:00.000Z",
+      "author": "55728",
+      "authorUrl": "https://github.com/55728",
+      "summary": "1. 概要 (1-2文で)  \n`requires_new: true` なネストしたトランザクション（セーブポイント）がロールバックされたときに、メモリ上の `lock_version` をDBの状態に戻すようにして、次回の `save` / `update!` で `ActiveRecord::StaleObjectError` が発生する不具合を修正するPRです。前回の #57363 で対応できていなかった「ネストしたセーブポイントのロールバック」ケースを補完します。"
+    },
+    {
+      "number": 57429,
+      "title": "Preserve SafeBuffer encoding in ActiveSupport::MessagePack {#pr-57429}",
+      "url": "https://github.com/rails/rails/pull/57429",
+      "mergedAt": "2026-05-21T00:00:00.000Z",
+      "author": "Copilot",
+      "authorUrl": "https://github.com/apps/copilot-swe-agent",
+      "summary": "1. 概要 (1-2文で)  \nActiveSupport::MessagePack で `ActiveSupport::SafeBuffer` をシリアライズ／デシリアライズした際に、元の文字エンコーディング（特に UTF-8）が失われないようにする修正です。これにより、キャッシュなどから復元した `SafeBuffer` を UTF-8 文字列と安全に連結できるようになります。"
+    },
+    {
+      "number": 57404,
+      "title": "Update permissions policy list {#pr-57404}",
+      "url": "https://github.com/rails/rails/pull/57404",
+      "mergedAt": "2026-05-21T00:00:00.000Z",
+      "author": "rubenarakelyan",
+      "authorUrl": "https://github.com/rubenarakelyan",
+      "summary": "1. 概要 (1–2文で)  \nRails の `ActionDispatch::PermissionsPolicy` が、ブラウザ側で新たに定義・拡充された Permissions Policy（旧 Feature Policy）のディレクティブ一覧に追随して更新されました。これにより、`config.permissions_policy` などから最新のポリシー項目を公式に扱えるようになります。"
+    },
+    {
+      "number": 57171,
+      "title": "Parallelize exist? checks and uploads in MirrorService#mirror {#pr-57171}",
+      "url": "https://github.com/rails/rails/pull/57171",
+      "mergedAt": "2026-05-21T00:00:00.000Z",
+      "author": "Mordorreal",
+      "authorUrl": "https://github.com/Mordorreal",
+      "summary": "1. 概要 (1-2文で)  \nActive Storage の `MirrorService#mirror` において、複数ミラーへの `exist?` チェックとアップロード処理をスレッドプール上で並列化し、特にネットワークレイテンシが支配的な環境で大幅な速度向上を図る変更です。既存の `@executor`（スレッドプール）を `mirror` でも活用するようにした改善 PR です。"
+    },
+    {
+      "number": 57423,
+      "title": "Fix ShareLock ownership under :fiber isolation {#pr-57423}",
+      "url": "https://github.com/rails/rails/pull/57423",
+      "mergedAt": "2026-05-21T00:00:00.000Z",
+      "author": "joeljunstrom",
+      "authorUrl": "https://github.com/joeljunstrom",
+      "summary": "1. 概要 (1-2文で)  \n`ActiveSupport::Concurrency::ShareLock` の「ロック所有者」の識別方法を、`Thread.current` ベースから `ActiveSupport::IsolatedExecutionState.context` ベースに変更し、`config.active_support.isolation_level = :fiber` のときでも正しく排他制御できるようにした PR です。これにより、Falcon などの Fiber スケジューラ使用時に、リロード後のランダムな `NoMethodError` が発生する不具合を修正しています。"
+    },
+    {
+      "number": 57425,
+      "title": "Release reloader share on rack hijack in ActionDispatch::Executor {#pr-57425}",
+      "url": "https://github.com/rails/rails/pull/57425",
+      "mergedAt": "2026-05-21T00:00:00.000Z",
+      "author": "joeljunstrom",
+      "authorUrl": "https://github.com/joeljunstrom",
+      "summary": "1. 概要 (1-2文で)  \nActionDispatch::Executor が WebSocket や Rack hijack（`rack.hijack_io`）による長寿命コネクションでもリクエスト完了処理（executor state の完了・reloader share の解放）を適切なタイミングで行うように変更されました。これにより、開発環境でのリロード待ちのデッドロックや、クリーンアップ処理がソケットクローズまで遅延する問題が解消されます。"
+    },
+    {
+      "number": 57397,
+      "title": "[ci skip] Clarify Active Job queue backends {#pr-57397}",
+      "url": "https://github.com/rails/rails/pull/57397",
+      "mergedAt": "2026-05-21T00:00:00.000Z",
+      "author": "sandstrom",
+      "authorUrl": "https://github.com/sandstrom",
+      "summary": "1. 概要 (1-2文で)  \nActive Job で利用できるキューイングバックエンドに関するガイド文書を整理し、「どのバックエンドを・なぜ挙げているのか」をより明確にしたドキュメント変更です。組み込みアダプタの今後の扱い（外部抽出の方針）とも整合するように説明とリンク構成が調整されています。"
+    },
+    {
+      "number": 57170,
+      "title": "Fix MirrorService#mirror IntegrityError with nil checksum {#pr-57170}",
+      "url": "https://github.com/rails/rails/pull/57170",
+      "mergedAt": "2026-05-21T00:00:00.000Z",
+      "author": "Mordorreal",
+      "authorUrl": "https://github.com/Mordorreal",
+      "summary": "1. 概要 (1-2文で)  \nActive Storage の `MirrorService#mirror` が、チェックサムが `nil` の場合でも整合性チェックを実行してしまい `ActiveStorage::IntegrityError` を投げていた不具合を修正した PRです。チェックサムが存在する場合にのみ整合性検証を行うようにし、ドキュメントの仕様と実装を一致させています。"
+    },
+    {
+      "number": 57223,
+      "title": "Fix duplicate `where` conditions in `create_or_find_by` {#pr-57223}",
+      "url": "https://github.com/rails/rails/pull/57223",
+      "mergedAt": "2026-05-21T00:00:00.000Z",
+      "author": "y-dashev",
+      "authorUrl": "https://github.com/y-dashev",
+      "summary": "1. 概要 (1–2文で)  \n`create_or_find_by` がユニーク制約違反 (`RecordNotUnique`) 後のリトライ時に重複した `where` 条件を生成してしまい、結果として `RecordNotFound` が起き得るバグを修正した PR です。`where(...).find_by!(...)` を `rewhere(...).take!` に置き換えることで、競合時の再検索ロジックを正しく動作させています。"
+    },
+    {
+      "number": 57424,
+      "title": "Update `SOLID_QUEUE_IN_PUMA` handling in `puma.rb` template {#pr-57424}",
+      "url": "https://github.com/rails/rails/pull/57424",
+      "mergedAt": "2026-05-21T00:00:00.000Z",
+      "author": "jordan-brough",
+      "authorUrl": "https://github.com/jordan-brough",
+      "summary": "1. 概要 (1-2文で)  \nRails が生成する `config/puma.rb` のテンプレートにおいて、`ENV[\"SOLID_QUEUE_IN_PUMA\"]` を真偽解釈するロジックが変更され、`nil` / 空文字列 `\"\"` / `\"0\"` / `\"false\"` を「false 相当」と扱うようになりました。これにより、環境変数に `\"false\"` や `\"0\"` を設定したときに、直感に反して機能が有効になってしまう問題を避けられます。"
+    },
+    {
+      "number": 57284,
+      "title": "Don't bump lock_version on records during blob analysis {#pr-57284}",
+      "url": "https://github.com/rails/rails/pull/57284",
+      "mergedAt": "2026-05-21T00:00:00.000Z",
+      "author": "g-pavlik",
+      "authorUrl": "https://github.com/g-pavlik",
+      "summary": "1. 概要 (1-2文で)  \nActive Storage の非同期分析（`ActiveStorage::AnalyzeJob`）が `lock_version` を意図せず更新してしまい、楽観ロック中のレコードで `ActiveRecord::StaleObjectError` が起きる問題を修正する PR です。  \nBlob 分析時の関連レコード `touch` では `updated_at` は更新しつつ、`lock_version` の更新だけを抑制する仕組みが Active Record 側に追加されています。"
+    },
+    {
+      "number": 57422,
+      "title": "Fixes to query command {#pr-57422}",
+      "url": "https://github.com/rails/rails/pull/57422",
+      "mergedAt": "2026-05-21T00:00:00.000Z",
+      "author": "andyjeffries",
+      "authorUrl": "https://github.com/andyjeffries",
+      "summary": "1. 概要 (1-2文で)  \n`rails query` コマンドのバグ修正 PR で、  \n- 読み取り専用接続をバイパスして書き込みできてしまう危険な挙動  \n- 実用上「使えない」レベルの挙動不良  \nを修正し、安全かつ実用的に使えるようにしたものです。"
+    },
+    {
+      "number": 54930,
+      "title": "Add referential integrity note in AR::FixtureSet docs [ci skip] {#pr-54930}",
+      "url": "https://github.com/rails/rails/pull/54930",
+      "mergedAt": "2026-05-21T00:00:00.000Z",
+      "author": "danimashu",
+      "authorUrl": "https://github.com/danimashu",
+      "summary": "1. 概要 (1-2文で)  \n`ActiveRecord::FixtureSet` のAPIドキュメントに、「フィクスチャ読み込み時にRailsがリレーショナル整合性（外部キー制約など）を一時的に無効化する」ことを説明する注意書きが追加されました。これにより、特にDBトリガーや外部キー検証に依存しているテストで、意図せず「非整合」なテストデータが生じうる点への注意喚起が強化されています。"
+    },
+    {
+      "number": 52871,
+      "title": "Allow to pass array values to `.in_order_of` {#pr-52871}",
+      "url": "https://github.com/rails/rails/pull/52871",
+      "mergedAt": "2026-05-21T00:00:00.000Z",
+      "author": "doits",
+      "authorUrl": "https://github.com/doits",
+      "summary": "1. 概要 (1–2文で)  \n`.in_order_of` にネストを含む配列を渡して、「値のグルーピング + グループの順序付け」ができるようになりました。これにより、ENUM などを使った状態カラムを「いくつかの状態をまとめて 1 グループとして扱いつつ、そのグループ自体の順序も制御する」といったクエリが書きやすくなります。"
+    },
+    {
+      "number": 57416,
+      "title": "[RF-Docs][ci-skip] Caching with Rails (#57107) {#pr-57416}",
+      "url": "https://github.com/rails/rails/pull/57416",
+      "mergedAt": "2026-05-21T00:00:00.000Z",
+      "author": "p8",
+      "authorUrl": "https://github.com/p8",
+      "summary": "1. 概要 (1-2文で)  \nRails ガイド「Caching with Rails」を現行のRailsの挙動・用語に合わせて大幅に書き直し、構成も整理しつつ、低レベルキャッシュ・フラグメントキャッシュ・Conditional GET・SQL/クエリキャッシュ・Solid Cache・非リクエストコンテキストでのキャッシュなどをより実践的かつ詳細に解説するドキュメント改訂PRです。機能追加や挙動変更ではなく、既存の仕組みを正しく理解してもらうためのドキュメント改善です。"
+    },
+    {
+      "number": 57417,
+      "title": "Update the Rails on Rack guide (#56918) [ci-skip] {#pr-57417}",
+      "url": "https://github.com/rails/rails/pull/57417",
+      "mergedAt": "2026-05-21T00:00:00.000Z",
+      "author": "p8",
+      "authorUrl": "https://github.com/p8",
+      "summary": "1. 概要 (1-2文で)\n- Rails公式ガイド「Rails on Rack」を大幅に書き直し・構成見直ししたドキュメント改善PRです。\n- Rackミドルウェアスタックの最新情報反映、初期化処理へのリンク追加、カスタムミドルウェアやコントローラからRack APIを使う高度な利用方法などが追記されています。"
+    },
+    {
+      "number": 57415,
+      "title": "[RF Docs] Active Record Query Interface (#56341) {#pr-57415}",
+      "url": "https://github.com/rails/rails/pull/57415",
+      "mergedAt": "2026-05-21T00:00:00.000Z",
+      "author": "p8",
+      "authorUrl": "https://github.com/p8",
+      "summary": "1. 概要 (1–2文)  \nActive Record Query Interface ガイド（`active_record_querying.md`）を大幅に書き直し・再構成し、関連する API コメントおよび Composite Primary Keys ガイドとのリンクも整理した PRです。SQL や複合主キー、スコープ、ロック、パフォーマンス関連への導線を明確にしつつ、例示・用語の整合性や安全性（SQL インジェクション等）の説明を強化しています。"
+    },
+    {
+      "number": 57414,
+      "title": "Cache fixtures parsing {#pr-57414}",
+      "url": "https://github.com/rails/rails/pull/57414",
+      "mergedAt": "2026-05-21T00:00:00.000Z",
+      "author": "byroot",
+      "authorUrl": "https://github.com/byroot",
+      "summary": "1. 概要 (1-2文で)  \nこのPRは、テスト実行時のフィクスチャ(YAML)の「パース処理」をキャッシュすることで、`use_transactional_tests = false` なテストが混在するケースでの大幅なパフォーマンス低下を緩和する変更です。DBのリセットは従来どおり行いつつ、YAML ファイルの再解析を避けてフィクスチャ読み込みのオーバーヘッドを削減しています。"
+    },
+    {
+      "number": 57413,
+      "title": "Optimize fixtures lookup pattern {#pr-57413}",
+      "url": "https://github.com/rails/rails/pull/57413",
+      "mergedAt": "2026-05-21T00:00:00.000Z",
+      "author": "byroot",
+      "authorUrl": "https://github.com/byroot",
+      "summary": "1. 概要 (1-2文で)  \nRails の ActiveRecord fixtures で、フィクスチャ名の検索（lookup）に使うパターンが最適化され、約 50% 高速かつコードも簡潔になるように変更されています。変更は 1 行のみですが、フィクスチャ読み込み周りのパフォーマンスに影響します。"
+    },
+    {
+      "number": 57405,
+      "title": "Improve Date::DATE_FORMATS and Time::DATE_FORMAT deprecation {#pr-57405}",
+      "url": "https://github.com/rails/rails/pull/57405",
+      "mergedAt": "2026-05-21T00:00:00.000Z",
+      "author": "byroot",
+      "authorUrl": "https://github.com/byroot",
+      "summary": "1. 概要 (1-2文で)  \nRails 7.2系(?)で進んでいる `Date::DATE_FORMATS` / `Time::DATE_FORMATS` 廃止方針に関するフォローアップで、非推奨警告の出し方を整理し、新しい推奨APIを警告メッセージに含めるようにしつつ、コア拡張とフォーマット定義モジュールの関係を整理したPRです。実質的には「どう警告を出すか」「どこにフォーマットが定義されるか」の内部構造の変更であり、既存アプリへの影響は主に非推奨警告の出方にとどまります。"
+    },
     {
       "number": 57345,
       "title": "Introduce `ActiveSupport::TimeFormats` and `ActiveSupport::DateFormats` for registering custom date formats {#pr-57345}",
@@ -262,195 +451,6 @@
       "author": "fatkodima",
       "authorUrl": "https://github.com/fatkodima",
       "summary": "1. 概要 (1-2文で)  \n`ActiveRecord::Batches::BatchEnumerator` が内部的に持っていた `cursor`, `order`, `use_ranges` を、外部から読み取れる公開属性として追加し、バッチ処理の挙動に応じた高度なカスタマイズができるようになりました。これにより、バッチイテレーションの状態や戦略を外部のライブラリ／アプリケーションから参照可能になります。"
-    },
-    {
-      "number": 45201,
-      "title": "Adds ability to get the combined bytes_size of all attached blobs {#pr-45201}",
-      "url": "https://github.com/rails/rails/pull/45201",
-      "mergedAt": "2026-05-17T00:00:00.000Z",
-      "author": "sandip-mane",
-      "authorUrl": "https://github.com/sandip-mane",
-      "summary": "1. 概要 (1-2文で)  \nActive Storage の `has_many_attached` に対して、紐づいている複数ファイルの総サイズ(バイト数)を一括で取得できる `byte_size` メソッドが追加されました。これにより、`Gallery.new.photos.byte_size` のようにして、複数添付ファイルの合計容量を簡単に取得できます。"
-    },
-    {
-      "number": 44746,
-      "title": "Fix `ActiveRecord::QueryMethods#in_order_of` when passing an out-of-range Integer. {#pr-44746}",
-      "url": "https://github.com/rails/rails/pull/44746",
-      "mergedAt": "2026-05-17T00:00:00.000Z",
-      "author": "tejanium",
-      "authorUrl": "https://github.com/tejanium",
-      "summary": "1. 概要 (1–2文で)  \n`ActiveRecord::QueryMethods#in_order_of` に、整数型カラムに対して範囲外の整数を渡したときに `ActiveModel::RangeError` が発生する不具合があり、それを修正する PR です。修正後は、範囲外など「シリアライズ不可能な値」は無視され、エラーを出さずに `ORDER BY` 句が構築されます。"
-    },
-    {
-      "number": 57107,
-      "title": "[RF-Docs][ci-skip] Caching with Rails {#pr-57107}",
-      "url": "https://github.com/rails/rails/pull/57107",
-      "mergedAt": "2026-05-17T00:00:00.000Z",
-      "author": "Ridhwana",
-      "authorUrl": "https://github.com/Ridhwana",
-      "summary": "1. 概要 (1-2文で)  \nRails公式ガイド「Caching with Rails」の内容を、現行のRailsの挙動に合わせて大幅に書き直し・再構成したドキュメント改善PRです。既存の構成やトーンは維持しつつ、`Rails.cache`、フラグメントキャッシュ、Conditional GET、SQLキャッシュ、Solid Cache、ETagなどの解説がかなり具体的・実践的になりました。"
-    },
-    {
-      "number": 56341,
-      "title": "[RF Docs] Active Record Query Interface {#pr-56341}",
-      "url": "https://github.com/rails/rails/pull/56341",
-      "mergedAt": "2026-05-17T00:00:00.000Z",
-      "author": "Ridhwana",
-      "authorUrl": "https://github.com/Ridhwana",
-      "summary": "1. 概要 (1–2文で)\n- Active Record Query Interface ガイド全体を大幅に書き直し・整理し、用語・構成・サンプルコード・相互リンクを現状の Rails に合わせてアップデートしたドキュメント改善 PRです。  \n- 併せて `ActiveRecord::Relation#only` / `#except` まわりなど、クエリメソッドのドキュメントコメントも微調整され、複合主キーガイドとの連携も強化されています。"
-    },
-    {
-      "number": 43736,
-      "title": "Introduce `**options` argument in the `DestroyAssociationAsyncJob#perform` method {#pr-43736}",
-      "url": "https://github.com/rails/rails/pull/43736",
-      "mergedAt": "2026-05-16T00:00:00.000Z",
-      "author": "smt116",
-      "authorUrl": "https://github.com/smt116",
-      "summary": "1. 概要 (1-2文で)  \n`ActiveRecord::DestroyAssociationAsyncJob#perform` の引数に `**options` が追加され、将来的にオプションを拡張しても既存アプリを壊さないようにするための後方互換性改善が行われました。実質的な挙動は現状変わらず、ごく小さなシグネチャ変更のみです。"
-    },
-    {
-      "number": 56842,
-      "title": "Revert: Sort table columns by name when dumping schema {#pr-56842}",
-      "url": "https://github.com/rails/rails/pull/56842",
-      "mergedAt": "2026-05-15T00:00:00.000Z",
-      "author": "bert-mccutchen",
-      "authorUrl": "https://github.com/bert-mccutchen",
-      "summary": "1. 概要 (1-2文で)  \nスキーマダンプ時にテーブルのカラムを名前順にソートする挙動を導入した変更(#53281)を、丸ごと取り消すPRです。これにより、`schema.rb` などでのカラムの出力順は、従来どおり「DBが返す順序（定義順）」に戻ります。"
-    },
-    {
-      "number": 57374,
-      "title": "Revert \"Add default `#render_in` implementation to `ActiveModel::Conversion`\" {#pr-57374}",
-      "url": "https://github.com/rails/rails/pull/57374",
-      "mergedAt": "2026-05-15T00:00:00.000Z",
-      "author": "seanpdoyle",
-      "authorUrl": "https://github.com/seanpdoyle",
-      "summary": "1. 概要 (1-2文で)  \n`ActiveModel::Conversion` に追加されていたデフォルト実装の `#render_in` を、一旦まるごと巻き戻した PR です。まだ未リリースの機能だったため、コントローラ起点のパーシャル名前空間解決に関する問題を踏まえて、仕様を見直した上で再度出し直す方針になっています。"
-    },
-    {
-      "number": 57364,
-      "title": "Enumerate columns in SELECT when only_columns is set {#pr-57364}",
-      "url": "https://github.com/rails/rails/pull/57364",
-      "mergedAt": "2026-05-15T00:00:00.000Z",
-      "author": "sarub0b0",
-      "authorUrl": "https://github.com/sarub0b0",
-      "summary": "1. 概要 (1-2文で)  \n`only_columns` を設定したときに、SQL の `SELECT` 句が `table.*` のままになってしまう不具合を修正し、ドキュメントどおり「指定したカラムだけを取得する」挙動になるようにした PR です。`ignored_columns` 使用時と同様に、`only_columns` でも SELECT 句でカラムを列挙するようにしています。"
-    },
-    {
-      "number": 57372,
-      "title": "Remove caller supplied :object option in render_in ActiveModel helper {#pr-57372}",
-      "url": "https://github.com/rails/rails/pull/57372",
-      "mergedAt": "2026-05-15T00:00:00.000Z",
-      "author": "tahsin352",
-      "authorUrl": "https://github.com/tahsin352",
-      "summary": "1. 概要 (1-2文で)  \nActiveModel の `render_in` ヘルパーで、呼び出し元が `:object` オプションを渡しても無視し、常に `self` を描画対象オブジェクトとして使うようにした PR です。これにより、キーワード引数の重複エラーや、意図せず `self` が上書きされる挙動を防ぎます。"
-    },
-    {
-      "number": 48628,
-      "title": "PostgreSQL reload virtual columns on update via RETURNING clause {#pr-48628}",
-      "url": "https://github.com/rails/rails/pull/48628",
-      "mergedAt": "2026-05-14T00:00:00.000Z",
-      "author": "abaldwin88",
-      "authorUrl": "https://github.com/abaldwin88",
-      "summary": "1. 概要 (1-2文で)  \nPostgreSQL を使う場合、Active Record が UPDATE クエリに RETURNING 句を付けて実行し、DB 側で計算・更新される「仮想カラム（virtual columns, generated columns）」を自動的に再ロードするようになりました。これにより、更新直後のモデル上で仮想カラムの値を正しく参照するために `reload` を呼ぶ必要がなくなります。"
-    },
-    {
-      "number": 56855,
-      "title": "fix: skip coder round-trip for Hash/Array values during `insert_all` {#pr-56855}",
-      "url": "https://github.com/rails/rails/pull/56855",
-      "mergedAt": "2026-05-14T00:00:00.000Z",
-      "author": "elasticspoon",
-      "authorUrl": "https://github.com/elasticspoon",
-      "summary": "1. 概要 (1-2文で)  \n`insert_all` / `insert_all!` がシリアライズ属性（YAML/JSON など）を扱う際に、不要な cast（YAML.dump → YAML.load の往復）をスキップするホットパスを入れて、性能劣化を解消した PR です。通常の属性代入など他の挙動に影響を与えず、`insert_all` のみを高速化します。"
-    },
-    {
-      "number": 57363,
-      "title": "Reset `lock_version` after transaction rollback {#pr-57363}",
-      "url": "https://github.com/rails/rails/pull/57363",
-      "mergedAt": "2026-05-14T00:00:00.000Z",
-      "author": "55728",
-      "authorUrl": "https://github.com/55728",
-      "summary": "1. 概要 (1-2文で)  \nこのPRは、楽観的ロック (`lock_version`) を使ったレコードをトランザクション内で更新した後にロールバックした際、メモリ上の `lock_version` とDB上の値が不整合になり、次回の保存で `ActiveRecord::StaleObjectError` が発生するバグを修正します。ロールバック時にトランザクション前の `lock_version` を正しく復元するように、トランザクション状態の復元処理を調整しています。"
-    },
-    {
-      "number": 53812,
-      "title": "Action Text: Dispatch Active Storage events with `id` and `file` {#pr-53812}",
-      "url": "https://github.com/rails/rails/pull/53812",
-      "mergedAt": "2026-05-14T00:00:00.000Z",
-      "author": "seanpdoyle",
-      "authorUrl": "https://github.com/seanpdoyle",
-      "summary": "1. 概要 (1-2文で)  \nAction Text が発火する Active Storage 直アップロード用の JavaScript イベントについて、`event.detail` に `id` と `file` を含め、さらに 2 種類のイベントを追加しつつ、ドキュメントとテストを実装に揃えた変更です。あわせて、イベントターゲットが `<input>` ではなく `<trix-editor>` であることや、`attachment` プロパティの存在もガイドに明記しています。"
-    },
-    {
-      "number": 47161,
-      "title": "Add support for `RETURNING` to `INSERT`/`UPDATE`/`DELETE` statements {#pr-47161}",
-      "url": "https://github.com/rails/rails/pull/47161",
-      "mergedAt": "2026-05-14T00:00:00.000Z",
-      "author": "benedikt",
-      "authorUrl": "https://github.com/benedikt",
-      "summary": "1. 概要 (1-2文で)  \nArel の `INSERT` / `UPDATE` / `DELETE` に `RETURNING` 句を付けてクエリを組み立てられるようにした PR です。PostgreSQL と SQLite で、データを変更しつつ同じクエリでその結果（変更後の行や集計値など）を取得する用途を Arel レベルでサポートします。"
-    },
-    {
-      "number": 57215,
-      "title": "Fix ParameterFilter hash-lookup optimization for line-anchored regexps {#pr-57215}",
-      "url": "https://github.com/rails/rails/pull/57215",
-      "mergedAt": "2026-05-14T00:00:00.000Z",
-      "author": "alexcwatt",
-      "authorUrl": "https://github.com/alexcwatt",
-      "summary": "1. 概要 (1-2文で)  \n`ActiveSupport::ParameterFilter` の正規表現最適化で、`/^token$/` と `/\\Atoken\\z/` を同一視していたことによる不正なフィルタリング挙動を修正し、行アンカー (`^`/`$`) と文字列アンカー (`\\A`/`\\z`) を正しく区別するようにした PR です。これにより、複数行を含むパラメータキーでも本来の正規表現 semantics に従って安全にフィルタリングできるようになります。"
-    },
-    {
-      "number": 57313,
-      "title": "Remove framework_defaults if load_defaults matches {#pr-57313}",
-      "url": "https://github.com/rails/rails/pull/57313",
-      "mergedAt": "2026-05-14T00:00:00.000Z",
-      "author": "runephilosof",
-      "authorUrl": "https://github.com/runephilosof",
-      "summary": "1. 概要 (1-2文で)  \n`config.load_defaults` で指定したバージョンと実際の Rails バージョンが一致している場合は、`config/initializers/new_framework_defaults_*.rb` を生成・維持しないようにして、「使っていない new_framework_defaults が散らかる」問題を解消する変更です。`rails new` だけでなく `rails app:update` 実行時にも、不要な new_framework_defaults が勝手に再作成されなくなります。"
-    },
-    {
-      "number": 55100,
-      "title": "Fix #55099 allowing array syntax for expression indexes in add_index {#pr-55100}",
-      "url": "https://github.com/rails/rails/pull/55100",
-      "mergedAt": "2026-05-14T00:00:00.000Z",
-      "author": "AlexandreCamillo",
-      "authorUrl": "https://github.com/AlexandreCamillo",
-      "summary": "1. 概要 (1-2文で)  \n`add_index` / `t.index` で「式インデックス（expression index）」を定義する際、これまで文字列でしか書けなかったものを、通常のマルチカラムインデックスと同様に配列シンタックスでも書けるようにした修正です。これにより、`[\"lower(email)\", :status]` のように、式とカラムを一貫した形で指定できます。"
-    },
-    {
-      "number": 54416,
-      "title": "ActiveStorage: implement attach! {#pr-54416}",
-      "url": "https://github.com/rails/rails/pull/54416",
-      "mergedAt": "2026-05-14T00:00:00.000Z",
-      "author": "quentindemetz",
-      "authorUrl": "https://github.com/quentindemetz",
-      "summary": "1. 概要 (1-2文で)  \nActiveStorage の `attach` に対応する「バン付き」メソッド `attach!` が、一つ/複数添付の両方（`has_one_attached`, `has_many_attached`）に実装されました。`attach!` は保存に失敗した場合に例外を投げることで、添付がサイレントに失敗することを防ぎます。"
-    },
-    {
-      "number": 57360,
-      "title": "Fix renderable arity checks when method is overridden {#pr-57360}",
-      "url": "https://github.com/rails/rails/pull/57360",
-      "mergedAt": "2026-05-14T00:00:00.000Z",
-      "author": "chaadow",
-      "authorUrl": "https://github.com/chaadow",
-      "summary": "1. 概要 (1-2文で)  \nRails の `render` が「レンダリング可能オブジェクト」の `render_in` の引数個数(arity)を判定する際に、自前で `method` メソッドを定義しているオブジェクトだと壊れていた問題を修正した PRです。`Kernel#method` を明示的に呼ぶことで、`render_in` の arity 判定が常に正しく行われるようになりました。"
-    },
-    {
-      "number": 57366,
-      "title": "Freeze more immutable constants {#pr-57366}",
-      "url": "https://github.com/rails/rails/pull/57366",
-      "mergedAt": "2026-05-14T00:00:00.000Z",
-      "author": "andrewn617",
-      "authorUrl": "https://github.com/andrewn617",
-      "summary": "1. 概要 (1-2文で)  \nRails内部で「本来不変であるべき定数」に `.freeze` を追加し、特に配列・ハッシュ・Set などのミュータブルなオブジェクトを不変化することで、Ractor 対応（並列実行の安全性向上）を進めるPRです。前回PR (#57323) でカバーしきれなかった箇所を追加で凍結しています。"
-    },
-    {
-      "number": 51627,
-      "title": "[Fix #51524] Fix `strict_loading` violations ignored when using `pluck` {#pr-51627}",
-      "url": "https://github.com/rails/rails/pull/51627",
-      "mergedAt": "2026-05-14T00:00:00.000Z",
-      "author": "shes50103",
-      "authorUrl": "https://github.com/shes50103",
-      "summary": "1. 概要 (1-2文で)  \n`strict_loading` モードが有効な関連に対して `pluck` を呼んだ場合でも、他の場合と同様に strict loading 違反としてエラー or ログ出力されるように修正した PRです。  \nあわせて、「事前に preload されている関連」は strict loading 違反とみなされないように判定ロジックが調整されています。"
     }
   ]
 }
