@@ -1,7 +1,151 @@
 {
-  "lastUpdated": "2026-05-22T00:35:05.610Z",
+  "lastUpdated": "2026-05-23T00:31:37.790Z",
   "totalCount": 50,
   "items": [
+    {
+      "number": 57434,
+      "title": "Run LoadAsync\\*ThreadPoolExecutorTest on the replaced pool to prevent connection leak {#pr-57434}",
+      "url": "https://github.com/rails/rails/pull/57434",
+      "mergedAt": "2026-05-22T00:00:00.000Z",
+      "author": "yahonda",
+      "authorUrl": "https://github.com/yahonda",
+      "summary": "1. 概要 (1-2文で)  \n`LoadAsyncMultiThreadPoolExecutorTest` と `LoadAsyncMixedThreadPoolExecutorTest` で、接続プールの差し替えタイミングを変更し、テスト実行時に PostgreSQL コネクションがリークして `too many clients` になる問題を防ぐ修正です。テスト専用の変更であり、本番コードには影響しません。"
+    },
+    {
+      "number": 57432,
+      "title": "Rename `reset_connection` to `reset_pool`; have `reset_connection` reset just the existing connection {#pr-57432}",
+      "url": "https://github.com/rails/rails/pull/57432",
+      "mergedAt": "2026-05-22T00:00:00.000Z",
+      "author": "yahonda",
+      "authorUrl": "https://github.com/yahonda",
+      "summary": "1. 概要 (1-2文で)  \nこのPRは、テストで使われている `reset_connection` ヘルパーの意味と実装を整理し、コネクションプールごと作り直す挙動を新しい `reset_pool` に切り出すことで、PostgreSQL テスト群で発生していたコネクションリーク（`too many clients`）を解消するものです。既存のテストはメソッド名そのままで、より安全な「既存コネクションのリセット」だけを行うようになります。"
+    },
+    {
+      "number": 57446,
+      "title": "Include valid values in ActiveRecord::Enum invalid-value error {#pr-57446}",
+      "url": "https://github.com/rails/rails/pull/57446",
+      "mergedAt": "2026-05-22T00:00:00.000Z",
+      "author": "hammadxcm",
+      "authorUrl": "https://github.com/hammadxcm",
+      "summary": "1. 概要 (1-2文で)  \nActiveRecord の enum に無効な値を代入したときに発生する `ArgumentError` のメッセージに、「どの値が有効か」を列挙して表示するようにした変更です。例外クラスや発生タイミングは変わらず、エラーメッセージの内容だけが改善されています。"
+    },
+    {
+      "number": 57437,
+      "title": "Match HTML attribute quotes to actual output in ActionView docs [ci skip] {#pr-57437}",
+      "url": "https://github.com/rails/rails/pull/57437",
+      "mergedAt": "2026-05-22T00:00:00.000Z",
+      "author": "55728",
+      "authorUrl": "https://github.com/55728",
+      "summary": "1. 概要 (1-2文で)  \nActionView のヘルパー (`simple_format`, `debug`, `button` など) が実際に出力する HTML と、RDoc のサンプルコード内の HTML 属性のクォート表記（シングル／ダブル）が食い違っていたため、ドキュメント側を実際の出力（ダブルクォート）に揃えた PR です。コードの挙動は一切変えず、ドキュメントのみの修正です。"
+    },
+    {
+      "number": 57445,
+      "title": "Fix incorrect SQL examples in ActiveRecord::QueryMethods docs {#pr-57445}",
+      "url": "https://github.com/rails/rails/pull/57445",
+      "mergedAt": "2026-05-22T00:00:00.000Z",
+      "author": "hammadxcm",
+      "authorUrl": "https://github.com/hammadxcm",
+      "summary": "1. 概要 (1-2文で)  \nActiveRecord::QueryMethods のドキュメント中に記載されていた SQL のサンプルが、実際に Rails が生成する SQL と食い違っていた問題を修正した PRです。コードの挙動には一切影響せず、コメント(ドキュメント)のみの修正です。"
+    },
+    {
+      "number": 57444,
+      "title": "Freeze `LookupContext` default proc internals {#pr-57444}",
+      "url": "https://github.com/rails/rails/pull/57444",
+      "mergedAt": "2026-05-22T00:00:00.000Z",
+      "author": "paracycle",
+      "authorUrl": "https://github.com/paracycle",
+      "summary": "1. 概要 (1-2文で)  \nActionView の `ActionView::LookupContext::Details::LookupContext::Accessors` において、テンプレート詳細情報の `DEFAULT_PROCS` の扱いを見直し、「実質的に不変」な内部状態を freeze できるようにした PR です。Ractor 対応の一環として、変更可能な定数をやめ、毎回凍結されたクラスインスタンス変数を差し替える方式にしています。\n\n2. 変更内容の詳細  \n\n### 背景・目的\n- Rails を Ractor 対応するためには、「本来不変であるべき定数」やグローバル状態を凍結する必要があります。\n- しかし `LookupContext::Accessors::DEFAULT_PROCS` は、実行時に `register_detail` などで更新され得るため、そのまま `freeze` すると壊れてしまいます。\n- この PR では、「定数として公開されているオブジェクト」は凍結しつつ、「更新が必要なときには新しい凍結済みオブジェクトに差し替える」パターンに移行しています。\n\n### 具体的な変更点\n\n※ 実際の diff は 9 行追加 / 7 行削除のみの小改修ですが、概念的には以下のような変更です。\n\n#### 1. `DEFAULT_PROCS` 定数の実体を「クラスインスタンス変数」に移動\n\n従来（イメージ）:\n\n```ruby\nmodule ActionView\n  class LookupContext\n    module Details\n      module Accessors\n        DEFAULT_PROCS = {\n          formats: -> { ... },\n          locale:  -> { ... },\n          # ...\n        }\n\n        class << self\n          attr_reader :registered_details\n          # ...\n        end\n      end\n    end\n  end\nend\n```\n\n`DEFAULT_PROCS` は定数としつつも、内部的には `DEFAULT_PROCS[:something] = proc` のように変更されていたため、「不変」とは言えない状態でした。\n\n今回（イメージ）:\n\n```ruby\nmodule ActionView\n  class LookupContext\n    module Details\n      module Accessors\n        class << self\n          # 凍結された Hash を保持するクラスインスタンス変数\n          def default_procs\n            @default_procs\n          end\n\n          def register_detail(name, &block)\n            # 既存の @default_procs から dup して書き換え、\n            # 最後に freeze した上で @default_procs に再代入\n            new_default_procs = @default_procs.dup\n            new_default_procs[name] = block\n            @default_procs = new_default_procs.freeze\n\n            # registered_details もここで更新 …\n          end\n        end\n\n        # 旧 DEFAULT_PROCS 定数は「初期値の参照」程度 or 廃止方向\n      end\n    end\n  end\nend\n```\n\nポイント:\n- `DEFAULT_PROCS` という「(見かけ上)不変であってほしい定数」は、実際には中身を書き換えない。\n- 更新が必要なときは、\n  1. 現在の `@default_procs` を `dup`\n  2. 新しいエントリを追加\n  3. `freeze` して `@default_procs` に置き換え\n- これにより「常に凍結済みの Hash を参照している」状態が保たれます。\n\n#### 2. `registered_details` と `DEFAULT_PROCS` のキーを一本化\n\n説明文にある通り:\n\n> we can use the keys of the same list as the `registered_details` list, thus removing a class instance variable in the process.\n\n- これまで:\n  - `registered_details` 用の配列/セット\n  - `DEFAULT_PROCS` のキー\n  が「ほぼ同じ情報を別々に持っていた」状態。\n- これを整理し、\n  - `default_procs` のキー情報をそのまま `registered_details` として利用\n  - もしくはその逆、といった形で「二重管理」していたクラスインスタンス変数を削減。\n\nこれにより、状態管理がシンプルになり、Ractor 対応上の「共有状態」の表面積も減ります。\n\n3. 影響範囲・注意点  \n\n### 影響範囲\n\n- 対象クラス/モジュール:\n  - `ActionView::LookupContext::Details::Accessors` およびその周辺のみ。\n- 主に影響を受けるのは以下のようなケースです:\n  - ActionView の `LookupContext` をカスタマイズし、`register_detail` 相当を直接呼び出しているコード\n  - `DEFAULT_PROCS` 定数を直接読み書きしている独自拡張\n\n### 挙動上の変化\n\n- 「標準的な使い方」（ビューの `formats`, `locale`, `variants` 等の通常の解決処理）における挙動は、原則として変わりません。\n- ただし、\n  - `DEFAULT_PROCS` の中身を書き換える（`DEFAULT_PROCS[:formats] = -> { ... }` など）\n  といったハック的なコードを書いていた場合:\n  - 今後そのような直接書き換えはできなくなる（もしくは非推奨）で、`register_detail` などの正式 API を通す必要が出てきます。\n- マルチスレッド / Ractor 環境下では、`default_procs` が常に凍結されているため、読み取り専用のデータ構造として安全に共有できることが期待されます。\n\n### パフォーマンス面\n\n- `register_detail` 実行時に `Hash#dup` + `freeze` を行うオーバーヘッドが増えますが、`register_detail` 自体は通常アプリケーション起動時やフレームワーク初期化時にのみ呼ばれることがほとんどのため、実行時のリクエスト処理に対する影響は極小と考えられます。\n\n4. 参考情報 (あれば)  \n\n- この PR は以下の PR のフォローアップです:  \n  - https://github.com/rails/rails/pull/57323  \n    → Rails の定数/グローバル状態を freeze して Ractor 対応を進める流れの一部。\n- Ractor 対応の文脈:\n  - Ruby 3 以降の Ractor では、「ミュータブルオブジェクト」を Ractor 間で共有できないため、「本来不変なはずの設定/定義オブジェクト」は積極的に `freeze` する方向に設計が進んでいます。\n  - Rails では、ActionView を含む多くのコンポーネントで、こうした「不変オブジェクトの明確化 / 凍結」が進められています。"
+    },
+    {
+      "number": 57427,
+      "title": "Fix #57401: Stop DRb service when shutting down parallel test workers {#pr-57427}",
+      "url": "https://github.com/rails/rails/pull/57427",
+      "mergedAt": "2026-05-22T00:00:00.000Z",
+      "author": "mugitti9",
+      "authorUrl": "https://github.com/mugitti9",
+      "summary": "1. 概要 (1-2文で)  \nRails の並列テスト（プロセス並列）実行時に、親プロセス側の DRb サービスが終了せずテストプロセスが終了しないことがある不具合が修正されました。`shutdown` 時に `DRb.stop_service` を呼ぶようにし、DRb の受け付けスレッドが残らないことをテストで保証しています。"
+    },
+    {
+      "number": 57447,
+      "title": "Improve insert_all error message to show key mismatch {#pr-57447}",
+      "url": "https://github.com/rails/rails/pull/57447",
+      "mergedAt": "2026-05-22T00:00:00.000Z",
+      "author": "hammadxcm",
+      "authorUrl": "https://github.com/hammadxcm",
+      "summary": "1. 概要 (1-2文で)  \n`insert_all` / `upsert_all` で、挿入するレコード同士のキーが揃っていない場合に発生する `ArgumentError` のメッセージが改善され、どのキーが「余分」または「不足」しているかがエラー文言に含まれるようになりました。これにより、大量データやカラム数が多いテーブルでのデバッグがしやすくなっています。"
+    },
+    {
+      "number": 57448,
+      "title": "Fix grammar in ActiveRecord errors and integration doc comments {#pr-57448}",
+      "url": "https://github.com/rails/rails/pull/57448",
+      "mergedAt": "2026-05-22T00:00:00.000Z",
+      "author": "hammadxcm",
+      "authorUrl": "https://github.com/hammadxcm",
+      "summary": "1. 概要 (1-2文で)  \nActiveRecord のエラーメッセージおよび `to_param` のドキュメントコメントにおける英語の文法ミスを修正した PR です。コードの挙動やテストには一切影響せず、コメントのみの変更です。"
+    },
+    {
+      "number": 57431,
+      "title": "fix: validate subcommand in `rails plugin` command {#pr-57431}",
+      "url": "https://github.com/rails/rails/pull/57431",
+      "mergedAt": "2026-05-22T00:00:00.000Z",
+      "author": "ruyrocha",
+      "authorUrl": "https://github.com/ruyrocha",
+      "summary": "1. 概要 (1-2文で)  \n`rails plugin` コマンドで `new` 以外のサブコマンドが指定された場合、これまでは無視されて `rails plugin new` として実行されていた挙動を修正し、不正なサブコマンドであればエラーを表示して終了するようにした PR です。これにより、タイプミスや誤ったコマンド指定による意図しないプラグイン生成を防ぎます。"
+    },
+    {
+      "number": 56195,
+      "title": "Allow create_join_table to accept a primary key {#pr-56195}",
+      "url": "https://github.com/rails/rails/pull/56195",
+      "mergedAt": "2026-05-22T00:00:00.000Z",
+      "author": "gsamokovarov",
+      "authorUrl": "https://github.com/gsamokovarov",
+      "summary": "1. 概要 (1-2文で)  \n`create_join_table` が `:primary_key` オプションを受け付けるようになり、従来は不可能だった結合テーブルへの主キー（特に複合主キー）の定義が可能になりました。デフォルトの挙動はこれまで通り主キー無し（`id: false`）のまま維持され、後方互換性も確保されています。"
+    },
+    {
+      "number": 56193,
+      "title": "Updates diagrams for dark mode compatibility and add EPUB fallback for SVG images [Guides] {#pr-56193}",
+      "url": "https://github.com/rails/rails/pull/56193",
+      "mergedAt": "2026-05-22T00:00:00.000Z",
+      "author": "shivabhusal",
+      "authorUrl": "https://github.com/shivabhusal",
+      "summary": "1. 概要 (1-2文で)  \nRails Guides の関連ガイドに使われている図版を、ライト／ダークモードに自動対応する SVG に差し替えるとともに、EPUB 生成時に SVG を他形式へフォールバックする仕組みが追加されています。これにより、Web 版ではダークモードでも読みやすくなり、EPUB（Kindle/Apple Books など）では「画像が表示されない」問題が軽減されます。"
+    },
+    {
+      "number": 57435,
+      "title": "Add missing docs for Rails.autoloaders {#pr-57435}",
+      "url": "https://github.com/rails/rails/pull/57435",
+      "mergedAt": "2026-05-22T00:00:00.000Z",
+      "author": "fxn",
+      "authorUrl": "https://github.com/fxn",
+      "summary": "1. 概要 (1-2文で)  \nRails 7系(?) で導入されている `Rails.autoloaders` の公開インターフェイスについて、ガイドには書かれていたものの、APIドキュメント（RDoc/YARD）側に欠けていた説明を追加するPRです。コードの挙動には手を入れず、`railties/lib/rails.rb` にドキュメントコメントを追加するだけの変更です。"
+    },
+    {
+      "number": 57406,
+      "title": "[#57402] Fix Active Record Pool Reaper thread leak after `Parallelization#shutdown` {#pr-57406}",
+      "url": "https://github.com/rails/rails/pull/57406",
+      "mergedAt": "2026-05-22T00:00:00.000Z",
+      "author": "ruyrocha",
+      "authorUrl": "https://github.com/ruyrocha",
+      "summary": "1. 概要 (1-2文で)  \nRails のテスト並列実行後に Active Record の Pool Reaper スレッドが親プロセス側にリークし、接続プールやファイルディスクリプタが解放されない問題を修正する PR です。`Parallelization#shutdown` 時にクリーンアップフックを実行し、Active Record が自前でプール破棄用フックを登録し、かつ Reaper スレッドを正しく停止・回収するようにしています。"
+    },
+    {
+      "number": 57433,
+      "title": "Disconnect test-local PostgreSQL adapters to prevent connection leak {#pr-57433}",
+      "url": "https://github.com/rails/rails/pull/57433",
+      "mergedAt": "2026-05-22T00:00:00.000Z",
+      "author": "yahonda",
+      "authorUrl": "https://github.com/yahonda",
+      "summary": "1. 概要 (1-2文で)  \n`PostgreSQLAdapterTest` 内で一時的に生成していた PostgreSQL アダプタ接続を明示的に切断することで、テスト実行時の PostgreSQL 接続リークを防ぐ修正です。`PostgreSQLAdapter.new` を直接呼び出していた箇所を、必ず `disconnect!` されるヘルパーメソッド経由に統一しています。"
+    },
+    {
+      "number": 57421,
+      "title": "Document endless range inconsistency for where [ci-skip] {#pr-57421}",
+      "url": "https://github.com/rails/rails/pull/57421",
+      "mergedAt": "2026-05-22T00:00:00.000Z",
+      "author": "p8",
+      "authorUrl": "https://github.com/p8",
+      "summary": "1. 概要 (1-2文で)  \n`where` で「終端のない Range（endless range）」を使ったとき、`start..`（閉区間）と `start...`（開区間）がどちらも同じ SQL（`>= start`）になるという挙動がガイドに明記されました。  \n挙動自体の変更ではなく、「一見すると直感に反するが、そういう仕様である」ことを公式ドキュメントに追記した PR です。"
+    },
     {
       "number": 57209,
       "title": "Fix label `for` not matching input `id` when collection value is nil {#pr-57209}",
@@ -307,150 +451,6 @@
       "author": "fatkodima",
       "authorUrl": "https://github.com/fatkodima",
       "summary": "1. 概要 (1-2文で)  \nPostgreSQL アダプタに、排他制約（exclusion constraint）とユニーク制約（unique constraint）が既に存在するかをチェックするためのヘルパー `exclusion_constraint_exists?` と `unique_constraint_exists?` が追加されました。これにより、制約を「存在しなければ追加する」といった形で、より安全かつ冪等的にマイグレーションを書くことができます。"
-    },
-    {
-      "number": 57377,
-      "title": "Add `enforced:` option for foreign keys on PostgreSQL 18.4+ {#pr-57377}",
-      "url": "https://github.com/rails/rails/pull/57377",
-      "mergedAt": "2026-05-19T00:00:00.000Z",
-      "author": "yahonda",
-      "authorUrl": "https://github.com/yahonda",
-      "summary": "1. 概要 (1-2文で)  \nPostgreSQL 18.4 以降を対象に、Active Record の外部キーに `enforced:` オプションが追加され、「参照整合性チェックを一時的に無効化して後から再検証する」ことを Rails の API 経由で安全に行えるようになりました。これにより、これまで superuser 権限やトリガ無効化に頼っていたバルクロードなどのユースケースを、テーブル所有者権限のみで実現できます。"
-    },
-    {
-      "number": 57388,
-      "title": "`http_cache_forever` now accept an optional `last_modified:` keyword parameter. {#pr-57388}",
-      "url": "https://github.com/rails/rails/pull/57388",
-      "mergedAt": "2026-05-19T00:00:00.000Z",
-      "author": "byroot",
-      "authorUrl": "https://github.com/byroot",
-      "summary": "1. 概要 (1-2文で)  \n`http_cache_forever` がオプション引数 `last_modified:` を受け取れるようになり、デフォルトの日付(2011-01-01)の代わりに実際の更新時刻を使った長期キャッシュ制御が可能になりました。あわせて Active Storage の `ProxyController` で、この新オプションを使うように変更されています。"
-    },
-    {
-      "number": 46262,
-      "title": "Support proc and symbol for `NumericalityValidator`'s `:in` option {#pr-46262}",
-      "url": "https://github.com/rails/rails/pull/46262",
-      "mergedAt": "2026-05-19T00:00:00.000Z",
-      "author": "ThomasSevestre",
-      "authorUrl": "https://github.com/ThomasSevestre",
-      "summary": "1. 概要 (1-2文で)  \n`NumericalityValidator` の `:in` オプションで、固定の Range だけでなく「Proc（ラムダ）」と「シンボル（インスタンスメソッド参照）」も指定できるようになりました。これにより、モデルインスタンスの状態に応じて動的に数値の許容範囲を変えられます。"
-    },
-    {
-      "number": 57386,
-      "title": "Use `...` and anonymous splats when possible {#pr-57386}",
-      "url": "https://github.com/rails/rails/pull/57386",
-      "mergedAt": "2026-05-19T00:00:00.000Z",
-      "author": "byroot",
-      "authorUrl": "https://github.com/byroot",
-      "summary": "1. 概要 (1-2文で)  \nこのPRは、`activesupport` の `String` 拡張（output_safety関連）で、可変長引数の扱いを「`*args` から `...` / 匿名スプラット」へ書き換えるリファクタリングです。機能仕様は変えずに、わずかなオブジェクト生成削減と、よりモダンで読みやすいRubyコードに整理しています。"
-    },
-    {
-      "number": 57385,
-      "title": "fix `start_with_delimiter?` has a false-positive when the number coincidentally begins with the delimiter string in number_to_phone {#pr-57385}",
-      "url": "https://github.com/rails/rails/pull/57385",
-      "mergedAt": "2026-05-19T00:00:00.000Z",
-      "author": "tahsin352",
-      "authorUrl": "https://github.com/tahsin352",
-      "summary": "1. 概要 (1-2文で)  \nRails の `number_to_phone` で、電話番号の数字列がたまたま区切り文字（`delimiter`）と同じ並びで始まる場合に、先頭の数字が誤って削られてしまうバグを修正した PR です。先頭の区切り文字を事後的に削るロジックをやめ、`gsub` の置換ブロック内で「最初のグループが空かどうか」を見て直接出力を制御するように変更しています。"
-    },
-    {
-      "number": 57384,
-      "title": "Accept and discard unused block in `ReflectionProxy#all_includes` {#pr-57384}",
-      "url": "https://github.com/rails/rails/pull/57384",
-      "mergedAt": "2026-05-19T00:00:00.000Z",
-      "author": "joshuay03",
-      "authorUrl": "https://github.com/joshuay03",
-      "summary": "1. 概要 (1-2文で)  \nRuby 3.4 の `strict_unused_block` 警告に対応するため、Active Record の `ReflectionProxy#all_includes` が渡されたブロックを明示的に受け取りつつ破棄するように変更されました。挙動の変更はなく、警告を抑制するだけのメンテナンス的修正です。"
-    },
-    {
-      "number": 46486,
-      "title": "Preserve attachment changes when converting record to another class using STI {#pr-46486}",
-      "url": "https://github.com/rails/rails/pull/46486",
-      "mergedAt": "2026-05-18T00:00:00.000Z",
-      "author": "fatkodima",
-      "authorUrl": "https://github.com/fatkodima",
-      "summary": "1. 概要 (1-2文で)  \nSTI（Single Table Inheritance）でレコードの `type` を変更して別クラスに「キャスト」した際に、Active Storage の添付ファイル変更（添付・削除）が失われてしまう不具合を修正したPRです。`becomes` / `becomes!` を使ってクラスを変換した場合でも、添付ファイルの変更が正しく引き継がれるようになりました。"
-    },
-    {
-      "number": 57375,
-      "title": "Fix `number_to_phone` dropping only one char of a multi-char delimiter {#pr-57375}",
-      "url": "https://github.com/rails/rails/pull/57375",
-      "mergedAt": "2026-05-18T00:00:00.000Z",
-      "author": "55728",
-      "authorUrl": "https://github.com/55728",
-      "summary": "1. 概要 (1-2文で)  \n`number_to_phone` に複数文字の `:delimiter` を指定し、かつ市外局番なし（7桁程度）の番号を渡した場合に、先頭に区切り文字の“欠片”が残ってしまうバグを修正したPRです。`slice!(0, 1)` で1文字だけ削っていた処理を、指定された区切り文字列全体の長さぶん削るように変更しています。"
-    },
-    {
-      "number": 56918,
-      "title": "[RF-Docs] [ci-skip] Update the Rails on Rack guide {#pr-56918}",
-      "url": "https://github.com/rails/rails/pull/56918",
-      "mergedAt": "2026-05-18T00:00:00.000Z",
-      "author": "ayushn21",
-      "authorUrl": "https://github.com/ayushn21",
-      "summary": "1. 概要 (1-2文で)  \nRailsガイドの「Rails on Rack」章が大幅に書き直され、現行のRailsの挙動やミドルウェア構成に即した内容へアップデートされました。Railsサーバ起動プロセス、ミドルウェアスタック、Rack APIの高度な使い方、カスタムミドルウェアの組み込み方法などが整理・拡充されています。"
-    },
-    {
-      "number": 45705,
-      "title": "Add explicit regression tests for ActiveRecord::Migration's #say & #say_with_time {#pr-45705}",
-      "url": "https://github.com/rails/rails/pull/45705",
-      "mergedAt": "2026-05-18T00:00:00.000Z",
-      "author": "nfedyashev",
-      "authorUrl": "https://github.com/nfedyashev",
-      "summary": "1. 概要 (1-2文で)  \nActiveRecord::Migration の `#say` と `#say_with_time` に対して、明示的なリグレッションテストが追加されています。加えて、`say_with_time` をブロックなしで呼び出した場合に明示的なエラーになる挙動をテストで保証するようになっています。"
-    },
-    {
-      "number": 57370,
-      "title": "Prevent false leaked-connection reports during reaper maintenance {#pr-57370}",
-      "url": "https://github.com/rails/rails/pull/57370",
-      "mergedAt": "2026-05-18T00:00:00.000Z",
-      "author": "curi",
-      "authorUrl": "https://github.com/curi",
-      "summary": "1. 概要 (1-2文で)  \nActiveRecord のテスト用リーク検知 (`ActiveRecord::TestCase#check_connection_leaks`) が、コネクションプールの Reaper 実行中に誤って「リーク」と判定してしまう問題を修正する PRです。プールの `reaper_lock` と同期してリークチェックを行うことで、Reaper が正当な理由で保持しているコネクションを誤検知しないようにしています。"
-    },
-    {
-      "number": 57380,
-      "title": "Fix pre-serialized String values skipping cast in insert_all hot path {#pr-57380}",
-      "url": "https://github.com/rails/rails/pull/57380",
-      "mergedAt": "2026-05-18T00:00:00.000Z",
-      "author": "tahsin352",
-      "authorUrl": "https://github.com/tahsin352",
-      "summary": "1. 概要 (1-2文で)  \n`insert_all` の高速化パスで「シリアライズ済みの文字列」を受け取った場合に、値が二重エンコードされてしまう不具合を修正し、`create` と同じキャスト挙動になるようにした PR です。Hash/Array などの通常ケースでのパフォーマンス改善は維持しつつ、String の場合だけ `cast` をスキップしないようにしています。"
-    },
-    {
-      "number": 57382,
-      "title": "Remove support for Rails 6.1 Active Record Marshal format {#pr-57382}",
-      "url": "https://github.com/rails/rails/pull/57382",
-      "mergedAt": "2026-05-18T00:00:00.000Z",
-      "author": "byroot",
-      "authorUrl": "https://github.com/byroot",
-      "summary": "1. 概要 (1-2文で)  \nRails 7.2 以降で、Rails 6.1 時代の Active Record オブジェクトの Marshal フォーマット（シリアライズ形式）を**「正式にはサポート対象外」とする**変更です。これにより Active Record 内部表現を将来的に大きく変更しやすくします。"
-    },
-    {
-      "number": 56565,
-      "title": "Revert \"Sort schema cache columns and indexes per table when dumping\" {#pr-56565}",
-      "url": "https://github.com/rails/rails/pull/56565",
-      "mergedAt": "2026-05-18T00:00:00.000Z",
-      "author": "byroot",
-      "authorUrl": "https://github.com/byroot",
-      "summary": "1. 概要 (1-2文で)  \n`schema_cache.yml` 生成時にテーブルごとにカラム・インデックスをソートしていた変更 (#54960) を元に戻し、スキーマキャッシュ内では定義順を維持するようにした PR です。  \n理由は、スキーマキャッシュのソートが `pluck(\"*\")` などカラム順に依存する挙動を変えてしまい、実際にバグを引き起こし得るためです。"
-    },
-    {
-      "number": 57267,
-      "title": "Fix bulk job and email enqueueing methods with no arguments {#pr-57267}",
-      "url": "https://github.com/rails/rails/pull/57267",
-      "mergedAt": "2026-05-17T00:00:00.000Z",
-      "author": "fatkodima",
-      "authorUrl": "https://github.com/fatkodima",
-      "summary": "1. 概要 (1-2文で)  \nAction Mailer と Active Job の「引数なし」での一括エンキュー (`*_all`, `*_later` など) が正しく動作しない問題 (#57264) を、内部ロジックの配置を整理することで修正した PR です。実質的な仕様変更や挙動追加はなく、「コードの場所を変えてバグを解消した」リファクタリング寄りの修正です。"
-    },
-    {
-      "number": 54587,
-      "title": "Expose all `BatchEnumerator` attributes {#pr-54587}",
-      "url": "https://github.com/rails/rails/pull/54587",
-      "mergedAt": "2026-05-17T00:00:00.000Z",
-      "author": "fatkodima",
-      "authorUrl": "https://github.com/fatkodima",
-      "summary": "1. 概要 (1-2文で)  \n`ActiveRecord::Batches::BatchEnumerator` が内部的に持っていた `cursor`, `order`, `use_ranges` を、外部から読み取れる公開属性として追加し、バッチ処理の挙動に応じた高度なカスタマイズができるようになりました。これにより、バッチイテレーションの状態や戦略を外部のライブラリ／アプリケーションから参照可能になります。"
     }
   ]
 }
