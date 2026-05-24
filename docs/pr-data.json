@@ -1,7 +1,61 @@
 {
-  "lastUpdated": "2026-05-23T00:31:37.790Z",
+  "lastUpdated": "2026-05-24T00:29:22.134Z",
   "totalCount": 50,
   "items": [
+    {
+      "number": 56582,
+      "title": "Fix PostgreSQL COMMENT ON INDEX for schema-qualified tables {#pr-56582}",
+      "url": "https://github.com/rails/rails/pull/56582",
+      "mergedAt": "2026-05-23T00:00:00.000Z",
+      "author": "eglitobias",
+      "authorUrl": "https://github.com/eglitobias",
+      "summary": "1. 概要 (1-2文で)  \nPostgreSQL でスキーマ付きテーブル（例: `\"other_schema.widgets\"`）に対して `add_index` をコメント付きで作成した際、`COMMENT ON INDEX` がスキーマ無しのインデックス名で発行されてエラーになる問題を修正する PR です。これにより、インデックスコメントもインデックス作成時と同様にスキーマ修飾された名前を使うようになります。"
+    },
+    {
+      "number": 57335,
+      "title": "Handle invalid SendGrid envelope input in Action Mailbox {#pr-57335}",
+      "url": "https://github.com/rails/rails/pull/57335",
+      "mergedAt": "2026-05-23T00:00:00.000Z",
+      "author": "afurm",
+      "authorUrl": "https://github.com/afurm",
+      "summary": "1. 概要 (1-2文で)  \nAction Mailbox の SendGrid 受信エンドポイントにおいて、`envelope` パラメータが「JSONとしては正しいが、想定した構造ではない」場合に、422 Unprocessable Content を返してメールを作成しないようにする防御的なバリデーションが追加されました。これにより、既存の「JSONとして不正な`envelope`」と同様の扱いになり、挙動の一貫性と堅牢性が向上しています。"
+    },
+    {
+      "number": 57452,
+      "title": "Handle malformed Mandrill events payloads in Action Mailbox {#pr-57452}",
+      "url": "https://github.com/rails/rails/pull/57452",
+      "mergedAt": "2026-05-23T00:00:00.000Z",
+      "author": "Messier81",
+      "authorUrl": "https://github.com/Messier81",
+      "summary": "1. 概要 (1-2文で)  \nMandrill の Action Mailbox ingress が、JSON の「形」が不正な payload を受け取った際に 500 を返していた問題を修正し、422 Unprocessable Content を返すようにした PRです。`mandrill_events` が「配列の Hash であること」を検証し、そうでない場合は新設の `MalformedEventsError` を投げて既存ハンドリングに乗せています。"
+    },
+    {
+      "number": 57453,
+      "title": "Fix HTML-aware ERB compiler errors in bundled templates so they apss strict validations {#pr-57453}",
+      "url": "https://github.com/rails/rails/pull/57453",
+      "mergedAt": "2026-05-23T00:00:00.000Z",
+      "author": "thomaswitt",
+      "authorUrl": "https://github.com/thomaswitt",
+      "summary": "1. 概要 (1-2文で)  \nHerb 0.10+ の「HTML 構文・属性位置を検証する ERB コンパイラ」で Rails 同梱のテンプレートがコンパイルエラーになる問題を解消し、すべての同梱 `.erb` テンプレートが Herb の厳密検証を通るようにした PR です。ついでに 2013 年から潜在していたレスキュー画面のテキストレスポンス内の余計な文字と、`<option>` タグ内の余計なスペースも解消されています。"
+    },
+    {
+      "number": 57450,
+      "title": "Deep-freeze `NumberConverter::DEFAULTS` {#pr-57450}",
+      "url": "https://github.com/rails/rails/pull/57450",
+      "mergedAt": "2026-05-23T00:00:00.000Z",
+      "author": "paracycle",
+      "authorUrl": "https://github.com/paracycle",
+      "summary": "1. 概要 (1-2文で)  \n`ActiveSupport::NumberHelper::NumberConverter::DEFAULTS` 定数を「深い凍結（deep-freeze）」することで、Ractor で共有可能な完全イミュータブルなオブジェクトにした PR です。外側の Hash だけでなく、ネストされた Hash もすべて freeze されています。"
+    },
+    {
+      "number": 48549,
+      "title": "Qualify association unscope values with table names {#pr-48549}",
+      "url": "https://github.com/rails/rails/pull/48549",
+      "mergedAt": "2026-05-23T00:00:00.000Z",
+      "author": "philip-maina",
+      "authorUrl": "https://github.com/philip-maina",
+      "summary": "1. 概要 (1-2文で)  \nRails の `unscope` が関連（association）経由のクエリで使われたときに、どのテーブルのカラムを外すのかが曖昧になりうる問題を、テーブル名付きで条件を解釈するように修正した PR です。これにより、特に `has_many :through` など複数テーブルが絡むクエリでの `unscope` の挙動が、より正確かつ予測可能になります。"
+    },
     {
       "number": 57434,
       "title": "Run LoadAsync\\*ThreadPoolExecutorTest on the replaced pool to prevent connection leak {#pr-57434}",
@@ -397,60 +451,6 @@
       "author": "55728",
       "authorUrl": "https://github.com/55728",
       "summary": "1. 概要 (1-2文で)  \nActiveModel の `:datetime` 型のドキュメントに「時刻だけの文字列も受け付ける」という誤った記述とサンプルがあったため、それを削除し、時刻のみを扱いたい場合は `:time` 型を使うよう誘導する修正です。実装には変更がなく、ドキュメントのみの修正です。"
-    },
-    {
-      "number": 50862,
-      "title": "Accept Tempfile as ActiveStorage attachable {#pr-50862}",
-      "url": "https://github.com/rails/rails/pull/50862",
-      "mergedAt": "2026-05-20T00:00:00.000Z",
-      "author": "shouichi",
-      "authorUrl": "https://github.com/shouichi",
-      "summary": "1. 概要 (1-2文で)  \nActive Storage の「添付可能オブジェクト(attachable)」として `Tempfile` が正式にサポートされました。これにより、`File` と同様に `Tempfile` をそのまま `has_one_attached` / `has_many_attached` に渡して添付できるようになります。"
-    },
-    {
-      "number": 57393,
-      "title": "Load image processing backend upfront {#pr-57393}",
-      "url": "https://github.com/rails/rails/pull/57393",
-      "mergedAt": "2026-05-20T00:00:00.000Z",
-      "author": "janko",
-      "authorUrl": "https://github.com/janko",
-      "summary": "1. 概要 (1-2文で)  \nこのPRは、Active Storage で初回の画像バリアント生成時に発生していた「画像処理バックエンドのロード遅延」をなくすため、ImageMagick / vips のバックエンドをあらかじめ `require` しておくようにした変更です。これにより、初回アクセスのレイテンシ低減と、prefork 型アプリサーバにおけるメモリ共有効率の向上が期待できます。"
-    },
-    {
-      "number": 57396,
-      "title": "Invalidate query cache when UPDATE goes through `update_with_result` {#pr-57396}",
-      "url": "https://github.com/rails/rails/pull/57396",
-      "mergedAt": "2026-05-20T00:00:00.000Z",
-      "author": "kylekeesling",
-      "authorUrl": "https://github.com/kylekeesling",
-      "summary": "1. 概要 (1-2文で)  \nPostgreSQL の GENERATED STORED カラムを持つテーブルで UPDATE が行われた際、`update_with_result` 経由の更新でもクエリキャッシュが正しく無効化されるようにした修正です。これにより、同一キャッシュスコープ内で UPDATE 後に古いレコードが返ってしまう不具合が解消されます。"
-    },
-    {
-      "number": 57378,
-      "title": "Use NOT ENFORCED in disable_referential_integrity on PostgreSQL 18.4+ {#pr-57378}",
-      "url": "https://github.com/rails/rails/pull/57378",
-      "mergedAt": "2026-05-20T00:00:00.000Z",
-      "author": "yahonda",
-      "authorUrl": "https://github.com/yahonda",
-      "summary": "1. 概要 (1-2文で)  \nPostgreSQL 18.4 以降を対象に、`disable_referential_integrity` が内部で外部キー制約を「NOT ENFORCED / ENFORCED」に切り替える方式に変更され、`DISABLE TRIGGER ALL` を使わなくなりました。これにより superuser 権限が不要になりつつ、トランザクションで安全に元の制約状態を復元できるようになっています。"
-    },
-    {
-      "number": 57394,
-      "title": "Stabilize `say_with_time` regression tests {#pr-57394}",
-      "url": "https://github.com/rails/rails/pull/57394",
-      "mergedAt": "2026-05-20T00:00:00.000Z",
-      "author": "yahonda",
-      "authorUrl": "https://github.com/yahonda",
-      "summary": "1. 概要 (1-2文で)  \n`say_with_time` の回帰テストが CI 環境でタイミングぶれにより不安定になっていた問題を、期待値を「固定文字列」から「フォーマットのみを保証する正規表現マッチ」に変更することで安定化した PR です。ログ出力の形式は維持したまま、経過時間の微小な違いでテストが落ちないようにしています。"
-    },
-    {
-      "number": 50431,
-      "title": "Add `exclusion_constraint_exists?` and `unique_constraint_exists?` helpers {#pr-50431}",
-      "url": "https://github.com/rails/rails/pull/50431",
-      "mergedAt": "2026-05-19T00:00:00.000Z",
-      "author": "fatkodima",
-      "authorUrl": "https://github.com/fatkodima",
-      "summary": "1. 概要 (1-2文で)  \nPostgreSQL アダプタに、排他制約（exclusion constraint）とユニーク制約（unique constraint）が既に存在するかをチェックするためのヘルパー `exclusion_constraint_exists?` と `unique_constraint_exists?` が追加されました。これにより、制約を「存在しなければ追加する」といった形で、より安全かつ冪等的にマイグレーションを書くことができます。"
     }
   ]
 }
