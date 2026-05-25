@@ -1,7 +1,43 @@
 {
-  "lastUpdated": "2026-05-24T00:29:22.134Z",
+  "lastUpdated": "2026-05-25T00:30:04.499Z",
   "totalCount": 50,
   "items": [
+    {
+      "number": 57158,
+      "title": "Fix touch_record for composite foreign keys {#pr-57158}",
+      "url": "https://github.com/rails/rails/pull/57158",
+      "mergedAt": "2026-05-24T00:00:00.000Z",
+      "author": "romulostorel",
+      "authorUrl": "https://github.com/romulostorel",
+      "summary": "1. 概要 (1–2文で)  \n複合外部キーを持つ `belongs_to` で `touch: true` を指定した場合、関連先が変更されたときに「古い側」のレコードが `touch` されない不具合を修正するPRです。`touch_record` の実装を、単一キー／複合キーの両方で正しく旧レコードを特定できるように見直しています。"
+    },
+    {
+      "number": 57163,
+      "title": "Document that `value_method` and `text_method` arguments of `options_from_collection_for_select` accept Proc [ci skip] {#pr-57163}",
+      "url": "https://github.com/rails/rails/pull/57163",
+      "mergedAt": "2026-05-24T00:00:00.000Z",
+      "author": "cgunther",
+      "authorUrl": "https://github.com/cgunther",
+      "summary": "1. 概要 (1-2文で)  \n`options_from_collection_for_select` と `option_groups_from_collection_for_select` の `value_method` / `text_method` / `group_method` / `group_label_method` に、従来から存在していた `Proc` のサポートを公式ドキュメントに明記した PR です。コードの挙動は変わらず、ドキュメントのみの更新です。"
+    },
+    {
+      "number": 56973,
+      "title": "[ci skip] Update ActiveRecord Migrations documentation concerning dat… {#pr-56973}",
+      "url": "https://github.com/rails/rails/pull/56973",
+      "mergedAt": "2026-05-24T00:00:00.000Z",
+      "author": "joshmfrankel",
+      "authorUrl": "https://github.com/joshmfrankel",
+      "summary": "1. 概要 (1-2文で)  \nActive Record Migrations ガイドの「データマイグレーション」節に、`script/` ディレクトリを使った一度きりのスクリプトやデータ移行の配置場所についての公式な説明が追記された PR です。既存の `maintenance_tasks` gem の紹介に加えて、Rails 本体に用意されているスクリプト実行の仕組みとの関係を明示しています。"
+    },
+    {
+      "number": 57455,
+      "title": "Fix typo in metaprogramming comment {#pr-57455}",
+      "url": "https://github.com/rails/rails/pull/57455",
+      "mergedAt": "2026-05-24T00:00:00.000Z",
+      "author": "nertzy",
+      "authorUrl": "https://github.com/nertzy",
+      "summary": "1. 概要 (1-2文で)  \n`ActiveSupport` の `String#output_safety` 周りのコメント中のタイポ（`**` が誤って `&&` と記載されていた）を修正した PR です。実装自体の挙動は変わらず、コメントだけが正しい内容に整合するように修正されています。"
+    },
     {
       "number": 56582,
       "title": "Fix PostgreSQL COMMENT ON INDEX for schema-qualified tables {#pr-56582}",
@@ -415,42 +451,6 @@
       "author": "curi",
       "authorUrl": "https://github.com/curi",
       "summary": "1. 概要 (1-2文で)  \n開発環境で `reload_routes!` などによりルーティングを再読み込みすると、Rails が内部的に用意している「開発用ウェルカムページ」の `GET /` ルートが毎回追加され、重複してしまう問題を解消する PR です。アプリ側で定義した root ルートの優先順位はこれまでどおり維持しつつ、内部ウェルカムルートの登録を「アプリ起動時の一度だけ」に制限しています。"
-    },
-    {
-      "number": 57340,
-      "title": "Add ActionController::Parameters#deep_transform_values {#pr-57340}",
-      "url": "https://github.com/rails/rails/pull/57340",
-      "mergedAt": "2026-05-20T00:00:00.000Z",
-      "author": "Edilbek",
-      "authorUrl": "https://github.com/Edilbek",
-      "summary": "1. 概要 (1-2文で)  \n`ActionController::Parameters` に `deep_transform_values` / `deep_transform_values!` が追加され、Strong Parameters の「許可状態(permitted?)」を保ったままネストした値を再帰的に変換できるようになりました。これにより、これまで必要だった `to_unsafe_h.deep_transform_values` によるガードレールの迂回が不要になります。"
-    },
-    {
-      "number": 57399,
-      "title": "doc: escape \"API\" for strong_parameters doc {#pr-57399}",
-      "url": "https://github.com/rails/rails/pull/57399",
-      "mergedAt": "2026-05-20T00:00:00.000Z",
-      "author": "okuramasafumi",
-      "authorUrl": "https://github.com/okuramasafumi",
-      "summary": "1. 概要 (1-2文で)  \nstrong_parameters のドキュメント中で、「API」という単語が誤ってリンク扱いになっていた問題を、Markdown エスケープによって修正した PR です。コードの挙動や API 仕様には一切変更はなく、純粋なドキュメント修正です。\n\n2. 変更内容の詳細(あればサンプルコードも含めて)  \n- 対象ファイル: `actionpack/lib/action_controller/metal/strong_parameters.rb`\n- strong_parameters のクラスコメント（YARD/rdoc用のドキュメントコメント）内にある「API」という単語が、そのまま書かれていることで自動的にリンクとして解釈されていました。\n- この PR では、その「API」をバックスラッシュ（`\\`）でエスケープして、ドキュメント生成時にリンクにならないようにしています。\n\nイメージとしては、ドキュメントコメント中の:\n\n```rdoc\nAPI\n```\n\nのような箇所が、以下のように変更された形です:\n\n```rdoc\n\\API\n```\n\nこれにより、rdoc/Markdown のパーサが「API」をリンク候補として扱わず、単なるテキストとして表示します。\n\n3. 影響範囲・注意点  \n- 影響範囲:\n  - Rails の公式ドキュメント（strong_parameters の API ドキュメント）の見た目のみが変わります。\n  - 生成される HTML ドキュメント上で、「API」という文字列がリンクではなくプレーンテキストとして表示されるようになります。\n- 注意点:\n  - 実行時の挙動、パブリック API、型、メソッドのシグネチャ等には一切変更がありません。\n  - テスト追加のチェックボックスにはチェックが入っていますが、この変更自体はドキュメントのみのため、特にテストは本質的には不要な種類の修正です。\n  - CHANGELOG の更新も不要な範囲（ドキュメントのみの微修正）として扱われています。\n\n4. 参考情報 (あれば)  \n- PR: https://github.com/rails/rails/pull/57399  \n- strong_parameters ドキュメントは「どのパラメータを許可するか」の説明で “API” という語を頻繁に使うため、余計な自動リンクを防ぐのは可読性向上・誤解回避のために有効です。"
-    },
-    {
-      "number": 57368,
-      "title": "Limit the size of strings we call `to_i` on in ActiveRecord {#pr-57368}",
-      "url": "https://github.com/rails/rails/pull/57368",
-      "mergedAt": "2026-05-20T00:00:00.000Z",
-      "author": "tenderlove",
-      "authorUrl": "https://github.com/tenderlove",
-      "summary": "1. 概要 (1-2文で)  \nこのPRは、ActiveRecord/ActiveModel が文字列を自動的に整数へ変換するときに、`to_i` をかける文字列長を制限し、超長い文字列による DoS の可能性を下げる変更です。カラムのバイトサイズに基づき、先頭 `_limit * 4` バイトだけを整数化の対象にします。"
-    },
-    {
-      "number": 57376,
-      "title": "Fix non-working time-only example in ActiveModel::Type::DateTime doc [ci skip] {#pr-57376}",
-      "url": "https://github.com/rails/rails/pull/57376",
-      "mergedAt": "2026-05-20T00:00:00.000Z",
-      "author": "55728",
-      "authorUrl": "https://github.com/55728",
-      "summary": "1. 概要 (1-2文で)  \nActiveModel の `:datetime` 型のドキュメントに「時刻だけの文字列も受け付ける」という誤った記述とサンプルがあったため、それを削除し、時刻のみを扱いたい場合は `:time` 型を使うよう誘導する修正です。実装には変更がなく、ドキュメントのみの修正です。"
     }
   ]
 }
