@@ -1,7 +1,34 @@
 {
-  "lastUpdated": "2026-05-25T00:30:04.499Z",
+  "lastUpdated": "2026-05-26T00:29:35.311Z",
   "totalCount": 50,
   "items": [
+    {
+      "number": 57466,
+      "title": "Dump enum types with fully qualified names for PostgreSQL {#pr-57466}",
+      "url": "https://github.com/rails/rails/pull/57466",
+      "mergedAt": "2026-05-25T00:00:00.000Z",
+      "author": "fatkodima",
+      "authorUrl": "https://github.com/fatkodima",
+      "summary": "1. 概要 (1-2文で)  \nPostgreSQL の enum 型を schema.rb にダンプするときに、「スキーマ付きの完全修飾名（schema.enum_name）」で出力するように変更した PR です。複数スキーマや同名 enum がある環境で、schema.rb の再ロード時に正しく enum を復元できるようになります。"
+    },
+    {
+      "number": 56979,
+      "title": "PostgreSQL::SchemaDumper drops index opclass when using persistent schemas alongside dump_schemas #56966 {#pr-56979}",
+      "url": "https://github.com/rails/rails/pull/56979",
+      "mergedAt": "2026-05-25T00:00:00.000Z",
+      "author": "nicolasva",
+      "authorUrl": "https://github.com/nicolasva",
+      "summary": "1. 概要 (1-2文で)  \n`dump_schemas` と永続スキーマ（別スキーマに拡張を置く構成）を併用したときに、PostgreSQL のインデックス opclass が `schema.rb` から黙って落ちてしまう不具合を修正した PRです。  \nスキーマ修飾された opclass 名（`shared_extensions.gin_trgm_ops` など）を正しくパースして、`schema.rb` に反映できるようにしています。"
+    },
+    {
+      "number": 57457,
+      "title": "Drop generated app databases after test_bin_setup_output {#pr-57457}",
+      "url": "https://github.com/rails/rails/pull/57457",
+      "mergedAt": "2026-05-25T00:00:00.000Z",
+      "author": "yahonda",
+      "authorUrl": "https://github.com/yahonda",
+      "summary": "1. 概要 (1-2文で)  \nRails のテスト `ApplicationTests::BinSetupTest#test_bin_setup_output` が PostgreSQL 上に作成していた `app_development` / `app_test` データベースを、テスト終了時に確実に削除するようにした PR です。テスト実行後に不要なデータベースが残り続ける問題を解消し、クリーンなテスト環境を保つことが目的です。"
+    },
     {
       "number": 57158,
       "title": "Fix touch_record for composite foreign keys {#pr-57158}",
@@ -424,33 +451,6 @@
       "author": "byroot",
       "authorUrl": "https://github.com/byroot",
       "summary": "1. 概要 (1-2文で)  \nRails 7.2系(?)で進んでいる `Date::DATE_FORMATS` / `Time::DATE_FORMATS` 廃止方針に関するフォローアップで、非推奨警告の出し方を整理し、新しい推奨APIを警告メッセージに含めるようにしつつ、コア拡張とフォーマット定義モジュールの関係を整理したPRです。実質的には「どう警告を出すか」「どこにフォーマットが定義されるか」の内部構造の変更であり、既存アプリへの影響は主に非推奨警告の出方にとどまります。"
-    },
-    {
-      "number": 57345,
-      "title": "Introduce `ActiveSupport::TimeFormats` and `ActiveSupport::DateFormats` for registering custom date formats {#pr-57345}",
-      "url": "https://github.com/rails/rails/pull/57345",
-      "mergedAt": "2026-05-20T00:00:00.000Z",
-      "author": "paracycle",
-      "authorUrl": "https://github.com/paracycle",
-      "summary": "1. 概要 (1-2文で)  \n`Time#to_fs` / `Date#to_fs` で使うカスタム日付フォーマットを、グローバル定数 `Time::DATE_FORMATS` / `Date::DATE_FORMATS` を直接いじらずに登録できる `ActiveSupport::TimeFormats` / `ActiveSupport::DateFormats` が導入されました。従来の定数ベースのカスタマイズは非推奨となり、次期Railsで削除予定です。"
-    },
-    {
-      "number": 53636,
-      "title": "fix referential_integrity for postgres partitioned tables {#pr-53636}",
-      "url": "https://github.com/rails/rails/pull/53636",
-      "mergedAt": "2026-05-20T00:00:00.000Z",
-      "author": "aandrieu",
-      "authorUrl": "https://github.com/aandrieu",
-      "summary": "1. 概要 (1-2文で)  \nPostgreSQL のパーティショニングされたテーブルに対して `ActiveRecord::FixtureSet.create_fixtures` などを利用した際、外部キー制約が意図せず `NOT VALID` になる不具合を修正する PR です。`referential_integrity` 実装内で行っていた制約の無効化 SQL を、対象テーブルにスコープするように変更しています。"
-    },
-    {
-      "number": 57367,
-      "title": "Prevent development welcome route from duplicating on route reload {#pr-57367}",
-      "url": "https://github.com/rails/rails/pull/57367",
-      "mergedAt": "2026-05-20T00:00:00.000Z",
-      "author": "curi",
-      "authorUrl": "https://github.com/curi",
-      "summary": "1. 概要 (1-2文で)  \n開発環境で `reload_routes!` などによりルーティングを再読み込みすると、Rails が内部的に用意している「開発用ウェルカムページ」の `GET /` ルートが毎回追加され、重複してしまう問題を解消する PR です。アプリ側で定義した root ルートの優先順位はこれまでどおり維持しつつ、内部ウェルカムルートの登録を「アプリ起動時の一度だけ」に制限しています。"
     }
   ]
 }
