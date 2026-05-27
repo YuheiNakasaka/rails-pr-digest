@@ -1,7 +1,88 @@
 {
-  "lastUpdated": "2026-05-26T00:29:35.311Z",
+  "lastUpdated": "2026-05-27T00:32:53.175Z",
   "totalCount": 50,
   "items": [
+    {
+      "number": 57243,
+      "title": "Fix `NoMethodError` for malformed multiparameter attribute keys {#pr-57243}",
+      "url": "https://github.com/rails/rails/pull/57243",
+      "mergedAt": "2026-05-26T00:00:00.000Z",
+      "author": "55728",
+      "authorUrl": "https://github.com/55728",
+      "summary": "1. 概要 (1-2文で)\n- multiparameter 属性のキーが壊れている（`written_on(` のように `(` だけで `)` が無い）場合に、素の `NoMethodError` で落ちていたのを、想定どおり `ActiveRecord::MultiparameterAssignmentErrors` として扱うように修正した PR です。\n- これにより、既存コードが rescue している `MultiparameterAssignmentErrors` で一貫してハンドリングできるようになります。"
+    },
+    {
+      "number": 57472,
+      "title": "Active Job: pass job to `stopping?` for fine-grained control over interruption {#pr-57472}",
+      "url": "https://github.com/rails/rails/pull/57472",
+      "mergedAt": "2026-05-26T00:00:00.000Z",
+      "author": "bdewater-thatch",
+      "authorUrl": "https://github.com/bdewater-thatch",
+      "summary": "1. 概要 (1-2文で)  \nActive Job の継続ジョブ (continuations) が「中断可能かどうか」を判定する際に、キューアダプタ側で `stopping?` に `job` オブジェクトを受け取れるようにした変更です。これにより、Solid Queue / Good Job / Sidekiq Pro などがジョブの属性（キュー名など）に応じて長時間実行ジョブをきめ細かく中断できるようになります。"
+    },
+    {
+      "number": 54542,
+      "title": "Duplicate `context` hash in `ActiveSupport::ErrorHandler#report` {#pr-54542}",
+      "url": "https://github.com/rails/rails/pull/54542",
+      "mergedAt": "2026-05-26T00:00:00.000Z",
+      "author": "andrewn617",
+      "authorUrl": "https://github.com/andrewn617",
+      "summary": "1. 概要 (1-2文で)  \n`ActiveSupport::ErrorHandler#report` が複数サブスクライバに同じ `context` ハッシュオブジェクトを共有して渡していた問題を修正し、サブスクライバごとに `deep_dup` したハッシュを渡すようにしたPRです。これにより、あるサブスクライバが `context` を破壊的変更しても、他のサブスクライバへの影響が出ないようになります。"
+    },
+    {
+      "number": 55638,
+      "title": "[ci skip] Wording correction for url_from documentation {#pr-55638}",
+      "url": "https://github.com/rails/rails/pull/55638",
+      "mergedAt": "2026-05-26T00:00:00.000Z",
+      "author": "dajabe",
+      "authorUrl": "https://github.com/dajabe",
+      "summary": "1. 概要 (1-2文で)  \n`ActionController::Redirecting#url_from` のドキュメント内の文言を修正し、「サブドメインは安全扱いされない（UnsafeRedirectError になり得る）」という実際の挙動がより明示的に分かるようにしたドキュメント専用 PR です。コードの挙動自体には一切変更はありません。"
+    },
+    {
+      "number": 57463,
+      "title": "Reject malformed Mandrill inbound events without raw messages {#pr-57463}",
+      "url": "https://github.com/rails/rails/pull/57463",
+      "mergedAt": "2026-05-26T00:00:00.000Z",
+      "author": "afurm",
+      "authorUrl": "https://github.com/afurm",
+      "summary": "1. 概要 (1-2文で)  \nMandrill のインバウンドイベントで `msg.raw_msg`（生 MIME メッセージ）が欠落または文字列でない場合、それを不正なイベントとして 422 を返して明示的に拒否するようにした変更です。これにより、従来 500 (TypeError) を返していたケースが正常にハンドリングされ、他の不正ペイロードと一貫した振る舞いになります。"
+    },
+    {
+      "number": 57459,
+      "title": "Fix typos in README, CONTRIBUTING, RELEASING_RAILS, and component docs {#pr-57459}",
+      "url": "https://github.com/rails/rails/pull/57459",
+      "mergedAt": "2026-05-26T00:00:00.000Z",
+      "author": "sagarjunnarkar",
+      "authorUrl": "https://github.com/sagarjunnarkar",
+      "summary": "1. 概要 (1-2文で)  \nRails 本体リポジトリ内の README やドキュメント類に含まれていた英語の誤字・文法ミス・記号抜けなどをまとめて修正した PR です。コードの挙動や API には一切影響せず、ドキュメントの品質向上のみを目的としています。"
+    },
+    {
+      "number": 55156,
+      "title": "Fix crash when trying to attach a Blob to a Record: {#pr-55156}",
+      "url": "https://github.com/rails/rails/pull/55156",
+      "mergedAt": "2026-05-26T00:00:00.000Z",
+      "author": "Edouard-chin",
+      "authorUrl": "https://github.com/Edouard-chin",
+      "summary": "1. 概要 (1-2文で)  \nActive Storage で `ActiveStorage.touch_attachment_records = false` のとき、既存の Blob をレコードにアタッチするとクラッシュしていた不具合を修正した PR です。Blob が自動で Attachment を保存しなくなった仕様変更により、未保存の Attachment を `touch` しようとして例外が出ていた箇所にガードを入れています。"
+    },
+    {
+      "number": 57458,
+      "title": "Drop test databases when use_postgresql / use_mysql2 is given a block {#pr-57458}",
+      "url": "https://github.com/rails/rails/pull/57458",
+      "mergedAt": "2026-05-26T00:00:00.000Z",
+      "author": "yahonda",
+      "authorUrl": "https://github.com/yahonda",
+      "summary": "1. 概要 (1-2文で)  \nRails のテスト用ヘルパ `use_postgresql` / `use_mysql2` にブロックを渡した場合、そのブロック内で作成された `railties_${Process.pid}_%` 形式のテストDBを自動で削除するようにしたPRです。これにより、per-PID / per-worker で作られる一時テストDBがテスト実行後に残り続ける問題が解消されます。"
+    },
+    {
+      "number": 57465,
+      "title": "Clean up rails console subprocesses spawned by FullStackConsoleTest {#pr-57465}",
+      "url": "https://github.com/rails/rails/pull/57465",
+      "mergedAt": "2026-05-26T00:00:00.000Z",
+      "author": "yahonda",
+      "authorUrl": "https://github.com/yahonda",
+      "summary": "1. 概要 (1-2文で)  \nFullStackConsoleTest が `rails console` をサブプロセスとして起動したまま放置していた問題を修正し、テスト終了時に必ずサブプロセスを kill/wait してクリーンアップするようにした PR です。これによりテスト実行時に zombie プロセスや不要な `rails console` プロセスが残らなくなります。"
+    },
     {
       "number": 57466,
       "title": "Dump enum types with fully qualified names for PostgreSQL {#pr-57466}",
@@ -370,87 +451,6 @@
       "author": "g-pavlik",
       "authorUrl": "https://github.com/g-pavlik",
       "summary": "1. 概要 (1-2文で)  \nActive Storage の非同期分析（`ActiveStorage::AnalyzeJob`）が `lock_version` を意図せず更新してしまい、楽観ロック中のレコードで `ActiveRecord::StaleObjectError` が起きる問題を修正する PR です。  \nBlob 分析時の関連レコード `touch` では `updated_at` は更新しつつ、`lock_version` の更新だけを抑制する仕組みが Active Record 側に追加されています。"
-    },
-    {
-      "number": 57422,
-      "title": "Fixes to query command {#pr-57422}",
-      "url": "https://github.com/rails/rails/pull/57422",
-      "mergedAt": "2026-05-21T00:00:00.000Z",
-      "author": "andyjeffries",
-      "authorUrl": "https://github.com/andyjeffries",
-      "summary": "1. 概要 (1-2文で)  \n`rails query` コマンドのバグ修正 PR で、  \n- 読み取り専用接続をバイパスして書き込みできてしまう危険な挙動  \n- 実用上「使えない」レベルの挙動不良  \nを修正し、安全かつ実用的に使えるようにしたものです。"
-    },
-    {
-      "number": 54930,
-      "title": "Add referential integrity note in AR::FixtureSet docs [ci skip] {#pr-54930}",
-      "url": "https://github.com/rails/rails/pull/54930",
-      "mergedAt": "2026-05-21T00:00:00.000Z",
-      "author": "danimashu",
-      "authorUrl": "https://github.com/danimashu",
-      "summary": "1. 概要 (1-2文で)  \n`ActiveRecord::FixtureSet` のAPIドキュメントに、「フィクスチャ読み込み時にRailsがリレーショナル整合性（外部キー制約など）を一時的に無効化する」ことを説明する注意書きが追加されました。これにより、特にDBトリガーや外部キー検証に依存しているテストで、意図せず「非整合」なテストデータが生じうる点への注意喚起が強化されています。"
-    },
-    {
-      "number": 52871,
-      "title": "Allow to pass array values to `.in_order_of` {#pr-52871}",
-      "url": "https://github.com/rails/rails/pull/52871",
-      "mergedAt": "2026-05-21T00:00:00.000Z",
-      "author": "doits",
-      "authorUrl": "https://github.com/doits",
-      "summary": "1. 概要 (1–2文で)  \n`.in_order_of` にネストを含む配列を渡して、「値のグルーピング + グループの順序付け」ができるようになりました。これにより、ENUM などを使った状態カラムを「いくつかの状態をまとめて 1 グループとして扱いつつ、そのグループ自体の順序も制御する」といったクエリが書きやすくなります。"
-    },
-    {
-      "number": 57416,
-      "title": "[RF-Docs][ci-skip] Caching with Rails (#57107) {#pr-57416}",
-      "url": "https://github.com/rails/rails/pull/57416",
-      "mergedAt": "2026-05-21T00:00:00.000Z",
-      "author": "p8",
-      "authorUrl": "https://github.com/p8",
-      "summary": "1. 概要 (1-2文で)  \nRails ガイド「Caching with Rails」を現行のRailsの挙動・用語に合わせて大幅に書き直し、構成も整理しつつ、低レベルキャッシュ・フラグメントキャッシュ・Conditional GET・SQL/クエリキャッシュ・Solid Cache・非リクエストコンテキストでのキャッシュなどをより実践的かつ詳細に解説するドキュメント改訂PRです。機能追加や挙動変更ではなく、既存の仕組みを正しく理解してもらうためのドキュメント改善です。"
-    },
-    {
-      "number": 57417,
-      "title": "Update the Rails on Rack guide (#56918) [ci-skip] {#pr-57417}",
-      "url": "https://github.com/rails/rails/pull/57417",
-      "mergedAt": "2026-05-21T00:00:00.000Z",
-      "author": "p8",
-      "authorUrl": "https://github.com/p8",
-      "summary": "1. 概要 (1-2文で)\n- Rails公式ガイド「Rails on Rack」を大幅に書き直し・構成見直ししたドキュメント改善PRです。\n- Rackミドルウェアスタックの最新情報反映、初期化処理へのリンク追加、カスタムミドルウェアやコントローラからRack APIを使う高度な利用方法などが追記されています。"
-    },
-    {
-      "number": 57415,
-      "title": "[RF Docs] Active Record Query Interface (#56341) {#pr-57415}",
-      "url": "https://github.com/rails/rails/pull/57415",
-      "mergedAt": "2026-05-21T00:00:00.000Z",
-      "author": "p8",
-      "authorUrl": "https://github.com/p8",
-      "summary": "1. 概要 (1–2文)  \nActive Record Query Interface ガイド（`active_record_querying.md`）を大幅に書き直し・再構成し、関連する API コメントおよび Composite Primary Keys ガイドとのリンクも整理した PRです。SQL や複合主キー、スコープ、ロック、パフォーマンス関連への導線を明確にしつつ、例示・用語の整合性や安全性（SQL インジェクション等）の説明を強化しています。"
-    },
-    {
-      "number": 57414,
-      "title": "Cache fixtures parsing {#pr-57414}",
-      "url": "https://github.com/rails/rails/pull/57414",
-      "mergedAt": "2026-05-21T00:00:00.000Z",
-      "author": "byroot",
-      "authorUrl": "https://github.com/byroot",
-      "summary": "1. 概要 (1-2文で)  \nこのPRは、テスト実行時のフィクスチャ(YAML)の「パース処理」をキャッシュすることで、`use_transactional_tests = false` なテストが混在するケースでの大幅なパフォーマンス低下を緩和する変更です。DBのリセットは従来どおり行いつつ、YAML ファイルの再解析を避けてフィクスチャ読み込みのオーバーヘッドを削減しています。"
-    },
-    {
-      "number": 57413,
-      "title": "Optimize fixtures lookup pattern {#pr-57413}",
-      "url": "https://github.com/rails/rails/pull/57413",
-      "mergedAt": "2026-05-21T00:00:00.000Z",
-      "author": "byroot",
-      "authorUrl": "https://github.com/byroot",
-      "summary": "1. 概要 (1-2文で)  \nRails の ActiveRecord fixtures で、フィクスチャ名の検索（lookup）に使うパターンが最適化され、約 50% 高速かつコードも簡潔になるように変更されています。変更は 1 行のみですが、フィクスチャ読み込み周りのパフォーマンスに影響します。"
-    },
-    {
-      "number": 57405,
-      "title": "Improve Date::DATE_FORMATS and Time::DATE_FORMAT deprecation {#pr-57405}",
-      "url": "https://github.com/rails/rails/pull/57405",
-      "mergedAt": "2026-05-21T00:00:00.000Z",
-      "author": "byroot",
-      "authorUrl": "https://github.com/byroot",
-      "summary": "1. 概要 (1-2文で)  \nRails 7.2系(?)で進んでいる `Date::DATE_FORMATS` / `Time::DATE_FORMATS` 廃止方針に関するフォローアップで、非推奨警告の出し方を整理し、新しい推奨APIを警告メッセージに含めるようにしつつ、コア拡張とフォーマット定義モジュールの関係を整理したPRです。実質的には「どう警告を出すか」「どこにフォーマットが定義されるか」の内部構造の変更であり、既存アプリへの影響は主に非推奨警告の出方にとどまります。"
     }
   ]
 }
