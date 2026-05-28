@@ -1,7 +1,25 @@
 {
-  "lastUpdated": "2026-05-27T00:32:53.175Z",
+  "lastUpdated": "2026-05-28T00:28:29.842Z",
   "totalCount": 50,
   "items": [
+    {
+      "number": 57087,
+      "title": "Only set Postgres timezone when needed {#pr-57087}",
+      "url": "https://github.com/rails/rails/pull/57087",
+      "mergedAt": "2026-05-27T00:00:00.000Z",
+      "author": "matthewd",
+      "authorUrl": "https://github.com/matthewd",
+      "summary": "1. 概要 (1-2文で)  \nPostgreSQL アダプタがサーバ側の `TimeZone` 設定を「常に SET する」のではなく、「必要なときだけ変更する」ように調整された PR です。  \nあわせて、PostgreSQL の `parameter_status` から取得した `TimeZone` や `variables` を、大文字・小文字の違いに影響されない（case-insensitive）形で扱うようになっています。"
+    },
+    {
+      "number": 56340,
+      "title": "[RF-Docs] [ci-skip]  Active Storage Guide {#pr-56340}",
+      "url": "https://github.com/rails/rails/pull/56340",
+      "mergedAt": "2026-05-27T00:00:00.000Z",
+      "author": "bhumi1102",
+      "authorUrl": "https://github.com/bhumi1102",
+      "summary": "1. 概要 (1-2文で)  \nActive Storage ガイド（`active_storage_overview.md`）が全面的に再構成され、概念説明・セットアップ手順・表示/配信方法などが大幅に整理・追記されました。あわせてテストガイド（`testing.md`）に Active Storage 向けのテスト方法が追記されています。"
+    },
     {
       "number": 57243,
       "title": "Fix `NoMethodError` for malformed multiparameter attribute keys {#pr-57243}",
@@ -433,24 +451,6 @@
       "author": "y-dashev",
       "authorUrl": "https://github.com/y-dashev",
       "summary": "1. 概要 (1–2文で)  \n`create_or_find_by` がユニーク制約違反 (`RecordNotUnique`) 後のリトライ時に重複した `where` 条件を生成してしまい、結果として `RecordNotFound` が起き得るバグを修正した PR です。`where(...).find_by!(...)` を `rewhere(...).take!` に置き換えることで、競合時の再検索ロジックを正しく動作させています。"
-    },
-    {
-      "number": 57424,
-      "title": "Update `SOLID_QUEUE_IN_PUMA` handling in `puma.rb` template {#pr-57424}",
-      "url": "https://github.com/rails/rails/pull/57424",
-      "mergedAt": "2026-05-21T00:00:00.000Z",
-      "author": "jordan-brough",
-      "authorUrl": "https://github.com/jordan-brough",
-      "summary": "1. 概要 (1-2文で)  \nRails が生成する `config/puma.rb` のテンプレートにおいて、`ENV[\"SOLID_QUEUE_IN_PUMA\"]` を真偽解釈するロジックが変更され、`nil` / 空文字列 `\"\"` / `\"0\"` / `\"false\"` を「false 相当」と扱うようになりました。これにより、環境変数に `\"false\"` や `\"0\"` を設定したときに、直感に反して機能が有効になってしまう問題を避けられます。"
-    },
-    {
-      "number": 57284,
-      "title": "Don't bump lock_version on records during blob analysis {#pr-57284}",
-      "url": "https://github.com/rails/rails/pull/57284",
-      "mergedAt": "2026-05-21T00:00:00.000Z",
-      "author": "g-pavlik",
-      "authorUrl": "https://github.com/g-pavlik",
-      "summary": "1. 概要 (1-2文で)  \nActive Storage の非同期分析（`ActiveStorage::AnalyzeJob`）が `lock_version` を意図せず更新してしまい、楽観ロック中のレコードで `ActiveRecord::StaleObjectError` が起きる問題を修正する PR です。  \nBlob 分析時の関連レコード `touch` では `updated_at` は更新しつつ、`lock_version` の更新だけを抑制する仕組みが Active Record 側に追加されています。"
     }
   ]
 }
