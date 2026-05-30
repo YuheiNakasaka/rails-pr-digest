@@ -1,7 +1,25 @@
 {
-  "lastUpdated": "2026-05-29T00:37:16.997Z",
+  "lastUpdated": "2026-05-30T00:30:45.829Z",
   "totalCount": 50,
   "items": [
+    {
+      "number": 57506,
+      "title": "Fix NullPool#server_version deadlock {#pr-57506}",
+      "url": "https://github.com/rails/rails/pull/57506",
+      "mergedAt": "2026-05-29T00:00:00.000Z",
+      "author": "hmcguire-shopify",
+      "authorUrl": "https://github.com/hmcguire-shopify",
+      "summary": "1. 概要 (1-2文で)  \nRails の Active Record で「単体接続(NullPool)」利用時に `server_version` を最初に呼ぶとデッドロックする不具合があり、`NullPool` が内部で使うロックを `Mutex` から `Monitor` に変更することで解消した PR です。通常の `ConnectionPool` と同じ再入可能なロック方式に揃えた、比較的小さなバグ修正です。"
+    },
+    {
+      "number": 57475,
+      "title": "Active Record Ractor-safe freezing {#pr-57475}",
+      "url": "https://github.com/rails/rails/pull/57475",
+      "mergedAt": "2026-05-29T00:00:00.000Z",
+      "author": "gmcgibbon",
+      "authorUrl": "https://github.com/gmcgibbon",
+      "summary": "1. 概要 (1-2文で)  \nActive Record 内のいくつかのモジュール／クラスで、オブジェクトの `freeze` や定数化（constantize）を進めることで、Ractor（Ruby 3 の並列実行モデル）でも安全に利用できるようにするための変更です。機能追加というより、Ractor 対応のための内部実装の堅牢化に近い位置づけです。"
+    },
     {
       "number": 57478,
       "title": "Acquire reaper_lock in preconnect to avoid racing with the reaper {#pr-57478}",
@@ -433,24 +451,6 @@
       "author": "hammadxcm",
       "authorUrl": "https://github.com/hammadxcm",
       "summary": "1. 概要 (1-2文で)  \nActiveRecord の enum に無効な値を代入したときに発生する `ArgumentError` のメッセージに、「どの値が有効か」を列挙して表示するようにした変更です。例外クラスや発生タイミングは変わらず、エラーメッセージの内容だけが改善されています。"
-    },
-    {
-      "number": 57437,
-      "title": "Match HTML attribute quotes to actual output in ActionView docs [ci skip] {#pr-57437}",
-      "url": "https://github.com/rails/rails/pull/57437",
-      "mergedAt": "2026-05-22T00:00:00.000Z",
-      "author": "55728",
-      "authorUrl": "https://github.com/55728",
-      "summary": "1. 概要 (1-2文で)  \nActionView のヘルパー (`simple_format`, `debug`, `button` など) が実際に出力する HTML と、RDoc のサンプルコード内の HTML 属性のクォート表記（シングル／ダブル）が食い違っていたため、ドキュメント側を実際の出力（ダブルクォート）に揃えた PR です。コードの挙動は一切変えず、ドキュメントのみの修正です。"
-    },
-    {
-      "number": 57445,
-      "title": "Fix incorrect SQL examples in ActiveRecord::QueryMethods docs {#pr-57445}",
-      "url": "https://github.com/rails/rails/pull/57445",
-      "mergedAt": "2026-05-22T00:00:00.000Z",
-      "author": "hammadxcm",
-      "authorUrl": "https://github.com/hammadxcm",
-      "summary": "1. 概要 (1-2文で)  \nActiveRecord::QueryMethods のドキュメント中に記載されていた SQL のサンプルが、実際に Rails が生成する SQL と食い違っていた問題を修正した PRです。コードの挙動には一切影響せず、コメント(ドキュメント)のみの修正です。"
     }
   ]
 }
