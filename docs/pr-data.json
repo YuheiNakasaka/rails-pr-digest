@@ -1,7 +1,16 @@
 {
-  "lastUpdated": "2026-05-30T00:30:45.829Z",
+  "lastUpdated": "2026-05-31T00:31:10.358Z",
   "totalCount": 50,
   "items": [
+    {
+      "number": 57438,
+      "title": "Preserve IPv6 prefix when dumping PostgreSQL `cidr`/`inet` defaults to schema.rb {#pr-57438}",
+      "url": "https://github.com/rails/rails/pull/57438",
+      "mergedAt": "2026-05-30T00:00:00.000Z",
+      "author": "55728",
+      "authorUrl": "https://github.com/55728",
+      "summary": "1. 概要 (1-2文で)  \nPostgreSQL の `cidr` / `inet` 型のデフォルト値を `schema.rb` にダンプする際、IPv6 アドレスのプレフィックスが `/32` のときに失われてしまうバグを修正する PR です。IPv4 と IPv6 で「フルマスク」とみなすプレフィックスを正しく判定することで、IPv6 のネットワーク情報がスキーマの往復で壊れないようにしています。"
+    },
     {
       "number": 57506,
       "title": "Fix NullPool#server_version deadlock {#pr-57506}",
@@ -442,15 +451,6 @@
       "author": "yahonda",
       "authorUrl": "https://github.com/yahonda",
       "summary": "1. 概要 (1-2文で)  \nこのPRは、テストで使われている `reset_connection` ヘルパーの意味と実装を整理し、コネクションプールごと作り直す挙動を新しい `reset_pool` に切り出すことで、PostgreSQL テスト群で発生していたコネクションリーク（`too many clients`）を解消するものです。既存のテストはメソッド名そのままで、より安全な「既存コネクションのリセット」だけを行うようになります。"
-    },
-    {
-      "number": 57446,
-      "title": "Include valid values in ActiveRecord::Enum invalid-value error {#pr-57446}",
-      "url": "https://github.com/rails/rails/pull/57446",
-      "mergedAt": "2026-05-22T00:00:00.000Z",
-      "author": "hammadxcm",
-      "authorUrl": "https://github.com/hammadxcm",
-      "summary": "1. 概要 (1-2文で)  \nActiveRecord の enum に無効な値を代入したときに発生する `ArgumentError` のメッセージに、「どの値が有効か」を列挙して表示するようにした変更です。例外クラスや発生タイミングは変わらず、エラーメッセージの内容だけが改善されています。"
     }
   ]
 }
