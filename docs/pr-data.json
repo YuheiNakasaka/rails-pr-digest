@@ -1,7 +1,34 @@
 {
-  "lastUpdated": "2026-05-31T00:31:10.358Z",
+  "lastUpdated": "2026-06-01T00:32:06.686Z",
   "totalCount": 50,
   "items": [
+    {
+      "number": 57521,
+      "title": "Fix `assert_part` / `assert_no_part` for body parts nested under an attachment {#pr-57521}",
+      "url": "https://github.com/rails/rails/pull/57521",
+      "mergedAt": "2026-05-31T00:00:00.000Z",
+      "author": "55728",
+      "authorUrl": "https://github.com/55728",
+      "summary": "1. 概要 (1-2文で)  \nActionMailer のテスト用アサーション `assert_part` / `assert_no_part` が、添付ファイル付きメールで本文パートを正しく検出できない問題を修正した PR です。`Mail#parts` ではなく `Mail#all_parts` を使うことで、`multipart/mixed` 配下にネストされた `multipart/alternative` 内の text/html パートも検査対象に含めるよう変更されています。"
+    },
+    {
+      "number": 55555,
+      "title": "Rate limiting calls `cache_key` on `by:` if the object responds to it {#pr-55555}",
+      "url": "https://github.com/rails/rails/pull/55555",
+      "mergedAt": "2026-05-31T00:00:00.000Z",
+      "author": "daniel-sabourin",
+      "authorUrl": "https://github.com/daniel-sabourin",
+      "summary": "1. 概要 (1-2文で)  \nRails の `ActionController::RateLimiting` において、`rate_limit` の `by:` オプションに任意オブジェクトを渡せるようにし、そのオブジェクトが `cache_key` を実装していればそれを自動的に使ってレート制限用のキャッシュキーを生成できるようにした PR です。これにより、IP アドレスではなく「ユーザーごと」など、より柔軟な単位でのレート制限が行いやすくなります。"
+    },
+    {
+      "number": 55388,
+      "title": "Respect `schema_search_path` on `rails dbconsole` for Postgres {#pr-55388}",
+      "url": "https://github.com/rails/rails/pull/55388",
+      "mergedAt": "2026-05-31T00:00:00.000Z",
+      "author": "sobrinho",
+      "authorUrl": "https://github.com/sobrinho",
+      "summary": "1. 概要 (1-2文で)  \nPostgreSQL を使う際に、`rails dbconsole` が `config/database.yml` の `schema_search_path` 設定をこれまで無視していた問題を修正し、アプリケーションと同じ search_path で `psql` が起動するようにした PR です。Rails の ActiveRecord 接続と手動で使う `rails dbconsole` の挙動を揃える変更です。"
+    },
     {
       "number": 57438,
       "title": "Preserve IPv6 prefix when dumping PostgreSQL `cidr`/`inet` defaults to schema.rb {#pr-57438}",
@@ -424,33 +451,6 @@
       "author": "paracycle",
       "authorUrl": "https://github.com/paracycle",
       "summary": "1. 概要 (1-2文で)  \n`ActiveSupport::NumberHelper::NumberConverter::DEFAULTS` 定数を「深い凍結（deep-freeze）」することで、Ractor で共有可能な完全イミュータブルなオブジェクトにした PR です。外側の Hash だけでなく、ネストされた Hash もすべて freeze されています。"
-    },
-    {
-      "number": 48549,
-      "title": "Qualify association unscope values with table names {#pr-48549}",
-      "url": "https://github.com/rails/rails/pull/48549",
-      "mergedAt": "2026-05-23T00:00:00.000Z",
-      "author": "philip-maina",
-      "authorUrl": "https://github.com/philip-maina",
-      "summary": "1. 概要 (1-2文で)  \nRails の `unscope` が関連（association）経由のクエリで使われたときに、どのテーブルのカラムを外すのかが曖昧になりうる問題を、テーブル名付きで条件を解釈するように修正した PR です。これにより、特に `has_many :through` など複数テーブルが絡むクエリでの `unscope` の挙動が、より正確かつ予測可能になります。"
-    },
-    {
-      "number": 57434,
-      "title": "Run LoadAsync\\*ThreadPoolExecutorTest on the replaced pool to prevent connection leak {#pr-57434}",
-      "url": "https://github.com/rails/rails/pull/57434",
-      "mergedAt": "2026-05-22T00:00:00.000Z",
-      "author": "yahonda",
-      "authorUrl": "https://github.com/yahonda",
-      "summary": "1. 概要 (1-2文で)  \n`LoadAsyncMultiThreadPoolExecutorTest` と `LoadAsyncMixedThreadPoolExecutorTest` で、接続プールの差し替えタイミングを変更し、テスト実行時に PostgreSQL コネクションがリークして `too many clients` になる問題を防ぐ修正です。テスト専用の変更であり、本番コードには影響しません。"
-    },
-    {
-      "number": 57432,
-      "title": "Rename `reset_connection` to `reset_pool`; have `reset_connection` reset just the existing connection {#pr-57432}",
-      "url": "https://github.com/rails/rails/pull/57432",
-      "mergedAt": "2026-05-22T00:00:00.000Z",
-      "author": "yahonda",
-      "authorUrl": "https://github.com/yahonda",
-      "summary": "1. 概要 (1-2文で)  \nこのPRは、テストで使われている `reset_connection` ヘルパーの意味と実装を整理し、コネクションプールごと作り直す挙動を新しい `reset_pool` に切り出すことで、PostgreSQL テスト群で発生していたコネクションリーク（`too many clients`）を解消するものです。既存のテストはメソッド名そのままで、より安全な「既存コネクションのリセット」だけを行うようになります。"
     }
   ]
 }
