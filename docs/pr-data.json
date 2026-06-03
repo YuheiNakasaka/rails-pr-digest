@@ -1,7 +1,106 @@
 {
-  "lastUpdated": "2026-06-02T00:42:35.051Z",
+  "lastUpdated": "2026-06-03T00:44:07.141Z",
   "totalCount": 50,
   "items": [
+    {
+      "number": 57532,
+      "title": "Fix grouped calculations by a `belongs_to` association with a composite primary key model {#pr-57532}",
+      "url": "https://github.com/rails/rails/pull/57532",
+      "mergedAt": "2026-06-02T00:00:00.000Z",
+      "author": "55728",
+      "authorUrl": "https://github.com/55728",
+      "summary": "1. 概要 (1-2文で)  \n`belongs_to` 先が複合主キーを持つモデルの場合に `group(:association).count` などの集計が `ArgumentError` で落ちていた問題を修正した PR です。従来の単一カラム主キーと同様に、「関連オブジェクトをキーにしたグループ集計」が複合主キーでも動作するようになります。"
+    },
+    {
+      "number": 57539,
+      "title": "Reverse `default_order` in `reverse_order` instead of discarding it {#pr-57539}",
+      "url": "https://github.com/rails/rails/pull/57539",
+      "mergedAt": "2026-06-02T00:00:00.000Z",
+      "author": "55728",
+      "authorUrl": "https://github.com/55728",
+      "summary": "1. 概要 (1-2文で)  \nRails の `ActiveRecord::Relation#reverse_order` が、`default_order` だけで並び替えられている場合にその並び順を正しく反転せず、主キー降順に差し替えてしまっていたバグを修正する PR です。明示的な `order` と同様に、`default_order` も `reverse_order` で正しく反転されるようになります。"
+    },
+    {
+      "number": 57546,
+      "title": "Test ContentDisposition.format class method {#pr-57546}",
+      "url": "https://github.com/rails/rails/pull/57546",
+      "mergedAt": "2026-06-02T00:00:00.000Z",
+      "author": "hammadxcm",
+      "authorUrl": "https://github.com/hammadxcm",
+      "summary": "1. 概要 (1-2文で)  \n`ActionDispatch::Http::ContentDisposition.format` クラスメソッドに対して、これまで存在していなかった直接のテストを追加した PR です。プロダクションコードの変更は一切なく、テストコードのみの追加です。\n\n2. 変更内容の詳細(あればサンプルコードも含めて)  \n- 対象  \n  - `ActionDispatch::Http::ContentDisposition.format` というクラスメソッド  \n    - Content-Disposition ヘッダ文字列を組み立てるための公開ショートカットメソッド  \n    - データストリーミング処理や ActiveStorage 内部で利用される想定の API\n\n- これまでの問題点  \n  - 既存テストは `ActionDispatch::Http::ContentDisposition` のインスタンスを生成し、`#to_s` を呼ぶ形でのみ挙動を検証していた  \n  - そのため、**公開 API としての `.format` 自体がテストされていなかった**（未カバー）\n\n- 今回の変更  \n  - `actionpack/test/dispatch/content_disposition_test.rb` に `.format` 用のテストを追加（+10行）  \n  - `.format` を以下の2パターンでテスト:\n    1. ファイル名なしでの呼び出し  \n    2. ファイル名ありでの呼び出し  \n\n  想定されるテストイメージは以下のような形です（概念的なサンプル）:\n\n  ```ruby\n  def test_format_without_filename\n    header = ActionDispatch::Http::ContentDisposition.format(disposition: \"attachment\")\n    assert_equal \"attachment\", header\n  end\n\n  def test_format_with_filename\n    header = ActionDispatch::Http::ContentDisposition.format(\n      disposition: \"attachment\",\n      filename: \"report.pdf\"\n    )\n    assert_equal 'attachment; filename=\"report.pdf\"; filename*=UTF-8\\'\\'report.pdf', header\n  end\n  ```\n\n  実際の期待値文字列やオプションは内部仕様に依存しますが、PR では「`.format` を直接呼び出し、その戻り値（ヘッダ文字列）を検証する」形でカバレッジを追加しています。\n\n3. 影響範囲・注意点  \n- 影響範囲  \n  - Rails 利用アプリの挙動には変更なし  \n  - `ActionDispatch::Http::ContentDisposition.format` を既に使っているコードへの互換性影響もなし  \n  - 主な影響は「テストカバレッジが正しく `.format` にも及ぶようになった」ことのみ\n\n- 注意点  \n  - `.format` の挙動自体は変わっていないため、これを契機に API の仕様変更などが行われたわけではない  \n  - ただし、今後 `.format` の実装を変更した際にはこのテストが壊れることでリグレッションを検知できるようになったため、**`.format` の振る舞いが事実上「仕様として固定化されやすくなった」**とも言える  \n  - `.format` を直接利用しているライブラリやアプリの開発者にとっては、今後このテストが仕様の参考になる\n\n4. 参考情報 (あれば)  \n- 対象クラス: `ActionDispatch::Http::ContentDisposition`  \n- 主な利用箇所の例（Rails 本体側）  \n  - ストリーミングレスポンス (`send_data`, `send_file` など) のヘッダ生成  \n  - ActiveStorage のファイルダウンロードレスポンスヘッダ生成  \n- この PR: https://github.com/rails/rails/pull/57546"
+    },
+    {
+      "number": 57544,
+      "title": "Test ValidationError exposes model and message {#pr-57544}",
+      "url": "https://github.com/rails/rails/pull/57544",
+      "mergedAt": "2026-06-02T00:00:00.000Z",
+      "author": "hammadxcm",
+      "authorUrl": "https://github.com/hammadxcm",
+      "summary": "1. 概要 (1–2文で)  \n`ActiveModel::ValidationError` に対するテストを拡充し、`validate!` 実行時に発生する例外から `#model` とエラーメッセージが期待どおり取得できることを検証する変更です。プロダクションコードの変更はなく、テストコードのみの追加です。"
+    },
+    {
+      "number": 57543,
+      "title": "Test ArrayInquirer#any? without candidates {#pr-57543}",
+      "url": "https://github.com/rails/rails/pull/57543",
+      "mergedAt": "2026-06-02T00:00:00.000Z",
+      "author": "hammadxcm",
+      "authorUrl": "https://github.com/hammadxcm",
+      "summary": "1. 概要 (1-2文で)  \n`ActiveSupport::ArrayInquirer#any?` を引数なしで呼び出した場合の挙動（配列に要素があるかどうかを返す）を確認するテストが追加された PR です。  \n本番コードへの変更はなく、テストカバレッジのみが拡充されています。"
+    },
+    {
+      "number": 57545,
+      "title": "Test BigInteger serializing string values {#pr-57545}",
+      "url": "https://github.com/rails/rails/pull/57545",
+      "mergedAt": "2026-06-02T00:00:00.000Z",
+      "author": "hammadxcm",
+      "authorUrl": "https://github.com/hammadxcm",
+      "summary": "1. 概要 (1-2文で)  \n`ActiveModel::Type::BigInteger#serialize` が文字列をどう扱うかについて、既存の挙動をテストで明示的にカバーする PR です。プロダクションコードの変更はなく、テストが 7 行追加されただけです。"
+    },
+    {
+      "number": 57541,
+      "title": "Test truncate when omission is longer than truncate_to {#pr-57541}",
+      "url": "https://github.com/rails/rails/pull/57541",
+      "mergedAt": "2026-06-02T00:00:00.000Z",
+      "author": "hammadxcm",
+      "authorUrl": "https://github.com/hammadxcm",
+      "summary": "1. 概要 (1-2文で)  \n`String#truncate` において、`:omission` が `truncate_to` より長い場合の挙動（省略記号だけが返り、結果文字列が `truncate_to` を超えるケース）をテストでカバーする PR です。プロダクションコードの変更はなく、テスト追加のみです。"
+    },
+    {
+      "number": 57540,
+      "title": "Test Array offset accessors when out of bounds {#pr-57540}",
+      "url": "https://github.com/rails/rails/pull/57540",
+      "mergedAt": "2026-06-02T00:00:00.000Z",
+      "author": "hammadxcm",
+      "authorUrl": "https://github.com/hammadxcm",
+      "summary": "1. 概要 (1-2文で)  \n`Array#second`〜`#forty_two` および `#second_to_last` / `#third_to_last` が、配列の長さが足りない場合に `nil` を返す挙動についてテストを追加した PR です。プロダクションコードの変更はなく、テストコードのみの追加です。"
+    },
+    {
+      "number": 57542,
+      "title": "Test Mime::Type#html? predicate {#pr-57542}",
+      "url": "https://github.com/rails/rails/pull/57542",
+      "mergedAt": "2026-06-02T00:00:00.000Z",
+      "author": "hammadxcm",
+      "authorUrl": "https://github.com/hammadxcm",
+      "summary": "1. 概要 (1-2文で)  \n`Mime::Type#html?` メソッドの挙動（`:html`シンボル、`\"html\"`を含むMIMEタイプ文字列、それ以外でfalse）を直接検証するテストが追加されたPRです。プロダクションコードの変更はなく、テストカバレッジを補完する目的の修正です。"
+    },
+    {
+      "number": 56422,
+      "title": "ActionView::TestCase#render resets rendered {#pr-56422}",
+      "url": "https://github.com/rails/rails/pull/56422",
+      "mergedAt": "2026-06-02T00:00:00.000Z",
+      "author": "drjayvee",
+      "authorUrl": "https://github.com/drjayvee",
+      "summary": "1. 概要 (1-2文で)  \nActionView::TestCase の `#render` が、複数回呼び出したときに `rendered` の内容を正しくリセットできていなかったバグを修正した PRです。メモ化導入 (#51093) によって壊れていた既存の挙動を復元しつつ、`content_class` をカスタム実装しているケースにも配慮した実装になっています。"
+    },
+    {
+      "number": 57534,
+      "title": "Fix `disable_joins` through associations grouping by composite key {#pr-57534}",
+      "url": "https://github.com/rails/rails/pull/57534",
+      "mergedAt": "2026-06-02T00:00:00.000Z",
+      "author": "55728",
+      "authorUrl": "https://github.com/55728",
+      "summary": "1. 概要 (1-2文で)  \n`disable_joins: true` を指定した `has_many/has_one :through` で、途中に order があり、かつ関連先が複合キー（複合 primary key / foreign key）を使っている場合に、結果が黙って空配列になってしまうバグを修正しています。  \n複合キーを使う関連の in-memory グルーピング処理で、キーの扱い方を正しく複合キー対応にすることで、取得済みレコードが消えてしまう問題を解消しています。"
+    },
     {
       "number": 57469,
       "title": "Fix `FormBuilder#to_partial_path` returning nil for non-Builder subclasses {#pr-57469}",
@@ -352,105 +451,6 @@
       "author": "bogdan",
       "authorUrl": "https://github.com/bogdan",
       "summary": "1. 概要 (1-2文で)  \nArray に空 Hash (`{}`) が含まれている場合に `Array#to_query` が `&&` を連続させた不正なクエリ文字列を生成してしまうバグを修正した PR です。空 Hash 由来の空文字列を結合前に捨てることで、仕様に沿った `application/x-www-form-urlencoded` 形式になるようにしています。"
-    },
-    {
-      "number": 57467,
-      "title": "Add shims for Ractor shareability methods {#pr-57467}",
-      "url": "https://github.com/rails/rails/pull/57467",
-      "mergedAt": "2026-05-28T00:00:00.000Z",
-      "author": "andrewn617",
-      "authorUrl": "https://github.com/andrewn617",
-      "summary": "1. 概要 (1-2文で)  \nRails（Active Support）に、Rubyの `Ractor` 関連メソッドをラップする「シム(shim)」が追加され、Rubyバージョンごとの `Ractor` 有無を意識せずに「Ractor共有可能化」を呼び出せる仕組みが導入されました。今後のRactor対応を見据え、`Kernel` 拡張として統一インターフェースを提供する変更です。"
-    },
-    {
-      "number": 57493,
-      "title": "[ci skip] Add step to create path for redirection before launching the application {#pr-57493}",
-      "url": "https://github.com/rails/rails/pull/57493",
-      "mergedAt": "2026-05-28T00:00:00.000Z",
-      "author": "maurobusso",
-      "authorUrl": "https://github.com/maurobusso",
-      "summary": "1. 概要 (1-2文で)  \nRailsガイド「Sign Up and Settings」チュートリアルの手順に、パスワード更新後にリダイレクトするためのルート（`settings_profile_path`）を事前に作成するステップが追加されました。これにより、まだ定義されていないパスヘルパーをチュートリアル中で先に使ってしまう問題が解消されています。"
-    },
-    {
-      "number": 57483,
-      "title": "Make exception wrapper ractor safe {#pr-57483}",
-      "url": "https://github.com/rails/rails/pull/57483",
-      "mergedAt": "2026-05-28T00:00:00.000Z",
-      "author": "andrewn617",
-      "authorUrl": "https://github.com/andrewn617",
-      "summary": "1. 概要 (1-2文で)  \nRails の `ActionDispatch::ExceptionWrapper` を Ractor セーフにするため、内部で保持している例外関連の設定ハッシュを凍結・再生成する形に変更し、あわせて `wrapper_exceptions` と `silent_exceptions` に対する公式な設定インターフェースが追加されました。これによりマルチ Ractor 実行時のスレッドセーフ性を高めつつ、例外ハンドリングをより柔軟に設定できるようになっています。"
-    },
-    {
-      "number": 57344,
-      "title": "Update Active Job Attributes documentation {#pr-57344}",
-      "url": "https://github.com/rails/rails/pull/57344",
-      "mergedAt": "2026-05-28T00:00:00.000Z",
-      "author": "bdewater-thatch",
-      "authorUrl": "https://github.com/bdewater-thatch",
-      "summary": "1. 概要 (1-2文で)  \nActive Job の「Attributes」機能に関するドキュメントを補強し、Railsガイドや Continuation API からも参照できるようにしたうえで、サンプルコードが実際に属性を「使う」例になるよう修正した PR です。機能追加ではなく、主にドキュメントとサンプルの改善によって意図を分かりやすくしています。"
-    },
-    {
-      "number": 57496,
-      "title": "Fix docs for ActiveSupport::SecurityUtils.fixed_length_secure_compare {#pr-57496}",
-      "url": "https://github.com/rails/rails/pull/57496",
-      "mergedAt": "2026-05-28T00:00:00.000Z",
-      "author": "andrewn617",
-      "authorUrl": "https://github.com/andrewn617",
-      "summary": "1. 概要 (1-2文で)  \n`ActiveSupport::SecurityUtils.fixed_length_secure_compare` の RDoc コメントが API ドキュメントに正しく表示されていなかった問題を、コメント位置を修正することで解消したPRです。機能や挙動は一切変えず、ドキュメント生成のためのメタ情報のみを調整しています。"
-    },
-    {
-      "number": 57489,
-      "title": "Improve documentation/testing of abort in Action Mailer `before_action {#pr-57489}",
-      "url": "https://github.com/rails/rails/pull/57489",
-      "mergedAt": "2026-05-28T00:00:00.000Z",
-      "author": "bensheldon",
-      "authorUrl": "https://github.com/bensheldon",
-      "summary": "1. 概要 (1-2文で)  \nAction Mailer の `before_action` コールバックで「送信を中断(abort)する」挙動について、ドキュメントが実装とずれていた部分を修正し、その挙動を保証するテストが追加されています。古い `body` メソッドに依存した誤った説明をやめ、現状の API に即した正しい書き方に更新した PRです。"
-    },
-    {
-      "number": 57495,
-      "title": "Reject malformed Action Mailbox raw email params {#pr-57495}",
-      "url": "https://github.com/rails/rails/pull/57495",
-      "mergedAt": "2026-05-28T00:00:00.000Z",
-      "author": "afurm",
-      "authorUrl": "https://github.com/afurm",
-      "summary": "1. 概要 (1–2文で)  \nMailgun / Postmark / SendGrid の Action Mailbox ingress において、「生メール(raw email)」パラメータの型を検証し、文字列以外（例: 配列）が渡された場合に 422 Unprocessable Content を返すように修正した PR です。これにより、従来 TypeError になっていたケースが、他の不正入力と同様に適切にハンドリングされます。"
-    },
-    {
-      "number": 57110,
-      "title": "Reduce number of queries during MariaDB column introspection {#pr-57110}",
-      "url": "https://github.com/rails/rails/pull/57110",
-      "mergedAt": "2026-05-28T00:00:00.000Z",
-      "author": "ilianah",
-      "authorUrl": "https://github.com/ilianah",
-      "summary": "1. 概要 (1-2文で)  \nMariaDB 接続時のカラム情報取得処理（カラム introspection）において、無駄な `SHOW CREATE TABLE` クエリが大量に発行されていた問題を、クエリ回数を最小限に抑える形で修正した PR です。MariaDB の「関数っぽいデフォルト値」を検出するロジックを集約し、非 MariaDB 環境では追加クエリが発生しないようになりました。"
-    },
-    {
-      "number": 57470,
-      "title": "Fix `number_to_delimited` mangling non-finite floats {#pr-57470}",
-      "url": "https://github.com/rails/rails/pull/57470",
-      "mergedAt": "2026-05-28T00:00:00.000Z",
-      "author": "55728",
-      "authorUrl": "https://github.com/55728",
-      "summary": "1. 概要 (1-2文で)  \n`ActiveSupport::NumberHelper.number_to_delimited` が `Float::INFINITY` などの非有限浮動小数点数を不正に区切ってしまうリグレッションを修正し、非有限値はそのまま文字列表現を返すようにした PR です。これにより `\"Infinity\"` が `\"In,fin,ity\"` になる問題が解消されます。"
-    },
-    {
-      "number": 57451,
-      "title": "Format non-finite numbers consistently in NumberHelper significant mode {#pr-57451}",
-      "url": "https://github.com/rails/rails/pull/57451",
-      "mergedAt": "2026-05-28T00:00:00.000Z",
-      "author": "55728",
-      "authorUrl": "https://github.com/55728",
-      "summary": "1. 概要 (1-2文で)  \n`ActiveSupport::NumberHelper` の `number_to_rounded` などで `significant: true` を指定した際、`Infinity` / `-Infinity` / `NaN` を渡すと `FloatDomainError` で落ちていた不具合を修正し、非 significant モードと同様に `\"Inf\"` / `\"-Inf\"` / `\"NaN\"` として一貫してフォーマットされるようにした PR です。  \nこれにより、同じヘルパー内で significant オプションの有無による挙動の不整合が解消されています。"
-    },
-    {
-      "number": 57492,
-      "title": "Reject malformed Action Mailbox original recipients {#pr-57492}",
-      "url": "https://github.com/rails/rails/pull/57492",
-      "mergedAt": "2026-05-28T00:00:00.000Z",
-      "author": "afurm",
-      "authorUrl": "https://github.com/afurm",
-      "summary": "1. 概要 (1-2文で)\n- Action Mailbox の Mailgun/Postmark インバウンド受信処理で、オプションの「元の宛先」パラメータが不正フォーマットだった場合に `TypeError` で落ちていた問題を修正し、422 Unprocessable Content を返して安全に拒否するようにした PR です。  \n- これにより、Mailgun の `recipient` と Postmark の `OriginalRecipient` が壊れていてもアプリ側が例外で落ちず、クライアントに正しいエラーを返せるようになります。"
     }
   ]
 }
