@@ -1,7 +1,106 @@
 {
-  "lastUpdated": "2026-06-03T00:44:07.141Z",
+  "lastUpdated": "2026-06-04T00:43:00.803Z",
   "totalCount": 50,
   "items": [
+    {
+      "number": 57565,
+      "title": "Preserve index attributes when renaming an index without native support {#pr-57565}",
+      "url": "https://github.com/rails/rails/pull/57565",
+      "mergedAt": "2026-06-03T00:00:00.000Z",
+      "author": "55728",
+      "authorUrl": "https://github.com/55728",
+      "summary": "1. 概要 (1-2文で)  \n`rename_index` のフォールバック実装（ネイティブな index rename を持たないアダプタ用）で、partial index の `WHERE` や列ソート順などの属性が失われていた問題を修正し、元の index 属性を保ったままリネームされるようにした PR です。主に SQLite や古い MySQL/MariaDB で、開発・テスト時の index 挙動が意図せず変わる問題を解消します。"
+    },
+    {
+      "number": 57563,
+      "title": "Fix `reset_column_sequences!` for a table in a quoted schema {#pr-57563}",
+      "url": "https://github.com/rails/rails/pull/57563",
+      "mergedAt": "2026-06-03T00:00:00.000Z",
+      "author": "55728",
+      "authorUrl": "https://github.com/55728",
+      "summary": "1. 概要 (1-2文で)  \nPostgreSQL でスキーマ名をクォートしたテーブル（例: `\"App\".widgets`）に対して `reset_column_sequences!` が `NoMethodError` で落ちていた不具合を修正した PR です。これにより、quoted schema を使う環境でも `reset_column_sequences!` / `reset_pk_sequence!` / fixture ロードが正常に動作するようになります。"
+    },
+    {
+      "number": 57560,
+      "title": "Fix nested attributes `:limit` miscounting a single-record hash {#pr-57560}",
+      "url": "https://github.com/rails/rails/pull/57560",
+      "mergedAt": "2026-06-03T00:00:00.000Z",
+      "author": "55728",
+      "authorUrl": "https://github.com/55728",
+      "summary": "1. 概要 (1-2文で)  \n`accepts_nested_attributes_for ..., limit: N` 使用時に、1件分のレコードを表す `id` キー付きハッシュが「N件を超えた」と誤判定されて `TooManyRecords` が発生するバグが修正されました。レコード数ではなくハッシュのキー数を数えていた実装を、正しく「レコード数」を数えるように変更しています。"
+    },
+    {
+      "number": 57550,
+      "title": "Make Ractor shareability methods only available on 4.0 and above. {#pr-57550}",
+      "url": "https://github.com/rails/rails/pull/57550",
+      "mergedAt": "2026-06-03T00:00:00.000Z",
+      "author": "andrewn617",
+      "authorUrl": "https://github.com/andrewn617",
+      "summary": "1. 概要 (1-2文で)  \nRails の Ractor 用ヘルパーメソッド（`ractor_make_shareable` / `ractor_shareable_proc` など）を、「Ruby 4.0 以上では本物を提供し、Ruby 3.x では一括で no-op（何もしない）にする」という方針に整理した PR です。  \nこれにより Ruby 3.x で `Ractor.make_shareable` だけが中途半端に働いて例外が出る、といった不整合を避けます。"
+    },
+    {
+      "number": 57567,
+      "title": "Read mysql2 affected_rows during perform_query {#pr-57567}",
+      "url": "https://github.com/rails/rails/pull/57567",
+      "mergedAt": "2026-06-03T00:00:00.000Z",
+      "author": "matthewd",
+      "authorUrl": "https://github.com/matthewd",
+      "summary": "1. 概要 (1-2文で)  \nMySQL 用の ActiveRecord アダプタで、クエリ実行時に `affected_rows`（影響を受けた行数）を確実に取得できるようにする変更です。`mysql2` が `nil` を返すケースでも、`ActiveRecord::Result` を使って影響行数を運べるようにし、テストもそれを検証しやすい形に調整しています。"
+    },
+    {
+      "number": 57561,
+      "title": "Fix PostgreSQL `foreign_keys` for a target table in a quoted schema {#pr-57561}",
+      "url": "https://github.com/rails/rails/pull/57561",
+      "mergedAt": "2026-06-03T00:00:00.000Z",
+      "author": "55728",
+      "authorUrl": "https://github.com/55728",
+      "summary": "1. 概要 (1-2文で)  \nPostgreSQL でスキーマ名がクォートされたテーブルに対する外部キーを扱う際、`foreign_keys` が参照先テーブル名(`to_table`)を壊してしまい、`rails db:schema:dump` から復元できないスキーマが生成されていた問題を修正する PR です。`regclass::text` の結果に対して不適切なアンクォート処理をしていたのを、スキーマ付き・クォート付きのテーブル名を正しく扱えるパーサに差し替えています。"
+    },
+    {
+      "number": 57547,
+      "title": "Test Mime::Type#=== and nil matching {#pr-57547}",
+      "url": "https://github.com/rails/rails/pull/57547",
+      "mergedAt": "2026-06-03T00:00:00.000Z",
+      "author": "hammadxcm",
+      "authorUrl": "https://github.com/hammadxcm",
+      "summary": "1. 概要 (1-2文で)  \nこのPRは、`Mime::Type` に既に存在している挙動（`#===` の配列マッチと、`#=~` / `#match?` の `nil` ガード）に対するテストを追加するだけの変更です。プロダクションコードの変更は一切なく、テストカバレッジを補完する目的のPRです。"
+    },
+    {
+      "number": 57556,
+      "title": "Test ParameterFilter#filter with empty filters returns a dup {#pr-57556}",
+      "url": "https://github.com/rails/rails/pull/57556",
+      "mergedAt": "2026-06-03T00:00:00.000Z",
+      "author": "hammadxcm",
+      "authorUrl": "https://github.com/hammadxcm",
+      "summary": "1. 概要 (1-2文で)  \n`ActiveSupport::ParameterFilter#filter` に対して、「フィルタが空のときは `params.dup` を返す」という振る舞いを確認するテストが追加された PR です。  \n本番コードの変更はなく、テストコードのみの追加です。"
+    },
+    {
+      "number": 57554,
+      "title": "Test Object#with returns the block's result {#pr-57554}",
+      "url": "https://github.com/rails/rails/pull/57554",
+      "mergedAt": "2026-06-03T00:00:00.000Z",
+      "author": "hammadxcm",
+      "authorUrl": "https://github.com/hammadxcm",
+      "summary": "1. 概要 (1-2文で)  \nこのPRは、`Object#with` が「ブロックに `self` を渡すだけでなく、そのブロックの戻り値自体を返す」ことをテストで明示的に保証するものです。プロダクションコードの変更はなく、テスト追加のみです。"
+    },
+    {
+      "number": 57553,
+      "title": "Fix Enumerable#in_order_of dropping nil elements when filter: false {#pr-57553}",
+      "url": "https://github.com/rails/rails/pull/57553",
+      "mergedAt": "2026-06-03T00:00:00.000Z",
+      "author": "hammadxcm",
+      "authorUrl": "https://github.com/hammadxcm",
+      "summary": "1. 概要 (1-2文で)  \n`Enumerable#in_order_of` に `filter: false` を指定した場合、本来は元の配列に含まれる `nil` も保持されるべきところが、誤って削除されていたバグが修正されました。`sort_by` ベースの処理で不要な `compact` を取り除き、仕様どおり `nil` を含めて返すようになっています。"
+    },
+    {
+      "number": 57548,
+      "title": "Test Range#sole with an endless range {#pr-57548}",
+      "url": "https://github.com/rails/rails/pull/57548",
+      "mergedAt": "2026-06-03T00:00:00.000Z",
+      "author": "hammadxcm",
+      "authorUrl": "https://github.com/hammadxcm",
+      "summary": "1. 概要 (1-2文で)  \nこのPRは、`Range#sole` が「終端なしの範囲（endless range）」に対して `SoleItemExpectedError` を投げることを確認するテストを追加するものです。既にあった「始端なしの範囲（beginless range）」向けテストに対応する形で、テストカバレッジを補完しており、本番コードの変更はありません。\n\n2. 変更内容の詳細  \n\n- 対象機能: `ActiveSupport` に追加されている `Range#sole`\n  - `Range#sole` は「範囲内に要素がちょうど1つだけ存在する場合にその要素を返し、それ以外の場合は例外を投げる」ユーティリティメソッドです（`ActiveSupport::SoleItemExpectedError` など）。\n\n- 既存の挙動:\n  - `Range#sole` には、以下のようなガードがあります（PR説明より）:\n    ```ruby\n    if self.begin.nil? || self.end.nil?\n      raise ActiveSupport::SoleItemExpectedError\n    end\n    ```\n    つまり、\n    - beginless range: `(..1)` → `self.begin.nil? #=> true`\n    - endless range: `(1..)` → `self.end.nil? #=> true`\n    のどちらも「無限範囲」とみなして `SoleItemExpectedError` を投げる設計です。\n\n- これまでのテスト状況:\n  - beginless range のケースはすでにテストされていました:\n    ```ruby\n    assert_raises(ActiveSupport::SoleItemExpectedError) { (..1).sole }\n    ```\n  - 一方で、endless range のケース:\n    ```ruby\n    (1..).sole\n    ```\n    が例外を投げることは、テストでカバーされていませんでした。\n\n- このPRでの変更:\n  - `activesupport/test/core_ext/range_ext_test.rb` に4行追加し、\n    - `(1..).sole` が `ActiveSupport::SoleItemExpectedError` を投げることを確認するテストを追加。\n  - これにより、「`self.begin.nil? || self.end.nil?` の両側」がテストで担保されるようになっています。\n\n  追加されるテストのイメージ（擬似コード）:\n  ```ruby\n  def test_sole_with_endless_range_raises\n    assert_raises(ActiveSupport::SoleItemExpectedError) do\n      (1..).sole\n    end\n  end\n  ```\n\n3. 影響範囲・注意点  \n\n- 影響範囲:\n  - 変更はテストコードのみであり、ランタイム挙動や公開APIに変更はありません。\n  - すでに実装されている「無限 range に対する `Range#sole` の例外スロー仕様」をテストで明示的に保証することによって、将来的なリグレッションを防止する効果があります。\n\n- 注意点:\n  - 開発者視点では、`Range#sole` は以下のように振る舞うことが前提として固まっていると考えてよいです:\n    - 有限範囲で要素が1つのみ → その要素を返す\n    - 有限範囲で要素0個または2個以上 → `SoleItemExpectedError` などの例外\n    - beginless range (`(..x)`) および endless range (`(x..)`): 「無限 range」とみなして常に `SoleItemExpectedError`\n  - 無限 range に対して `sole` を使ってはいけない、という仕様がテストでより強固に固定されるため、将来この仕様を変えたい場合は、テスト変更を含めて明示的な設計変更が必要になります。\n\n4. 参考情報 (あれば)  \n\n- 対象メソッド: `ActiveSupport` の `Range#sole`  \n  ドキュメント:  \n  - Rails ガイドでは `sole` は主に `ActiveRecord::Relation#sole` として紹介されますが、`Enumerable#sole` / `Range#sole` も同様の振る舞いをします。\n- 関連仕様:\n  - Ruby 2.6以降で導入された beginless range `(..x)` と endless range `(x..)` に対し、Rails は「無限集合」とみなして `sole` を禁止するポリシーを取っていることが、このPRのテストからも読み取れます。"
+    },
     {
       "number": 57532,
       "title": "Fix grouped calculations by a `belongs_to` association with a composite primary key model {#pr-57532}",
@@ -352,105 +451,6 @@
       "author": "daniel-sabourin",
       "authorUrl": "https://github.com/daniel-sabourin",
       "summary": "1. 概要 (1-2文で)  \nRails の `ActionController::RateLimiting` において、`rate_limit` の `by:` オプションに任意オブジェクトを渡せるようにし、そのオブジェクトが `cache_key` を実装していればそれを自動的に使ってレート制限用のキャッシュキーを生成できるようにした PR です。これにより、IP アドレスではなく「ユーザーごと」など、より柔軟な単位でのレート制限が行いやすくなります。"
-    },
-    {
-      "number": 55388,
-      "title": "Respect `schema_search_path` on `rails dbconsole` for Postgres {#pr-55388}",
-      "url": "https://github.com/rails/rails/pull/55388",
-      "mergedAt": "2026-05-31T00:00:00.000Z",
-      "author": "sobrinho",
-      "authorUrl": "https://github.com/sobrinho",
-      "summary": "1. 概要 (1-2文で)  \nPostgreSQL を使う際に、`rails dbconsole` が `config/database.yml` の `schema_search_path` 設定をこれまで無視していた問題を修正し、アプリケーションと同じ search_path で `psql` が起動するようにした PR です。Rails の ActiveRecord 接続と手動で使う `rails dbconsole` の挙動を揃える変更です。"
-    },
-    {
-      "number": 57438,
-      "title": "Preserve IPv6 prefix when dumping PostgreSQL `cidr`/`inet` defaults to schema.rb {#pr-57438}",
-      "url": "https://github.com/rails/rails/pull/57438",
-      "mergedAt": "2026-05-30T00:00:00.000Z",
-      "author": "55728",
-      "authorUrl": "https://github.com/55728",
-      "summary": "1. 概要 (1-2文で)  \nPostgreSQL の `cidr` / `inet` 型のデフォルト値を `schema.rb` にダンプする際、IPv6 アドレスのプレフィックスが `/32` のときに失われてしまうバグを修正する PR です。IPv4 と IPv6 で「フルマスク」とみなすプレフィックスを正しく判定することで、IPv6 のネットワーク情報がスキーマの往復で壊れないようにしています。"
-    },
-    {
-      "number": 57506,
-      "title": "Fix NullPool#server_version deadlock {#pr-57506}",
-      "url": "https://github.com/rails/rails/pull/57506",
-      "mergedAt": "2026-05-29T00:00:00.000Z",
-      "author": "hmcguire-shopify",
-      "authorUrl": "https://github.com/hmcguire-shopify",
-      "summary": "1. 概要 (1-2文で)  \nRails の Active Record で「単体接続(NullPool)」利用時に `server_version` を最初に呼ぶとデッドロックする不具合があり、`NullPool` が内部で使うロックを `Mutex` から `Monitor` に変更することで解消した PR です。通常の `ConnectionPool` と同じ再入可能なロック方式に揃えた、比較的小さなバグ修正です。"
-    },
-    {
-      "number": 57475,
-      "title": "Active Record Ractor-safe freezing {#pr-57475}",
-      "url": "https://github.com/rails/rails/pull/57475",
-      "mergedAt": "2026-05-29T00:00:00.000Z",
-      "author": "gmcgibbon",
-      "authorUrl": "https://github.com/gmcgibbon",
-      "summary": "1. 概要 (1-2文で)  \nActive Record 内のいくつかのモジュール／クラスで、オブジェクトの `freeze` や定数化（constantize）を進めることで、Ractor（Ruby 3 の並列実行モデル）でも安全に利用できるようにするための変更です。機能追加というより、Ractor 対応のための内部実装の堅牢化に近い位置づけです。"
-    },
-    {
-      "number": 57478,
-      "title": "Acquire reaper_lock in preconnect to avoid racing with the reaper {#pr-57478}",
-      "url": "https://github.com/rails/rails/pull/57478",
-      "mergedAt": "2026-05-29T00:00:00.000Z",
-      "author": "yahonda",
-      "authorUrl": "https://github.com/yahonda",
-      "summary": "1. 概要 (1-2文で)  \nActiveRecord の接続プールで `preconnect` 実行時に `reaper_lock` を取得するようにし、リーパー（メンテナンス用スレッド）との競合状態（race condition）で CI の `test_preconnect` が落ちる問題を解消する PR です。`disconnect` や `discard!` と同じ「プール全体に影響する操作は reaper_lock で囲む」という設計に揃えています。"
-    },
-    {
-      "number": 57501,
-      "title": "Return a completed promise for async_count with limit(0) {#pr-57501}",
-      "url": "https://github.com/rails/rails/pull/57501",
-      "mergedAt": "2026-05-28T00:00:00.000Z",
-      "author": "fallintoplace",
-      "authorUrl": "https://github.com/fallintoplace",
-      "summary": "1. 概要 (1-2文で)  \n`Relation#async_count` が `limit(0)` のときに整数 `0` を直接返してしまう不整合が修正され、常に `ActiveRecord::Promise` を返すようになりました。これにより、`async_count` の戻り値で `value`, `then`, `pending?` などの Promise API を一貫して利用できます。"
-    },
-    {
-      "number": 50979,
-      "title": "Action Cable server adapterization {#pr-50979}",
-      "url": "https://github.com/rails/rails/pull/50979",
-      "mergedAt": "2026-05-28T00:00:00.000Z",
-      "author": "palkan",
-      "authorUrl": "https://github.com/palkan",
-      "summary": "1. 概要 (1-2文で)  \nAction Cable の「WebSocket + スレッド実装」に強く結びついていた部分を分離し、「サーバーアダプタ化」するリファクタリングです。既存の Rails 標準 Action Cable の挙動はほぼ変えずに、代替サーバー・Fiber 実行モデル・SSE などに乗せ替えやすくするための基盤整備が行われています。"
-    },
-    {
-      "number": 57268,
-      "title": "Fix: registers ERBTracker instead of RubyTracker when eager_load = true {#pr-57268}",
-      "url": "https://github.com/rails/rails/pull/57268",
-      "mergedAt": "2026-05-28T00:00:00.000Z",
-      "author": "joaoGabriel55",
-      "authorUrl": "https://github.com/joaoGabriel55",
-      "summary": "1. 概要 (1-2文で)  \nRails 8.1 デフォルト設定かつ `eager_load: true` などの条件下で、ERB テンプレートの依存関係トラッキングが正しく動かない不具合を修正した PR です。`ActionView.render_tracker` の設定タイミングを `after_initialize` から専用 initializer に移し、ERB が適切に `RubyTracker` へ紐づくようにしています。"
-    },
-    {
-      "number": 39525,
-      "title": "Add support for default order {#pr-39525}",
-      "url": "https://github.com/rails/rails/pull/39525",
-      "mergedAt": "2026-05-28T00:00:00.000Z",
-      "author": "udan11",
-      "authorUrl": "https://github.com/udan11",
-      "summary": "1. 概要 (1-2文で)  \n`ActiveRecord::Relation` に「デフォルトの並び順」を定義できる `#default_order` が追加され、関連（`has_many` など）にも `default_order:` オプション／スコープで同等の機能を指定できるようになりました。これにより、アプリ側で「常にこの順で取りたいが、明示的に order を書いたときはそちらを優先したい」というパターンを Rails レベルで表現できます。"
-    },
-    {
-      "number": 53101,
-      "title": "[Fix #52229] Respect `#reject` in Action Cable `before_subscribe` callbacks {#pr-53101}",
-      "url": "https://github.com/rails/rails/pull/53101",
-      "mergedAt": "2026-05-28T00:00:00.000Z",
-      "author": "joshuay03",
-      "authorUrl": "https://github.com/joshuay03",
-      "summary": "1. 概要 (1-2文で)  \nAction Cable の `before_subscribe` コールバック内で `reject` を呼んだ場合に、これまで実行されてしまっていた `subscribed` を呼ばないようにするバグ修正です。`before_subscribe` による購読拒否が、期待どおりチャンネル購読開始処理全体を止めるようになります。"
-    },
-    {
-      "number": 57500,
-      "title": "Fix Array#to_query producing double && when array contains empty hash {#pr-57500}",
-      "url": "https://github.com/rails/rails/pull/57500",
-      "mergedAt": "2026-05-28T00:00:00.000Z",
-      "author": "bogdan",
-      "authorUrl": "https://github.com/bogdan",
-      "summary": "1. 概要 (1-2文で)  \nArray に空 Hash (`{}`) が含まれている場合に `Array#to_query` が `&&` を連続させた不正なクエリ文字列を生成してしまうバグを修正した PR です。空 Hash 由来の空文字列を結合前に捨てることで、仕様に沿った `application/x-www-form-urlencoded` 形式になるようにしています。"
     }
   ]
 }
