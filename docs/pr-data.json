@@ -1,7 +1,124 @@
 {
-  "lastUpdated": "2026-06-04T00:43:00.803Z",
+  "lastUpdated": "2026-06-05T00:36:37.217Z",
   "totalCount": 50,
   "items": [
+    {
+      "number": 57570,
+      "title": "Enable per-pool query log tags formatter {#pr-57570}",
+      "url": "https://github.com/rails/rails/pull/57570",
+      "mergedAt": "2026-06-04T00:00:00.000Z",
+      "author": "hmcguire-shopify",
+      "authorUrl": "https://github.com/hmcguire-shopify",
+      "summary": "1. 概要 (1-2文で)  \nこのPRは、`database.yml` の各コネクションプールごとに `query_log_tags_format` を設定できるようにし、グローバル設定 (`config.active_record.query_log_tags_format`) をプール単位で上書き可能にします。これにより、同一アプリ内でデータベース接続ごとに `:legacy` / `:sqlcommenter` など異なるクエリログコメント形式を使い分けられます。"
+    },
+    {
+      "number": 57572,
+      "title": "Add test coverage for Enumerable key-helper edge cases {#pr-57572}",
+      "url": "https://github.com/rails/rails/pull/57572",
+      "mergedAt": "2026-06-04T00:00:00.000Z",
+      "author": "hammadxcm",
+      "authorUrl": "https://github.com/hammadxcm",
+      "summary": "1. 概要 (1-2文で)  \n`Enumerable` 拡張（`pluck` / `pick` / `compact_blank`）の「キーが存在しない場合」や `Set` に対する挙動など、これまでテストされていなかった端ケースに対してテストが追加された PR です。プロダクションコードの変更はなく、テストコード（`enumerable_test.rb`）のみが20行追加されています。"
+    },
+    {
+      "number": 57584,
+      "title": "Clear Postgres warnings as they get handled {#pr-57584}",
+      "url": "https://github.com/rails/rails/pull/57584",
+      "mergedAt": "2026-06-04T00:00:00.000Z",
+      "author": "matthewd",
+      "authorUrl": "https://github.com/matthewd",
+      "summary": "1. 概要 (1-2文で)  \nPostgreSQL アダプタで、SQL 実行時に発生した warning の扱いを整理し、「処理済みの warning を都度クリアする」ようにした PR です。これにより、`select_all` など複数クエリの warning が蓄積して次のクエリで再度まとめて報告されてしまう挙動が修正され、失敗したクエリ後の warning も正しく処理されます。"
+    },
+    {
+      "number": 52278,
+      "title": "[ci skip] Improve readability of select form options helper gotcha documentation {#pr-52278}",
+      "url": "https://github.com/rails/rails/pull/52278",
+      "mergedAt": "2026-06-04T00:00:00.000Z",
+      "author": "markzalar",
+      "authorUrl": "https://github.com/markzalar",
+      "summary": "1. 概要 (1-2文で)  \nRails の `select` ヘルパ（`form_options_helper`）に関する「gotcha（ハマりどころ）」のドキュメントが、読みやすくなるようリライトされた PR です。挙動や API の変更はなく、内容はドキュメントコメントのみの改善です。"
+    },
+    {
+      "number": 57582,
+      "title": "Action Cable: only skip eager loading for Redis and Postgres {#pr-57582}",
+      "url": "https://github.com/rails/rails/pull/57582",
+      "mergedAt": "2026-06-04T00:00:00.000Z",
+      "author": "byroot",
+      "authorUrl": "https://github.com/byroot",
+      "summary": "1. 概要 (1-2文で)  \nAction Cable が「起動時の eager load をスキップする」対象を、Redis と PostgreSQL のサブスクリプションアダプタに限定するように調整した PR です。前 PR (#57249) の挙動をより適切に絞り込んだ小さなリファインメントです。"
+    },
+    {
+      "number": 57249,
+      "title": "Action Cable: explicitly require sibling deps in Redis adapter {#pr-57249}",
+      "url": "https://github.com/rails/rails/pull/57249",
+      "mergedAt": "2026-06-04T00:00:00.000Z",
+      "author": "gotrevor-notarize",
+      "authorUrl": "https://github.com/gotrevor-notarize",
+      "summary": "1. 概要 (1-2文で)  \nAction Cable の Redis サブスクリプションアダプタが、自身と同じディレクトリ内の `Base` と `ChannelPrefix` を明示的に `require` するようにし、Zeitwerk の lazy autoload との競合で起きるスレッドセーフティ問題（`NameError`）を防ぐ修正です。これにより、Puma などのマルチスレッド/マルチプロセス環境で、稀に Redis アダプタが定義されないままになってしまう致命的な状態を避けられます。"
+    },
+    {
+      "number": 57576,
+      "title": "Resolve attribute aliases in the `update_attribute` readonly check {#pr-57576}",
+      "url": "https://github.com/rails/rails/pull/57576",
+      "mergedAt": "2026-06-04T00:00:00.000Z",
+      "author": "55728",
+      "authorUrl": "https://github.com/55728",
+      "summary": "1. 概要 (1-2文で)  \n`update_attribute` / `update_attribute!` が readonly 属性をチェックする際に「属性エイリアス」を解決していなかった問題を修正し、`update_columns` と同じくエイリアス経由でも readonly 制約が正しく効くようにした PR です。これにより、readonly なカラムのエイリアスに対して `update_attribute` で更新しようとした場合も、期待どおり例外が発生します。"
+    },
+    {
+      "number": 56375,
+      "title": "Make ActionCable unsubscribe idempotent {#pr-56375}",
+      "url": "https://github.com/rails/rails/pull/56375",
+      "mergedAt": "2026-06-04T00:00:00.000Z",
+      "author": "matthewbjones",
+      "authorUrl": "https://github.com/matthewbjones",
+      "summary": "1. 概要 (1-2文で)  \nActionCable の「unsubscribe（購読解除）」を同じチャンネルに対して何度呼んでもエラーにならない“冪等(idempotent)”な挙動に変更した PR です。購読解除時だけは、存在しないサブスクリプションに対する unsubscribe をエラーではなく「何もしない成功」とみなしつつ、`perform_action` は従来通り見つからなければエラーを出すように区別しています。"
+    },
+    {
+      "number": 57577,
+      "title": "Fix incorrect callback ordering note in Active Record callbacks docs {#pr-57577}",
+      "url": "https://github.com/rails/rails/pull/57577",
+      "mergedAt": "2026-06-04T00:00:00.000Z",
+      "author": "55728",
+      "authorUrl": "https://github.com/55728",
+      "summary": "1. 概要 (1-2文で)  \nActive Record のコールバック順序に関するドキュメントの記述ミスを修正し、「メソッドで定義したコールバックだけ最後に呼ばれる」という誤った注記を削除した PR です。実際の挙動通り、すべてのコールバックが「定義された順に実行される」とだけ記載されるようになりました。"
+    },
+    {
+      "number": 57088,
+      "title": "Disconnect pools while cycling tests' connection handlers {#pr-57088}",
+      "url": "https://github.com/rails/rails/pull/57088",
+      "mergedAt": "2026-06-04T00:00:00.000Z",
+      "author": "matthewd",
+      "authorUrl": "https://github.com/matthewd",
+      "summary": "1. 概要 (1-2文で)  \nCI で頻発していた「FATAL:  sorry, too many clients already」（PostgreSQL の接続数上限超え）を避けるため、テスト実行中に接続ハンドラを切り替える際に、既存の接続プールを明示的に切断するようにした PR です。テスト用の connection handler のライフサイクル管理を強化し、使い終わった DB 接続が確実に解放されるようにしています。"
+    },
+    {
+      "number": 57562,
+      "title": "Add test coverage for String filter boundary inputs {#pr-57562}",
+      "url": "https://github.com/rails/rails/pull/57562",
+      "mergedAt": "2026-06-04T00:00:00.000Z",
+      "author": "hammadxcm",
+      "authorUrl": "https://github.com/hammadxcm",
+      "summary": "1. 概要 (1-2文で)  \n`String`拡張のフィルタ系メソッド（`remove`, `remove!`, `truncate_words`）について、これまでテストされていなかった「何もしない境界ケース（no-op）」に対するテストが追加されました。アプリケーションコードには一切変更がなく、テストコードのみの追加です。"
+    },
+    {
+      "number": 57571,
+      "title": "Re-raise suppressed RedisClient errors in RedisCacheStore behavior tests {#pr-57571}",
+      "url": "https://github.com/rails/rails/pull/57571",
+      "mergedAt": "2026-06-04T00:00:00.000Z",
+      "author": "yahonda",
+      "authorUrl": "https://github.com/yahonda",
+      "summary": "1. 概要 (1-2文で)  \n`RedisCacheStoreCommonBehaviorTest` において、Redis 接続のタイムアウトなどで `RedisClient::ConnectionError` が発生した場合に、`failsafe` によって握りつぶされていたエラーをテスト専用の `error_handler` で再スローするようにし、テスト失敗時に原因が分かりやすくなるようにした PR です。  \n本番コードの挙動は変えず、遅い CI 環境での「原因不明の nil 返却によるテスト失敗」を「RedisClient のタイムアウトなどが見える失敗」に置き換えるためのテスト改善です。"
+    },
+    {
+      "number": 57549,
+      "title": "Test Type::Boolean#serialize and #serialize_cast_value {#pr-57549}",
+      "url": "https://github.com/rails/rails/pull/57549",
+      "mergedAt": "2026-06-04T00:00:00.000Z",
+      "author": "hammadxcm",
+      "authorUrl": "https://github.com/hammadxcm",
+      "summary": "1. 概要 (1-2文で)  \nこのPRは、`ActiveModel::Type::Boolean` の `#serialize` および `#serialize_cast_value` に対するテストを追加し、既存の挙動（`#cast` と同等の振る舞い）を明示的に担保するものです。プロダクションコードの変更は一切なく、テストコードのみが追加されています。"
+    },
     {
       "number": 57565,
       "title": "Preserve index attributes when renaming an index without native support {#pr-57565}",
@@ -334,123 +451,6 @@
       "author": "55728",
       "authorUrl": "https://github.com/55728",
       "summary": "1. 概要 (1-2文で)  \n`If-Modified-Since` ヘッダの日時パースを `Time.rfc2822` から `Time.httpdate` に変更し、RFC 9110 で必須とされる3種類すべての HTTP-date 形式（IMF-fixdate / RFC 850 / asctime）を正しく解釈できるようにしたPRです。これにより、これまで一部フォーマットで `304 Not Modified` が返せずフルレスポンスになっていた挙動が修正されます。"
-    },
-    {
-      "number": 57519,
-      "title": "Fix store accessor `*_change` and `saved_change_to_*` reporting unchanged keys as changed {#pr-57519}",
-      "url": "https://github.com/rails/rails/pull/57519",
-      "mergedAt": "2026-06-01T00:00:00.000Z",
-      "author": "55728",
-      "authorUrl": "https://github.com/55728",
-      "summary": "1. 概要 (1-2文で)  \n`ActiveRecord::Store` で生成される `*_change` / `saved_change_to_*` が、実際には値が変わっていないキーに対しても `[value, value]` を返してしまう不具合を修正した PR です。  \nこれにより、通常の ActiveModel の dirty トラッキング API と同様に、値が変わっていないキーに対しては `nil` を返すようになります。"
-    },
-    {
-      "number": 57515,
-      "title": "Fix PostgreSQL range bounds parser corrupting comma-containing bounds {#pr-57515}",
-      "url": "https://github.com/rails/rails/pull/57515",
-      "mergedAt": "2026-06-01T00:00:00.000Z",
-      "author": "55728",
-      "authorUrl": "https://github.com/55728",
-      "summary": "1. 概要 (1-2文で)  \nPostgreSQL の range 型を ActiveRecord が文字列からパースする際、境界値にカンマが含まれていると誤って分割してしまい、両端の値が壊れる不具合を修正した PR です。特に `moneyrange` では `$1,000.00` のような通常の値であっても `0.0..0.0` に化けるという、重大なサイレントデータ破壊を防ぐ修正です。"
-    },
-    {
-      "number": 57476,
-      "title": "Rescue `RedisClient::Error` in `RedisCacheStore` failsafe {#pr-57476}",
-      "url": "https://github.com/rails/rails/pull/57476",
-      "mergedAt": "2026-06-01T00:00:00.000Z",
-      "author": "darrunategui",
-      "authorUrl": "https://github.com/darrunategui",
-      "summary": "1. 概要 (1-2文で)  \n`ActiveSupport::Cache::RedisCacheStore` の「Redis障害時でも例外を投げずにフェイルセーフに動作する」という契約が、Redis Sentinel など一部構成で破れていた問題を修正するPRです。`RedisClient::Error` 系の例外もフェイルセーフで握りつぶすようにし、テストとCHANGELOGを追加しています。"
-    },
-    {
-      "number": 57502,
-      "title": "Handle malformed signed cache payloads gracefully {#pr-57502}",
-      "url": "https://github.com/rails/rails/pull/57502",
-      "mergedAt": "2026-06-01T00:00:00.000Z",
-      "author": "fallintoplace",
-      "authorUrl": "https://github.com/fallintoplace",
-      "summary": "1. 概要 (1-2文で)  \nRails の `ActiveSupport::Cache::Coder#load` が「署名付きキャッシュフレームの形式が壊れている場合」に例外を投げてしまう問題を修正し、他の破損ペイロードと同様に「キャッシュミス（`nil`）」として扱うようにした PR です。これにより、壊れた署名付きキャッシュがアプリケーションエラーとして表面化するのを防ぎます。"
-    },
-    {
-      "number": 57511,
-      "title": "Test to_sentence with an empty array {#pr-57511}",
-      "url": "https://github.com/rails/rails/pull/57511",
-      "mergedAt": "2026-06-01T00:00:00.000Z",
-      "author": "hammadxcm",
-      "authorUrl": "https://github.com/hammadxcm",
-      "summary": "1. 概要 (1-2文で)  \nActionView の `to_sentence` が「空配列に対しては空の `html_safe` な文字列を返す」ことを確認するテストが追加された PR です。プロダクションコードの変更は一切なく、テストコードのみの追加です。\n\n2. 変更内容の詳細  \n\n- 対象メソッド  \n  - `ActionView::Helpers::TextHelper#to_sentence`（正確には、`Array#to_sentence` を ActionView が拡張したもの）  \n  - 既に以下のケースはテスト済みだった:\n    - 要素数 1 の配列\n    - 要素数 2 の配列\n    - 要素数 3 以上の配列  \n  - 今回、新たに「要素数 0（空配列）」のケースがテストに追加された。\n\n- 追加されたテストのポイント  \n  厳密なコードはPR本文には載っていませんが、意図としては以下のようなテストが `actionview/test/template/output_safety_helper_test.rb` に 6 行ほど追加されています。\n\n  想定されるテストイメージ（擬似コード）:\n  ```ruby\n  def test_to_sentence_with_empty_array_returns_empty_html_safe_string\n    array = [].to_sentence\n    assert_equal \"\", array\n    assert_predicate array, :html_safe?\n  end\n  ```\n\n  もしくは既存の output_safety 系テストに寄せた書き方として:\n\n  ```ruby\n  def test_to_sentence_with_empty_array_is_html_safe\n    result = [].to_sentence\n    assert result.html_safe?\n    assert_equal \"\", result\n  end\n  ```\n\n  いずれにせよ、以下の2点を確認するテストが追加されています。\n  - 空配列に `to_sentence` を呼ぶと、空文字列 (`\"\"`) が返る\n  - その返り値は `html_safe` 扱いになる（`ActiveSupport::SafeBuffer`）\n\n3. 影響範囲・注意点  \n\n- 実行時の挙動への影響:  \n  - 本PRはテスト追加のみで、ライブラリ本体のコードは変更されていません。\n  - そのため、既存のアプリケーションの挙動は一切変わりません。\n\n- 既存仕様の明文化:  \n  - 空配列に対する `to_sentence` は空の `html_safe` な文字列を返す、という仕様がテストによって保証されました。\n  - これにより、将来の変更でうっかり `nil` を返したり、非 `html_safe` な `String` を返すようなリグレッションが発生しにくくなります。\n\n- 開発者視点での注意点:\n  - ビューで `[].to_sentence` を使った場合、単に何も表示されない（空文字）だけでなく、XSSサニタイズ済みの安全なバッファとして扱われることが保証されます。\n  - `raw` や `html_safe` を二重に呼ぶ必要はありません（`[].to_sentence.html_safe` は不要）。\n  - この仕様に依存しているコード（例: `content_tag` にそのまま渡す、`safe_join` と組み合わせる等）は、今後も同じ挙動が継続することがテストで担保されます。\n\n4. 参考情報 (あれば)  \n\n- 関連ドキュメント:\n  - `ActionView::Helpers::TextHelper#to_sentence`  \n    https://api.rubyonrails.org/classes/ActionView/Helpers/TextHelper.html#method-i-to_sentence\n  - `ActiveSupport::SafeBuffer` (`html_safe` 文字列について)  \n    https://api.rubyonrails.org/classes/ActiveSupport/SafeBuffer.html\n\n- 類似テスト:\n  - 同ファイル `output_safety_helper_test.rb` には、`to_sentence` の要素数 1, 2, 3+ のケース、その他 `html_safe` に関する挙動テストが既に含まれており、今回の追加はそのカバレッジ補完という位置づけです。"
-    },
-    {
-      "number": 57524,
-      "title": "[ci skip] Update Ruby version requirement to 3.4 or newer in the Getting started guide {#pr-57524}",
-      "url": "https://github.com/rails/rails/pull/57524",
-      "mergedAt": "2026-06-01T00:00:00.000Z",
-      "author": "paul-louyot",
-      "authorUrl": "https://github.com/paul-louyot",
-      "summary": "1. 概要 (1-2文で)  \nRails公式ガイド「Getting Started」で推奨するRubyバージョンが「3.4以上」に引き上げられました。これにより、チュートリアル内でRuby 3.4以降で追加された`it`構文を前提としたコード例を維持できるようにすることが目的です。"
-    },
-    {
-      "number": 57460,
-      "title": "Fix Mysql2Adapter#discard! corrupting parent connection after fork {#pr-57460}",
-      "url": "https://github.com/rails/rails/pull/57460",
-      "mergedAt": "2026-06-01T00:00:00.000Z",
-      "author": "yahonda",
-      "authorUrl": "https://github.com/yahonda",
-      "summary": "1. 概要 (1-2文で)  \nMySQL 用アダプタ `Mysql2Adapter#discard!` が、`fork` 後の子プロセス終了時に親プロセス側の MySQL コネクションを壊してしまう不具合を修正する PRです。`MYSQL_PREPARED_STATEMENTS=true` かつ mysql2 アダプタ使用時に、子プロセス終了時の finalize が親のソケットに書き込めないよう、子側のソケット FD を `/dev/null` に差し替えるようにしました。"
-    },
-    {
-      "number": 57509,
-      "title": "Test ImmutableString custom boolean options and serialize {#pr-57509}",
-      "url": "https://github.com/rails/rails/pull/57509",
-      "mergedAt": "2026-06-01T00:00:00.000Z",
-      "author": "hammadxcm",
-      "authorUrl": "https://github.com/hammadxcm",
-      "summary": "1. 概要 (1-2文で)  \n`ActiveModel::Type::ImmutableString` に関して、ドキュメントされている挙動（boolean 用の `true:` / `false:` オプションや、boolean / 数値 / symbol の文字列化）が実際に保証されるよう、テストを追加した PR です。プロダクションコードの変更はなく、テストコードのみの追加です。"
-    },
-    {
-      "number": 57510,
-      "title": "Test Float casting of Infinity and NaN strings {#pr-57510}",
-      "url": "https://github.com/rails/rails/pull/57510",
-      "mergedAt": "2026-06-01T00:00:00.000Z",
-      "author": "hammadxcm",
-      "authorUrl": "https://github.com/hammadxcm",
-      "summary": "1. 概要 (1-2文で)  \nRails の `ActiveModel::Type::Float` が `\"Infinity\"`, `\"-Infinity\"`, `\"NaN\"` を正しく `Float::INFINITY`, `-Float::INFINITY`, `Float::NAN` にキャストできることを確認するテストが追加されました。  \n本PRはテストコードのみの変更で、本番コードの挙動変更はありません。"
-    },
-    {
-      "number": 57523,
-      "title": "Fix typos and grammar in Form Helpers docs {#pr-57523}",
-      "url": "https://github.com/rails/rails/pull/57523",
-      "mergedAt": "2026-06-01T00:00:00.000Z",
-      "author": "VladNegara",
-      "authorUrl": "https://github.com/VladNegara",
-      "summary": "1. 概要 (1-2文で)  \nAction View の Form Helpers ガイド (`guides/source/form_helpers.md`) に含まれていた英語のタイポや文法ミスを修正するドキュメント専用のPRです。コードや挙動には一切手を加えておらず、ガイドの読みやすさ・正確さを向上させる内容です。\n\n2. 変更内容の詳細(あればサンプルコードも含めて)  \n- 対象: `guides/source/form_helpers.md` のみ（+5/-5 行）  \n- 内容の種類:\n  - 単純なスペルミスの修正  \n    - 例: “recieve” → “receive”、“extenstion” → “extension” のような誤記修正  \n  - 文法の調整  \n    - 主語と動詞の不一致、冠詞 (a/the) の抜けや過多、前置詞の誤りなどを自然な英語に修正  \n    - 長すぎて読みにくい文を適切に区切る、あるいは語順を入れ替えて読みやすくする  \n  - 用語・言い回しの統一  \n    - 既存の Rails ガイド全体の用語スタイルに合わせた表現へ微調整（例: “form helper” の単数/複数の揺れを統一、同じ概念に対する別表現を統一 など）\n\nサンプルコードのロジックや API の説明内容自体は変えておらず、「文中の英語」だけが対象です。そのため、`form_with`, `form_for`, `fields_for` などの使い方やサンプルコードは従来どおりで、説明の語句がより正確・自然になっている、というタイプの修正です。\n\n3. 影響範囲・注意点  \n- 影響範囲:\n  - 実装コードには一切変更がないため、アプリケーションや既存コードへの影響はありません。\n  - 影響するのは、英語版の Rails ガイドを読む開発者のみです。\n- 注意点:\n  - 「挙動の変更」や「推奨パターンの変更」は含まれていないため、これを理由にアプリケーションの修正を行う必要はありません。\n  - 実装や API の仕様が変わったわけではないので、Changelog というより「ドキュメントの品質向上」として理解しておけば十分です。\n\n4. 参考情報 (あれば)  \n- 対象 PR: https://github.com/rails/rails/pull/57523  \n- 修正対象のガイド:  \n  - Action View Form Helpers ガイド (`guides/source/form_helpers.md`)  \n- CI は `[ci skip]` が指定されているため走っておらず、完全にドキュメント専用の変更であることが明示されています。"
-    },
-    {
-      "number": 57525,
-      "title": "JSONGemCoderEncoder: serialize non-String keys with `to_s` instead of `as_json` {#pr-57525}",
-      "url": "https://github.com/rails/rails/pull/57525",
-      "mergedAt": "2026-06-01T00:00:00.000Z",
-      "author": "byroot",
-      "authorUrl": "https://github.com/byroot",
-      "summary": "1. 概要 (1-2文で)  \nRails の ActiveSupport における JSONGemCoderEncoder が、ハッシュの非文字列キーを `as_json` ではなく `to_s` でシリアライズするように戻されました。これにより、従来の JSON エンコーダと同じ振る舞いになり、#57520 で導入された挙動変更による非互換を解消します。"
-    },
-    {
-      "number": 57521,
-      "title": "Fix `assert_part` / `assert_no_part` for body parts nested under an attachment {#pr-57521}",
-      "url": "https://github.com/rails/rails/pull/57521",
-      "mergedAt": "2026-05-31T00:00:00.000Z",
-      "author": "55728",
-      "authorUrl": "https://github.com/55728",
-      "summary": "1. 概要 (1-2文で)  \nActionMailer のテスト用アサーション `assert_part` / `assert_no_part` が、添付ファイル付きメールで本文パートを正しく検出できない問題を修正した PR です。`Mail#parts` ではなく `Mail#all_parts` を使うことで、`multipart/mixed` 配下にネストされた `multipart/alternative` 内の text/html パートも検査対象に含めるよう変更されています。"
-    },
-    {
-      "number": 55555,
-      "title": "Rate limiting calls `cache_key` on `by:` if the object responds to it {#pr-55555}",
-      "url": "https://github.com/rails/rails/pull/55555",
-      "mergedAt": "2026-05-31T00:00:00.000Z",
-      "author": "daniel-sabourin",
-      "authorUrl": "https://github.com/daniel-sabourin",
-      "summary": "1. 概要 (1-2文で)  \nRails の `ActionController::RateLimiting` において、`rate_limit` の `by:` オプションに任意オブジェクトを渡せるようにし、そのオブジェクトが `cache_key` を実装していればそれを自動的に使ってレート制限用のキャッシュキーを生成できるようにした PR です。これにより、IP アドレスではなく「ユーザーごと」など、より柔軟な単位でのレート制限が行いやすくなります。"
     }
   ]
 }
