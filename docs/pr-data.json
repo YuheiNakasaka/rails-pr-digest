@@ -1,7 +1,115 @@
 {
-  "lastUpdated": "2026-06-05T00:36:37.217Z",
+  "lastUpdated": "2026-06-06T00:34:21.733Z",
   "totalCount": 50,
   "items": [
+    {
+      "number": 55061,
+      "title": "[ci skip] Add docs for error context middleware {#pr-55061}",
+      "url": "https://github.com/rails/rails/pull/55061",
+      "mergedAt": "2026-06-05T00:00:00.000Z",
+      "author": "dersam",
+      "authorUrl": "https://github.com/dersam",
+      "summary": "1. 概要 (1-2文で)  \nRails ガイドの「エラー報告」ドキュメントに、`ActiveSupport::ErrorReporter` の「error context middleware」（エラーコンテキスト用ミドルウェア）の使い方が追記された PR です。コードの振る舞い変更はなく、ドキュメントのみの追加です。"
+    },
+    {
+      "number": 57592,
+      "title": "[RF-Docs] [ci-skip] Active Job Basics guide (#57101) {#pr-57592}",
+      "url": "https://github.com/rails/rails/pull/57592",
+      "mergedAt": "2026-06-05T00:00:00.000Z",
+      "author": "p8",
+      "authorUrl": "https://github.com/p8",
+      "summary": "1. 概要 (1-2文で)\n- Active Job Basics ガイド全体の構成を大幅に見直し、特に Solid Queue とキューイング周りの説明を、より概念的かつ実務的な内容に再編したドキュメント改善 PR です。  \n- 既存内容の重複や価値の薄いセクションを削除・統合し、キュー名／優先度／コールバック／失敗ジョブの扱いなどを一貫した流れで理解できるように整理しています。"
+    },
+    {
+      "number": 57101,
+      "title": "[RF-Docs] [ci-skip] Active Job Basics guide {#pr-57101}",
+      "url": "https://github.com/rails/rails/pull/57101",
+      "mergedAt": "2026-06-05T00:00:00.000Z",
+      "author": "bhumi1102",
+      "authorUrl": "https://github.com/bhumi1102",
+      "summary": "1. 概要 (1-2文で)  \nActive Job BasicsガイドをRails Foundationのドキュメント方針に沿って全面的に再構成し、特にSolid Queueの説明を「設計・特徴・使い方」の観点から整理し直したPRです。細かい・重複したセクションを削除・統合し、キュー名/優先度/コールバック/失敗時の扱いなど、実務で重要なテーマごとに読みやすく再編成しています。"
+    },
+    {
+      "number": 57575,
+      "title": "Clear the type column when removing a polymorphic `has_one` {#pr-57575}",
+      "url": "https://github.com/rails/rails/pull/57575",
+      "mergedAt": "2026-06-05T00:00:00.000Z",
+      "author": "55728",
+      "authorUrl": "https://github.com/55728",
+      "summary": "1. 概要 (1-2文で)  \npolymorphic な `has_one` 関連を代入で外す（`owner.child = nil` / `owner.child = other`）際に、外部キーだけでなく `<name>_type` も確実に `NULL` にするように修正した PR です。これにより、`dependent: :nullify` 経由の「nullify」と挙動が統一され、一方向の polymorphic `has_one` で発生していた「type カラムが古いまま残る」不整合が解消されます。"
+    },
+    {
+      "number": 57566,
+      "title": "Fix MessagePack serialization of records with a `time` column {#pr-57566}",
+      "url": "https://github.com/rails/rails/pull/57566",
+      "mergedAt": "2026-06-05T00:00:00.000Z",
+      "author": "55728",
+      "authorUrl": "https://github.com/55728",
+      "summary": "1. 概要 (1-2文で)  \n`time` 型カラムを持つ ActiveRecord オブジェクトを `ActiveRecord::MessagePack` でシリアライズすると `NoMethodError` が発生していた問題を修正した PR です。`ActiveRecord::Type::Time::Value` を MessagePack の対象型として正式に登録することで、`Rails.cache.write` 等で `time` カラムを含むレコードを安全にキャッシュできるようになりました。"
+    },
+    {
+      "number": 57590,
+      "title": "Fix order-dependent test failures with `sqlite3_mem` {#pr-57590}",
+      "url": "https://github.com/rails/rails/pull/57590",
+      "mergedAt": "2026-06-05T00:00:00.000Z",
+      "author": "ruyrocha",
+      "authorUrl": "https://github.com/ruyrocha",
+      "summary": "1. 概要 (1-2文で)  \n`ARCONN=sqlite3_mem` でのテスト実行時に、テスト実行順によって約3000件の失敗を引き起こしていた原因となる2つのテストを修正し、SQLite の in-memory DB 環境でもテストスイート全体が安定して通るようにした PR です。グローバルな SchemaCache の破壊と、`:memory:` DB 自体の破棄を招いていたテストの挙動を修正・制限しています。"
+    },
+    {
+      "number": 57591,
+      "title": "Merge pull request #57583 from VladNegara/nested-join-explanation {#pr-57591}",
+      "url": "https://github.com/rails/rails/pull/57591",
+      "mergedAt": "2026-06-05T00:00:00.000Z",
+      "author": "p8",
+      "authorUrl": "https://github.com/p8",
+      "summary": "1. 概要 (1-2文で)  \nActive Record Querying ガイド内で「ネストしたクエリ (nested join / nested query)」の平易な英語説明が誤解を招く内容だったため、実際の挙動・クエリ構造に合うように文章だけを修正したドキュメント更新です。コードや API の挙動変更は一切なく、ガイドの記述の正確性を高めるための修正です。"
+    },
+    {
+      "number": 57583,
+      "title": "Fix plain English explanation of nested query in Active Record Querying guide [ci-skip] {#pr-57583}",
+      "url": "https://github.com/rails/rails/pull/57583",
+      "mergedAt": "2026-06-05T00:00:00.000Z",
+      "author": "VladNegara",
+      "authorUrl": "https://github.com/VladNegara",
+      "summary": "1. 概要 (1-2文で)  \nActive Record Querying ガイドにある「ネストした関連の JOIN」の英語説明文が、実際のクエリの挙動と食い違っていたため、それを正しい内容に修正するドキュメント変更です。コードや挙動の変更はなく、ガイドの自然言語による説明だけが更新されています。"
+    },
+    {
+      "number": 57580,
+      "title": "Skip Proc and Regexp filter_attributes when syncing to filter_parameters {#pr-57580}",
+      "url": "https://github.com/rails/rails/pull/57580",
+      "mergedAt": "2026-06-05T00:00:00.000Z",
+      "author": "jcalvert",
+      "authorUrl": "https://github.com/jcalvert",
+      "summary": "1. 概要 (1-2文で)  \nこのPRは、`ActiveRecord::FilterAttributeHandler` がモデルの `filter_attributes` を `Rails.application.config.filter_parameters` に同期する際、`Proc` や `Regexp` など文字列化しても意味のないエントリをスキップするようにし、不要かつ不安定なフィルタ文字列が `filter_parameters` に蓄積される問題を修正するものです。これにより、フィルタ設定がよりクリーンで安定し、ログや検査ツールが扱いやすくなります。"
+    },
+    {
+      "number": 57585,
+      "title": "Fix reaper fork test by disabling GSS encryption. {#pr-57585}",
+      "url": "https://github.com/rails/rails/pull/57585",
+      "mergedAt": "2026-06-05T00:00:00.000Z",
+      "author": "ruyrocha",
+      "authorUrl": "https://github.com/ruyrocha",
+      "summary": "1. 概要 (1-2文で)  \nmacOSで `ReaperTest#test_connection_pool_starts_reaper_in_fork` 実行時に segfault が発生していた問題を、fork 後の子プロセスで PostgreSQL の GSS 暗号化ネゴシエーションを無効化することで回避する修正です。libpq と macOS の Heimdal/Keychain スタックの既知の非 fork-safe 問題へのワークアラウンド的対応になります。"
+    },
+    {
+      "number": 57587,
+      "title": "Replace deprecated US/Eastern timezone with America/New_York in tests {#pr-57587}",
+      "url": "https://github.com/rails/rails/pull/57587",
+      "mergedAt": "2026-06-05T00:00:00.000Z",
+      "author": "ruyrocha",
+      "authorUrl": "https://github.com/ruyrocha",
+      "summary": "1. 概要 (1-2文で)  \n`US/Eastern` が PostgreSQL で無効なタイムゾーン名になった問題に対応し、テストコード内のタイムゾーン指定を正規の `America/New_York` に置き換える PR です。Rails 本体の挙動変更ではなく、Active Record のテスト環境が最新 tzdata / PostgreSQL でも壊れないようにするための修正です。"
+    },
+    {
+      "number": 56899,
+      "title": "Add `sql_notifications` connection config option to disable SQL notifications {#pr-56899}",
+      "url": "https://github.com/rails/rails/pull/56899",
+      "mergedAt": "2026-06-05T00:00:00.000Z",
+      "author": "rosa",
+      "authorUrl": "https://github.com/rosa",
+      "summary": "1. 概要 (1-2文で)  \nActive Record の DB 接続ごとに SQL 通知（ActiveSupport::Notifications による instrumentation）を無効化できる `sql_notifications` 接続オプションが追加されました。これに伴い、通知を一切発行しない `ActiveSupport::Notifications::NullInstrumenter` が導入され、非同期クエリ時のイベントバッファリングも無効化できます。"
+    },
     {
       "number": 57570,
       "title": "Enable per-pool query log tags formatter {#pr-57570}",
@@ -343,114 +451,6 @@
       "author": "55728",
       "authorUrl": "https://github.com/55728",
       "summary": "1. 概要 (1-2文で)  \nRails の複合主キーを持つモデルに対し、`find` に「文字列の id タプル」を複数渡した場合にレコードが1件も返らず常に `[]` になっていた不具合を修正する PR です。各主キー列ごとに適切な型キャストを行うことで、単一主キーと同様にパラメータ由来の文字列 id でも正しくレコードが取得されるようになります。"
-    },
-    {
-      "number": 57439,
-      "title": "Fix PostgreSQL range column schema dump producing invalid Ruby {#pr-57439}",
-      "url": "https://github.com/rails/rails/pull/57439",
-      "mergedAt": "2026-06-01T00:00:00.000Z",
-      "author": "55728",
-      "authorUrl": "https://github.com/55728",
-      "summary": "1. 概要 (1-2文で)  \nPostgreSQL の range 型カラム（`daterange`, `tsrange`, `tstzrange` など）にデフォルト値がある場合、`db:schema:dump` が Ruby としてパース不能な `schema.rb` を生成していた不具合を修正する PR です。range の両端値をサブタイプ（Date / Time など）の `type_cast_for_schema` を通して Ruby リテラルとして正しく出力するように変更されています。"
-    },
-    {
-      "number": 57403,
-      "title": "Update Active Storage for ImageProcessing 2.0 {#pr-57403}",
-      "url": "https://github.com/rails/rails/pull/57403",
-      "mergedAt": "2026-06-01T00:00:00.000Z",
-      "author": "janko",
-      "authorUrl": "https://github.com/janko",
-      "summary": "1. 概要 (1-2文で)  \nImageProcessing 2.0 のリリースに合わせて、Active Storage の依存関係・設定・ドキュメントを更新した PRです。v2.0 での破壊的変更（明示的な gem 依存と libvips による「危険フォーマット」のブロック）に追随しています。"
-    },
-    {
-      "number": 57004,
-      "title": "Reimplement RedisCache store using `redis-client` {#pr-57004}",
-      "url": "https://github.com/rails/rails/pull/57004",
-      "mergedAt": "2026-06-01T00:00:00.000Z",
-      "author": "byroot",
-      "authorUrl": "https://github.com/byroot",
-      "summary": "1. 概要 (1-2文で)  \nRedis ベースのキャッシュストア `RedisCacheStore` を、従来の `redis` gem ではなく新しい `redis-client` を使って作り直した PRです。既存の設定・APIとの互換性を確保するため、旧実装は `DeprecatedRedisCacheStore` として残しつつ、RESP2 プロトコルを使うことで Redis サーバの要件は従来から変えない形になっています。"
-    },
-    {
-      "number": 57533,
-      "title": "Reimplement Action Cable redis adapter with redis-client {#pr-57533}",
-      "url": "https://github.com/rails/rails/pull/57533",
-      "mergedAt": "2026-06-01T00:00:00.000Z",
-      "author": "byroot",
-      "authorUrl": "https://github.com/byroot",
-      "summary": "1. 概要 (1-2文で)  \nAction Cable の Redis アダプタ実装を、従来の `redis` gem ベースから `redis-client` ベースに書き換えた PRです。これにより、Rails が巨大な `redis` gem へ依存せずに済むようになり、購読（Pub/Sub）まわりの実装もシンプルになっています。"
-    },
-    {
-      "number": 57528,
-      "title": "Document ports can be added to hosts in `config.hosts' [ci-skip] {#pr-57528}",
-      "url": "https://github.com/rails/rails/pull/57528",
-      "mergedAt": "2026-06-01T00:00:00.000Z",
-      "author": "p8",
-      "authorUrl": "https://github.com/p8",
-      "summary": "1. 概要 (1-2文で)  \nこのPRは、Rails の `config.hosts` にホスト名と一緒に「ポート番号も指定できる」ことをガイドに追記した、ドキュメント専用の変更です。コードの挙動自体は変わらず、既存機能の説明を補完するものです。\n\n2. 変更内容の詳細 (サンプルコード含む)  \n- 変更ファイルは `guides/source/configuring.md` のみで、Rails アプリケーション設定ガイドの「`config.hosts` の説明」に数行の記述が追加されています。\n- 追加された内容はだいたい以下のような趣旨です（擬似的な抜粋・イメージ）:\n\n  ```md\n  ### config.hosts\n\n  # 中略: もともとの説明（許可ホストの設定など）\n\n  ホスト名だけでなく、ポート番号を含めて指定することもできます:\n\n  ```ruby\n  # 例: 特定ポートのみ許可する\n  config.hosts << \"example.com:3000\"\n  config.hosts << \"localhost:3001\"\n  ```\n\n  これは、同じホスト名でもポートごとにアクセス可否を分けたい場合に有用です。\n  ```\n\n- もともと Rails 本体は `\"example.com:3000\"` のような文字列をホストとして扱うことができており（`ActionDispatch::HostAuthorization` のマッチ時にホストヘッダ全体を評価）、このPRでは「その事実が公式ドキュメントに明記された」という位置付けです。\n- `[ci-skip]` がタイトルに付いている通り、テストを伴わない単なるドキュメント変更として扱われています。\n\n3. 影響範囲・注意点  \n- 影響範囲:\n  - ランタイムの挙動変更や API 変更はありません。`config.hosts` の既存仕様のうち、「ポートを含められる」という点がドキュメントで明文化されたのみです。\n  - これにより、「ホスト名だけしか指定できない」と誤解していた開発者が、ポート単位でのホワイトリスト制御を正しく設定できるようになります。\n- 注意点:\n  - 実際の `Host` ヘッダの値（および Rack/サーバがアプリに渡す `request.host_with_port` など）と、`config.hosts` に書いた値の形式を合わせる必要があります。\n    - 例: 開発で `http://localhost:3000` にアクセスするなら、`config.hosts << \"localhost:3000\"` のようにポート付きで書く。\n  - 逆に、ポートを省いた `\"example.com\"` を設定した場合は、「任意のポートでの `example.com` へのアクセスを許可する」という扱いになる実装/バージョンもあるため、厳密にポートを絞りたい場合は必ずポート込みで指定することが推奨されます。\n  - 一部のプロキシやコンテナ環境では、アプリケーション側から見える `Host` ヘッダのポートが、クライアントからのポートと異なることがあるため、実環境でどの値が来るかをログ等で確認した上で `config.hosts` を設定するのが安全です。\n\n4. 参考情報 (あれば)  \n- 対応する機能: `ActionDispatch::HostAuthorization` ミドルウェア (`config.hosts` 設定に基づいてリクエストを許可/拒否する機能)  \n- 関連ドキュメント（英語版・最新版を参照するとよい部分）:\n  - Rails Guides: Configuring Rails Applications – 「`config.hosts`」セクション  \n- 実際の活用例:\n  - docker-compose などで複数コンテナを異なるポートでローカル公開しており、特定のポートに対してのみ Rails アプリがリクエストを受け付けるようにしたい場合に、`config.hosts << \"myapp.local:8080\"` のように設定できることが、今回のドキュメント変更で分かりやすくなります。"
-    },
-    {
-      "number": 57503,
-      "title": "Reject malformed hosts with extra ports {#pr-57503}",
-      "url": "https://github.com/rails/rails/pull/57503",
-      "mergedAt": "2026-06-01T00:00:00.000Z",
-      "author": "afurm",
-      "authorUrl": "https://github.com/afurm",
-      "summary": "1. 概要 (1-2文で)  \nHostAuthorization ミドルウェアが「許可ホストにポートを含めて設定した場合」にも誤って「追加の任意ポート」を許容してしまう問題（例: `www.example.com:80:80` が通ってしまう）を修正する PR です。ポートを含む許可ホストに対しては、余分なポートを受け入れないよう正規表現生成ロジックを変更し、対応するテストも追加しています。"
-    },
-    {
-      "number": 57526,
-      "title": "Revert adding ractor helpers in Kernel {#pr-57526}",
-      "url": "https://github.com/rails/rails/pull/57526",
-      "mergedAt": "2026-06-01T00:00:00.000Z",
-      "author": "byroot",
-      "authorUrl": "https://github.com/byroot",
-      "summary": "1. 概要 (1-2文で)  \nこのPRは、Ractor 関連のヘルパーメソッドを `Kernel` に追加して Rails のパブリック API にする方針を撤回し、代わりに内部モジュール (`ActiveSupport::Ractors`) として提供するように変更しています。目的は、Ruby の古いバージョン互換のためだけに必要なヘルパーを「永久に維持すべきパブリック API」にしないようにすることです。"
-    },
-    {
-      "number": 57529,
-      "title": "Fix syntax for Rack response in Rack guide (#57527) [ci-skip] {#pr-57529}",
-      "url": "https://github.com/rails/rails/pull/57529",
-      "mergedAt": "2026-06-01T00:00:00.000Z",
-      "author": "p8",
-      "authorUrl": "https://github.com/p8",
-      "summary": "1. 概要 (1-2文で)  \nRails ガイド「Rails on Rack」に記載されている Rack レスポンスのサンプルコードの構文ミスを、正しい Rack 仕様に沿う形で修正したドキュメント修正PRです。コードや挙動には一切変更がなく、ガイドの記述のみが更新されています。\n\n2. 変更内容の詳細  \n\n- 対象ファイル: `guides/source/rails_on_rack.md`\n- 変更内容は 1 行のみで、Rack アプリケーションの返り値（Rack レスポンス）の書き方を正しい構文に修正しています。\n\nRack のアプリケーションは以下の形式の 3 要素配列を返す必要があります:\n\n```ruby\n# [ステータスコード, ヘッダ(Hash), ボディ(各要素が文字列の Enumerable)]\n[status, headers, body]\n```\n\nガイド内のサンプルでは、この 3 要素目（body）か、もしくは全体の書式が Rack 仕様に即していない形になっていたため、例えば次のような形に修正されていると考えられます:\n\n修正前（誤った例・イメージ）:\n\n```ruby\n# body を単なる文字列で返している / または配列ではない、など\n[200, { \"Content-Type\" => \"text/html\" }, \"Hello, world!\"]\n```\n\n修正後（正しい Rack レスポンスの例）:\n\n```ruby\n[200, { \"Content-Type\" => \"text/html\" }, [\"Hello, world!\"]]\n```\n\nあるいは単純なシンタックスエラー（カンマやカッコの抜け、シンボルの書き方など）があれば、それが修正されています。  \nいずれにせよ、修正内容は **「Rack アプリの返り値サンプルを、Rack が要求する `[status, headers, body]` 形式として正しく書き直した」** ものです。\n\n3. 影響範囲・注意点  \n\n- 影響範囲:\n  - Rails 本体・Rack インテグレーションの実装・挙動には影響しません。\n  - ドキュメント（Rails ガイド）を見て Rack アプリケーションを書く開発者が、誤ったレスポンス形式を参考にしてしまうリスクが減ります。\n\n- 注意点:\n  - 既に誤ったサンプルをもとにアプリを書いていた場合、Rack のインターフェース仕様（body は `each` できる文字列の配列などである必要がある）を改めて確認するのがよいです。\n  - PR タイトルに `[ci-skip]` が付いている通り、コード変更がないため CI はスキップされています。\n\n4. 参考情報 (あれば)  \n\n- Rack SPEC（Rack アプリの返り値仕様）  \n  - https://github.com/rack/rack/blob/main/SPEC.rdoc  \n  - 「The Body must respond to `each` and must only yield String values.」など、レスポンス形式の要件が詳述されています。\n- Rails ガイド: Rails on Rack  \n  - 最新版の `rails_on_rack.md` を参照すると、今回修正された正しいサンプルコードを確認できます。"
-    },
-    {
-      "number": 57527,
-      "title": "Fix syntax for Rack response in Rack guide {#pr-57527}",
-      "url": "https://github.com/rails/rails/pull/57527",
-      "mergedAt": "2026-06-01T00:00:00.000Z",
-      "author": "ayushn21",
-      "authorUrl": "https://github.com/ayushn21",
-      "summary": "1. 概要 (1-2文で)  \nRailsガイド「Rails on Rack」で、Rackレスポンスの書き方に誤りがあったため、正しい `Rack::Response` オブジェクトを使う形に修正したドキュメント更新のPRです。コードの挙動ではなく、ガイドのサンプルコードの記述ミスを直しています。"
-    },
-    {
-      "number": 57516,
-      "title": "Fix `Duration#in_*` truncating sub-second precision {#pr-57516}",
-      "url": "https://github.com/rails/rails/pull/57516",
-      "mergedAt": "2026-06-01T00:00:00.000Z",
-      "author": "55728",
-      "authorUrl": "https://github.com/55728",
-      "summary": "1. 概要 (1-2文で)  \n`ActiveSupport::Duration` の `in_minutes`, `in_hours`, `in_days`, `in_weeks`, `in_months`, `in_years` が、内部で秒数を整数に切り捨ててから計算していたため、サブ秒精度が失われていたバグを修正する PR です。`in_seconds` / `to_i` の挙動はそのままに、`in_*` 系メソッドだけが小数を正しく扱うようになります。"
-    },
-    {
-      "number": 57514,
-      "title": "Hash PostgreSQL cable channel identifiers by byte size {#pr-57514}",
-      "url": "https://github.com/rails/rails/pull/57514",
-      "mergedAt": "2026-06-01T00:00:00.000Z",
-      "author": "55728",
-      "authorUrl": "https://github.com/55728",
-      "summary": "1. 概要 (1-2文で)  \nAction Cable の PostgreSQL サブスクリプションアダプタで、チャネル名の長さ判定を「文字数」ではなく「バイト数」で行うように変更し、マルチバイト文字を含むチャネル名が PostgreSQL の識別子上限（63バイト）でサイレントに切り詰められる問題を修正した PR です。  \nこれにより、長い日本語名などを使ったチャネルで発生し得た「メッセージのサイレントロス」および「別チャネルへの誤配送」が解消されます。"
-    },
-    {
-      "number": 57505,
-      "title": "Parse all HTTP-date formats in If-Modified-Since {#pr-57505}",
-      "url": "https://github.com/rails/rails/pull/57505",
-      "mergedAt": "2026-06-01T00:00:00.000Z",
-      "author": "55728",
-      "authorUrl": "https://github.com/55728",
-      "summary": "1. 概要 (1-2文で)  \n`If-Modified-Since` ヘッダの日時パースを `Time.rfc2822` から `Time.httpdate` に変更し、RFC 9110 で必須とされる3種類すべての HTTP-date 形式（IMF-fixdate / RFC 850 / asctime）を正しく解釈できるようにしたPRです。これにより、これまで一部フォーマットで `304 Not Modified` が返せずフルレスポンスになっていた挙動が修正されます。"
     }
   ]
 }
