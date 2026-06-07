@@ -1,7 +1,43 @@
 {
-  "lastUpdated": "2026-06-06T00:34:21.733Z",
+  "lastUpdated": "2026-06-07T00:33:00.626Z",
   "totalCount": 50,
   "items": [
+    {
+      "number": 57611,
+      "title": "Fix double encode for Coders::JSON and JSON column {#pr-57611}",
+      "url": "https://github.com/rails/rails/pull/57611",
+      "mergedAt": "2026-06-06T00:00:00.000Z",
+      "author": "skipkayhil",
+      "authorUrl": "https://github.com/skipkayhil",
+      "summary": "1. 概要 (1-2文で)  \nActiveRecordで、ネイティブの `json`/`jsonb` カラムに対して `serialize` を JSON コーダー付きで宣言したときに、`ActiveRecord::Coders::JSON` 経由だと二重エンコードされて壊れた JSON が保存される不具合を修正したPRです。`JSON` と `ActiveRecord::Coders::JSON` などJSONコーダーのバリエーションを、互換性チェックですべて正しく検知するようにしました。"
+    },
+    {
+      "number": 57601,
+      "title": "Fix `update_all` / `delete_all` ignoring `group`/`having` (updates/deletes every row) {#pr-57601}",
+      "url": "https://github.com/rails/rails/pull/57601",
+      "mergedAt": "2026-06-06T00:00:00.000Z",
+      "author": "55728",
+      "authorUrl": "https://github.com/55728",
+      "summary": "1. 概要 (1-2文で)  \n`group`/`having` を含むが `joins` / `limit` / `offset` / `order` を含まない Relation に対して `update_all` / `delete_all` を呼ぶと、`HAVING` が完全に無視されテーブル全行が更新・削除されてしまう不具合を修正した PR です。Arel の SQL 生成ロジックを修正し、純粋な `group`/`having` ケースでもサブクエリ経由で PK ベースに対象レコードを絞り込むようにしました。"
+    },
+    {
+      "number": 57605,
+      "title": "Reset the memoized `finder_needs_type_condition?` flag on `reset_column_information` {#pr-57605}",
+      "url": "https://github.com/rails/rails/pull/57605",
+      "mergedAt": "2026-06-06T00:00:00.000Z",
+      "author": "55728",
+      "authorUrl": "https://github.com/55728",
+      "summary": "1. 概要 (1-2文で)  \n`reset_column_information` / `reload_schema_from_cache` 実行後も、STI 用のフラグ `finder_needs_type_condition?` の結果が古いまま残ってしまう不具合を修正する PR です。これにより、マイグレーションなどで `type` カラムを追加・削除した後に、STI 条件が効かなくなる／クエリがクラッシュする問題が解消されます。"
+    },
+    {
+      "number": 57603,
+      "title": "Fix `Relation#cache_key` crashing on a loaded collection with a `NULL` timestamp {#pr-57603}",
+      "url": "https://github.com/rails/rails/pull/57603",
+      "mergedAt": "2026-06-06T00:00:00.000Z",
+      "author": "55728",
+      "authorUrl": "https://github.com/55728",
+      "summary": "1. 概要 (1–2文で)  \n`ActiveRecord::Relation#cache_key` / `cache_version` が、「すでにロード済みの関連に `NULL` の timestamp を含むレコードがある場合」に限って `ArgumentError` で落ちる不具合を修正した PRです。未ロード時とロード済み時で `NULL` の扱いが食い違っていたのを揃え、どちらでも同じ cache key を生成するようになりました。"
+    },
     {
       "number": 55061,
       "title": "[ci skip] Add docs for error context middleware {#pr-55061}",
@@ -415,42 +451,6 @@
       "author": "drjayvee",
       "authorUrl": "https://github.com/drjayvee",
       "summary": "1. 概要 (1-2文で)  \nActionView::TestCase の `#render` が、複数回呼び出したときに `rendered` の内容を正しくリセットできていなかったバグを修正した PRです。メモ化導入 (#51093) によって壊れていた既存の挙動を復元しつつ、`content_class` をカスタム実装しているケースにも配慮した実装になっています。"
-    },
-    {
-      "number": 57534,
-      "title": "Fix `disable_joins` through associations grouping by composite key {#pr-57534}",
-      "url": "https://github.com/rails/rails/pull/57534",
-      "mergedAt": "2026-06-02T00:00:00.000Z",
-      "author": "55728",
-      "authorUrl": "https://github.com/55728",
-      "summary": "1. 概要 (1-2文で)  \n`disable_joins: true` を指定した `has_many/has_one :through` で、途中に order があり、かつ関連先が複合キー（複合 primary key / foreign key）を使っている場合に、結果が黙って空配列になってしまうバグを修正しています。  \n複合キーを使う関連の in-memory グルーピング処理で、キーの扱い方を正しく複合キー対応にすることで、取得済みレコードが消えてしまう問題を解消しています。"
-    },
-    {
-      "number": 57469,
-      "title": "Fix `FormBuilder#to_partial_path` returning nil for non-Builder subclasses {#pr-57469}",
-      "url": "https://github.com/rails/rails/pull/57469",
-      "mergedAt": "2026-06-01T00:00:00.000Z",
-      "author": "55728",
-      "authorUrl": "https://github.com/55728",
-      "summary": "1. 概要 (1-2文で)  \n`FormBuilder#to_partial_path` が、クラス名が `*Builder` で終わらないサブクラスに対して `nil` を返してしまうバグを修正した PR です。`String#sub!` を `String#sub` に変更することで、あらゆる FormBuilder サブクラスで常に有効なパーシャルパス文字列が得られるようになります。"
-    },
-    {
-      "number": 57531,
-      "title": "Fix collection `ids=` writers raising `RecordNotFound` for composite primary key models with string ids {#pr-57531}",
-      "url": "https://github.com/rails/rails/pull/57531",
-      "mergedAt": "2026-06-01T00:00:00.000Z",
-      "author": "55728",
-      "authorUrl": "https://github.com/55728",
-      "summary": "1. 概要 (1-2文で)  \n複合主キーを持つモデルに対して `has_many` / `has_and_belongs_to_many` の `xxx_ids=` を文字列のID配列で呼び出すと、実在するレコードでも `ActiveRecord::RecordNotFound` が発生していた問題を修正するPRです。  \nフォームやJSONから来る「文字列の複合ID」を正しくキャストして関連付けできるようにしています。"
-    },
-    {
-      "number": 57530,
-      "title": "Fix `find` silently returning `[]` for composite primary key ids passed as strings {#pr-57530}",
-      "url": "https://github.com/rails/rails/pull/57530",
-      "mergedAt": "2026-06-01T00:00:00.000Z",
-      "author": "55728",
-      "authorUrl": "https://github.com/55728",
-      "summary": "1. 概要 (1-2文で)  \nRails の複合主キーを持つモデルに対し、`find` に「文字列の id タプル」を複数渡した場合にレコードが1件も返らず常に `[]` になっていた不具合を修正する PR です。各主キー列ごとに適切な型キャストを行うことで、単一主キーと同様にパラメータ由来の文字列 id でも正しくレコードが取得されるようになります。"
     }
   ]
 }
