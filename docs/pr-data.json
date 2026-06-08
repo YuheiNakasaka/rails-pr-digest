@@ -1,7 +1,61 @@
 {
-  "lastUpdated": "2026-06-07T00:33:00.626Z",
+  "lastUpdated": "2026-06-08T00:35:21.948Z",
   "totalCount": 50,
   "items": [
+    {
+      "number": 57615,
+      "title": "Fix `clear_*_change` doc claiming it clears previous changes [ci skip] {#pr-57615}",
+      "url": "https://github.com/rails/rails/pull/57615",
+      "mergedAt": "2026-06-07T00:00:00.000Z",
+      "author": "55728",
+      "authorUrl": "https://github.com/55728",
+      "summary": "1. 概要 (1-2文で)  \n`clear_*_change` メソッド（正確には `clear_attribute_change` が生成する系）のドキュメントが「現在の変更と過去の変更を両方クリアする」と誤って説明していたのを、「現在の変更だけをクリアする」という実装どおりの内容に修正する PR です。挙動自体には変更はなく、ドキュメントのみの修正です。"
+    },
+    {
+      "number": 57598,
+      "title": "Fix `find` with an explicit `order` + `offset` past the ids raising a spurious `RecordNotFound` {#pr-57598}",
+      "url": "https://github.com/rails/rails/pull/57598",
+      "mergedAt": "2026-06-07T00:00:00.000Z",
+      "author": "55728",
+      "authorUrl": "https://github.com/55728",
+      "summary": "1. 概要 (1-2文で)  \n`find` に配列ID + 明示的な `order` + `offset` が ID 数を超える値で指定された場合に、意味不明な負数付きの `ActiveRecord::RecordNotFound` が発生していた不具合を修正し、そのケースで空配列 (`[]`) を返すように揃えた PR です。あわせて、`order` の有無で `find` の挙動が食い違わないことを確認する回帰テストが追加されています。"
+    },
+    {
+      "number": 57613,
+      "title": "Make `rails new` work again on systems that do not have vips {#pr-57613}",
+      "url": "https://github.com/rails/rails/pull/57613",
+      "mergedAt": "2026-06-07T00:00:00.000Z",
+      "author": "jeromedalbert",
+      "authorUrl": "https://github.com/jeromedalbert",
+      "summary": "1. 概要 (1-2文で)  \n`rails new` 実行時に vips がインストールされていない環境でアプリ作成が失敗していた不具合を修正し、Active Storage で vips を実際に使うタイミングまでエラーが発生しないようにした PR です。`Gemfile` の `ruby-vips` の読み込み方法を変え、テストも追加されています。"
+    },
+    {
+      "number": 57616,
+      "title": "Fix `ActiveModel::Type::Decimal` doc for a non-numeric cast [ci skip] {#pr-57616}",
+      "url": "https://github.com/rails/rails/pull/57616",
+      "mergedAt": "2026-06-07T00:00:00.000Z",
+      "author": "55728",
+      "authorUrl": "https://github.com/55728",
+      "summary": "1. 概要 (1-2文で)  \n`ActiveModel::Type::Decimal` のドキュメント中のキャスト結果の説明が実装と食い違っていたため、非数値を渡した場合の戻り値を `nil` ではなく `0.0` に修正するドキュメント更新です。実装自体の挙動変更はなく、コメント(サンプルコードの期待値)のみが正されました。"
+    },
+    {
+      "number": 57618,
+      "title": "Fix `add_index` example in Active Record Schema docs {#pr-57618}",
+      "url": "https://github.com/rails/rails/pull/57618",
+      "mergedAt": "2026-06-07T00:00:00.000Z",
+      "author": "55728",
+      "authorUrl": "https://github.com/55728",
+      "summary": "1. 概要 (1-2文で)  \nActiveRecord::Schema のドキュメント内で示されていた `add_index` の使用例が実際のメソッドシグネチャと合っておらず、実行すると `ArgumentError` になる問題を修正した PR です。`add_index` に対する誤った位置引数の利用例を、正しいキーワード引数形式へと修正しています。"
+    },
+    {
+      "number": 57607,
+      "title": "Fix `in_order_of` surfacing `NULL` rows for an unknown enum key or out-of-range integer {#pr-57607}",
+      "url": "https://github.com/rails/rails/pull/57607",
+      "mergedAt": "2026-06-07T00:00:00.000Z",
+      "author": "55728",
+      "authorUrl": "https://github.com/55728",
+      "summary": "1. 概要 (1-2文で)  \n`ActiveRecord::Relation#in_order_of` が、列挙型(enum)の未知キーや範囲外整数を指定したときに、本来無視すべき値を `NULL` マッチとして扱い、`NULL` 行を紛れ込ませてしまう不具合を修正した PR です。明示的な `nil` と「シリアライズ結果としての `nil`」を区別し、後者は `in_order_of` から除外することで、`Enumerable#in_order_of` と同じ挙動に揃えています。"
+    },
     {
       "number": 57611,
       "title": "Fix double encode for Coders::JSON and JSON column {#pr-57611}",
@@ -397,60 +451,6 @@
       "author": "hammadxcm",
       "authorUrl": "https://github.com/hammadxcm",
       "summary": "1. 概要 (1–2文で)  \n`ActiveModel::ValidationError` に対するテストを拡充し、`validate!` 実行時に発生する例外から `#model` とエラーメッセージが期待どおり取得できることを検証する変更です。プロダクションコードの変更はなく、テストコードのみの追加です。"
-    },
-    {
-      "number": 57543,
-      "title": "Test ArrayInquirer#any? without candidates {#pr-57543}",
-      "url": "https://github.com/rails/rails/pull/57543",
-      "mergedAt": "2026-06-02T00:00:00.000Z",
-      "author": "hammadxcm",
-      "authorUrl": "https://github.com/hammadxcm",
-      "summary": "1. 概要 (1-2文で)  \n`ActiveSupport::ArrayInquirer#any?` を引数なしで呼び出した場合の挙動（配列に要素があるかどうかを返す）を確認するテストが追加された PR です。  \n本番コードへの変更はなく、テストカバレッジのみが拡充されています。"
-    },
-    {
-      "number": 57545,
-      "title": "Test BigInteger serializing string values {#pr-57545}",
-      "url": "https://github.com/rails/rails/pull/57545",
-      "mergedAt": "2026-06-02T00:00:00.000Z",
-      "author": "hammadxcm",
-      "authorUrl": "https://github.com/hammadxcm",
-      "summary": "1. 概要 (1-2文で)  \n`ActiveModel::Type::BigInteger#serialize` が文字列をどう扱うかについて、既存の挙動をテストで明示的にカバーする PR です。プロダクションコードの変更はなく、テストが 7 行追加されただけです。"
-    },
-    {
-      "number": 57541,
-      "title": "Test truncate when omission is longer than truncate_to {#pr-57541}",
-      "url": "https://github.com/rails/rails/pull/57541",
-      "mergedAt": "2026-06-02T00:00:00.000Z",
-      "author": "hammadxcm",
-      "authorUrl": "https://github.com/hammadxcm",
-      "summary": "1. 概要 (1-2文で)  \n`String#truncate` において、`:omission` が `truncate_to` より長い場合の挙動（省略記号だけが返り、結果文字列が `truncate_to` を超えるケース）をテストでカバーする PR です。プロダクションコードの変更はなく、テスト追加のみです。"
-    },
-    {
-      "number": 57540,
-      "title": "Test Array offset accessors when out of bounds {#pr-57540}",
-      "url": "https://github.com/rails/rails/pull/57540",
-      "mergedAt": "2026-06-02T00:00:00.000Z",
-      "author": "hammadxcm",
-      "authorUrl": "https://github.com/hammadxcm",
-      "summary": "1. 概要 (1-2文で)  \n`Array#second`〜`#forty_two` および `#second_to_last` / `#third_to_last` が、配列の長さが足りない場合に `nil` を返す挙動についてテストを追加した PR です。プロダクションコードの変更はなく、テストコードのみの追加です。"
-    },
-    {
-      "number": 57542,
-      "title": "Test Mime::Type#html? predicate {#pr-57542}",
-      "url": "https://github.com/rails/rails/pull/57542",
-      "mergedAt": "2026-06-02T00:00:00.000Z",
-      "author": "hammadxcm",
-      "authorUrl": "https://github.com/hammadxcm",
-      "summary": "1. 概要 (1-2文で)  \n`Mime::Type#html?` メソッドの挙動（`:html`シンボル、`\"html\"`を含むMIMEタイプ文字列、それ以外でfalse）を直接検証するテストが追加されたPRです。プロダクションコードの変更はなく、テストカバレッジを補完する目的の修正です。"
-    },
-    {
-      "number": 56422,
-      "title": "ActionView::TestCase#render resets rendered {#pr-56422}",
-      "url": "https://github.com/rails/rails/pull/56422",
-      "mergedAt": "2026-06-02T00:00:00.000Z",
-      "author": "drjayvee",
-      "authorUrl": "https://github.com/drjayvee",
-      "summary": "1. 概要 (1-2文で)  \nActionView::TestCase の `#render` が、複数回呼び出したときに `rendered` の内容を正しくリセットできていなかったバグを修正した PRです。メモ化導入 (#51093) によって壊れていた既存の挙動を復元しつつ、`content_class` をカスタム実装しているケースにも配慮した実装になっています。"
     }
   ]
 }
