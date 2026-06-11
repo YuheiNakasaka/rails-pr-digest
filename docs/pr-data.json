@@ -1,7 +1,88 @@
 {
-  "lastUpdated": "2026-06-10T00:39:34.351Z",
+  "lastUpdated": "2026-06-11T00:39:54.093Z",
   "totalCount": 50,
   "items": [
+    {
+      "number": 57657,
+      "title": "Support a single composite primary key id in `delete` {#pr-57657}",
+      "url": "https://github.com/rails/rails/pull/57657",
+      "mergedAt": "2026-06-10T00:00:00.000Z",
+      "author": "55728",
+      "authorUrl": "https://github.com/55728",
+      "summary": "1. 概要 (1-2文で)  \nRails の ActiveRecord において、複合主キーを持つモデルに対して `Model.delete(record.id)` を呼び出すと `ArgumentError` が出ていた問題を修正し、`destroy` と同様に単一レコードの削除が正しく動作するようにしました。`delete` の単一・複数 ID 指定の挙動が、複合主キー環境でも一貫するようになります。"
+    },
+    {
+      "number": 57653,
+      "title": "Keep composite primary key columns in the default attribute set {#pr-57653}",
+      "url": "https://github.com/rails/rails/pull/57653",
+      "mergedAt": "2026-06-10T00:00:00.000Z",
+      "author": "55728",
+      "authorUrl": "https://github.com/55728",
+      "summary": "1. 概要 (1-2文で)  \nこのPRは、複合主キーを持つモデルで `select` による部分読み出しを行った際、主キー列を参照すると `ActiveModel::MissingAttributeError` が発生してしまう問題を修正し、単一主キーと同様に `nil` を返すようにしたものです。`attributes_builder` がデフォルト属性セットを構築する際に、複合主キー列も常に初期化対象に含めるようにしています。"
+    },
+    {
+      "number": 57649,
+      "title": "Return an empty array from `find([])` on a composite primary key {#pr-57649}",
+      "url": "https://github.com/rails/rails/pull/57649",
+      "mergedAt": "2026-06-10T00:00:00.000Z",
+      "author": "55728",
+      "authorUrl": "https://github.com/55728",
+      "summary": "1. 概要 (1-2文で)  \n複合主キーを持つモデルに対して `Model.find([])` を呼ぶと `ActiveRecord::RecordNotFound` が発生していた挙動を、単一主キーと同様に空配列 `[]` を返すように修正した PR です。これにより、主キーの種類に依存しない一貫した `find` の挙動が保証されます。"
+    },
+    {
+      "number": 57594,
+      "title": "Fix bug where reload leaks ordinary scopes into all_queries lookups. {#pr-57594}",
+      "url": "https://github.com/rails/rails/pull/57594",
+      "mergedAt": "2026-06-10T00:00:00.000Z",
+      "author": "andrewn617",
+      "authorUrl": "https://github.com/andrewn617",
+      "summary": "1. 概要 (1-2文で)  \n`reload` 実行時に、`all_queries` 用のデフォルトスコープだけを使うはずのクエリに、通常のスコープ（`current_scope`）が紛れ込んでしまうバグを修正した PR です。`all` を経由せず `default_scoped(all_queries: true)` を直接使うことで、`all_queries` なスコープだけが正しく反映されるようになりました。"
+    },
+    {
+      "number": 57637,
+      "title": "Reinitialize the thread-safe level key when a logger is copied {#pr-57637}",
+      "url": "https://github.com/rails/rails/pull/57637",
+      "mergedAt": "2026-06-10T00:00:00.000Z",
+      "author": "etiennebarrie",
+      "authorUrl": "https://github.com/etiennebarrie",
+      "summary": "1. 概要 (1-2文で)  \n`LoggerThreadSafeLevel` を持つロガーを `clone` / `dup` した際に、元のロガーとスレッドローカルなログレベルの保存領域を共有してしまうバグを修正しています。コピー時にキーを再初期化することで、コピー後のロガーごとに独立したスレッドセーフなログレベル管理が行われるようになります。"
+    },
+    {
+      "number": 57647,
+      "title": "Don't mutate the names array passed to `Cache::Store#delete_multi` {#pr-57647}",
+      "url": "https://github.com/rails/rails/pull/57647",
+      "mergedAt": "2026-06-10T00:00:00.000Z",
+      "author": "55728",
+      "authorUrl": "https://github.com/55728",
+      "summary": "1. 概要 (1-2文で)  \n`ActiveSupport::Cache::Store#delete_multi` が、呼び出し元から渡された配列を破壊的に変更していた問題を修正し、他の multi 系メソッド (`read_multi`, `write_multi`, `fetch_multi`) と同様に非破壊的な処理に統一する PR です。これにより、キー配列が意図せず変更されたり、名前空間が二重に付与される不具合や、凍結配列での例外が解消されます。"
+    },
+    {
+      "number": 57643,
+      "title": "Add test coverage for the remaining Type::Date cast branches {#pr-57643}",
+      "url": "https://github.com/rails/rails/pull/57643",
+      "mergedAt": "2026-06-10T00:00:00.000Z",
+      "author": "hammadxcm",
+      "authorUrl": "https://github.com/hammadxcm",
+      "summary": "1. 概要 (1-2文で)  \nActiveModel::Type::Date#cast の、これまでテストされていなかった分岐パスに対してテストを追加し、分岐網羅に近づけた PR です。アプリケーションコードの変更はなく、テストのみの追加です。"
+    },
+    {
+      "number": 57644,
+      "title": "Memoize ivar when freezing ActiveSupport::TaggedLogging::Formatter {#pr-57644}",
+      "url": "https://github.com/rails/rails/pull/57644",
+      "mergedAt": "2026-06-10T00:00:00.000Z",
+      "author": "etiennebarrie",
+      "authorUrl": "https://github.com/etiennebarrie",
+      "summary": "1. 概要 (1-2文で)  \n`ActiveSupport::TaggedLogging::Formatter` を freeze した状態でも Ractor 間で共有して使えるようにするため、インスタンス変数のメモ化処理が追加されました。これにより、Ractor-shareable な logger 構成で tagged logging を安全に利用できます。"
+    },
+    {
+      "number": 57646,
+      "title": "Minor Grammar Fixes {#pr-57646}",
+      "url": "https://github.com/rails/rails/pull/57646",
+      "mergedAt": "2026-06-10T00:00:00.000Z",
+      "author": "yashika279",
+      "authorUrl": "https://github.com/yashika279",
+      "summary": "1. 概要 (1-2文で)  \nこのPRは、Railsガイドの README (guides/README.md) に含まれていた英文の文法ミスを 1 箇所だけ修正したものです。アプリケーションコードやフレームワークの挙動には一切影響せず、ドキュメント品質の向上のみを目的としています。\n\n2. 変更内容の詳細  \n- 対象ファイル: `guides/README.md`  \n- 変更行: +1 / -1（1 行分の文言を置き換え）\n\n内容としては、英語の文章中の軽微な文法・表現の誤りを修正するものです。  \n具体的には、たとえば以下のようなタイプの修正に相当します（※イメージ例）:\n\n```diff\n- This guides helps you to understand Rails.\n+ These guides help you understand Rails.\n```\n\n実際の PR でも同様に、  \n- 単数・複数形の不一致  \n- 冠詞 (a/the) の誤用  \n- 前置詞の選択ミス  \n- 動詞の形 (helps → help など)  \nといった「読んだときに違和感がある程度の軽微な文法ミス」を修正していると考えられます。\n\nコードロジックの変更はなく、ガイド文書中の一文のみが差し替えられています。\n\n3. 影響範囲・注意点  \n- 影響範囲  \n  - Rails の挙動、API、設定値、マイグレーション、生成物などには一切影響なし  \n  - Rails ガイドを英語で読む際の可読性・自然さがわずかに向上  \n- 注意点  \n  - バージョンアップ時に、この PR を理由にテストや動作確認を強化する必要はありません。  \n  - ドキュメントの文言を引用している社内資料や記事がある場合、文言が 1 行だけ微妙に変わっている可能性はありますが、意味が変わるような修正ではないため、通常は気にしなくて構いません。\n\n4. 参考情報 (あれば)  \n- PR: https://github.com/rails/rails/pull/57646  \n- 対象ファイルの最新内容は、Rails 本家リポジトリの `guides/README.md` を参照してください。  \n- ドキュメント系 PR は、挙動には影響しないものの、ガイドやチュートリアルを教材として使う場合には誤解を減らす助けになります。"
+    },
     {
       "number": 57639,
       "title": "[ActiveModel] Re-run `normalizes` only when the value changed in place {#pr-57639}",
@@ -370,87 +451,6 @@
       "author": "ruyrocha",
       "authorUrl": "https://github.com/ruyrocha",
       "summary": "1. 概要 (1-2文で)  \nmacOSで `ReaperTest#test_connection_pool_starts_reaper_in_fork` 実行時に segfault が発生していた問題を、fork 後の子プロセスで PostgreSQL の GSS 暗号化ネゴシエーションを無効化することで回避する修正です。libpq と macOS の Heimdal/Keychain スタックの既知の非 fork-safe 問題へのワークアラウンド的対応になります。"
-    },
-    {
-      "number": 57587,
-      "title": "Replace deprecated US/Eastern timezone with America/New_York in tests {#pr-57587}",
-      "url": "https://github.com/rails/rails/pull/57587",
-      "mergedAt": "2026-06-05T00:00:00.000Z",
-      "author": "ruyrocha",
-      "authorUrl": "https://github.com/ruyrocha",
-      "summary": "1. 概要 (1-2文で)  \n`US/Eastern` が PostgreSQL で無効なタイムゾーン名になった問題に対応し、テストコード内のタイムゾーン指定を正規の `America/New_York` に置き換える PR です。Rails 本体の挙動変更ではなく、Active Record のテスト環境が最新 tzdata / PostgreSQL でも壊れないようにするための修正です。"
-    },
-    {
-      "number": 56899,
-      "title": "Add `sql_notifications` connection config option to disable SQL notifications {#pr-56899}",
-      "url": "https://github.com/rails/rails/pull/56899",
-      "mergedAt": "2026-06-05T00:00:00.000Z",
-      "author": "rosa",
-      "authorUrl": "https://github.com/rosa",
-      "summary": "1. 概要 (1-2文で)  \nActive Record の DB 接続ごとに SQL 通知（ActiveSupport::Notifications による instrumentation）を無効化できる `sql_notifications` 接続オプションが追加されました。これに伴い、通知を一切発行しない `ActiveSupport::Notifications::NullInstrumenter` が導入され、非同期クエリ時のイベントバッファリングも無効化できます。"
-    },
-    {
-      "number": 57570,
-      "title": "Enable per-pool query log tags formatter {#pr-57570}",
-      "url": "https://github.com/rails/rails/pull/57570",
-      "mergedAt": "2026-06-04T00:00:00.000Z",
-      "author": "hmcguire-shopify",
-      "authorUrl": "https://github.com/hmcguire-shopify",
-      "summary": "1. 概要 (1-2文で)  \nこのPRは、`database.yml` の各コネクションプールごとに `query_log_tags_format` を設定できるようにし、グローバル設定 (`config.active_record.query_log_tags_format`) をプール単位で上書き可能にします。これにより、同一アプリ内でデータベース接続ごとに `:legacy` / `:sqlcommenter` など異なるクエリログコメント形式を使い分けられます。"
-    },
-    {
-      "number": 57572,
-      "title": "Add test coverage for Enumerable key-helper edge cases {#pr-57572}",
-      "url": "https://github.com/rails/rails/pull/57572",
-      "mergedAt": "2026-06-04T00:00:00.000Z",
-      "author": "hammadxcm",
-      "authorUrl": "https://github.com/hammadxcm",
-      "summary": "1. 概要 (1-2文で)  \n`Enumerable` 拡張（`pluck` / `pick` / `compact_blank`）の「キーが存在しない場合」や `Set` に対する挙動など、これまでテストされていなかった端ケースに対してテストが追加された PR です。プロダクションコードの変更はなく、テストコード（`enumerable_test.rb`）のみが20行追加されています。"
-    },
-    {
-      "number": 57584,
-      "title": "Clear Postgres warnings as they get handled {#pr-57584}",
-      "url": "https://github.com/rails/rails/pull/57584",
-      "mergedAt": "2026-06-04T00:00:00.000Z",
-      "author": "matthewd",
-      "authorUrl": "https://github.com/matthewd",
-      "summary": "1. 概要 (1-2文で)  \nPostgreSQL アダプタで、SQL 実行時に発生した warning の扱いを整理し、「処理済みの warning を都度クリアする」ようにした PR です。これにより、`select_all` など複数クエリの warning が蓄積して次のクエリで再度まとめて報告されてしまう挙動が修正され、失敗したクエリ後の warning も正しく処理されます。"
-    },
-    {
-      "number": 52278,
-      "title": "[ci skip] Improve readability of select form options helper gotcha documentation {#pr-52278}",
-      "url": "https://github.com/rails/rails/pull/52278",
-      "mergedAt": "2026-06-04T00:00:00.000Z",
-      "author": "markzalar",
-      "authorUrl": "https://github.com/markzalar",
-      "summary": "1. 概要 (1-2文で)  \nRails の `select` ヘルパ（`form_options_helper`）に関する「gotcha（ハマりどころ）」のドキュメントが、読みやすくなるようリライトされた PR です。挙動や API の変更はなく、内容はドキュメントコメントのみの改善です。"
-    },
-    {
-      "number": 57582,
-      "title": "Action Cable: only skip eager loading for Redis and Postgres {#pr-57582}",
-      "url": "https://github.com/rails/rails/pull/57582",
-      "mergedAt": "2026-06-04T00:00:00.000Z",
-      "author": "byroot",
-      "authorUrl": "https://github.com/byroot",
-      "summary": "1. 概要 (1-2文で)  \nAction Cable が「起動時の eager load をスキップする」対象を、Redis と PostgreSQL のサブスクリプションアダプタに限定するように調整した PR です。前 PR (#57249) の挙動をより適切に絞り込んだ小さなリファインメントです。"
-    },
-    {
-      "number": 57249,
-      "title": "Action Cable: explicitly require sibling deps in Redis adapter {#pr-57249}",
-      "url": "https://github.com/rails/rails/pull/57249",
-      "mergedAt": "2026-06-04T00:00:00.000Z",
-      "author": "gotrevor-notarize",
-      "authorUrl": "https://github.com/gotrevor-notarize",
-      "summary": "1. 概要 (1-2文で)  \nAction Cable の Redis サブスクリプションアダプタが、自身と同じディレクトリ内の `Base` と `ChannelPrefix` を明示的に `require` するようにし、Zeitwerk の lazy autoload との競合で起きるスレッドセーフティ問題（`NameError`）を防ぐ修正です。これにより、Puma などのマルチスレッド/マルチプロセス環境で、稀に Redis アダプタが定義されないままになってしまう致命的な状態を避けられます。"
-    },
-    {
-      "number": 57576,
-      "title": "Resolve attribute aliases in the `update_attribute` readonly check {#pr-57576}",
-      "url": "https://github.com/rails/rails/pull/57576",
-      "mergedAt": "2026-06-04T00:00:00.000Z",
-      "author": "55728",
-      "authorUrl": "https://github.com/55728",
-      "summary": "1. 概要 (1-2文で)  \n`update_attribute` / `update_attribute!` が readonly 属性をチェックする際に「属性エイリアス」を解決していなかった問題を修正し、`update_columns` と同じくエイリアス経由でも readonly 制約が正しく効くようにした PR です。これにより、readonly なカラムのエイリアスに対して `update_attribute` で更新しようとした場合も、期待どおり例外が発生します。"
     }
   ]
 }
