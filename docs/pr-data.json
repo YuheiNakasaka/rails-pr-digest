@@ -1,7 +1,88 @@
 {
-  "lastUpdated": "2026-06-11T00:39:54.093Z",
+  "lastUpdated": "2026-06-12T00:38:07.671Z",
   "totalCount": 50,
   "items": [
+    {
+      "number": 57674,
+      "title": "Fix `String#truncate` with `:separator` and an over-long `:omission` {#pr-57674}",
+      "url": "https://github.com/rails/rails/pull/57674",
+      "mergedAt": "2026-06-12T00:00:00.000Z",
+      "author": "55728",
+      "authorUrl": "https://github.com/55728",
+      "summary": "1. 概要 (1-2文で)  \n`String#truncate` に `:separator` オプションを指定しつつ、`:omission` の長さが `truncate_to` 以上になるケースで、想定より長い文字列が返ってしまう不具合を修正した PR です。`separator` を使う場合も、非 `separator` パスと同様に「省略記号だけ」を返すよう挙動を揃えています。"
+    },
+    {
+      "number": 57681,
+      "title": "Make some lambdas in constants shareable {#pr-57681}",
+      "url": "https://github.com/rails/rails/pull/57681",
+      "mergedAt": "2026-06-11T00:00:00.000Z",
+      "author": "andrewn617",
+      "authorUrl": "https://github.com/andrewn617",
+      "summary": "1. 概要 (1-2文で)  \nRails の各所で定数として保持されている lambda を、Ruby 4.0+ の Ractor 上で安全に共有できるようにするため、「shareability shim」を使って shareable にした PRです。将来的な Ractor 対応・並列実行対応を見据えた小さな互換性対応で、挙動そのものは基本的に変わりません。"
+    },
+    {
+      "number": 57626,
+      "title": "Introduce a new mechanism for applications to prepare for ractor safety {#pr-57626}",
+      "url": "https://github.com/rails/rails/pull/57626",
+      "mergedAt": "2026-06-11T00:00:00.000Z",
+      "author": "Edouard-chin",
+      "authorUrl": "https://github.com/Edouard-chin",
+      "summary": "1. 概要 (1-2文で)  \nこのPRは、Railsアプリケーションが将来的に Ractor セーフになるための準備として、「RailsのAPIに渡される proc が Ractor 的に安全かどうか」を検査・制御する新しい仕組みを導入したものです。まずは `ActionDispatch::Routing::RouteSet`（ルーティング）に適用されており、今後ほかの部分にも広げていく前提の基盤的変更です。"
+    },
+    {
+      "number": 57673,
+      "title": "Reject attribute names that shadow CurrentAttributes methods {#pr-57673}",
+      "url": "https://github.com/rails/rails/pull/57673",
+      "mergedAt": "2026-06-11T00:00:00.000Z",
+      "author": "55728",
+      "authorUrl": "https://github.com/55728",
+      "summary": "1. 概要 (1-2文で)  \n`ActiveSupport::CurrentAttributes` で、クラス内部のメソッド名と同じ名前の属性を定義できてしまう問題を修正し、そのような属性名を宣言した場合は `ArgumentError` を投げて拒否するようにしました。これにより `reset` が効かなくなるなどの「リクエスト間で状態が漏れる」不具合を防ぎます。"
+    },
+    {
+      "number": 57638,
+      "title": "Refactor Composite Primary Key implementation by using polymorphism {#pr-57638}",
+      "url": "https://github.com/rails/rails/pull/57638",
+      "mergedAt": "2026-06-11T00:00:00.000Z",
+      "author": "paracycle",
+      "authorUrl": "https://github.com/paracycle",
+      "summary": "1. 概要 (1-2文で)  \nこのPRは、Railsの複合主キー（Composite Primary Key, CPK）対応で散在していた「if 複合主キーなら…」という条件分岐ロジックを整理し、新たに導入した `ActiveRecord::Key` クラス階層（ポリモーフィズム）に集約するリファクタリングです。機能追加というよりは、CPKサポートの内部実装を大幅にクリーンアップし、今後の保守性と拡張性を高める変更です。"
+    },
+    {
+      "number": 57660,
+      "title": "Fix `normalizes` casting raw database values on in-place change detection {#pr-57660}",
+      "url": "https://github.com/rails/rails/pull/57660",
+      "mergedAt": "2026-06-11T00:00:00.000Z",
+      "author": "chaadow",
+      "authorUrl": "https://github.com/chaadow",
+      "summary": "1. 概要 (1-2文で)  \n`normalizes` を使った属性について、「インプレース変更の検知(normalized_attribute_changed_in_place?)」時に **DBの生値(raw value)を誤って cast していた**ため JSON などで例外が出るリグレッションが発生しており、これを **正しく deserialize を通すように修正**した PRです。"
+    },
+    {
+      "number": 57658,
+      "title": "Add test coverage for ActiveSupport::Duration edge cases {#pr-57658}",
+      "url": "https://github.com/rails/rails/pull/57658",
+      "mergedAt": "2026-06-11T00:00:00.000Z",
+      "author": "hammadxcm",
+      "authorUrl": "https://github.com/hammadxcm",
+      "summary": "1. 概要 (1-2文で)  \nActiveSupport::Duration のこれまでテストされていなかったエッジケースや、rdoc で明示されている挙動に対してテストを追加する PR です。コード本体の変更はなく、テストのみの追加で信頼性と回 regresion 検知能力を高めています。"
+    },
+    {
+      "number": 57666,
+      "title": "Make some more constants ractor safe {#pr-57666}",
+      "url": "https://github.com/rails/rails/pull/57666",
+      "mergedAt": "2026-06-11T00:00:00.000Z",
+      "author": "andrewn617",
+      "authorUrl": "https://github.com/andrewn617",
+      "summary": "1. 概要 (1-2文で)  \nRails の Action Pack 周辺で、Ractor（マルチスレッド並列実行機構）対応を強化するために、一部の定数およびクラス属性を freeze して「Ractor セーフ（共有可能）」にした PR です。特に scaffold されたルーティング付きの新規アプリを Ractor 内で動かす際に頻繁にアクセスされる定数を対象にしています。"
+    },
+    {
+      "number": 57663,
+      "title": "Little clean up in cookies_test.rb {#pr-57663}",
+      "url": "https://github.com/rails/rails/pull/57663",
+      "mergedAt": "2026-06-11T00:00:00.000Z",
+      "author": "andrewn617",
+      "authorUrl": "https://github.com/andrewn617",
+      "summary": "1. 概要 (1-2文で)  \ncookies に関するテスト (`cookies_test.rb`) 内の重複コードをヘルパーメソッド化し、テストコードを整理・簡素化したPRです。挙動変更はなく、あくまでリファクタリング（クリーンアップ）が目的です。"
+    },
     {
       "number": 57657,
       "title": "Support a single composite primary key id in `delete` {#pr-57657}",
@@ -370,87 +451,6 @@
       "author": "dersam",
       "authorUrl": "https://github.com/dersam",
       "summary": "1. 概要 (1-2文で)  \nRails ガイドの「エラー報告」ドキュメントに、`ActiveSupport::ErrorReporter` の「error context middleware」（エラーコンテキスト用ミドルウェア）の使い方が追記された PR です。コードの振る舞い変更はなく、ドキュメントのみの追加です。"
-    },
-    {
-      "number": 57592,
-      "title": "[RF-Docs] [ci-skip] Active Job Basics guide (#57101) {#pr-57592}",
-      "url": "https://github.com/rails/rails/pull/57592",
-      "mergedAt": "2026-06-05T00:00:00.000Z",
-      "author": "p8",
-      "authorUrl": "https://github.com/p8",
-      "summary": "1. 概要 (1-2文で)\n- Active Job Basics ガイド全体の構成を大幅に見直し、特に Solid Queue とキューイング周りの説明を、より概念的かつ実務的な内容に再編したドキュメント改善 PR です。  \n- 既存内容の重複や価値の薄いセクションを削除・統合し、キュー名／優先度／コールバック／失敗ジョブの扱いなどを一貫した流れで理解できるように整理しています。"
-    },
-    {
-      "number": 57101,
-      "title": "[RF-Docs] [ci-skip] Active Job Basics guide {#pr-57101}",
-      "url": "https://github.com/rails/rails/pull/57101",
-      "mergedAt": "2026-06-05T00:00:00.000Z",
-      "author": "bhumi1102",
-      "authorUrl": "https://github.com/bhumi1102",
-      "summary": "1. 概要 (1-2文で)  \nActive Job BasicsガイドをRails Foundationのドキュメント方針に沿って全面的に再構成し、特にSolid Queueの説明を「設計・特徴・使い方」の観点から整理し直したPRです。細かい・重複したセクションを削除・統合し、キュー名/優先度/コールバック/失敗時の扱いなど、実務で重要なテーマごとに読みやすく再編成しています。"
-    },
-    {
-      "number": 57575,
-      "title": "Clear the type column when removing a polymorphic `has_one` {#pr-57575}",
-      "url": "https://github.com/rails/rails/pull/57575",
-      "mergedAt": "2026-06-05T00:00:00.000Z",
-      "author": "55728",
-      "authorUrl": "https://github.com/55728",
-      "summary": "1. 概要 (1-2文で)  \npolymorphic な `has_one` 関連を代入で外す（`owner.child = nil` / `owner.child = other`）際に、外部キーだけでなく `<name>_type` も確実に `NULL` にするように修正した PR です。これにより、`dependent: :nullify` 経由の「nullify」と挙動が統一され、一方向の polymorphic `has_one` で発生していた「type カラムが古いまま残る」不整合が解消されます。"
-    },
-    {
-      "number": 57566,
-      "title": "Fix MessagePack serialization of records with a `time` column {#pr-57566}",
-      "url": "https://github.com/rails/rails/pull/57566",
-      "mergedAt": "2026-06-05T00:00:00.000Z",
-      "author": "55728",
-      "authorUrl": "https://github.com/55728",
-      "summary": "1. 概要 (1-2文で)  \n`time` 型カラムを持つ ActiveRecord オブジェクトを `ActiveRecord::MessagePack` でシリアライズすると `NoMethodError` が発生していた問題を修正した PR です。`ActiveRecord::Type::Time::Value` を MessagePack の対象型として正式に登録することで、`Rails.cache.write` 等で `time` カラムを含むレコードを安全にキャッシュできるようになりました。"
-    },
-    {
-      "number": 57590,
-      "title": "Fix order-dependent test failures with `sqlite3_mem` {#pr-57590}",
-      "url": "https://github.com/rails/rails/pull/57590",
-      "mergedAt": "2026-06-05T00:00:00.000Z",
-      "author": "ruyrocha",
-      "authorUrl": "https://github.com/ruyrocha",
-      "summary": "1. 概要 (1-2文で)  \n`ARCONN=sqlite3_mem` でのテスト実行時に、テスト実行順によって約3000件の失敗を引き起こしていた原因となる2つのテストを修正し、SQLite の in-memory DB 環境でもテストスイート全体が安定して通るようにした PR です。グローバルな SchemaCache の破壊と、`:memory:` DB 自体の破棄を招いていたテストの挙動を修正・制限しています。"
-    },
-    {
-      "number": 57591,
-      "title": "Merge pull request #57583 from VladNegara/nested-join-explanation {#pr-57591}",
-      "url": "https://github.com/rails/rails/pull/57591",
-      "mergedAt": "2026-06-05T00:00:00.000Z",
-      "author": "p8",
-      "authorUrl": "https://github.com/p8",
-      "summary": "1. 概要 (1-2文で)  \nActive Record Querying ガイド内で「ネストしたクエリ (nested join / nested query)」の平易な英語説明が誤解を招く内容だったため、実際の挙動・クエリ構造に合うように文章だけを修正したドキュメント更新です。コードや API の挙動変更は一切なく、ガイドの記述の正確性を高めるための修正です。"
-    },
-    {
-      "number": 57583,
-      "title": "Fix plain English explanation of nested query in Active Record Querying guide [ci-skip] {#pr-57583}",
-      "url": "https://github.com/rails/rails/pull/57583",
-      "mergedAt": "2026-06-05T00:00:00.000Z",
-      "author": "VladNegara",
-      "authorUrl": "https://github.com/VladNegara",
-      "summary": "1. 概要 (1-2文で)  \nActive Record Querying ガイドにある「ネストした関連の JOIN」の英語説明文が、実際のクエリの挙動と食い違っていたため、それを正しい内容に修正するドキュメント変更です。コードや挙動の変更はなく、ガイドの自然言語による説明だけが更新されています。"
-    },
-    {
-      "number": 57580,
-      "title": "Skip Proc and Regexp filter_attributes when syncing to filter_parameters {#pr-57580}",
-      "url": "https://github.com/rails/rails/pull/57580",
-      "mergedAt": "2026-06-05T00:00:00.000Z",
-      "author": "jcalvert",
-      "authorUrl": "https://github.com/jcalvert",
-      "summary": "1. 概要 (1-2文で)  \nこのPRは、`ActiveRecord::FilterAttributeHandler` がモデルの `filter_attributes` を `Rails.application.config.filter_parameters` に同期する際、`Proc` や `Regexp` など文字列化しても意味のないエントリをスキップするようにし、不要かつ不安定なフィルタ文字列が `filter_parameters` に蓄積される問題を修正するものです。これにより、フィルタ設定がよりクリーンで安定し、ログや検査ツールが扱いやすくなります。"
-    },
-    {
-      "number": 57585,
-      "title": "Fix reaper fork test by disabling GSS encryption. {#pr-57585}",
-      "url": "https://github.com/rails/rails/pull/57585",
-      "mergedAt": "2026-06-05T00:00:00.000Z",
-      "author": "ruyrocha",
-      "authorUrl": "https://github.com/ruyrocha",
-      "summary": "1. 概要 (1-2文で)  \nmacOSで `ReaperTest#test_connection_pool_starts_reaper_in_fork` 実行時に segfault が発生していた問題を、fork 後の子プロセスで PostgreSQL の GSS 暗号化ネゴシエーションを無効化することで回避する修正です。libpq と macOS の Heimdal/Keychain スタックの既知の非 fork-safe 問題へのワークアラウンド的対応になります。"
     }
   ]
 }
