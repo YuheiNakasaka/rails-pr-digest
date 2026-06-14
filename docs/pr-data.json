@@ -1,7 +1,142 @@
 {
-  "lastUpdated": "2026-06-13T00:38:18.015Z",
+  "lastUpdated": "2026-06-14T00:37:34.477Z",
   "totalCount": 50,
   "items": [
+    {
+      "number": 57697,
+      "title": "Don't fire remove_channel for an unknown channel {#pr-57697}",
+      "url": "https://github.com/rails/rails/pull/57697",
+      "mergedAt": "2026-06-13T00:00:00.000Z",
+      "author": "55728",
+      "authorUrl": "https://github.com/55728",
+      "summary": "1. 概要 (1-2文で)  \nAction Cable の `SubscriberMap#remove_subscriber` が、存在しないチャンネルに対しても `remove_channel`（UNLISTEN / unsubscribe）を発火してしまうバグを、ハッシュのキー存在チェックで防ぐ修正です。これにより、まだ購読登録されていない・すでに削除済みのチャンネルに対して、不要な UNLISTEN / unsubscribe が飛ばなくなります。"
+    },
+    {
+      "number": 57677,
+      "title": "Fix `Array#to_query` to skip empty Array elements, mirroring the empty-Hash case {#pr-57677}",
+      "url": "https://github.com/rails/rails/pull/57677",
+      "mergedAt": "2026-06-13T00:00:00.000Z",
+      "author": "55728",
+      "authorUrl": "https://github.com/55728",
+      "summary": "1. 概要 (1-2文で)  \n`Array#to_query` が、ネストされた空配列の要素をクエリ文字列から除外するように修正されました。これにより、既に実装されていた「空ハッシュ要素は落とす」という挙動と整合がとれ、余計な「値なしパラメータ」が出力されなくなります。"
+    },
+    {
+      "number": 57655,
+      "title": "Support a single composite primary key id in `update`/`update!` {#pr-57655}",
+      "url": "https://github.com/rails/rails/pull/57655",
+      "mergedAt": "2026-06-13T00:00:00.000Z",
+      "author": "55728",
+      "authorUrl": "https://github.com/55728",
+      "summary": "1. 概要 (1-2文で)  \nRails の `ActiveRecord::Base.update` / `update!` が、複合主キー（composite primary key）モデルに対して「単一レコードの id」として配列を渡した場合に `RecordNotFound` を出してしまう問題を修正した PR です。複合主キーでも単一主キーと同様に `Model.update(record.id, attrs)` が正しく単一更新として動作するようになります。"
+    },
+    {
+      "number": 57690,
+      "title": "Keep the Redis listener alive when the last channel is unsubscribed {#pr-57690}",
+      "url": "https://github.com/rails/rails/pull/57690",
+      "mergedAt": "2026-06-13T00:00:00.000Z",
+      "author": "55728",
+      "authorUrl": "https://github.com/55728",
+      "summary": "1. 概要 (1-2文で)  \nRedis クライアントの実装変更により、最後のチャネルが `UNSUBSCRIBE` された瞬間に Action Cable の Redis リスナー用スレッドが終了してしまう不具合があり、それを修正する PRです。内部用の「番兵」チャネル（`_action_cable_internal`）への購読を復活させることで、通常の購読解除ではリスナーが死なず、明示的なシャットダウン時のみ終了するようにしました。"
+    },
+    {
+      "number": 57700,
+      "title": "Shut down the heartbeat timer on server restart {#pr-57700}",
+      "url": "https://github.com/rails/rails/pull/57700",
+      "mergedAt": "2026-06-13T00:00:00.000Z",
+      "author": "55728",
+      "authorUrl": "https://github.com/55728",
+      "summary": "1. 概要 (1-2文で)  \nAction Cable サーバ再起動時に、ハートビート用の `@heartbeat_timer` が停止されずに残り続けていた不具合を修正する PR です。  \n開発環境のコードリロードごとにスレッドプールとタイマーがリーク・再生成される問題を解消します。"
+    },
+    {
+      "number": 57699,
+      "title": "Raise ChannelNotFound for a subscribe command without a channel {#pr-57699}",
+      "url": "https://github.com/rails/rails/pull/57699",
+      "mergedAt": "2026-06-13T00:00:00.000Z",
+      "author": "55728",
+      "authorUrl": "https://github.com/55728",
+      "summary": "1. 概要 (1-2文で)  \nAction Cable の `subscribe` コマンドで `channel` キーが省略された場合に、これまで素の `NoMethodError` が発生していたのを、他の経路と同様に `ChannelNotFound` 例外が発生するように統一したバグフィックスです。サーバ側は異常クライアントからの不正な subscribe メッセージに対して、より一貫したエラー処理ができるようになります。"
+    },
+    {
+      "number": 57695,
+      "title": "Keep pending subscribe confirmations across a Redis reconnect {#pr-57695}",
+      "url": "https://github.com/rails/rails/pull/57695",
+      "mergedAt": "2026-06-13T00:00:00.000Z",
+      "author": "55728",
+      "authorUrl": "https://github.com/55728",
+      "summary": "1. 概要 (1-2文で)  \nRedis の pub/sub 接続が切れた直後に発生していた「サブスクライブ確認(on_success)が二度と返ってこない」問題を修正し、再接続後も未完了の subscribe 確認を正しく引き継ぐようにした PR です。Redis クライアント刷新時のリグレッションで、Action Cable の Redis アダプタの挙動のみをピンポイントに修正しています。"
+    },
+    {
+      "number": 57696,
+      "title": "Respect an explicit `id: nil` in the Redis cable config {#pr-57696}",
+      "url": "https://github.com/rails/rails/pull/57696",
+      "mergedAt": "2026-06-13T00:00:00.000Z",
+      "author": "55728",
+      "authorUrl": "https://github.com/55728",
+      "summary": "1. 概要 (1-2文で)  \nAction Cable の Redis アダプタにおいて、Redis 接続設定で明示的に `id: nil` を指定した場合にそれが上書きされず、そのまま尊重されるように修正した PR です。これにより、ドキュメント通り「`id: nil` を指定して `CLIENT SETNAME` を発行しない」挙動が正しく動作するようになります。"
+    },
+    {
+      "number": 57698,
+      "title": "Coerce stream name to String in the test adapter accessors {#pr-57698}",
+      "url": "https://github.com/rails/rails/pull/57698",
+      "mergedAt": "2026-06-13T00:00:00.000Z",
+      "author": "55728",
+      "authorUrl": "https://github.com/55728",
+      "summary": "1. 概要 (1-2文で)  \nAction Cable のテスト用アダプタ (`SubscriptionAdapter::Test`) において、シンボルのストリーム名を使ったときにブロードキャスト検証が正しく動かない不具合を修正する PR です。内部で文字列キーとして保存しているのに対し、読み出し側が生の引数（シンボルなど）でアクセスしていたため起きていた不整合を解消しています。"
+    },
+    {
+      "number": 57692,
+      "title": "Coerce broadcasting to String in Channel#stop_stream_from {#pr-57692}",
+      "url": "https://github.com/rails/rails/pull/57692",
+      "mergedAt": "2026-06-13T00:00:00.000Z",
+      "author": "55728",
+      "authorUrl": "https://github.com/55728",
+      "summary": "1. 概要 (1-2文で)  \nAction Cable の `Channel#stop_stream_from` が、`stream_from` と同様に引数を `String` に変換して扱うよう修正されました。これにより、シンボルを使って購読開始・停止を行った場合でも、正しく購読解除されるようになります。"
+    },
+    {
+      "number": 57691,
+      "title": "Iterate a snapshot of the connections in Server#each_connection {#pr-57691}",
+      "url": "https://github.com/rails/rails/pull/57691",
+      "mergedAt": "2026-06-13T00:00:00.000Z",
+      "author": "55728",
+      "authorUrl": "https://github.com/55728",
+      "summary": "1. 概要 (1-2文で)  \nAction Cable の `Server#each_connection` が、内部のハッシュを直接イテレートするのではなく「スナップショット（配列）」をイテレートするように変更され、接続の追加・削除が同時に起きても `RuntimeError: can't add a new key into hash during iteration` が発生しないようになりました。これにより、ハートビートやサーバ再起動時の接続処理が安定して動作します。"
+    },
+    {
+      "number": 57675,
+      "title": "Don't mutate the caller's string in `Inflector#transliterate` {#pr-57675}",
+      "url": "https://github.com/rails/rails/pull/57675",
+      "mergedAt": "2026-06-13T00:00:00.000Z",
+      "author": "55728",
+      "authorUrl": "https://github.com/55728",
+      "summary": "1. 概要 (1-2文で)  \n`ActiveSupport::Inflector.transliterate` が、非 frozen かつ非 UTF-8 の文字列引数を「こっそり破壊的変更」してしまう不具合を修正し、常に引数を複製してから処理するようにした PR です。これにより `parameterize` も含め、呼び出し元の文字列オブジェクトのエンコーディングやバイト列が書き換わらないことが保証されます。"
+    },
+    {
+      "number": 57676,
+      "title": "Fix StructuredEventSubscriber.debug_only leaking across subscriber subclasses {#pr-57676}",
+      "url": "https://github.com/rails/rails/pull/57676",
+      "mergedAt": "2026-06-13T00:00:00.000Z",
+      "author": "55728",
+      "authorUrl": "https://github.com/55728",
+      "summary": "1. 概要 (1-2文で)  \n`ActiveSupport::StructuredEventSubscriber` の `debug_only` で設定したメソッド名が、サブクラス間や基底クラスに「漏れ」て共有されてしまうバグを修正する PR です。`class_attribute` のデフォルト配列を破壊的に変更していたために起きていた問題を、非破壊的な再代入に変えることで解消しています。"
+    },
+    {
+      "number": 57693,
+      "title": "Make `ActiveRecord::Base.with` call `Object#with` when passed a block {#pr-57693}",
+      "url": "https://github.com/rails/rails/pull/57693",
+      "mergedAt": "2026-06-13T00:00:00.000Z",
+      "author": "janko",
+      "authorUrl": "https://github.com/janko",
+      "summary": "1. 概要 (1-2文で)  \nActiveRecord::Base の `.with` がブロック付きで呼ばれた場合に、CTE 用の `ActiveRecord::Relation#with` ではなく、Ruby コア拡張の `Object#with` を呼ぶようにした変更です。これにより、Active Record モデルで `with` を使って一時的に設定を上書きするパターンが自然に利用できるようになります。"
+    },
+    {
+      "number": 57689,
+      "title": "Add test coverage for HashWithIndifferentAccess key access and except {#pr-57689}",
+      "url": "https://github.com/rails/rails/pull/57689",
+      "mergedAt": "2026-06-13T00:00:00.000Z",
+      "author": "hammadxcm",
+      "authorUrl": "https://github.com/hammadxcm",
+      "summary": "1. 概要 (1-2文で)  \n`ActiveSupport::HashWithIndifferentAccess` について、これまでテストされていなかった分岐や挙動（`fetch` のブロック・デフォルト値、`values_at` の欠損キー、`dig` の miss パス、`except`/`without` の基本仕様）に対してテストが追加されました。アプリケーションコードへの変更はなく、テスト追加のみのPRです。"
+    },
     {
       "number": 57680,
       "title": "Ensure `assert_no_changes` isn't given a static value {#pr-57680}",
@@ -316,141 +451,6 @@
       "author": "55728",
       "authorUrl": "https://github.com/55728",
       "summary": "1. 概要 (1-2文で)  \n`ActiveSupport::HashWithIndifferentAccess.new` に元ハッシュを渡したとき、元ハッシュに `false` をデフォルト値として設定していても、それが失われずにそのまま引き継がれるようにするバグ修正です。これにより、`Hash.new(false)` など「未知キーは false を返す」ことを前提にしたコードが、HWIA 変換後も期待通り動作します。"
-    },
-    {
-      "number": 57606,
-      "title": "Resolve attribute aliases for the locking column in `update_all` {#pr-57606}",
-      "url": "https://github.com/rails/rails/pull/57606",
-      "mergedAt": "2026-06-09T00:00:00.000Z",
-      "author": "55728",
-      "authorUrl": "https://github.com/55728",
-      "summary": "1. 概要 (1-2文で)  \n`update_all` で楽観ロック用カラム（`lock_version`）を `alias_attribute` 経由で指定したときに、値が失われたり PostgreSQL でエラーになる不具合を修正する PRです。`update_all` 内でロックカラムを検出する際に、属性エイリアスも正しく解決して判定するように変更されています。"
-    },
-    {
-      "number": 57617,
-      "title": "Fix `accepts_nested_attributes_for` docs about `_destroy` and new records [ci skip] {#pr-57617}",
-      "url": "https://github.com/rails/rails/pull/57617",
-      "mergedAt": "2026-06-09T00:00:00.000Z",
-      "author": "55728",
-      "authorUrl": "https://github.com/55728",
-      "summary": "1. 概要 (1-2文で)  \n`accepts_nested_attributes_for` のドキュメントにおいて、「新規レコードかつ `_destroy` が真なら無視される」という説明が、`allow_destroy: true` が有効な場合にしか成り立たないにもかかわらず、無条件にそうであるかのように書かれていた問題を修正した PR です。コードの挙動は従来どおりで、ドキュメントだけを実装に合わせて訂正しています。"
-    },
-    {
-      "number": 57600,
-      "title": "Fix `store_accessor` read mutating a `NULL` structured column {#pr-57600}",
-      "url": "https://github.com/rails/rails/pull/57600",
-      "mergedAt": "2026-06-09T00:00:00.000Z",
-      "author": "55728",
-      "authorUrl": "https://github.com/55728",
-      "summary": "1. 概要 (1-2文で)\n- `store_accessor` を、`NULL` の `json` / `jsonb` / `hstore` カラムに対して「読むだけ」で呼び出したときに、レコードが変更済み扱いになり `NULL` が `{}` で上書き保存されてしまうバグを修正する PR です。\n- 修正により、「読み取り専用の操作」がレコードを汚染（dirty 化）したり、DB 上の `NULL` を暗黙的に `{}` に書き換えることがなくなります。"
-    },
-    {
-      "number": 57622,
-      "title": "Fix `Range#include?` / `Range#===` raising on exclusive non-integer sub-ranges {#pr-57622}",
-      "url": "https://github.com/rails/rails/pull/57622",
-      "mergedAt": "2026-06-09T00:00:00.000Z",
-      "author": "55728",
-      "authorUrl": "https://github.com/55728",
-      "summary": "1. 概要 (1-2文で)  \nActiveSupport が拡張している `Range#include?` / `Range#===` の「レンジ同士の包含チェック」で、排他的終端かつ非整数 (`Float`, `Time` など) のサブレンジを渡すと `TypeError` で落ちていた問題を修正した PR です。Ruby 本体の `Range#cover?(range)` に処理を委譲することで、すべての型・端点組み合わせで正しく真偽値を返すようにしています。"
-    },
-    {
-      "number": 57614,
-      "title": "Allow `insert!` to accept the `:unique_by` option {#pr-57614}",
-      "url": "https://github.com/rails/rails/pull/57614",
-      "mergedAt": "2026-06-09T00:00:00.000Z",
-      "author": "55728",
-      "authorUrl": "https://github.com/55728",
-      "summary": "1. 概要 (1-2文で)  \n`ActiveRecord::Relation#insert!` で、これまで渡せなかった `unique_by:` オプションを受け付けるようにし、`insert` / `insert_all!` とインターフェースを揃えた修正です。これにより、`insert!` でも一意制約を考慮した upsert 風の挙動が利用可能になります。"
-    },
-    {
-      "number": 57581,
-      "title": "Support `only:` and `except:` on `_deliver` callbacks in ActionMailer {#pr-57581}",
-      "url": "https://github.com/rails/rails/pull/57581",
-      "mergedAt": "2026-06-09T00:00:00.000Z",
-      "author": "excid3",
-      "authorUrl": "https://github.com/excid3",
-      "summary": "1. 概要 (1-2文で)  \nAction Mailer の `_deliver` コールバック（`before_deliver`, `after_deliver`, `around_deliver`）で、`only:` / `except:` オプションが正しく機能するように修正・拡張されたPRです。これにより、コントローラの `*_action` コールバックと同様の書き方で、特定のメールアクションに対してのみコールバックを適用できるようになります。"
-    },
-    {
-      "number": 57595,
-      "title": "Forward blob metadata to MirrorService mirrors {#pr-57595}",
-      "url": "https://github.com/rails/rails/pull/57595",
-      "mergedAt": "2026-06-09T00:00:00.000Z",
-      "author": "maksim-romanov",
-      "authorUrl": "https://github.com/maksim-romanov",
-      "summary": "1. 概要 (1-2文で)  \nActive Storage の MirrorService がミラー先ストレージにアップロードするとき、`content_type` や `filename` などの blob メタデータを正しく引き継ぐように修正した PR です。これにより、S3 / R2 / Azure / GCS などのミラー先を直接参照した場合でも、オリジナルと同じヘッダでオブジェクトが配信されるようになります。"
-    },
-    {
-      "number": 53161,
-      "title": "Add bundler-cache feature in dev container setup {#pr-53161}",
-      "url": "https://github.com/rails/rails/pull/53161",
-      "mergedAt": "2026-06-09T00:00:00.000Z",
-      "author": "viktorianer",
-      "authorUrl": "https://github.com/viktorianer",
-      "summary": "1. 概要 (1-2文で)  \nDev Container で Rails 開発を行う際に、Bundler を含む Ruby 環境（`.rbenv` ディレクトリ）をボリュームとしてキャッシュする仕組みが追加され、コンテナ再作成時の gem 再インストールコストを削減する変更です。Rails の devcontainer 用ジェネレータとそのテストが、この新しいキャッシュ戦略に合わせて更新されています。"
-    },
-    {
-      "number": 57574,
-      "title": "Make the backtrace cleaner ractor shareable by default {#pr-57574}",
-      "url": "https://github.com/rails/rails/pull/57574",
-      "mergedAt": "2026-06-09T00:00:00.000Z",
-      "author": "andrewn617",
-      "authorUrl": "https://github.com/andrewn617",
-      "summary": "1. 概要 (1-2文で)  \nRails のバックトレースクリーナー（`Rails.backtrace_cleaner` / `ActiveSupport::BacktraceCleaner`）が、デフォルトで Ractor 共有可能になるように実装を変更した PRです。これにより、`Rails.application` を Ractor で安全に共有しやすくなります。"
-    },
-    {
-      "number": 57593,
-      "title": "Add unit tests for ```ActiveStorage::Variation``` {#pr-57593}",
-      "url": "https://github.com/rails/rails/pull/57593",
-      "mergedAt": "2026-06-09T00:00:00.000Z",
-      "author": "Edilbek",
-      "authorUrl": "https://github.com/Edilbek",
-      "summary": "1. 概要 (1-2文で)  \nActiveStorage のコア値オブジェクトである `ActiveStorage::Variation` に対して、専用のユニットテストが追加された PR です。既存では統合テスト越しにしか検証されていなかった振る舞いを、変換キーの扱いやエンコード/デコードの不変条件レベルで直接テストするようにしています。"
-    },
-    {
-      "number": 57624,
-      "title": "Fix URL fragment in Active Record Migrations guide [ci skip] {#pr-57624}",
-      "url": "https://github.com/rails/rails/pull/57624",
-      "mergedAt": "2026-06-08T00:00:00.000Z",
-      "author": "VladNegara",
-      "authorUrl": "https://github.com/VladNegara",
-      "summary": "1. 概要 (1-2文で)  \nActive Record Migrationsガイド内のリンク先フラグメント（ページ内アンカー）が誤っていたため、正しいフラグメントに修正したPRです。機能コードには一切手を触れず、ドキュメント上のリンク切れを解消するだけの変更です。"
-    },
-    {
-      "number": 57620,
-      "title": "Fix `number_to_delimited` corrupting numbers with a leading sign {#pr-57620}",
-      "url": "https://github.com/rails/rails/pull/57620",
-      "mergedAt": "2026-06-08T00:00:00.000Z",
-      "author": "55728",
-      "authorUrl": "https://github.com/55728",
-      "summary": "1. 概要 (1-2文で)  \n`number_to_delimited` が符号付き数値（先頭に `-` や `+` が付く数）を区切り文字付きに変換する際、先頭の符号直後に区切り文字を挿入してしまう不具合を修正した PR です。これにより、`number_to_rounded` や `number_to_human` で符号付き数値＋`delimiter:` を使った場合の誤ったフォーマットも合わせて解消されます。"
-    },
-    {
-      "number": 57621,
-      "title": "Fix `InheritableOptions#==` raising `NoMethodError` on non-Hash comparison {#pr-57621}",
-      "url": "https://github.com/rails/rails/pull/57621",
-      "mergedAt": "2026-06-08T00:00:00.000Z",
-      "author": "55728",
-      "authorUrl": "https://github.com/55728",
-      "summary": "1. 概要 (1–2文で)  \n`ActiveSupport::InheritableOptions#==` が Hash 以外との比較時に `NoMethodError` を起こしていた問題を修正し、Hash/Hashライクなオブジェクトとのみ中身を比較し、それ以外とは常に `false` を返すようにした PR です。これにより `nil` と空の `InheritableOptions` が誤って等価になる問題や、`Array#include?` などからの予期せぬ `NoMethodError` が解消されます。"
-    },
-    {
-      "number": 57615,
-      "title": "Fix `clear_*_change` doc claiming it clears previous changes [ci skip] {#pr-57615}",
-      "url": "https://github.com/rails/rails/pull/57615",
-      "mergedAt": "2026-06-07T00:00:00.000Z",
-      "author": "55728",
-      "authorUrl": "https://github.com/55728",
-      "summary": "1. 概要 (1-2文で)  \n`clear_*_change` メソッド（正確には `clear_attribute_change` が生成する系）のドキュメントが「現在の変更と過去の変更を両方クリアする」と誤って説明していたのを、「現在の変更だけをクリアする」という実装どおりの内容に修正する PR です。挙動自体には変更はなく、ドキュメントのみの修正です。"
-    },
-    {
-      "number": 57598,
-      "title": "Fix `find` with an explicit `order` + `offset` past the ids raising a spurious `RecordNotFound` {#pr-57598}",
-      "url": "https://github.com/rails/rails/pull/57598",
-      "mergedAt": "2026-06-07T00:00:00.000Z",
-      "author": "55728",
-      "authorUrl": "https://github.com/55728",
-      "summary": "1. 概要 (1-2文で)  \n`find` に配列ID + 明示的な `order` + `offset` が ID 数を超える値で指定された場合に、意味不明な負数付きの `ActiveRecord::RecordNotFound` が発生していた不具合を修正し、そのケースで空配列 (`[]`) を返すように揃えた PR です。あわせて、`order` の有無で `find` の挙動が食い違わないことを確認する回帰テストが追加されています。"
     }
   ]
 }
