@@ -1,7 +1,151 @@
 {
-  "lastUpdated": "2026-06-14T00:37:34.477Z",
+  "lastUpdated": "2026-06-15T00:39:44.642Z",
   "totalCount": 50,
   "items": [
+    {
+      "number": 57726,
+      "title": "Fix `max_resumptions` attribute name in `ResumeLimitError` docs {#pr-57726}",
+      "url": "https://github.com/rails/rails/pull/57726",
+      "mergedAt": "2026-06-14T00:00:00.000Z",
+      "author": "55728",
+      "authorUrl": "https://github.com/55728",
+      "summary": "1. 概要 (1-2文で)  \n`ActiveJob::Continuation::ResumeLimitError` の RDoc に誤って記載されていたクラス属性名 `max_resumes` を、正しい `max_resumptions` に修正したドキュメント専用のPRです。コード挙動自体は一切変わらず、ドキュメントの記述だけが1行修正されています。"
+    },
+    {
+      "number": 57730,
+      "title": "Don't mask errors raised inside a cursor's `succ` in `Step#advance!` {#pr-57730}",
+      "url": "https://github.com/rails/rails/pull/57730",
+      "mergedAt": "2026-06-14T00:00:00.000Z",
+      "author": "55728",
+      "authorUrl": "https://github.com/55728",
+      "summary": "1. 概要 (1-2文で)  \n`ActiveJob::Continuation::Step#advance!` がカーソルの `succ` 呼び出し時に発生する本来の `NoMethodError` を飲み込んで別エラーにすり替えていた問題を修正し、`succ` を実装していないカーソルだけを明示的に弾くように変更した PR です。これにより、カスタムカーソルの `succ` 内部のバグが正しく例外として表に出るようになります。"
+    },
+    {
+      "number": 57729,
+      "title": "Pass the exception positionally when resuming a continuation after an error {#pr-57729}",
+      "url": "https://github.com/rails/rails/pull/57729",
+      "mergedAt": "2026-06-14T00:00:00.000Z",
+      "author": "55728",
+      "authorUrl": "https://github.com/55728",
+      "summary": "1. 概要 (1-2文で)  \nActive Job の「継続可能（continuable）ジョブ」をエラー後に再開する際、例外オブジェクトの渡し方に不整合があり、`exception_executions` のキーが意図しない文字列になる不具合を修正した PR です。例外は常に位置引数で `resume_job` に渡すように統一し、それを検証するテストが追加されています。"
+    },
+    {
+      "number": 57728,
+      "title": "Clear `enqueue_error` when re-enqueuing a job {#pr-57728}",
+      "url": "https://github.com/rails/rails/pull/57728",
+      "mergedAt": "2026-06-14T00:00:00.000Z",
+      "author": "55728",
+      "authorUrl": "https://github.com/55728",
+      "summary": "1. 概要 (1-2文で)  \nActive Job の同一ジョブインスタンスを再キューイングした際、前回の失敗時の `enqueue_error` が残り続けてしまう問題を修正し、再キューイング時に `enqueue_error` をクリアするようにした PR です。これにより、ジョブが実際には正常にキューイングされたにもかかわらず、監視やログに例外が発生したかのように記録される不整合が解消されます。"
+    },
+    {
+      "number": 57725,
+      "title": "Include adapter in Active Job `perform_start` event payload {#pr-57725}",
+      "url": "https://github.com/rails/rails/pull/57725",
+      "mergedAt": "2026-06-14T00:00:00.000Z",
+      "author": "55728",
+      "authorUrl": "https://github.com/55728",
+      "summary": "1. 概要 (1-2文で)  \nActive Job の `perform_start` 構造化イベントのペイロードに `adapter` 情報が含まれていなかった不整合な挙動を修正し、他のイベント（`enqueue`, `enqueue_at`, `enqueue_all`, `perform`）と同様にアダプタ名を含めるようにした PR です。これによりログや構造化イベントの利用時に、ジョブ実行開始時点でも正しいアダプタ名が参照できるようになります。"
+    },
+    {
+      "number": 57688,
+      "title": "Run Action Cable JS tests with Web Test Runner {#pr-57688}",
+      "url": "https://github.com/rails/rails/pull/57688",
+      "mergedAt": "2026-06-14T00:00:00.000Z",
+      "author": "matthewd",
+      "authorUrl": "https://github.com/matthewd",
+      "summary": "1. 概要 (1-2文で)  \nAction Cable の JavaScript テスト実行環境を、非推奨となった Karma から Web Test Runner + Sauce Labs を使う構成に移行した PRです。既存の QUnit テストスイートを壊さずに、新しいテストランナー経由でブラウザテストを実行できるようにしています。"
+    },
+    {
+      "number": 57687,
+      "title": "Assortment of CI/test fixes {#pr-57687}",
+      "url": "https://github.com/rails/rails/pull/57687",
+      "mergedAt": "2026-06-14T00:00:00.000Z",
+      "author": "matthewd",
+      "authorUrl": "https://github.com/matthewd",
+      "summary": "1. 概要 (1-2文で)  \nCI とテスト周りの安定性を向上させるための修正がまとめて行われ、特に Active Record のコネクションプール切断時の例外ハンドリングが「例外を報告して処理は継続する」挙動に変更されました。その他は主にテストコード側の調整・リファクタリングで、本体 API の互換性を壊す変更は原則ありません。"
+    },
+    {
+      "number": 57723,
+      "title": "Fix `retry_on` `wait:` proc with an optional argument {#pr-57723}",
+      "url": "https://github.com/rails/rails/pull/57723",
+      "mergedAt": "2026-06-14T00:00:00.000Z",
+      "author": "55728",
+      "authorUrl": "https://github.com/55728",
+      "summary": "1. 概要 (1-2文で)  \n`ActiveJob.retry_on` の `wait:` オプションに渡す `Proc` が「省略可能な引数1つ」を取る場合（`->(executions = 0) { ... }` など）に `ArgumentError` が発生していた不具合を修正する PR です。`Proc#arity` の扱いを見直し、1引数・可変長引数・2引数の各パターンで後方互換性を保ちながら適切な呼び出しが行われるようになりました。"
+    },
+    {
+      "number": 57715,
+      "title": "Exclude all composite primary key components from `content_columns` {#pr-57715}",
+      "url": "https://github.com/rails/rails/pull/57715",
+      "mergedAt": "2026-06-14T00:00:00.000Z",
+      "author": "55728",
+      "authorUrl": "https://github.com/55728",
+      "summary": "1. 概要 (1-2文で)  \n`content_columns` が複合主キー(composite primary key, CPK)のカラムを正しく除外できていなかった問題を修正し、CPK の全ての主キー構成カラムを確実に除外するようにしました。単一主キーの場合の挙動・ドキュメントと一貫した動作になります。"
+    },
+    {
+      "number": 57714,
+      "title": "Treat `remove_column` with options but no type as irreversible {#pr-57714}",
+      "url": "https://github.com/rails/rails/pull/57714",
+      "mergedAt": "2026-06-14T00:00:00.000Z",
+      "author": "55728",
+      "authorUrl": "https://github.com/55728",
+      "summary": "1. 概要 (1-2文で)  \n`remove_column` に「型なし＋オプションあり」で書かれたマイグレーションが、これまで「可逆」と誤判定されて壊れた逆操作 (`add_column`) を生成していた問題を修正し、正しく `IrreversibleMigration` を投げるようにした PR です。これによりロールバック時の謎の例外ではなく、明示的な「型がないので不可逆」というエラーメッセージが得られるようになります。"
+    },
+    {
+      "number": 57712,
+      "title": "Fix `counter_cache_column` crash when no column is given on the has_many side {#pr-57712}",
+      "url": "https://github.com/rails/rails/pull/57712",
+      "mergedAt": "2026-06-14T00:00:00.000Z",
+      "author": "55728",
+      "authorUrl": "https://github.com/55728",
+      "summary": "1. 概要 (1-2文で)  \nRails 7.2系で、`has_many` / `has_one` 側に `counter_cache: true` や `counter_cache: { active: false }` を指定した際に `NoMethodError: undefined method '-@' for nil` で落ちるリグレッションが修正されました。カウンターキャッシュ列が省略された場合でも、従来どおり自動で `xxx_count` というカラム名が使われるようになります。"
+    },
+    {
+      "number": 57708,
+      "title": "Clear the connections registry on server restart {#pr-57708}",
+      "url": "https://github.com/rails/rails/pull/57708",
+      "mergedAt": "2026-06-14T00:00:00.000Z",
+      "author": "55728",
+      "authorUrl": "https://github.com/55728",
+      "summary": "1. 概要 (1-2文で)  \nこのPRは、Action Cable のサーバ再起動 (`Server::Base#restart`) 時に接続レジストリ（`connections_map`）がクリアされず、クローズ済み接続オブジェクトが蓄積してしまう不具合を修正します。再起動処理の中で `connections_map.clear` を実行することで、開発モードなどでの繰り返しリロード時に「死んだ接続」が溜まらないようにしています。"
+    },
+    {
+      "number": 57717,
+      "title": "Coerce `seeds` and `use_metadata_table` booleans in `UrlConfig` {#pr-57717}",
+      "url": "https://github.com/rails/rails/pull/57717",
+      "mergedAt": "2026-06-14T00:00:00.000Z",
+      "author": "55728",
+      "authorUrl": "https://github.com/55728",
+      "summary": "1. 概要 (1-2文で)  \n`DATABASE_URL` のクエリパラメータで指定された `seeds` と `use_metadata_table` が、文字列 `\"false\"` のまま扱われて常に truthy になっていた問題を修正し、既存の `replica` / `database_tasks` と同様に真偽値へ強制変換するようにした PR です。これにより、`?seeds=false` や `?use_metadata_table=false` が正しく false として扱われます。"
+    },
+    {
+      "number": 57719,
+      "title": "Raise RecordNotFound for `find(nil)` on a composite primary key model {#pr-57719}",
+      "url": "https://github.com/rails/rails/pull/57719",
+      "mergedAt": "2026-06-14T00:00:00.000Z",
+      "author": "55728",
+      "authorUrl": "https://github.com/55728",
+      "summary": "1. 概要 (1-2文で)  \n複合主キーを持つモデルで `Model.find(nil)` や引数なしの `Model.find` を呼び出した際に、想定外の `NoMethodError` が発生していた問題を修正し、単一主キーと同様に `ActiveRecord::RecordNotFound` を投げるようにしたPRです。複合主キー用の内部判定ロジックに nil ガードを追加し、それに対応するテストを追加しています。"
+    },
+    {
+      "number": 57722,
+      "title": "Don't log a dangling \"with arguments:\" for jobs with no arguments {#pr-57722}",
+      "url": "https://github.com/rails/rails/pull/57722",
+      "mergedAt": "2026-06-14T00:00:00.000Z",
+      "author": "55728",
+      "authorUrl": "https://github.com/55728",
+      "summary": "1. 概要 (1-2文で)  \nActive Job のログ出力で、引数なしジョブにも `with arguments:` という文言だけがぶら下がって出力されてしまう問題を修正する PR です。構造化イベント対応時に削除されていた「引数が空かどうかのチェック」を復元し、従来通りのログフォーマットに戻しています。"
+    },
+    {
+      "number": 57709,
+      "title": "Restart the Redis listener thread when it dies {#pr-57709}",
+      "url": "https://github.com/rails/rails/pull/57709",
+      "mergedAt": "2026-06-14T00:00:00.000Z",
+      "author": "chaadow",
+      "authorUrl": "https://github.com/chaadow",
+      "summary": "1. 概要 (1-2文で)  \nAction Cable の Redis サブスクリプションアダプタにおいて、リスナースレッドが死んだまま二度と復帰せず、そのプロセスでのブロードキャストが黙って失われる問題を修正する PR です。リスナースレッドが死亡していた場合に再起動できるようにし、その振る舞いをテストで保証しています。"
+    },
     {
       "number": 57697,
       "title": "Don't fire remove_channel for an unknown channel {#pr-57697}",
@@ -307,150 +451,6 @@
       "author": "55728",
       "authorUrl": "https://github.com/55728",
       "summary": "1. 概要 (1-2文で)  \nRails の ActiveRecord において、複合主キーを持つモデルに対して `Model.delete(record.id)` を呼び出すと `ArgumentError` が出ていた問題を修正し、`destroy` と同様に単一レコードの削除が正しく動作するようにしました。`delete` の単一・複数 ID 指定の挙動が、複合主キー環境でも一貫するようになります。"
-    },
-    {
-      "number": 57653,
-      "title": "Keep composite primary key columns in the default attribute set {#pr-57653}",
-      "url": "https://github.com/rails/rails/pull/57653",
-      "mergedAt": "2026-06-10T00:00:00.000Z",
-      "author": "55728",
-      "authorUrl": "https://github.com/55728",
-      "summary": "1. 概要 (1-2文で)  \nこのPRは、複合主キーを持つモデルで `select` による部分読み出しを行った際、主キー列を参照すると `ActiveModel::MissingAttributeError` が発生してしまう問題を修正し、単一主キーと同様に `nil` を返すようにしたものです。`attributes_builder` がデフォルト属性セットを構築する際に、複合主キー列も常に初期化対象に含めるようにしています。"
-    },
-    {
-      "number": 57649,
-      "title": "Return an empty array from `find([])` on a composite primary key {#pr-57649}",
-      "url": "https://github.com/rails/rails/pull/57649",
-      "mergedAt": "2026-06-10T00:00:00.000Z",
-      "author": "55728",
-      "authorUrl": "https://github.com/55728",
-      "summary": "1. 概要 (1-2文で)  \n複合主キーを持つモデルに対して `Model.find([])` を呼ぶと `ActiveRecord::RecordNotFound` が発生していた挙動を、単一主キーと同様に空配列 `[]` を返すように修正した PR です。これにより、主キーの種類に依存しない一貫した `find` の挙動が保証されます。"
-    },
-    {
-      "number": 57594,
-      "title": "Fix bug where reload leaks ordinary scopes into all_queries lookups. {#pr-57594}",
-      "url": "https://github.com/rails/rails/pull/57594",
-      "mergedAt": "2026-06-10T00:00:00.000Z",
-      "author": "andrewn617",
-      "authorUrl": "https://github.com/andrewn617",
-      "summary": "1. 概要 (1-2文で)  \n`reload` 実行時に、`all_queries` 用のデフォルトスコープだけを使うはずのクエリに、通常のスコープ（`current_scope`）が紛れ込んでしまうバグを修正した PR です。`all` を経由せず `default_scoped(all_queries: true)` を直接使うことで、`all_queries` なスコープだけが正しく反映されるようになりました。"
-    },
-    {
-      "number": 57637,
-      "title": "Reinitialize the thread-safe level key when a logger is copied {#pr-57637}",
-      "url": "https://github.com/rails/rails/pull/57637",
-      "mergedAt": "2026-06-10T00:00:00.000Z",
-      "author": "etiennebarrie",
-      "authorUrl": "https://github.com/etiennebarrie",
-      "summary": "1. 概要 (1-2文で)  \n`LoggerThreadSafeLevel` を持つロガーを `clone` / `dup` した際に、元のロガーとスレッドローカルなログレベルの保存領域を共有してしまうバグを修正しています。コピー時にキーを再初期化することで、コピー後のロガーごとに独立したスレッドセーフなログレベル管理が行われるようになります。"
-    },
-    {
-      "number": 57647,
-      "title": "Don't mutate the names array passed to `Cache::Store#delete_multi` {#pr-57647}",
-      "url": "https://github.com/rails/rails/pull/57647",
-      "mergedAt": "2026-06-10T00:00:00.000Z",
-      "author": "55728",
-      "authorUrl": "https://github.com/55728",
-      "summary": "1. 概要 (1-2文で)  \n`ActiveSupport::Cache::Store#delete_multi` が、呼び出し元から渡された配列を破壊的に変更していた問題を修正し、他の multi 系メソッド (`read_multi`, `write_multi`, `fetch_multi`) と同様に非破壊的な処理に統一する PR です。これにより、キー配列が意図せず変更されたり、名前空間が二重に付与される不具合や、凍結配列での例外が解消されます。"
-    },
-    {
-      "number": 57643,
-      "title": "Add test coverage for the remaining Type::Date cast branches {#pr-57643}",
-      "url": "https://github.com/rails/rails/pull/57643",
-      "mergedAt": "2026-06-10T00:00:00.000Z",
-      "author": "hammadxcm",
-      "authorUrl": "https://github.com/hammadxcm",
-      "summary": "1. 概要 (1-2文で)  \nActiveModel::Type::Date#cast の、これまでテストされていなかった分岐パスに対してテストを追加し、分岐網羅に近づけた PR です。アプリケーションコードの変更はなく、テストのみの追加です。"
-    },
-    {
-      "number": 57644,
-      "title": "Memoize ivar when freezing ActiveSupport::TaggedLogging::Formatter {#pr-57644}",
-      "url": "https://github.com/rails/rails/pull/57644",
-      "mergedAt": "2026-06-10T00:00:00.000Z",
-      "author": "etiennebarrie",
-      "authorUrl": "https://github.com/etiennebarrie",
-      "summary": "1. 概要 (1-2文で)  \n`ActiveSupport::TaggedLogging::Formatter` を freeze した状態でも Ractor 間で共有して使えるようにするため、インスタンス変数のメモ化処理が追加されました。これにより、Ractor-shareable な logger 構成で tagged logging を安全に利用できます。"
-    },
-    {
-      "number": 57646,
-      "title": "Minor Grammar Fixes {#pr-57646}",
-      "url": "https://github.com/rails/rails/pull/57646",
-      "mergedAt": "2026-06-10T00:00:00.000Z",
-      "author": "yashika279",
-      "authorUrl": "https://github.com/yashika279",
-      "summary": "1. 概要 (1-2文で)  \nこのPRは、Railsガイドの README (guides/README.md) に含まれていた英文の文法ミスを 1 箇所だけ修正したものです。アプリケーションコードやフレームワークの挙動には一切影響せず、ドキュメント品質の向上のみを目的としています。\n\n2. 変更内容の詳細  \n- 対象ファイル: `guides/README.md`  \n- 変更行: +1 / -1（1 行分の文言を置き換え）\n\n内容としては、英語の文章中の軽微な文法・表現の誤りを修正するものです。  \n具体的には、たとえば以下のようなタイプの修正に相当します（※イメージ例）:\n\n```diff\n- This guides helps you to understand Rails.\n+ These guides help you understand Rails.\n```\n\n実際の PR でも同様に、  \n- 単数・複数形の不一致  \n- 冠詞 (a/the) の誤用  \n- 前置詞の選択ミス  \n- 動詞の形 (helps → help など)  \nといった「読んだときに違和感がある程度の軽微な文法ミス」を修正していると考えられます。\n\nコードロジックの変更はなく、ガイド文書中の一文のみが差し替えられています。\n\n3. 影響範囲・注意点  \n- 影響範囲  \n  - Rails の挙動、API、設定値、マイグレーション、生成物などには一切影響なし  \n  - Rails ガイドを英語で読む際の可読性・自然さがわずかに向上  \n- 注意点  \n  - バージョンアップ時に、この PR を理由にテストや動作確認を強化する必要はありません。  \n  - ドキュメントの文言を引用している社内資料や記事がある場合、文言が 1 行だけ微妙に変わっている可能性はありますが、意味が変わるような修正ではないため、通常は気にしなくて構いません。\n\n4. 参考情報 (あれば)  \n- PR: https://github.com/rails/rails/pull/57646  \n- 対象ファイルの最新内容は、Rails 本家リポジトリの `guides/README.md` を参照してください。  \n- ドキュメント系 PR は、挙動には影響しないものの、ガイドやチュートリアルを教材として使う場合には誤解を減らす助けになります。"
-    },
-    {
-      "number": 57639,
-      "title": "[ActiveModel] Re-run `normalizes` only when the value changed in place {#pr-57639}",
-      "url": "https://github.com/rails/rails/pull/57639",
-      "mergedAt": "2026-06-10T00:00:00.000Z",
-      "author": "yaroslav",
-      "authorUrl": "https://github.com/yaroslav",
-      "summary": "1. 概要 (1-2文で)  \n`ActiveModel.normalizes` を使った属性正規化について、「未保存レコードで `valid?` を呼ぶたびに毎回正規化が再実行されてしまう」不具合を修正し、本当に「インプレース変更」があった場合だけ再正規化するようにした PR です。これにより、挙動のバグが直るとともに、特に未保存レコードの繰り返しバリデーション時のパフォーマンスが改善されます。"
-    },
-    {
-      "number": 57060,
-      "title": "Offload ActiveStorage::Blob#metadata sync to background {#pr-57060}",
-      "url": "https://github.com/rails/rails/pull/57060",
-      "mergedAt": "2026-06-09T00:00:00.000Z",
-      "author": "shouichi",
-      "authorUrl": "https://github.com/shouichi",
-      "summary": "1. 概要 (1-2文で)  \nActive Storage の `ActiveStorage::Blob#metadata` 更新処理を即時実行からバックグラウンドジョブ実行に切り離すことで、サーバーとワーカーが同時にメタデータを更新してしまうレースコンディション（特に GCS などでのエラー）を回避する変更です。これに伴い、サービス層の API と計測イベント（Instrumentation）がジョブ実行前提の形に整理されています。"
-    },
-    {
-      "number": 57630,
-      "title": "Remove unordered baseline assertions from test_default_order {#pr-57630}",
-      "url": "https://github.com/rails/rails/pull/57630",
-      "mergedAt": "2026-06-09T00:00:00.000Z",
-      "author": "yahonda",
-      "authorUrl": "https://github.com/yahonda",
-      "summary": "1. 概要 (1-2文で)  \n`default_order` に関するテストのうち、`ORDER BY` 句がないクエリに対して戻り順を前提にしていた不安定なアサーションを削除し、DB依存でランダムに落ちるテストを安定化する変更です。`default_order` 機能自体の挙動は変えず、テストのみを整理しています。"
-    },
-    {
-      "number": 57636,
-      "title": "Fix `number_to_currency` crashing on a negative number with `precision: nil` {#pr-57636}",
-      "url": "https://github.com/rails/rails/pull/57636",
-      "mergedAt": "2026-06-09T00:00:00.000Z",
-      "author": "55728",
-      "authorUrl": "https://github.com/55728",
-      "summary": "1. 概要 (1-2文で)  \n`number_to_currency` に `precision: nil`（丸めなし）を渡したとき、負の数だけが `TypeError` でクラッシュしていたバグを修正した PR です。負数でも正数と同様に `precision: nil` を受け付け、クラッシュせずに通貨文字列を返すようになります。"
-    },
-    {
-      "number": 57635,
-      "title": "Preserve the sub-second fraction in `TimeZone#strptime` with `%s` {#pr-57635}",
-      "url": "https://github.com/rails/rails/pull/57635",
-      "mergedAt": "2026-06-09T00:00:00.000Z",
-      "author": "55728",
-      "authorUrl": "https://github.com/55728",
-      "summary": "1. 概要 (1-2文で)  \n`ActiveSupport::TimeZone#strptime` で、`\"%s.%N\"` / `\"%s.%L\"` のようなエポック秒＋小数形式をパースした際にサブ秒(ナノ秒)が失われていたバグを修正したPRです。Ruby標準ライブラリ `Time.strptime` と同じ挙動になるよう、小数部分も含めて `Time` を生成するようにしています。"
-    },
-    {
-      "number": 57634,
-      "title": "Forward blocks to `DelegateClass` methods that yield implicitly {#pr-57634}",
-      "url": "https://github.com/rails/rails/pull/57634",
-      "mergedAt": "2026-06-09T00:00:00.000Z",
-      "author": "55728",
-      "authorUrl": "https://github.com/55728",
-      "summary": "1. 概要 (1-2文で)  \n`ActiveSupport::Delegation.DelegateClass` が、暗黙に `yield` するメソッドへブロックを正しく委譲できていなかったバグを修正し、Ruby標準ライブラリの `DelegateClass` と同じくブロックを転送するようにしたPRです。これにより、`scan` や `map` などブロック必須のメソッドをラップしても、期待どおりブロックが動作するようになります。"
-    },
-    {
-      "number": 57632,
-      "title": "Carry `has_many` `default_order:` into the cached association SQL {#pr-57632}",
-      "url": "https://github.com/rails/rails/pull/57632",
-      "mergedAt": "2026-06-09T00:00:00.000Z",
-      "author": "55728",
-      "authorUrl": "https://github.com/55728",
-      "summary": "1. 概要 (1-2文で)  \n`has_many` の新オプション `default_order:` が、関連先レコードを実際にロードするときに無視されてしまう不具合を修正し、かつ statement cache を維持したまま `ORDER BY` をキャッシュされた SQL に反映するようにした PR です。`default_order:` を指定した関連でも、`to_a` / `reload` などでのロード結果が常に期待どおりの順序になるようになります。"
-    },
-    {
-      "number": 57633,
-      "title": "Preserve falsy default value when building `HashWithIndifferentAccess` {#pr-57633}",
-      "url": "https://github.com/rails/rails/pull/57633",
-      "mergedAt": "2026-06-09T00:00:00.000Z",
-      "author": "55728",
-      "authorUrl": "https://github.com/55728",
-      "summary": "1. 概要 (1-2文で)  \n`ActiveSupport::HashWithIndifferentAccess.new` に元ハッシュを渡したとき、元ハッシュに `false` をデフォルト値として設定していても、それが失われずにそのまま引き継がれるようにするバグ修正です。これにより、`Hash.new(false)` など「未知キーは false を返す」ことを前提にしたコードが、HWIA 変換後も期待通り動作します。"
     }
   ]
 }
