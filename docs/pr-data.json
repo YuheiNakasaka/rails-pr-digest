@@ -1,7 +1,79 @@
 {
-  "lastUpdated": "2026-06-15T00:39:44.642Z",
+  "lastUpdated": "2026-06-16T00:44:05.685Z",
   "totalCount": 50,
   "items": [
+    {
+      "number": 57738,
+      "title": "Return an empty string from `word_wrap` when the text is nil {#pr-57738}",
+      "url": "https://github.com/rails/rails/pull/57738",
+      "mergedAt": "2026-06-15T00:00:00.000Z",
+      "author": "55728",
+      "authorUrl": "https://github.com/55728",
+      "summary": "1. 概要 (1-2文で)  \n`word_wrap` ヘルパーに `nil` を渡したときに `NoMethodError` が発生していた問題を修正し、`nil` の場合でも空文字列 (`\"\"`) を返すようにしたPRです。これにより他のテキスト系ヘルパーと挙動が揃い、ビューからそのまま呼び出しても安全になりました。"
+    },
+    {
+      "number": 57737,
+      "title": "Stop documenting the removed `args:` Hash form of `assert_enqueued_email_with` {#pr-57737}",
+      "url": "https://github.com/rails/rails/pull/57737",
+      "mergedAt": "2026-06-15T00:00:00.000Z",
+      "author": "55728",
+      "authorUrl": "https://github.com/55728",
+      "summary": "1. 概要 (1-2文で)  \n`assert_enqueued_email_with` のドキュメントが、既に削除済みの `args: { ... }` 形式でのパラメータ付きメールの検証方法を案内していたため、実装に即した `params:` 形式の説明に修正した PR です。コード変更はなく、RDoc の不整合解消のみです。"
+    },
+    {
+      "number": 57739,
+      "title": "Apply the deprecated `scope` hash `:except` option to except, not only {#pr-57739}",
+      "url": "https://github.com/rails/rails/pull/57739",
+      "mergedAt": "2026-06-15T00:00:00.000Z",
+      "author": "55728",
+      "authorUrl": "https://github.com/55728",
+      "summary": "1. 概要 (1-2文で)  \nRails のルーティングで `scope` に「非推奨のハッシュ形式」を渡したとき、`:except` オプションが誤って `:only` として扱われ、指定と逆のルートが生成されていたバグを修正する PR です。あわせて、この退行を検出するテストが追加されています。"
+    },
+    {
+      "number": 57740,
+      "title": "Honor the deprecated `namespace` hash path options {#pr-57740}",
+      "url": "https://github.com/rails/rails/pull/57740",
+      "mergedAt": "2026-06-15T00:00:00.000Z",
+      "author": "55728",
+      "authorUrl": "https://github.com/55728",
+      "summary": "1. 概要 (1-2文で)  \nRails のルーティング DSL において、`namespace` が受け取る **非推奨のハッシュ形式オプション**（`{ path: ... }` など）が正しく扱われず、パスの二重付与や `shallow_path` / `shallow_prefix` 無視といったバグが出ていたのを修正する PR です。キーワード引数形式との挙動の不一致を解消し、非推奨形式でも期待どおりルーティングが生成されるようにしています。"
+    },
+    {
+      "number": 57721,
+      "title": "Return an Enumerator from `Parameters#select` / `#reject` when no block is given {#pr-57721}",
+      "url": "https://github.com/rails/rails/pull/57721",
+      "mergedAt": "2026-06-15T00:00:00.000Z",
+      "author": "55728",
+      "authorUrl": "https://github.com/55728",
+      "summary": "1. 概要 (1-2文で)  \n`ActionController::Parameters#select` / `#reject` をブロックなしで呼び出したとき、これまで例外が発生していた挙動を修正し、`Hash` と同様に `Enumerator` を返すようにした PR です。Rails の Strong Parameters が Ruby 標準の `Hash` のインターフェースとより一貫するようになります。"
+    },
+    {
+      "number": 57735,
+      "title": "[RF Docs] Rails Internationalization (#57381) {#pr-57735}",
+      "url": "https://github.com/rails/rails/pull/57735",
+      "mergedAt": "2026-06-15T00:00:00.000Z",
+      "author": "p8",
+      "authorUrl": "https://github.com/p8",
+      "summary": "1. 概要 (1-2文で)  \nRails ガイドの「国際化 (I18n)」ドキュメントを大幅にリライトし、初心者にも読み進めやすい構成と、より具体的なコード例・出力例を備えた内容に刷新した PR です。あわせて、古い情報の削除や他ガイドとの表記・スタイルの整合も図られています。"
+    },
+    {
+      "number": 57734,
+      "title": "[ci skip] Remove orphaned backtick from routing docs {#pr-57734}",
+      "url": "https://github.com/rails/rails/pull/57734",
+      "mergedAt": "2026-06-15T00:00:00.000Z",
+      "author": "tylerlwsmith",
+      "authorUrl": "https://github.com/tylerlwsmith",
+      "summary": "1. 概要 (1-2文で)  \nRails のルーティングガイド（routing.md）の「Path and URL Helpers」セクションに紛れ込んでいた不要なバッククォート（`）1文字を削除した、ドキュメントのみの修正です。機能や挙動の変更は一切なく、表記・レイアウトの体裁を整えるためのものです。\n\n2. 変更内容の詳細 (あればサンプルコードも含めて)  \n- 対象ファイル: `guides/source/routing.md`  \n- 変更内容:  \n  - 該当セクション内の文章中に、Markdown のインラインコードとして閉じていない「余計なバッククォート」が 1 文字存在していたのを削除しています。\n  - 実際の差分は「1 行においてバッククォートを 1 文字削除」という最小限の変更で、文章やコード例の意味自体は変わっていません。\n\nイメージとしては、例えば以下のような状態になっていたものを:\n\n```md\nYou can use `user_path(@user)`` to get the path...\n```\n\nこれを:\n\n```md\nYou can use `user_path(@user)` to get the path...\n```\n\nのように修正した、というタイプの変更です（実際の文面はこれと多少異なる可能性がありますが、性質としては同じです）。\n\n3. 影響範囲・注意点  \n- 影響範囲:\n  - Rails 本体のコード・API には一切影響ありません。\n  - 影響するのは Rails Guides の表示のみで、Markdown → HTML 変換後の見た目（インラインコードの崩れ、余計な記号の表示）が解消されます。\n- 注意点:\n  - ドキュメント修正のみのため、アプリケーション側で対応すべきことはありません。\n  - CI を回さないための `[ci skip]` がタイトルに付いていますが、これはコード変更がないドキュメント PR でよく行われる運用上の指定であり、特別な意味はありません。\n\n4. 参考情報 (あれば)  \n- 該当セクション: Rails Guides > Routing > [Path and URL Helpers](https://guides.rubyonrails.org/routing.html#path-and-url-helpers)  \n- 目的: Markdown 記法上のタイポ修正によるドキュメント品質の向上であり、API 仕様やルーティングの挙動に関する変更・補足は行っていません。"
+    },
+    {
+      "number": 57381,
+      "title": "[RF Docs] Rails Internationalization {#pr-57381}",
+      "url": "https://github.com/rails/rails/pull/57381",
+      "mergedAt": "2026-06-15T00:00:00.000Z",
+      "author": "Ridhwana",
+      "authorUrl": "https://github.com/Ridhwana",
+      "summary": "1. 概要 (1-2文で)  \nRailsガイドの「Rails Internationalization (I18n)」ドキュメントを大幅に書き換え、構成を初心者フレンドリーに再編しつつ、API・ベストプラクティス・例外処理などを具体的なコード例付きで整理したPRです。既存のガイドラインとの整合性を取りつつ、古い情報や不要なセクションも整理しています。"
+    },
     {
       "number": 57726,
       "title": "Fix `max_resumptions` attribute name in `ResumeLimitError` docs {#pr-57726}",
@@ -379,78 +451,6 @@
       "author": "andrewn617",
       "authorUrl": "https://github.com/andrewn617",
       "summary": "1. 概要 (1-2文で)  \nRails の各所で定数として保持されている lambda を、Ruby 4.0+ の Ractor 上で安全に共有できるようにするため、「shareability shim」を使って shareable にした PRです。将来的な Ractor 対応・並列実行対応を見据えた小さな互換性対応で、挙動そのものは基本的に変わりません。"
-    },
-    {
-      "number": 57626,
-      "title": "Introduce a new mechanism for applications to prepare for ractor safety {#pr-57626}",
-      "url": "https://github.com/rails/rails/pull/57626",
-      "mergedAt": "2026-06-11T00:00:00.000Z",
-      "author": "Edouard-chin",
-      "authorUrl": "https://github.com/Edouard-chin",
-      "summary": "1. 概要 (1-2文で)  \nこのPRは、Railsアプリケーションが将来的に Ractor セーフになるための準備として、「RailsのAPIに渡される proc が Ractor 的に安全かどうか」を検査・制御する新しい仕組みを導入したものです。まずは `ActionDispatch::Routing::RouteSet`（ルーティング）に適用されており、今後ほかの部分にも広げていく前提の基盤的変更です。"
-    },
-    {
-      "number": 57673,
-      "title": "Reject attribute names that shadow CurrentAttributes methods {#pr-57673}",
-      "url": "https://github.com/rails/rails/pull/57673",
-      "mergedAt": "2026-06-11T00:00:00.000Z",
-      "author": "55728",
-      "authorUrl": "https://github.com/55728",
-      "summary": "1. 概要 (1-2文で)  \n`ActiveSupport::CurrentAttributes` で、クラス内部のメソッド名と同じ名前の属性を定義できてしまう問題を修正し、そのような属性名を宣言した場合は `ArgumentError` を投げて拒否するようにしました。これにより `reset` が効かなくなるなどの「リクエスト間で状態が漏れる」不具合を防ぎます。"
-    },
-    {
-      "number": 57638,
-      "title": "Refactor Composite Primary Key implementation by using polymorphism {#pr-57638}",
-      "url": "https://github.com/rails/rails/pull/57638",
-      "mergedAt": "2026-06-11T00:00:00.000Z",
-      "author": "paracycle",
-      "authorUrl": "https://github.com/paracycle",
-      "summary": "1. 概要 (1-2文で)  \nこのPRは、Railsの複合主キー（Composite Primary Key, CPK）対応で散在していた「if 複合主キーなら…」という条件分岐ロジックを整理し、新たに導入した `ActiveRecord::Key` クラス階層（ポリモーフィズム）に集約するリファクタリングです。機能追加というよりは、CPKサポートの内部実装を大幅にクリーンアップし、今後の保守性と拡張性を高める変更です。"
-    },
-    {
-      "number": 57660,
-      "title": "Fix `normalizes` casting raw database values on in-place change detection {#pr-57660}",
-      "url": "https://github.com/rails/rails/pull/57660",
-      "mergedAt": "2026-06-11T00:00:00.000Z",
-      "author": "chaadow",
-      "authorUrl": "https://github.com/chaadow",
-      "summary": "1. 概要 (1-2文で)  \n`normalizes` を使った属性について、「インプレース変更の検知(normalized_attribute_changed_in_place?)」時に **DBの生値(raw value)を誤って cast していた**ため JSON などで例外が出るリグレッションが発生しており、これを **正しく deserialize を通すように修正**した PRです。"
-    },
-    {
-      "number": 57658,
-      "title": "Add test coverage for ActiveSupport::Duration edge cases {#pr-57658}",
-      "url": "https://github.com/rails/rails/pull/57658",
-      "mergedAt": "2026-06-11T00:00:00.000Z",
-      "author": "hammadxcm",
-      "authorUrl": "https://github.com/hammadxcm",
-      "summary": "1. 概要 (1-2文で)  \nActiveSupport::Duration のこれまでテストされていなかったエッジケースや、rdoc で明示されている挙動に対してテストを追加する PR です。コード本体の変更はなく、テストのみの追加で信頼性と回 regresion 検知能力を高めています。"
-    },
-    {
-      "number": 57666,
-      "title": "Make some more constants ractor safe {#pr-57666}",
-      "url": "https://github.com/rails/rails/pull/57666",
-      "mergedAt": "2026-06-11T00:00:00.000Z",
-      "author": "andrewn617",
-      "authorUrl": "https://github.com/andrewn617",
-      "summary": "1. 概要 (1-2文で)  \nRails の Action Pack 周辺で、Ractor（マルチスレッド並列実行機構）対応を強化するために、一部の定数およびクラス属性を freeze して「Ractor セーフ（共有可能）」にした PR です。特に scaffold されたルーティング付きの新規アプリを Ractor 内で動かす際に頻繁にアクセスされる定数を対象にしています。"
-    },
-    {
-      "number": 57663,
-      "title": "Little clean up in cookies_test.rb {#pr-57663}",
-      "url": "https://github.com/rails/rails/pull/57663",
-      "mergedAt": "2026-06-11T00:00:00.000Z",
-      "author": "andrewn617",
-      "authorUrl": "https://github.com/andrewn617",
-      "summary": "1. 概要 (1-2文で)  \ncookies に関するテスト (`cookies_test.rb`) 内の重複コードをヘルパーメソッド化し、テストコードを整理・簡素化したPRです。挙動変更はなく、あくまでリファクタリング（クリーンアップ）が目的です。"
-    },
-    {
-      "number": 57657,
-      "title": "Support a single composite primary key id in `delete` {#pr-57657}",
-      "url": "https://github.com/rails/rails/pull/57657",
-      "mergedAt": "2026-06-10T00:00:00.000Z",
-      "author": "55728",
-      "authorUrl": "https://github.com/55728",
-      "summary": "1. 概要 (1-2文で)  \nRails の ActiveRecord において、複合主キーを持つモデルに対して `Model.delete(record.id)` を呼び出すと `ArgumentError` が出ていた問題を修正し、`destroy` と同様に単一レコードの削除が正しく動作するようにしました。`delete` の単一・複数 ID 指定の挙動が、複合主キー環境でも一貫するようになります。"
     }
   ]
 }
