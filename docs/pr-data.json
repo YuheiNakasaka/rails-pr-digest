@@ -1,7 +1,79 @@
 {
-  "lastUpdated": "2026-06-16T00:44:05.685Z",
+  "lastUpdated": "2026-06-17T00:37:59.065Z",
   "totalCount": 50,
   "items": [
+    {
+      "number": 57759,
+      "title": "Make `test_assign_ids_with_cpk_for_two_models` order-independent {#pr-57759}",
+      "url": "https://github.com/rails/rails/pull/57759",
+      "mergedAt": "2026-06-17T00:00:00.000Z",
+      "author": "yahonda",
+      "authorUrl": "https://github.com/yahonda",
+      "summary": "1. 概要 (1-2文で)  \n`TestDefaultAutosaveAssociationOnAHasManyAssociation#test_assign_ids_with_cpk_for_two_models` が PostgreSQL で順序依存のためにフレークしていた問題を、期待値と実際値の双方を sort して比較することで順序非依存なテストに修正した PR です。`has_many :books` に `order:` 指定がないため `book_ids` の返却順が不定である点をテスト側で吸収しています。"
+    },
+    {
+      "number": 57727,
+      "title": "Accept a Float wait in `retry_on` {#pr-57727}",
+      "url": "https://github.com/rails/rails/pull/57727",
+      "mergedAt": "2026-06-16T00:00:00.000Z",
+      "author": "55728",
+      "authorUrl": "https://github.com/55728",
+      "summary": "1. 概要 (1-2文で)  \n`ActiveJob` の `retry_on` オプションで `wait: 2.5` のような Float を指定すると例外が発生していた不具合を修正し、`set(wait: 2.5)` と同様に Float も受け付けるようにしました。内部的には Float を整数秒に切り捨てて扱うため、依然としてサブ秒単位のリトライは行われません。"
+    },
+    {
+      "number": 57755,
+      "title": "Make ActionController::Flash.add_flash_types ractor safe {#pr-57755}",
+      "url": "https://github.com/rails/rails/pull/57755",
+      "mergedAt": "2026-06-16T00:00:00.000Z",
+      "author": "andrewn617",
+      "authorUrl": "https://github.com/andrewn617",
+      "summary": "1. 概要 (1–2文で)  \n`ActionController::Flash.add_flash_types` が Ractor（Ruby の並行実行モデル）下でも安全に動作するように内部実装が変更されました。これにより、複数 Ractor からカスタム flash タイプを追加してもデータ競合が起きないようになります。"
+    },
+    {
+      "number": 57752,
+      "title": "More shareable constants {#pr-57752}",
+      "url": "https://github.com/rails/rails/pull/57752",
+      "mergedAt": "2026-06-16T00:00:00.000Z",
+      "author": "andrewn617",
+      "authorUrl": "https://github.com/andrewn617",
+      "summary": "1. 概要 (1-2文で)  \nRails内部で使われている一部の定数(Hashなど)について、Ractor対応のために「共有可能（shareable）」なオブジェクトとして扱えるように凍結処理が追加・修正されたPRです。主にActionPack・ActionView・ActiveSupport内の定数の凍結方法を見直し、マルチRactor環境での安全性を高めています。"
+    },
+    {
+      "number": 57751,
+      "title": "Make Messages::Metadata serializer arrays frozen by default. {#pr-57751}",
+      "url": "https://github.com/rails/rails/pull/57751",
+      "mergedAt": "2026-06-16T00:00:00.000Z",
+      "author": "andrewn617",
+      "authorUrl": "https://github.com/andrewn617",
+      "summary": "1. 概要 (1-2文で)  \nRails の `ActiveSupport::Messages::Metadata` における envelope / timestamp のシリアライザ配列を、デフォルトで凍結して Ractor 共有可能にする変更です。これにより、Rails のグローバル状態を Ractor セーフに近づけつつ、既存のロードフックによる配列の拡張も維持しています。"
+    },
+    {
+      "number": 57750,
+      "title": "Avoid racing the maintenance thread's checkout {#pr-57750}",
+      "url": "https://github.com/rails/rails/pull/57750",
+      "mergedAt": "2026-06-16T00:00:00.000Z",
+      "author": "matthewd",
+      "authorUrl": "https://github.com/matthewd",
+      "summary": "1. 概要 (1–2文で)  \nこのPRは、Active Record のテスト (`activerecord/test/cases/test_case_test.rb`) におけるメンテナンス用スレッド（maintenance thread）の処理とテスト本体の処理が「競合条件（race condition）」を起こし、テストがまれに落ちる（flaky）問題を解消するための修正です。前のPR #57744 の修正が別種のフレークを生んでしまったため、そのフォローアップとしてテストの同期方法を調整しています。"
+    },
+    {
+      "number": 57743,
+      "title": "Fix `ActiveSupport::InheritableOptions#to_h` for nested inheritable options {#pr-57743}",
+      "url": "https://github.com/rails/rails/pull/57743",
+      "mergedAt": "2026-06-16T00:00:00.000Z",
+      "author": "andrewn617",
+      "authorUrl": "https://github.com/andrewn617",
+      "summary": "1. 概要 (1-2文で)  \n`ActiveSupport::InheritableOptions#to_h` が、親に `InheritableOptions` を持つ（ネストした）ケースで正しく Hash を返さず、オブジェクトをそのまま返してしまう不具合を修正した PRです。親側を `to_h` してからマージするように変更し、ネストされた継承オプションでも常に期待通りの Hash が得られるようになりました。"
+    },
+    {
+      "number": 57744,
+      "title": "Wait for any asynchronous connection maintenance work before leak check {#pr-57744}",
+      "url": "https://github.com/rails/rails/pull/57744",
+      "mergedAt": "2026-06-16T00:00:00.000Z",
+      "author": "matthewd",
+      "authorUrl": "https://github.com/matthewd",
+      "summary": "1. 概要 (1-2文で)  \nこのPRは、Active Record のテストで「コネクションリークチェック」を行う前に、非同期で実行されるコネクションメンテナンス処理がすべて終わるまで待つようにし、テストの不安定さや誤検知を防ぐ変更です。非同期 executor が有効な環境でも、接続リーパー周りのテストが安定して実行できるようになります。"
+    },
     {
       "number": 57738,
       "title": "Return an empty string from `word_wrap` when the text is nil {#pr-57738}",
@@ -379,78 +451,6 @@
       "author": "55728",
       "authorUrl": "https://github.com/55728",
       "summary": "1. 概要 (1-2文で)  \n`ActiveRecord::Relation#excluding`（およびエイリアスの `without`）が複合主キーを持つモデルでエラーになっていた問題を修正し、単一主キーと同様に正常動作するようにした PR です。単一主キー向けの挙動は変えず、複合主キーのときだけ where 句の組み立て方を切り替えています。"
-    },
-    {
-      "number": 57670,
-      "title": "Fix `Hash.from_xml` raising `Date::Error` on `type=\"date\"` values surrounded by whitespace {#pr-57670}",
-      "url": "https://github.com/rails/rails/pull/57670",
-      "mergedAt": "2026-06-12T00:00:00.000Z",
-      "author": "55728",
-      "authorUrl": "https://github.com/55728",
-      "summary": "1. 概要 (1-2文で)  \n`Hash.from_xml` が `type=\"date\"` の要素に前後の空白文字（改行やスペース）が含まれていると `Date::Error` で落ちていた問題を修正した PR です。日付文字列を `Date.strptime` に渡す前に `to_s.strip` することで、インデント付き・整形済み XML でも問題なくパースできるようになりました。"
-    },
-    {
-      "number": 57671,
-      "title": "Fix `MemoryStore#cleanup` raising `NoMethodError` with a non-DupCoder serializer {#pr-57671}",
-      "url": "https://github.com/rails/rails/pull/57671",
-      "mergedAt": "2026-06-12T00:00:00.000Z",
-      "author": "55728",
-      "authorUrl": "https://github.com/55728",
-      "summary": "1. 概要 (1-2文で)  \n`ActiveSupport::Cache::MemoryStore` を非デフォルトのシリアライザ（`serializer: :marshal_7_1` など）付きで使った際に、`cleanup` 実行時に `NoMethodError` が発生して書き込みが失敗する問題を修正した PR です。`cleanup` 内でも他と同様に `deserialize_entry` を通してエントリを扱うようにし、テストを追加しています。"
-    },
-    {
-      "number": 57672,
-      "title": "Fix Time#advance and DateTime#advance mutating the caller's options hash {#pr-57672}",
-      "url": "https://github.com/rails/rails/pull/57672",
-      "mergedAt": "2026-06-12T00:00:00.000Z",
-      "author": "55728",
-      "authorUrl": "https://github.com/55728",
-      "summary": "1. 概要 (1-2文で)  \n`Time#advance` と `DateTime#advance` が、呼び出し元から渡された options ハッシュを破壊的に変更していた問題を修正した PR です。ハッシュを複製してから処理するようにすることで、呼び出し元のハッシュの汚染や `FrozenError` を解消し、`Date#advance` との挙動の一貫性も取っています。"
-    },
-    {
-      "number": 57686,
-      "title": "Re-raise suppressed RedisClient errors in all RedisCacheStoreTests classes {#pr-57686}",
-      "url": "https://github.com/rails/rails/pull/57686",
-      "mergedAt": "2026-06-12T00:00:00.000Z",
-      "author": "yahonda",
-      "authorUrl": "https://github.com/yahonda",
-      "summary": "1. 概要 (1-2文で)  \nRedis を使ったキャッシュストアのテストにおいて、これまで握りつぶされていた `RedisClient` のエラーをすべての `RedisCacheStoreTests` 系テストで再スローするようにし、原因が分かりにくい失敗を診断しやすくした PR です。前回 PR (#57571) で一部クラスにだけ入っていた `error_handler` の設定を、共通のデフォルトに移して全テストクラスに適用しています。"
-    },
-    {
-      "number": 57679,
-      "title": "Fix increment! with explicit query constraints {#pr-57679}",
-      "url": "https://github.com/rails/rails/pull/57679",
-      "mergedAt": "2026-06-12T00:00:00.000Z",
-      "author": "jsaubry",
-      "authorUrl": "https://github.com/jsaubry",
-      "summary": "1. 概要 (1-2文で)  \n`increment!` / `decrement!` が `query_constraints` を持つモデルに対しても、更新時の `WHERE` 句にそれらの制約列を正しく含めるように修正された PR です。単一主キー + 明示的 `query_constraints` 環境で、主キーのみで UPDATE してしまう不具合を解消します。"
-    },
-    {
-      "number": 57682,
-      "title": "Ractor safe readonly attributes {#pr-57682}",
-      "url": "https://github.com/rails/rails/pull/57682",
-      "mergedAt": "2026-06-12T00:00:00.000Z",
-      "author": "andrewn617",
-      "authorUrl": "https://github.com/andrewn617",
-      "summary": "1. 概要 (1-2文で)  \nRails を Ractor セーフにする取り組みの一環として、`ActiveRecord::Base._attr_readonly` で使われる配列を「最初から凍結(frozen)された不変オブジェクト」として扱うようにし、テスト用の Ractor 関連アサーションも整理・拡張した PR です。これにより、クラスレベルの設定情報が Ractor 間で安全に共有しやすくなります。"
-    },
-    {
-      "number": 57674,
-      "title": "Fix `String#truncate` with `:separator` and an over-long `:omission` {#pr-57674}",
-      "url": "https://github.com/rails/rails/pull/57674",
-      "mergedAt": "2026-06-12T00:00:00.000Z",
-      "author": "55728",
-      "authorUrl": "https://github.com/55728",
-      "summary": "1. 概要 (1-2文で)  \n`String#truncate` に `:separator` オプションを指定しつつ、`:omission` の長さが `truncate_to` 以上になるケースで、想定より長い文字列が返ってしまう不具合を修正した PR です。`separator` を使う場合も、非 `separator` パスと同様に「省略記号だけ」を返すよう挙動を揃えています。"
-    },
-    {
-      "number": 57681,
-      "title": "Make some lambdas in constants shareable {#pr-57681}",
-      "url": "https://github.com/rails/rails/pull/57681",
-      "mergedAt": "2026-06-11T00:00:00.000Z",
-      "author": "andrewn617",
-      "authorUrl": "https://github.com/andrewn617",
-      "summary": "1. 概要 (1-2文で)  \nRails の各所で定数として保持されている lambda を、Ruby 4.0+ の Ractor 上で安全に共有できるようにするため、「shareability shim」を使って shareable にした PRです。将来的な Ractor 対応・並列実行対応を見据えた小さな互換性対応で、挙動そのものは基本的に変わりません。"
     }
   ]
 }
