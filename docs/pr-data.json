@@ -1,7 +1,61 @@
 {
-  "lastUpdated": "2026-06-17T00:37:59.065Z",
+  "lastUpdated": "2026-06-18T00:38:52.673Z",
   "totalCount": 50,
   "items": [
+    {
+      "number": 57756,
+      "title": "Make AbstractController::Helper.helper_method ractor safe {#pr-57756}",
+      "url": "https://github.com/rails/rails/pull/57756",
+      "mergedAt": "2026-06-18T00:00:00.000Z",
+      "author": "andrewn617",
+      "authorUrl": "https://github.com/andrewn617",
+      "summary": "1. 概要 (1-2文で)  \n`AbstractController::Helper.helper_method` が Ractor（Ruby の並行実行モデル）環境でも安全に動作するよう、内部で保持しているヘルパーメソッド配列の扱いを「コピーして凍結する」パターンに変更した PR です。これにより、Ractor 間で共有されるオブジェクトに対する破壊的変更を避け、スレッド／Ractor セーフティを高めています。"
+    },
+    {
+      "number": 57760,
+      "title": "Simplify PRE_CONTENT_STRING hash {#pr-57760}",
+      "url": "https://github.com/rails/rails/pull/57760",
+      "mergedAt": "2026-06-17T00:00:00.000Z",
+      "author": "skipkayhil",
+      "authorUrl": "https://github.com/skipkayhil",
+      "summary": "1. 概要 (1-2文で)  \nRails の `ActionView::Helpers::TagHelper` 内で使われている `PRE_CONTENT_STRING` ハッシュの定義が、Ruby 3.1 以降の最適化を踏まえて簡素化されました。`nil` 用のデフォルト値を持たせることでオブジェクト生成を減らしていたロジックが、もはや効果を持たないため削除されています。"
+    },
+    {
+      "number": 57749,
+      "title": "Fix `instance_variable_names` RDoc to show declaration order {#pr-57749}",
+      "url": "https://github.com/rails/rails/pull/57749",
+      "mergedAt": "2026-06-17T00:00:00.000Z",
+      "author": "55728",
+      "authorUrl": "https://github.com/55728",
+      "summary": "1. 概要 (1-2文で)  \n`Object#instance_variable_names` の RDoc 例が、実際の返り値の順序と逆になっていたため、ドキュメント上の配列の順序を実際の挙動に合わせて修正した PR です。コードの挙動変更はなく、ドキュメントのみの修正です。"
+    },
+    {
+      "number": 57748,
+      "title": "Honor falsy values in routing's deprecated positional-hash options {#pr-57748}",
+      "url": "https://github.com/rails/rails/pull/57748",
+      "mergedAt": "2026-06-17T00:00:00.000Z",
+      "author": "55728",
+      "authorUrl": "https://github.com/55728",
+      "summary": "1. 概要 (1-2文で)  \nRails のルーティング DSL において、非推奨の「位置引数＋ハッシュ」形式で `format: false` / `anchor: false` を指定した場合に値が無視されていた問題を修正し、キーワード引数形式と同じ挙動になるようにしています。これにより、移行期間中にハッシュ形式からキーワード形式へ書き換えた際にルート挙動が変わってしまう不具合を防ぎます。"
+    },
+    {
+      "number": 57758,
+      "title": "Fix `in_order_of` raising on CTEs {#pr-57758}",
+      "url": "https://github.com/rails/rails/pull/57758",
+      "mergedAt": "2026-06-17T00:00:00.000Z",
+      "author": "viralpraxis",
+      "authorUrl": "https://github.com/viralpraxis",
+      "summary": "1. 概要 (1-2文で)  \n`in_order_of` を CTE 由来のカラムに対して使うと `NoMethodError` になるバグを修正し、解決できないカラム（CTE など）については型キャスト処理をスキップするようにした PR です。これにより、CTE 内で定義したエイリアスカラムでも `in_order_of` が安全に使えるようになります。"
+    },
+    {
+      "number": 57610,
+      "title": "Fix visibility of ActiveRecord::Coders [ci skip] {#pr-57610}",
+      "url": "https://github.com/rails/rails/pull/57610",
+      "mergedAt": "2026-06-17T00:00:00.000Z",
+      "author": "skipkayhil",
+      "authorUrl": "https://github.com/skipkayhil",
+      "summary": "1. 概要 (1-2文で)  \nActiveRecord::Coders 周りの RDoc/YARD 用コメントを整理し、「どのクラスが公式にドキュメント対象か」を明確化した PRです。`SafeCoder` は実装詳細として非公開扱いにし、代わりにユーザが直接使う Coders クラス群をドキュメント対象として扱うようにしています。"
+    },
     {
       "number": 57759,
       "title": "Make `test_assign_ids_with_cpk_for_two_models` order-independent {#pr-57759}",
@@ -397,60 +451,6 @@
       "author": "55728",
       "authorUrl": "https://github.com/55728",
       "summary": "1. 概要 (1-2文で)  \n`ActiveSupport::Inflector.transliterate` が、非 frozen かつ非 UTF-8 の文字列引数を「こっそり破壊的変更」してしまう不具合を修正し、常に引数を複製してから処理するようにした PR です。これにより `parameterize` も含め、呼び出し元の文字列オブジェクトのエンコーディングやバイト列が書き換わらないことが保証されます。"
-    },
-    {
-      "number": 57676,
-      "title": "Fix StructuredEventSubscriber.debug_only leaking across subscriber subclasses {#pr-57676}",
-      "url": "https://github.com/rails/rails/pull/57676",
-      "mergedAt": "2026-06-13T00:00:00.000Z",
-      "author": "55728",
-      "authorUrl": "https://github.com/55728",
-      "summary": "1. 概要 (1-2文で)  \n`ActiveSupport::StructuredEventSubscriber` の `debug_only` で設定したメソッド名が、サブクラス間や基底クラスに「漏れ」て共有されてしまうバグを修正する PR です。`class_attribute` のデフォルト配列を破壊的に変更していたために起きていた問題を、非破壊的な再代入に変えることで解消しています。"
-    },
-    {
-      "number": 57693,
-      "title": "Make `ActiveRecord::Base.with` call `Object#with` when passed a block {#pr-57693}",
-      "url": "https://github.com/rails/rails/pull/57693",
-      "mergedAt": "2026-06-13T00:00:00.000Z",
-      "author": "janko",
-      "authorUrl": "https://github.com/janko",
-      "summary": "1. 概要 (1-2文で)  \nActiveRecord::Base の `.with` がブロック付きで呼ばれた場合に、CTE 用の `ActiveRecord::Relation#with` ではなく、Ruby コア拡張の `Object#with` を呼ぶようにした変更です。これにより、Active Record モデルで `with` を使って一時的に設定を上書きするパターンが自然に利用できるようになります。"
-    },
-    {
-      "number": 57689,
-      "title": "Add test coverage for HashWithIndifferentAccess key access and except {#pr-57689}",
-      "url": "https://github.com/rails/rails/pull/57689",
-      "mergedAt": "2026-06-13T00:00:00.000Z",
-      "author": "hammadxcm",
-      "authorUrl": "https://github.com/hammadxcm",
-      "summary": "1. 概要 (1-2文で)  \n`ActiveSupport::HashWithIndifferentAccess` について、これまでテストされていなかった分岐や挙動（`fetch` のブロック・デフォルト値、`values_at` の欠損キー、`dig` の miss パス、`except`/`without` の基本仕様）に対してテストが追加されました。アプリケーションコードへの変更はなく、テスト追加のみのPRです。"
-    },
-    {
-      "number": 57680,
-      "title": "Ensure `assert_no_changes` isn't given a static value {#pr-57680}",
-      "url": "https://github.com/rails/rails/pull/57680",
-      "mergedAt": "2026-06-12T00:00:00.000Z",
-      "author": "amomchilov",
-      "authorUrl": "https://github.com/amomchilov",
-      "summary": "1. 概要 (1-2文で)  \n`assert_no_changes`（および関連メソッド）が「静的な値」を引数に取った場合に、対象が実際には変化していてもテストが常に成功してしまう問題を防ぐため、引数に許可される型を制限し、そうでない場合は `ArgumentError` を発生させるようにした変更です。これにより、書き間違い・勘違いによるテストの空振りを早期に検知できるようになります。"
-    },
-    {
-      "number": 57057,
-      "title": "Report Postgres FATAL exceptions more clearly {#pr-57057}",
-      "url": "https://github.com/rails/rails/pull/57057",
-      "mergedAt": "2026-06-12T00:00:00.000Z",
-      "author": "matthewd",
-      "authorUrl": "https://github.com/matthewd",
-      "summary": "1. 概要 (1-2文で)  \nPostgreSQL から返される `FATAL` エラーを、一般的な `StatementInvalid` ではなく「接続が壊れた」ことを示す `ConnectionFailed` として明示的に扱うように変更し、壊れた接続を後からまで引きずらないようにした PR です。  \nそのために libpq の使い方を `exec_params` 依存から、`send_query_params` + 明示的な `get_result` ループや notice receiver の活用に変更し、より確実に「本当の例外」を捕捉できるようにしています。"
-    },
-    {
-      "number": 57656,
-      "title": "Support composite primary keys in `excluding` {#pr-57656}",
-      "url": "https://github.com/rails/rails/pull/57656",
-      "mergedAt": "2026-06-12T00:00:00.000Z",
-      "author": "55728",
-      "authorUrl": "https://github.com/55728",
-      "summary": "1. 概要 (1-2文で)  \n`ActiveRecord::Relation#excluding`（およびエイリアスの `without`）が複合主キーを持つモデルでエラーになっていた問題を修正し、単一主キーと同様に正常動作するようにした PR です。単一主キー向けの挙動は変えず、複合主キーのときだけ where 句の組み立て方を切り替えています。"
     }
   ]
 }
