@@ -1,7 +1,70 @@
 {
-  "lastUpdated": "2026-06-18T00:38:52.673Z",
+  "lastUpdated": "2026-06-19T00:42:57.507Z",
   "totalCount": 50,
   "items": [
+    {
+      "number": 57641,
+      "title": "Enable per-pool query log tags prepend config {#pr-57641}",
+      "url": "https://github.com/rails/rails/pull/57641",
+      "mergedAt": "2026-06-18T00:00:00.000Z",
+      "author": "hmcguire-shopify",
+      "authorUrl": "https://github.com/hmcguire-shopify",
+      "summary": "1. 概要 (1-2文で)  \nこのPRは、Active Recordのクエリログタグ機能を「コネクションプールごと」に細かく設定できるように拡張したものです。`database.yml` でプール単位にタグ付けそのものの有効/無効、フォーマット、コメントの前後どちらに付けるかを指定できるようになります。"
+    },
+    {
+      "number": 57765,
+      "title": "Validate `retry_on` `wait:` argument type at class definition {#pr-57765}",
+      "url": "https://github.com/rails/rails/pull/57765",
+      "mergedAt": "2026-06-18T00:00:00.000Z",
+      "author": "55728",
+      "authorUrl": "https://github.com/55728",
+      "summary": "1. 概要 (1-2文で)  \nActive Job の `retry_on` オプション `wait:` に渡せる値の型チェックを、「リトライ実行時」ではなく「ジョブクラス定義時」に行うようにした PR です。これにより、サポート外の値を指定した場合に、元のエラーを潰す形の内部エラーではなく、クラス読み込み時に明確な `ArgumentError` が発生するようになります。"
+    },
+    {
+      "number": 57777,
+      "title": "8-1-stable: Clear Postgres warnings as they get handled {#pr-57777}",
+      "url": "https://github.com/rails/rails/pull/57777",
+      "mergedAt": "2026-06-18T00:00:00.000Z",
+      "author": "matthewd",
+      "authorUrl": "https://github.com/matthewd",
+      "summary": "1. 概要 (1–2文で)  \nRails 8.1系（8-1-stable）に対し、「PostgreSQL の warning を処理したタイミングで逐次クリアする」挙動を backport した PR です。これにより、同一コネクション上で警告が溜まり続けて後続クエリに悪影響を与える問題を防ぎ、より正確に warning を扱えるようにしています。"
+    },
+    {
+      "number": 57774,
+      "title": "Remove primary_key class ivar {#pr-57774}",
+      "url": "https://github.com/rails/rails/pull/57774",
+      "mergedAt": "2026-06-18T00:00:00.000Z",
+      "author": "ilianah",
+      "authorUrl": "https://github.com/ilianah",
+      "summary": "1. 概要 (1-2文で)  \nActive Record の `primary_key` 周りの実装からクラスインスタンス変数 `@primary_key` を廃止し、`primary_key` と `primary_key_definition` の同期を取りやすくするための内部リファクタリングです。外部 API の挙動はほぼ変えずに、内部状態の一貫性を高める変更です。"
+    },
+    {
+      "number": 57770,
+      "title": "8-0-stable: Backport recent test suite fixes {#pr-57770}",
+      "url": "https://github.com/rails/rails/pull/57770",
+      "mergedAt": "2026-06-18T00:00:00.000Z",
+      "author": "matthewd",
+      "authorUrl": "https://github.com/matthewd",
+      "summary": "1. 概要  \nRails 8.0-stable ブランチに対して、テストスイートの安定性向上・バグ回避のために、main 側 (#57767) で行われた修正の「適用可能な部分だけ」をバックポートした PR です。主に Active Record と Action Mailbox のテストコードやテスト用ヘルパ、接続プール周りに手が入り、CI のフレーク・環境依存の失敗を減らすことが目的です。"
+    },
+    {
+      "number": 57767,
+      "title": "8-1-stable: Backport recent test suite fixes {#pr-57767}",
+      "url": "https://github.com/rails/rails/pull/57767",
+      "mergedAt": "2026-06-18T00:00:00.000Z",
+      "author": "matthewd",
+      "authorUrl": "https://github.com/matthewd",
+      "summary": "1. 概要 (1–2文)  \nこのPRは Rails 8.1 ステーブルブランチに対して、直近のテストスイート修正をまとめてバックポートしたものです。主に Action Mailbox と Active Record 周りのテストと接続プールまわりの実装が調整され、CI の安定性とテストの信頼性を高めています。"
+    },
+    {
+      "number": 57768,
+      "title": "More test fixes {#pr-57768}",
+      "url": "https://github.com/rails/rails/pull/57768",
+      "mergedAt": "2026-06-18T00:00:00.000Z",
+      "author": "matthewd",
+      "authorUrl": "https://github.com/matthewd",
+      "summary": "1. 概要 (1-2文で)  \nRails の Active Record テスト周りと接続プールの実装に対して、並行実行時の不具合を修正する PRです。特に Ruby 3.3.5 より前の環境で使われる `WeakThreadKeyMap` のフォールバック実装に対するスレッドセーフティ修正が含まれています。"
+    },
     {
       "number": 57756,
       "title": "Make AbstractController::Helper.helper_method ractor safe {#pr-57756}",
@@ -388,69 +451,6 @@
       "author": "55728",
       "authorUrl": "https://github.com/55728",
       "summary": "1. 概要 (1-2文で)  \nAction Cable サーバ再起動時に、ハートビート用の `@heartbeat_timer` が停止されずに残り続けていた不具合を修正する PR です。  \n開発環境のコードリロードごとにスレッドプールとタイマーがリーク・再生成される問題を解消します。"
-    },
-    {
-      "number": 57699,
-      "title": "Raise ChannelNotFound for a subscribe command without a channel {#pr-57699}",
-      "url": "https://github.com/rails/rails/pull/57699",
-      "mergedAt": "2026-06-13T00:00:00.000Z",
-      "author": "55728",
-      "authorUrl": "https://github.com/55728",
-      "summary": "1. 概要 (1-2文で)  \nAction Cable の `subscribe` コマンドで `channel` キーが省略された場合に、これまで素の `NoMethodError` が発生していたのを、他の経路と同様に `ChannelNotFound` 例外が発生するように統一したバグフィックスです。サーバ側は異常クライアントからの不正な subscribe メッセージに対して、より一貫したエラー処理ができるようになります。"
-    },
-    {
-      "number": 57695,
-      "title": "Keep pending subscribe confirmations across a Redis reconnect {#pr-57695}",
-      "url": "https://github.com/rails/rails/pull/57695",
-      "mergedAt": "2026-06-13T00:00:00.000Z",
-      "author": "55728",
-      "authorUrl": "https://github.com/55728",
-      "summary": "1. 概要 (1-2文で)  \nRedis の pub/sub 接続が切れた直後に発生していた「サブスクライブ確認(on_success)が二度と返ってこない」問題を修正し、再接続後も未完了の subscribe 確認を正しく引き継ぐようにした PR です。Redis クライアント刷新時のリグレッションで、Action Cable の Redis アダプタの挙動のみをピンポイントに修正しています。"
-    },
-    {
-      "number": 57696,
-      "title": "Respect an explicit `id: nil` in the Redis cable config {#pr-57696}",
-      "url": "https://github.com/rails/rails/pull/57696",
-      "mergedAt": "2026-06-13T00:00:00.000Z",
-      "author": "55728",
-      "authorUrl": "https://github.com/55728",
-      "summary": "1. 概要 (1-2文で)  \nAction Cable の Redis アダプタにおいて、Redis 接続設定で明示的に `id: nil` を指定した場合にそれが上書きされず、そのまま尊重されるように修正した PR です。これにより、ドキュメント通り「`id: nil` を指定して `CLIENT SETNAME` を発行しない」挙動が正しく動作するようになります。"
-    },
-    {
-      "number": 57698,
-      "title": "Coerce stream name to String in the test adapter accessors {#pr-57698}",
-      "url": "https://github.com/rails/rails/pull/57698",
-      "mergedAt": "2026-06-13T00:00:00.000Z",
-      "author": "55728",
-      "authorUrl": "https://github.com/55728",
-      "summary": "1. 概要 (1-2文で)  \nAction Cable のテスト用アダプタ (`SubscriptionAdapter::Test`) において、シンボルのストリーム名を使ったときにブロードキャスト検証が正しく動かない不具合を修正する PR です。内部で文字列キーとして保存しているのに対し、読み出し側が生の引数（シンボルなど）でアクセスしていたため起きていた不整合を解消しています。"
-    },
-    {
-      "number": 57692,
-      "title": "Coerce broadcasting to String in Channel#stop_stream_from {#pr-57692}",
-      "url": "https://github.com/rails/rails/pull/57692",
-      "mergedAt": "2026-06-13T00:00:00.000Z",
-      "author": "55728",
-      "authorUrl": "https://github.com/55728",
-      "summary": "1. 概要 (1-2文で)  \nAction Cable の `Channel#stop_stream_from` が、`stream_from` と同様に引数を `String` に変換して扱うよう修正されました。これにより、シンボルを使って購読開始・停止を行った場合でも、正しく購読解除されるようになります。"
-    },
-    {
-      "number": 57691,
-      "title": "Iterate a snapshot of the connections in Server#each_connection {#pr-57691}",
-      "url": "https://github.com/rails/rails/pull/57691",
-      "mergedAt": "2026-06-13T00:00:00.000Z",
-      "author": "55728",
-      "authorUrl": "https://github.com/55728",
-      "summary": "1. 概要 (1-2文で)  \nAction Cable の `Server#each_connection` が、内部のハッシュを直接イテレートするのではなく「スナップショット（配列）」をイテレートするように変更され、接続の追加・削除が同時に起きても `RuntimeError: can't add a new key into hash during iteration` が発生しないようになりました。これにより、ハートビートやサーバ再起動時の接続処理が安定して動作します。"
-    },
-    {
-      "number": 57675,
-      "title": "Don't mutate the caller's string in `Inflector#transliterate` {#pr-57675}",
-      "url": "https://github.com/rails/rails/pull/57675",
-      "mergedAt": "2026-06-13T00:00:00.000Z",
-      "author": "55728",
-      "authorUrl": "https://github.com/55728",
-      "summary": "1. 概要 (1-2文で)  \n`ActiveSupport::Inflector.transliterate` が、非 frozen かつ非 UTF-8 の文字列引数を「こっそり破壊的変更」してしまう不具合を修正し、常に引数を複製してから処理するようにした PR です。これにより `parameterize` も含め、呼び出し元の文字列オブジェクトのエンコーディングやバイト列が書き換わらないことが保証されます。"
     }
   ]
 }
