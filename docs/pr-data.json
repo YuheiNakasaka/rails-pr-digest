@@ -1,7 +1,52 @@
 {
-  "lastUpdated": "2026-06-19T00:42:57.507Z",
+  "lastUpdated": "2026-06-20T00:33:50.441Z",
   "totalCount": 50,
   "items": [
+    {
+      "number": 57579,
+      "title": "Add RFC 9110 compliant Accept header content negotiation opt-in {#pr-57579}",
+      "url": "https://github.com/rails/rails/pull/57579",
+      "mergedAt": "2026-06-19T00:00:00.000Z",
+      "author": "williantenfen",
+      "authorUrl": "https://github.com/williantenfen",
+      "summary": "1. 概要 (1-2文で)  \nRFC 9110 に準拠した `Accept` ヘッダによるコンテンツネゴシエーションを行うオプション設定 `config.action_dispatch.respect_accept_header_rfc9110` が追加されました。デフォルトは従来通りの挙動（IE7 向けワークアラウンドを維持）で、明示的に opt-in したアプリだけが新しい挙動になります。"
+    },
+    {
+      "number": 57780,
+      "title": "Extract Template.validate_formats and Template.normalized_formats {#pr-57780}",
+      "url": "https://github.com/rails/rails/pull/57780",
+      "mergedAt": "2026-06-19T00:00:00.000Z",
+      "author": "etiennebarrie",
+      "authorUrl": "https://github.com/etiennebarrie",
+      "summary": "1. 概要 (1–2文で)  \nこのPRは、`Template::Types` へ直接アクセスしてリクエストフォーマットを処理していたコードを、`Template` クラス内のヘルパーメソッド（`validate_formats` / `normalized_formats`）経由にリファクタリングしたものです。あわせて、`Template` の autoload 定義の重複を削除し、並び順を整理しています。"
+    },
+    {
+      "number": 57775,
+      "title": "Make ActiveRecord::Base.primary_key a class attribute {#pr-57775}",
+      "url": "https://github.com/rails/rails/pull/57775",
+      "mergedAt": "2026-06-19T00:00:00.000Z",
+      "author": "ilianah",
+      "authorUrl": "https://github.com/ilianah",
+      "summary": "1. 概要 (1-2文で)  \n`ActiveRecord::Base.primary_key` が「クラス属性 (class_attribute)」として扱われるようになり、`table_name` と同様にサブクラスへオーバーライド内容が継承されるようになりました。これにより、抽象クラスや STI での主キー指定がより直感的で一貫した挙動になります。"
+    },
+    {
+      "number": 57773,
+      "title": "Remove outdated documentation for overriding primary_key {#pr-57773}",
+      "url": "https://github.com/rails/rails/pull/57773",
+      "mergedAt": "2026-06-19T00:00:00.000Z",
+      "author": "ilianah",
+      "authorUrl": "https://github.com/ilianah",
+      "summary": "1. 概要 (1-2文で)  \nRails 7.2系以降（PR #57638 の変更）では、`primary_key` の値だけを単独でオーバーライドすることができなくなったため、その古い方法を説明していたドキュメントコメントが削除されました。コードの挙動自体は変わらず、ドキュメント上の記述のみが整理されています。"
+    },
+    {
+      "number": 57651,
+      "title": "Fix associations on a new record when the owner has a composite primary key {#pr-57651}",
+      "url": "https://github.com/rails/rails/pull/57651",
+      "mergedAt": "2026-06-19T00:00:00.000Z",
+      "author": "jsaubry",
+      "authorUrl": "https://github.com/jsaubry",
+      "summary": "1. 概要 (1-2文で)  \n複合主キーを持つレコードに対する `has_many` / `has_one` の関連が、「未保存だがキーはすべて埋まっている」場合に常に空(`[]`/`nil`)になってしまう問題を修正したPRです。`foreign_key_present?` で複合主キーを正しく判定するようにし、単一主キーと同様に関連クエリが発行されるようになりました。"
+    },
     {
       "number": 57641,
       "title": "Enable per-pool query log tags prepend config {#pr-57641}",
@@ -406,51 +451,6 @@
       "author": "chaadow",
       "authorUrl": "https://github.com/chaadow",
       "summary": "1. 概要 (1-2文で)  \nAction Cable の Redis サブスクリプションアダプタにおいて、リスナースレッドが死んだまま二度と復帰せず、そのプロセスでのブロードキャストが黙って失われる問題を修正する PR です。リスナースレッドが死亡していた場合に再起動できるようにし、その振る舞いをテストで保証しています。"
-    },
-    {
-      "number": 57697,
-      "title": "Don't fire remove_channel for an unknown channel {#pr-57697}",
-      "url": "https://github.com/rails/rails/pull/57697",
-      "mergedAt": "2026-06-13T00:00:00.000Z",
-      "author": "55728",
-      "authorUrl": "https://github.com/55728",
-      "summary": "1. 概要 (1-2文で)  \nAction Cable の `SubscriberMap#remove_subscriber` が、存在しないチャンネルに対しても `remove_channel`（UNLISTEN / unsubscribe）を発火してしまうバグを、ハッシュのキー存在チェックで防ぐ修正です。これにより、まだ購読登録されていない・すでに削除済みのチャンネルに対して、不要な UNLISTEN / unsubscribe が飛ばなくなります。"
-    },
-    {
-      "number": 57677,
-      "title": "Fix `Array#to_query` to skip empty Array elements, mirroring the empty-Hash case {#pr-57677}",
-      "url": "https://github.com/rails/rails/pull/57677",
-      "mergedAt": "2026-06-13T00:00:00.000Z",
-      "author": "55728",
-      "authorUrl": "https://github.com/55728",
-      "summary": "1. 概要 (1-2文で)  \n`Array#to_query` が、ネストされた空配列の要素をクエリ文字列から除外するように修正されました。これにより、既に実装されていた「空ハッシュ要素は落とす」という挙動と整合がとれ、余計な「値なしパラメータ」が出力されなくなります。"
-    },
-    {
-      "number": 57655,
-      "title": "Support a single composite primary key id in `update`/`update!` {#pr-57655}",
-      "url": "https://github.com/rails/rails/pull/57655",
-      "mergedAt": "2026-06-13T00:00:00.000Z",
-      "author": "55728",
-      "authorUrl": "https://github.com/55728",
-      "summary": "1. 概要 (1-2文で)  \nRails の `ActiveRecord::Base.update` / `update!` が、複合主キー（composite primary key）モデルに対して「単一レコードの id」として配列を渡した場合に `RecordNotFound` を出してしまう問題を修正した PR です。複合主キーでも単一主キーと同様に `Model.update(record.id, attrs)` が正しく単一更新として動作するようになります。"
-    },
-    {
-      "number": 57690,
-      "title": "Keep the Redis listener alive when the last channel is unsubscribed {#pr-57690}",
-      "url": "https://github.com/rails/rails/pull/57690",
-      "mergedAt": "2026-06-13T00:00:00.000Z",
-      "author": "55728",
-      "authorUrl": "https://github.com/55728",
-      "summary": "1. 概要 (1-2文で)  \nRedis クライアントの実装変更により、最後のチャネルが `UNSUBSCRIBE` された瞬間に Action Cable の Redis リスナー用スレッドが終了してしまう不具合があり、それを修正する PRです。内部用の「番兵」チャネル（`_action_cable_internal`）への購読を復活させることで、通常の購読解除ではリスナーが死なず、明示的なシャットダウン時のみ終了するようにしました。"
-    },
-    {
-      "number": 57700,
-      "title": "Shut down the heartbeat timer on server restart {#pr-57700}",
-      "url": "https://github.com/rails/rails/pull/57700",
-      "mergedAt": "2026-06-13T00:00:00.000Z",
-      "author": "55728",
-      "authorUrl": "https://github.com/55728",
-      "summary": "1. 概要 (1-2文で)  \nAction Cable サーバ再起動時に、ハートビート用の `@heartbeat_timer` が停止されずに残り続けていた不具合を修正する PR です。  \n開発環境のコードリロードごとにスレッドプールとタイマーがリーク・再生成される問題を解消します。"
     }
   ]
 }
