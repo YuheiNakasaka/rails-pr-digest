@@ -1,7 +1,70 @@
 {
-  "lastUpdated": "2026-06-20T00:33:50.441Z",
+  "lastUpdated": "2026-06-21T00:36:17.202Z",
   "totalCount": 50,
   "items": [
+    {
+      "number": 57793,
+      "title": "Fix typos in Rails on Rack guide {#pr-57793}",
+      "url": "https://github.com/rails/rails/pull/57793",
+      "mergedAt": "2026-06-20T00:00:00.000Z",
+      "author": "55728",
+      "authorUrl": "https://github.com/55728",
+      "summary": "1. 概要 (1-2文で)  \nRailsガイド「Rails on Rack」の文書中にあるスペルミスを4箇所修正したドキュメント専用のPRです。アプリケーションコードや挙動には一切影響せず、ガイドの可読性・正確性のみを向上させています。\n\n2. 変更内容の詳細(あればサンプルコードも含めて)  \n対象ファイル: `guides/source/rails_on_rack.md`\n\n修正されたスペルミスは以下の4箇所です。\n\n- ミドルウェアのコメント中\n  - `\"Propgate\"` → `\"Propagate\"`\n  - `\"Propogate\"` → `\"Propagate\"`\n\n  想定される例（イメージ）:\n  ```ruby\n  # Before\n  # Propgate the request to the next middleware\n  # Propogate the response back to the client\n\n  # After\n  # Propagate the request to the next middleware\n  # Propagate the response back to the client\n  ```\n\n- ガイド本文中\n  - `\"reponse\"` → `\"response\"`\n  - `\"faciliate\"` → `\"facilitate\"` (`Rack::ETag` に関する説明部分)\n\n  ETag に関する箇所のニュアンスとしては、「レスポンスのキャッシングや conditional GET を facilitate（容易にする）」といった説明文の中の綴りを修正しているものと考えられます。\n\nいずれも意味を変える変更ではなく、英単語の正しい綴りに合わせるだけの修正です。\n\n3. 影響範囲・注意点  \n- 影響範囲  \n  - Rails本体のコード、Rackミドルウェアの実装、インターフェース等には一切変更なし。\n  - 影響するのは「Rails on Rack」ガイド（英語版）の表示のみです。\n- 注意点  \n  - ドキュメントの更新に伴い、ガイドを引用している外部資料・ブログなどで古いスペルがそのまま残る可能性がありますが、機能上の問題はありません。\n  - Railsの挙動やRackミドルウェアの書き方が変わったわけではないため、既存コードの修正は不要です。\n\n4. 参考情報 (あれば)  \n- 該当ガイド: Guides > Rails on Rack  \n  https://guides.rubyonrails.org/rails_on_rack.html  \n- `Rack::ETag` の公式ドキュメント（Rack側）:  \n  https://www.rubydoc.info/gems/rack/Rack/ETag"
+    },
+    {
+      "number": 57794,
+      "title": "Fix grammar in Model.inspect schema-not-loaded message {#pr-57794}",
+      "url": "https://github.com/rails/rails/pull/57794",
+      "mergedAt": "2026-06-20T00:00:00.000Z",
+      "author": "55728",
+      "authorUrl": "https://github.com/55728",
+      "summary": "1. 概要 (1-2文で)  \nActiveRecord の `Model.inspect` がスキーマ未ロード時に返すメッセージ中の英語の文法ミス（\"schema informations\"）を、正しい \"schema information\" に修正した PR です。  \n実装コードとそれに対応するテストのユーザ向け文字列のみが変更されています。"
+    },
+    {
+      "number": 57796,
+      "title": "Make config.rake_eager_load more explicit {#pr-57796}",
+      "url": "https://github.com/rails/rails/pull/57796",
+      "mergedAt": "2026-06-20T00:00:00.000Z",
+      "author": "fxn",
+      "authorUrl": "https://github.com/fxn",
+      "summary": "1. 概要 (1-2文で)  \n`config.eager_load` が Rake 実行時に「無視される」のではなく「書き換えられる」挙動と、そのトリガーである `config.rake_eager_load` の役割をドキュメントと生成テンプレート上で明示的にした PRです。Rails のオートロード／イager load の契約を文章レベルで分かりやすくし、開発者が本番環境やテスト環境での eager load の実際の挙動を誤解しにくくしています。"
+    },
+    {
+      "number": 57791,
+      "title": "Fix typos in comments {#pr-57791}",
+      "url": "https://github.com/rails/rails/pull/57791",
+      "mergedAt": "2026-06-20T00:00:00.000Z",
+      "author": "55728",
+      "authorUrl": "https://github.com/55728",
+      "summary": "1. 概要 (1-2文で)  \nRails のコメント中のタイプミス（スペルミス）を 2 箇所だけ修正する PR で、実行時の挙動や API には一切影響がありません。ドキュメント品質・可読性向上のみを目的とした変更です。"
+    },
+    {
+      "number": 57787,
+      "title": "Fix `Rails.app.dotenvs` to honor an explicit path argument {#pr-57787}",
+      "url": "https://github.com/rails/rails/pull/57787",
+      "mergedAt": "2026-06-20T00:00:00.000Z",
+      "author": "55728",
+      "authorUrl": "https://github.com/55728",
+      "summary": "1. 概要 (1-2文で)  \n`Rails.application#dotenvs` に `path` 引数を渡しても、最初の呼び出し時のパスしか反映されないバグを修正し、パスごとに別々の `.env` 設定を正しく扱えるようにした PR です。`dotenvs` のメモ化方法を「単一インスタンス」から「パスごとのインスタンス」に変更しています。"
+    },
+    {
+      "number": 57788,
+      "title": "Remove unused private `EnvConfiguration#lookup` {#pr-57788}",
+      "url": "https://github.com/rails/rails/pull/57788",
+      "mergedAt": "2026-06-20T00:00:00.000Z",
+      "author": "55728",
+      "authorUrl": "https://github.com/55728",
+      "summary": "1. 概要 (1-2文で)  \n`ActiveSupport::EnvConfiguration` に定義されていた、実際には一度も呼ばれていない private メソッド `#lookup` が削除されました。動作仕様の変更はなく、内部コードの整理・不要コード削除のみです。"
+    },
+    {
+      "number": 57786,
+      "title": "[ci skip]Fix typo in comment for ENV.fetch usage in application.rb {#pr-57786}",
+      "url": "https://github.com/rails/rails/pull/57786",
+      "mergedAt": "2026-06-20T00:00:00.000Z",
+      "author": "willnet",
+      "authorUrl": "https://github.com/willnet",
+      "summary": "1. 概要 (1-2文で)  \napplication.rb 内で `ENV.fetch` の使い方を説明しているコメントにあった誤字を修正するだけの PR です。コードの挙動や外部 API には一切変更がなく、ドキュメント品質の向上のみを目的としています。"
+    },
     {
       "number": 57579,
       "title": "Add RFC 9110 compliant Accept header content negotiation opt-in {#pr-57579}",
@@ -388,69 +451,6 @@
       "author": "55728",
       "authorUrl": "https://github.com/55728",
       "summary": "1. 概要 (1-2文で)  \n`content_columns` が複合主キー(composite primary key, CPK)のカラムを正しく除外できていなかった問題を修正し、CPK の全ての主キー構成カラムを確実に除外するようにしました。単一主キーの場合の挙動・ドキュメントと一貫した動作になります。"
-    },
-    {
-      "number": 57714,
-      "title": "Treat `remove_column` with options but no type as irreversible {#pr-57714}",
-      "url": "https://github.com/rails/rails/pull/57714",
-      "mergedAt": "2026-06-14T00:00:00.000Z",
-      "author": "55728",
-      "authorUrl": "https://github.com/55728",
-      "summary": "1. 概要 (1-2文で)  \n`remove_column` に「型なし＋オプションあり」で書かれたマイグレーションが、これまで「可逆」と誤判定されて壊れた逆操作 (`add_column`) を生成していた問題を修正し、正しく `IrreversibleMigration` を投げるようにした PR です。これによりロールバック時の謎の例外ではなく、明示的な「型がないので不可逆」というエラーメッセージが得られるようになります。"
-    },
-    {
-      "number": 57712,
-      "title": "Fix `counter_cache_column` crash when no column is given on the has_many side {#pr-57712}",
-      "url": "https://github.com/rails/rails/pull/57712",
-      "mergedAt": "2026-06-14T00:00:00.000Z",
-      "author": "55728",
-      "authorUrl": "https://github.com/55728",
-      "summary": "1. 概要 (1-2文で)  \nRails 7.2系で、`has_many` / `has_one` 側に `counter_cache: true` や `counter_cache: { active: false }` を指定した際に `NoMethodError: undefined method '-@' for nil` で落ちるリグレッションが修正されました。カウンターキャッシュ列が省略された場合でも、従来どおり自動で `xxx_count` というカラム名が使われるようになります。"
-    },
-    {
-      "number": 57708,
-      "title": "Clear the connections registry on server restart {#pr-57708}",
-      "url": "https://github.com/rails/rails/pull/57708",
-      "mergedAt": "2026-06-14T00:00:00.000Z",
-      "author": "55728",
-      "authorUrl": "https://github.com/55728",
-      "summary": "1. 概要 (1-2文で)  \nこのPRは、Action Cable のサーバ再起動 (`Server::Base#restart`) 時に接続レジストリ（`connections_map`）がクリアされず、クローズ済み接続オブジェクトが蓄積してしまう不具合を修正します。再起動処理の中で `connections_map.clear` を実行することで、開発モードなどでの繰り返しリロード時に「死んだ接続」が溜まらないようにしています。"
-    },
-    {
-      "number": 57717,
-      "title": "Coerce `seeds` and `use_metadata_table` booleans in `UrlConfig` {#pr-57717}",
-      "url": "https://github.com/rails/rails/pull/57717",
-      "mergedAt": "2026-06-14T00:00:00.000Z",
-      "author": "55728",
-      "authorUrl": "https://github.com/55728",
-      "summary": "1. 概要 (1-2文で)  \n`DATABASE_URL` のクエリパラメータで指定された `seeds` と `use_metadata_table` が、文字列 `\"false\"` のまま扱われて常に truthy になっていた問題を修正し、既存の `replica` / `database_tasks` と同様に真偽値へ強制変換するようにした PR です。これにより、`?seeds=false` や `?use_metadata_table=false` が正しく false として扱われます。"
-    },
-    {
-      "number": 57719,
-      "title": "Raise RecordNotFound for `find(nil)` on a composite primary key model {#pr-57719}",
-      "url": "https://github.com/rails/rails/pull/57719",
-      "mergedAt": "2026-06-14T00:00:00.000Z",
-      "author": "55728",
-      "authorUrl": "https://github.com/55728",
-      "summary": "1. 概要 (1-2文で)  \n複合主キーを持つモデルで `Model.find(nil)` や引数なしの `Model.find` を呼び出した際に、想定外の `NoMethodError` が発生していた問題を修正し、単一主キーと同様に `ActiveRecord::RecordNotFound` を投げるようにしたPRです。複合主キー用の内部判定ロジックに nil ガードを追加し、それに対応するテストを追加しています。"
-    },
-    {
-      "number": 57722,
-      "title": "Don't log a dangling \"with arguments:\" for jobs with no arguments {#pr-57722}",
-      "url": "https://github.com/rails/rails/pull/57722",
-      "mergedAt": "2026-06-14T00:00:00.000Z",
-      "author": "55728",
-      "authorUrl": "https://github.com/55728",
-      "summary": "1. 概要 (1-2文で)  \nActive Job のログ出力で、引数なしジョブにも `with arguments:` という文言だけがぶら下がって出力されてしまう問題を修正する PR です。構造化イベント対応時に削除されていた「引数が空かどうかのチェック」を復元し、従来通りのログフォーマットに戻しています。"
-    },
-    {
-      "number": 57709,
-      "title": "Restart the Redis listener thread when it dies {#pr-57709}",
-      "url": "https://github.com/rails/rails/pull/57709",
-      "mergedAt": "2026-06-14T00:00:00.000Z",
-      "author": "chaadow",
-      "authorUrl": "https://github.com/chaadow",
-      "summary": "1. 概要 (1-2文で)  \nAction Cable の Redis サブスクリプションアダプタにおいて、リスナースレッドが死んだまま二度と復帰せず、そのプロセスでのブロードキャストが黙って失われる問題を修正する PR です。リスナースレッドが死亡していた場合に再起動できるようにし、その振る舞いをテストで保証しています。"
     }
   ]
 }
