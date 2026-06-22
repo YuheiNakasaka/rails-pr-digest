@@ -1,7 +1,88 @@
 {
-  "lastUpdated": "2026-06-21T00:36:17.202Z",
+  "lastUpdated": "2026-06-22T00:37:19.493Z",
   "totalCount": 50,
   "items": [
+    {
+      "number": 57806,
+      "title": "Fix broken anchor links in guides {#pr-57806}",
+      "url": "https://github.com/rails/rails/pull/57806",
+      "mergedAt": "2026-06-21T00:00:00.000Z",
+      "author": "55728",
+      "authorUrl": "https://github.com/55728",
+      "summary": "1. 概要 (1-2文で)  \nRails Guides 内の壊れたアンカーリンク（`file.html#anchor` 形式のセクションリンク）を現状のセクション ID に合わせて修正し、16リンク分のスクロール不能問題を解消した PR です。残った一部のリンクは、該当セクション自体が削除・移動されており、別 PR での著者判断を要するものとして保留されています。"
+    },
+    {
+      "number": 57711,
+      "title": "Fix `create_or_find_by` scope pollution on the non-transactional retry {#pr-57711}",
+      "url": "https://github.com/rails/rails/pull/57711",
+      "mergedAt": "2026-06-21T00:00:00.000Z",
+      "author": "55728",
+      "authorUrl": "https://github.com/55728",
+      "summary": "1. 概要 (1-2文で)  \n`create_or_find_by` / `create_or_find_by!` が一意制約違反 (`RecordNotUnique`) でリトライする際、トランザクション外でのみ「スコープ汚染」により既存レコードを正しく取得できないバグが残っていたのを修正したPRです。あわせて、そのトランザクション外の挙動をカバーする新しいテストが追加されています。"
+    },
+    {
+      "number": 57782,
+      "title": "Avoid mutating params hash passed to ActionDispatch::Http::URL.url_for {#pr-57782}",
+      "url": "https://github.com/rails/rails/pull/57782",
+      "mergedAt": "2026-06-21T00:00:00.000Z",
+      "author": "55728",
+      "authorUrl": "https://github.com/55728",
+      "summary": "1. 概要 (1-2文で)  \n`ActionDispatch::Http::URL.url_for` が引数として受け取った `params:` ハッシュを破壊的に変更していた問題を修正し、呼び出し元のハッシュを変更しないようにした PR です。これにより、`request.query_parameters` などのメモ化ハッシュが意図せず書き換えられる不具合や、凍結されたハッシュでの `FrozenError` が解消されます。"
+    },
+    {
+      "number": 57720,
+      "title": "Don't share the actions Hash across `ActionableError` subclasses {#pr-57720}",
+      "url": "https://github.com/rails/rails/pull/57720",
+      "mergedAt": "2026-06-21T00:00:00.000Z",
+      "author": "55728",
+      "authorUrl": "https://github.com/55728",
+      "summary": "1. 概要 (1-2文で)  \n`ActiveSupport::ActionableError` でアクションを管理するクラス変数 `_actions` がサブクラス間で共有されてしまい、定義していないアクションが親・兄弟クラスに「漏れる」バグを、コピーオンライトによる再代入で修正した PR です。これにより、各 `ActionableError` サブクラスごとにアクション定義が正しく分離されます。"
+    },
+    {
+      "number": 57792,
+      "title": "Avoid mutating the override options passed to `ActiveModel::Errors#import` {#pr-57792}",
+      "url": "https://github.com/rails/rails/pull/57792",
+      "mergedAt": "2026-06-21T00:00:00.000Z",
+      "author": "55728",
+      "authorUrl": "https://github.com/55728",
+      "summary": "1. 概要 (1-2文で)  \n`ActiveModel::Errors#import` が引数に渡された `override_options` ハッシュを書き換えてしまう問題と、凍結されたハッシュを渡すと `FrozenError` が発生する問題を修正する PRです。`override_options` を `dup` してから正規化することで、呼び出し元のハッシュを一切変更しないようにしています。"
+    },
+    {
+      "number": 57802,
+      "title": "Fix typos in generated app config templates {#pr-57802}",
+      "url": "https://github.com/rails/rails/pull/57802",
+      "mergedAt": "2026-06-21T00:00:00.000Z",
+      "author": "55728",
+      "authorUrl": "https://github.com/55728",
+      "summary": "1. 概要 (1-2文で)  \nRails が新規アプリ生成時に使う設定ファイルテンプレート内のコメントにあった英単語のスペルミスを修正する PR です。実行ロジックや挙動の変更はなく、生成される設定ファイルのコメント表記のみがきれいになります。"
+    },
+    {
+      "number": 57799,
+      "title": "Fix grammar in guides {#pr-57799}",
+      "url": "https://github.com/rails/rails/pull/57799",
+      "mergedAt": "2026-06-21T00:00:00.000Z",
+      "author": "55728",
+      "authorUrl": "https://github.com/55728",
+      "summary": "1. 概要 (1-2文で)  \nこのPRは、Rails公式ガイド内の明らかな英語の文法ミスを修正したものです。コードや挙動の変更は一切なく、ガイド文書の可読性・正確性を高めるドキュメント専用の修正です。"
+    },
+    {
+      "number": 57798,
+      "title": "Fix indefinite article in error messages {#pr-57798}",
+      "url": "https://github.com/rails/rails/pull/57798",
+      "mergedAt": "2026-06-21T00:00:00.000Z",
+      "author": "55728",
+      "authorUrl": "https://github.com/55728",
+      "summary": "1. 概要 (1-2文で)  \n英語メッセージ内の不定冠詞 (\"a\"/\"an\") の誤りを修正した、極めて小さな文言調整の PR です。挙動や API 仕様には変更はなく、ユーザー向けエラーメッセージ／ログの英語表現のみが改善されています。"
+    },
+    {
+      "number": 57797,
+      "title": "Fix :singleton-method: directive typo for protected_environments [ci skip] {#pr-57797}",
+      "url": "https://github.com/rails/rails/pull/57797",
+      "mergedAt": "2026-06-21T00:00:00.000Z",
+      "author": "fuentesjr",
+      "authorUrl": "https://github.com/fuentesjr",
+      "summary": "1. 概要 (1-2文で)  \nActiveRecordクラスメソッド `protected_environments` のRDoc用ディレクティブのスペルミスを修正し、APIドキュメントに正しく表示されるようにしたPRです。実行時の挙動や公開APIのインターフェイス自体には変更はなく、ドキュメント生成のみが対象です。"
+    },
     {
       "number": 57793,
       "title": "Fix typos in Rails on Rack guide {#pr-57793}",
@@ -370,87 +451,6 @@
       "author": "Ridhwana",
       "authorUrl": "https://github.com/Ridhwana",
       "summary": "1. 概要 (1-2文で)  \nRailsガイドの「Rails Internationalization (I18n)」ドキュメントを大幅に書き換え、構成を初心者フレンドリーに再編しつつ、API・ベストプラクティス・例外処理などを具体的なコード例付きで整理したPRです。既存のガイドラインとの整合性を取りつつ、古い情報や不要なセクションも整理しています。"
-    },
-    {
-      "number": 57726,
-      "title": "Fix `max_resumptions` attribute name in `ResumeLimitError` docs {#pr-57726}",
-      "url": "https://github.com/rails/rails/pull/57726",
-      "mergedAt": "2026-06-14T00:00:00.000Z",
-      "author": "55728",
-      "authorUrl": "https://github.com/55728",
-      "summary": "1. 概要 (1-2文で)  \n`ActiveJob::Continuation::ResumeLimitError` の RDoc に誤って記載されていたクラス属性名 `max_resumes` を、正しい `max_resumptions` に修正したドキュメント専用のPRです。コード挙動自体は一切変わらず、ドキュメントの記述だけが1行修正されています。"
-    },
-    {
-      "number": 57730,
-      "title": "Don't mask errors raised inside a cursor's `succ` in `Step#advance!` {#pr-57730}",
-      "url": "https://github.com/rails/rails/pull/57730",
-      "mergedAt": "2026-06-14T00:00:00.000Z",
-      "author": "55728",
-      "authorUrl": "https://github.com/55728",
-      "summary": "1. 概要 (1-2文で)  \n`ActiveJob::Continuation::Step#advance!` がカーソルの `succ` 呼び出し時に発生する本来の `NoMethodError` を飲み込んで別エラーにすり替えていた問題を修正し、`succ` を実装していないカーソルだけを明示的に弾くように変更した PR です。これにより、カスタムカーソルの `succ` 内部のバグが正しく例外として表に出るようになります。"
-    },
-    {
-      "number": 57729,
-      "title": "Pass the exception positionally when resuming a continuation after an error {#pr-57729}",
-      "url": "https://github.com/rails/rails/pull/57729",
-      "mergedAt": "2026-06-14T00:00:00.000Z",
-      "author": "55728",
-      "authorUrl": "https://github.com/55728",
-      "summary": "1. 概要 (1-2文で)  \nActive Job の「継続可能（continuable）ジョブ」をエラー後に再開する際、例外オブジェクトの渡し方に不整合があり、`exception_executions` のキーが意図しない文字列になる不具合を修正した PR です。例外は常に位置引数で `resume_job` に渡すように統一し、それを検証するテストが追加されています。"
-    },
-    {
-      "number": 57728,
-      "title": "Clear `enqueue_error` when re-enqueuing a job {#pr-57728}",
-      "url": "https://github.com/rails/rails/pull/57728",
-      "mergedAt": "2026-06-14T00:00:00.000Z",
-      "author": "55728",
-      "authorUrl": "https://github.com/55728",
-      "summary": "1. 概要 (1-2文で)  \nActive Job の同一ジョブインスタンスを再キューイングした際、前回の失敗時の `enqueue_error` が残り続けてしまう問題を修正し、再キューイング時に `enqueue_error` をクリアするようにした PR です。これにより、ジョブが実際には正常にキューイングされたにもかかわらず、監視やログに例外が発生したかのように記録される不整合が解消されます。"
-    },
-    {
-      "number": 57725,
-      "title": "Include adapter in Active Job `perform_start` event payload {#pr-57725}",
-      "url": "https://github.com/rails/rails/pull/57725",
-      "mergedAt": "2026-06-14T00:00:00.000Z",
-      "author": "55728",
-      "authorUrl": "https://github.com/55728",
-      "summary": "1. 概要 (1-2文で)  \nActive Job の `perform_start` 構造化イベントのペイロードに `adapter` 情報が含まれていなかった不整合な挙動を修正し、他のイベント（`enqueue`, `enqueue_at`, `enqueue_all`, `perform`）と同様にアダプタ名を含めるようにした PR です。これによりログや構造化イベントの利用時に、ジョブ実行開始時点でも正しいアダプタ名が参照できるようになります。"
-    },
-    {
-      "number": 57688,
-      "title": "Run Action Cable JS tests with Web Test Runner {#pr-57688}",
-      "url": "https://github.com/rails/rails/pull/57688",
-      "mergedAt": "2026-06-14T00:00:00.000Z",
-      "author": "matthewd",
-      "authorUrl": "https://github.com/matthewd",
-      "summary": "1. 概要 (1-2文で)  \nAction Cable の JavaScript テスト実行環境を、非推奨となった Karma から Web Test Runner + Sauce Labs を使う構成に移行した PRです。既存の QUnit テストスイートを壊さずに、新しいテストランナー経由でブラウザテストを実行できるようにしています。"
-    },
-    {
-      "number": 57687,
-      "title": "Assortment of CI/test fixes {#pr-57687}",
-      "url": "https://github.com/rails/rails/pull/57687",
-      "mergedAt": "2026-06-14T00:00:00.000Z",
-      "author": "matthewd",
-      "authorUrl": "https://github.com/matthewd",
-      "summary": "1. 概要 (1-2文で)  \nCI とテスト周りの安定性を向上させるための修正がまとめて行われ、特に Active Record のコネクションプール切断時の例外ハンドリングが「例外を報告して処理は継続する」挙動に変更されました。その他は主にテストコード側の調整・リファクタリングで、本体 API の互換性を壊す変更は原則ありません。"
-    },
-    {
-      "number": 57723,
-      "title": "Fix `retry_on` `wait:` proc with an optional argument {#pr-57723}",
-      "url": "https://github.com/rails/rails/pull/57723",
-      "mergedAt": "2026-06-14T00:00:00.000Z",
-      "author": "55728",
-      "authorUrl": "https://github.com/55728",
-      "summary": "1. 概要 (1-2文で)  \n`ActiveJob.retry_on` の `wait:` オプションに渡す `Proc` が「省略可能な引数1つ」を取る場合（`->(executions = 0) { ... }` など）に `ArgumentError` が発生していた不具合を修正する PR です。`Proc#arity` の扱いを見直し、1引数・可変長引数・2引数の各パターンで後方互換性を保ちながら適切な呼び出しが行われるようになりました。"
-    },
-    {
-      "number": 57715,
-      "title": "Exclude all composite primary key components from `content_columns` {#pr-57715}",
-      "url": "https://github.com/rails/rails/pull/57715",
-      "mergedAt": "2026-06-14T00:00:00.000Z",
-      "author": "55728",
-      "authorUrl": "https://github.com/55728",
-      "summary": "1. 概要 (1-2文で)  \n`content_columns` が複合主キー(composite primary key, CPK)のカラムを正しく除外できていなかった問題を修正し、CPK の全ての主キー構成カラムを確実に除外するようにしました。単一主キーの場合の挙動・ドキュメントと一貫した動作になります。"
     }
   ]
 }
