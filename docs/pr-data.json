@@ -1,7 +1,106 @@
 {
-  "lastUpdated": "2026-06-22T00:37:19.493Z",
+  "lastUpdated": "2026-06-23T00:34:55.708Z",
   "totalCount": 50,
   "items": [
+    {
+      "number": 57754,
+      "title": "Make AbstractController::Caching.view_cache_dependency ractor safe {#pr-57754}",
+      "url": "https://github.com/rails/rails/pull/57754",
+      "mergedAt": "2026-06-22T00:00:00.000Z",
+      "author": "andrewn617",
+      "authorUrl": "https://github.com/andrewn617",
+      "summary": "1. 概要 (1-2文で)  \n`AbstractController::Caching.view_cache_dependency` が Ractor セーフになるよう実装が変更され、ビューキャッシュの依存関係を格納する配列およびその中の Proc を Ractor 共有可能な形で扱うようにした PRです。Ractors を利用するアプリでもビューキャッシュまわりでスレッド／Ractor 安全性を確保しやすくなります。"
+    },
+    {
+      "number": 57753,
+      "title": "Make ExecutionContext.after_change ractor safe {#pr-57753}",
+      "url": "https://github.com/rails/rails/pull/57753",
+      "mergedAt": "2026-06-22T00:00:00.000Z",
+      "author": "andrewn617",
+      "authorUrl": "https://github.com/andrewn617",
+      "summary": "1. 概要 (1-2文で)  \n`ActiveSupport::ExecutionContext.after_change_callbacks` を Ractor セーフにするため、コールバック配列の扱いを不変（freeze）かつ共有可能な形に変更した PRです。これに伴い、`ExecutionContext` を利用している `helpers.rb` や `query_logs.rb` 周りも、Ractor セーフな前提で動作するよう微調整されています。"
+    },
+    {
+      "number": 57815,
+      "title": "Revert pull request #57814 {#pr-57815}",
+      "url": "https://github.com/rails/rails/pull/57815",
+      "mergedAt": "2026-06-22T00:00:00.000Z",
+      "author": "etiennebarrie",
+      "authorUrl": "https://github.com/etiennebarrie",
+      "summary": "1. 概要 (1-2文で)  \nこのPR (#57815) は、直前のPR (#57814) で導入された ActiveSupport の JSON エンコード周りの変更を「丸ごとリバート」したものです。理由は、Ruby 3.3 の Ractor を起動した際にクラス属性周りで `[BUG] should have cvar cache entry` という VM クラッシュが CI で再発するためです。"
+    },
+    {
+      "number": 57814,
+      "title": "Make ActiveSupport::JSON encoders Ractor-shareable {#pr-57814}",
+      "url": "https://github.com/rails/rails/pull/57814",
+      "mergedAt": "2026-06-22T00:00:00.000Z",
+      "author": "etiennebarrie",
+      "authorUrl": "https://github.com/etiennebarrie",
+      "summary": "1. 概要 (1-2文で)  \nActiveSupport::JSON のエンコーダを「Ractor-shareable」（Ractor 間で共有可能）にするため、エンコーダを早い段階で `freeze` するように変更した PRです。これにより `Ractor.make_shareable` を明示的に呼ばずに、Ractor 内からそのまま JSON エンコード機能を利用できるようになっています。"
+    },
+    {
+      "number": 57789,
+      "title": "Strip inline comments from unquoted `.env` values {#pr-57789}",
+      "url": "https://github.com/rails/rails/pull/57789",
+      "mergedAt": "2026-06-22T00:00:00.000Z",
+      "author": "55728",
+      "authorUrl": "https://github.com/55728",
+      "summary": "1. 概要 (1-2文で)  \nRails の `DotEnvConfiguration` が `.env` ファイルを読む際に、**未クォート値の末尾コメント（`#` 以降）を自動的に除去**するようになりました。これにより、`.env` では一般的な「値の右にコメントを書く」記法で、値が誤ってコメント込みで解釈される不具合が解消されます。"
+    },
+    {
+      "number": 57800,
+      "title": "Reword allow/let phrasings in guides {#pr-57800}",
+      "url": "https://github.com/rails/rails/pull/57800",
+      "mergedAt": "2026-06-22T00:00:00.000Z",
+      "author": "55728",
+      "authorUrl": "https://github.com/55728",
+      "summary": "1. 概要 (1-2文で)  \nRailsガイド内の英語表現を、文法的により正確で自然な形にリライトしたPRです。コードやAPIの挙動には一切影響せず、ドキュメント中の「allow」「let」の使い方を修正しています。"
+    },
+    {
+      "number": 57805,
+      "title": "Fix `Http::Headers#merge` mutating the original request {#pr-57805}",
+      "url": "https://github.com/rails/rails/pull/57805",
+      "mergedAt": "2026-06-22T00:00:00.000Z",
+      "author": "55728",
+      "authorUrl": "https://github.com/55728",
+      "summary": "1. 概要 (1-2文で)  \n`ActionDispatch::Http::Headers#merge` が「新しい Headers を返して元のリクエストを変更しない」という仕様に反して、元の `request.env` を破壊的に変更していたバグを修正するPRです。`merge` が正しく新しい `Http::Headers` インスタンスを返し、呼び出し元のリクエストに副作用を与えないようになりました。"
+    },
+    {
+      "number": 57808,
+      "title": "Validate offset value at call time like limit {#pr-57808}",
+      "url": "https://github.com/rails/rails/pull/57808",
+      "mergedAt": "2026-06-22T00:00:00.000Z",
+      "author": "55728",
+      "authorUrl": "https://github.com/55728",
+      "summary": "1. 概要 (1-2文で)  \n`offset` に渡す引数が整数でない場合、これまではサイレントに `to_i` で変換されていましたが、このPRにより `limit` と同様に `Integer(value)` でバリデーションし、不正な値は即座に `ArgumentError` を投げるようになりました。これにより、SQL生成時と in-memory finder 経路の挙動が整合的になり、バグを早期に検出できます。"
+    },
+    {
+      "number": 57811,
+      "title": "Update actions/checkout to v7 {#pr-57811}",
+      "url": "https://github.com/rails/rails/pull/57811",
+      "mergedAt": "2026-06-22T00:00:00.000Z",
+      "author": "Uaitt",
+      "authorUrl": "https://github.com/Uaitt",
+      "summary": "1. 概要 (1–2文で)  \nGitHub Actions の `actions/checkout` を v7 に更新する PRで、Rails 本体の CI ワークフローと、`rails new` / plugin generator が出力する GitHub Actions テンプレートの両方が対象です。アプリやライブラリの挙動には影響せず、CI環境と生成される GitHub Actions 設定の最新版追従が目的です。"
+    },
+    {
+      "number": 57810,
+      "title": "Fix use of `class_attribute` for `primary_key_definition` {#pr-57810}",
+      "url": "https://github.com/rails/rails/pull/57810",
+      "mergedAt": "2026-06-22T00:00:00.000Z",
+      "author": "byroot",
+      "authorUrl": "https://github.com/byroot",
+      "summary": "1. 概要 (1-2文で)  \n`primary_key_definition` の `class_attribute` の定義タイミングを修正し、継承階層で同じアクセサが何度も再定義されてしまう問題を解消しました。`inherited` フックではなく、Concern が include されたタイミングで定義するように変更されています。"
+    },
+    {
+      "number": 57795,
+      "title": "Support polymorphic associations with custom primary keys through `:inverse_of` {#pr-57795}",
+      "url": "https://github.com/rails/rails/pull/57795",
+      "mergedAt": "2026-06-22T00:00:00.000Z",
+      "author": "kamipo",
+      "authorUrl": "https://github.com/kamipo",
+      "summary": "1. 概要 (1–2文で)  \nこのPRは、「ポリモーフィック関連 + `:inverse_of`」の組み合わせで、逆側の関連に定義されたカスタム `:primary_key` が正しく使われるようにする変更です。これにより、ポリモーフィック関連先ごとに異なる主キー(例: `uuid`, `slug`, `id`)を自然に扱えるようになります。"
+    },
     {
       "number": 57806,
       "title": "Fix broken anchor links in guides {#pr-57806}",
@@ -352,105 +451,6 @@
       "author": "andrewn617",
       "authorUrl": "https://github.com/andrewn617",
       "summary": "1. 概要 (1-2文で)  \nRails の `ActiveSupport::Messages::Metadata` における envelope / timestamp のシリアライザ配列を、デフォルトで凍結して Ractor 共有可能にする変更です。これにより、Rails のグローバル状態を Ractor セーフに近づけつつ、既存のロードフックによる配列の拡張も維持しています。"
-    },
-    {
-      "number": 57750,
-      "title": "Avoid racing the maintenance thread's checkout {#pr-57750}",
-      "url": "https://github.com/rails/rails/pull/57750",
-      "mergedAt": "2026-06-16T00:00:00.000Z",
-      "author": "matthewd",
-      "authorUrl": "https://github.com/matthewd",
-      "summary": "1. 概要 (1–2文で)  \nこのPRは、Active Record のテスト (`activerecord/test/cases/test_case_test.rb`) におけるメンテナンス用スレッド（maintenance thread）の処理とテスト本体の処理が「競合条件（race condition）」を起こし、テストがまれに落ちる（flaky）問題を解消するための修正です。前のPR #57744 の修正が別種のフレークを生んでしまったため、そのフォローアップとしてテストの同期方法を調整しています。"
-    },
-    {
-      "number": 57743,
-      "title": "Fix `ActiveSupport::InheritableOptions#to_h` for nested inheritable options {#pr-57743}",
-      "url": "https://github.com/rails/rails/pull/57743",
-      "mergedAt": "2026-06-16T00:00:00.000Z",
-      "author": "andrewn617",
-      "authorUrl": "https://github.com/andrewn617",
-      "summary": "1. 概要 (1-2文で)  \n`ActiveSupport::InheritableOptions#to_h` が、親に `InheritableOptions` を持つ（ネストした）ケースで正しく Hash を返さず、オブジェクトをそのまま返してしまう不具合を修正した PRです。親側を `to_h` してからマージするように変更し、ネストされた継承オプションでも常に期待通りの Hash が得られるようになりました。"
-    },
-    {
-      "number": 57744,
-      "title": "Wait for any asynchronous connection maintenance work before leak check {#pr-57744}",
-      "url": "https://github.com/rails/rails/pull/57744",
-      "mergedAt": "2026-06-16T00:00:00.000Z",
-      "author": "matthewd",
-      "authorUrl": "https://github.com/matthewd",
-      "summary": "1. 概要 (1-2文で)  \nこのPRは、Active Record のテストで「コネクションリークチェック」を行う前に、非同期で実行されるコネクションメンテナンス処理がすべて終わるまで待つようにし、テストの不安定さや誤検知を防ぐ変更です。非同期 executor が有効な環境でも、接続リーパー周りのテストが安定して実行できるようになります。"
-    },
-    {
-      "number": 57738,
-      "title": "Return an empty string from `word_wrap` when the text is nil {#pr-57738}",
-      "url": "https://github.com/rails/rails/pull/57738",
-      "mergedAt": "2026-06-15T00:00:00.000Z",
-      "author": "55728",
-      "authorUrl": "https://github.com/55728",
-      "summary": "1. 概要 (1-2文で)  \n`word_wrap` ヘルパーに `nil` を渡したときに `NoMethodError` が発生していた問題を修正し、`nil` の場合でも空文字列 (`\"\"`) を返すようにしたPRです。これにより他のテキスト系ヘルパーと挙動が揃い、ビューからそのまま呼び出しても安全になりました。"
-    },
-    {
-      "number": 57737,
-      "title": "Stop documenting the removed `args:` Hash form of `assert_enqueued_email_with` {#pr-57737}",
-      "url": "https://github.com/rails/rails/pull/57737",
-      "mergedAt": "2026-06-15T00:00:00.000Z",
-      "author": "55728",
-      "authorUrl": "https://github.com/55728",
-      "summary": "1. 概要 (1-2文で)  \n`assert_enqueued_email_with` のドキュメントが、既に削除済みの `args: { ... }` 形式でのパラメータ付きメールの検証方法を案内していたため、実装に即した `params:` 形式の説明に修正した PR です。コード変更はなく、RDoc の不整合解消のみです。"
-    },
-    {
-      "number": 57739,
-      "title": "Apply the deprecated `scope` hash `:except` option to except, not only {#pr-57739}",
-      "url": "https://github.com/rails/rails/pull/57739",
-      "mergedAt": "2026-06-15T00:00:00.000Z",
-      "author": "55728",
-      "authorUrl": "https://github.com/55728",
-      "summary": "1. 概要 (1-2文で)  \nRails のルーティングで `scope` に「非推奨のハッシュ形式」を渡したとき、`:except` オプションが誤って `:only` として扱われ、指定と逆のルートが生成されていたバグを修正する PR です。あわせて、この退行を検出するテストが追加されています。"
-    },
-    {
-      "number": 57740,
-      "title": "Honor the deprecated `namespace` hash path options {#pr-57740}",
-      "url": "https://github.com/rails/rails/pull/57740",
-      "mergedAt": "2026-06-15T00:00:00.000Z",
-      "author": "55728",
-      "authorUrl": "https://github.com/55728",
-      "summary": "1. 概要 (1-2文で)  \nRails のルーティング DSL において、`namespace` が受け取る **非推奨のハッシュ形式オプション**（`{ path: ... }` など）が正しく扱われず、パスの二重付与や `shallow_path` / `shallow_prefix` 無視といったバグが出ていたのを修正する PR です。キーワード引数形式との挙動の不一致を解消し、非推奨形式でも期待どおりルーティングが生成されるようにしています。"
-    },
-    {
-      "number": 57721,
-      "title": "Return an Enumerator from `Parameters#select` / `#reject` when no block is given {#pr-57721}",
-      "url": "https://github.com/rails/rails/pull/57721",
-      "mergedAt": "2026-06-15T00:00:00.000Z",
-      "author": "55728",
-      "authorUrl": "https://github.com/55728",
-      "summary": "1. 概要 (1-2文で)  \n`ActionController::Parameters#select` / `#reject` をブロックなしで呼び出したとき、これまで例外が発生していた挙動を修正し、`Hash` と同様に `Enumerator` を返すようにした PR です。Rails の Strong Parameters が Ruby 標準の `Hash` のインターフェースとより一貫するようになります。"
-    },
-    {
-      "number": 57735,
-      "title": "[RF Docs] Rails Internationalization (#57381) {#pr-57735}",
-      "url": "https://github.com/rails/rails/pull/57735",
-      "mergedAt": "2026-06-15T00:00:00.000Z",
-      "author": "p8",
-      "authorUrl": "https://github.com/p8",
-      "summary": "1. 概要 (1-2文で)  \nRails ガイドの「国際化 (I18n)」ドキュメントを大幅にリライトし、初心者にも読み進めやすい構成と、より具体的なコード例・出力例を備えた内容に刷新した PR です。あわせて、古い情報の削除や他ガイドとの表記・スタイルの整合も図られています。"
-    },
-    {
-      "number": 57734,
-      "title": "[ci skip] Remove orphaned backtick from routing docs {#pr-57734}",
-      "url": "https://github.com/rails/rails/pull/57734",
-      "mergedAt": "2026-06-15T00:00:00.000Z",
-      "author": "tylerlwsmith",
-      "authorUrl": "https://github.com/tylerlwsmith",
-      "summary": "1. 概要 (1-2文で)  \nRails のルーティングガイド（routing.md）の「Path and URL Helpers」セクションに紛れ込んでいた不要なバッククォート（`）1文字を削除した、ドキュメントのみの修正です。機能や挙動の変更は一切なく、表記・レイアウトの体裁を整えるためのものです。\n\n2. 変更内容の詳細 (あればサンプルコードも含めて)  \n- 対象ファイル: `guides/source/routing.md`  \n- 変更内容:  \n  - 該当セクション内の文章中に、Markdown のインラインコードとして閉じていない「余計なバッククォート」が 1 文字存在していたのを削除しています。\n  - 実際の差分は「1 行においてバッククォートを 1 文字削除」という最小限の変更で、文章やコード例の意味自体は変わっていません。\n\nイメージとしては、例えば以下のような状態になっていたものを:\n\n```md\nYou can use `user_path(@user)`` to get the path...\n```\n\nこれを:\n\n```md\nYou can use `user_path(@user)` to get the path...\n```\n\nのように修正した、というタイプの変更です（実際の文面はこれと多少異なる可能性がありますが、性質としては同じです）。\n\n3. 影響範囲・注意点  \n- 影響範囲:\n  - Rails 本体のコード・API には一切影響ありません。\n  - 影響するのは Rails Guides の表示のみで、Markdown → HTML 変換後の見た目（インラインコードの崩れ、余計な記号の表示）が解消されます。\n- 注意点:\n  - ドキュメント修正のみのため、アプリケーション側で対応すべきことはありません。\n  - CI を回さないための `[ci skip]` がタイトルに付いていますが、これはコード変更がないドキュメント PR でよく行われる運用上の指定であり、特別な意味はありません。\n\n4. 参考情報 (あれば)  \n- 該当セクション: Rails Guides > Routing > [Path and URL Helpers](https://guides.rubyonrails.org/routing.html#path-and-url-helpers)  \n- 目的: Markdown 記法上のタイポ修正によるドキュメント品質の向上であり、API 仕様やルーティングの挙動に関する変更・補足は行っていません。"
-    },
-    {
-      "number": 57381,
-      "title": "[RF Docs] Rails Internationalization {#pr-57381}",
-      "url": "https://github.com/rails/rails/pull/57381",
-      "mergedAt": "2026-06-15T00:00:00.000Z",
-      "author": "Ridhwana",
-      "authorUrl": "https://github.com/Ridhwana",
-      "summary": "1. 概要 (1-2文で)  \nRailsガイドの「Rails Internationalization (I18n)」ドキュメントを大幅に書き換え、構成を初心者フレンドリーに再編しつつ、API・ベストプラクティス・例外処理などを具体的なコード例付きで整理したPRです。既存のガイドラインとの整合性を取りつつ、古い情報や不要なセクションも整理しています。"
     }
   ]
 }
