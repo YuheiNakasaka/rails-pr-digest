@@ -1,7 +1,52 @@
 {
-  "lastUpdated": "2026-06-23T00:34:55.708Z",
+  "lastUpdated": "2026-06-24T00:29:44.595Z",
   "totalCount": 50,
   "items": [
+    {
+      "number": 57778,
+      "title": "Fix configuring query_log_tags in database.yml {#pr-57778}",
+      "url": "https://github.com/rails/rails/pull/57778",
+      "mergedAt": "2026-06-23T00:00:00.000Z",
+      "author": "hmcguire-shopify",
+      "authorUrl": "https://github.com/hmcguire-shopify",
+      "summary": "1. 概要 (1-2文で)  \n`database.yml` で `query_log_tags` を設定した際に正しく読み込まれない不具合があり、`HashConfig` 内でネストされたキーをシンボルではなく文字列として扱うように修正した PR です。これにより、`database.yml` で `query_log_tags` を設定した場合に、期待通りクエリログタグが有効になります。"
+    },
+    {
+      "number": 57021,
+      "title": "De-anonymize generated attribute module for Store {#pr-57021}",
+      "url": "https://github.com/rails/rails/pull/57021",
+      "mergedAt": "2026-06-23T00:00:00.000Z",
+      "author": "hmcguire-shopify",
+      "authorUrl": "https://github.com/hmcguire-shopify",
+      "summary": "1. 概要 (1-2文で)  \nActiveRecord::Store がモデルに `store_accessor` などで生成する属性用モジュールについて、これまで匿名モジュールだったものに名前を付け、先祖チェーンで何のモジュールか分かるようにした PR です。あわせて、そのモジュールへの参照方法を「インスタンス変数で保持」から「定義済みの名前で参照」に変更しています。"
+    },
+    {
+      "number": 57642,
+      "title": "Remove some memoization in Active Record and Active Model {#pr-57642}",
+      "url": "https://github.com/rails/rails/pull/57642",
+      "mergedAt": "2026-06-23T00:00:00.000Z",
+      "author": "gmcgibbon",
+      "authorUrl": "https://github.com/gmcgibbon",
+      "summary": "1. 概要 (1-2文で)  \nActive Record / Active Model 内のいくつかのメモ化(memoization)を削除し、Ractor（マルチスレッド/マルチRactor環境）で扱いやすくする変更です。`arel_table` などを毎回計算するようにし、性能劣化はベンチマーク的に許容範囲に収めつつ、Ractorセーフな設計に近づけています。"
+    },
+    {
+      "number": 57783,
+      "title": "Split template lookup into raising and non-raising {#pr-57783}",
+      "url": "https://github.com/rails/rails/pull/57783",
+      "mergedAt": "2026-06-23T00:00:00.000Z",
+      "author": "etiennebarrie",
+      "authorUrl": "https://github.com/etiennebarrie",
+      "summary": "1. 概要 (1-2文で)  \nこのPRは、テンプレート探索APIを「例外を投げる版」と「例外を投げない版」に整理し、`find_all(...).first` や `rescue` に頼らずにテンプレート探索できるようにした変更です。あわせて、テンプレートが「どれか1つでも存在するか」を調べる `any_formats?` を追加し、テンプレート探索ロジックを `LookupContext` に集約しやすくしています。"
+    },
+    {
+      "number": 57809,
+      "title": "Fix broken anchor links in guides [8-1-stable] {#pr-57809}",
+      "url": "https://github.com/rails/rails/pull/57809",
+      "mergedAt": "2026-06-23T00:00:00.000Z",
+      "author": "55728",
+      "authorUrl": "https://github.com/55728",
+      "summary": "1. 概要 (1-2文で)  \nRails 8.1 系（8-1-stable ブランチ）のガイド内で壊れていたアンカーリンク（ページ内リンク）を、実際に存在する見出し ID に合わせて修正するバックポート PRです。主にガイド同士の参照で古い見出し ID やコピペミスを新しい ID に置き換えており、ドキュメントのナビゲーション品質を改善します。"
+    },
     {
       "number": 57754,
       "title": "Make AbstractController::Caching.view_cache_dependency ractor safe {#pr-57754}",
@@ -406,51 +451,6 @@
       "author": "skipkayhil",
       "authorUrl": "https://github.com/skipkayhil",
       "summary": "1. 概要 (1-2文で)  \nActiveRecord::Coders 周りの RDoc/YARD 用コメントを整理し、「どのクラスが公式にドキュメント対象か」を明確化した PRです。`SafeCoder` は実装詳細として非公開扱いにし、代わりにユーザが直接使う Coders クラス群をドキュメント対象として扱うようにしています。"
-    },
-    {
-      "number": 57759,
-      "title": "Make `test_assign_ids_with_cpk_for_two_models` order-independent {#pr-57759}",
-      "url": "https://github.com/rails/rails/pull/57759",
-      "mergedAt": "2026-06-17T00:00:00.000Z",
-      "author": "yahonda",
-      "authorUrl": "https://github.com/yahonda",
-      "summary": "1. 概要 (1-2文で)  \n`TestDefaultAutosaveAssociationOnAHasManyAssociation#test_assign_ids_with_cpk_for_two_models` が PostgreSQL で順序依存のためにフレークしていた問題を、期待値と実際値の双方を sort して比較することで順序非依存なテストに修正した PR です。`has_many :books` に `order:` 指定がないため `book_ids` の返却順が不定である点をテスト側で吸収しています。"
-    },
-    {
-      "number": 57727,
-      "title": "Accept a Float wait in `retry_on` {#pr-57727}",
-      "url": "https://github.com/rails/rails/pull/57727",
-      "mergedAt": "2026-06-16T00:00:00.000Z",
-      "author": "55728",
-      "authorUrl": "https://github.com/55728",
-      "summary": "1. 概要 (1-2文で)  \n`ActiveJob` の `retry_on` オプションで `wait: 2.5` のような Float を指定すると例外が発生していた不具合を修正し、`set(wait: 2.5)` と同様に Float も受け付けるようにしました。内部的には Float を整数秒に切り捨てて扱うため、依然としてサブ秒単位のリトライは行われません。"
-    },
-    {
-      "number": 57755,
-      "title": "Make ActionController::Flash.add_flash_types ractor safe {#pr-57755}",
-      "url": "https://github.com/rails/rails/pull/57755",
-      "mergedAt": "2026-06-16T00:00:00.000Z",
-      "author": "andrewn617",
-      "authorUrl": "https://github.com/andrewn617",
-      "summary": "1. 概要 (1–2文で)  \n`ActionController::Flash.add_flash_types` が Ractor（Ruby の並行実行モデル）下でも安全に動作するように内部実装が変更されました。これにより、複数 Ractor からカスタム flash タイプを追加してもデータ競合が起きないようになります。"
-    },
-    {
-      "number": 57752,
-      "title": "More shareable constants {#pr-57752}",
-      "url": "https://github.com/rails/rails/pull/57752",
-      "mergedAt": "2026-06-16T00:00:00.000Z",
-      "author": "andrewn617",
-      "authorUrl": "https://github.com/andrewn617",
-      "summary": "1. 概要 (1-2文で)  \nRails内部で使われている一部の定数(Hashなど)について、Ractor対応のために「共有可能（shareable）」なオブジェクトとして扱えるように凍結処理が追加・修正されたPRです。主にActionPack・ActionView・ActiveSupport内の定数の凍結方法を見直し、マルチRactor環境での安全性を高めています。"
-    },
-    {
-      "number": 57751,
-      "title": "Make Messages::Metadata serializer arrays frozen by default. {#pr-57751}",
-      "url": "https://github.com/rails/rails/pull/57751",
-      "mergedAt": "2026-06-16T00:00:00.000Z",
-      "author": "andrewn617",
-      "authorUrl": "https://github.com/andrewn617",
-      "summary": "1. 概要 (1-2文で)  \nRails の `ActiveSupport::Messages::Metadata` における envelope / timestamp のシリアライザ配列を、デフォルトで凍結して Ractor 共有可能にする変更です。これにより、Rails のグローバル状態を Ractor セーフに近づけつつ、既存のロードフックによる配列の拡張も維持しています。"
     }
   ]
 }
