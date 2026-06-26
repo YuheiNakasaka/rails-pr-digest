@@ -1,7 +1,88 @@
 {
-  "lastUpdated": "2026-06-25T00:34:00.919Z",
+  "lastUpdated": "2026-06-26T00:36:28.024Z",
   "totalCount": 50,
   "items": [
+    {
+      "number": 57848,
+      "title": "Make parameter encodings ractor safe by default {#pr-57848}",
+      "url": "https://github.com/rails/rails/pull/57848",
+      "mergedAt": "2026-06-25T00:00:00.000Z",
+      "author": "andrewn617",
+      "authorUrl": "https://github.com/andrewn617",
+      "summary": "1. 概要 (1-2文で)  \n`ActionController::Base.parameter_encodings` をデフォルトで Ractor セーフにするため、内部で使われるハッシュ構造を常に freeze し、書き換え時は dup→変更→再 freeze する方式に変更した PRです。これに伴い、従来の「default proc でハッシュをその場で書き換える」仕組みは廃止され、空の凍結ハッシュをデフォルト値として返す形に変わりました。"
+    },
+    {
+      "number": 57850,
+      "title": "Make rescue handlers ractor safe by default {#pr-57850}",
+      "url": "https://github.com/rails/rails/pull/57850",
+      "mergedAt": "2026-06-25T00:00:00.000Z",
+      "author": "andrewn617",
+      "authorUrl": "https://github.com/andrewn617",
+      "summary": "1. 概要 (1–2文で)  \nRails の `ActiveSupport::Rescuable` が持つ「例外クラスとハンドラの対応表」を、Ractor（マルチスレッド/マルチ Ractor 実行）でも安全に扱えるようにする変更です。データ構造自体を freeze / dup する運用に変えることで、Ractor 間で共有しても壊れない形にしつつ、ハンドラ Proc 自体の Ractor shareable 化は利用者に委ねています。"
+    },
+    {
+      "number": 57851,
+      "title": "Make protected ivars ractor safe {#pr-57851}",
+      "url": "https://github.com/rails/rails/pull/57851",
+      "mergedAt": "2026-06-25T00:00:00.000Z",
+      "author": "andrewn617",
+      "authorUrl": "https://github.com/andrewn617",
+      "summary": "1. 概要 (1-2文で)  \nActionMailer と ActionController に定義されている `PROTECTED_IVARS` 定数を `.freeze` することで、Ractor セーフ（並行実行時にスレッド安全）になるようにした PR です。RuboCop によるチェックから漏れていた未凍結の定数を補正する、極めて小さな内部的変更です。"
+    },
+    {
+      "number": 57857,
+      "title": "Make ActiveSupport::TimeFormats ractor shareable {#pr-57857}",
+      "url": "https://github.com/rails/rails/pull/57857",
+      "mergedAt": "2026-06-25T00:00:00.000Z",
+      "author": "andrewn617",
+      "authorUrl": "https://github.com/andrewn617",
+      "summary": "1. 概要 (1-2文で)  \n`ActiveSupport::TimeFormats` が保持しているフォーマット一覧 (`@list`) を Ractor で共有可能にするため、内部で使っている lambda を「共有可能 (shareable)」な形に修正した PRです。これにより、Ruby 3 の Ractor を用いた並列実行環境でも `ActiveSupport::TimeWithZone#to_s` などが安全に利用しやすくなります。"
+    },
+    {
+      "number": 57858,
+      "title": "Only document the public ActionView::Template API [ci skip] {#pr-57858}",
+      "url": "https://github.com/rails/rails/pull/57858",
+      "mergedAt": "2026-06-25T00:00:00.000Z",
+      "author": "etiennebarrie",
+      "authorUrl": "https://github.com/etiennebarrie",
+      "summary": "1. 概要 (1-2文で)  \nこのPRは、ActionView::Template のうち「アプリケーションから使うことを想定したメソッドだけ」を公式ドキュメントに載せるよう整理したものです。具体的には `register_template_handler` を ActionView::Template の公開APIとして明示的にドキュメント化し、それ以外のテンプレート関連クラス／メソッドを内部APIとして非公開扱いにしています。"
+    },
+    {
+      "number": 57784,
+      "title": "Fix inverse matching for association composite primary keys {#pr-57784}",
+      "url": "https://github.com/rails/rails/pull/57784",
+      "mergedAt": "2026-06-25T00:00:00.000Z",
+      "author": "Korri",
+      "authorUrl": "https://github.com/Korri",
+      "summary": "1. 概要 (1-2文で)  \nRails の関連付けで「関連自体は複合主キーを使うが、所有側モデルの `id` は単一キー」というケースで `inverse_of` の自動設定が壊れていた問題を修正した PR です。`Association#matches_foreign_key?` の比較ロジックを修正し、子オブジェクトの複合外部キーと親オブジェクト側の値が正しくマッチするようにしています。"
+    },
+    {
+      "number": 57859,
+      "title": "Better shareable_lambda usage {#pr-57859}",
+      "url": "https://github.com/rails/rails/pull/57859",
+      "mergedAt": "2026-06-25T00:00:00.000Z",
+      "author": "andrewn617",
+      "authorUrl": "https://github.com/andrewn617",
+      "summary": "1. 概要 (1-2文で)  \nRails内部で使われている `shareable_lambda` の使い方を、よりシンプルで読みやすい形にリファクタリングしたPRです。挙動や外部APIは変えずに、定数として定義されているラムダの書き方を整理しただけの変更です。"
+    },
+    {
+      "number": 57853,
+      "title": "Fix incorrect number_to_rounded doc example [ci skip] {#pr-57853}",
+      "url": "https://github.com/rails/rails/pull/57853",
+      "mergedAt": "2026-06-25T00:00:00.000Z",
+      "author": "antonzaharia",
+      "authorUrl": "https://github.com/antonzaharia",
+      "summary": "1. 概要 (1-2文で)  \n`ActiveSupport::NumberHelper#number_to_rounded` の RDoc に記載されていた `precision: 0` の出力例が、実装と異なり「切り捨て」のように見えていた問題を修正し、「四捨五入」の挙動に合わせた正しい例に更新した PR です。コードの挙動自体は従来どおりで、ドキュメントのみの修正です。"
+    },
+    {
+      "number": 57602,
+      "title": "Make Active Record Railtie Ractor safe {#pr-57602}",
+      "url": "https://github.com/rails/rails/pull/57602",
+      "mergedAt": "2026-06-25T00:00:00.000Z",
+      "author": "gmcgibbon",
+      "authorUrl": "https://github.com/gmcgibbon",
+      "summary": "1. 概要 (1-2文で)  \nActive Record の Railtie 内で使われている message verifier 用の Proc を「Ractor 共有可能（Ractor-shareable）」な形に変更し、Ractor 環境でも安全に動作するようにした PR です。Rails の初期化処理と Ractor の併用時に、Active Record が Ractor の制約に抵触しないようにするのが目的です。"
+    },
     {
       "number": 57849,
       "title": "Bump cgi to 0.5.2 {#pr-57849}",
@@ -370,87 +451,6 @@
       "author": "ilianah",
       "authorUrl": "https://github.com/ilianah",
       "summary": "1. 概要 (1-2文で)  \n`ActiveRecord::Base.primary_key` が「クラス属性 (class_attribute)」として扱われるようになり、`table_name` と同様にサブクラスへオーバーライド内容が継承されるようになりました。これにより、抽象クラスや STI での主キー指定がより直感的で一貫した挙動になります。"
-    },
-    {
-      "number": 57773,
-      "title": "Remove outdated documentation for overriding primary_key {#pr-57773}",
-      "url": "https://github.com/rails/rails/pull/57773",
-      "mergedAt": "2026-06-19T00:00:00.000Z",
-      "author": "ilianah",
-      "authorUrl": "https://github.com/ilianah",
-      "summary": "1. 概要 (1-2文で)  \nRails 7.2系以降（PR #57638 の変更）では、`primary_key` の値だけを単独でオーバーライドすることができなくなったため、その古い方法を説明していたドキュメントコメントが削除されました。コードの挙動自体は変わらず、ドキュメント上の記述のみが整理されています。"
-    },
-    {
-      "number": 57651,
-      "title": "Fix associations on a new record when the owner has a composite primary key {#pr-57651}",
-      "url": "https://github.com/rails/rails/pull/57651",
-      "mergedAt": "2026-06-19T00:00:00.000Z",
-      "author": "jsaubry",
-      "authorUrl": "https://github.com/jsaubry",
-      "summary": "1. 概要 (1-2文で)  \n複合主キーを持つレコードに対する `has_many` / `has_one` の関連が、「未保存だがキーはすべて埋まっている」場合に常に空(`[]`/`nil`)になってしまう問題を修正したPRです。`foreign_key_present?` で複合主キーを正しく判定するようにし、単一主キーと同様に関連クエリが発行されるようになりました。"
-    },
-    {
-      "number": 57641,
-      "title": "Enable per-pool query log tags prepend config {#pr-57641}",
-      "url": "https://github.com/rails/rails/pull/57641",
-      "mergedAt": "2026-06-18T00:00:00.000Z",
-      "author": "hmcguire-shopify",
-      "authorUrl": "https://github.com/hmcguire-shopify",
-      "summary": "1. 概要 (1-2文で)  \nこのPRは、Active Recordのクエリログタグ機能を「コネクションプールごと」に細かく設定できるように拡張したものです。`database.yml` でプール単位にタグ付けそのものの有効/無効、フォーマット、コメントの前後どちらに付けるかを指定できるようになります。"
-    },
-    {
-      "number": 57765,
-      "title": "Validate `retry_on` `wait:` argument type at class definition {#pr-57765}",
-      "url": "https://github.com/rails/rails/pull/57765",
-      "mergedAt": "2026-06-18T00:00:00.000Z",
-      "author": "55728",
-      "authorUrl": "https://github.com/55728",
-      "summary": "1. 概要 (1-2文で)  \nActive Job の `retry_on` オプション `wait:` に渡せる値の型チェックを、「リトライ実行時」ではなく「ジョブクラス定義時」に行うようにした PR です。これにより、サポート外の値を指定した場合に、元のエラーを潰す形の内部エラーではなく、クラス読み込み時に明確な `ArgumentError` が発生するようになります。"
-    },
-    {
-      "number": 57777,
-      "title": "8-1-stable: Clear Postgres warnings as they get handled {#pr-57777}",
-      "url": "https://github.com/rails/rails/pull/57777",
-      "mergedAt": "2026-06-18T00:00:00.000Z",
-      "author": "matthewd",
-      "authorUrl": "https://github.com/matthewd",
-      "summary": "1. 概要 (1–2文で)  \nRails 8.1系（8-1-stable）に対し、「PostgreSQL の warning を処理したタイミングで逐次クリアする」挙動を backport した PR です。これにより、同一コネクション上で警告が溜まり続けて後続クエリに悪影響を与える問題を防ぎ、より正確に warning を扱えるようにしています。"
-    },
-    {
-      "number": 57774,
-      "title": "Remove primary_key class ivar {#pr-57774}",
-      "url": "https://github.com/rails/rails/pull/57774",
-      "mergedAt": "2026-06-18T00:00:00.000Z",
-      "author": "ilianah",
-      "authorUrl": "https://github.com/ilianah",
-      "summary": "1. 概要 (1-2文で)  \nActive Record の `primary_key` 周りの実装からクラスインスタンス変数 `@primary_key` を廃止し、`primary_key` と `primary_key_definition` の同期を取りやすくするための内部リファクタリングです。外部 API の挙動はほぼ変えずに、内部状態の一貫性を高める変更です。"
-    },
-    {
-      "number": 57770,
-      "title": "8-0-stable: Backport recent test suite fixes {#pr-57770}",
-      "url": "https://github.com/rails/rails/pull/57770",
-      "mergedAt": "2026-06-18T00:00:00.000Z",
-      "author": "matthewd",
-      "authorUrl": "https://github.com/matthewd",
-      "summary": "1. 概要  \nRails 8.0-stable ブランチに対して、テストスイートの安定性向上・バグ回避のために、main 側 (#57767) で行われた修正の「適用可能な部分だけ」をバックポートした PR です。主に Active Record と Action Mailbox のテストコードやテスト用ヘルパ、接続プール周りに手が入り、CI のフレーク・環境依存の失敗を減らすことが目的です。"
-    },
-    {
-      "number": 57767,
-      "title": "8-1-stable: Backport recent test suite fixes {#pr-57767}",
-      "url": "https://github.com/rails/rails/pull/57767",
-      "mergedAt": "2026-06-18T00:00:00.000Z",
-      "author": "matthewd",
-      "authorUrl": "https://github.com/matthewd",
-      "summary": "1. 概要 (1–2文)  \nこのPRは Rails 8.1 ステーブルブランチに対して、直近のテストスイート修正をまとめてバックポートしたものです。主に Action Mailbox と Active Record 周りのテストと接続プールまわりの実装が調整され、CI の安定性とテストの信頼性を高めています。"
-    },
-    {
-      "number": 57768,
-      "title": "More test fixes {#pr-57768}",
-      "url": "https://github.com/rails/rails/pull/57768",
-      "mergedAt": "2026-06-18T00:00:00.000Z",
-      "author": "matthewd",
-      "authorUrl": "https://github.com/matthewd",
-      "summary": "1. 概要 (1-2文で)  \nRails の Active Record テスト周りと接続プールの実装に対して、並行実行時の不具合を修正する PRです。特に Ruby 3.3.5 より前の環境で使われる `WeakThreadKeyMap` のフォールバック実装に対するスレッドセーフティ修正が含まれています。"
     }
   ]
 }
