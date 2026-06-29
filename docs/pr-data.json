@@ -1,7 +1,124 @@
 {
-  "lastUpdated": "2026-06-28T00:31:37.695Z",
+  "lastUpdated": "2026-06-29T00:36:07.782Z",
   "totalCount": 50,
   "items": [
+    {
+      "number": 57843,
+      "title": "Declare `assert_not_pattern` alias for `refute_pattern` {#pr-57843}",
+      "url": "https://github.com/rails/rails/pull/57843",
+      "mergedAt": "2026-06-28T00:00:00.000Z",
+      "author": "seanpdoyle",
+      "authorUrl": "https://github.com/seanpdoyle",
+      "summary": "1. 概要 (1-2文で)  \nRails の `ActiveSupport::TestCase` に、Minitest の `refute_pattern` に対応するエイリアスメソッド `assert_not_pattern` が追加されました。これにより、他の `assert_not_*` 系メソッドと同じ書き方でパターンマッチングの否定アサーションが使えるようになります。"
+    },
+    {
+      "number": 57896,
+      "title": "Apply DISTINCT to a grouped `sum` {#pr-57896}",
+      "url": "https://github.com/rails/rails/pull/57896",
+      "mergedAt": "2026-06-28T00:00:00.000Z",
+      "author": "55728",
+      "authorUrl": "https://github.com/55728",
+      "summary": "1. 概要 (1-2文で)  \n`Relation#sum` に `distinct` と `group` を同時に指定した場合に、内部的に `SUM(DISTINCT column)` ではなく単なる `SUM(column)` が実行されてしまい、数値が誤っていたバグを修正する PR です。未グループのケースで既に行っていた `DISTINCT` フラグ適用処理を、グループ化された集計パスにも適用することで挙動を揃えています。"
+    },
+    {
+      "number": 57902,
+      "title": "Keep `HashWithIndifferentAccess#filter` returning indifferent access {#pr-57902}",
+      "url": "https://github.com/rails/rails/pull/57902",
+      "mergedAt": "2026-06-28T00:00:00.000Z",
+      "author": "55728",
+      "authorUrl": "https://github.com/55728",
+      "summary": "1. 概要 (1-2文で)  \n`ActiveSupport::HashWithIndifferentAccess` において、`#filter` 呼び出し時にも「シンボル/文字列を区別しないアクセス（indifferent access）」が維持されるように修正した PR です。これにより、`#select` と `#filter` が同じクラス（`HashWithIndifferentAccess`）を返し、期待どおりの挙動になります。"
+    },
+    {
+      "number": 57894,
+      "title": "Reverse a relation by its `query_constraints` when no order is given {#pr-57894}",
+      "url": "https://github.com/rails/rails/pull/57894",
+      "mergedAt": "2026-06-28T00:00:00.000Z",
+      "author": "55728",
+      "authorUrl": "https://github.com/55728",
+      "summary": "1. 概要 (1-2文で)  \n`query_constraints` を宣言しているモデルに対して `reverse_order` を呼んだ際、暗黙的な並び順（`first` / `last` が使う順序）を正しく反転するように修正した PR です。これにより、`reverse_order.first == last` が直感通りに成り立つようになり、モデルに `query_constraints` が無い場合の挙動は従来通りです。"
+    },
+    {
+      "number": 57817,
+      "title": "Use the float value for `:wait` if passed to `ActiveJob.retry_on` {#pr-57817}",
+      "url": "https://github.com/rails/rails/pull/57817",
+      "mergedAt": "2026-06-28T00:00:00.000Z",
+      "author": "p8",
+      "authorUrl": "https://github.com/p8",
+      "summary": "1. 概要 (1-2文で)  \n`ActiveJob.retry_on` に `wait:` オプションとして Float（秒数の小数）を渡した場合に、これまで整数に丸められていた待機時間を、Float のまま正しく扱うようにした修正です。`ActiveJob.set(wait: ...)` と同様に小数秒の遅延がサポートされ、CHANGELOG も追記されています。"
+    },
+    {
+      "number": 57837,
+      "title": "Make CookieStore::DEFAULT_SAME_SITE ractor safe {#pr-57837}",
+      "url": "https://github.com/rails/rails/pull/57837",
+      "mergedAt": "2026-06-28T00:00:00.000Z",
+      "author": "55728",
+      "authorUrl": "https://github.com/55728",
+      "summary": "1. 概要 (1-2文で)  \n`ActionDispatch::Session::CookieStore` のデフォルト `same_site` 設定用 Proc を `ActiveSupport::Ractors.shareable_proc` でラップし、`CookieStore::DEFAULT_SAME_SITE` を Ractor 間で共有可能（Ractor-shareable）にする変更です。これにより、Ractor を用いた並行実行環境でも CookieStore のデフォルト動作が安全に利用できます。"
+    },
+    {
+      "number": 57839,
+      "title": "Make some ActiveSupport constants ractor safe {#pr-57839}",
+      "url": "https://github.com/rails/rails/pull/57839",
+      "mergedAt": "2026-06-28T00:00:00.000Z",
+      "author": "55728",
+      "authorUrl": "https://github.com/55728",
+      "summary": "1. 概要 (1-2文で)  \nActiveSupport 内の一部の定数（ログレベル判定用 lambda と debug モード判定用 proc）を、`ActiveSupport::Ractors.shareable_lambda` / `.shareable_proc` でラップし、Ractor 間で共有可能（Ractor-shareable）にした PR です。これにより、Ractor を使う並行実行環境でも、これらの ActiveSupport 定数が安全に利用できます。"
+    },
+    {
+      "number": 57840,
+      "title": "Make some Active Record constants ractor safe {#pr-57840}",
+      "url": "https://github.com/rails/rails/pull/57840",
+      "mergedAt": "2026-06-28T00:00:00.000Z",
+      "author": "55728",
+      "authorUrl": "https://github.com/55728",
+      "summary": "1. 概要 (1-2文で)  \nActive Record内部で定数として保持しているいくつかのProcを、`ActiveSupport::Ractors.shareable_proc` でラップして Ractor 共有可能にした変更です。これにより、ArelのSQLバインド処理およびネストした属性の`:all_blank`判定で使われるProcが、Ractor間で安全に共有できるようになります。"
+    },
+    {
+      "number": 57841,
+      "title": "Make ActionMailbox::Callbacks::TERMINATOR ractor safe {#pr-57841}",
+      "url": "https://github.com/rails/rails/pull/57841",
+      "mergedAt": "2026-06-28T00:00:00.000Z",
+      "author": "55728",
+      "authorUrl": "https://github.com/55728",
+      "summary": "1. 概要 (1-2文で)  \nAction Mailbox のコールバック用終端処理 (`TERMINATOR` lambda) を `ActiveSupport::Ractors.shareable_lambda` でラップし、Ractor 間で安全に共有できるようにした PR です。これにより、すでに Ractor 対応されたコールバック機構 (#57629) において、Action Mailbox 固有の終端処理も Ractor-safe になります。"
+    },
+    {
+      "number": 57890,
+      "title": "Fix `week_field` emitting invalid week strings at ISO year boundaries {#pr-57890}",
+      "url": "https://github.com/rails/rails/pull/57890",
+      "mergedAt": "2026-06-28T00:00:00.000Z",
+      "author": "55728",
+      "authorUrl": "https://github.com/55728",
+      "summary": "1. 概要 (1-2文で)  \nRails の `week_field` ヘルパが、年末年始の ISO 週番号境界で仕様上無効な週文字列（例: `2016-W53`）を出力してしまう不具合を修正し、常に ISO 週番号付け年 (week-numbering year) を用いるようにした PRです。これにより `<input type=\"week\">` の値がブラウザ仕様どおり `yyyy-Www` 形式で、かつ実在する週を指すようになります。"
+    },
+    {
+      "number": 57870,
+      "title": "Honor `options[:drop]` in CacheStore session deletion {#pr-57870}",
+      "url": "https://github.com/rails/rails/pull/57870",
+      "mergedAt": "2026-06-28T00:00:00.000Z",
+      "author": "55728",
+      "authorUrl": "https://github.com/55728",
+      "summary": "1. 概要 (1-2文で)  \n`ActionDispatch::Session::CacheStore#delete_session` が `options[:drop]` を無視して常に新しいセッションIDを返していた不具合が修正され、`options[:drop]` が指定された場合は `nil` を返すようになりました。これにより、Rack のインターフェース仕様および `CookieStore` の挙動と整合が取れ、セッションを「ドロップしたつもりなのに新しいセッションが発行される」問題が解消されます。"
+    },
+    {
+      "number": 57897,
+      "title": "Deduplicate columns in `regroup` {#pr-57897}",
+      "url": "https://github.com/rails/rails/pull/57897",
+      "mergedAt": "2026-06-28T00:00:00.000Z",
+      "author": "55728",
+      "authorUrl": "https://github.com/55728",
+      "summary": "1. 概要 (1-2文で)  \n`ActiveRecord::Relation#regroup` / `regroup!` が、重複したカラム指定をそのまま保持していた問題を修正し、`group` と同様にグループ対象カラムを重複除去（uniq）するようにした PR です。これにより、ドキュメントにある「`regroup` は `unscope(:group).group(fields)` のショートハンド」という仕様が実際の挙動と一致するようになりました。"
+    },
+    {
+      "number": 57899,
+      "title": "Fix flaky test_parallel_group_stops_launching_new_steps_with_*_flag {#pr-57899}",
+      "url": "https://github.com/rails/rails/pull/57899",
+      "mergedAt": "2026-06-28T00:00:00.000Z",
+      "author": "yahonda",
+      "authorUrl": "https://github.com/yahonda",
+      "summary": "1. 概要 (1-2文で)  \nRails の CI テスト `ContinuousIntegrationTest#test_parallel_group_stops_launching_new_steps_with_*_flag` が並列実行時のタイミング依存で不安定に落ちる問題を、テスト側の実行時間を調整することで解消した PR です。  \n本番コードの変更はなく、`activesupport/test/continuous_integration_test.rb` 内のテスト定義のみが修正されています。"
+    },
     {
       "number": 57895,
       "title": "Make `add_foreign_key(if_not_exists: true)` reversible {#pr-57895}",
@@ -334,123 +451,6 @@
       "author": "andrewn617",
       "authorUrl": "https://github.com/andrewn617",
       "summary": "1. 概要 (1-2文で)  \n`AbstractController::Caching.view_cache_dependency` が Ractor セーフになるよう実装が変更され、ビューキャッシュの依存関係を格納する配列およびその中の Proc を Ractor 共有可能な形で扱うようにした PRです。Ractors を利用するアプリでもビューキャッシュまわりでスレッド／Ractor 安全性を確保しやすくなります。"
-    },
-    {
-      "number": 57753,
-      "title": "Make ExecutionContext.after_change ractor safe {#pr-57753}",
-      "url": "https://github.com/rails/rails/pull/57753",
-      "mergedAt": "2026-06-22T00:00:00.000Z",
-      "author": "andrewn617",
-      "authorUrl": "https://github.com/andrewn617",
-      "summary": "1. 概要 (1-2文で)  \n`ActiveSupport::ExecutionContext.after_change_callbacks` を Ractor セーフにするため、コールバック配列の扱いを不変（freeze）かつ共有可能な形に変更した PRです。これに伴い、`ExecutionContext` を利用している `helpers.rb` や `query_logs.rb` 周りも、Ractor セーフな前提で動作するよう微調整されています。"
-    },
-    {
-      "number": 57815,
-      "title": "Revert pull request #57814 {#pr-57815}",
-      "url": "https://github.com/rails/rails/pull/57815",
-      "mergedAt": "2026-06-22T00:00:00.000Z",
-      "author": "etiennebarrie",
-      "authorUrl": "https://github.com/etiennebarrie",
-      "summary": "1. 概要 (1-2文で)  \nこのPR (#57815) は、直前のPR (#57814) で導入された ActiveSupport の JSON エンコード周りの変更を「丸ごとリバート」したものです。理由は、Ruby 3.3 の Ractor を起動した際にクラス属性周りで `[BUG] should have cvar cache entry` という VM クラッシュが CI で再発するためです。"
-    },
-    {
-      "number": 57814,
-      "title": "Make ActiveSupport::JSON encoders Ractor-shareable {#pr-57814}",
-      "url": "https://github.com/rails/rails/pull/57814",
-      "mergedAt": "2026-06-22T00:00:00.000Z",
-      "author": "etiennebarrie",
-      "authorUrl": "https://github.com/etiennebarrie",
-      "summary": "1. 概要 (1-2文で)  \nActiveSupport::JSON のエンコーダを「Ractor-shareable」（Ractor 間で共有可能）にするため、エンコーダを早い段階で `freeze` するように変更した PRです。これにより `Ractor.make_shareable` を明示的に呼ばずに、Ractor 内からそのまま JSON エンコード機能を利用できるようになっています。"
-    },
-    {
-      "number": 57789,
-      "title": "Strip inline comments from unquoted `.env` values {#pr-57789}",
-      "url": "https://github.com/rails/rails/pull/57789",
-      "mergedAt": "2026-06-22T00:00:00.000Z",
-      "author": "55728",
-      "authorUrl": "https://github.com/55728",
-      "summary": "1. 概要 (1-2文で)  \nRails の `DotEnvConfiguration` が `.env` ファイルを読む際に、**未クォート値の末尾コメント（`#` 以降）を自動的に除去**するようになりました。これにより、`.env` では一般的な「値の右にコメントを書く」記法で、値が誤ってコメント込みで解釈される不具合が解消されます。"
-    },
-    {
-      "number": 57800,
-      "title": "Reword allow/let phrasings in guides {#pr-57800}",
-      "url": "https://github.com/rails/rails/pull/57800",
-      "mergedAt": "2026-06-22T00:00:00.000Z",
-      "author": "55728",
-      "authorUrl": "https://github.com/55728",
-      "summary": "1. 概要 (1-2文で)  \nRailsガイド内の英語表現を、文法的により正確で自然な形にリライトしたPRです。コードやAPIの挙動には一切影響せず、ドキュメント中の「allow」「let」の使い方を修正しています。"
-    },
-    {
-      "number": 57805,
-      "title": "Fix `Http::Headers#merge` mutating the original request {#pr-57805}",
-      "url": "https://github.com/rails/rails/pull/57805",
-      "mergedAt": "2026-06-22T00:00:00.000Z",
-      "author": "55728",
-      "authorUrl": "https://github.com/55728",
-      "summary": "1. 概要 (1-2文で)  \n`ActionDispatch::Http::Headers#merge` が「新しい Headers を返して元のリクエストを変更しない」という仕様に反して、元の `request.env` を破壊的に変更していたバグを修正するPRです。`merge` が正しく新しい `Http::Headers` インスタンスを返し、呼び出し元のリクエストに副作用を与えないようになりました。"
-    },
-    {
-      "number": 57808,
-      "title": "Validate offset value at call time like limit {#pr-57808}",
-      "url": "https://github.com/rails/rails/pull/57808",
-      "mergedAt": "2026-06-22T00:00:00.000Z",
-      "author": "55728",
-      "authorUrl": "https://github.com/55728",
-      "summary": "1. 概要 (1-2文で)  \n`offset` に渡す引数が整数でない場合、これまではサイレントに `to_i` で変換されていましたが、このPRにより `limit` と同様に `Integer(value)` でバリデーションし、不正な値は即座に `ArgumentError` を投げるようになりました。これにより、SQL生成時と in-memory finder 経路の挙動が整合的になり、バグを早期に検出できます。"
-    },
-    {
-      "number": 57811,
-      "title": "Update actions/checkout to v7 {#pr-57811}",
-      "url": "https://github.com/rails/rails/pull/57811",
-      "mergedAt": "2026-06-22T00:00:00.000Z",
-      "author": "Uaitt",
-      "authorUrl": "https://github.com/Uaitt",
-      "summary": "1. 概要 (1–2文で)  \nGitHub Actions の `actions/checkout` を v7 に更新する PRで、Rails 本体の CI ワークフローと、`rails new` / plugin generator が出力する GitHub Actions テンプレートの両方が対象です。アプリやライブラリの挙動には影響せず、CI環境と生成される GitHub Actions 設定の最新版追従が目的です。"
-    },
-    {
-      "number": 57810,
-      "title": "Fix use of `class_attribute` for `primary_key_definition` {#pr-57810}",
-      "url": "https://github.com/rails/rails/pull/57810",
-      "mergedAt": "2026-06-22T00:00:00.000Z",
-      "author": "byroot",
-      "authorUrl": "https://github.com/byroot",
-      "summary": "1. 概要 (1-2文で)  \n`primary_key_definition` の `class_attribute` の定義タイミングを修正し、継承階層で同じアクセサが何度も再定義されてしまう問題を解消しました。`inherited` フックではなく、Concern が include されたタイミングで定義するように変更されています。"
-    },
-    {
-      "number": 57795,
-      "title": "Support polymorphic associations with custom primary keys through `:inverse_of` {#pr-57795}",
-      "url": "https://github.com/rails/rails/pull/57795",
-      "mergedAt": "2026-06-22T00:00:00.000Z",
-      "author": "kamipo",
-      "authorUrl": "https://github.com/kamipo",
-      "summary": "1. 概要 (1–2文で)  \nこのPRは、「ポリモーフィック関連 + `:inverse_of`」の組み合わせで、逆側の関連に定義されたカスタム `:primary_key` が正しく使われるようにする変更です。これにより、ポリモーフィック関連先ごとに異なる主キー(例: `uuid`, `slug`, `id`)を自然に扱えるようになります。"
-    },
-    {
-      "number": 57806,
-      "title": "Fix broken anchor links in guides {#pr-57806}",
-      "url": "https://github.com/rails/rails/pull/57806",
-      "mergedAt": "2026-06-21T00:00:00.000Z",
-      "author": "55728",
-      "authorUrl": "https://github.com/55728",
-      "summary": "1. 概要 (1-2文で)  \nRails Guides 内の壊れたアンカーリンク（`file.html#anchor` 形式のセクションリンク）を現状のセクション ID に合わせて修正し、16リンク分のスクロール不能問題を解消した PR です。残った一部のリンクは、該当セクション自体が削除・移動されており、別 PR での著者判断を要するものとして保留されています。"
-    },
-    {
-      "number": 57711,
-      "title": "Fix `create_or_find_by` scope pollution on the non-transactional retry {#pr-57711}",
-      "url": "https://github.com/rails/rails/pull/57711",
-      "mergedAt": "2026-06-21T00:00:00.000Z",
-      "author": "55728",
-      "authorUrl": "https://github.com/55728",
-      "summary": "1. 概要 (1-2文で)  \n`create_or_find_by` / `create_or_find_by!` が一意制約違反 (`RecordNotUnique`) でリトライする際、トランザクション外でのみ「スコープ汚染」により既存レコードを正しく取得できないバグが残っていたのを修正したPRです。あわせて、そのトランザクション外の挙動をカバーする新しいテストが追加されています。"
-    },
-    {
-      "number": 57782,
-      "title": "Avoid mutating params hash passed to ActionDispatch::Http::URL.url_for {#pr-57782}",
-      "url": "https://github.com/rails/rails/pull/57782",
-      "mergedAt": "2026-06-21T00:00:00.000Z",
-      "author": "55728",
-      "authorUrl": "https://github.com/55728",
-      "summary": "1. 概要 (1-2文で)  \n`ActionDispatch::Http::URL.url_for` が引数として受け取った `params:` ハッシュを破壊的に変更していた問題を修正し、呼び出し元のハッシュを変更しないようにした PR です。これにより、`request.query_parameters` などのメモ化ハッシュが意図せず書き換えられる不具合や、凍結されたハッシュでの `FrozenError` が解消されます。"
     }
   ]
 }
