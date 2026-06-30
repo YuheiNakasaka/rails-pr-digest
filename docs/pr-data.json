@@ -1,7 +1,43 @@
 {
-  "lastUpdated": "2026-06-29T00:36:07.782Z",
+  "lastUpdated": "2026-06-30T00:32:22.519Z",
   "totalCount": 50,
   "items": [
+    {
+      "number": 57913,
+      "title": "Keep nil elements named in the series for `in_order_of` {#pr-57913}",
+      "url": "https://github.com/rails/rails/pull/57913",
+      "mergedAt": "2026-06-29T00:00:00.000Z",
+      "author": "55728",
+      "authorUrl": "https://github.com/55728",
+      "summary": "1. 概要 (1-2文で)  \n`Enumerable#in_order_of` を `filter: true`（デフォルト）で使ったとき、ソート順を指定する配列（series）に `nil` が含まれていても、これまでは結果から `nil` が落ちていましたが、PRにより明示的に指定された `nil` を結果にも残すように修正されました。これにより、`filter: true` と `filter: false` での挙動が `nil` の扱いに関して一貫します。"
+    },
+    {
+      "number": 57915,
+      "title": "Include call options in `Cache#exist?` instrumentation payload {#pr-57915}",
+      "url": "https://github.com/rails/rails/pull/57915",
+      "mergedAt": "2026-06-29T00:00:00.000Z",
+      "author": "55728",
+      "authorUrl": "https://github.com/55728",
+      "summary": "1. 概要 (1-2文で)  \n`Rails.cache.exist?` 実行時に発火する `cache_exist?.active_support` の通知ペイロードに、これまで含まれていなかったオプション引数（namespace, version, expires_in など）が含まれるようになりました。これにより、他のキャッシュ操作（read/write/delete/fetch_hit）と同じ情報が計測・ロギングで利用できます。"
+    },
+    {
+      "number": 57911,
+      "title": "Allow Arel to be required on its own {#pr-57911}",
+      "url": "https://github.com/rails/rails/pull/57911",
+      "mergedAt": "2026-06-29T00:00:00.000Z",
+      "author": "55728",
+      "authorUrl": "https://github.com/55728",
+      "summary": "1. 概要 (1-2文で)  \n`require \"arel\"` を Active Support なしで実行すると `ActiveSupport::Ractors` の `NameError` が発生していた問題を、Arel 側で明示的に `active_support/ractors` を読み込むことで解消した PR です。Arel を Active Record 抜きで単独利用するユースケースが再び正常に動くようになります。"
+    },
+    {
+      "number": 57907,
+      "title": "Return a composite has_and_belongs_to_many association_foreign_key as an array {#pr-57907}",
+      "url": "https://github.com/rails/rails/pull/57907",
+      "mergedAt": "2026-06-29T00:00:00.000Z",
+      "author": "ollym",
+      "authorUrl": "https://github.com/ollym",
+      "summary": "1. 概要 (1-2文で)  \n`has_and_belongs_to_many` で複合キーを指定した場合、reflection から取得できる `association_foreign_key` が、文字列化された 1 つの値ではなく、`foreign_key` と同様に「カラム名文字列の配列」として返るように修正された PR です。これにより、複合 HABTM を introspection（メタ情報の取得）から正しく扱えるようになります。"
+    },
     {
       "number": 57843,
       "title": "Declare `assert_not_pattern` alias for `refute_pattern` {#pr-57843}",
@@ -415,42 +451,6 @@
       "author": "hmcguire-shopify",
       "authorUrl": "https://github.com/hmcguire-shopify",
       "summary": "1. 概要 (1-2文で)  \nActiveRecord::Store がモデルに `store_accessor` などで生成する属性用モジュールについて、これまで匿名モジュールだったものに名前を付け、先祖チェーンで何のモジュールか分かるようにした PR です。あわせて、そのモジュールへの参照方法を「インスタンス変数で保持」から「定義済みの名前で参照」に変更しています。"
-    },
-    {
-      "number": 57642,
-      "title": "Remove some memoization in Active Record and Active Model {#pr-57642}",
-      "url": "https://github.com/rails/rails/pull/57642",
-      "mergedAt": "2026-06-23T00:00:00.000Z",
-      "author": "gmcgibbon",
-      "authorUrl": "https://github.com/gmcgibbon",
-      "summary": "1. 概要 (1-2文で)  \nActive Record / Active Model 内のいくつかのメモ化(memoization)を削除し、Ractor（マルチスレッド/マルチRactor環境）で扱いやすくする変更です。`arel_table` などを毎回計算するようにし、性能劣化はベンチマーク的に許容範囲に収めつつ、Ractorセーフな設計に近づけています。"
-    },
-    {
-      "number": 57783,
-      "title": "Split template lookup into raising and non-raising {#pr-57783}",
-      "url": "https://github.com/rails/rails/pull/57783",
-      "mergedAt": "2026-06-23T00:00:00.000Z",
-      "author": "etiennebarrie",
-      "authorUrl": "https://github.com/etiennebarrie",
-      "summary": "1. 概要 (1-2文で)  \nこのPRは、テンプレート探索APIを「例外を投げる版」と「例外を投げない版」に整理し、`find_all(...).first` や `rescue` に頼らずにテンプレート探索できるようにした変更です。あわせて、テンプレートが「どれか1つでも存在するか」を調べる `any_formats?` を追加し、テンプレート探索ロジックを `LookupContext` に集約しやすくしています。"
-    },
-    {
-      "number": 57809,
-      "title": "Fix broken anchor links in guides [8-1-stable] {#pr-57809}",
-      "url": "https://github.com/rails/rails/pull/57809",
-      "mergedAt": "2026-06-23T00:00:00.000Z",
-      "author": "55728",
-      "authorUrl": "https://github.com/55728",
-      "summary": "1. 概要 (1-2文で)  \nRails 8.1 系（8-1-stable ブランチ）のガイド内で壊れていたアンカーリンク（ページ内リンク）を、実際に存在する見出し ID に合わせて修正するバックポート PRです。主にガイド同士の参照で古い見出し ID やコピペミスを新しい ID に置き換えており、ドキュメントのナビゲーション品質を改善します。"
-    },
-    {
-      "number": 57754,
-      "title": "Make AbstractController::Caching.view_cache_dependency ractor safe {#pr-57754}",
-      "url": "https://github.com/rails/rails/pull/57754",
-      "mergedAt": "2026-06-22T00:00:00.000Z",
-      "author": "andrewn617",
-      "authorUrl": "https://github.com/andrewn617",
-      "summary": "1. 概要 (1-2文で)  \n`AbstractController::Caching.view_cache_dependency` が Ractor セーフになるよう実装が変更され、ビューキャッシュの依存関係を格納する配列およびその中の Proc を Ractor 共有可能な形で扱うようにした PRです。Ractors を利用するアプリでもビューキャッシュまわりでスレッド／Ractor 安全性を確保しやすくなります。"
     }
   ]
 }
