@@ -1,7 +1,151 @@
 {
-  "lastUpdated": "2026-06-30T00:32:22.519Z",
+  "lastUpdated": "2026-07-01T00:37:46.964Z",
   "totalCount": 50,
   "items": [
+    {
+      "number": 57936,
+      "title": "Deduplicate columns in `default_order` {#pr-57936}",
+      "url": "https://github.com/rails/rails/pull/57936",
+      "mergedAt": "2026-06-30T00:00:00.000Z",
+      "author": "55728",
+      "authorUrl": "https://github.com/55728",
+      "summary": "1. 概要 (1-2文で)  \n`default_order` に同じカラムを複数回渡した場合、`ORDER BY` 句に重複して出力されないよう重複排除される変更です。これにより、すでに同様の挙動をしていた `order` や `regroup` と一貫した動きになります。"
+    },
+    {
+      "number": 57856,
+      "title": "Load ActionDispatch::Request::Session and Utils at boot time {#pr-57856}",
+      "url": "https://github.com/rails/rails/pull/57856",
+      "mergedAt": "2026-06-30T00:00:00.000Z",
+      "author": "andrewn617",
+      "authorUrl": "https://github.com/andrewn617",
+      "summary": "1. 概要 (1–2文で)\n- `ActionDispatch::Request::Session` とその内部で使われる `Utils` を「初回リクエスト時のオートロード」から「アプリ起動時のロード」に変更するためのリファクタリングです。  \n- これにより ractor 利用時など並行環境でのオートロード問題や循環 require を避けつつ、`Session` を `ActionDispatch::Http::Session` に移動して責務の位置付けを整理しています。"
+    },
+    {
+      "number": 57684,
+      "title": "Add a Ractor-shareable ActiveSupport::TaggedLogging.shareable_logger {#pr-57684}",
+      "url": "https://github.com/rails/rails/pull/57684",
+      "mergedAt": "2026-06-30T00:00:00.000Z",
+      "author": "etiennebarrie",
+      "authorUrl": "https://github.com/etiennebarrie",
+      "summary": "1. 概要 (1–2文で)  \nRactor から安全に共有できるログ出力用 API `ActiveSupport::TaggedLogging.shareable_logger` が追加され、複数 Ractor / スレッドから同じ logger を使える仕組みが導入されました。内部的にはバックグラウンドスレッドに書き込み処理を委譲する `ActiveSupport::ShareableLogger` を tagged logging でラップする構成です。"
+    },
+    {
+      "number": 57937,
+      "title": "Load database config when a connection is absent from the shared section {#pr-57937}",
+      "url": "https://github.com/rails/rails/pull/57937",
+      "mergedAt": "2026-06-30T00:00:00.000Z",
+      "author": "55728",
+      "authorUrl": "https://github.com/55728",
+      "summary": "1. 概要 (1-2文で)  \n`database.yml` で `shared` セクションに存在しない接続名が環境ごとに定義されている場合、これまでは `NoMethodError` で落ちていたのを、「その接続は shared マージ対象外として素通りさせる」ように修正した PR です。これにより、3階層構造の `database.yml` をより柔軟に書けるようになり、安全にロードできるようになりました。"
+    },
+    {
+      "number": 57946,
+      "title": "Allow the Evented LogSubscriber to be shareable {#pr-57946}",
+      "url": "https://github.com/rails/rails/pull/57946",
+      "mergedAt": "2026-06-30T00:00:00.000Z",
+      "author": "Edouard-chin",
+      "authorUrl": "https://github.com/Edouard-chin",
+      "summary": "1. 概要 (1-2文で)  \nEvented な LogSubscriber（および関連する StructuredEventSubscriber）の実装から「Proc を含む定数ハッシュ」を排除し、Ractor でも共有可能（shareable）になるようにリファクタリングした PR です。`Ractor.shareable_proc` を使わずに、設計側で Proc 依存を解消することで Ractor セーフティを高めています。"
+    },
+    {
+      "number": 57816,
+      "title": "Set browser binary when preloading system test driver {#pr-57816}",
+      "url": "https://github.com/rails/rails/pull/57816",
+      "mergedAt": "2026-06-30T00:00:00.000Z",
+      "author": "titusfortner",
+      "authorUrl": "https://github.com/titusfortner",
+      "summary": "1. 概要 (1-2文で)  \nRails の system test で Selenium ドライバをプリロードする際に、Chrome/Firefox のブラウザ実行ファイルの場所（`options.binary`）が設定されず「cannot find Chrome binary」で落ちる問題を修正する PR です。  \nSelenium 側の仕様変更（`DriverFinder` が `options` をミューテートしなくなった）に追従し、Rails 側で明示的にブラウザバイナリを設定するようにしています。"
+    },
+    {
+      "number": 57918,
+      "title": "Make default scopes ractor safe {#pr-57918}",
+      "url": "https://github.com/rails/rails/pull/57918",
+      "mergedAt": "2026-06-30T00:00:00.000Z",
+      "author": "andrewn617",
+      "authorUrl": "https://github.com/andrewn617",
+      "summary": "1. 概要 (1-2文で)  \n`ActiveRecord::Base.default_scope` の実装を見直し、デフォルトスコープを Ractor セーフ（スレッド／Ractor間で共有しても安全）にするために、default_scope の内部状態を freeze して不変オブジェクトとして扱うようにした PR です。加えて、この挙動を保証するテストが追加されています。"
+    },
+    {
+      "number": 57930,
+      "title": "Only document the public ActionView::DependencyTracker API [ci skip] {#pr-57930}",
+      "url": "https://github.com/rails/rails/pull/57930",
+      "mergedAt": "2026-06-30T00:00:00.000Z",
+      "author": "etiennebarrie",
+      "authorUrl": "https://github.com/etiennebarrie",
+      "summary": "1. 概要 (1-2文で)  \nActionView::DependencyTracker のうち、実際に外部から利用されている「公開API」のみを公式ドキュメントに載せるように整理した PR です。`register_tracker` と `ERBTracker` を正式にドキュメント対象とし、それ以外の内部実装は引き続き非公開（`:nodoc:`）とすることで、サポート対象のエントリポイントを明確にしています。"
+    },
+    {
+      "number": 57932,
+      "title": "Minor Active Support Cache refactorings {#pr-57932}",
+      "url": "https://github.com/rails/rails/pull/57932",
+      "mergedAt": "2026-06-30T00:00:00.000Z",
+      "author": "byroot",
+      "authorUrl": "https://github.com/byroot",
+      "summary": "1. 概要 (1-2文で)  \nActiveSupport::Cache 周りの内部実装を少し整理したリファクタリング PR です。`instrument`/ログ出力処理と、ローカルキャッシュ (`LocalCache`) の `increment` 挙動が単純化され、不要なヘルパーやメソッドが削除されています。"
+    },
+    {
+      "number": 57931,
+      "title": "Implement ActiveSupport::ProxyLogger {#pr-57931}",
+      "url": "https://github.com/rails/rails/pull/57931",
+      "mergedAt": "2026-06-30T00:00:00.000Z",
+      "author": "byroot",
+      "authorUrl": "https://github.com/byroot",
+      "summary": "1. 概要 (1-2文で)  \nRailsのActiveSupportに `ActiveSupport::ProxyLogger` が追加され、既存のロガーにログを委譲しつつ「別のログレベルで」フィルタリングできるラッパーロガーが使えるようになりました。これにより、アプリ全体と同じ出力先を使いつつ、特定ライブラリだけログを抑制・制御することが容易になります。"
+    },
+    {
+      "number": 57874,
+      "title": "Make the Action View template handler registry Ractor-shareable {#pr-57874}",
+      "url": "https://github.com/rails/rails/pull/57874",
+      "mergedAt": "2026-06-30T00:00:00.000Z",
+      "author": "etiennebarrie",
+      "authorUrl": "https://github.com/etiennebarrie",
+      "summary": "1. 概要 (1-2文で)  \nAction View のテンプレートハンドラのレジストリを Ractor で共有可能（Ractor-shareable）にするため、内部実装がクラス変数ベースからモジュールインスタンス変数＋不変（frozen）な構造に再設計された PR です。これにより、テンプレート検索・描画パスでのハンドラ参照が Ractor セーフかつスレッド安全になり、読み取り時に書き込みが発生しないようになっています。"
+    },
+    {
+      "number": 57916,
+      "title": "Treat a Symbol stream name as a literal stream in channel test assertions {#pr-57916}",
+      "url": "https://github.com/rails/rails/pull/57916",
+      "mergedAt": "2026-06-30T00:00:00.000Z",
+      "author": "55728",
+      "authorUrl": "https://github.com/55728",
+      "summary": "1. 概要 (1-2文で)  \nAction Cable のチャンネル用テストヘルパ (`ActionCable::Channel::TestCase`) において、シンボルで指定したストリーム名を本番動作と同じく「文字列に対応するリテラルなストリーム名」として扱うように修正した PR です。これにより、`:my_room` と `\"my_room\"` を使ったストリーム／アサーションの挙動が一貫し、誤検知・見逃しが起きないようになります。"
+    },
+    {
+      "number": 57912,
+      "title": "Reference `ActionCable::Configuration` in the Action Cable guide {#pr-57912}",
+      "url": "https://github.com/rails/rails/pull/57912",
+      "mergedAt": "2026-06-30T00:00:00.000Z",
+      "author": "55728",
+      "authorUrl": "https://github.com/55728",
+      "summary": "1. 概要 (1-2文で)  \nAction Cable ガイド内の「Configuration」セクションで参照していたクラス名を、古い `ActionCable::Server::Configuration` から現在の正規名 `ActionCable::Configuration` に修正したドキュメント更新です。バックワードコンパチ目的のエイリアスは残っていますが、ガイド上は新しい正規クラス名を指すようになりました。"
+    },
+    {
+      "number": 57928,
+      "title": "Eliminate a useless frame in AS::Notifications.instrument {#pr-57928}",
+      "url": "https://github.com/rails/rails/pull/57928",
+      "mergedAt": "2026-06-30T00:00:00.000Z",
+      "author": "byroot",
+      "authorUrl": "https://github.com/byroot",
+      "summary": "1. 概要 (1-2文で)  \n`ActiveSupport::Notifications.instrument` 内の「無駄なスタックフレーム」を取り除き、スタックトレースやフレームグラフが少し読みやすくなるようにした変更です。性能への影響はほぼありませんが、デバッグやプロファイリング時の視認性が向上します。"
+    },
+    {
+      "number": 57919,
+      "title": "Make LogSubscriber.log_levels ractor safe {#pr-57919}",
+      "url": "https://github.com/rails/rails/pull/57919",
+      "mergedAt": "2026-06-30T00:00:00.000Z",
+      "author": "andrewn617",
+      "authorUrl": "https://github.com/andrewn617",
+      "summary": "1. 概要 (1-2文で)\n- `ActiveSupport::LogSubscriber` の `subscribe_log_level` が Ractor（マルチスレッド/マルチ Ractor）環境でも安全に動作するように、内部で持っている `log_levels` ハッシュをフリーズするようにした PR です。\n- これにより、Ractor 間で `LogSubscriber` を共有してもログレベル設定が原因でエラーやデータ競合が起きにくくなります。"
+    },
+    {
+      "number": 57920,
+      "title": "Eagerly assign ExecutionWrapper's active key {#pr-57920}",
+      "url": "https://github.com/rails/rails/pull/57920",
+      "mergedAt": "2026-06-30T00:00:00.000Z",
+      "author": "andrewn617",
+      "authorUrl": "https://github.com/andrewn617",
+      "summary": "1. 概要 (1-2文で)  \nExecutionWrapper のサブクラスにおける `active_key` の代入タイミングを「継承時」に早めることで、最初のリクエストが非メイン Ractor で処理された場合に発生する Ractor の隔離エラーを防ぐ修正です。Ractor 対応を強化するための内部的な初期化順序の見直しになります。"
+    },
     {
       "number": 57913,
       "title": "Keep nil elements named in the series for `in_order_of` {#pr-57913}",
@@ -307,150 +451,6 @@
       "author": "andrewn617",
       "authorUrl": "https://github.com/andrewn617",
       "summary": "1. 概要 (1-2文で)  \n`ActionController::Base.parameter_encodings` をデフォルトで Ractor セーフにするため、内部で使われるハッシュ構造を常に freeze し、書き換え時は dup→変更→再 freeze する方式に変更した PRです。これに伴い、従来の「default proc でハッシュをその場で書き換える」仕組みは廃止され、空の凍結ハッシュをデフォルト値として返す形に変わりました。"
-    },
-    {
-      "number": 57850,
-      "title": "Make rescue handlers ractor safe by default {#pr-57850}",
-      "url": "https://github.com/rails/rails/pull/57850",
-      "mergedAt": "2026-06-25T00:00:00.000Z",
-      "author": "andrewn617",
-      "authorUrl": "https://github.com/andrewn617",
-      "summary": "1. 概要 (1–2文で)  \nRails の `ActiveSupport::Rescuable` が持つ「例外クラスとハンドラの対応表」を、Ractor（マルチスレッド/マルチ Ractor 実行）でも安全に扱えるようにする変更です。データ構造自体を freeze / dup する運用に変えることで、Ractor 間で共有しても壊れない形にしつつ、ハンドラ Proc 自体の Ractor shareable 化は利用者に委ねています。"
-    },
-    {
-      "number": 57851,
-      "title": "Make protected ivars ractor safe {#pr-57851}",
-      "url": "https://github.com/rails/rails/pull/57851",
-      "mergedAt": "2026-06-25T00:00:00.000Z",
-      "author": "andrewn617",
-      "authorUrl": "https://github.com/andrewn617",
-      "summary": "1. 概要 (1-2文で)  \nActionMailer と ActionController に定義されている `PROTECTED_IVARS` 定数を `.freeze` することで、Ractor セーフ（並行実行時にスレッド安全）になるようにした PR です。RuboCop によるチェックから漏れていた未凍結の定数を補正する、極めて小さな内部的変更です。"
-    },
-    {
-      "number": 57857,
-      "title": "Make ActiveSupport::TimeFormats ractor shareable {#pr-57857}",
-      "url": "https://github.com/rails/rails/pull/57857",
-      "mergedAt": "2026-06-25T00:00:00.000Z",
-      "author": "andrewn617",
-      "authorUrl": "https://github.com/andrewn617",
-      "summary": "1. 概要 (1-2文で)  \n`ActiveSupport::TimeFormats` が保持しているフォーマット一覧 (`@list`) を Ractor で共有可能にするため、内部で使っている lambda を「共有可能 (shareable)」な形に修正した PRです。これにより、Ruby 3 の Ractor を用いた並列実行環境でも `ActiveSupport::TimeWithZone#to_s` などが安全に利用しやすくなります。"
-    },
-    {
-      "number": 57858,
-      "title": "Only document the public ActionView::Template API [ci skip] {#pr-57858}",
-      "url": "https://github.com/rails/rails/pull/57858",
-      "mergedAt": "2026-06-25T00:00:00.000Z",
-      "author": "etiennebarrie",
-      "authorUrl": "https://github.com/etiennebarrie",
-      "summary": "1. 概要 (1-2文で)  \nこのPRは、ActionView::Template のうち「アプリケーションから使うことを想定したメソッドだけ」を公式ドキュメントに載せるよう整理したものです。具体的には `register_template_handler` を ActionView::Template の公開APIとして明示的にドキュメント化し、それ以外のテンプレート関連クラス／メソッドを内部APIとして非公開扱いにしています。"
-    },
-    {
-      "number": 57784,
-      "title": "Fix inverse matching for association composite primary keys {#pr-57784}",
-      "url": "https://github.com/rails/rails/pull/57784",
-      "mergedAt": "2026-06-25T00:00:00.000Z",
-      "author": "Korri",
-      "authorUrl": "https://github.com/Korri",
-      "summary": "1. 概要 (1-2文で)  \nRails の関連付けで「関連自体は複合主キーを使うが、所有側モデルの `id` は単一キー」というケースで `inverse_of` の自動設定が壊れていた問題を修正した PR です。`Association#matches_foreign_key?` の比較ロジックを修正し、子オブジェクトの複合外部キーと親オブジェクト側の値が正しくマッチするようにしています。"
-    },
-    {
-      "number": 57859,
-      "title": "Better shareable_lambda usage {#pr-57859}",
-      "url": "https://github.com/rails/rails/pull/57859",
-      "mergedAt": "2026-06-25T00:00:00.000Z",
-      "author": "andrewn617",
-      "authorUrl": "https://github.com/andrewn617",
-      "summary": "1. 概要 (1-2文で)  \nRails内部で使われている `shareable_lambda` の使い方を、よりシンプルで読みやすい形にリファクタリングしたPRです。挙動や外部APIは変えずに、定数として定義されているラムダの書き方を整理しただけの変更です。"
-    },
-    {
-      "number": 57853,
-      "title": "Fix incorrect number_to_rounded doc example [ci skip] {#pr-57853}",
-      "url": "https://github.com/rails/rails/pull/57853",
-      "mergedAt": "2026-06-25T00:00:00.000Z",
-      "author": "antonzaharia",
-      "authorUrl": "https://github.com/antonzaharia",
-      "summary": "1. 概要 (1-2文で)  \n`ActiveSupport::NumberHelper#number_to_rounded` の RDoc に記載されていた `precision: 0` の出力例が、実装と異なり「切り捨て」のように見えていた問題を修正し、「四捨五入」の挙動に合わせた正しい例に更新した PR です。コードの挙動自体は従来どおりで、ドキュメントのみの修正です。"
-    },
-    {
-      "number": 57602,
-      "title": "Make Active Record Railtie Ractor safe {#pr-57602}",
-      "url": "https://github.com/rails/rails/pull/57602",
-      "mergedAt": "2026-06-25T00:00:00.000Z",
-      "author": "gmcgibbon",
-      "authorUrl": "https://github.com/gmcgibbon",
-      "summary": "1. 概要 (1-2文で)  \nActive Record の Railtie 内で使われている message verifier 用の Proc を「Ractor 共有可能（Ractor-shareable）」な形に変更し、Ractor 環境でも安全に動作するようにした PR です。Rails の初期化処理と Ractor の併用時に、Active Record が Ractor の制約に抵触しないようにするのが目的です。"
-    },
-    {
-      "number": 57849,
-      "title": "Bump cgi to 0.5.2 {#pr-57849}",
-      "url": "https://github.com/rails/rails/pull/57849",
-      "mergedAt": "2026-06-24T00:00:00.000Z",
-      "author": "yahonda",
-      "authorUrl": "https://github.com/yahonda",
-      "summary": "1. 概要 (1-2文で)  \nRails の CI（特に guides ジョブ）で `cgi` のバージョン不一致により落ちていたため、`Gemfile.lock` 内の `cgi` を 0.5.2 に上げて CI を安定化させる PR です。コード挙動を変える修正ではなく、CI 環境と rubygems.org 上の最新版を揃えるためのメンテナンス的変更です。"
-    },
-    {
-      "number": 57847,
-      "title": "Move Action Cable configuration to top level {#pr-57847}",
-      "url": "https://github.com/rails/rails/pull/57847",
-      "mergedAt": "2026-06-24T00:00:00.000Z",
-      "author": "samuel-williams-shopify",
-      "authorUrl": "https://github.com/samuel-williams-shopify",
-      "summary": "1. 概要 (1-2文で)  \nAction Cable の設定クラスを `ActionCable::Server::Configuration` からトップレベルの `ActionCable::Configuration` に抽出し、旧クラスは互換用エイリアスとして残すリファクタリングです。既存コードを壊さずに、今後のサーバー入れ替えフックなどの拡張をしやすくするための下準備となる変更です。"
-    },
-    {
-      "number": 57844,
-      "title": "Remove the use of `$,` as a default value for `safe_join` {#pr-57844}",
-      "url": "https://github.com/rails/rails/pull/57844",
-      "mergedAt": "2026-06-24T00:00:00.000Z",
-      "author": "Edouard-chin",
-      "authorUrl": "https://github.com/Edouard-chin",
-      "summary": "1. 概要 (1-2文で)  \nRails の `ActionView::Helpers::OutputSafetyHelper#safe_join` が、暗黙にグローバル変数 `$,` を区切り文字のデフォルトとして使う挙動をやめ、常に `nil`（＝区切りなし）をデフォルトとするように変更されました。これにより、Ractor セーフティ向上と、Ruby 本体で非推奨な `$,` への依存解消が行われています。"
-    },
-    {
-      "number": 57829,
-      "title": "Refactor Arel::Table to use keyword name: argument {#pr-57829}",
-      "url": "https://github.com/rails/rails/pull/57829",
-      "mergedAt": "2026-06-24T00:00:00.000Z",
-      "author": "gmcgibbon",
-      "authorUrl": "https://github.com/gmcgibbon",
-      "summary": "1. 概要 (1-2文で)  \n`Arel::Table` のコンストラクタ引数が「位置引数＋オプション」で name を渡す形から、「キーワード引数 name:」で渡す形にリファクタリングされた PR です。これに伴い、`Arel::Table` を直接生成している内部コード・テストコードがすべて新しい呼び出し方に書き換えられています。"
-    },
-    {
-      "number": 57833,
-      "title": "Only reset predicate builder on table_name exists {#pr-57833}",
-      "url": "https://github.com/rails/rails/pull/57833",
-      "mergedAt": "2026-06-24T00:00:00.000Z",
-      "author": "gmcgibbon",
-      "authorUrl": "https://github.com/gmcgibbon",
-      "summary": "1. 概要 (1-2文で)  \nActive Record の `table_name` が「遅延計算(lazy)」になったことで、最初の計算時にも `predicate_builder` がリセットされてしまう不具合があり、それを修正する PR です。具体的には、すでに `predicate_builder` が存在する場合にだけリセットするよう条件を追加し、テーブル名の初回決定ではリセットされないようにしています。"
-    },
-    {
-      "number": 57832,
-      "title": "Bump json to 2.20.0 and pass `allow_comments: true` {#pr-57832}",
-      "url": "https://github.com/rails/rails/pull/57832",
-      "mergedAt": "2026-06-24T00:00:00.000Z",
-      "author": "yahonda",
-      "authorUrl": "https://github.com/yahonda",
-      "summary": "1. 概要 (1-2文で)  \njson gem を 2.20.0 に更新し、Rails 本体が「コメント付き JSON(JSONC)」をパースしている箇所で `allow_comments: true` オプションを明示的に渡すようにした PR です。これにより、json 2.20.0 で追加された「コメント検出時の非推奨警告」による nightly テストの失敗を解消しています。"
-    },
-    {
-      "number": 57778,
-      "title": "Fix configuring query_log_tags in database.yml {#pr-57778}",
-      "url": "https://github.com/rails/rails/pull/57778",
-      "mergedAt": "2026-06-23T00:00:00.000Z",
-      "author": "hmcguire-shopify",
-      "authorUrl": "https://github.com/hmcguire-shopify",
-      "summary": "1. 概要 (1-2文で)  \n`database.yml` で `query_log_tags` を設定した際に正しく読み込まれない不具合があり、`HashConfig` 内でネストされたキーをシンボルではなく文字列として扱うように修正した PR です。これにより、`database.yml` で `query_log_tags` を設定した場合に、期待通りクエリログタグが有効になります。"
-    },
-    {
-      "number": 57021,
-      "title": "De-anonymize generated attribute module for Store {#pr-57021}",
-      "url": "https://github.com/rails/rails/pull/57021",
-      "mergedAt": "2026-06-23T00:00:00.000Z",
-      "author": "hmcguire-shopify",
-      "authorUrl": "https://github.com/hmcguire-shopify",
-      "summary": "1. 概要 (1-2文で)  \nActiveRecord::Store がモデルに `store_accessor` などで生成する属性用モジュールについて、これまで匿名モジュールだったものに名前を付け、先祖チェーンで何のモジュールか分かるようにした PR です。あわせて、そのモジュールへの参照方法を「インスタンス変数で保持」から「定義済みの名前で参照」に変更しています。"
     }
   ]
 }
