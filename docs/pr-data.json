@@ -1,7 +1,79 @@
 {
-  "lastUpdated": "2026-07-01T00:37:46.964Z",
+  "lastUpdated": "2026-07-02T00:34:05.644Z",
   "totalCount": 50,
   "items": [
+    {
+      "number": 57957,
+      "title": "Bump Github Action cache version to 6 {#pr-57957}",
+      "url": "https://github.com/rails/rails/pull/57957",
+      "mergedAt": "2026-07-01T00:00:00.000Z",
+      "author": "akhilgkrishnan",
+      "authorUrl": "https://github.com/akhilgkrishnan",
+      "summary": "1. 概要 (1-2文で)  \nRails が生成する GitHub Actions ワークフロー（CI 用）の「キャッシュバージョン」を 6 に更新した PRです。アプリケーション／プラグイン用 generator が出力する `.github/workflows/ci.yml` のテンプレートのみが対象です。"
+    },
+    {
+      "number": 57939,
+      "title": "Apply source mappings to dynamic permissions policy sources {#pr-57939}",
+      "url": "https://github.com/rails/rails/pull/57939",
+      "mergedAt": "2026-07-01T00:00:00.000Z",
+      "author": "55728",
+      "authorUrl": "https://github.com/55728",
+      "summary": "1. 概要 (1-2文で)  \nPermissions-Policy で「動的（callable）なソース指定」にキーワード（`:self` など）を返した場合も、静的指定と同様にマッピング（`'self'` などへの変換）が適用されるようになりました。これにより、これまで動的ソースだけ不正なポリシー文字列（`self` のような裸の単語）が出力されていた問題が修正されています。"
+    },
+    {
+      "number": 57938,
+      "title": "Allow a trailing slash URL with a blank path to take query params {#pr-57938}",
+      "url": "https://github.com/rails/rails/pull/57938",
+      "mergedAt": "2026-07-01T00:00:00.000Z",
+      "author": "55728",
+      "authorUrl": "https://github.com/55728",
+      "summary": "1. 概要 (1-2文で)  \n`url_for` で `trailing_slash: true` かつ `path: \"\"`（空文字）を指定した場合に、クエリパラメータやアンカーを付与すると `FrozenError` が発生していた不具合を修正した PR です。  \nこれにより、`\"/\"` をベースに `\"/?a=1\"` のように正常にパラメータやアンカーを付与できるようになりました。"
+    },
+    {
+      "number": 57951,
+      "title": "Improve usage of Ractor.shareable_lambda {#pr-57951}",
+      "url": "https://github.com/rails/rails/pull/57951",
+      "mergedAt": "2026-07-01T00:00:00.000Z",
+      "author": "andrewn617",
+      "authorUrl": "https://github.com/andrewn617",
+      "summary": "1. 概要 (1-2文で)  \nAction Mailbox 内で `Ractor.shareable_lambda` の使い方を、`&->` を噛ませる形からブロックを直接渡す形に書き換えた、スタイル／可読性改善のための小さなリファクタリングです。挙動変更や機能追加はなく、既存の動作を保ったまま Ruby らしい書き方に揃えています。"
+    },
+    {
+      "number": 57952,
+      "title": "Make parameter parsers assignment ractor safe {#pr-57952}",
+      "url": "https://github.com/rails/rails/pull/57952",
+      "mergedAt": "2026-07-01T00:00:00.000Z",
+      "author": "andrewn617",
+      "authorUrl": "https://github.com/andrewn617",
+      "summary": "1. 概要 (1-2文で)  \nRails のパラメータパーサー (`parameter_parsers`) を設定する処理が Ractor セーフになるように、代入時に渡されたハッシュを `freeze` するよう変更した PRです。あわせて、デフォルトパーサーの設定にパブリック API を経由せず、直接インスタンス変数に代入するようにして、不要なハッシュの複製を避けています。"
+    },
+    {
+      "number": 57955,
+      "title": "Ractor safe counter cache configuration {#pr-57955}",
+      "url": "https://github.com/rails/rails/pull/57955",
+      "mergedAt": "2026-07-01T00:00:00.000Z",
+      "author": "andrewn617",
+      "authorUrl": "https://github.com/andrewn617",
+      "summary": "1. 概要 (1-2文で)  \nActiveRecord のカウンタキャッシュ設定情報（`_counter_cache_columns` と `counter_cached_association_names`）をデフォルトで `freeze` し、Ractor（Ruby の並行オブジェクト実行モデル）でも安全に扱えるようにした PR です。これにより、Ractor 間で共有されるカウンタキャッシュ設定が不変オブジェクトとなり、スレッド／Ractor セーフティが向上します。"
+    },
+    {
+      "number": 57922,
+      "title": "Freeze the inflection rules after the app boots {#pr-57922}",
+      "url": "https://github.com/rails/rails/pull/57922",
+      "mergedAt": "2026-07-01T00:00:00.000Z",
+      "author": "Edouard-chin",
+      "authorUrl": "https://github.com/Edouard-chin",
+      "summary": "1. 概要 (1-2文で)  \nこのPRは、Railsアプリケーションのブート完了後に `ActiveSupport::Inflector` の「変換ルール（inflection rules）」を変更できないようにし、すべての言語ごとの inflections を freeze する変更です。これにより、起動後の不定な挙動を防ぎつつ、将来的な Ractor 対応も見据えたスレッドセーフ性の向上を図っています。"
+    },
+    {
+      "number": 57823,
+      "title": "Initialize ActionView::LookupContext.view_context_class early {#pr-57823}",
+      "url": "https://github.com/rails/rails/pull/57823",
+      "mergedAt": "2026-07-01T00:00:00.000Z",
+      "author": "etiennebarrie",
+      "authorUrl": "https://github.com/etiennebarrie",
+      "summary": "1. 概要 (1-2文で)  \n`ActionView::LookupContext.view_context_class` をできるだけ早いタイミングで初期化することで、`enable_reloading = false` な環境ではミューテックスに触らずに済むようにし、Ractor からも追加セットアップなしで安全にビューコンテキストクラスを利用できるようにした変更です。"
+    },
     {
       "number": 57936,
       "title": "Deduplicate columns in `default_order` {#pr-57936}",
@@ -379,78 +451,6 @@
       "author": "55728",
       "authorUrl": "https://github.com/55728",
       "summary": "1. 概要 (1-2文で)  \n`drop_virtual_table` のマイグレーションを逆変換する際の引数チェックが誤っており、本来は不可逆であるべき操作が「可逆」と判定されてしまう不具合を修正した PR です。これにより、`drop_virtual_table` の逆操作として生成される `create_virtual_table` が正しく実行可能かどうかを正しく判定できるようになりました。"
-    },
-    {
-      "number": 57873,
-      "title": "Fix `unique_constraint_exists?` to accept `:column` instead of `:expression` {#pr-57873}",
-      "url": "https://github.com/rails/rails/pull/57873",
-      "mergedAt": "2026-06-26T00:00:00.000Z",
-      "author": "55728",
-      "authorUrl": "https://github.com/55728",
-      "summary": "1. 概要 (1-2文で)  \nPostgreSQL アダプタの `unique_constraint_exists?` が `column:` オプションを正しく受け付けず `ArgumentError` を投げていたバグが修正されました。ガード条件とエラーメッセージが、ユニーク制約の API 仕様（`:column` または `:name`）に整合するようになっています。"
-    },
-    {
-      "number": 57842,
-      "title": "Make ActiveSupport::JSON encoders Ractor-shareable {#pr-57842}",
-      "url": "https://github.com/rails/rails/pull/57842",
-      "mergedAt": "2026-06-26T00:00:00.000Z",
-      "author": "etiennebarrie",
-      "authorUrl": "https://github.com/etiennebarrie",
-      "summary": "1. 概要 (1-2文で)  \nActiveSupport::JSON のエンコーダを Ractor 共有可能（Ractor-shareable）にし、Ractor 環境下でも安全に再利用できるようにした PRです。併せて、その挙動をテストするために Isolation テストを導入し、Ruby 本体のクラッシュを回避するようにしています。"
-    },
-    {
-      "number": 57845,
-      "title": "Report PostgreSQL default timestamp/time precision as 6 {#pr-57845}",
-      "url": "https://github.com/rails/rails/pull/57845",
-      "mergedAt": "2026-06-26T00:00:00.000Z",
-      "author": "adrianna-chang-shopify",
-      "authorUrl": "https://github.com/adrianna-chang-shopify",
-      "summary": "1. 概要 (1-2文で)  \nPostgreSQL の `timestamp` / `time` 系カラムについて、typmod が省略された「素の」型 (`timestamp` など) でも実際にはマイクロ秒精度(6桁)で動いていることを、Active Record のメタデータ上でも `precision: 6` として正しく報告するようにした変更です。これにより、DBに保存された値と Active Record での型キャスト結果の精度が揃い、タイムスタンプの扱いが一貫します。"
-    },
-    {
-      "number": 57866,
-      "title": "Fix incorrect RDoc output examples in ActiveRecord {#pr-57866}",
-      "url": "https://github.com/rails/rails/pull/57866",
-      "mergedAt": "2026-06-26T00:00:00.000Z",
-      "author": "55728",
-      "authorUrl": "https://github.com/55728",
-      "summary": "1. 概要 (1-2文で)  \nActive Record の RDoc 内のコード例が、実際の挙動と矛盾していたため、それを正しい出力例に修正した PR です。挙動そのものの変更はなく、あくまでドキュメントの誤記修正です。"
-    },
-    {
-      "number": 57855,
-      "title": "Fix incorrect human_size round_mode doc example {#pr-57855}",
-      "url": "https://github.com/rails/rails/pull/57855",
-      "mergedAt": "2026-06-26T00:00:00.000Z",
-      "author": "55728",
-      "authorUrl": "https://github.com/55728",
-      "summary": "1. 概要 (1-2文で)  \n`Numeric#to_fs(:human_size)` の RDoc に記載されていた `round_mode` オプションのサンプルコードが、実際の動作と合っていなかったため修正した PR です。コード本体の挙動に問題はなく、ドキュメント中の例のみを正しいものに差し替えています。"
-    },
-    {
-      "number": 57865,
-      "title": "Fix incorrect RDoc examples in Active Model {#pr-57865}",
-      "url": "https://github.com/rails/rails/pull/57865",
-      "mergedAt": "2026-06-26T00:00:00.000Z",
-      "author": "55728",
-      "authorUrl": "https://github.com/55728",
-      "summary": "1. 概要 (1-2文で)  \nActive Model の RDoc サンプルコードにおける出力例と実際のコードの不整合を修正したドキュメント専用のPRです。`attribute_method?` と `Errors#each` の例が実際の動作に沿うように、クラス名とオプション値が修正されています。"
-    },
-    {
-      "number": 57864,
-      "title": "Add missing `&block` to `merge!` `:call-seq:` in `ActionController::Parameters` {#pr-57864}",
-      "url": "https://github.com/rails/rails/pull/57864",
-      "mergedAt": "2026-06-26T00:00:00.000Z",
-      "author": "55728",
-      "authorUrl": "https://github.com/55728",
-      "summary": "1. 概要 (1-2文で)  \n`ActionController::Parameters#merge!` のドキュメント（`:call-seq:`）に、実装上は受け取っているブロック引数 `&block` が記載されていなかった問題を修正した PR です。`Hash#merge!` と同様に、キー衝突時にブロックでマージ方法を指定できることが、ドキュメント上も明示されるようになりました。"
-    },
-    {
-      "number": 57848,
-      "title": "Make parameter encodings ractor safe by default {#pr-57848}",
-      "url": "https://github.com/rails/rails/pull/57848",
-      "mergedAt": "2026-06-25T00:00:00.000Z",
-      "author": "andrewn617",
-      "authorUrl": "https://github.com/andrewn617",
-      "summary": "1. 概要 (1-2文で)  \n`ActionController::Base.parameter_encodings` をデフォルトで Ractor セーフにするため、内部で使われるハッシュ構造を常に freeze し、書き換え時は dup→変更→再 freeze する方式に変更した PRです。これに伴い、従来の「default proc でハッシュをその場で書き換える」仕組みは廃止され、空の凍結ハッシュをデフォルト値として返す形に変わりました。"
     }
   ]
 }
