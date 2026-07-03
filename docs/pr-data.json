@@ -1,7 +1,43 @@
 {
-  "lastUpdated": "2026-07-02T00:34:05.644Z",
+  "lastUpdated": "2026-07-03T00:29:08.397Z",
   "totalCount": 50,
   "items": [
+    {
+      "number": 57826,
+      "title": "Deprecate Mime::SET, Mime::LOOKUP and Mime::EXTENSION_LOOKUP {#pr-57826}",
+      "url": "https://github.com/rails/rails/pull/57826",
+      "mergedAt": "2026-07-02T00:00:00.000Z",
+      "author": "etiennebarrie",
+      "authorUrl": "https://github.com/etiennebarrie",
+      "summary": "1. 概要 (1-2文で)  \nRails の MIME タイプ周りの内部レジストリを直接公開していた `Mime::SET`, `Mime::LOOKUP`, `Mime::EXTENSION_LOOKUP` が非推奨化され、代わりに既存の公開 API（`Mime.symbols`, `Mime[...]`, `Mime::Type.lookup`, `Mime::Type.lookup_by_extension` など）と新設の `Mime.extensions` を使うように誘導する変更です。  \nこれにより、ミュータブルな内部状態への直接アクセスを抑制しつつ、これまで内部定数でしかできなかった操作も正式なパブリック API でカバーされるようになりました。"
+    },
+    {
+      "number": 57917,
+      "title": "Attribute methods ractor safe {#pr-57917}",
+      "url": "https://github.com/rails/rails/pull/57917",
+      "mergedAt": "2026-07-02T00:00:00.000Z",
+      "author": "andrewn617",
+      "authorUrl": "https://github.com/andrewn617",
+      "summary": "1. 概要 (1-2文で)  \nRails の `ActiveModel::AttributeMethods` 周りで使われる `aliases_by_attribute_name` / `attribute_aliases` / `attribute_method_patterns` を、Ractor 間で安全に共有できるよう「デフォルトで freeze される値オブジェクト＆コレクション」に変更した PRです。これにより、Ractor 環境でも属性メソッド関連の情報を安心して参照できるようになり、並行実行時のデータ競合や Ractor 制限によるエラーを防ぎます。"
+    },
+    {
+      "number": 57757,
+      "title": "Make InheritableOptions ractor safe {#pr-57757}",
+      "url": "https://github.com/rails/rails/pull/57757",
+      "mergedAt": "2026-07-02T00:00:00.000Z",
+      "author": "andrewn617",
+      "authorUrl": "https://github.com/andrewn617",
+      "summary": "1. 概要 (1-2文で)  \nRails の `InheritableOptions`（`ActiveSupport::OrderedOptions` 系）の実装を見直し、`freeze` 済みで Ractor 共有可能（Ractor-safe）にできるようにした PRです。親ハッシュへのフォールバックを行うデフォルト Proc を凍結時に除去し、Ractor の shareable 制約に抵触しない仕組みに変更しています。"
+    },
+    {
+      "number": 57953,
+      "title": "Mark a connection unverified when a non-StandardError interrupts a query {#pr-57953}",
+      "url": "https://github.com/rails/rails/pull/57953",
+      "mergedAt": "2026-07-02T00:00:00.000Z",
+      "author": "edaroit",
+      "authorUrl": "https://github.com/edaroit",
+      "summary": "1. 概要 (1-2文で)  \n- Active Record の DB コネクションプールで、`StandardError` 以外の例外（`Timeout` や fiber scheduler の `Async::Stop` / `Async::Cancel` など）でクエリが中断された場合にも、そのコネクションを「未検証状態」にマークするようにし、後続リクエストに壊れたソケットが再利用されないようにする修正です。  \n- 中断されたクエリ自体の挙動（例外がそのまま飛ぶ）は変えず、「プールに戻されたコネクションの信頼性」だけを正しく扱うことで、EOFError などが後続の無関係なリクエストで発生するバグを防ぎます。"
+    },
     {
       "number": 57957,
       "title": "Bump Github Action cache version to 6 {#pr-57957}",
@@ -415,42 +451,6 @@
       "author": "55728",
       "authorUrl": "https://github.com/55728",
       "summary": "1. 概要 (1-2文で)  \nActionView の form ヘルパーに記載されていた RDoc のサンプルコードが、実際の出力と食い違っていた箇所を修正した PRです。`month_field` / `week_field` と `select` ヘルパーのドキュメント上の出力例のみが変わっており、実装ロジックには変更はありません。"
-    },
-    {
-      "number": 57869,
-      "title": "Fix stale instance variable in `stale?` RDoc example {#pr-57869}",
-      "url": "https://github.com/rails/rails/pull/57869",
-      "mergedAt": "2026-06-26T00:00:00.000Z",
-      "author": "55728",
-      "authorUrl": "https://github.com/55728",
-      "summary": "1. 概要 (1-2文で)  \n`ActionController::ConditionalGet` の RDoc 中の `stale?` の単一レコード例で、未定義のインスタンス変数 `@articles` を参照していた誤記を、正しく `@article` に修正したドキュメント向けの変更です。実装コードではなく、サンプルコードのみの修正です。"
-    },
-    {
-      "number": 57867,
-      "title": "Fix incorrect RDoc output examples in ActiveSupport {#pr-57867}",
-      "url": "https://github.com/rails/rails/pull/57867",
-      "mergedAt": "2026-06-26T00:00:00.000Z",
-      "author": "55728",
-      "authorUrl": "https://github.com/55728",
-      "summary": "1. 概要 (1-2文で)  \nActiveSupport の RDoc (ドキュメント用コメント) に記載されていたサンプル出力が、実際のコードの挙動と食い違っていたため、それを修正した PR です。コードの動作自体には変更がなく、あくまでドキュメントの例の整合性を取る修正です。"
-    },
-    {
-      "number": 57871,
-      "title": "Fix `remove_check_constraint` with `if_exists` for the expression form {#pr-57871}",
-      "url": "https://github.com/rails/rails/pull/57871",
-      "mergedAt": "2026-06-26T00:00:00.000Z",
-      "author": "55728",
-      "authorUrl": "https://github.com/55728",
-      "summary": "1. 概要 (1-2文で)  \n`remove_check_constraint` を式（expression）指定で使った場合に、`if_exists: true` が no-op にならず `ArgumentError` を投げていた不具合を修正した PR です。抽象アダプタと SQLite3 アダプタの両方で、存在確認時にも expression を正しく渡すようにしています。"
-    },
-    {
-      "number": 57872,
-      "title": "Fix reversibility check for `drop_virtual_table` {#pr-57872}",
-      "url": "https://github.com/rails/rails/pull/57872",
-      "mergedAt": "2026-06-26T00:00:00.000Z",
-      "author": "55728",
-      "authorUrl": "https://github.com/55728",
-      "summary": "1. 概要 (1-2文で)  \n`drop_virtual_table` のマイグレーションを逆変換する際の引数チェックが誤っており、本来は不可逆であるべき操作が「可逆」と判定されてしまう不具合を修正した PR です。これにより、`drop_virtual_table` の逆操作として生成される `create_virtual_table` が正しく実行可能かどうかを正しく判定できるようになりました。"
     }
   ]
 }
