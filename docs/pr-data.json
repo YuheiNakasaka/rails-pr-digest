@@ -1,7 +1,142 @@
 {
-  "lastUpdated": "2026-07-03T00:29:08.397Z",
+  "lastUpdated": "2026-07-04T00:31:08.705Z",
   "totalCount": 50,
   "items": [
+    {
+      "number": 57972,
+      "title": "Make `remove_foreign_key(if_exists: true)` reversible {#pr-57972}",
+      "url": "https://github.com/rails/rails/pull/57972",
+      "mergedAt": "2026-07-03T00:00:00.000Z",
+      "author": "55728",
+      "authorUrl": "https://github.com/55728",
+      "summary": "1. 概要 (1-2文で)  \nRails のマイグレーションで `remove_foreign_key if_exists: true` を実行した際、その逆操作（ロールバック）として生成される `add_foreign_key` が誤って `if_exists: true` を含んでしまう問題を修正した PR です。これにより、ロールバック時に `if_exists` が正しく `if_not_exists` に変換され、操作がより安全かつ意図通りに動作するようになります。"
+    },
+    {
+      "number": 57970,
+      "title": "Make `ActiveSupport::ProxyLogger#silence` suppress logs {#pr-57970}",
+      "url": "https://github.com/rails/rails/pull/57970",
+      "mergedAt": "2026-07-03T00:00:00.000Z",
+      "author": "55728",
+      "authorUrl": "https://github.com/55728",
+      "summary": "1. 概要 (1-2文で)  \n`ActiveSupport::ProxyLogger#silence` が期待どおりログを抑制するように修正された PR です。`silence` ブロック内で、指定した一時的なログレベル未満のメッセージが内部ロガーへ転送されないようになりました。"
+    },
+    {
+      "number": 57888,
+      "title": "Make autosave association callbacks Ractor-safe {#pr-57888}",
+      "url": "https://github.com/rails/rails/pull/57888",
+      "mergedAt": "2026-07-03T00:00:00.000Z",
+      "author": "gmcgibbon",
+      "authorUrl": "https://github.com/gmcgibbon",
+      "summary": "1. 概要 (1-2文で)  \nActive Record の autosave な関連（`autosave: true` な association）で生成されるコールバックメソッドを、Ractor（並行実行環境）でも安全に動作するように実装を変更した PR です。`define_method` + ブロックで作っていたメソッドを `class_eval` + シンボル呼び出しに変えることで、非共有 `Proc` をキャプチャしないようにしています。"
+    },
+    {
+      "number": 57927,
+      "title": "Make Active Record scope methods Ractor-shareable {#pr-57927}",
+      "url": "https://github.com/rails/rails/pull/57927",
+      "mergedAt": "2026-07-03T00:00:00.000Z",
+      "author": "gmcgibbon",
+      "authorUrl": "https://github.com/gmcgibbon",
+      "summary": "1. 概要 (1-2文で)  \nActive Record の `scope` が Ractor（並列実行機構）上で利用できるように、スコープ定義で使われる `Proc` を「Ractor-shareable」な形に変更した PR です。これにより、Ractor 内から AR モデルのスコープを安全に呼び出せるようになります。"
+    },
+    {
+      "number": 57961,
+      "title": "Add ActiveSupport::Ractors.try_make_shareable {#pr-57961}",
+      "url": "https://github.com/rails/rails/pull/57961",
+      "mergedAt": "2026-07-03T00:00:00.000Z",
+      "author": "gmcgibbon",
+      "authorUrl": "https://github.com/gmcgibbon",
+      "summary": "1. 概要 (1-2文で)  \n`ActiveSupport::Ractors.try_make_shareable` という新しいメソッドが追加され、任意のオブジェクトを「Ractor 共有可能（shareable）」にしようと試みる共通ユーティリティが ActiveSupport に入りました。`unshareable_proc_action` の設定に応じて、共有不可な Proc などにぶつかったときの挙動（例外・警告・無視）を切り替えられます。"
+    },
+    {
+      "number": 57976,
+      "title": "Make `ActiveSupport::EventReport::LogSubscriber` ractor safe {#pr-57976}",
+      "url": "https://github.com/rails/rails/pull/57976",
+      "mergedAt": "2026-07-03T00:00:00.000Z",
+      "author": "andrewn617",
+      "authorUrl": "https://github.com/andrewn617",
+      "summary": "1. 概要 (1-2文で)  \n`ActiveSupport::EventReport::LogSubscriber` の `event_log_level` API が Ractor セーフになるように、内部で使っている `log_levels` の扱いを「コピー＆追記＆freeze」に変更した PRです。共有ハッシュをそのまま書き換えないことで、Ractor 間でのスレッドセーフ／Ractor セーフな利用ができるようになっています。"
+    },
+    {
+      "number": 57978,
+      "title": "Make Normalization.normalizes ractor safe {#pr-57978}",
+      "url": "https://github.com/rails/rails/pull/57978",
+      "mergedAt": "2026-07-03T00:00:00.000Z",
+      "author": "andrewn617",
+      "authorUrl": "https://github.com/andrewn617",
+      "summary": "1. 概要 (1-2文で)  \n`ActiveModel::Normalization.normalizes` が Ractor（マルチスレッド並列実行）環境でも安全に利用できるよう、正規化属性を追加する内部実装を「複製してから追記して凍結する」形に変更した PR です。挙動自体は変えずに、内部データ構造の扱い方だけをスレッド/Ractor安全寄りにしています。"
+    },
+    {
+      "number": 57979,
+      "title": "Use latest ruby for GHA integration tests {#pr-57979}",
+      "url": "https://github.com/rails/rails/pull/57979",
+      "mergedAt": "2026-07-03T00:00:00.000Z",
+      "author": "skipkayhil",
+      "authorUrl": "https://github.com/skipkayhil",
+      "summary": "1. 概要 (1-2文で)  \nこのPRは、GitHub Actions 上で動作する Rails の各種インテグレーションテスト（devcontainer、rails new docker、rail_inspector）で使用する Ruby のバージョンを「最新の Ruby」に切り替える変更です。テストフロー自体は変えず、実行環境としての Ruby の指定のみを更新しています。\n\n2. 変更内容の詳細(あればサンプルコードも含めて)  \n対象ファイルはいずれも GitHub Actions のワークフローファイルです。\n\n- `.github/workflows/devcontainer-smoke-test.yml`\n- `.github/workflows/rail_inspector.yml`\n- `.github/workflows/rails-new-docker.yml`\n\n各ワークフロー内で、Ruby のバージョンを指定している箇所が 1 行ずつ書き換えられています。具体的には、従来は固定バージョン（例: `3.3`, `3.2` など）を指定していたものを、「最新の安定版 Ruby」を指す指定に変更した形が想定されます。\n\n典型的には、以下のような変更になっている可能性が高いです（参考イメージ）:\n\n```yaml\n# 変更前（例）\n- uses: ruby/setup-ruby@v1\n  with:\n    ruby-version: '3.3'\n\n# 変更後（例）\n- uses: ruby/setup-ruby@v1\n  with:\n    ruby-version: 'ruby'  # または '3.4' など、その時点の最新\n```\n\nもしくは、`matrix` で定義している `ruby: [ '3.3' ]` を最新バージョンに上げる、という形の可能性もあります。  \nいずれにせよ、各ワークフローの「使う Ruby のバージョンを 1 行だけ差し替えている」以外の変更は行われていません。\n\n3. 影響範囲・注意点  \n\n- 影響範囲  \n  - GitHub Actions 上で実行される以下のワークフローの Ruby 実行環境:\n    - devcontainer-smoke-test\n    - rail_inspector\n    - rails-new-docker  \n  - これらが「常に最新の Ruby で Rails をテストする」状態になるため、Rails 本体が最新 Ruby に対して継続的に検証されるようになります。\n\n- メリット  \n  - Ruby の新バージョンがリリースされた際に、自動的にそのバージョンで検証が走るようになり、Ruby 側の変更による非互換や警告の早期検知が可能になります。\n  - Rails の「最新 Ruby サポート状況」が CI 上で常にカバーされるため、メンテナンス性の向上に寄与します。\n\n- 注意点 / リスク  \n  - Ruby の新バージョンで非互換やバグが出た場合、Ruby リリース直後に CI が急に壊れる可能性があります（＝Rails 側が即座には対応できていないケース）。\n  - もし「特定の Ruby バージョンでの動作保証」を厳密にテストしたい場合は、別のジョブやマトリクスで LTS 的なバージョン（例: `3.1`, `3.2` など）を並行して運用する必要があります。\n  - 新しい Ruby でのみ発生する警告（deprecation など）が増え、ログがノイジーになる可能性があります。\n\n4. 参考情報 (あれば)  \n\n- `ruby/setup-ruby` アクションのバージョン指定方法（`ruby-version: ruby` で「最新安定版」を指す等）  \n  https://github.com/ruby/setup-ruby#usage\n- Rails がサポートしている Ruby バージョンポリシー（ガイドライン）  \n  https://guides.rubyonrails.org/ (「Ruby on Rails Guides」内の “Getting Started” や “Maintenance Policy” 関連)  \n- Rails リポジトリ内の GitHub Actions 設定全体  \n  https://github.com/rails/rails/tree/main/.github/workflows"
+    },
+    {
+      "number": 57974,
+      "title": "Require `useragent` when loading `ActionController::AllowBrowser` {#pr-57974}",
+      "url": "https://github.com/rails/rails/pull/57974",
+      "mergedAt": "2026-07-03T00:00:00.000Z",
+      "author": "andrewn617",
+      "authorUrl": "https://github.com/andrewn617",
+      "summary": "1. 概要 (1-2文で)  \n`ActionController::AllowBrowser` を読み込むタイミングで `useragent` を `require` するように変更し、これまで「最初のリクエスト時」に行われていた `useragent` の読み込みを事前に行えるようにした PR です。主に eager load 環境や Ractor 対応時の初回読み込みタイミングの改善が目的です。"
+    },
+    {
+      "number": 57977,
+      "title": "Fix typographical errors from CHANGELOG files[ci skip] {#pr-57977}",
+      "url": "https://github.com/rails/rails/pull/57977",
+      "mergedAt": "2026-07-03T00:00:00.000Z",
+      "author": "nisusam",
+      "authorUrl": "https://github.com/nisusam",
+      "summary": "1. 概要 (1-2文で)  \nこのPRは、Rails の CHANGELOG ファイル内に含まれていた英単語のタイポ（綴り誤り）を修正するものです。コードや挙動は一切変更せず、ドキュメントの品質向上のみを目的としています。\n\n2. 変更内容の詳細(あればサンプルコードも含めて)  \n- 対象ファイル  \n  - `actionpack/CHANGELOG.md`  \n  - `actionview/CHANGELOG.md`  \n  - `railties/CHANGELOG.md`  \n\n- 変更内容  \n  - 各 CHANGELOG に記載されている文章中の typographical error（スペルミスや細かな表記揺れ）を、それぞれ正しい綴りに修正しています。\n  - 追加行数 3 / 削除行数 3 から分かる通り、修正は行単位で 1 箇所ずつの軽微な置き換えであり、文面の意味や履歴内容自体は変えていません。\n  - 例としては以下のような変更が想定されます（イメージであり、実際の差分そのものではありません）:\n    ```diff\n    - * Fixes a behvaior where ...\n    + * Fixes a behavior where ...\n\n    - * Depreacted option ...\n    + * Deprecated option ...\n    ```\n\n  Ruby コード・設定ファイル・テストコードなど、実行時に読み込まれる部分への変更は行われていません。\n\n3. 影響範囲・注意点  \n- 影響範囲  \n  - 影響するのはドキュメント（CHANGELOG）のみであり、Rails アプリケーションの実行時挙動、ビルド、テスト、API は一切影響を受けません。\n  - 既存のバージョン互換性・マイグレーション・設定などにも影響なし。\n\n- 注意点  \n  - CI スキップ指定（`[ci skip]`）がタイトルに入っており、テストが走っていない点はログ上の事実としてありますが、そもそも実行可能コードに触れていないため問題にはなりません。\n  - CHANGELOG の参照時に、以前のタイポに依存したリンクや検索（例: タイポした単語で全文検索していた）を行っていた場合は、今後は正しい綴りで検索する必要があります。\n\n4. 参考情報 (あれば)  \n- PR タイトルから分かる通り、この変更は「CHANGELOG ファイル中の誤字修正」に限定されており、Rails の機能追加やバグ修正とは無関係です。  \n- Rails では、コードと直接関係ないドキュメント変更についても PR ベースで管理し、CI をスキップして軽量にマージする運用が行われています。"
+    },
+    {
+      "number": 57959,
+      "title": "Fix polymorphic belongs_to primary key for sharded targets {#pr-57959}",
+      "url": "https://github.com/rails/rails/pull/57959",
+      "mergedAt": "2026-07-03T00:00:00.000Z",
+      "author": "hmcguire-shopify",
+      "authorUrl": "https://github.com/hmcguire-shopify",
+      "summary": "1. 概要 (1-2文で)\n- シャーディング対応で「複合主キーを持つ has_many」と「単一外部キーを持つ polymorphic belongs_to」を組み合わせたときに、`AutosaveAssociation` 内で主キーと外部キーの対応付けがずれて `ActiveModel::MissingAttributeError` が起きる回 regress を修正した PRです。  \n- `BelongsToReflection#association_primary_key` が、belongs_to 側が単一外部キーしか持たない場合でも、シャーディング用の複合主キー（`query_constraints`）をそのまま返してしまっていた挙動を是正しています。"
+    },
+    {
+      "number": 57942,
+      "title": "Return all parameters from `deconstruct_keys` when no keys are requested {#pr-57942}",
+      "url": "https://github.com/rails/rails/pull/57942",
+      "mergedAt": "2026-07-03T00:00:00.000Z",
+      "author": "55728",
+      "authorUrl": "https://github.com/55728",
+      "summary": "1. 概要 (1-2文で)  \n`ActionController::Parameters` に対するパターンマッチで、`{ key:, **rest }` のように **特定キーを指定せず rest バインディングだけを使った場合**にマッチしなかった問題を修正し、`Hash#deconstruct_keys` と同じ挙動（キー指定なしなら全パラメータを返す）になるようにした変更です。"
+    },
+    {
+      "number": 57965,
+      "title": "8 1 stable cp 1dbad939f8 {#pr-57965}",
+      "url": "https://github.com/rails/rails/pull/57965",
+      "mergedAt": "2026-07-03T00:00:00.000Z",
+      "author": "p8",
+      "authorUrl": "https://github.com/p8",
+      "summary": "1. 概要 (1-2文で)  \nこのPRは、Rails 8.1 ステーブルブランチに対して「product_reviews」という新しいガイドを大きく追加し、既存の「wishlists」ガイドをわずかに調整する、ドキュメント中心の変更です。コード本体には手が入っておらず、開発者向けの学習・サンプルアプリケーション的なガイドが充実した形になります。"
+    },
+    {
+      "number": 57964,
+      "title": "Fix casing in product reviews guide {#pr-57964}",
+      "url": "https://github.com/rails/rails/pull/57964",
+      "mergedAt": "2026-07-03T00:00:00.000Z",
+      "author": "p8",
+      "authorUrl": "https://github.com/p8",
+      "summary": "1. 概要 (1-2文で)  \nこのPRは、Rails ガイド「product_reviews.md」内の英単語の大文字・小文字表記（casing）を修正し、用語やコードの表記ゆれを整えるドキュメント修正です。機能や挙動の変更はなく、アプリケーションコードやテストには影響しません。"
+    },
+    {
+      "number": 57244,
+      "title": "[RF-DOCS][ci-skip] Add Product Reviews Tutorial {#pr-57244}",
+      "url": "https://github.com/rails/rails/pull/57244",
+      "mergedAt": "2026-07-03T00:00:00.000Z",
+      "author": "excid3",
+      "authorUrl": "https://github.com/excid3",
+      "summary": "1. 概要 (1-2文で)  \nこのPRは、Rails公式ガイドの「ECサイトチュートリアル」の続きとして「商品レビュー(Product Reviews)」機能を実装する新しいチュートリアルを追加するドキュメント変更です。ユーザーによる星評価付きレビュー、画像アップロード、レビューに基づく商品の平均評価更新、フィルタリング・集計表示、管理画面でのレビュー編集などを一通りカバーしています。"
+    },
     {
       "number": 57826,
       "title": "Deprecate Mime::SET, Mime::LOOKUP and Mime::EXTENSION_LOOKUP {#pr-57826}",
@@ -316,141 +451,6 @@
       "author": "55728",
       "authorUrl": "https://github.com/55728",
       "summary": "1. 概要 (1-2文で)  \n`ActiveSupport::HashWithIndifferentAccess` において、`#filter` 呼び出し時にも「シンボル/文字列を区別しないアクセス（indifferent access）」が維持されるように修正した PR です。これにより、`#select` と `#filter` が同じクラス（`HashWithIndifferentAccess`）を返し、期待どおりの挙動になります。"
-    },
-    {
-      "number": 57894,
-      "title": "Reverse a relation by its `query_constraints` when no order is given {#pr-57894}",
-      "url": "https://github.com/rails/rails/pull/57894",
-      "mergedAt": "2026-06-28T00:00:00.000Z",
-      "author": "55728",
-      "authorUrl": "https://github.com/55728",
-      "summary": "1. 概要 (1-2文で)  \n`query_constraints` を宣言しているモデルに対して `reverse_order` を呼んだ際、暗黙的な並び順（`first` / `last` が使う順序）を正しく反転するように修正した PR です。これにより、`reverse_order.first == last` が直感通りに成り立つようになり、モデルに `query_constraints` が無い場合の挙動は従来通りです。"
-    },
-    {
-      "number": 57817,
-      "title": "Use the float value for `:wait` if passed to `ActiveJob.retry_on` {#pr-57817}",
-      "url": "https://github.com/rails/rails/pull/57817",
-      "mergedAt": "2026-06-28T00:00:00.000Z",
-      "author": "p8",
-      "authorUrl": "https://github.com/p8",
-      "summary": "1. 概要 (1-2文で)  \n`ActiveJob.retry_on` に `wait:` オプションとして Float（秒数の小数）を渡した場合に、これまで整数に丸められていた待機時間を、Float のまま正しく扱うようにした修正です。`ActiveJob.set(wait: ...)` と同様に小数秒の遅延がサポートされ、CHANGELOG も追記されています。"
-    },
-    {
-      "number": 57837,
-      "title": "Make CookieStore::DEFAULT_SAME_SITE ractor safe {#pr-57837}",
-      "url": "https://github.com/rails/rails/pull/57837",
-      "mergedAt": "2026-06-28T00:00:00.000Z",
-      "author": "55728",
-      "authorUrl": "https://github.com/55728",
-      "summary": "1. 概要 (1-2文で)  \n`ActionDispatch::Session::CookieStore` のデフォルト `same_site` 設定用 Proc を `ActiveSupport::Ractors.shareable_proc` でラップし、`CookieStore::DEFAULT_SAME_SITE` を Ractor 間で共有可能（Ractor-shareable）にする変更です。これにより、Ractor を用いた並行実行環境でも CookieStore のデフォルト動作が安全に利用できます。"
-    },
-    {
-      "number": 57839,
-      "title": "Make some ActiveSupport constants ractor safe {#pr-57839}",
-      "url": "https://github.com/rails/rails/pull/57839",
-      "mergedAt": "2026-06-28T00:00:00.000Z",
-      "author": "55728",
-      "authorUrl": "https://github.com/55728",
-      "summary": "1. 概要 (1-2文で)  \nActiveSupport 内の一部の定数（ログレベル判定用 lambda と debug モード判定用 proc）を、`ActiveSupport::Ractors.shareable_lambda` / `.shareable_proc` でラップし、Ractor 間で共有可能（Ractor-shareable）にした PR です。これにより、Ractor を使う並行実行環境でも、これらの ActiveSupport 定数が安全に利用できます。"
-    },
-    {
-      "number": 57840,
-      "title": "Make some Active Record constants ractor safe {#pr-57840}",
-      "url": "https://github.com/rails/rails/pull/57840",
-      "mergedAt": "2026-06-28T00:00:00.000Z",
-      "author": "55728",
-      "authorUrl": "https://github.com/55728",
-      "summary": "1. 概要 (1-2文で)  \nActive Record内部で定数として保持しているいくつかのProcを、`ActiveSupport::Ractors.shareable_proc` でラップして Ractor 共有可能にした変更です。これにより、ArelのSQLバインド処理およびネストした属性の`:all_blank`判定で使われるProcが、Ractor間で安全に共有できるようになります。"
-    },
-    {
-      "number": 57841,
-      "title": "Make ActionMailbox::Callbacks::TERMINATOR ractor safe {#pr-57841}",
-      "url": "https://github.com/rails/rails/pull/57841",
-      "mergedAt": "2026-06-28T00:00:00.000Z",
-      "author": "55728",
-      "authorUrl": "https://github.com/55728",
-      "summary": "1. 概要 (1-2文で)  \nAction Mailbox のコールバック用終端処理 (`TERMINATOR` lambda) を `ActiveSupport::Ractors.shareable_lambda` でラップし、Ractor 間で安全に共有できるようにした PR です。これにより、すでに Ractor 対応されたコールバック機構 (#57629) において、Action Mailbox 固有の終端処理も Ractor-safe になります。"
-    },
-    {
-      "number": 57890,
-      "title": "Fix `week_field` emitting invalid week strings at ISO year boundaries {#pr-57890}",
-      "url": "https://github.com/rails/rails/pull/57890",
-      "mergedAt": "2026-06-28T00:00:00.000Z",
-      "author": "55728",
-      "authorUrl": "https://github.com/55728",
-      "summary": "1. 概要 (1-2文で)  \nRails の `week_field` ヘルパが、年末年始の ISO 週番号境界で仕様上無効な週文字列（例: `2016-W53`）を出力してしまう不具合を修正し、常に ISO 週番号付け年 (week-numbering year) を用いるようにした PRです。これにより `<input type=\"week\">` の値がブラウザ仕様どおり `yyyy-Www` 形式で、かつ実在する週を指すようになります。"
-    },
-    {
-      "number": 57870,
-      "title": "Honor `options[:drop]` in CacheStore session deletion {#pr-57870}",
-      "url": "https://github.com/rails/rails/pull/57870",
-      "mergedAt": "2026-06-28T00:00:00.000Z",
-      "author": "55728",
-      "authorUrl": "https://github.com/55728",
-      "summary": "1. 概要 (1-2文で)  \n`ActionDispatch::Session::CacheStore#delete_session` が `options[:drop]` を無視して常に新しいセッションIDを返していた不具合が修正され、`options[:drop]` が指定された場合は `nil` を返すようになりました。これにより、Rack のインターフェース仕様および `CookieStore` の挙動と整合が取れ、セッションを「ドロップしたつもりなのに新しいセッションが発行される」問題が解消されます。"
-    },
-    {
-      "number": 57897,
-      "title": "Deduplicate columns in `regroup` {#pr-57897}",
-      "url": "https://github.com/rails/rails/pull/57897",
-      "mergedAt": "2026-06-28T00:00:00.000Z",
-      "author": "55728",
-      "authorUrl": "https://github.com/55728",
-      "summary": "1. 概要 (1-2文で)  \n`ActiveRecord::Relation#regroup` / `regroup!` が、重複したカラム指定をそのまま保持していた問題を修正し、`group` と同様にグループ対象カラムを重複除去（uniq）するようにした PR です。これにより、ドキュメントにある「`regroup` は `unscope(:group).group(fields)` のショートハンド」という仕様が実際の挙動と一致するようになりました。"
-    },
-    {
-      "number": 57899,
-      "title": "Fix flaky test_parallel_group_stops_launching_new_steps_with_*_flag {#pr-57899}",
-      "url": "https://github.com/rails/rails/pull/57899",
-      "mergedAt": "2026-06-28T00:00:00.000Z",
-      "author": "yahonda",
-      "authorUrl": "https://github.com/yahonda",
-      "summary": "1. 概要 (1-2文で)  \nRails の CI テスト `ContinuousIntegrationTest#test_parallel_group_stops_launching_new_steps_with_*_flag` が並列実行時のタイミング依存で不安定に落ちる問題を、テスト側の実行時間を調整することで解消した PR です。  \n本番コードの変更はなく、`activesupport/test/continuous_integration_test.rb` 内のテスト定義のみが修正されています。"
-    },
-    {
-      "number": 57895,
-      "title": "Make `add_foreign_key(if_not_exists: true)` reversible {#pr-57895}",
-      "url": "https://github.com/rails/rails/pull/57895",
-      "mergedAt": "2026-06-27T00:00:00.000Z",
-      "author": "55728",
-      "authorUrl": "https://github.com/55728",
-      "summary": "1. 概要 (1-2文で)  \n`add_foreign_key(if_not_exists: true)` を含むマイグレーションをロールバックした際に、正しく可逆（reversible）になるように修正したPRです。`if_not_exists: true` を伴う外部キー追加の逆操作として、`if_exists: true` を付けた `remove_foreign_key` が生成されるようになりました。"
-    },
-    {
-      "number": 57892,
-      "title": "Return an `ActiveRecord::Promise` from `async_ids` on a contradictory relation {#pr-57892}",
-      "url": "https://github.com/rails/rails/pull/57892",
-      "mergedAt": "2026-06-27T00:00:00.000Z",
-      "author": "55728",
-      "authorUrl": "https://github.com/55728",
-      "summary": "1. 概要 (1-2文で)  \n`Relation#async_ids` が「常に `ActiveRecord::Promise` を返す」という仕様に反して、矛盾した where 句（例: `where(id: [])`）の場合だけ素の `Array` を返してしまうバグがあり、それを修正した PR です。`async_ids` がどんな条件でも一貫して `ActiveRecord::Promise` を返すようになりました。"
-    },
-    {
-      "number": 57891,
-      "title": "Fix `number_to_human`/`number_to_human_size` crashing on `precision: nil` {#pr-57891}",
-      "url": "https://github.com/rails/rails/pull/57891",
-      "mergedAt": "2026-06-27T00:00:00.000Z",
-      "author": "55728",
-      "authorUrl": "https://github.com/55728",
-      "summary": "1. 概要 (1-2文で)  \n`number_to_human` と `number_to_human_size` に `precision: nil` を渡したときに `NoMethodError` で落ちていた不具合を修正した PR です。ほかの number helper と同様に、`precision: nil` を安全に扱えるようになります。"
-    },
-    {
-      "number": 57889,
-      "title": "Fix incorrect RDoc examples across frameworks {#pr-57889}",
-      "url": "https://github.com/rails/rails/pull/57889",
-      "mergedAt": "2026-06-27T00:00:00.000Z",
-      "author": "55728",
-      "authorUrl": "https://github.com/55728",
-      "summary": "1. 概要 (1-2文で)  \nこのPRは、Rails 各フレームワークに散在していた RDoc の誤ったサンプルコードや出力例を、実際の挙動に合わせて修正する「コメントのみ([ci skip])」の変更です。コードロジックには一切手を入れておらず、ドキュメントの信頼性・再現性を高めることが目的です。"
-    },
-    {
-      "number": 57868,
-      "title": "Fix incorrect RDoc examples in ActionView form helpers {#pr-57868}",
-      "url": "https://github.com/rails/rails/pull/57868",
-      "mergedAt": "2026-06-26T00:00:00.000Z",
-      "author": "55728",
-      "authorUrl": "https://github.com/55728",
-      "summary": "1. 概要 (1-2文で)  \nActionView の form ヘルパーに記載されていた RDoc のサンプルコードが、実際の出力と食い違っていた箇所を修正した PRです。`month_field` / `week_field` と `select` ヘルパーのドキュメント上の出力例のみが変わっており、実装ロジックには変更はありません。"
     }
   ]
 }
