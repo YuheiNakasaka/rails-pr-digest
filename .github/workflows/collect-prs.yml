@@ -6,6 +6,10 @@ on:
     - cron: '0 0 * * *'
   workflow_dispatch: # Allow manual trigger
 
+concurrency:
+  group: ${{ github.workflow }}
+  cancel-in-progress: false
+
 permissions:
   contents: write
   pages: write
@@ -45,7 +49,19 @@ jobs:
           if [ -n "$(git status --porcelain)" ]; then
             git add docs/monthly/*.md docs/monthly-index.json docs/pr-data.json
             git commit -m "Update Rails PR digest [skip ci]"
-            git push
+
+            for i in 1 2 3 4 5; do
+              if git push; then
+                break
+              fi
+              echo "Push rejected, rebasing onto latest remote and retrying ($i)..."
+              git fetch origin "${GITHUB_REF_NAME}"
+              git rebase "origin/${GITHUB_REF_NAME}"
+              if [ "$i" -eq 5 ]; then
+                echo "Failed to push after multiple retries"
+                exit 1
+              fi
+            done
           else
             echo "No changes to commit"
           fi
