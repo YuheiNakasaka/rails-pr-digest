@@ -1,7 +1,124 @@
 {
-  "lastUpdated": "2026-07-04T00:31:08.705Z",
+  "lastUpdated": "2026-07-05T00:30:36.620Z",
   "totalCount": 50,
   "items": [
+    {
+      "number": 57991,
+      "title": "Stop HTML-escaping JSON written by Coders::JSON {#pr-57991}",
+      "url": "https://github.com/rails/rails/pull/57991",
+      "mergedAt": "2026-07-04T00:00:00.000Z",
+      "author": "55728",
+      "authorUrl": "https://github.com/55728",
+      "summary": "1. 概要 (1-2文で)  \n`ActiveRecord::Coders::JSON` が JSON を DB に書き込む際、意図されていた「HTML エスケープ無し (`escape: false`)」設定が実際には効いておらず、HTML エスケープされてしまっていた不具合を修正する PR です。これにより、JSON 型カラムや `ActiveRecord::Type::Json` との挙動が統一されます。"
+    },
+    {
+      "number": 57990,
+      "title": "Match HTTP auth scheme case-insensitively for Token and Bearer {#pr-57990}",
+      "url": "https://github.com/rails/rails/pull/57990",
+      "mergedAt": "2026-07-04T00:00:00.000Z",
+      "author": "55728",
+      "authorUrl": "https://github.com/55728",
+      "summary": "1. 概要 (1-2文で)  \nHTTP の `Authorization` ヘッダにおける `Token` / `Bearer` 認証スキームの判定が、大文字小文字を区別しない（case-insensitive）形に修正されました。これにより、`bearer abc123` や `TOKEN xyz` といった非標準の大文字小文字でも正しくトークンが認識されるようになります。"
+    },
+    {
+      "number": 57993,
+      "title": "Fix incorrect number_to_percentage default precision in docs [ci skip] {#pr-57993}",
+      "url": "https://github.com/rails/rails/pull/57993",
+      "mergedAt": "2026-07-04T00:00:00.000Z",
+      "author": "anxkhn",
+      "authorUrl": "https://github.com/anxkhn",
+      "summary": "1. 概要 (1-2文で)  \n`number_to_percentage` ヘルパーのドキュメントに書かれていた `:precision` オプションのデフォルト値が誤っており、実際の挙動（デフォルト3桁）に合わせて「2」から「3」に修正した PR です。コードや挙動の変更はなく、ドキュメントのみの修正です。"
+    },
+    {
+      "number": 57986,
+      "title": "Fix Guides Index flyout menu overflowing its panel {#pr-57986}",
+      "url": "https://github.com/rails/rails/pull/57986",
+      "mergedAt": "2026-07-04T00:00:00.000Z",
+      "author": "iuhoay",
+      "authorUrl": "https://github.com/iuhoay",
+      "summary": "1. 概要 (1-2文で)  \nRails Guides のデスクトップ向け「Guides Index」フライアウトメニューで、3カラムレイアウトが横幅を超えて右にはみ出していた問題を、CSS のレイアウト指定を見直すことで解消した PR です。`width` と `margin` の組み合わせで 100% を超えていたものを、`column-gap` と `calc()` を用いてちょうど 100% に収まるようにしています。"
+    },
+    {
+      "number": 57997,
+      "title": "Use `Range#cover?` for `this_week?`/`this_month?`/`this_year?` {#pr-57997}",
+      "url": "https://github.com/rails/rails/pull/57997",
+      "mergedAt": "2026-07-04T00:00:00.000Z",
+      "author": "55728",
+      "authorUrl": "https://github.com/55728",
+      "summary": "1. 概要 (1-2文で)  \n`Date`/`Time`関連のヘルパー `this_week?` / `this_month?` / `this_year?` が、内部判定に `Range#include?` ではなく `Range#cover?` を使うように変更され、性能が大きく改善されました。振る舞いは変えずに、呼び出しごとの無駄な日付走査を避けるリファクタリングです。"
+    },
+    {
+      "number": 57963,
+      "title": "Add `this_quarter?` to Date/Time {#pr-57963}",
+      "url": "https://github.com/rails/rails/pull/57963",
+      "mergedAt": "2026-07-04T00:00:00.000Z",
+      "author": "55728",
+      "authorUrl": "https://github.com/55728",
+      "summary": "1. 概要 (1-2文で)  \n`Date`, `Time`, `DateTime`, `ActiveSupport::TimeWithZone` に対して「今期（今四半期）かどうか」を判定する `this_quarter?` メソッドが追加されました。これにより、week/month/year に揃う形で quarter にも `this_*?` プレディケートが用意され、日付処理の一貫性が向上しています。"
+    },
+    {
+      "number": 57987,
+      "title": "Make `add_index(if_not_exists: true)` reversible {#pr-57987}",
+      "url": "https://github.com/rails/rails/pull/57987",
+      "mergedAt": "2026-07-04T00:00:00.000Z",
+      "author": "55728",
+      "authorUrl": "https://github.com/55728",
+      "summary": "1. 概要 (1-2文で)  \n`add_index` / `remove_index` のマイグレーションを逆変換（rollback 時の自動生成）する際に、`if_not_exists` / `if_exists` オプションが正しく対応付けられるようになりました。これにより、既存/非存在なインデックスに対して安全にロールバックでき、これまで発生していた不要な例外が解消されます。"
+    },
+    {
+      "number": 57992,
+      "title": "Require fileutils in Cache::FileStore {#pr-57992}",
+      "url": "https://github.com/rails/rails/pull/57992",
+      "mergedAt": "2026-07-04T00:00:00.000Z",
+      "author": "55728",
+      "authorUrl": "https://github.com/55728",
+      "summary": "1. 概要 (1-2文で)  \n`ActiveSupport::Cache::FileStore` 内で `FileUtils` を利用しているにもかかわらず `\"fileutils\"` を require していなかった問題を修正し、スタンドアロンな ActiveSupport 利用時に発生していた `NameError` を解消する PR です。Rails フルスタックでは暗黙に読み込まれていた依存を、明示的に宣言するようになりました。"
+    },
+    {
+      "number": 57984,
+      "title": "Quote the index name in MySQL enable_index/disable_index {#pr-57984}",
+      "url": "https://github.com/rails/rails/pull/57984",
+      "mergedAt": "2026-07-04T00:00:00.000Z",
+      "author": "55728",
+      "authorUrl": "https://github.com/55728",
+      "summary": "1. 概要 (1-2文で)  \nMySQL / MariaDB 用アダプタの `enable_index` / `disable_index` が、インデックス名をクォートせずに SQL を生成していた問題を修正し、予約語や特殊文字を含むインデックス名でも正常に動作するようにしました。`rename_index` など他のインデックス操作と一貫して、インデックス名に `quote_column_name` を適用するようになっています。"
+    },
+    {
+      "number": 57988,
+      "title": "Raise on ignored `if_exists` option in `change_table`'s `remove_timestamps` {#pr-57988}",
+      "url": "https://github.com/rails/rails/pull/57988",
+      "mergedAt": "2026-07-04T00:00:00.000Z",
+      "author": "55728",
+      "authorUrl": "https://github.com/55728",
+      "summary": "1. 概要 (1-2文で)  \n`change_table` ブロック内で `t.remove_timestamps` に `if_exists:` / `if_not_exists:` オプションを渡した場合、これまでは黙って無視されていましたが、他のメソッドと同様に `ArgumentError` を投げて呼び出し側に誤用を知らせるように変更されました。これにより、サポートされないオプションの利用を早期に検知できるようになります。"
+    },
+    {
+      "number": 57989,
+      "title": "Fix color_field emitting invalid color values for strings containing a hex substring {#pr-57989}",
+      "url": "https://github.com/rails/rails/pull/57989",
+      "mergedAt": "2026-07-04T00:00:00.000Z",
+      "author": "55728",
+      "authorUrl": "https://github.com/55728",
+      "summary": "1. 概要 (1-2文で)  \n`color_field` ヘルパーの色値バリデーションが不正確だったため、`<input type=\"color\">` にブラウザが解釈できない値がそのまま出力されていた問題を修正しています。正規表現を「文字列全体が `#rrggbb` 形式かどうか」を見るように変更し、それ以外は `#000000` にフォールバックする挙動を統一しました。"
+    },
+    {
+      "number": 57985,
+      "title": "Update PostgreSQL database.yml sample in Command Line guide [ci skip] {#pr-57985}",
+      "url": "https://github.com/rails/rails/pull/57985",
+      "mergedAt": "2026-07-04T00:00:00.000Z",
+      "author": "fuentesjr",
+      "authorUrl": "https://github.com/fuentesjr",
+      "summary": "1. 概要 (1-2文で)  \nCommand Line ガイド内の PostgreSQL 用 `database.yml` サンプルを、現行の `rails new ... --database=postgresql` が生成する内容に合わせて更新した PRです。合わせて、非推奨になりつつある `pool` キーの例を、新しい `max_connections` キーの例に置き換えています。"
+    },
+    {
+      "number": 57921,
+      "title": "Expand Action Mailer `delivery_method` configuration docs [ci skip] {#pr-57921}",
+      "url": "https://github.com/rails/rails/pull/57921",
+      "mergedAt": "2026-07-04T00:00:00.000Z",
+      "author": "davidstosik",
+      "authorUrl": "https://github.com/davidstosik",
+      "summary": "1. 概要 (1-2文で)  \nAction Mailer の `config.action_mailer.delivery_method` のドキュメントを拡充し、循環参照的で分かりにくかった記述を、実際に使えるレベルの説明に整理した PR です。あわせて `smtp_settings` / `sendmail_settings` / `file_settings` との依存関係が分かるように、記述の順番も入れ替えています。"
+    },
     {
       "number": 57972,
       "title": "Make `remove_foreign_key(if_exists: true)` reversible {#pr-57972}",
@@ -334,123 +451,6 @@
       "author": "byroot",
       "authorUrl": "https://github.com/byroot",
       "summary": "1. 概要 (1-2文で)  \nRailsのActiveSupportに `ActiveSupport::ProxyLogger` が追加され、既存のロガーにログを委譲しつつ「別のログレベルで」フィルタリングできるラッパーロガーが使えるようになりました。これにより、アプリ全体と同じ出力先を使いつつ、特定ライブラリだけログを抑制・制御することが容易になります。"
-    },
-    {
-      "number": 57874,
-      "title": "Make the Action View template handler registry Ractor-shareable {#pr-57874}",
-      "url": "https://github.com/rails/rails/pull/57874",
-      "mergedAt": "2026-06-30T00:00:00.000Z",
-      "author": "etiennebarrie",
-      "authorUrl": "https://github.com/etiennebarrie",
-      "summary": "1. 概要 (1-2文で)  \nAction View のテンプレートハンドラのレジストリを Ractor で共有可能（Ractor-shareable）にするため、内部実装がクラス変数ベースからモジュールインスタンス変数＋不変（frozen）な構造に再設計された PR です。これにより、テンプレート検索・描画パスでのハンドラ参照が Ractor セーフかつスレッド安全になり、読み取り時に書き込みが発生しないようになっています。"
-    },
-    {
-      "number": 57916,
-      "title": "Treat a Symbol stream name as a literal stream in channel test assertions {#pr-57916}",
-      "url": "https://github.com/rails/rails/pull/57916",
-      "mergedAt": "2026-06-30T00:00:00.000Z",
-      "author": "55728",
-      "authorUrl": "https://github.com/55728",
-      "summary": "1. 概要 (1-2文で)  \nAction Cable のチャンネル用テストヘルパ (`ActionCable::Channel::TestCase`) において、シンボルで指定したストリーム名を本番動作と同じく「文字列に対応するリテラルなストリーム名」として扱うように修正した PR です。これにより、`:my_room` と `\"my_room\"` を使ったストリーム／アサーションの挙動が一貫し、誤検知・見逃しが起きないようになります。"
-    },
-    {
-      "number": 57912,
-      "title": "Reference `ActionCable::Configuration` in the Action Cable guide {#pr-57912}",
-      "url": "https://github.com/rails/rails/pull/57912",
-      "mergedAt": "2026-06-30T00:00:00.000Z",
-      "author": "55728",
-      "authorUrl": "https://github.com/55728",
-      "summary": "1. 概要 (1-2文で)  \nAction Cable ガイド内の「Configuration」セクションで参照していたクラス名を、古い `ActionCable::Server::Configuration` から現在の正規名 `ActionCable::Configuration` に修正したドキュメント更新です。バックワードコンパチ目的のエイリアスは残っていますが、ガイド上は新しい正規クラス名を指すようになりました。"
-    },
-    {
-      "number": 57928,
-      "title": "Eliminate a useless frame in AS::Notifications.instrument {#pr-57928}",
-      "url": "https://github.com/rails/rails/pull/57928",
-      "mergedAt": "2026-06-30T00:00:00.000Z",
-      "author": "byroot",
-      "authorUrl": "https://github.com/byroot",
-      "summary": "1. 概要 (1-2文で)  \n`ActiveSupport::Notifications.instrument` 内の「無駄なスタックフレーム」を取り除き、スタックトレースやフレームグラフが少し読みやすくなるようにした変更です。性能への影響はほぼありませんが、デバッグやプロファイリング時の視認性が向上します。"
-    },
-    {
-      "number": 57919,
-      "title": "Make LogSubscriber.log_levels ractor safe {#pr-57919}",
-      "url": "https://github.com/rails/rails/pull/57919",
-      "mergedAt": "2026-06-30T00:00:00.000Z",
-      "author": "andrewn617",
-      "authorUrl": "https://github.com/andrewn617",
-      "summary": "1. 概要 (1-2文で)\n- `ActiveSupport::LogSubscriber` の `subscribe_log_level` が Ractor（マルチスレッド/マルチ Ractor）環境でも安全に動作するように、内部で持っている `log_levels` ハッシュをフリーズするようにした PR です。\n- これにより、Ractor 間で `LogSubscriber` を共有してもログレベル設定が原因でエラーやデータ競合が起きにくくなります。"
-    },
-    {
-      "number": 57920,
-      "title": "Eagerly assign ExecutionWrapper's active key {#pr-57920}",
-      "url": "https://github.com/rails/rails/pull/57920",
-      "mergedAt": "2026-06-30T00:00:00.000Z",
-      "author": "andrewn617",
-      "authorUrl": "https://github.com/andrewn617",
-      "summary": "1. 概要 (1-2文で)  \nExecutionWrapper のサブクラスにおける `active_key` の代入タイミングを「継承時」に早めることで、最初のリクエストが非メイン Ractor で処理された場合に発生する Ractor の隔離エラーを防ぐ修正です。Ractor 対応を強化するための内部的な初期化順序の見直しになります。"
-    },
-    {
-      "number": 57913,
-      "title": "Keep nil elements named in the series for `in_order_of` {#pr-57913}",
-      "url": "https://github.com/rails/rails/pull/57913",
-      "mergedAt": "2026-06-29T00:00:00.000Z",
-      "author": "55728",
-      "authorUrl": "https://github.com/55728",
-      "summary": "1. 概要 (1-2文で)  \n`Enumerable#in_order_of` を `filter: true`（デフォルト）で使ったとき、ソート順を指定する配列（series）に `nil` が含まれていても、これまでは結果から `nil` が落ちていましたが、PRにより明示的に指定された `nil` を結果にも残すように修正されました。これにより、`filter: true` と `filter: false` での挙動が `nil` の扱いに関して一貫します。"
-    },
-    {
-      "number": 57915,
-      "title": "Include call options in `Cache#exist?` instrumentation payload {#pr-57915}",
-      "url": "https://github.com/rails/rails/pull/57915",
-      "mergedAt": "2026-06-29T00:00:00.000Z",
-      "author": "55728",
-      "authorUrl": "https://github.com/55728",
-      "summary": "1. 概要 (1-2文で)  \n`Rails.cache.exist?` 実行時に発火する `cache_exist?.active_support` の通知ペイロードに、これまで含まれていなかったオプション引数（namespace, version, expires_in など）が含まれるようになりました。これにより、他のキャッシュ操作（read/write/delete/fetch_hit）と同じ情報が計測・ロギングで利用できます。"
-    },
-    {
-      "number": 57911,
-      "title": "Allow Arel to be required on its own {#pr-57911}",
-      "url": "https://github.com/rails/rails/pull/57911",
-      "mergedAt": "2026-06-29T00:00:00.000Z",
-      "author": "55728",
-      "authorUrl": "https://github.com/55728",
-      "summary": "1. 概要 (1-2文で)  \n`require \"arel\"` を Active Support なしで実行すると `ActiveSupport::Ractors` の `NameError` が発生していた問題を、Arel 側で明示的に `active_support/ractors` を読み込むことで解消した PR です。Arel を Active Record 抜きで単独利用するユースケースが再び正常に動くようになります。"
-    },
-    {
-      "number": 57907,
-      "title": "Return a composite has_and_belongs_to_many association_foreign_key as an array {#pr-57907}",
-      "url": "https://github.com/rails/rails/pull/57907",
-      "mergedAt": "2026-06-29T00:00:00.000Z",
-      "author": "ollym",
-      "authorUrl": "https://github.com/ollym",
-      "summary": "1. 概要 (1-2文で)  \n`has_and_belongs_to_many` で複合キーを指定した場合、reflection から取得できる `association_foreign_key` が、文字列化された 1 つの値ではなく、`foreign_key` と同様に「カラム名文字列の配列」として返るように修正された PR です。これにより、複合 HABTM を introspection（メタ情報の取得）から正しく扱えるようになります。"
-    },
-    {
-      "number": 57843,
-      "title": "Declare `assert_not_pattern` alias for `refute_pattern` {#pr-57843}",
-      "url": "https://github.com/rails/rails/pull/57843",
-      "mergedAt": "2026-06-28T00:00:00.000Z",
-      "author": "seanpdoyle",
-      "authorUrl": "https://github.com/seanpdoyle",
-      "summary": "1. 概要 (1-2文で)  \nRails の `ActiveSupport::TestCase` に、Minitest の `refute_pattern` に対応するエイリアスメソッド `assert_not_pattern` が追加されました。これにより、他の `assert_not_*` 系メソッドと同じ書き方でパターンマッチングの否定アサーションが使えるようになります。"
-    },
-    {
-      "number": 57896,
-      "title": "Apply DISTINCT to a grouped `sum` {#pr-57896}",
-      "url": "https://github.com/rails/rails/pull/57896",
-      "mergedAt": "2026-06-28T00:00:00.000Z",
-      "author": "55728",
-      "authorUrl": "https://github.com/55728",
-      "summary": "1. 概要 (1-2文で)  \n`Relation#sum` に `distinct` と `group` を同時に指定した場合に、内部的に `SUM(DISTINCT column)` ではなく単なる `SUM(column)` が実行されてしまい、数値が誤っていたバグを修正する PR です。未グループのケースで既に行っていた `DISTINCT` フラグ適用処理を、グループ化された集計パスにも適用することで挙動を揃えています。"
-    },
-    {
-      "number": 57902,
-      "title": "Keep `HashWithIndifferentAccess#filter` returning indifferent access {#pr-57902}",
-      "url": "https://github.com/rails/rails/pull/57902",
-      "mergedAt": "2026-06-28T00:00:00.000Z",
-      "author": "55728",
-      "authorUrl": "https://github.com/55728",
-      "summary": "1. 概要 (1-2文で)  \n`ActiveSupport::HashWithIndifferentAccess` において、`#filter` 呼び出し時にも「シンボル/文字列を区別しないアクセス（indifferent access）」が維持されるように修正した PR です。これにより、`#select` と `#filter` が同じクラス（`HashWithIndifferentAccess`）を返し、期待どおりの挙動になります。"
     }
   ]
 }
