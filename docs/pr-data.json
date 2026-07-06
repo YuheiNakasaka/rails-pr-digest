@@ -1,7 +1,88 @@
 {
-  "lastUpdated": "2026-07-05T06:13:04.662Z",
+  "lastUpdated": "2026-07-06T00:30:29.619Z",
   "totalCount": 50,
   "items": [
+    {
+      "number": 58005,
+      "title": "Make `add_column(if_not_exists: true)` reversible {#pr-58005}",
+      "url": "https://github.com/rails/rails/pull/58005",
+      "mergedAt": "2026-07-05T00:00:00.000Z",
+      "author": "55728",
+      "authorUrl": "https://github.com/55728",
+      "summary": "1. 概要 (1-2文で)  \n`add_column(..., if_not_exists: true)` を含むマイグレーションをロールバックした際に、逆操作として不正なオプションを付けた `remove_column` が生成されていた問題を修正し、正しく `if_exists: true` が付くようにした PR です。これにより、該当マイグレーションのロールバックが安全かつ他のコマンドと一貫した挙動になります。"
+    },
+    {
+      "number": 58004,
+      "title": "Return no rows without a query for `none.ids` {#pr-58004}",
+      "url": "https://github.com/rails/rails/pull/58004",
+      "mergedAt": "2026-07-05T00:00:00.000Z",
+      "author": "55728",
+      "authorUrl": "https://github.com/55728",
+      "summary": "1. 概要 (1-2文で)  \n`Relation#none` に対して `ids` / `async_ids` を呼び出したとき、これまでは実際に `SELECT ... WHERE (1=0)` のクエリが発行されていたのを、`pluck` と同様に**クエリを投げずに常に空配列（またはそれを返す Promise）を返す**ように修正した PR です。`none` が「DB に触れない null object」として一貫した動作をするようになります。"
+    },
+    {
+      "number": 58007,
+      "title": "Instrument the normalized key in `MemoryStore#increment`/`#decrement` {#pr-58007}",
+      "url": "https://github.com/rails/rails/pull/58007",
+      "mergedAt": "2026-07-05T00:00:00.000Z",
+      "author": "55728",
+      "authorUrl": "https://github.com/55728",
+      "summary": "1. 概要 (1-2文で)  \n`ActiveSupport::Cache::MemoryStore` の `increment` / `decrement` が発行する計測イベント（`cache_increment` / `cache_decrement`）について、これまで「生のキー」を送っていたものを、他のストア実装と同様に「正規化済み（名前空間付き）のキー」を送るように揃えた変更です。これにより、メモリストア利用時の計測イベントのキー情報が一貫したものになります。"
+    },
+    {
+      "number": 58008,
+      "title": "Clear a stale `enqueue_error` when `perform_all_later` re-enqueues a job {#pr-58008}",
+      "url": "https://github.com/rails/rails/pull/58008",
+      "mergedAt": "2026-07-05T00:00:00.000Z",
+      "author": "55728",
+      "authorUrl": "https://github.com/55728",
+      "summary": "1. 概要 (1-2文で)  \n`perform_all_later` が `enqueue_all` 未実装アダプタ向けに「1件ずつ enqueue」するフォールバック経路を使う際、過去の失敗時にセットされた `enqueue_error` がクリアされず、状態が矛盾する問題を修正したPRです。これにより、再enqueueに成功したジョブは `successfully_enqueued? == true` かつ `enqueue_error == nil` という一貫した状態になります。"
+    },
+    {
+      "number": 58009,
+      "title": "Account for `queue_name_prefix` in `assert_enqueued_email_with` {#pr-58009}",
+      "url": "https://github.com/rails/rails/pull/58009",
+      "mergedAt": "2026-07-05T00:00:00.000Z",
+      "author": "55728",
+      "authorUrl": "https://github.com/55728",
+      "summary": "1. 概要 (1-2文で)  \n`ActiveJob::Base.queue_name_prefix` を設定している場合でも、`assert_enqueued_email_with` が正しくジョブのキュー名を判定できるように修正した PR です。これにより、メール自体は正しく `deliver_later` されているのにテストだけが失敗する問題が解消されます。"
+    },
+    {
+      "number": 58010,
+      "title": "Support endless and beginless ranges in `number_field`/`range_field` {#pr-58010}",
+      "url": "https://github.com/rails/rails/pull/58010",
+      "mergedAt": "2026-07-05T00:00:00.000Z",
+      "author": "55728",
+      "authorUrl": "https://github.com/55728",
+      "summary": "1. 概要 (1-2文で)  \n`number_field` / `range_field` ヘルパで、`in:` / `within:` オプションに無限範囲 (`18..` など) や片側無限範囲 (`..10` など) を渡したときに `RangeError` になっていた問題を修正し、適切に `min` / `max` 属性へ変換できるようにした PR です。Ruby の end/beginless Range を正式にサポートしつつ、従来の閉区間・排他的区間の挙動は維持しています。"
+    },
+    {
+      "number": 58006,
+      "title": "Return the current value for an unchanged store accessor's `_was` {#pr-58006}",
+      "url": "https://github.com/rails/rails/pull/58006",
+      "mergedAt": "2026-07-05T00:00:00.000Z",
+      "author": "55728",
+      "authorUrl": "https://github.com/55728",
+      "summary": "1. 概要 (1-2文で)  \nstore アクセッサに対する `<key>_was` の挙動が、変更されていない場合にも `nil` を返してしまう不整合を修正し、`ActiveModel::Dirty` の契約どおり「未変更なら現在値を返す」ように揃えた PR です。これにより、store カラムを使う場合も通常の属性と同様の Dirty API の挙動が得られます。"
+    },
+    {
+      "number": 58011,
+      "title": "Honor an explicit `:selected` option in `weekday_select` {#pr-58011}",
+      "url": "https://github.com/rails/rails/pull/58011",
+      "mergedAt": "2026-07-05T00:00:00.000Z",
+      "author": "55728",
+      "authorUrl": "https://github.com/55728",
+      "summary": "1. 概要 (1-2文で)  \n`weekday_select` ヘルパに `selected:` オプションを明示的に渡した場合でも、その値が正しく優先されるように挙動が修正されました。これにより、他の `select` 系ヘルパ (`select`, `collection_select`, `grouped_collection_select`, `date_select`) と一貫した動きになります。"
+    },
+    {
+      "number": 58003,
+      "title": "Fix belongs_to change tracking for composite foreign keys {#pr-58003}",
+      "url": "https://github.com/rails/rails/pull/58003",
+      "mergedAt": "2026-07-05T00:00:00.000Z",
+      "author": "anxkhn",
+      "authorUrl": "https://github.com/anxkhn",
+      "summary": "1. 概要 (1-2文で)  \n`belongs_to` に複合外部キー（Composite Foreign Key）を使っている場合に、`association_changed?` / `association_previously_changed?` が常に `false` を返してしまうバグを修正したPRです。単一カラムの外部キーには影響せず、複合キーのときだけ正しく変更検知できるようにしています。"
+    },
     {
       "number": 57991,
       "title": "Stop HTML-escaping JSON written by Coders::JSON {#pr-57991}",
@@ -370,87 +451,6 @@
       "author": "55728",
       "authorUrl": "https://github.com/55728",
       "summary": "1. 概要 (1-2文で)  \n`default_order` に同じカラムを複数回渡した場合、`ORDER BY` 句に重複して出力されないよう重複排除される変更です。これにより、すでに同様の挙動をしていた `order` や `regroup` と一貫した動きになります。"
-    },
-    {
-      "number": 57856,
-      "title": "Load ActionDispatch::Request::Session and Utils at boot time {#pr-57856}",
-      "url": "https://github.com/rails/rails/pull/57856",
-      "mergedAt": "2026-06-30T00:00:00.000Z",
-      "author": "andrewn617",
-      "authorUrl": "https://github.com/andrewn617",
-      "summary": "1. 概要 (1–2文で)\n- `ActionDispatch::Request::Session` とその内部で使われる `Utils` を「初回リクエスト時のオートロード」から「アプリ起動時のロード」に変更するためのリファクタリングです。  \n- これにより ractor 利用時など並行環境でのオートロード問題や循環 require を避けつつ、`Session` を `ActionDispatch::Http::Session` に移動して責務の位置付けを整理しています。"
-    },
-    {
-      "number": 57684,
-      "title": "Add a Ractor-shareable ActiveSupport::TaggedLogging.shareable_logger {#pr-57684}",
-      "url": "https://github.com/rails/rails/pull/57684",
-      "mergedAt": "2026-06-30T00:00:00.000Z",
-      "author": "etiennebarrie",
-      "authorUrl": "https://github.com/etiennebarrie",
-      "summary": "1. 概要 (1–2文で)  \nRactor から安全に共有できるログ出力用 API `ActiveSupport::TaggedLogging.shareable_logger` が追加され、複数 Ractor / スレッドから同じ logger を使える仕組みが導入されました。内部的にはバックグラウンドスレッドに書き込み処理を委譲する `ActiveSupport::ShareableLogger` を tagged logging でラップする構成です。"
-    },
-    {
-      "number": 57937,
-      "title": "Load database config when a connection is absent from the shared section {#pr-57937}",
-      "url": "https://github.com/rails/rails/pull/57937",
-      "mergedAt": "2026-06-30T00:00:00.000Z",
-      "author": "55728",
-      "authorUrl": "https://github.com/55728",
-      "summary": "1. 概要 (1-2文で)  \n`database.yml` で `shared` セクションに存在しない接続名が環境ごとに定義されている場合、これまでは `NoMethodError` で落ちていたのを、「その接続は shared マージ対象外として素通りさせる」ように修正した PR です。これにより、3階層構造の `database.yml` をより柔軟に書けるようになり、安全にロードできるようになりました。"
-    },
-    {
-      "number": 57946,
-      "title": "Allow the Evented LogSubscriber to be shareable {#pr-57946}",
-      "url": "https://github.com/rails/rails/pull/57946",
-      "mergedAt": "2026-06-30T00:00:00.000Z",
-      "author": "Edouard-chin",
-      "authorUrl": "https://github.com/Edouard-chin",
-      "summary": "1. 概要 (1-2文で)  \nEvented な LogSubscriber（および関連する StructuredEventSubscriber）の実装から「Proc を含む定数ハッシュ」を排除し、Ractor でも共有可能（shareable）になるようにリファクタリングした PR です。`Ractor.shareable_proc` を使わずに、設計側で Proc 依存を解消することで Ractor セーフティを高めています。"
-    },
-    {
-      "number": 57816,
-      "title": "Set browser binary when preloading system test driver {#pr-57816}",
-      "url": "https://github.com/rails/rails/pull/57816",
-      "mergedAt": "2026-06-30T00:00:00.000Z",
-      "author": "titusfortner",
-      "authorUrl": "https://github.com/titusfortner",
-      "summary": "1. 概要 (1-2文で)  \nRails の system test で Selenium ドライバをプリロードする際に、Chrome/Firefox のブラウザ実行ファイルの場所（`options.binary`）が設定されず「cannot find Chrome binary」で落ちる問題を修正する PR です。  \nSelenium 側の仕様変更（`DriverFinder` が `options` をミューテートしなくなった）に追従し、Rails 側で明示的にブラウザバイナリを設定するようにしています。"
-    },
-    {
-      "number": 57918,
-      "title": "Make default scopes ractor safe {#pr-57918}",
-      "url": "https://github.com/rails/rails/pull/57918",
-      "mergedAt": "2026-06-30T00:00:00.000Z",
-      "author": "andrewn617",
-      "authorUrl": "https://github.com/andrewn617",
-      "summary": "1. 概要 (1-2文で)  \n`ActiveRecord::Base.default_scope` の実装を見直し、デフォルトスコープを Ractor セーフ（スレッド／Ractor間で共有しても安全）にするために、default_scope の内部状態を freeze して不変オブジェクトとして扱うようにした PR です。加えて、この挙動を保証するテストが追加されています。"
-    },
-    {
-      "number": 57930,
-      "title": "Only document the public ActionView::DependencyTracker API [ci skip] {#pr-57930}",
-      "url": "https://github.com/rails/rails/pull/57930",
-      "mergedAt": "2026-06-30T00:00:00.000Z",
-      "author": "etiennebarrie",
-      "authorUrl": "https://github.com/etiennebarrie",
-      "summary": "1. 概要 (1-2文で)  \nActionView::DependencyTracker のうち、実際に外部から利用されている「公開API」のみを公式ドキュメントに載せるように整理した PR です。`register_tracker` と `ERBTracker` を正式にドキュメント対象とし、それ以外の内部実装は引き続き非公開（`:nodoc:`）とすることで、サポート対象のエントリポイントを明確にしています。"
-    },
-    {
-      "number": 57932,
-      "title": "Minor Active Support Cache refactorings {#pr-57932}",
-      "url": "https://github.com/rails/rails/pull/57932",
-      "mergedAt": "2026-06-30T00:00:00.000Z",
-      "author": "byroot",
-      "authorUrl": "https://github.com/byroot",
-      "summary": "1. 概要 (1-2文で)  \nActiveSupport::Cache 周りの内部実装を少し整理したリファクタリング PR です。`instrument`/ログ出力処理と、ローカルキャッシュ (`LocalCache`) の `increment` 挙動が単純化され、不要なヘルパーやメソッドが削除されています。"
-    },
-    {
-      "number": 57931,
-      "title": "Implement ActiveSupport::ProxyLogger {#pr-57931}",
-      "url": "https://github.com/rails/rails/pull/57931",
-      "mergedAt": "2026-06-30T00:00:00.000Z",
-      "author": "byroot",
-      "authorUrl": "https://github.com/byroot",
-      "summary": "1. 概要 (1-2文で)  \nRailsのActiveSupportに `ActiveSupport::ProxyLogger` が追加され、既存のロガーにログを委譲しつつ「別のログレベルで」フィルタリングできるラッパーロガーが使えるようになりました。これにより、アプリ全体と同じ出力先を使いつつ、特定ライブラリだけログを抑制・制御することが容易になります。"
     }
   ]
 }
