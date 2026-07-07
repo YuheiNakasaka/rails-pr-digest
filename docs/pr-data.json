@@ -1,7 +1,88 @@
 {
-  "lastUpdated": "2026-07-06T00:30:29.619Z",
+  "lastUpdated": "2026-07-07T00:32:13.347Z",
   "totalCount": 50,
   "items": [
+    {
+      "number": 57825,
+      "title": "Introduce ractorize {#pr-57825}",
+      "url": "https://github.com/rails/rails/pull/57825",
+      "mergedAt": "2026-07-06T00:00:00.000Z",
+      "author": "andrewn617",
+      "authorUrl": "https://github.com/andrewn617",
+      "summary": "1. 概要 (1-2文で)  \nRails アプリケーションを Ractor から共有可能にするための土台として、`Rails::Application#ractorize!` が導入され、基本的な Rails アプリを `Ractor.make_shareable` できるようにする PR です。あわせて、Ractor 非対応だったいくつかの内部実装（継承オプション、KeyGenerator、Mutex など）が Ractor セーフになるよう調整されています。"
+    },
+    {
+      "number": 58018,
+      "title": "Translate `if_exists`/`if_not_exists` guards when inverting `remove_column` and `add_reference`/`remove_reference` {#pr-58018}",
+      "url": "https://github.com/rails/rails/pull/58018",
+      "mergedAt": "2026-07-06T00:00:00.000Z",
+      "author": "55728",
+      "authorUrl": "https://github.com/55728",
+      "summary": "1. 概要 (1-2文で)  \n`remove_column` および `add_reference` / `remove_reference`（とそのエイリアス `add_belongs_to` / `remove_belongs_to`）について、マイグレーションの巻き戻し時に `if_exists` / `if_not_exists` オプションが正しく反転して適用されるように修正した PR です。これにより、これらのコマンドを使った冪等なマイグレーションの `change` / `revert` が、期待通りに動作するようになります。"
+    },
+    {
+      "number": 58024,
+      "title": "Derive the expected queue from the delivery job in `assert_enqueued_email_with` {#pr-58024}",
+      "url": "https://github.com/rails/rails/pull/58024",
+      "mergedAt": "2026-07-06T00:00:00.000Z",
+      "author": "55728",
+      "authorUrl": "https://github.com/55728",
+      "summary": "1. 概要 (1-2文で)  \n`assert_enqueued_email_with` が、メール送信時のキュー名を「メイラー側の設定」ではなく「delivery_job 側の設定」から導出するように修正されました。これにより、カスタム `delivery_job` で `queue_as` を指定している場合でも、正しくテストが通るようになります。"
+    },
+    {
+      "number": 58017,
+      "title": "Preserve subsecond precision in the `DateTime.now` travel stub under `with_usec` {#pr-58017}",
+      "url": "https://github.com/rails/rails/pull/58017",
+      "mergedAt": "2026-07-06T00:00:00.000Z",
+      "author": "55728",
+      "authorUrl": "https://github.com/55728",
+      "summary": "1. 概要 (1-2文で)  \n`travel_to(time, with_usec: true)` 使用時に、`DateTime.now` でもサブ秒（マイクロ秒）精度が正しく保持されるように修正したPRです。これにより、同じ凍結時刻を参照する `Time.now` と `DateTime.now` の挙動が一致します。"
+    },
+    {
+      "number": 58021,
+      "title": "Honor an explicit `:selected` option in `time_zone_select` {#pr-58021}",
+      "url": "https://github.com/rails/rails/pull/58021",
+      "mergedAt": "2026-07-06T00:00:00.000Z",
+      "author": "55728",
+      "authorUrl": "https://github.com/55728",
+      "summary": "1. 概要 (1-2文で)  \n`time_zone_select` ヘルパーに `selected:` オプションを明示的に渡した場合、その値がきちんと選択状態として反映されるように修正したPRです。`selected:` を指定しない既存コードの挙動は変わりません。"
+    },
+    {
+      "number": 58012,
+      "title": "Fix broken links in guides [ci skip] {#pr-58012}",
+      "url": "https://github.com/rails/rails/pull/58012",
+      "mergedAt": "2026-07-06T00:00:00.000Z",
+      "author": "fuentesjr",
+      "authorUrl": "https://github.com/fuentesjr",
+      "summary": "1. 概要 (1-2文で)  \nこのPRは、Rails Guides 内および外部サイトへの「リンク切れ」を3箇所修正するドキュメント専用の変更です。動作コードには一切手を入れておらず、ガイドの参照先を正しいURL／アンカーに差し替えています。"
+    },
+    {
+      "number": 58016,
+      "title": "Forward keyword arguments through deprecation proxies {#pr-58016}",
+      "url": "https://github.com/rails/rails/pull/58016",
+      "mergedAt": "2026-07-06T00:00:00.000Z",
+      "author": "55728",
+      "authorUrl": "https://github.com/55728",
+      "summary": "1. 概要 (1-2文で)  \n`DeprecatedObjectProxy` / `DeprecatedInstanceVariableProxy` 経由でキーワード引数必須メソッドを呼ぶと `ArgumentError` になっていた問題を修正し、正しくキーワード引数として転送されるようにした PR です。Ruby 3 以降の「キーワード引数の分離」による不具合を、`ruby2_keywords` を使って最小限の変更で解消しています。"
+    },
+    {
+      "number": 58015,
+      "title": "Strip surrounding whitespace before parsing a duration in `Hash.from_xml` {#pr-58015}",
+      "url": "https://github.com/rails/rails/pull/58015",
+      "mergedAt": "2026-07-06T00:00:00.000Z",
+      "author": "55728",
+      "authorUrl": "https://github.com/55728",
+      "summary": "1. 概要 (1-2文で)  \n`Hash.from_xml` が `type=\"duration\"` の要素をパースする際に、前後の空白文字（改行・インデント）を除去してから `ActiveSupport::Duration` に変換するように修正された PR です。これにより、「人間が整形した XML」に含まれる改行やインデントのせいで `ParsingError` が起きていた問題が解消されます。"
+    },
+    {
+      "number": 58014,
+      "title": "Remove stale payload-based filter example in EventReporter#subscribe rdoc {#pr-58014}",
+      "url": "https://github.com/rails/rails/pull/58014",
+      "mergedAt": "2026-07-06T00:00:00.000Z",
+      "author": "55728",
+      "authorUrl": "https://github.com/55728",
+      "summary": "1. 概要 (1-2文で)  \nEventReporter#subscribe の RDoc に載っていた「payload によるフィルタ」サンプルコードが、実際の挙動と矛盾しており誤解を招くため削除され、フィルタから参照できるのはイベント名のみであることを明示するドキュメント修正です。コードの挙動には一切変更はなく、ドキュメントのみの更新です。"
+    },
     {
       "number": 58005,
       "title": "Make `add_column(if_not_exists: true)` reversible {#pr-58005}",
@@ -370,87 +451,6 @@
       "author": "edaroit",
       "authorUrl": "https://github.com/edaroit",
       "summary": "1. 概要 (1-2文で)  \n- Active Record の DB コネクションプールで、`StandardError` 以外の例外（`Timeout` や fiber scheduler の `Async::Stop` / `Async::Cancel` など）でクエリが中断された場合にも、そのコネクションを「未検証状態」にマークするようにし、後続リクエストに壊れたソケットが再利用されないようにする修正です。  \n- 中断されたクエリ自体の挙動（例外がそのまま飛ぶ）は変えず、「プールに戻されたコネクションの信頼性」だけを正しく扱うことで、EOFError などが後続の無関係なリクエストで発生するバグを防ぎます。"
-    },
-    {
-      "number": 57957,
-      "title": "Bump Github Action cache version to 6 {#pr-57957}",
-      "url": "https://github.com/rails/rails/pull/57957",
-      "mergedAt": "2026-07-01T00:00:00.000Z",
-      "author": "akhilgkrishnan",
-      "authorUrl": "https://github.com/akhilgkrishnan",
-      "summary": "1. 概要 (1-2文で)  \nRails が生成する GitHub Actions ワークフロー（CI 用）の「キャッシュバージョン」を 6 に更新した PRです。アプリケーション／プラグイン用 generator が出力する `.github/workflows/ci.yml` のテンプレートのみが対象です。"
-    },
-    {
-      "number": 57939,
-      "title": "Apply source mappings to dynamic permissions policy sources {#pr-57939}",
-      "url": "https://github.com/rails/rails/pull/57939",
-      "mergedAt": "2026-07-01T00:00:00.000Z",
-      "author": "55728",
-      "authorUrl": "https://github.com/55728",
-      "summary": "1. 概要 (1-2文で)  \nPermissions-Policy で「動的（callable）なソース指定」にキーワード（`:self` など）を返した場合も、静的指定と同様にマッピング（`'self'` などへの変換）が適用されるようになりました。これにより、これまで動的ソースだけ不正なポリシー文字列（`self` のような裸の単語）が出力されていた問題が修正されています。"
-    },
-    {
-      "number": 57938,
-      "title": "Allow a trailing slash URL with a blank path to take query params {#pr-57938}",
-      "url": "https://github.com/rails/rails/pull/57938",
-      "mergedAt": "2026-07-01T00:00:00.000Z",
-      "author": "55728",
-      "authorUrl": "https://github.com/55728",
-      "summary": "1. 概要 (1-2文で)  \n`url_for` で `trailing_slash: true` かつ `path: \"\"`（空文字）を指定した場合に、クエリパラメータやアンカーを付与すると `FrozenError` が発生していた不具合を修正した PR です。  \nこれにより、`\"/\"` をベースに `\"/?a=1\"` のように正常にパラメータやアンカーを付与できるようになりました。"
-    },
-    {
-      "number": 57951,
-      "title": "Improve usage of Ractor.shareable_lambda {#pr-57951}",
-      "url": "https://github.com/rails/rails/pull/57951",
-      "mergedAt": "2026-07-01T00:00:00.000Z",
-      "author": "andrewn617",
-      "authorUrl": "https://github.com/andrewn617",
-      "summary": "1. 概要 (1-2文で)  \nAction Mailbox 内で `Ractor.shareable_lambda` の使い方を、`&->` を噛ませる形からブロックを直接渡す形に書き換えた、スタイル／可読性改善のための小さなリファクタリングです。挙動変更や機能追加はなく、既存の動作を保ったまま Ruby らしい書き方に揃えています。"
-    },
-    {
-      "number": 57952,
-      "title": "Make parameter parsers assignment ractor safe {#pr-57952}",
-      "url": "https://github.com/rails/rails/pull/57952",
-      "mergedAt": "2026-07-01T00:00:00.000Z",
-      "author": "andrewn617",
-      "authorUrl": "https://github.com/andrewn617",
-      "summary": "1. 概要 (1-2文で)  \nRails のパラメータパーサー (`parameter_parsers`) を設定する処理が Ractor セーフになるように、代入時に渡されたハッシュを `freeze` するよう変更した PRです。あわせて、デフォルトパーサーの設定にパブリック API を経由せず、直接インスタンス変数に代入するようにして、不要なハッシュの複製を避けています。"
-    },
-    {
-      "number": 57955,
-      "title": "Ractor safe counter cache configuration {#pr-57955}",
-      "url": "https://github.com/rails/rails/pull/57955",
-      "mergedAt": "2026-07-01T00:00:00.000Z",
-      "author": "andrewn617",
-      "authorUrl": "https://github.com/andrewn617",
-      "summary": "1. 概要 (1-2文で)  \nActiveRecord のカウンタキャッシュ設定情報（`_counter_cache_columns` と `counter_cached_association_names`）をデフォルトで `freeze` し、Ractor（Ruby の並行オブジェクト実行モデル）でも安全に扱えるようにした PR です。これにより、Ractor 間で共有されるカウンタキャッシュ設定が不変オブジェクトとなり、スレッド／Ractor セーフティが向上します。"
-    },
-    {
-      "number": 57922,
-      "title": "Freeze the inflection rules after the app boots {#pr-57922}",
-      "url": "https://github.com/rails/rails/pull/57922",
-      "mergedAt": "2026-07-01T00:00:00.000Z",
-      "author": "Edouard-chin",
-      "authorUrl": "https://github.com/Edouard-chin",
-      "summary": "1. 概要 (1-2文で)  \nこのPRは、Railsアプリケーションのブート完了後に `ActiveSupport::Inflector` の「変換ルール（inflection rules）」を変更できないようにし、すべての言語ごとの inflections を freeze する変更です。これにより、起動後の不定な挙動を防ぎつつ、将来的な Ractor 対応も見据えたスレッドセーフ性の向上を図っています。"
-    },
-    {
-      "number": 57823,
-      "title": "Initialize ActionView::LookupContext.view_context_class early {#pr-57823}",
-      "url": "https://github.com/rails/rails/pull/57823",
-      "mergedAt": "2026-07-01T00:00:00.000Z",
-      "author": "etiennebarrie",
-      "authorUrl": "https://github.com/etiennebarrie",
-      "summary": "1. 概要 (1-2文で)  \n`ActionView::LookupContext.view_context_class` をできるだけ早いタイミングで初期化することで、`enable_reloading = false` な環境ではミューテックスに触らずに済むようにし、Ractor からも追加セットアップなしで安全にビューコンテキストクラスを利用できるようにした変更です。"
-    },
-    {
-      "number": 57936,
-      "title": "Deduplicate columns in `default_order` {#pr-57936}",
-      "url": "https://github.com/rails/rails/pull/57936",
-      "mergedAt": "2026-06-30T00:00:00.000Z",
-      "author": "55728",
-      "authorUrl": "https://github.com/55728",
-      "summary": "1. 概要 (1-2文で)  \n`default_order` に同じカラムを複数回渡した場合、`ORDER BY` 句に重複して出力されないよう重複排除される変更です。これにより、すでに同様の挙動をしていた `order` や `regroup` と一貫した動きになります。"
     }
   ]
 }
