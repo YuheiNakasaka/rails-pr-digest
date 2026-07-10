@@ -1,7 +1,34 @@
 {
-  "lastUpdated": "2026-07-09T00:28:45.946Z",
+  "lastUpdated": "2026-07-10T00:28:48.604Z",
   "totalCount": 50,
   "items": [
+    {
+      "number": 58061,
+      "title": "Fix some FrozenErrors for ractorized application {#pr-58061}",
+      "url": "https://github.com/rails/rails/pull/58061",
+      "mergedAt": "2026-07-09T00:00:00.000Z",
+      "author": "hmcguire-shopify",
+      "authorUrl": "https://github.com/hmcguire-shopify",
+      "summary": "1. 概要 (1–2文で)  \nRails アプリケーションを `Rails.application.ractorize!` で共有可能（freeze）にした際に発生していた `FrozenError` を、キャッシュのローカルキャッシュキーとアプリケーションの `revision` を「後からではなく事前に」計算するようにすることで解消する PR です。Ractors 対応アプリでのエラー報告や `Rails.cache` 利用が、freeze 後でも安全に動作するようになります。"
+    },
+    {
+      "number": 58068,
+      "title": "Let dump_schema pass the given format down to schema_dump {#pr-58068}",
+      "url": "https://github.com/rails/rails/pull/58068",
+      "mergedAt": "2026-07-09T00:00:00.000Z",
+      "author": "fxn",
+      "authorUrl": "https://github.com/fxn",
+      "summary": "1. 概要 (1-2文で)  \n`ActiveRecord::DatabaseTasks.dump_schema` が受け取った `format` 引数を内部の `schema_dump` 呼び出しに正しく引き渡すよう修正された PR です。これにより、`dump_schema` に任意のスキーマフォーマットを指定した場合でも、その指定が確実に反映されるようになりました。"
+    },
+    {
+      "number": 58066,
+      "title": "Add `write_multi_entries` method to batch writes for memcache store if dalli's `set_multi` is defined {#pr-58066}",
+      "url": "https://github.com/rails/rails/pull/58066",
+      "mergedAt": "2026-07-09T00:00:00.000Z",
+      "author": "ilianah",
+      "authorUrl": "https://github.com/ilianah",
+      "summary": "1. 概要 (1-2文で)  \nこのPRは、`ActiveSupport::Cache::MemCacheStore` に `write_multi_entries` メソッドを追加し、利用中の dalli に `set_multi` が定義されている場合はそれを使って複数キーを一括書き込みできるようにする変更です。これにより、memcached への書き込み時のラウンドトリップ数が削減され、パフォーマンス向上が見込まれます。"
+    },
     {
       "number": 58058,
       "title": "Skip the query for a grouped calculation on a contradictory relation {#pr-58058}",
@@ -424,33 +451,6 @@
       "author": "55728",
       "authorUrl": "https://github.com/55728",
       "summary": "1. 概要 (1-2文で)  \nMySQL / MariaDB 用アダプタの `enable_index` / `disable_index` が、インデックス名をクォートせずに SQL を生成していた問題を修正し、予約語や特殊文字を含むインデックス名でも正常に動作するようにしました。`rename_index` など他のインデックス操作と一貫して、インデックス名に `quote_column_name` を適用するようになっています。"
-    },
-    {
-      "number": 57988,
-      "title": "Raise on ignored `if_exists` option in `change_table`'s `remove_timestamps` {#pr-57988}",
-      "url": "https://github.com/rails/rails/pull/57988",
-      "mergedAt": "2026-07-04T00:00:00.000Z",
-      "author": "55728",
-      "authorUrl": "https://github.com/55728",
-      "summary": "1. 概要 (1-2文で)  \n`change_table` ブロック内で `t.remove_timestamps` に `if_exists:` / `if_not_exists:` オプションを渡した場合、これまでは黙って無視されていましたが、他のメソッドと同様に `ArgumentError` を投げて呼び出し側に誤用を知らせるように変更されました。これにより、サポートされないオプションの利用を早期に検知できるようになります。"
-    },
-    {
-      "number": 57989,
-      "title": "Fix color_field emitting invalid color values for strings containing a hex substring {#pr-57989}",
-      "url": "https://github.com/rails/rails/pull/57989",
-      "mergedAt": "2026-07-04T00:00:00.000Z",
-      "author": "55728",
-      "authorUrl": "https://github.com/55728",
-      "summary": "1. 概要 (1-2文で)  \n`color_field` ヘルパーの色値バリデーションが不正確だったため、`<input type=\"color\">` にブラウザが解釈できない値がそのまま出力されていた問題を修正しています。正規表現を「文字列全体が `#rrggbb` 形式かどうか」を見るように変更し、それ以外は `#000000` にフォールバックする挙動を統一しました。"
-    },
-    {
-      "number": 57985,
-      "title": "Update PostgreSQL database.yml sample in Command Line guide [ci skip] {#pr-57985}",
-      "url": "https://github.com/rails/rails/pull/57985",
-      "mergedAt": "2026-07-04T00:00:00.000Z",
-      "author": "fuentesjr",
-      "authorUrl": "https://github.com/fuentesjr",
-      "summary": "1. 概要 (1-2文で)  \nCommand Line ガイド内の PostgreSQL 用 `database.yml` サンプルを、現行の `rails new ... --database=postgresql` が生成する内容に合わせて更新した PRです。合わせて、非推奨になりつつある `pool` キーの例を、新しい `max_connections` キーの例に置き換えています。"
     }
   ]
 }
