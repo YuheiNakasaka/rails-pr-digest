@@ -1,7 +1,25 @@
 {
-  "lastUpdated": "2026-07-10T00:28:48.604Z",
+  "lastUpdated": "2026-07-11T00:23:20.128Z",
   "totalCount": 50,
   "items": [
+    {
+      "number": 58052,
+      "title": "Combine equivalent owner-dependent preload scopes {#pr-58052}",
+      "url": "https://github.com/rails/rails/pull/58052",
+      "mergedAt": "2026-07-10T00:00:00.000Z",
+      "author": "rwalters44",
+      "authorUrl": "https://github.com/rwalters44",
+      "summary": "1. 概要 (1-2文で)  \nowner（親レコード）依存のスコープ付き関連（いわゆるインスタンス依存スコープ）の eager load 時に、実質同じ条件のスコープをまとめて 1 つの Preloader に統合するようにした PRです。これにより、SQL の発行回数は変わらないまま、Preloader オブジェクトの数とレコードスキャン回数が大幅に減り、高負荷ケースで性能が大きく改善されます。"
+    },
+    {
+      "number": 57742,
+      "title": "Introduce `ActiveJob::DeserializationError::RecordNotFound` {#pr-57742}",
+      "url": "https://github.com/rails/rails/pull/57742",
+      "mergedAt": "2026-07-10T00:00:00.000Z",
+      "author": "rosa",
+      "authorUrl": "https://github.com/rosa",
+      "summary": "1. 概要 (1-2文で)  \nActiveJob の引数デシリアライズ時に「レコードがない場合」と「それ以外のエラー」を区別するために、新しく `ActiveJob::DeserializationError::RecordNotFound` 例外が導入されました。これにより、レコード削除など「正当な」理由による失敗だけを discard し、ネットワーク障害など一時的なエラーは通常どおりリトライさせる運用が可能になります。"
+    },
     {
       "number": 58061,
       "title": "Fix some FrozenErrors for ractorized application {#pr-58061}",
@@ -433,24 +451,6 @@
       "author": "55728",
       "authorUrl": "https://github.com/55728",
       "summary": "1. 概要 (1-2文で)  \n`add_index` / `remove_index` のマイグレーションを逆変換（rollback 時の自動生成）する際に、`if_not_exists` / `if_exists` オプションが正しく対応付けられるようになりました。これにより、既存/非存在なインデックスに対して安全にロールバックでき、これまで発生していた不要な例外が解消されます。"
-    },
-    {
-      "number": 57992,
-      "title": "Require fileutils in Cache::FileStore {#pr-57992}",
-      "url": "https://github.com/rails/rails/pull/57992",
-      "mergedAt": "2026-07-04T00:00:00.000Z",
-      "author": "55728",
-      "authorUrl": "https://github.com/55728",
-      "summary": "1. 概要 (1-2文で)  \n`ActiveSupport::Cache::FileStore` 内で `FileUtils` を利用しているにもかかわらず `\"fileutils\"` を require していなかった問題を修正し、スタンドアロンな ActiveSupport 利用時に発生していた `NameError` を解消する PR です。Rails フルスタックでは暗黙に読み込まれていた依存を、明示的に宣言するようになりました。"
-    },
-    {
-      "number": 57984,
-      "title": "Quote the index name in MySQL enable_index/disable_index {#pr-57984}",
-      "url": "https://github.com/rails/rails/pull/57984",
-      "mergedAt": "2026-07-04T00:00:00.000Z",
-      "author": "55728",
-      "authorUrl": "https://github.com/55728",
-      "summary": "1. 概要 (1-2文で)  \nMySQL / MariaDB 用アダプタの `enable_index` / `disable_index` が、インデックス名をクォートせずに SQL を生成していた問題を修正し、予約語や特殊文字を含むインデックス名でも正常に動作するようにしました。`rename_index` など他のインデックス操作と一貫して、インデックス名に `quote_column_name` を適用するようになっています。"
     }
   ]
 }
