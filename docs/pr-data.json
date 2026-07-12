@@ -1,7 +1,43 @@
 {
-  "lastUpdated": "2026-07-11T00:23:20.128Z",
+  "lastUpdated": "2026-07-12T00:24:16.611Z",
   "totalCount": 50,
   "items": [
+    {
+      "number": 58087,
+      "title": "Fix MySQL POINT and MULTIPOINT columns being misreported as integers {#pr-58087}",
+      "url": "https://github.com/rails/rails/pull/58087",
+      "mergedAt": "2026-07-11T00:00:00.000Z",
+      "author": "kyuuri1791",
+      "authorUrl": "https://github.com/kyuuri1791",
+      "summary": "1. 概要 (1-2文で)  \nMySQL の `POINT` / `MULTIPOINT` カラムが ActiveRecord 上で誤って整数型として扱われていた不具合を修正し、他の空間型と同様に「未知の型」として扱うようにした PR です。これにより、スキーマ情報の取得やスキーマ変換ツール利用時に不正な integer 定義が紛れ込む問題を防ぎます。"
+    },
+    {
+      "number": 58076,
+      "title": "Interpolate a fixture label verbatim, without backreference expansion {#pr-58076}",
+      "url": "https://github.com/rails/rails/pull/58076",
+      "mergedAt": "2026-07-11T00:00:00.000Z",
+      "author": "55728",
+      "authorUrl": "https://github.com/55728",
+      "summary": "1. 概要 (1-2文で)  \nRails の fixture で使える特殊変数 `$LABEL` を展開する際に、ラベル文字列中の `\\&` や `\\1` などが正規表現の後方参照として解釈されてしまう問題を修正し、ラベルを「そのままの文字列」として挿入するようにした PR です。これにより、バックスラッシュを含むラベルでも意図通りの値が fixture に設定されます。"
+    },
+    {
+      "number": 58080,
+      "title": "Round-trip the `null: false` attribute modifier in `GeneratedAttribute#to_s` {#pr-58080}",
+      "url": "https://github.com/rails/rails/pull/58080",
+      "mergedAt": "2026-07-11T00:00:00.000Z",
+      "author": "55728",
+      "authorUrl": "https://github.com/55728",
+      "summary": "1. 概要 (1-2文で)  \nRails のジェネレータで使う属性表現（`GeneratedAttribute#to_s`）において、`string!` のような `!` 修飾子（= `null: false`）が文字列表現に正しく反映されずラウンドトリップできなかった問題を修正し、`!` を含む属性指定がパース前後で同じ表記に戻るようにした PR です。これにより、属性文字列表現のシリアライズ／デシリアライズの一貫性と正しさが改善されます。"
+    },
+    {
+      "number": 58086,
+      "title": "Convert Symbol keys in a `HashWithIndifferentAccess#transform_keys` mapping {#pr-58086}",
+      "url": "https://github.com/rails/rails/pull/58086",
+      "mergedAt": "2026-07-11T00:00:00.000Z",
+      "author": "55728",
+      "authorUrl": "https://github.com/55728",
+      "summary": "1. 概要 (1-2文で)  \nHashWithIndifferentAccess（以下 HWIA）の `transform_keys` / `transform_keys!` に「変換マッピング用のハッシュ」を渡したとき、マッピング側のキーが Symbol の場合でも正しくキー変換されるように修正した PRです。これにより、Ruby 標準の `Hash#transform_keys(hash)` と同じ挙動になり、HWIA 内の他メソッド (`slice`, `dig`, `fetch`, `[]`) との一貫性も取られました。"
+    },
     {
       "number": 58052,
       "title": "Combine equivalent owner-dependent preload scopes {#pr-58052}",
@@ -415,42 +451,6 @@
       "author": "anxkhn",
       "authorUrl": "https://github.com/anxkhn",
       "summary": "1. 概要 (1-2文で)  \n`number_to_percentage` ヘルパーのドキュメントに書かれていた `:precision` オプションのデフォルト値が誤っており、実際の挙動（デフォルト3桁）に合わせて「2」から「3」に修正した PR です。コードや挙動の変更はなく、ドキュメントのみの修正です。"
-    },
-    {
-      "number": 57986,
-      "title": "Fix Guides Index flyout menu overflowing its panel {#pr-57986}",
-      "url": "https://github.com/rails/rails/pull/57986",
-      "mergedAt": "2026-07-04T00:00:00.000Z",
-      "author": "iuhoay",
-      "authorUrl": "https://github.com/iuhoay",
-      "summary": "1. 概要 (1-2文で)  \nRails Guides のデスクトップ向け「Guides Index」フライアウトメニューで、3カラムレイアウトが横幅を超えて右にはみ出していた問題を、CSS のレイアウト指定を見直すことで解消した PR です。`width` と `margin` の組み合わせで 100% を超えていたものを、`column-gap` と `calc()` を用いてちょうど 100% に収まるようにしています。"
-    },
-    {
-      "number": 57997,
-      "title": "Use `Range#cover?` for `this_week?`/`this_month?`/`this_year?` {#pr-57997}",
-      "url": "https://github.com/rails/rails/pull/57997",
-      "mergedAt": "2026-07-04T00:00:00.000Z",
-      "author": "55728",
-      "authorUrl": "https://github.com/55728",
-      "summary": "1. 概要 (1-2文で)  \n`Date`/`Time`関連のヘルパー `this_week?` / `this_month?` / `this_year?` が、内部判定に `Range#include?` ではなく `Range#cover?` を使うように変更され、性能が大きく改善されました。振る舞いは変えずに、呼び出しごとの無駄な日付走査を避けるリファクタリングです。"
-    },
-    {
-      "number": 57963,
-      "title": "Add `this_quarter?` to Date/Time {#pr-57963}",
-      "url": "https://github.com/rails/rails/pull/57963",
-      "mergedAt": "2026-07-04T00:00:00.000Z",
-      "author": "55728",
-      "authorUrl": "https://github.com/55728",
-      "summary": "1. 概要 (1-2文で)  \n`Date`, `Time`, `DateTime`, `ActiveSupport::TimeWithZone` に対して「今期（今四半期）かどうか」を判定する `this_quarter?` メソッドが追加されました。これにより、week/month/year に揃う形で quarter にも `this_*?` プレディケートが用意され、日付処理の一貫性が向上しています。"
-    },
-    {
-      "number": 57987,
-      "title": "Make `add_index(if_not_exists: true)` reversible {#pr-57987}",
-      "url": "https://github.com/rails/rails/pull/57987",
-      "mergedAt": "2026-07-04T00:00:00.000Z",
-      "author": "55728",
-      "authorUrl": "https://github.com/55728",
-      "summary": "1. 概要 (1-2文で)  \n`add_index` / `remove_index` のマイグレーションを逆変換（rollback 時の自動生成）する際に、`if_not_exists` / `if_exists` オプションが正しく対応付けられるようになりました。これにより、既存/非存在なインデックスに対して安全にロールバックでき、これまで発生していた不要な例外が解消されます。"
     }
   ]
 }
