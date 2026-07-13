@@ -1,7 +1,70 @@
 {
-  "lastUpdated": "2026-07-12T00:24:16.611Z",
+  "lastUpdated": "2026-07-13T00:25:12.439Z",
   "totalCount": 50,
   "items": [
+    {
+      "number": 58096,
+      "title": "Read foreign key names from the schema on SQLite3 {#pr-58096}",
+      "url": "https://github.com/rails/rails/pull/58096",
+      "mergedAt": "2026-07-12T00:00:00.000Z",
+      "author": "55728",
+      "authorUrl": "https://github.com/55728",
+      "summary": "1. 概要 (1-2文で)  \nSQLite3 アダプタで `foreign_keys(table)` が外部キー制約名を正しく取得するようになり、`remove_foreign_key ..., name: ...` が意図した制約だけを削除できるように修正されています。これにより、テーブル再構築時もカスタム外部キー名が維持され、スキーマダンプにも正しく反映されます。"
+    },
+    {
+      "number": 58064,
+      "title": "Carry the `form` attribute onto a multiple `select`'s hidden field {#pr-58064}",
+      "url": "https://github.com/rails/rails/pull/58064",
+      "mergedAt": "2026-07-12T00:00:00.000Z",
+      "author": "55728",
+      "authorUrl": "https://github.com/55728",
+      "summary": "1. 概要 (1-2文で)  \n`multiple: true` な `select` ヘルパが生成する「値クリア用の hidden フィールド」にも、`form:` オプションで指定した `form` 属性を引き継ぐようにした変更です。これにより、`<form>` 要素の外にある `multiple select` でも、全ての選択を外したときに意図通り「空配列」が送信されるようになります。"
+    },
+    {
+      "number": 58099,
+      "title": "Refactor assume_migrated_upto_version {#pr-58099}",
+      "url": "https://github.com/rails/rails/pull/58099",
+      "mergedAt": "2026-07-12T00:00:00.000Z",
+      "author": "fxn",
+      "authorUrl": "https://github.com/fxn",
+      "summary": "1. 概要 (1-2文で)  \n`ActiveRecord::Migration#assume_migrated_upto_version` の内部実装を、主に変数名とテーブル名の扱いの整理によってリファクタリングしたPRです。挙動の変更はなく、読みやすさ・一貫性・将来の保守性を高めるための内部改善です。"
+    },
+    {
+      "number": 58077,
+      "title": "Strip only the commented line when detecting a LIMIT in `rails query` {#pr-58077}",
+      "url": "https://github.com/rails/rails/pull/58077",
+      "mergedAt": "2026-07-12T00:00:00.000Z",
+      "author": "55728",
+      "authorUrl": "https://github.com/55728",
+      "summary": "1. 概要 (1-2文で)  \n`rails query --sql` コマンドで SQL 内の `LIMIT` 有無を判定する際、行コメント `-- ...` の処理が誤ってその後ろの全体を巻き込んでしまい、本来存在する `LIMIT` を見落として二重に `LIMIT` を付けてしまう不具合を修正した PR です。コメント除去の正規表現を修正し、「コメント行だけ」を正しく取り除いてから `LIMIT` を検出するようにしています。"
+    },
+    {
+      "number": 58091,
+      "title": "Honor `if_not_exists:` in SQLite3 `add_check_constraint` and `add_foreign_key` {#pr-58091}",
+      "url": "https://github.com/rails/rails/pull/58091",
+      "mergedAt": "2026-07-12T00:00:00.000Z",
+      "author": "55728",
+      "authorUrl": "https://github.com/55728",
+      "summary": "1. 概要 (1-2文で)  \nSQLite3 アダプタの `add_check_constraint` / `add_foreign_key` が、オプション `if_not_exists: true` を正しく解釈していなかった問題を修正し、既に存在する制約がある場合は何もせず（no-op）に済むようになりました。これにより、他のアダプタ（MySQL、Trilogy）や `remove_*` 系メソッドとの挙動の一貫性が取れ、ロールバック時の再実行も安全になります。"
+    },
+    {
+      "number": 58092,
+      "title": "Accept `Date` and numeric inputs in `relative_time_in_words` {#pr-58092}",
+      "url": "https://github.com/rails/rails/pull/58092",
+      "mergedAt": "2026-07-12T00:00:00.000Z",
+      "author": "55728",
+      "authorUrl": "https://github.com/55728",
+      "summary": "1. 概要 (1-2文で)  \n`relative_time_in_words` ヘルパーが、ドキュメント上は受け付けることになっていた `Date` や数値（秒数）を実際には扱えず `ArgumentError` を出していた問題を修正した PR です。`distance_of_time_in_words` と同様に、引数を事前に `Time` に正規化してから過去/未来の判定を行うように変更されています。"
+    },
+    {
+      "number": 58093,
+      "title": "Decouple schema loading from the versions formatter {#pr-58093}",
+      "url": "https://github.com/rails/rails/pull/58093",
+      "mergedAt": "2026-07-12T00:00:00.000Z",
+      "author": "fxn",
+      "authorUrl": "https://github.com/fxn",
+      "summary": "1. 概要 (1-2文で)  \nRails 8.1 で導入された「version formatter」の契約（インターフェース）から、`schema.rb` ローダー（`:ruby` ローダー）の要件が漏れ出していた問題を解消するため、**スキーマ読み込み処理とバージョンフォーマッタを疎結合にする変更**です。`schema.rb` ローダーと `structure.sql` ダンパーが同じ内部 SQL 生成ロジックを共有していたのをやめ、それぞれの責務を分離しています。"
+    },
     {
       "number": 58087,
       "title": "Fix MySQL POINT and MULTIPOINT columns being misreported as integers {#pr-58087}",
@@ -388,69 +451,6 @@
       "author": "55728",
       "authorUrl": "https://github.com/55728",
       "summary": "1. 概要 (1-2文で)  \n`ActiveJob::Base.queue_name_prefix` を設定している場合でも、`assert_enqueued_email_with` が正しくジョブのキュー名を判定できるように修正した PR です。これにより、メール自体は正しく `deliver_later` されているのにテストだけが失敗する問題が解消されます。"
-    },
-    {
-      "number": 58010,
-      "title": "Support endless and beginless ranges in `number_field`/`range_field` {#pr-58010}",
-      "url": "https://github.com/rails/rails/pull/58010",
-      "mergedAt": "2026-07-05T00:00:00.000Z",
-      "author": "55728",
-      "authorUrl": "https://github.com/55728",
-      "summary": "1. 概要 (1-2文で)  \n`number_field` / `range_field` ヘルパで、`in:` / `within:` オプションに無限範囲 (`18..` など) や片側無限範囲 (`..10` など) を渡したときに `RangeError` になっていた問題を修正し、適切に `min` / `max` 属性へ変換できるようにした PR です。Ruby の end/beginless Range を正式にサポートしつつ、従来の閉区間・排他的区間の挙動は維持しています。"
-    },
-    {
-      "number": 58006,
-      "title": "Return the current value for an unchanged store accessor's `_was` {#pr-58006}",
-      "url": "https://github.com/rails/rails/pull/58006",
-      "mergedAt": "2026-07-05T00:00:00.000Z",
-      "author": "55728",
-      "authorUrl": "https://github.com/55728",
-      "summary": "1. 概要 (1-2文で)  \nstore アクセッサに対する `<key>_was` の挙動が、変更されていない場合にも `nil` を返してしまう不整合を修正し、`ActiveModel::Dirty` の契約どおり「未変更なら現在値を返す」ように揃えた PR です。これにより、store カラムを使う場合も通常の属性と同様の Dirty API の挙動が得られます。"
-    },
-    {
-      "number": 58011,
-      "title": "Honor an explicit `:selected` option in `weekday_select` {#pr-58011}",
-      "url": "https://github.com/rails/rails/pull/58011",
-      "mergedAt": "2026-07-05T00:00:00.000Z",
-      "author": "55728",
-      "authorUrl": "https://github.com/55728",
-      "summary": "1. 概要 (1-2文で)  \n`weekday_select` ヘルパに `selected:` オプションを明示的に渡した場合でも、その値が正しく優先されるように挙動が修正されました。これにより、他の `select` 系ヘルパ (`select`, `collection_select`, `grouped_collection_select`, `date_select`) と一貫した動きになります。"
-    },
-    {
-      "number": 58003,
-      "title": "Fix belongs_to change tracking for composite foreign keys {#pr-58003}",
-      "url": "https://github.com/rails/rails/pull/58003",
-      "mergedAt": "2026-07-05T00:00:00.000Z",
-      "author": "anxkhn",
-      "authorUrl": "https://github.com/anxkhn",
-      "summary": "1. 概要 (1-2文で)  \n`belongs_to` に複合外部キー（Composite Foreign Key）を使っている場合に、`association_changed?` / `association_previously_changed?` が常に `false` を返してしまうバグを修正したPRです。単一カラムの外部キーには影響せず、複合キーのときだけ正しく変更検知できるようにしています。"
-    },
-    {
-      "number": 57991,
-      "title": "Stop HTML-escaping JSON written by Coders::JSON {#pr-57991}",
-      "url": "https://github.com/rails/rails/pull/57991",
-      "mergedAt": "2026-07-04T00:00:00.000Z",
-      "author": "55728",
-      "authorUrl": "https://github.com/55728",
-      "summary": "1. 概要 (1-2文で)  \n`ActiveRecord::Coders::JSON` が JSON を DB に書き込む際、意図されていた「HTML エスケープ無し (`escape: false`)」設定が実際には効いておらず、HTML エスケープされてしまっていた不具合を修正する PR です。これにより、JSON 型カラムや `ActiveRecord::Type::Json` との挙動が統一されます。"
-    },
-    {
-      "number": 57990,
-      "title": "Match HTTP auth scheme case-insensitively for Token and Bearer {#pr-57990}",
-      "url": "https://github.com/rails/rails/pull/57990",
-      "mergedAt": "2026-07-04T00:00:00.000Z",
-      "author": "55728",
-      "authorUrl": "https://github.com/55728",
-      "summary": "1. 概要 (1-2文で)  \nHTTP の `Authorization` ヘッダにおける `Token` / `Bearer` 認証スキームの判定が、大文字小文字を区別しない（case-insensitive）形に修正されました。これにより、`bearer abc123` や `TOKEN xyz` といった非標準の大文字小文字でも正しくトークンが認識されるようになります。"
-    },
-    {
-      "number": 57993,
-      "title": "Fix incorrect number_to_percentage default precision in docs [ci skip] {#pr-57993}",
-      "url": "https://github.com/rails/rails/pull/57993",
-      "mergedAt": "2026-07-04T00:00:00.000Z",
-      "author": "anxkhn",
-      "authorUrl": "https://github.com/anxkhn",
-      "summary": "1. 概要 (1-2文で)  \n`number_to_percentage` ヘルパーのドキュメントに書かれていた `:precision` オプションのデフォルト値が誤っており、実際の挙動（デフォルト3桁）に合わせて「2」から「3」に修正した PR です。コードや挙動の変更はなく、ドキュメントのみの修正です。"
     }
   ]
 }
