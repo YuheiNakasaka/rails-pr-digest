@@ -1,7 +1,61 @@
 {
-  "lastUpdated": "2026-07-13T00:25:12.439Z",
+  "lastUpdated": "2026-07-14T00:22:11.329Z",
   "totalCount": 50,
   "items": [
+    {
+      "number": 58111,
+      "title": "Fix the broken #with reference {#pr-58111}",
+      "url": "https://github.com/rails/rails/pull/58111",
+      "mergedAt": "2026-07-13T00:00:00.000Z",
+      "author": "codergeek121",
+      "authorUrl": "https://github.com/codergeek121",
+      "summary": "1. 概要 (1–2文で)  \nRails の Active Record の `#with_recursive` メソッドのドキュメント内で、壊れていた `#with` への参照リンクが修正されました。コードの挙動には一切影響せず、ドキュメント上のリンク誤りのみを直す変更です。\n\n2. 変更内容の詳細  \n- 対象ファイル: `activerecord/lib/active_record/relation/query_methods.rb`  \n- 変更内容は 1 行の置換のみで、`#with_recursive` のドキュメントコメント中に書かれていた `#with` への参照形式（`rdoc` 用のリンク記法）が誤っていたため、正しい形に修正されています。\n\nイメージとしては、以下のようなコメント行が:\n\n```ruby\n# Similar to #with_recursive, see #with for non-recursive CTEs.\n```\n\nのように書かれていて、`#with` への参照が RDoc 上でリンク切れになっていたため、例えば:\n\n```ruby\n# Similar to #with_recursive, see Relation#with for non-recursive CTEs.\n```\n\nのようにクラス名付きにする、あるいは RDoc が解釈可能な形（`#with` → `with` メソッドシグネチャ形式など）に書き換えられた、という種類の修正です。  \n※正確な文字列は PR 本文からは分かりませんが、「参照の形式」を 1 箇所修正しているだけです。\n\n実装コード (`def with_recursive ... end` やクエリロジック) には手が入っていません。\n\n3. 影響範囲・注意点  \n- 影響範囲:\n  - Rails API ドキュメント (RDoc / api.rubyonrails.org 等) を閲覧した際に、`#with_recursive` の説明から `#with` へのリンクが正しく飛べるようになります。\n  - ランタイムの挙動、パフォーマンス、互換性には一切影響しません。\n- 注意点:\n  - 既存アプリケーション側で対応すべき変更はありません。\n  - CI などでドキュメント生成をしている場合も、生成物のリンクが正しくなるだけでビルド手順の変更は不要です。\n\n4. 参考情報 (あれば)  \n- `ActiveRecord::QueryMethods#with` / `#with_recursive` は CTE (Common Table Expression) を扱うためのメソッドで、例:\n\n  ```ruby\n  Post.with(\n    popular_posts: Post.where(\"likes_count > 100\")\n  ).from(\"popular_posts AS posts\")\n  ```\n\n  のように非再帰 CTE を `with` で定義したり、\n\n  ```ruby\n  Category.with_recursive(\n    ancestors: Category.where(id: 10),\n    union: Category.joins(\"JOIN ancestors ON categories.parent_id = ancestors.id\")\n  ).from(\"ancestors\")\n  ```\n\n  のような再帰 CTE を `with_recursive` で扱うときに利用します。\n\nこの PR は、こうしたメソッドの使い方をドキュメント上で辿りやすくするための、リンク修正のみのメンテナンス変更です。"
+    },
+    {
+      "number": 58110,
+      "title": "Remove unneeded parenthesis [ci-skip] {#pr-58110}",
+      "url": "https://github.com/rails/rails/pull/58110",
+      "mergedAt": "2026-07-13T00:00:00.000Z",
+      "author": "claudiob",
+      "authorUrl": "https://github.com/claudiob",
+      "summary": "1. 概要 (1-2文で)  \nRailsのガイド「product_reviews.md」に記載されていたコード例から、不要な括弧（parenthesis）を取り除くドキュメント修正PRです。アプリの挙動には影響せず、ガイドのコードスタイル・可読性を改善する目的の変更です。"
+    },
+    {
+      "number": 57967,
+      "title": "Change the order of Views and Controllers in the guides {#pr-57967}",
+      "url": "https://github.com/rails/rails/pull/57967",
+      "mergedAt": "2026-07-13T00:00:00.000Z",
+      "author": "p8",
+      "authorUrl": "https://github.com/p8",
+      "summary": "1. 概要 (1-2文で)  \nRails Guides のナビゲーション順序を、従来の「MVCのV→C」から「リクエストライフサイクル (route → controller → view → response)」に合わせて整理し直した PR です。具体的には、コントローラ関連ガイドをビューより前に出し、ルーティングとコントローラをまとめて扱う形に変更しています。"
+    },
+    {
+      "number": 57966,
+      "title": "Comment ellipsis in guides examples {#pr-57966}",
+      "url": "https://github.com/rails/rails/pull/57966",
+      "mergedAt": "2026-07-13T00:00:00.000Z",
+      "author": "p8",
+      "authorUrl": "https://github.com/p8",
+      "summary": "1. 概要 (1-2文で)  \nRails Guides のコード例中に素の三点リーダ `...` をそのまま書かないようにし、多くをコメントアウトされた `# ...` に統一した PR です。Ruby では `...` が有効な構文であるため、ガイドのコードをコピペしたときに意図せず動作してしまう／構文エラーになる問題を避けることが目的です。"
+    },
+    {
+      "number": 58098,
+      "title": "Fix settings navigation test in authentication guide {#pr-58098}",
+      "url": "https://github.com/rails/rails/pull/58098",
+      "mergedAt": "2026-07-13T00:00:00.000Z",
+      "author": "Lemmah",
+      "authorUrl": "https://github.com/Lemmah",
+      "summary": "1. 概要 (1-2文で)  \n認証ガイド内のシステムテスト例において、「Store Settings」がリンクではなく見出し（`h4`）としてレンダリングされている実際のマークアップに合わせて、テストのセレクタを修正したドキュメント変更です。これにより、一般ユーザーと管理者ユーザーのテスト例の整合性が取り戻され、意図した挙動を正しく検証できる内容になっています。"
+    },
+    {
+      "number": 58101,
+      "title": "Downcase Cache-Control key in asset pipeline guide example {#pr-58101}",
+      "url": "https://github.com/rails/rails/pull/58101",
+      "mergedAt": "2026-07-13T00:00:00.000Z",
+      "author": "meganemura",
+      "authorUrl": "https://github.com/meganemura",
+      "summary": "1. 概要 (1-2文で)  \nAsset Pipeline ガイド内のサンプルコードにおける `Cache-Control` ヘッダー名を、Rack 3 の仕様に合わせて小文字の `\"cache-control\"` に修正したドキュメント更新です。実装コードではなく、ガイドの表記を現状のジェネレータ出力と整合させることが目的です。\n\n2. 変更内容の詳細(あればサンプルコードも含めて)  \n- 対象: `guides/source/asset_pipeline.md` の「CDNs and the Cache-Control Header」セクション内のコード例  \n- 変更前の例（イメージ）:\n\n  ```ruby\n  config.public_file_server.headers = {\n    \"Cache-Control\" => \"public, max-age=31536000\"\n  }\n  ```\n\n- 変更後の例:\n\n  ```ruby\n  config.public_file_server.headers = {\n    \"cache-control\" => \"public, max-age=31536000\"\n  }\n  ```\n\n- 文字としての HTTP ヘッダー名を説明する本文中では従来どおり `Cache-Control` と表記し、コード例のみ Rack 3 SPEC に準拠した小文字キーに揃えています。  \n- 背景として、#52653 で `config/environments/development.rb.tt` と `test.rb.tt` のテンプレートが `\"cache-control\"` に変更されており、新規アプリの実際の生成コードとの不整合を解消する修正です。\n\n3. 影響範囲・注意点  \n- 影響範囲:\n  - Rails ガイド（ドキュメント）のみであり、フレームワーク本体の動作や API には変更はありません。\n  - ただし、ガイドを参考に環境設定を書いている開発者にとって、Rack 3 仕様に即した正しい例が示されるようになります。\n- 技術的なポイント・注意:\n  - Rack 3 ではレスポンスヘッダーは小文字キーで扱うことが要求される（仕様）ため、Rails のジェネレートされる環境ファイルも小文字 `\"cache-control\"` を使用するようになっています。\n  - HTTP ヘッダー名自体はプロトコル上は大文字・小文字を区別しませんが、Rack 3 のインターフェース要件に合わせる必要があります。\n  - 既存アプリで `\"Cache-Control\"` をキーに使っていても、Rack 2 環境では通常問題になりませんが、Rack 3 への移行時には小文字化を検討するのが無難です（この PR はそのベストプラクティスの周知にもつながります）。\n\n4. 参考情報 (あれば)  \n- 対応元 Issue/PR: #52653（Rack 3 SPEC に合わせて環境テンプレートのレスポンスヘッダーキーを小文字化した変更）  \n- Rack 3 SPEC（概要）:\n  - レスポンスヘッダーは `Hash&lt;String, String>` で、キーは小文字の ASCII 文字列であることが求められる。  \n- 実務的には、Rails 7 以降で Rack 3 を使う、または今後のアップグレードを見据える場合、`config.public_file_server.headers` やミドルウェアで設定するヘッダー名は小文字に揃えておくとよいです。"
+    },
     {
       "number": 58096,
       "title": "Read foreign key names from the schema on SQLite3 {#pr-58096}",
@@ -397,60 +451,6 @@
       "author": "55728",
       "authorUrl": "https://github.com/55728",
       "summary": "1. 概要 (1-2文で)  \n`Hash.from_xml` が `type=\"duration\"` の要素をパースする際に、前後の空白文字（改行・インデント）を除去してから `ActiveSupport::Duration` に変換するように修正された PR です。これにより、「人間が整形した XML」に含まれる改行やインデントのせいで `ParsingError` が起きていた問題が解消されます。"
-    },
-    {
-      "number": 58014,
-      "title": "Remove stale payload-based filter example in EventReporter#subscribe rdoc {#pr-58014}",
-      "url": "https://github.com/rails/rails/pull/58014",
-      "mergedAt": "2026-07-06T00:00:00.000Z",
-      "author": "55728",
-      "authorUrl": "https://github.com/55728",
-      "summary": "1. 概要 (1-2文で)  \nEventReporter#subscribe の RDoc に載っていた「payload によるフィルタ」サンプルコードが、実際の挙動と矛盾しており誤解を招くため削除され、フィルタから参照できるのはイベント名のみであることを明示するドキュメント修正です。コードの挙動には一切変更はなく、ドキュメントのみの更新です。"
-    },
-    {
-      "number": 58005,
-      "title": "Make `add_column(if_not_exists: true)` reversible {#pr-58005}",
-      "url": "https://github.com/rails/rails/pull/58005",
-      "mergedAt": "2026-07-05T00:00:00.000Z",
-      "author": "55728",
-      "authorUrl": "https://github.com/55728",
-      "summary": "1. 概要 (1-2文で)  \n`add_column(..., if_not_exists: true)` を含むマイグレーションをロールバックした際に、逆操作として不正なオプションを付けた `remove_column` が生成されていた問題を修正し、正しく `if_exists: true` が付くようにした PR です。これにより、該当マイグレーションのロールバックが安全かつ他のコマンドと一貫した挙動になります。"
-    },
-    {
-      "number": 58004,
-      "title": "Return no rows without a query for `none.ids` {#pr-58004}",
-      "url": "https://github.com/rails/rails/pull/58004",
-      "mergedAt": "2026-07-05T00:00:00.000Z",
-      "author": "55728",
-      "authorUrl": "https://github.com/55728",
-      "summary": "1. 概要 (1-2文で)  \n`Relation#none` に対して `ids` / `async_ids` を呼び出したとき、これまでは実際に `SELECT ... WHERE (1=0)` のクエリが発行されていたのを、`pluck` と同様に**クエリを投げずに常に空配列（またはそれを返す Promise）を返す**ように修正した PR です。`none` が「DB に触れない null object」として一貫した動作をするようになります。"
-    },
-    {
-      "number": 58007,
-      "title": "Instrument the normalized key in `MemoryStore#increment`/`#decrement` {#pr-58007}",
-      "url": "https://github.com/rails/rails/pull/58007",
-      "mergedAt": "2026-07-05T00:00:00.000Z",
-      "author": "55728",
-      "authorUrl": "https://github.com/55728",
-      "summary": "1. 概要 (1-2文で)  \n`ActiveSupport::Cache::MemoryStore` の `increment` / `decrement` が発行する計測イベント（`cache_increment` / `cache_decrement`）について、これまで「生のキー」を送っていたものを、他のストア実装と同様に「正規化済み（名前空間付き）のキー」を送るように揃えた変更です。これにより、メモリストア利用時の計測イベントのキー情報が一貫したものになります。"
-    },
-    {
-      "number": 58008,
-      "title": "Clear a stale `enqueue_error` when `perform_all_later` re-enqueues a job {#pr-58008}",
-      "url": "https://github.com/rails/rails/pull/58008",
-      "mergedAt": "2026-07-05T00:00:00.000Z",
-      "author": "55728",
-      "authorUrl": "https://github.com/55728",
-      "summary": "1. 概要 (1-2文で)  \n`perform_all_later` が `enqueue_all` 未実装アダプタ向けに「1件ずつ enqueue」するフォールバック経路を使う際、過去の失敗時にセットされた `enqueue_error` がクリアされず、状態が矛盾する問題を修正したPRです。これにより、再enqueueに成功したジョブは `successfully_enqueued? == true` かつ `enqueue_error == nil` という一貫した状態になります。"
-    },
-    {
-      "number": 58009,
-      "title": "Account for `queue_name_prefix` in `assert_enqueued_email_with` {#pr-58009}",
-      "url": "https://github.com/rails/rails/pull/58009",
-      "mergedAt": "2026-07-05T00:00:00.000Z",
-      "author": "55728",
-      "authorUrl": "https://github.com/55728",
-      "summary": "1. 概要 (1-2文で)  \n`ActiveJob::Base.queue_name_prefix` を設定している場合でも、`assert_enqueued_email_with` が正しくジョブのキュー名を判定できるように修正した PR です。これにより、メール自体は正しく `deliver_later` されているのにテストだけが失敗する問題が解消されます。"
     }
   ]
 }
