@@ -1,7 +1,25 @@
 {
-  "lastUpdated": "2026-07-14T00:22:11.329Z",
+  "lastUpdated": "2026-07-15T00:20:16.095Z",
   "totalCount": 50,
   "items": [
+    {
+      "number": 58117,
+      "title": "Raise for empty shards on `connected_to_all_shards` {#pr-58117}",
+      "url": "https://github.com/rails/rails/pull/58117",
+      "mergedAt": "2026-07-14T00:00:00.000Z",
+      "author": "eileencodes",
+      "authorUrl": "https://github.com/eileencodes",
+      "summary": "1. 概要 (1-2文で)  \n`connected_to_all_shards` を、実際にはシャーディングされていないアプリ（shard 設定が空のケース）で呼び出した場合に、静かに動作するのではなくエラーを送出するように変更した PR です。  \n「シャーディングされていない構成で `connected_to_all_shards` を使う」ことを明示的に不正利用として扱う方向に仕様が整理されています。"
+    },
+    {
+      "number": 58055,
+      "title": "Use NOT ENFORCED toggle in check_all_foreign_keys_valid! on PostgreSQL 18.4+ {#pr-58055}",
+      "url": "https://github.com/rails/rails/pull/58055",
+      "mergedAt": "2026-07-14T00:00:00.000Z",
+      "author": "yahonda",
+      "authorUrl": "https://github.com/yahonda",
+      "summary": "1. 概要 (1-2文で)  \nRails の `ActiveRecord::ConnectionAdapters::PostgreSQLAdapter#check_all_foreign_keys_valid!` が、PostgreSQL 18.4 以降では `NOT ENFORCED` / `ENFORCED` トグルを用いて外部キーの再検証を行うようになり、スーパーユーザ権限が不要になりました。これにより、`disable_referential_integrity` と同様に、テーブル所有者権限だけでテスト用フィクスチャの外部キー検証を行えるようになります。"
+    },
     {
       "number": 58111,
       "title": "Fix the broken #with reference {#pr-58111}",
@@ -433,24 +451,6 @@
       "author": "fuentesjr",
       "authorUrl": "https://github.com/fuentesjr",
       "summary": "1. 概要 (1-2文で)  \nこのPRは、Rails Guides 内および外部サイトへの「リンク切れ」を3箇所修正するドキュメント専用の変更です。動作コードには一切手を入れておらず、ガイドの参照先を正しいURL／アンカーに差し替えています。"
-    },
-    {
-      "number": 58016,
-      "title": "Forward keyword arguments through deprecation proxies {#pr-58016}",
-      "url": "https://github.com/rails/rails/pull/58016",
-      "mergedAt": "2026-07-06T00:00:00.000Z",
-      "author": "55728",
-      "authorUrl": "https://github.com/55728",
-      "summary": "1. 概要 (1-2文で)  \n`DeprecatedObjectProxy` / `DeprecatedInstanceVariableProxy` 経由でキーワード引数必須メソッドを呼ぶと `ArgumentError` になっていた問題を修正し、正しくキーワード引数として転送されるようにした PR です。Ruby 3 以降の「キーワード引数の分離」による不具合を、`ruby2_keywords` を使って最小限の変更で解消しています。"
-    },
-    {
-      "number": 58015,
-      "title": "Strip surrounding whitespace before parsing a duration in `Hash.from_xml` {#pr-58015}",
-      "url": "https://github.com/rails/rails/pull/58015",
-      "mergedAt": "2026-07-06T00:00:00.000Z",
-      "author": "55728",
-      "authorUrl": "https://github.com/55728",
-      "summary": "1. 概要 (1-2文で)  \n`Hash.from_xml` が `type=\"duration\"` の要素をパースする際に、前後の空白文字（改行・インデント）を除去してから `ActiveSupport::Duration` に変換するように修正された PR です。これにより、「人間が整形した XML」に含まれる改行やインデントのせいで `ParsingError` が起きていた問題が解消されます。"
     }
   ]
 }
