@@ -1,7 +1,106 @@
 {
-  "lastUpdated": "2026-07-15T00:20:16.095Z",
+  "lastUpdated": "2026-07-16T00:26:50.801Z",
   "totalCount": 50,
   "items": [
+    {
+      "number": 58116,
+      "title": "Guard tests for PostgreSQL 11, 12, and 15 changes {#pr-58116}",
+      "url": "https://github.com/rails/rails/pull/58116",
+      "mergedAt": "2026-07-15T00:00:00.000Z",
+      "author": "yahonda",
+      "authorUrl": "https://github.com/yahonda",
+      "summary": "1. 概要 (1-2文で)  \nこのPRは、Active Record のテスト群とテスト用スキーマを「PostgreSQL 10〜18の全サポート範囲で通る」ように調整し、特定バージョン以降でしか存在しない PostgreSQL 機能を利用するテストにガード（条件分岐・スキップ）を入れたものです。ライブラリ本体の動作変更は行わず、あくまでテストとスキーマ定義のみを修正しています。"
+    },
+    {
+      "number": 57702,
+      "title": "Don't autovivify the PostgreSQL listener on shutdown {#pr-57702}",
+      "url": "https://github.com/rails/rails/pull/57702",
+      "mergedAt": "2026-07-15T00:00:00.000Z",
+      "author": "55728",
+      "authorUrl": "https://github.com/55728",
+      "summary": "1. 概要 (1-2文で)  \nPostgreSQL 用の ActionCable サブスクリプションアダプタで、`shutdown` 時に未使用の `listener` を新規生成してしまう不具合を修正し、Redis アダプタと同様に「既に存在する場合のみ shutdown する」挙動に統一した PR です。これにより、未購読・送信専用プロセスの終了時に不要なスレッド・DB接続が作られなくなります。"
+    },
+    {
+      "number": 58042,
+      "title": "Add missing ActiveSupport core extension and feature requires {#pr-58042}",
+      "url": "https://github.com/rails/rails/pull/58042",
+      "mergedAt": "2026-07-15T00:00:00.000Z",
+      "author": "55728",
+      "authorUrl": "https://github.com/55728",
+      "summary": "1. 概要 (1-2文で)\nRails の各コンポーネントが Active Support のコア拡張メソッドや定数を **明示的に require していなかった問題**をまとめて修正し、「特定の順序で require したときだけ動く」状態を解消する PR です。挙動そのものは変えず、ロード順に依存した `NoMethodError` / `NameError` を潰すための require 追加のみが行われています。"
+    },
+    {
+      "number": 58132,
+      "title": "Fix `rubocop.yml` indentation {#pr-58132}",
+      "url": "https://github.com/rails/rails/pull/58132",
+      "mergedAt": "2026-07-15T00:00:00.000Z",
+      "author": "jeromedalbert",
+      "authorUrl": "https://github.com/jeromedalbert",
+      "summary": "1. 概要 (1-2文で)  \nRails が `rails new` などで生成する `.rubocop.yml` テンプレートのインデント幅を、他の YAML テンプレートと同じ「半角スペース 2 個」に揃える修正です。前回 PR(#57252) のフォローアップとして、4 スペースになっていた部分を 2 スペースに直しています。"
+    },
+    {
+      "number": 58043,
+      "title": "Respect a limit set on the relation in `rails query` {#pr-58043}",
+      "url": "https://github.com/rails/rails/pull/58043",
+      "mergedAt": "2026-07-15T00:00:00.000Z",
+      "author": "55728",
+      "authorUrl": "https://github.com/55728",
+      "summary": "1. 概要 (1-2文で)  \n`bin/rails query` コマンドで、すでに `limit` が設定されている Active Record リレーションを評価した際に、その `limit` がページネーション用の件数 (`per + 1`) に上書きされてしまう問題を修正し、ユーザー指定の `limit` をそのまま尊重するようにした PR です。これにより `Post.limit(5)` のようなクエリで、期待どおり 5 件だけが取得されるようになります。"
+    },
+    {
+      "number": 58063,
+      "title": "Test that `reverse_merge` takes the default from the other hash {#pr-58063}",
+      "url": "https://github.com/rails/rails/pull/58063",
+      "mergedAt": "2026-07-15T00:00:00.000Z",
+      "author": "55728",
+      "authorUrl": "https://github.com/55728",
+      "summary": "1. 概要 (1-2文で)  \n`Hash#reverse_merge` / `Hash#reverse_merge!` が「レシーバではなく、引数側のハッシュの `default` / `default_proc` を引き継ぐ」という既存仕様をテストで明示的に保証する PR です。実装コードの変更はなく、テスト追加のみです。"
+    },
+    {
+      "number": 58129,
+      "title": "Fix Rubocop violation in `config/puma.rb` - Approach 1 {#pr-58129}",
+      "url": "https://github.com/rails/rails/pull/58129",
+      "mergedAt": "2026-07-15T00:00:00.000Z",
+      "author": "jeromedalbert",
+      "authorUrl": "https://github.com/jeromedalbert",
+      "summary": "1. 概要 (1-2文で)  \nRails アプリ生成時の `config/puma.rb` テンプレートに含まれていた RuboCop (`Layout/SpaceInsideArrayLiteralBrackets`) 違反を修正し、`rails new myapp --main` で作成したアプリで `bin/rubocop` や `bin/ci` が失敗しないようにした PR です。  \n前の PR (#57424) による変更で入り込んだスタイル違反を、テンプレート側で1行だけ修正しています。"
+    },
+    {
+      "number": 55410,
+      "title": "Introduce `ActionView::Helper::NavigationHelper` {#pr-55410}",
+      "url": "https://github.com/rails/rails/pull/55410",
+      "mergedAt": "2026-07-15T00:00:00.000Z",
+      "author": "seanpdoyle",
+      "authorUrl": "https://github.com/seanpdoyle",
+      "summary": "1. 概要 (1-2文で)  \n`button_to` / `link_to` 系のヘルパー（`link_to_unless_current`, `link_to_unless`, `link_to_if` を含む）が、新設の `ActionView::Helpers::NavigationHelper` モジュールに切り出されました。挙動の変更はほぼなく、主に内部構造の整理・責務分離が目的のリファクタリングです。"
+    },
+    {
+      "number": 58126,
+      "title": "[RF-Docs] [ci-skip] Update the Rails Generators guide (#57371) {#pr-58126}",
+      "url": "https://github.com/rails/rails/pull/58126",
+      "mergedAt": "2026-07-15T00:00:00.000Z",
+      "author": "p8",
+      "authorUrl": "https://github.com/p8",
+      "summary": "1. 概要 (1-2文で)  \nRails Generators ガイド（`guides/source/generators.md`）を大きく書き換え・再構成したドキュメント更新PRです。Rails Foundation のドキュメントプロジェクトの一環で、Generators の説明を最新かつ体系的な内容に整えることが目的です。"
+    },
+    {
+      "number": 57371,
+      "title": "[RF-Docs] [ci-skip] Update the Rails Generators guide {#pr-57371}",
+      "url": "https://github.com/rails/rails/pull/57371",
+      "mergedAt": "2026-07-15T00:00:00.000Z",
+      "author": "bhumi1102",
+      "authorUrl": "https://github.com/bhumi1102",
+      "summary": "1. 概要 (1–2文で)  \nRails Foundation のドキュメント刷新プロジェクトの一環として、「Rails Generators ガイド（generators.md）」が大幅に書き直されました。既存内容の整理・拡張に加え、他ガイドから統合されたセクションを含めて、ジェネレータの使い方・カスタマイズ方法がより体系的に説明されています。"
+    },
+    {
+      "number": 58124,
+      "title": "Fix `Relation#one?` doc example calling `any?` {#pr-58124}",
+      "url": "https://github.com/rails/rails/pull/58124",
+      "mergedAt": "2026-07-15T00:00:00.000Z",
+      "author": "55728",
+      "authorUrl": "https://github.com/55728",
+      "summary": "1. 概要 (1-2文で)  \n`ActiveRecord::Relation#one?` のドキュメント中のサンプルコードが誤って `any?` を呼んでいた問題を修正し、説明文やコメントの文言・整形も合わせて調整したドキュメント専用のPRです。コードの挙動自体には一切変更はありません。"
+    },
     {
       "number": 58117,
       "title": "Raise for empty shards on `connected_to_all_shards` {#pr-58117}",
@@ -352,105 +451,6 @@
       "author": "55728",
       "authorUrl": "https://github.com/55728",
       "summary": "1. 概要 (1-2文で)  \n`color_field` ヘルパーが、明示的に `value: nil` が指定された場合でもモデルの値で上書きしてしまう不具合を修正し、`value:` オプション（`nil` を含む）を正しく尊重するようにした PR です。これにより「入力欄をあえて空にしたい」というケースが期待通り動作します。"
-    },
-    {
-      "number": 58035,
-      "title": "Don't mutate the array passed to RedisCacheStore via `:client` {#pr-58035}",
-      "url": "https://github.com/rails/rails/pull/58035",
-      "mergedAt": "2026-07-07T00:00:00.000Z",
-      "author": "55728",
-      "authorUrl": "https://github.com/55728",
-      "summary": "1. 概要 (1-2文で)  \nRedisCacheStore のコンストラクタに `client:` オプションとして渡した配列を内部で破壊的に変更しないようにし、`FrozenError` が発生しないように修正した PR です。`redis-client` ベースの未リリース実装にのみ影響する挙動で、本修正によりドキュメントどおりの使い方が安全に行えるようになります。"
-    },
-    {
-      "number": 58037,
-      "title": "Require enumerable core ext for Range#sole {#pr-58037}",
-      "url": "https://github.com/rails/rails/pull/58037",
-      "mergedAt": "2026-07-07T00:00:00.000Z",
-      "author": "55728",
-      "authorUrl": "https://github.com/55728",
-      "summary": "1. 概要 (1-2文で)  \n`Range#sole` が内部的に依存している Enumerable 拡張が読み込まれていないため、`require \"active_support/core_ext/range\"` だけだと常にクラッシュしていた問題を修正する PR です。`Range#sole` 定義ファイルで `active_support/core_ext/enumerable` を明示的に require することで、単体ロード時でも正しく動作するようにしています。"
-    },
-    {
-      "number": 58032,
-      "title": "Fix event timestamp type in EventReporter rdoc {#pr-58032}",
-      "url": "https://github.com/rails/rails/pull/58032",
-      "mergedAt": "2026-07-07T00:00:00.000Z",
-      "author": "55728",
-      "authorUrl": "https://github.com/55728",
-      "summary": "1. 概要 (1-2文で)  \n`ActiveSupport::EventReporter` のドキュメントで、イベントハッシュに含まれる `:timestamp` の型が誤って `Float` と記載されていたのを、実際の実装に合わせて `Integer` に修正した PR です。実際の値はナノ秒精度のエポックタイム（`Process.clock_gettime(..., :nanosecond)`）であり、巨大整数である点が明示されました。"
-    },
-    {
-      "number": 58033,
-      "title": "Instrument the normalized key in `Cache#fetch` hit path {#pr-58033}",
-      "url": "https://github.com/rails/rails/pull/58033",
-      "mergedAt": "2026-07-07T00:00:00.000Z",
-      "author": "55728",
-      "authorUrl": "https://github.com/55728",
-      "summary": "1. 概要 (1-2文で)  \n`ActiveSupport::Cache::Store#fetch` がキャッシュヒット時に発行する `cache_fetch_hit.active_support` 通知の `payload[:key]` を、他のキャッシュ関連イベントと同様に「正規化済み（namespace 付与後）のキー」に統一した変更です。これにより、ヒットとミスで同じ論理エントリに対して異なるキーが通知される不整合が解消されます。"
-    },
-    {
-      "number": 57830,
-      "title": "Make ActionController Renderers ractor safe {#pr-57830}",
-      "url": "https://github.com/rails/rails/pull/57830",
-      "mergedAt": "2026-07-07T00:00:00.000Z",
-      "author": "Edouard-chin",
-      "authorUrl": "https://github.com/Edouard-chin",
-      "summary": "1. 概要 (1-2文で)  \nActionController の Renderers（`js`, `xml` など）を Ractor セーフにするため、レンダラー名を保持するオブジェクトの扱いを見直し、ミューテーションの停止と freeze を行った PRです。併せて、内部利用想定の定数を非推奨化しつつ、ActiveSupport の deprecation プロキシに「初期化後に参照先を書き換えられる」仕組みを追加しています。"
-    },
-    {
-      "number": 57825,
-      "title": "Introduce ractorize {#pr-57825}",
-      "url": "https://github.com/rails/rails/pull/57825",
-      "mergedAt": "2026-07-06T00:00:00.000Z",
-      "author": "andrewn617",
-      "authorUrl": "https://github.com/andrewn617",
-      "summary": "1. 概要 (1-2文で)  \nRails アプリケーションを Ractor から共有可能にするための土台として、`Rails::Application#ractorize!` が導入され、基本的な Rails アプリを `Ractor.make_shareable` できるようにする PR です。あわせて、Ractor 非対応だったいくつかの内部実装（継承オプション、KeyGenerator、Mutex など）が Ractor セーフになるよう調整されています。"
-    },
-    {
-      "number": 58018,
-      "title": "Translate `if_exists`/`if_not_exists` guards when inverting `remove_column` and `add_reference`/`remove_reference` {#pr-58018}",
-      "url": "https://github.com/rails/rails/pull/58018",
-      "mergedAt": "2026-07-06T00:00:00.000Z",
-      "author": "55728",
-      "authorUrl": "https://github.com/55728",
-      "summary": "1. 概要 (1-2文で)  \n`remove_column` および `add_reference` / `remove_reference`（とそのエイリアス `add_belongs_to` / `remove_belongs_to`）について、マイグレーションの巻き戻し時に `if_exists` / `if_not_exists` オプションが正しく反転して適用されるように修正した PR です。これにより、これらのコマンドを使った冪等なマイグレーションの `change` / `revert` が、期待通りに動作するようになります。"
-    },
-    {
-      "number": 58024,
-      "title": "Derive the expected queue from the delivery job in `assert_enqueued_email_with` {#pr-58024}",
-      "url": "https://github.com/rails/rails/pull/58024",
-      "mergedAt": "2026-07-06T00:00:00.000Z",
-      "author": "55728",
-      "authorUrl": "https://github.com/55728",
-      "summary": "1. 概要 (1-2文で)  \n`assert_enqueued_email_with` が、メール送信時のキュー名を「メイラー側の設定」ではなく「delivery_job 側の設定」から導出するように修正されました。これにより、カスタム `delivery_job` で `queue_as` を指定している場合でも、正しくテストが通るようになります。"
-    },
-    {
-      "number": 58017,
-      "title": "Preserve subsecond precision in the `DateTime.now` travel stub under `with_usec` {#pr-58017}",
-      "url": "https://github.com/rails/rails/pull/58017",
-      "mergedAt": "2026-07-06T00:00:00.000Z",
-      "author": "55728",
-      "authorUrl": "https://github.com/55728",
-      "summary": "1. 概要 (1-2文で)  \n`travel_to(time, with_usec: true)` 使用時に、`DateTime.now` でもサブ秒（マイクロ秒）精度が正しく保持されるように修正したPRです。これにより、同じ凍結時刻を参照する `Time.now` と `DateTime.now` の挙動が一致します。"
-    },
-    {
-      "number": 58021,
-      "title": "Honor an explicit `:selected` option in `time_zone_select` {#pr-58021}",
-      "url": "https://github.com/rails/rails/pull/58021",
-      "mergedAt": "2026-07-06T00:00:00.000Z",
-      "author": "55728",
-      "authorUrl": "https://github.com/55728",
-      "summary": "1. 概要 (1-2文で)  \n`time_zone_select` ヘルパーに `selected:` オプションを明示的に渡した場合、その値がきちんと選択状態として反映されるように修正したPRです。`selected:` を指定しない既存コードの挙動は変わりません。"
-    },
-    {
-      "number": 58012,
-      "title": "Fix broken links in guides [ci skip] {#pr-58012}",
-      "url": "https://github.com/rails/rails/pull/58012",
-      "mergedAt": "2026-07-06T00:00:00.000Z",
-      "author": "fuentesjr",
-      "authorUrl": "https://github.com/fuentesjr",
-      "summary": "1. 概要 (1-2文で)  \nこのPRは、Rails Guides 内および外部サイトへの「リンク切れ」を3箇所修正するドキュメント専用の変更です。動作コードには一切手を入れておらず、ガイドの参照先を正しいURL／アンカーに差し替えています。"
     }
   ]
 }
