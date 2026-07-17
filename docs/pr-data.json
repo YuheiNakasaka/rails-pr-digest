@@ -1,7 +1,43 @@
 {
-  "lastUpdated": "2026-07-16T00:26:50.801Z",
+  "lastUpdated": "2026-07-17T00:25:20.667Z",
   "totalCount": 50,
   "items": [
+    {
+      "number": 58133,
+      "title": "Don't force multi statement for MySQL tx isolation {#pr-58133}",
+      "url": "https://github.com/rails/rails/pull/58133",
+      "mergedAt": "2026-07-16T00:00:00.000Z",
+      "author": "edaroit",
+      "authorUrl": "https://github.com/edaroit",
+      "summary": "1. 概要 (1-2文で)  \nMySQL系アダプタでトランザクション分離レベルを設定して `BEGIN` する処理について、「再試行時に一体として扱う」安全性は維持しつつ、常にマルチステートメントを強制しないように変更されたPRです。これにより、DBへのラウンドトリップ増加や ProxySQL でのコネクション多重化(multiplexing)無効化といった副作用を避けられるようになっています。"
+    },
+    {
+      "number": 58115,
+      "title": "Add async test coverage for contradiction/none short-circuits in calculations {#pr-58115}",
+      "url": "https://github.com/rails/rails/pull/58115",
+      "mergedAt": "2026-07-16T00:00:00.000Z",
+      "author": "55728",
+      "authorUrl": "https://github.com/55728",
+      "summary": "1. 概要 (1-2文で)  \n矛盾条件（contradiction）や `@none` による早期リターンが行われる計算系メソッドについて、非同期版（`async_*`）でも「DBクエリを発行しない」「期待値を返す」ことを検証するテストが追加・強化された PR です。従来は同期版のみで確認していた no-query パスを、`Promise` ベースの async パスでも同等にカバーするようにしています。"
+    },
+    {
+      "number": 58085,
+      "title": "Preserve sub-second precision when coercing a `DateTime` in `Time.at` {#pr-58085}",
+      "url": "https://github.com/rails/rails/pull/58085",
+      "mergedAt": "2026-07-16T00:00:00.000Z",
+      "author": "55728",
+      "authorUrl": "https://github.com/55728",
+      "summary": "1. 概要 (1–2文で)  \n`Time.at(DateTime)` したときに、サブ秒（マイクロ秒）精度が失われていた問題を修正し、`DateTime` から `Time` への変換でもマイクロ秒まで正確に保持されるようにしたPRです。`ActiveSupport::TimeWithZone` と同様に Rational ベースの変換を使うことで、浮動小数点の丸め誤差を排除しています。"
+    },
+    {
+      "number": 58119,
+      "title": "Allow to access `Controller#controller_path` in a Ractor {#pr-58119}",
+      "url": "https://github.com/rails/rails/pull/58119",
+      "mergedAt": "2026-07-16T00:00:00.000Z",
+      "author": "Edouard-chin",
+      "authorUrl": "https://github.com/Edouard-chin",
+      "summary": "1. 概要 (1-2文で)  \n`AbstractController#controller_path` が返す文字列を freeze することで、Ractor 内からも安全に `controller_path` を呼び出せるようにした変更です。Ractor セーフティを満たすための最小限の修正で、既存のメモ化ロジックを活かしつつ対応しています。"
+    },
     {
       "number": 58116,
       "title": "Guard tests for PostgreSQL 11, 12, and 15 changes {#pr-58116}",
@@ -415,42 +451,6 @@
       "author": "55728",
       "authorUrl": "https://github.com/55728",
       "summary": "1. 概要 (1–2文で)  \n複合主キー(Composite Primary Key)を持つモデルに対して `destroy([])` や `update([], [])` を呼ぶと `NoMethodError` になっていた問題を修正し、空配列を「空のID集合」として扱うようにしたPRです。単一主キーのモデルと同様に、これらの呼び出しが安全な no-op として `[]` を返すようになります。"
-    },
-    {
-      "number": 58041,
-      "title": "Apply DISTINCT to `average` {#pr-58041}",
-      "url": "https://github.com/rails/rails/pull/58041",
-      "mergedAt": "2026-07-07T00:00:00.000Z",
-      "author": "55728",
-      "authorUrl": "https://github.com/55728",
-      "summary": "1. 概要 (1-2文で)  \n`ActiveRecord::Relation#average` が `distinct` 指定を無視していた問題を修正し、`distinct.average` が SQL の `AVG(DISTINCT column)` を使うようになりました。これにより、`distinct.count` / `distinct.sum` と平均値の挙動が一貫します。"
-    },
-    {
-      "number": 58044,
-      "title": "Resolve `default_priority` lazily so a configured value is honored {#pr-58044}",
-      "url": "https://github.com/rails/rails/pull/58044",
-      "mergedAt": "2026-07-07T00:00:00.000Z",
-      "author": "55728",
-      "authorUrl": "https://github.com/55728",
-      "summary": "1. 概要 (1-2文で)  \nActiveJob で `default_priority` をイニシャライザなどで後から設定してもジョブに反映されなかった問題を修正し、優先度を参照するタイミングで `default_priority` を遅延評価するように変更した PR です。これにより `default_queue_name` と同じ挙動・パターン（lambda での遅延デフォルト解決）に揃えられています。"
-    },
-    {
-      "number": 58034,
-      "title": "Support `log` on `ActiveSupport::ProxyLogger` {#pr-58034}",
-      "url": "https://github.com/rails/rails/pull/58034",
-      "mergedAt": "2026-07-07T00:00:00.000Z",
-      "author": "55728",
-      "authorUrl": "https://github.com/55728",
-      "summary": "1. 概要 (1-2文で)  \n`ActiveSupport::ProxyLogger` が標準ライブラリ `Logger` のインターフェイスと揃うように、`log` メソッドを `add` のエイリアスとしてサポートする変更です。これにより、`ProxyLogger` 経由で `log` を呼び出した際に `NoMethodError` にならず、適切なレベル判定を行ってログが出力されるようになります。"
-    },
-    {
-      "number": 58023,
-      "title": "Honor an explicit `value: nil` in `color_field` {#pr-58023}",
-      "url": "https://github.com/rails/rails/pull/58023",
-      "mergedAt": "2026-07-07T00:00:00.000Z",
-      "author": "55728",
-      "authorUrl": "https://github.com/55728",
-      "summary": "1. 概要 (1-2文で)  \n`color_field` ヘルパーが、明示的に `value: nil` が指定された場合でもモデルの値で上書きしてしまう不具合を修正し、`value:` オプション（`nil` を含む）を正しく尊重するようにした PR です。これにより「入力欄をあえて空にしたい」というケースが期待通り動作します。"
     }
   ]
 }
