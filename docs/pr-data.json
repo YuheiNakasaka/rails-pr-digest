@@ -1,7 +1,43 @@
 {
-  "lastUpdated": "2026-07-17T00:25:20.667Z",
+  "lastUpdated": "2026-07-18T00:22:41.639Z",
   "totalCount": 50,
   "items": [
+    {
+      "number": 58148,
+      "title": "Fix test_precompile_shouldn't_use_the_digests_present_in_manifest.json failure {#pr-58148}",
+      "url": "https://github.com/rails/rails/pull/58148",
+      "mergedAt": "2026-07-17T00:00:00.000Z",
+      "author": "yahonda",
+      "authorUrl": "https://github.com/yahonda",
+      "summary": "1. 概要 (1–2文で)  \nRails の Sprockets 資産プリコンパイルに関するテストが CI 上で時々失敗していた問題を、テスト側で 1 秒スリープを挟むことでフレークを解消した PR です。Sprockets がファイルの更新検知を「秒単位の mtime」と「キャッシュされたダイジェスト」に依存している仕様にテストを合わせています。"
+    },
+    {
+      "number": 58139,
+      "title": "Harden load schema migrations {#pr-58139}",
+      "url": "https://github.com/rails/rails/pull/58139",
+      "mergedAt": "2026-07-17T00:00:00.000Z",
+      "author": "55728",
+      "authorUrl": "https://github.com/55728",
+      "summary": "1. 概要 (1-2文で)  \n`ActiveRecord::Schema.load_schema_migrations` が、実プロジェクトで起こりがちな2つのケース（CRLF 行末や末尾改行なし、重複バージョン）でも安全かつ一貫して動作するように強化された PR です。これにより、`db/schema.rb` のフォーマット差異や人手によるマージミスがあっても、スキーママイグレーションのロードがより堅牢になります。"
+    },
+    {
+      "number": 58113,
+      "title": "Make AbstractController::Base#action_methods ractor safe {#pr-58113}",
+      "url": "https://github.com/rails/rails/pull/58113",
+      "mergedAt": "2026-07-17T00:00:00.000Z",
+      "author": "Edouard-chin",
+      "authorUrl": "https://github.com/Edouard-chin",
+      "summary": "1. 概要 (1-2文で)  \n`AbstractController::Base#action_methods` が返す `Set` を凍結(freeze)し、Ractor（Rubyの並行実行モデル）で参照しても `Ractor::IsolationError` が出ないようにした変更です。これに伴い、`ActionMailer` など `action_methods` をオーバーライドしている箇所も、Ractorセーフになるよう調整されています。"
+    },
+    {
+      "number": 58134,
+      "title": "Support dumping schema_migrations in db/schema.rb {#pr-58134}",
+      "url": "https://github.com/rails/rails/pull/58134",
+      "mergedAt": "2026-07-17T00:00:00.000Z",
+      "author": "fxn",
+      "authorUrl": "https://github.com/fxn",
+      "summary": "1. 概要 (1-2文で)  \n`db/schema.rb` に `schema_migrations` の中身（適用済みマイグレーションのバージョン一覧）をダンプできるオプションが追加されました。これにより、スキーマファイルだけで DB のマイグレーション状態をより正確に再現でき、かつマイグレーションバージョンに起因するマージコンフリクトを緩和できるようになります。"
+    },
     {
       "number": 58133,
       "title": "Don't force multi statement for MySQL tx isolation {#pr-58133}",
@@ -415,42 +451,6 @@
       "author": "55728",
       "authorUrl": "https://github.com/55728",
       "summary": "1. 概要 (1-2文で)  \n`remove_foreign_key ... if_exists: true` が、`:name` や `:to_table` で外部キーを特定した場合に例外を投げてしまう不具合を修正し、対象の外部キーが存在しなければ常に no-op になるよう統一されました。`foreign_key_exists?` の存在チェックに、後続の lookup と同じ識別オプションを正しく引き継ぐようにした変更です。"
-    },
-    {
-      "number": 58051,
-      "title": "Freeze empty where clause predicates {#pr-58051}",
-      "url": "https://github.com/rails/rails/pull/58051",
-      "mergedAt": "2026-07-07T00:00:00.000Z",
-      "author": "gmcgibbon",
-      "authorUrl": "https://github.com/gmcgibbon",
-      "summary": "1. 概要 (1-2文で)  \nActiveRecord の `WhereClause::Empty` オブジェクトを freeze することで、Ractor（Ruby の並行実行モデル）に対応した PR です。`where` 句が「空」の場合に使われる共有オブジェクトを不変にし、安全にスレッド／Ractor 間で扱えるようにしています。"
-    },
-    {
-      "number": 58048,
-      "title": "Fix ActionController::Live streams hanging on client disconnect {#pr-58048}",
-      "url": "https://github.com/rails/rails/pull/58048",
-      "mergedAt": "2026-07-07T00:00:00.000Z",
-      "author": "wpeterson",
-      "authorUrl": "https://github.com/wpeterson",
-      "summary": "1. 概要 (1-2文で)  \nActionController::Live でクライアント切断時にストリーム処理がハングし、スレッドが解放されない不具合を修正した PR です。`Buffer#abort` 時にも確実にコンシューマループが終了できるよう、nil 終端の enqueue とブロードキャスト処理を追加し、その挙動を確認する回帰テストを導入しています。"
-    },
-    {
-      "number": 58039,
-      "title": "Support endless and beginless ranges in `number_field_tag`/`range_field_tag` {#pr-58039}",
-      "url": "https://github.com/rails/rails/pull/58039",
-      "mergedAt": "2026-07-07T00:00:00.000Z",
-      "author": "55728",
-      "authorUrl": "https://github.com/55728",
-      "summary": "1. 概要 (1-2文で)  \n`number_field_tag` / `range_field_tag` に対して `:in` / `:within` オプションに「終端なし(endless)」や「始端なし(beginless)」の Range を渡したときに `RangeError` になっていた問題を解消し、適切な `min` / `max` 属性を出力するようにした PR です。既に対応済みだった `number_field` / `range_field` と挙動を統一する変更です。"
-    },
-    {
-      "number": 58040,
-      "title": "Treat an empty id array as an empty set for composite primary keys {#pr-58040}",
-      "url": "https://github.com/rails/rails/pull/58040",
-      "mergedAt": "2026-07-07T00:00:00.000Z",
-      "author": "55728",
-      "authorUrl": "https://github.com/55728",
-      "summary": "1. 概要 (1–2文で)  \n複合主キー(Composite Primary Key)を持つモデルに対して `destroy([])` や `update([], [])` を呼ぶと `NoMethodError` になっていた問題を修正し、空配列を「空のID集合」として扱うようにしたPRです。単一主キーのモデルと同様に、これらの呼び出しが安全な no-op として `[]` を返すようになります。"
     }
   ]
 }
