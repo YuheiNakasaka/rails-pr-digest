@@ -1,7 +1,43 @@
 {
-  "lastUpdated": "2026-07-18T00:22:41.639Z",
+  "lastUpdated": "2026-07-19T00:23:36.125Z",
   "totalCount": 50,
   "items": [
+    {
+      "number": 58036,
+      "title": "Fix typos and inconsistencies in documentation {#pr-58036}",
+      "url": "https://github.com/rails/rails/pull/58036",
+      "mergedAt": "2026-07-18T00:00:00.000Z",
+      "author": "55728",
+      "authorUrl": "https://github.com/55728",
+      "summary": "1. 概要 (1-2文で)  \nこのPRは、Rails本体およびガイド・APIドキュメント・コメントに存在していた typo（スペルミス）や、サンプルコード／説明文の不整合をまとめて修正するものです。実行時の挙動には変更を加えず、ドキュメントとコメントの品質・信頼性を高めています。"
+    },
+    {
+      "number": 58154,
+      "title": "Pin json below 2.20 in the Gemfile {#pr-58154}",
+      "url": "https://github.com/rails/rails/pull/58154",
+      "mergedAt": "2026-07-18T00:00:00.000Z",
+      "author": "yahonda",
+      "authorUrl": "https://github.com/yahonda",
+      "summary": "1. 概要 (1–2文で)  \nRails 7.2 系ブランチの開発・CI環境において、`json` gem 2.20.0 以降で導入された「コメント付き JSON の非推奨警告」が strict warnings CI を落としてしまう問題に対応するため、`json` を `< 2.20` にピン留めした PR です。アプリケーション側の依存バージョンには影響せず、Rails 本体の開発・テスト環境専用の制約です。"
+    },
+    {
+      "number": 58153,
+      "title": "Pin json below 2.20 in the Gemfile {#pr-58153}",
+      "url": "https://github.com/rails/rails/pull/58153",
+      "mergedAt": "2026-07-18T00:00:00.000Z",
+      "author": "yahonda",
+      "authorUrl": "https://github.com/yahonda",
+      "summary": "1. 概要 (1-2文で)  \nRails 8.0 系ブランチで、`json` gem を 2.20 未満に固定する変更です。`json 2.20.0` でコメント付き JSON に対する非推奨警告が出て CI の strict warnings を落としてしまう問題を、Gemfile 側でバージョンをピン止めすることで回避しています。"
+    },
+    {
+      "number": 58146,
+      "title": "Test that config.action_dispatch.default_headers set in an initializer is applied {#pr-58146}",
+      "url": "https://github.com/rails/rails/pull/58146",
+      "mergedAt": "2026-07-18T00:00:00.000Z",
+      "author": "nurey",
+      "authorUrl": "https://github.com/nurey",
+      "summary": "1. 概要 (1-2文で)  \nRails 8.x 系で「initializer から設定した `config.action_dispatch.default_headers` がレスポンスに反映されない」というリグレッションに対し、その再発を防ぐためのテストが追加されています。既に main ブランチでは修正済みですが、その挙動を保証する回帰テストを追加する PR です。"
+    },
     {
       "number": 58148,
       "title": "Fix test_precompile_shouldn't_use_the_digests_present_in_manifest.json failure {#pr-58148}",
@@ -415,42 +451,6 @@
       "author": "hmcguire-shopify",
       "authorUrl": "https://github.com/hmcguire-shopify",
       "summary": "1. 概要 (1-2文で)  \n`ActionView::Template::Sources::File` が `ActionView.eager_load!` 実行時に確実に eager load されるように、`Sources::File` クラス定義を別ファイルから `sources.rb` 内にインライン化した変更です。これにより、最初のテンプレートレンダリングまで `Sources::File` が require されないという遅延ロード問題を解消します。"
-    },
-    {
-      "number": 57662,
-      "title": "Add ActiveSupport::Ractors.on_main to proxy work to the main Ractor {#pr-57662}",
-      "url": "https://github.com/rails/rails/pull/57662",
-      "mergedAt": "2026-07-08T00:00:00.000Z",
-      "author": "gmcgibbon",
-      "authorUrl": "https://github.com/gmcgibbon",
-      "summary": "1. 概要 (1-2文で)  \nこのPRは、非メイン Ractor からメイン Ractor に処理を委譲するための `ActiveSupport::Ractors.on_main` メソッドを追加し、クラスインスタンス変数のメモ化など「メイン Ractor でしか安全に行えない処理」をプロキシできるようにするものです。これにより、Ractors 対応のためにクラスレベルメモ化を完全に捨てずに、安全な形で保持できるようになります。"
-    },
-    {
-      "number": 58057,
-      "title": "Raise on ignored `if_exists`/`if_not_exists` in `change_table` check constraints {#pr-58057}",
-      "url": "https://github.com/rails/rails/pull/58057",
-      "mergedAt": "2026-07-08T00:00:00.000Z",
-      "author": "55728",
-      "authorUrl": "https://github.com/55728",
-      "summary": "1. 概要 (1-2文で)  \n`change_table` ブロック内で `t.check_constraint` / `t.remove_check_constraint` に渡された `if_exists` / `if_not_exists` オプションが無視されていた問題を修正し、他のメソッド同様に `ArgumentError` を投げて誤用を検知できるようにした PR です。これにより、条件付きマイグレーションのつもりが実際には効いていない、というサイレントな失敗を防ぎます。"
-    },
-    {
-      "number": 57956,
-      "title": "Bump MySQL Image version to 9.7 {#pr-57956}",
-      "url": "https://github.com/rails/rails/pull/57956",
-      "mergedAt": "2026-07-08T00:00:00.000Z",
-      "author": "akhilgkrishnan",
-      "authorUrl": "https://github.com/akhilgkrishnan",
-      "summary": "1. 概要 (1-2文で)  \nRails が内部で利用している MySQL のコンテナイメージバージョンを「9.7」に更新する PR です。Rails アプリ生成処理や関連テストで前提としている MySQL イメージタグを最新に追随させています。"
-    },
-    {
-      "number": 58050,
-      "title": "Forward identifying options in `remove_foreign_key`'s `if_exists` guard {#pr-58050}",
-      "url": "https://github.com/rails/rails/pull/58050",
-      "mergedAt": "2026-07-07T00:00:00.000Z",
-      "author": "55728",
-      "authorUrl": "https://github.com/55728",
-      "summary": "1. 概要 (1-2文で)  \n`remove_foreign_key ... if_exists: true` が、`:name` や `:to_table` で外部キーを特定した場合に例外を投げてしまう不具合を修正し、対象の外部キーが存在しなければ常に no-op になるよう統一されました。`foreign_key_exists?` の存在チェックに、後続の lookup と同じ識別オプションを正しく引き継ぐようにした変更です。"
     }
   ]
 }
