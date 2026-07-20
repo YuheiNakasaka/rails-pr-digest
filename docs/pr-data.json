@@ -1,7 +1,25 @@
 {
-  "lastUpdated": "2026-07-19T00:23:36.125Z",
+  "lastUpdated": "2026-07-20T00:24:39.958Z",
   "totalCount": 50,
   "items": [
+    {
+      "number": 58157,
+      "title": "Assert @verified directly in the non-StandardError interrupt test {#pr-58157}",
+      "url": "https://github.com/rails/rails/pull/58157",
+      "mergedAt": "2026-07-19T00:00:00.000Z",
+      "author": "yahonda",
+      "authorUrl": "https://github.com/yahonda",
+      "summary": "1. 概要 (1-2文で)  \nRails 8-0-stable で落ちていた `ActiveRecord::AdapterConnectionTest` のテストを、`verified?` メソッドではなくインスタンス変数 `@verified` を直接検査するように変更して修正した PR です。テストの意図（「非 StandardError 系の割り込みが発生すると、接続が再検証対象になること」）は維持されたままです。"
+    },
+    {
+      "number": 58158,
+      "title": "Fix RDoc markup in ActiveSupport::ContinuousIntegration [ci skip] {#pr-58158}",
+      "url": "https://github.com/rails/rails/pull/58158",
+      "mergedAt": "2026-07-19T00:00:00.000Z",
+      "author": "Yuhi-Sato",
+      "authorUrl": "https://github.com/Yuhi-Sato",
+      "summary": "1. 概要 (1-2文で)  \nActiveSupport::ContinuousIntegration のクラスドキュメント内で、コード（等幅）表現に使われていた RDoc マークアップを修正し、API ドキュメント上で正しく固定幅表示されるようにした PRです。コードや挙動には一切変更はなく、ドキュメント表現のみの修正です。"
+    },
     {
       "number": 58036,
       "title": "Fix typos and inconsistencies in documentation {#pr-58036}",
@@ -433,24 +451,6 @@
       "author": "55728",
       "authorUrl": "https://github.com/55728",
       "summary": "1. 概要 (1-2文で)  \n`WHERE` 句が論理的に矛盾していて絶対に行がヒットしない Relation に対して、グルーピング付き集計（`group(...).count` など）を行う場合、DBクエリを発行せずに即座に空ハッシュを返すように最適化した PR です。すでに非グループ集計で行っていた最適化を、グループ集計経路にも拡張した形です。"
-    },
-    {
-      "number": 58054,
-      "title": "Remove some duplication in ColorField {#pr-58054}",
-      "url": "https://github.com/rails/rails/pull/58054",
-      "mergedAt": "2026-07-08T00:00:00.000Z",
-      "author": "p8",
-      "authorUrl": "https://github.com/p8",
-      "summary": "1. 概要 (1-2文で)  \n`ColorField` と `TextField` で重複していた「値が渡されないとき／nil のときの value 属性の扱い」を共通化するリファクタリングです。`TextField` に `fallback_value` メソッドを追加し、`ColorField` 側はそれをオーバーライドすることで重複コードを削除しつつ、属性の出力順序も他フィールドとより一貫したものにしています。"
-    },
-    {
-      "number": 58062,
-      "title": "Ensure AV::Template::Sources::File is eager loaded {#pr-58062}",
-      "url": "https://github.com/rails/rails/pull/58062",
-      "mergedAt": "2026-07-08T00:00:00.000Z",
-      "author": "hmcguire-shopify",
-      "authorUrl": "https://github.com/hmcguire-shopify",
-      "summary": "1. 概要 (1-2文で)  \n`ActionView::Template::Sources::File` が `ActionView.eager_load!` 実行時に確実に eager load されるように、`Sources::File` クラス定義を別ファイルから `sources.rb` 内にインライン化した変更です。これにより、最初のテンプレートレンダリングまで `Sources::File` が require されないという遅延ロード問題を解消します。"
     }
   ]
 }
