@@ -1,7 +1,16 @@
 {
-  "lastUpdated": "2026-07-20T00:24:39.958Z",
+  "lastUpdated": "2026-07-21T00:23:56.478Z",
   "totalCount": 50,
   "items": [
+    {
+      "number": 58166,
+      "title": "Let dump_schema_migrations_sort_by be :reverse by default {#pr-58166}",
+      "url": "https://github.com/rails/rails/pull/58166",
+      "mergedAt": "2026-07-20T00:00:00.000Z",
+      "author": "fxn",
+      "authorUrl": "https://github.com/fxn",
+      "summary": "1. 概要 (1-2文で)  \n`db/schema.rb` に `schema_migrations` テーブルをダンプする機能について、デフォルトの並び順が「辞書順（昇順）」から「逆順（:reverse、最新のマイグレーションが先）」に変更されました。これにより、この機能を有効化したときに、マージコンフリクトを避けやすい並び順が最初から採用されます。"
+    },
     {
       "number": 58157,
       "title": "Assert @verified directly in the non-StandardError interrupt test {#pr-58157}",
@@ -442,15 +451,6 @@
       "author": "ilianah",
       "authorUrl": "https://github.com/ilianah",
       "summary": "1. 概要 (1-2文で)  \nこのPRは、`ActiveSupport::Cache::MemCacheStore` に `write_multi_entries` メソッドを追加し、利用中の dalli に `set_multi` が定義されている場合はそれを使って複数キーを一括書き込みできるようにする変更です。これにより、memcached への書き込み時のラウンドトリップ数が削減され、パフォーマンス向上が見込まれます。"
-    },
-    {
-      "number": 58058,
-      "title": "Skip the query for a grouped calculation on a contradictory relation {#pr-58058}",
-      "url": "https://github.com/rails/rails/pull/58058",
-      "mergedAt": "2026-07-08T00:00:00.000Z",
-      "author": "55728",
-      "authorUrl": "https://github.com/55728",
-      "summary": "1. 概要 (1-2文で)  \n`WHERE` 句が論理的に矛盾していて絶対に行がヒットしない Relation に対して、グルーピング付き集計（`group(...).count` など）を行う場合、DBクエリを発行せずに即座に空ハッシュを返すように最適化した PR です。すでに非グループ集計で行っていた最適化を、グループ集計経路にも拡張した形です。"
     }
   ]
 }
