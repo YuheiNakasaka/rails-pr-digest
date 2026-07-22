@@ -1,7 +1,214 @@
 {
-  "lastUpdated": "2026-07-21T00:23:56.478Z",
+  "lastUpdated": "2026-07-22T00:27:22.909Z",
   "totalCount": 50,
   "items": [
+    {
+      "number": 58198,
+      "title": "Remove unused TemplateDetails readers {#pr-58198}",
+      "url": "https://github.com/rails/rails/pull/58198",
+      "mergedAt": "2026-07-22T00:00:00.000Z",
+      "author": "nvasilevski",
+      "authorUrl": "https://github.com/nvasilevski",
+      "summary": "1. 概要 (1-2文で)  \n`ActionView::TemplateDetails::Requested` クラスから、既にどこからも使われていない「生のテンプレート詳細情報」のリーダーメソッドと対応するインスタンス変数が削除されました。テンプレートマッチング処理がインデックスベース(`*_idx`)に完全移行したことに伴うデッドコード整理です。"
+    },
+    {
+      "number": 58196,
+      "title": "Remove unused Journey endpoints reader {#pr-58196}",
+      "url": "https://github.com/rails/rails/pull/58196",
+      "mergedAt": "2026-07-22T00:00:00.000Z",
+      "author": "nvasilevski",
+      "authorUrl": "https://github.com/nvasilevski",
+      "summary": "1. 概要 (1-2文で)  \nRails のルーティングエンジン Journey 内の `ActionDispatch::Journey::GTG::Builder#endpoints` という未使用のリーダーメソッドが削除されました。  \n追加も参照もされておらず常に `nil` しか返さない状態だったため、不要コードの整理として削除された変更です。"
+    },
+    {
+      "number": 58195,
+      "title": "Remove unused Journey methods {#pr-58195}",
+      "url": "https://github.com/rails/rails/pull/58195",
+      "mergedAt": "2026-07-21T00:00:00.000Z",
+      "author": "nvasilevski",
+      "authorUrl": "https://github.com/nvasilevski",
+      "summary": "1. 概要 (1-2文で)  \nRails の内部ルーティングエンジン Journey において、既にどこからも呼ばれていない公開メソッドが 4 つ削除されました。外部 API ではなく内部クラス上のメソッド削除のため、通常のアプリケーションコードへの影響はほぼありません。"
+    },
+    {
+      "number": 58164,
+      "title": "Generate omakase-compliant routes in the authentication generator {#pr-58164}",
+      "url": "https://github.com/rails/rails/pull/58164",
+      "mergedAt": "2026-07-21T00:00:00.000Z",
+      "author": "55728",
+      "authorUrl": "https://github.com/55728",
+      "summary": "1. 概要 (1-2文で)  \n`bin/rails generate authentication` が生成する `config/routes.rb` の記述スタイルを修正し、Rubocop（Layout/SpaceInsideArrayLiteralBrackets）に違反しない「おまかせ（omakase）」スタイルのルーティングが生成されるようにした PR です。これにより、生成直後のアプリが CI の Rubocop ジョブを素通りできるようになります。"
+    },
+    {
+      "number": 58160,
+      "title": "Fix NodeSource RPM URL in Development Dependencies Install guide [ci skip] {#pr-58160}",
+      "url": "https://github.com/rails/rails/pull/58160",
+      "mergedAt": "2026-07-21T00:00:00.000Z",
+      "author": "fuentesjr",
+      "authorUrl": "https://github.com/fuentesjr",
+      "summary": "1. 概要 (1-2文で)  \nRailsガイド「Development Dependencies Install」の Fedora/CentOS 向け手順で使われている NodeSource RPM の URL が 404 になっていたため、正しい URL（pub_20.x）に修正した PR です。コード本体の変更はなく、ドキュメントのみの更新です。"
+    },
+    {
+      "number": 58188,
+      "title": "Remove unused V6_0::ReferenceDefinition {#pr-58188}",
+      "url": "https://github.com/rails/rails/pull/58188",
+      "mergedAt": "2026-07-21T00:00:00.000Z",
+      "author": "nvasilevski",
+      "authorUrl": "https://github.com/nvasilevski",
+      "summary": "1. 概要 (1-2文で)  \nRails 6.0 用の互換クラス `V6_0::ReferenceDefinition` が、実際にはどこからも使われていない「死んだコード」であることが確認され、削除されました。これにより ActiveRecord のマイグレーション互換レイヤが少しシンプルになっています。"
+    },
+    {
+      "number": 58190,
+      "title": "Deprecate Cookies::HTTP_HEADER constant {#pr-58190}",
+      "url": "https://github.com/rails/rails/pull/58190",
+      "mergedAt": "2026-07-21T00:00:00.000Z",
+      "author": "nvasilevski",
+      "authorUrl": "https://github.com/nvasilevski",
+      "summary": "1. 概要 (1-2文で)  \n`ActionDispatch::Cookies::HTTP_HEADER` 定数が非推奨（deprecated）になり、今後は `Rack::SET_COOKIE` を使うことが推奨されるようにした PR です。既に内部的には未使用ですが、外部利用があるため、即削除ではなく非推奨期間を設けています。"
+    },
+    {
+      "number": 58191,
+      "title": "Deprecate RedisCacheStore::DEFAULT_REDIS_OPTIONS {#pr-58191}",
+      "url": "https://github.com/rails/rails/pull/58191",
+      "mergedAt": "2026-07-21T00:00:00.000Z",
+      "author": "nvasilevski",
+      "authorUrl": "https://github.com/nvasilevski",
+      "summary": "1. 概要 (1-2文で)  \n`ActiveSupport::Cache::RedisCacheStore::DEFAULT_REDIS_OPTIONS` が、Rails 内部では既に使われていないため、**即削除ではなく「非推奨(deprecated)扱い」として残しつつ、将来的な削除に向けた移行パスを示した PR** です。代わりに、アプリ側は `RedisCacheStore` もしくは利用中の Redis クライアントに対して、タイムアウトなどのオプションを明示的に渡すように促されています。"
+    },
+    {
+      "number": 58193,
+      "title": "Remove unused test methods {#pr-58193}",
+      "url": "https://github.com/rails/rails/pull/58193",
+      "mergedAt": "2026-07-21T00:00:00.000Z",
+      "author": "nvasilevski",
+      "authorUrl": "https://github.com/nvasilevski",
+      "summary": "1. 概要 (1-2文で)  \nRails 本体の「テスト専用コード」から、参照されていないメソッド／アクセサ計 24 個を削除するクリーンアップ PR です。  \nすべて `test/` 配下の変更であり、本番コードの挙動や公開 API には影響しません。"
+    },
+    {
+      "number": 58192,
+      "title": "Remove unused Routing::HTTP_METHODS constant {#pr-58192}",
+      "url": "https://github.com/rails/rails/pull/58192",
+      "mergedAt": "2026-07-21T00:00:00.000Z",
+      "author": "nvasilevski",
+      "authorUrl": "https://github.com/nvasilevski",
+      "summary": "1. 概要 (1-2文で)  \n`ActionDispatch::Routing` 内で長らく使われていなかった定数 `HTTP_METHODS` が削除されました。Rails本体からは既に参照されておらず、内部実装の古い残骸をクリーンアップする変更です。"
+    },
+    {
+      "number": 58194,
+      "title": "Restore unregistered tests {#pr-58194}",
+      "url": "https://github.com/rails/rails/pull/58194",
+      "mergedAt": "2026-07-21T00:00:00.000Z",
+      "author": "nvasilevski",
+      "authorUrl": "https://github.com/nvasilevski",
+      "summary": "1. 概要 (1-2文で)  \nこのPRは、`test_` プレフィックスがついておらず Minitest によって実行されていなかった6つのテストメソッドを、正しくテストとして登録し直したものです。テスト内容自体は変えず、メソッド名だけを修正してテストが実行されるようにしています。"
+    },
+    {
+      "number": 58182,
+      "title": "Remove unused ThreadMonitor#mon_try_enter method {#pr-58182}",
+      "url": "https://github.com/rails/rails/pull/58182",
+      "mergedAt": "2026-07-21T00:00:00.000Z",
+      "author": "nvasilevski",
+      "authorUrl": "https://github.com/nvasilevski",
+      "summary": "1. 概要 (1-2文で)  \nRailsの`ActiveSupport::Concurrency::ThreadMonitor`から、既にどこからも呼ばれていなかった`mon_try_enter`メソッドが削除されました。機能追加ではなく、不要コードの整理によるリファクタリングです。"
+    },
+    {
+      "number": 58185,
+      "title": "Remove unused ParamBuilder#new_depth_limit method {#pr-58185}",
+      "url": "https://github.com/rails/rails/pull/58185",
+      "mergedAt": "2026-07-21T00:00:00.000Z",
+      "author": "nvasilevski",
+      "authorUrl": "https://github.com/nvasilevski",
+      "summary": "1. 概要 (1-2文で)  \nRails の `ActionDispatch::Http::ParamBuilder` クラスから、実際には一度も使われていなかった `new_depth_limit` メソッドが削除されました。機能的な変更はなく、内部実装の不要コードの整理（リファクタリング）にあたります。"
+    },
+    {
+      "number": 58176,
+      "title": "Remove unused UriEncoder constants {#pr-58176}",
+      "url": "https://github.com/rails/rails/pull/58176",
+      "mergedAt": "2026-07-21T00:00:00.000Z",
+      "author": "nvasilevski",
+      "authorUrl": "https://github.com/nvasilevski",
+      "summary": "1. 概要 (1-2文で)  \nRails 内部クラス `UriEncoder` に定義されていた未使用の定数 `UTF_8` と `ESCAPED` が削除されました。内部実装のデッドコード整理であり、公開APIの挙動には影響しません。"
+    },
+    {
+      "number": 58178,
+      "title": "Remove unused Journey::GTG::MatchData {#pr-58178}",
+      "url": "https://github.com/rails/rails/pull/58178",
+      "mergedAt": "2026-07-21T00:00:00.000Z",
+      "author": "nvasilevski",
+      "authorUrl": "https://github.com/nvasilevski",
+      "summary": "1. 概要 (1-2文で)  \nRails の内部ルーティングエンジン Journey に存在していた未使用クラス `Journey::GTG::MatchData` が、完全に参照されていない“死んだコード”であるため削除されました。これに伴い、そのクラスを前提としたコメント・コード片が `simulator.rb` から取り除かれています。"
+    },
+    {
+      "number": 58180,
+      "title": "Remove unused SAFE_FETCH_SITES constant {#pr-58180}",
+      "url": "https://github.com/rails/rails/pull/58180",
+      "mergedAt": "2026-07-21T00:00:00.000Z",
+      "author": "nvasilevski",
+      "authorUrl": "https://github.com/nvasilevski",
+      "summary": "1. 概要 (1-2文で)  \nこのPRでは、`ActionController::RequestForgeryProtection` 内で定義されていた未使用の `SAFE_FETCH_SITES` 定数が削除されています。CSRF保護の実装変更により参照されなくなっていた「死んだコード」をクリーンアップするものです。"
+    },
+    {
+      "number": 58183,
+      "title": "Remove unused ConnectionHandler#pool_managers method {#pr-58183}",
+      "url": "https://github.com/rails/rails/pull/58183",
+      "mergedAt": "2026-07-21T00:00:00.000Z",
+      "author": "nvasilevski",
+      "authorUrl": "https://github.com/nvasilevski",
+      "summary": "1. 概要 (1-2文で)  \nActive Record の `ConnectionHandler` に定義されていた未使用メソッド `pool_managers` が削除されました。これは過去の非推奨パス削除後に呼び出し元がなくなっていたヘルパーメソッドの単純なクリーンアップです。"
+    },
+    {
+      "number": 58184,
+      "title": "Remove unused cross_origin_request? method {#pr-58184}",
+      "url": "https://github.com/rails/rails/pull/58184",
+      "mergedAt": "2026-07-21T00:00:00.000Z",
+      "author": "nvasilevski",
+      "authorUrl": "https://github.com/nvasilevski",
+      "summary": "1. 概要 (1-2文で)  \n`ActionController::RequestForgeryProtection` 内に定義されていた未使用メソッド `cross_origin_request?` が削除されました。Fetch Metadata を用いた CSRF 対策実装の一部として追加されていたものの、実際にはどこからも呼ばれていなかったためのクリーンアップです。"
+    },
+    {
+      "number": 58186,
+      "title": "Remove unused Redis cache serialize_entries methods {#pr-58186}",
+      "url": "https://github.com/rails/rails/pull/58186",
+      "mergedAt": "2026-07-21T00:00:00.000Z",
+      "author": "nvasilevski",
+      "authorUrl": "https://github.com/nvasilevski",
+      "summary": "1. 概要 (1-2文で)  \nRedis のキャッシュストア（`RedisCacheStore` と `DeprecatedRedisCacheStore`）に残っていた未使用のヘルパーメソッド `serialize_entries` が削除されました。実際の挙動には影響せず、不要コードの整理によるリファクタリングです。"
+    },
+    {
+      "number": 58147,
+      "title": "[8-1-stable] Avoid loading ActionController::Live early in initializer {#pr-58147}",
+      "url": "https://github.com/rails/rails/pull/58147",
+      "mergedAt": "2026-07-21T00:00:00.000Z",
+      "author": "nurey",
+      "authorUrl": "https://github.com/nurey",
+      "summary": "1. 概要 (1-2文で)  \nRails 8.1 系で、initializer 内で `config.action_dispatch.default_headers = { ... }` を丸ごと置き換え設定しても反映されないリグレッションを修正するバックポートです。原因だった `ActionController::Live` の早期ロードを避けるため、新しい load hook `:action_controller_live` を導入し、設定が正しいタイミングで反映されるようにしています。"
+    },
+    {
+      "number": 58175,
+      "title": "Remove unused EMPTY_BINARY_STRING constant {#pr-58175}",
+      "url": "https://github.com/rails/rails/pull/58175",
+      "mergedAt": "2026-07-21T00:00:00.000Z",
+      "author": "nvasilevski",
+      "authorUrl": "https://github.com/nvasilevski",
+      "summary": "1. 概要 (1-2文で)  \nRails の ActiveSupport::Cache コーダ関連コードから、どこからも参照されていなかった定数 `EMPTY_BINARY_STRING` が削除されました。機能的な挙動の変更はなく、完全にデッドコードのクリーンアップです。"
+    },
+    {
+      "number": 58171,
+      "title": "Fix `bundle install` on `ruby-dev` {#pr-58171}",
+      "url": "https://github.com/rails/rails/pull/58171",
+      "mergedAt": "2026-07-21T00:00:00.000Z",
+      "author": "Earlopain",
+      "authorUrl": "https://github.com/Earlopain",
+      "summary": "1. 概要 (1-2文で)  \n`ruby-dev`（Ruby 開発版）で `bundle install` が失敗していた問題を、利用していた gem を更新して解消した PRです。Rails 本体のコードは変更せず、`Gemfile.lock` の依存バージョンのみを修正しています。"
+    },
+    {
+      "number": 58163,
+      "title": "[ci-skip][doc] Fix inconsistent links in Active Job guide {#pr-58163}",
+      "url": "https://github.com/rails/rails/pull/58163",
+      "mergedAt": "2026-07-21T00:00:00.000Z",
+      "author": "hachi8833",
+      "authorUrl": "https://github.com/hachi8833",
+      "summary": "1. 概要 (1-2文で)  \nActive Jobガイド内のリンク表記ゆれを修正し、ドキュメント内のリンクスタイルを統一したPRです。コードや挙動の変更はなく、ドキュメントのみへの軽微な修正です。\n\n2. 変更内容の詳細  \n\n- 対象ファイル: `guides/source/active_job_basics.md`\n- 変更内容:\n  - Active Jobガイド内にあるリンクの一部で、Markdownのリンク表記に使う角カッコ `[]` が不足しており、他の箇所と形式が不一致だった部分を修正\n  - 実質的には、以下のような「リンクの括弧漏れ」を直していると考えられます（例・イメージ）:\n\n    ```md\n    # 修正前（例）\n    See Active Support Instrumentation(https://guides.rubyonrails.org/active_support_instrumentation.html) for more details.\n\n    # 修正後（例）\n    See [Active Support Instrumentation](https://guides.rubyonrails.org/active_support_instrumentation.html) for more details.\n    ```\n\n  - 追加行数2・削除行数2のため、2箇所程度で `[]` の付け忘れや、他と異なるリンク表現を統一した変更とみられます。\n\n3. 影響範囲・注意点  \n\n- 影響範囲:\n  - Rails本体のコード、API挙動、Active Jobの仕様・インターフェースには一切影響しません。\n  - 影響するのは、Rails Guides（Active Job Basics）の表示のみです。\n  - ガイドをHTMLにビルドした際、該当箇所が正しくリンクとしてレンダリングされるようになります。\n- 注意点:\n  - ドキュメント向けの変更なので、アプリケーション側で対応すべきことはありません。\n  - ドキュメントを翻訳・派生させているプロジェクトでは、同様のリンク表記ゆれがないか確認しておくと良いです。\n\n4. 参考情報 (あれば)  \n\n- PRタイトルの `[ci-skip]` から、CIを走らせる必要がないドキュメント専用の変更として扱われていることがわかります。\n- Rails GuidesのMarkdownでは、基本的に標準的なMarkdownリンク構文（`[テキスト](URL)`）で統一されているため、今後ガイドにPRを出す際もこのスタイルに合わせるのが望ましいです。"
+    },
     {
       "number": 58166,
       "title": "Let dump_schema_migrations_sort_by be :reverse by default {#pr-58166}",
@@ -244,213 +451,6 @@
       "author": "eileencodes",
       "authorUrl": "https://github.com/eileencodes",
       "summary": "1. 概要 (1-2文で)  \n`connected_to_all_shards` を、実際にはシャーディングされていないアプリ（shard 設定が空のケース）で呼び出した場合に、静かに動作するのではなくエラーを送出するように変更した PR です。  \n「シャーディングされていない構成で `connected_to_all_shards` を使う」ことを明示的に不正利用として扱う方向に仕様が整理されています。"
-    },
-    {
-      "number": 58055,
-      "title": "Use NOT ENFORCED toggle in check_all_foreign_keys_valid! on PostgreSQL 18.4+ {#pr-58055}",
-      "url": "https://github.com/rails/rails/pull/58055",
-      "mergedAt": "2026-07-14T00:00:00.000Z",
-      "author": "yahonda",
-      "authorUrl": "https://github.com/yahonda",
-      "summary": "1. 概要 (1-2文で)  \nRails の `ActiveRecord::ConnectionAdapters::PostgreSQLAdapter#check_all_foreign_keys_valid!` が、PostgreSQL 18.4 以降では `NOT ENFORCED` / `ENFORCED` トグルを用いて外部キーの再検証を行うようになり、スーパーユーザ権限が不要になりました。これにより、`disable_referential_integrity` と同様に、テーブル所有者権限だけでテスト用フィクスチャの外部キー検証を行えるようになります。"
-    },
-    {
-      "number": 58111,
-      "title": "Fix the broken #with reference {#pr-58111}",
-      "url": "https://github.com/rails/rails/pull/58111",
-      "mergedAt": "2026-07-13T00:00:00.000Z",
-      "author": "codergeek121",
-      "authorUrl": "https://github.com/codergeek121",
-      "summary": "1. 概要 (1–2文で)  \nRails の Active Record の `#with_recursive` メソッドのドキュメント内で、壊れていた `#with` への参照リンクが修正されました。コードの挙動には一切影響せず、ドキュメント上のリンク誤りのみを直す変更です。\n\n2. 変更内容の詳細  \n- 対象ファイル: `activerecord/lib/active_record/relation/query_methods.rb`  \n- 変更内容は 1 行の置換のみで、`#with_recursive` のドキュメントコメント中に書かれていた `#with` への参照形式（`rdoc` 用のリンク記法）が誤っていたため、正しい形に修正されています。\n\nイメージとしては、以下のようなコメント行が:\n\n```ruby\n# Similar to #with_recursive, see #with for non-recursive CTEs.\n```\n\nのように書かれていて、`#with` への参照が RDoc 上でリンク切れになっていたため、例えば:\n\n```ruby\n# Similar to #with_recursive, see Relation#with for non-recursive CTEs.\n```\n\nのようにクラス名付きにする、あるいは RDoc が解釈可能な形（`#with` → `with` メソッドシグネチャ形式など）に書き換えられた、という種類の修正です。  \n※正確な文字列は PR 本文からは分かりませんが、「参照の形式」を 1 箇所修正しているだけです。\n\n実装コード (`def with_recursive ... end` やクエリロジック) には手が入っていません。\n\n3. 影響範囲・注意点  \n- 影響範囲:\n  - Rails API ドキュメント (RDoc / api.rubyonrails.org 等) を閲覧した際に、`#with_recursive` の説明から `#with` へのリンクが正しく飛べるようになります。\n  - ランタイムの挙動、パフォーマンス、互換性には一切影響しません。\n- 注意点:\n  - 既存アプリケーション側で対応すべき変更はありません。\n  - CI などでドキュメント生成をしている場合も、生成物のリンクが正しくなるだけでビルド手順の変更は不要です。\n\n4. 参考情報 (あれば)  \n- `ActiveRecord::QueryMethods#with` / `#with_recursive` は CTE (Common Table Expression) を扱うためのメソッドで、例:\n\n  ```ruby\n  Post.with(\n    popular_posts: Post.where(\"likes_count > 100\")\n  ).from(\"popular_posts AS posts\")\n  ```\n\n  のように非再帰 CTE を `with` で定義したり、\n\n  ```ruby\n  Category.with_recursive(\n    ancestors: Category.where(id: 10),\n    union: Category.joins(\"JOIN ancestors ON categories.parent_id = ancestors.id\")\n  ).from(\"ancestors\")\n  ```\n\n  のような再帰 CTE を `with_recursive` で扱うときに利用します。\n\nこの PR は、こうしたメソッドの使い方をドキュメント上で辿りやすくするための、リンク修正のみのメンテナンス変更です。"
-    },
-    {
-      "number": 58110,
-      "title": "Remove unneeded parenthesis [ci-skip] {#pr-58110}",
-      "url": "https://github.com/rails/rails/pull/58110",
-      "mergedAt": "2026-07-13T00:00:00.000Z",
-      "author": "claudiob",
-      "authorUrl": "https://github.com/claudiob",
-      "summary": "1. 概要 (1-2文で)  \nRailsのガイド「product_reviews.md」に記載されていたコード例から、不要な括弧（parenthesis）を取り除くドキュメント修正PRです。アプリの挙動には影響せず、ガイドのコードスタイル・可読性を改善する目的の変更です。"
-    },
-    {
-      "number": 57967,
-      "title": "Change the order of Views and Controllers in the guides {#pr-57967}",
-      "url": "https://github.com/rails/rails/pull/57967",
-      "mergedAt": "2026-07-13T00:00:00.000Z",
-      "author": "p8",
-      "authorUrl": "https://github.com/p8",
-      "summary": "1. 概要 (1-2文で)  \nRails Guides のナビゲーション順序を、従来の「MVCのV→C」から「リクエストライフサイクル (route → controller → view → response)」に合わせて整理し直した PR です。具体的には、コントローラ関連ガイドをビューより前に出し、ルーティングとコントローラをまとめて扱う形に変更しています。"
-    },
-    {
-      "number": 57966,
-      "title": "Comment ellipsis in guides examples {#pr-57966}",
-      "url": "https://github.com/rails/rails/pull/57966",
-      "mergedAt": "2026-07-13T00:00:00.000Z",
-      "author": "p8",
-      "authorUrl": "https://github.com/p8",
-      "summary": "1. 概要 (1-2文で)  \nRails Guides のコード例中に素の三点リーダ `...` をそのまま書かないようにし、多くをコメントアウトされた `# ...` に統一した PR です。Ruby では `...` が有効な構文であるため、ガイドのコードをコピペしたときに意図せず動作してしまう／構文エラーになる問題を避けることが目的です。"
-    },
-    {
-      "number": 58098,
-      "title": "Fix settings navigation test in authentication guide {#pr-58098}",
-      "url": "https://github.com/rails/rails/pull/58098",
-      "mergedAt": "2026-07-13T00:00:00.000Z",
-      "author": "Lemmah",
-      "authorUrl": "https://github.com/Lemmah",
-      "summary": "1. 概要 (1-2文で)  \n認証ガイド内のシステムテスト例において、「Store Settings」がリンクではなく見出し（`h4`）としてレンダリングされている実際のマークアップに合わせて、テストのセレクタを修正したドキュメント変更です。これにより、一般ユーザーと管理者ユーザーのテスト例の整合性が取り戻され、意図した挙動を正しく検証できる内容になっています。"
-    },
-    {
-      "number": 58101,
-      "title": "Downcase Cache-Control key in asset pipeline guide example {#pr-58101}",
-      "url": "https://github.com/rails/rails/pull/58101",
-      "mergedAt": "2026-07-13T00:00:00.000Z",
-      "author": "meganemura",
-      "authorUrl": "https://github.com/meganemura",
-      "summary": "1. 概要 (1-2文で)  \nAsset Pipeline ガイド内のサンプルコードにおける `Cache-Control` ヘッダー名を、Rack 3 の仕様に合わせて小文字の `\"cache-control\"` に修正したドキュメント更新です。実装コードではなく、ガイドの表記を現状のジェネレータ出力と整合させることが目的です。\n\n2. 変更内容の詳細(あればサンプルコードも含めて)  \n- 対象: `guides/source/asset_pipeline.md` の「CDNs and the Cache-Control Header」セクション内のコード例  \n- 変更前の例（イメージ）:\n\n  ```ruby\n  config.public_file_server.headers = {\n    \"Cache-Control\" => \"public, max-age=31536000\"\n  }\n  ```\n\n- 変更後の例:\n\n  ```ruby\n  config.public_file_server.headers = {\n    \"cache-control\" => \"public, max-age=31536000\"\n  }\n  ```\n\n- 文字としての HTTP ヘッダー名を説明する本文中では従来どおり `Cache-Control` と表記し、コード例のみ Rack 3 SPEC に準拠した小文字キーに揃えています。  \n- 背景として、#52653 で `config/environments/development.rb.tt` と `test.rb.tt` のテンプレートが `\"cache-control\"` に変更されており、新規アプリの実際の生成コードとの不整合を解消する修正です。\n\n3. 影響範囲・注意点  \n- 影響範囲:\n  - Rails ガイド（ドキュメント）のみであり、フレームワーク本体の動作や API には変更はありません。\n  - ただし、ガイドを参考に環境設定を書いている開発者にとって、Rack 3 仕様に即した正しい例が示されるようになります。\n- 技術的なポイント・注意:\n  - Rack 3 ではレスポンスヘッダーは小文字キーで扱うことが要求される（仕様）ため、Rails のジェネレートされる環境ファイルも小文字 `\"cache-control\"` を使用するようになっています。\n  - HTTP ヘッダー名自体はプロトコル上は大文字・小文字を区別しませんが、Rack 3 のインターフェース要件に合わせる必要があります。\n  - 既存アプリで `\"Cache-Control\"` をキーに使っていても、Rack 2 環境では通常問題になりませんが、Rack 3 への移行時には小文字化を検討するのが無難です（この PR はそのベストプラクティスの周知にもつながります）。\n\n4. 参考情報 (あれば)  \n- 対応元 Issue/PR: #52653（Rack 3 SPEC に合わせて環境テンプレートのレスポンスヘッダーキーを小文字化した変更）  \n- Rack 3 SPEC（概要）:\n  - レスポンスヘッダーは `Hash&lt;String, String>` で、キーは小文字の ASCII 文字列であることが求められる。  \n- 実務的には、Rails 7 以降で Rack 3 を使う、または今後のアップグレードを見据える場合、`config.public_file_server.headers` やミドルウェアで設定するヘッダー名は小文字に揃えておくとよいです。"
-    },
-    {
-      "number": 58096,
-      "title": "Read foreign key names from the schema on SQLite3 {#pr-58096}",
-      "url": "https://github.com/rails/rails/pull/58096",
-      "mergedAt": "2026-07-12T00:00:00.000Z",
-      "author": "55728",
-      "authorUrl": "https://github.com/55728",
-      "summary": "1. 概要 (1-2文で)  \nSQLite3 アダプタで `foreign_keys(table)` が外部キー制約名を正しく取得するようになり、`remove_foreign_key ..., name: ...` が意図した制約だけを削除できるように修正されています。これにより、テーブル再構築時もカスタム外部キー名が維持され、スキーマダンプにも正しく反映されます。"
-    },
-    {
-      "number": 58064,
-      "title": "Carry the `form` attribute onto a multiple `select`'s hidden field {#pr-58064}",
-      "url": "https://github.com/rails/rails/pull/58064",
-      "mergedAt": "2026-07-12T00:00:00.000Z",
-      "author": "55728",
-      "authorUrl": "https://github.com/55728",
-      "summary": "1. 概要 (1-2文で)  \n`multiple: true` な `select` ヘルパが生成する「値クリア用の hidden フィールド」にも、`form:` オプションで指定した `form` 属性を引き継ぐようにした変更です。これにより、`<form>` 要素の外にある `multiple select` でも、全ての選択を外したときに意図通り「空配列」が送信されるようになります。"
-    },
-    {
-      "number": 58099,
-      "title": "Refactor assume_migrated_upto_version {#pr-58099}",
-      "url": "https://github.com/rails/rails/pull/58099",
-      "mergedAt": "2026-07-12T00:00:00.000Z",
-      "author": "fxn",
-      "authorUrl": "https://github.com/fxn",
-      "summary": "1. 概要 (1-2文で)  \n`ActiveRecord::Migration#assume_migrated_upto_version` の内部実装を、主に変数名とテーブル名の扱いの整理によってリファクタリングしたPRです。挙動の変更はなく、読みやすさ・一貫性・将来の保守性を高めるための内部改善です。"
-    },
-    {
-      "number": 58077,
-      "title": "Strip only the commented line when detecting a LIMIT in `rails query` {#pr-58077}",
-      "url": "https://github.com/rails/rails/pull/58077",
-      "mergedAt": "2026-07-12T00:00:00.000Z",
-      "author": "55728",
-      "authorUrl": "https://github.com/55728",
-      "summary": "1. 概要 (1-2文で)  \n`rails query --sql` コマンドで SQL 内の `LIMIT` 有無を判定する際、行コメント `-- ...` の処理が誤ってその後ろの全体を巻き込んでしまい、本来存在する `LIMIT` を見落として二重に `LIMIT` を付けてしまう不具合を修正した PR です。コメント除去の正規表現を修正し、「コメント行だけ」を正しく取り除いてから `LIMIT` を検出するようにしています。"
-    },
-    {
-      "number": 58091,
-      "title": "Honor `if_not_exists:` in SQLite3 `add_check_constraint` and `add_foreign_key` {#pr-58091}",
-      "url": "https://github.com/rails/rails/pull/58091",
-      "mergedAt": "2026-07-12T00:00:00.000Z",
-      "author": "55728",
-      "authorUrl": "https://github.com/55728",
-      "summary": "1. 概要 (1-2文で)  \nSQLite3 アダプタの `add_check_constraint` / `add_foreign_key` が、オプション `if_not_exists: true` を正しく解釈していなかった問題を修正し、既に存在する制約がある場合は何もせず（no-op）に済むようになりました。これにより、他のアダプタ（MySQL、Trilogy）や `remove_*` 系メソッドとの挙動の一貫性が取れ、ロールバック時の再実行も安全になります。"
-    },
-    {
-      "number": 58092,
-      "title": "Accept `Date` and numeric inputs in `relative_time_in_words` {#pr-58092}",
-      "url": "https://github.com/rails/rails/pull/58092",
-      "mergedAt": "2026-07-12T00:00:00.000Z",
-      "author": "55728",
-      "authorUrl": "https://github.com/55728",
-      "summary": "1. 概要 (1-2文で)  \n`relative_time_in_words` ヘルパーが、ドキュメント上は受け付けることになっていた `Date` や数値（秒数）を実際には扱えず `ArgumentError` を出していた問題を修正した PR です。`distance_of_time_in_words` と同様に、引数を事前に `Time` に正規化してから過去/未来の判定を行うように変更されています。"
-    },
-    {
-      "number": 58093,
-      "title": "Decouple schema loading from the versions formatter {#pr-58093}",
-      "url": "https://github.com/rails/rails/pull/58093",
-      "mergedAt": "2026-07-12T00:00:00.000Z",
-      "author": "fxn",
-      "authorUrl": "https://github.com/fxn",
-      "summary": "1. 概要 (1-2文で)  \nRails 8.1 で導入された「version formatter」の契約（インターフェース）から、`schema.rb` ローダー（`:ruby` ローダー）の要件が漏れ出していた問題を解消するため、**スキーマ読み込み処理とバージョンフォーマッタを疎結合にする変更**です。`schema.rb` ローダーと `structure.sql` ダンパーが同じ内部 SQL 生成ロジックを共有していたのをやめ、それぞれの責務を分離しています。"
-    },
-    {
-      "number": 58087,
-      "title": "Fix MySQL POINT and MULTIPOINT columns being misreported as integers {#pr-58087}",
-      "url": "https://github.com/rails/rails/pull/58087",
-      "mergedAt": "2026-07-11T00:00:00.000Z",
-      "author": "kyuuri1791",
-      "authorUrl": "https://github.com/kyuuri1791",
-      "summary": "1. 概要 (1-2文で)  \nMySQL の `POINT` / `MULTIPOINT` カラムが ActiveRecord 上で誤って整数型として扱われていた不具合を修正し、他の空間型と同様に「未知の型」として扱うようにした PR です。これにより、スキーマ情報の取得やスキーマ変換ツール利用時に不正な integer 定義が紛れ込む問題を防ぎます。"
-    },
-    {
-      "number": 58076,
-      "title": "Interpolate a fixture label verbatim, without backreference expansion {#pr-58076}",
-      "url": "https://github.com/rails/rails/pull/58076",
-      "mergedAt": "2026-07-11T00:00:00.000Z",
-      "author": "55728",
-      "authorUrl": "https://github.com/55728",
-      "summary": "1. 概要 (1-2文で)  \nRails の fixture で使える特殊変数 `$LABEL` を展開する際に、ラベル文字列中の `\\&` や `\\1` などが正規表現の後方参照として解釈されてしまう問題を修正し、ラベルを「そのままの文字列」として挿入するようにした PR です。これにより、バックスラッシュを含むラベルでも意図通りの値が fixture に設定されます。"
-    },
-    {
-      "number": 58080,
-      "title": "Round-trip the `null: false` attribute modifier in `GeneratedAttribute#to_s` {#pr-58080}",
-      "url": "https://github.com/rails/rails/pull/58080",
-      "mergedAt": "2026-07-11T00:00:00.000Z",
-      "author": "55728",
-      "authorUrl": "https://github.com/55728",
-      "summary": "1. 概要 (1-2文で)  \nRails のジェネレータで使う属性表現（`GeneratedAttribute#to_s`）において、`string!` のような `!` 修飾子（= `null: false`）が文字列表現に正しく反映されずラウンドトリップできなかった問題を修正し、`!` を含む属性指定がパース前後で同じ表記に戻るようにした PR です。これにより、属性文字列表現のシリアライズ／デシリアライズの一貫性と正しさが改善されます。"
-    },
-    {
-      "number": 58086,
-      "title": "Convert Symbol keys in a `HashWithIndifferentAccess#transform_keys` mapping {#pr-58086}",
-      "url": "https://github.com/rails/rails/pull/58086",
-      "mergedAt": "2026-07-11T00:00:00.000Z",
-      "author": "55728",
-      "authorUrl": "https://github.com/55728",
-      "summary": "1. 概要 (1-2文で)  \nHashWithIndifferentAccess（以下 HWIA）の `transform_keys` / `transform_keys!` に「変換マッピング用のハッシュ」を渡したとき、マッピング側のキーが Symbol の場合でも正しくキー変換されるように修正した PRです。これにより、Ruby 標準の `Hash#transform_keys(hash)` と同じ挙動になり、HWIA 内の他メソッド (`slice`, `dig`, `fetch`, `[]`) との一貫性も取られました。"
-    },
-    {
-      "number": 58052,
-      "title": "Combine equivalent owner-dependent preload scopes {#pr-58052}",
-      "url": "https://github.com/rails/rails/pull/58052",
-      "mergedAt": "2026-07-10T00:00:00.000Z",
-      "author": "rwalters44",
-      "authorUrl": "https://github.com/rwalters44",
-      "summary": "1. 概要 (1-2文で)  \nowner（親レコード）依存のスコープ付き関連（いわゆるインスタンス依存スコープ）の eager load 時に、実質同じ条件のスコープをまとめて 1 つの Preloader に統合するようにした PRです。これにより、SQL の発行回数は変わらないまま、Preloader オブジェクトの数とレコードスキャン回数が大幅に減り、高負荷ケースで性能が大きく改善されます。"
-    },
-    {
-      "number": 57742,
-      "title": "Introduce `ActiveJob::DeserializationError::RecordNotFound` {#pr-57742}",
-      "url": "https://github.com/rails/rails/pull/57742",
-      "mergedAt": "2026-07-10T00:00:00.000Z",
-      "author": "rosa",
-      "authorUrl": "https://github.com/rosa",
-      "summary": "1. 概要 (1-2文で)  \nActiveJob の引数デシリアライズ時に「レコードがない場合」と「それ以外のエラー」を区別するために、新しく `ActiveJob::DeserializationError::RecordNotFound` 例外が導入されました。これにより、レコード削除など「正当な」理由による失敗だけを discard し、ネットワーク障害など一時的なエラーは通常どおりリトライさせる運用が可能になります。"
-    },
-    {
-      "number": 58061,
-      "title": "Fix some FrozenErrors for ractorized application {#pr-58061}",
-      "url": "https://github.com/rails/rails/pull/58061",
-      "mergedAt": "2026-07-09T00:00:00.000Z",
-      "author": "hmcguire-shopify",
-      "authorUrl": "https://github.com/hmcguire-shopify",
-      "summary": "1. 概要 (1–2文で)  \nRails アプリケーションを `Rails.application.ractorize!` で共有可能（freeze）にした際に発生していた `FrozenError` を、キャッシュのローカルキャッシュキーとアプリケーションの `revision` を「後からではなく事前に」計算するようにすることで解消する PR です。Ractors 対応アプリでのエラー報告や `Rails.cache` 利用が、freeze 後でも安全に動作するようになります。"
-    },
-    {
-      "number": 58068,
-      "title": "Let dump_schema pass the given format down to schema_dump {#pr-58068}",
-      "url": "https://github.com/rails/rails/pull/58068",
-      "mergedAt": "2026-07-09T00:00:00.000Z",
-      "author": "fxn",
-      "authorUrl": "https://github.com/fxn",
-      "summary": "1. 概要 (1-2文で)  \n`ActiveRecord::DatabaseTasks.dump_schema` が受け取った `format` 引数を内部の `schema_dump` 呼び出しに正しく引き渡すよう修正された PR です。これにより、`dump_schema` に任意のスキーマフォーマットを指定した場合でも、その指定が確実に反映されるようになりました。"
-    },
-    {
-      "number": 58066,
-      "title": "Add `write_multi_entries` method to batch writes for memcache store if dalli's `set_multi` is defined {#pr-58066}",
-      "url": "https://github.com/rails/rails/pull/58066",
-      "mergedAt": "2026-07-09T00:00:00.000Z",
-      "author": "ilianah",
-      "authorUrl": "https://github.com/ilianah",
-      "summary": "1. 概要 (1-2文で)  \nこのPRは、`ActiveSupport::Cache::MemCacheStore` に `write_multi_entries` メソッドを追加し、利用中の dalli に `set_multi` が定義されている場合はそれを使って複数キーを一括書き込みできるようにする変更です。これにより、memcached への書き込み時のラウンドトリップ数が削減され、パフォーマンス向上が見込まれます。"
     }
   ]
 }
