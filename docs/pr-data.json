@@ -1,7 +1,25 @@
 {
-  "lastUpdated": "2026-07-22T00:27:22.909Z",
+  "lastUpdated": "2026-07-23T00:24:32.499Z",
   "totalCount": 50,
   "items": [
+    {
+      "number": 58214,
+      "title": "Remove unused parameter {#pr-58214}",
+      "url": "https://github.com/rails/rails/pull/58214",
+      "mergedAt": "2026-07-22T00:00:00.000Z",
+      "author": "tenderlove",
+      "authorUrl": "https://github.com/tenderlove",
+      "summary": "1. 概要 (1-2文で)  \nActive Record の `spawn_methods` 内で、もはや使用されていない可変長引数（`*rest` のような引数）が削除されたメンテナンス用の変更です。`rewhere` サポート削除に伴って不要になっていた引数を整理しただけで、挙動の変更はほぼありません。"
+    },
+    {
+      "number": 58197,
+      "title": "Remove unused HABTM reflection storage {#pr-58197}",
+      "url": "https://github.com/rails/rails/pull/58197",
+      "mergedAt": "2026-07-22T00:00:00.000Z",
+      "author": "nvasilevski",
+      "authorUrl": "https://github.com/nvasilevski",
+      "summary": "1. 概要 (1-2文で)  \nこのPRは、`has_and_belongs_to_many`（HABTM）の内部で使われていなかった `left_reflection` の保存処理を削除する、極めて小さなクリーンアップ変更です。機能・挙動は一切変わらず、不要なコードが取り除かれただけです。"
+    },
     {
       "number": 58198,
       "title": "Remove unused TemplateDetails readers {#pr-58198}",
@@ -433,24 +451,6 @@
       "author": "bhumi1102",
       "authorUrl": "https://github.com/bhumi1102",
       "summary": "1. 概要 (1–2文で)  \nRails Foundation のドキュメント刷新プロジェクトの一環として、「Rails Generators ガイド（generators.md）」が大幅に書き直されました。既存内容の整理・拡張に加え、他ガイドから統合されたセクションを含めて、ジェネレータの使い方・カスタマイズ方法がより体系的に説明されています。"
-    },
-    {
-      "number": 58124,
-      "title": "Fix `Relation#one?` doc example calling `any?` {#pr-58124}",
-      "url": "https://github.com/rails/rails/pull/58124",
-      "mergedAt": "2026-07-15T00:00:00.000Z",
-      "author": "55728",
-      "authorUrl": "https://github.com/55728",
-      "summary": "1. 概要 (1-2文で)  \n`ActiveRecord::Relation#one?` のドキュメント中のサンプルコードが誤って `any?` を呼んでいた問題を修正し、説明文やコメントの文言・整形も合わせて調整したドキュメント専用のPRです。コードの挙動自体には一切変更はありません。"
-    },
-    {
-      "number": 58117,
-      "title": "Raise for empty shards on `connected_to_all_shards` {#pr-58117}",
-      "url": "https://github.com/rails/rails/pull/58117",
-      "mergedAt": "2026-07-14T00:00:00.000Z",
-      "author": "eileencodes",
-      "authorUrl": "https://github.com/eileencodes",
-      "summary": "1. 概要 (1-2文で)  \n`connected_to_all_shards` を、実際にはシャーディングされていないアプリ（shard 設定が空のケース）で呼び出した場合に、静かに動作するのではなくエラーを送出するように変更した PR です。  \n「シャーディングされていない構成で `connected_to_all_shards` を使う」ことを明示的に不正利用として扱う方向に仕様が整理されています。"
     }
   ]
 }
