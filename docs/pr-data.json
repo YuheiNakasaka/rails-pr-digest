@@ -1,7 +1,25 @@
 {
-  "lastUpdated": "2026-07-24T00:28:22.233Z",
+  "lastUpdated": "2026-07-25T00:25:50.642Z",
   "totalCount": 50,
   "items": [
+    {
+      "number": 58225,
+      "title": "Make lazy route loading thread-safe {#pr-58225}",
+      "url": "https://github.com/rails/rails/pull/58225",
+      "mergedAt": "2026-07-24T00:00:00.000Z",
+      "author": "grk",
+      "authorUrl": "https://github.com/grk",
+      "summary": "1. 概要 (1-2文で)  \nRails 8 で導入された「ルーティングの遅延読み込み (lazy route loading)」にスレッドセーフでない箇所があり、初回リクエストが並行すると一部ルートが 404 になったり URL ヘルパが未定義になるレースコンディションが発生していました。  \nこのPRでは `RoutesReloader` に再入可能なロックと明示的なロード状態管理を導入し、初回ロードおよびリロードをスレッドセーフにする変更が行われています。"
+    },
+    {
+      "number": 58199,
+      "title": "Stop filtering i18n paths on initialize {#pr-58199}",
+      "url": "https://github.com/rails/rails/pull/58199",
+      "mergedAt": "2026-07-24T00:00:00.000Z",
+      "author": "gmcgibbon",
+      "authorUrl": "https://github.com/gmcgibbon",
+      "summary": "1. 概要 (1-2文で)  \nRails の i18n ロード処理とパスのグロブ処理から「初期化時の不要なフィルタリング」と「不要なソート」を取り除き、高負荷なアプリケーションでの起動・ロード時間を短縮する変更です。i18n のファイルパスの存在チェックを初期化時ではなくリロード時に遅延させることで、数千ファイル規模でもオーバーヘッドを抑えています。"
+    },
     {
       "number": 58227,
       "title": "Remove dead branch in MySQL column introspection {#pr-58227}",
@@ -433,24 +451,6 @@
       "author": "yahonda",
       "authorUrl": "https://github.com/yahonda",
       "summary": "1. 概要 (1–2文で)  \nRails の Sprockets 資産プリコンパイルに関するテストが CI 上で時々失敗していた問題を、テスト側で 1 秒スリープを挟むことでフレークを解消した PR です。Sprockets がファイルの更新検知を「秒単位の mtime」と「キャッシュされたダイジェスト」に依存している仕様にテストを合わせています。"
-    },
-    {
-      "number": 58139,
-      "title": "Harden load schema migrations {#pr-58139}",
-      "url": "https://github.com/rails/rails/pull/58139",
-      "mergedAt": "2026-07-17T00:00:00.000Z",
-      "author": "55728",
-      "authorUrl": "https://github.com/55728",
-      "summary": "1. 概要 (1-2文で)  \n`ActiveRecord::Schema.load_schema_migrations` が、実プロジェクトで起こりがちな2つのケース（CRLF 行末や末尾改行なし、重複バージョン）でも安全かつ一貫して動作するように強化された PR です。これにより、`db/schema.rb` のフォーマット差異や人手によるマージミスがあっても、スキーママイグレーションのロードがより堅牢になります。"
-    },
-    {
-      "number": 58113,
-      "title": "Make AbstractController::Base#action_methods ractor safe {#pr-58113}",
-      "url": "https://github.com/rails/rails/pull/58113",
-      "mergedAt": "2026-07-17T00:00:00.000Z",
-      "author": "Edouard-chin",
-      "authorUrl": "https://github.com/Edouard-chin",
-      "summary": "1. 概要 (1-2文で)  \n`AbstractController::Base#action_methods` が返す `Set` を凍結(freeze)し、Ractor（Rubyの並行実行モデル）で参照しても `Ractor::IsolationError` が出ないようにした変更です。これに伴い、`ActionMailer` など `action_methods` をオーバーライドしている箇所も、Ractorセーフになるよう調整されています。"
     }
   ]
 }
