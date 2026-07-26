@@ -1,7 +1,52 @@
 {
-  "lastUpdated": "2026-07-25T00:25:50.642Z",
+  "lastUpdated": "2026-07-26T00:26:59.472Z",
   "totalCount": 50,
   "items": [
+    {
+      "number": 58240,
+      "title": "Document that `connected_to_all_shards` raises with no shards {#pr-58240}",
+      "url": "https://github.com/rails/rails/pull/58240",
+      "mergedAt": "2026-07-25T00:00:00.000Z",
+      "author": "55728",
+      "authorUrl": "https://github.com/55728",
+      "summary": "1. 概要 (1-2文で)  \nRails 8.2 での `connected_to_all_shards` の挙動変更（シャード未設定時に `ArgumentError` を送出）に合わせて、RDoc（API ドキュメント）の説明を実装どおりに修正する PR です。これにより、ドキュメントと実際の挙動の不一致が解消されます。"
+    },
+    {
+      "number": 58236,
+      "title": "Fix dangling Action Text autoloads for `Configurator` and `Registry` {#pr-58236}",
+      "url": "https://github.com/rails/rails/pull/58236",
+      "mergedAt": "2026-07-25T00:00:00.000Z",
+      "author": "55728",
+      "authorUrl": "https://github.com/55728",
+      "summary": "1. 概要 (1-2文で)  \nAction Text が存在しないファイルに対して autoload を設定していたため、未定義定数参照時に本来期待される `NameError` ではなく `LoadError` が発生していた問題を修正した PR です。不要かつ誤った autoload を削除し、`ActionText::Configurator` と `ActionText::Registry` 参照時に `NameError` を返すようにしています。"
+    },
+    {
+      "number": 58231,
+      "title": "Fix reason phrase casing in the 404 error page title {#pr-58231}",
+      "url": "https://github.com/rails/rails/pull/58231",
+      "mergedAt": "2026-07-25T00:00:00.000Z",
+      "author": "55728",
+      "authorUrl": "https://github.com/55728",
+      "summary": "1. 概要 (1-2文で)  \n404エラーページのHTMLタイトルに含まれる HTTP リーズンフレーズの表記を、仕様どおり「Not Found」に統一するPRです。ガイドや各エンジンのダミーアプリを含め、`404 Not found` となっていた箇所をすべて `404 Not Found` に修正しています。"
+    },
+    {
+      "number": 58234,
+      "title": "[ci-skip][doc] Update link styles in generator guide {#pr-58234}",
+      "url": "https://github.com/rails/rails/pull/58234",
+      "mergedAt": "2026-07-25T00:00:00.000Z",
+      "author": "hachi8833",
+      "authorUrl": "https://github.com/hachi8833",
+      "summary": "1. 概要 (1-2文で)  \nRails ガイド「Generators Guide」の中で、ジェネレータ関連 API へのリンクを edge API から安定版 API に変更し、外部リンクの書き方を統一して IDE のシンタックスハイライトと相性が良いスタイルに整えたドキュメント修正の PR です。機能コードは一切変更されていません。"
+    },
+    {
+      "number": 57211,
+      "title": "Add config to raise on invalid TimeZone#parse strings {#pr-57211}",
+      "url": "https://github.com/rails/rails/pull/57211",
+      "mergedAt": "2026-07-25T00:00:00.000Z",
+      "author": "Saidbek",
+      "authorUrl": "https://github.com/Saidbek",
+      "summary": "1. 概要 (1-2文で)  \n`ActiveSupport::TimeZone#parse` に対して「不正な文字列を渡したときに必ず `ArgumentError` を投げる」ための設定フラグ `ActiveSupport.raise_on_invalid_time_zone_parse` が追加されました。Rails 8.2 の `config.load_defaults \"8.2\"` ではこのフラグがデフォルトで有効になり、これまで曖昧だった挙動が Ruby 標準の `Time.parse` に揃えられます。"
+    },
     {
       "number": 58225,
       "title": "Make lazy route loading thread-safe {#pr-58225}",
@@ -406,51 +451,6 @@
       "author": "Yuhi-Sato",
       "authorUrl": "https://github.com/Yuhi-Sato",
       "summary": "1. 概要 (1-2文で)  \nActiveSupport::ContinuousIntegration のクラスドキュメント内で、コード（等幅）表現に使われていた RDoc マークアップを修正し、API ドキュメント上で正しく固定幅表示されるようにした PRです。コードや挙動には一切変更はなく、ドキュメント表現のみの修正です。"
-    },
-    {
-      "number": 58036,
-      "title": "Fix typos and inconsistencies in documentation {#pr-58036}",
-      "url": "https://github.com/rails/rails/pull/58036",
-      "mergedAt": "2026-07-18T00:00:00.000Z",
-      "author": "55728",
-      "authorUrl": "https://github.com/55728",
-      "summary": "1. 概要 (1-2文で)  \nこのPRは、Rails本体およびガイド・APIドキュメント・コメントに存在していた typo（スペルミス）や、サンプルコード／説明文の不整合をまとめて修正するものです。実行時の挙動には変更を加えず、ドキュメントとコメントの品質・信頼性を高めています。"
-    },
-    {
-      "number": 58154,
-      "title": "Pin json below 2.20 in the Gemfile {#pr-58154}",
-      "url": "https://github.com/rails/rails/pull/58154",
-      "mergedAt": "2026-07-18T00:00:00.000Z",
-      "author": "yahonda",
-      "authorUrl": "https://github.com/yahonda",
-      "summary": "1. 概要 (1–2文で)  \nRails 7.2 系ブランチの開発・CI環境において、`json` gem 2.20.0 以降で導入された「コメント付き JSON の非推奨警告」が strict warnings CI を落としてしまう問題に対応するため、`json` を `< 2.20` にピン留めした PR です。アプリケーション側の依存バージョンには影響せず、Rails 本体の開発・テスト環境専用の制約です。"
-    },
-    {
-      "number": 58153,
-      "title": "Pin json below 2.20 in the Gemfile {#pr-58153}",
-      "url": "https://github.com/rails/rails/pull/58153",
-      "mergedAt": "2026-07-18T00:00:00.000Z",
-      "author": "yahonda",
-      "authorUrl": "https://github.com/yahonda",
-      "summary": "1. 概要 (1-2文で)  \nRails 8.0 系ブランチで、`json` gem を 2.20 未満に固定する変更です。`json 2.20.0` でコメント付き JSON に対する非推奨警告が出て CI の strict warnings を落としてしまう問題を、Gemfile 側でバージョンをピン止めすることで回避しています。"
-    },
-    {
-      "number": 58146,
-      "title": "Test that config.action_dispatch.default_headers set in an initializer is applied {#pr-58146}",
-      "url": "https://github.com/rails/rails/pull/58146",
-      "mergedAt": "2026-07-18T00:00:00.000Z",
-      "author": "nurey",
-      "authorUrl": "https://github.com/nurey",
-      "summary": "1. 概要 (1-2文で)  \nRails 8.x 系で「initializer から設定した `config.action_dispatch.default_headers` がレスポンスに反映されない」というリグレッションに対し、その再発を防ぐためのテストが追加されています。既に main ブランチでは修正済みですが、その挙動を保証する回帰テストを追加する PR です。"
-    },
-    {
-      "number": 58148,
-      "title": "Fix test_precompile_shouldn't_use_the_digests_present_in_manifest.json failure {#pr-58148}",
-      "url": "https://github.com/rails/rails/pull/58148",
-      "mergedAt": "2026-07-17T00:00:00.000Z",
-      "author": "yahonda",
-      "authorUrl": "https://github.com/yahonda",
-      "summary": "1. 概要 (1–2文で)  \nRails の Sprockets 資産プリコンパイルに関するテストが CI 上で時々失敗していた問題を、テスト側で 1 秒スリープを挟むことでフレークを解消した PR です。Sprockets がファイルの更新検知を「秒単位の mtime」と「キャッシュされたダイジェスト」に依存している仕様にテストを合わせています。"
     }
   ]
 }
