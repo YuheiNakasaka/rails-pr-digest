@@ -1,7 +1,52 @@
 {
-  "lastUpdated": "2026-07-26T00:26:59.472Z",
+  "lastUpdated": "2026-07-27T00:26:50.786Z",
   "totalCount": 50,
   "items": [
+    {
+      "number": 58252,
+      "title": "Fix: infinite route reload when after_routes_loaded accesses routes {#pr-58252}",
+      "url": "https://github.com/rails/rails/pull/58252",
+      "mergedAt": "2026-07-26T00:00:00.000Z",
+      "author": "chaadow",
+      "authorUrl": "https://github.com/chaadow",
+      "summary": "1. 概要 (1-2文で)  \nRails のルーティング再読み込み処理において、`after_routes_loaded` フック内でルートセットにアクセスすると無限にルートが再読み込みされてしまう不具合を修正した PR です。`execute_unless_loaded` のクリティカルセクション（ルート定義とフック実行の一連の流れ）全体でロード状態を「loading」に保つように変更しています。"
+    },
+    {
+      "number": 58250,
+      "title": "Fix `number_to_human_size` crashing above a terabyte {#pr-58250}",
+      "url": "https://github.com/rails/rails/pull/58250",
+      "mergedAt": "2026-07-26T00:00:00.000Z",
+      "author": "55728",
+      "authorUrl": "https://github.com/55728",
+      "summary": "1. 概要 (1-2文で)  \n`number_to_human_size` が 1TB を超えるサイズをロケール依存でフォーマットする際、一部ロケールで `TypeError` が発生していた問題を修正し、ペタ/エクサ/ゼタバイトに対しても英語ベースのフォールバックが効くようになりました。これにより、対応する翻訳がないロケールでも `\"1 PB\"`, `\"1 EB\"`, `\"1 ZB\"` などの文字列を返し、例外を出さずに動作します。"
+    },
+    {
+      "number": 58249,
+      "title": "Extract `:table_name` as explicit kwarg in join table helpers {#pr-58249}",
+      "url": "https://github.com/rails/rails/pull/58249",
+      "mergedAt": "2026-07-26T00:00:00.000Z",
+      "author": "kamipo",
+      "authorUrl": "https://github.com/kamipo",
+      "summary": "1. 概要 (1-2文で)  \n`create_join_table`, `build_create_join_table_definition`, `drop_join_table` で `:table_name` を「単なる options の1要素」から「明示的なキーワード引数」に変更し、`options` をその場で破壊的変更していた補助メソッド `find_join_table_name` と `JoinTable` モジュールを削除したリファクタリングです。これにより API が明示的になり、`CommandRecorder` からの不要な `include JoinTable` も除去されています。"
+    },
+    {
+      "number": 58248,
+      "title": "Fix inaccurate docstring in `CommandRecorder#inverse_of` [ci-skip] {#pr-58248}",
+      "url": "https://github.com/rails/rails/pull/58248",
+      "mergedAt": "2026-07-26T00:00:00.000Z",
+      "author": "kamipo",
+      "authorUrl": "https://github.com/kamipo",
+      "summary": "1. 概要 (1-2文で)  \n`ActiveRecord::Migration::CommandRecorder#inverse_of` のドキュメントコメント（docstring）が、現在の実装と食い違っていたため、古い挙動を前提にした説明とサンプルが削除されました。コード本体の挙動変更はなく、ドキュメントのみの修正です。\n\n2. 変更内容の詳細  \n\n- 対象ファイル:  \n  `activerecord/lib/active_record/migration/command_recorder.rb`\n\n- 変更点:  \n  `CommandRecorder#inverse_of` のコメントから、以下のような内容が削除されています。\n\n  - 「あるコマンドの逆操作が複数のコマンドから成る場合は、コマンドの配列を返す」という説明\n  - その具体例として挙げられていた `invert_remove_columns` の説明・サンプル\n\n- 背景となる実装の変化:\n  - もともと `invert_remove_columns` は、「複数カラムの削除」に対する逆操作として、「複数の `[:add_column, ...]` コマンドの配列」を返していました。\n  - しかし 3582de977d (2020年) のリファクタで、逆操作は「単一の `[:add_columns, ...]` コマンド」にフラット化されるようになりました。\n    - 例（イメージ）:\n      - 以前のイメージ:  \n        ```ruby\n        [\n          [:add_column, :users, :name, :string, **options1],\n          [:add_column, :users, :age, :integer, **options2]\n        ]\n        ```\n      - 現在のイメージ:  \n        ```ruby\n        [\n          [:add_columns, :users, [[:name, :string, options1], [:age, :integer, options2]]]\n        ]\n        ```\n  - にもかかわらず docstring 側が「複数コマンドの配列を返す」という古い仕様のまま残っていたため、その部分の記述と例が削除されています。\n\n- 実コードのふるまい:\n  - この PR では Ruby コード自体は一切変更されていません（追加 0 行 / 削除 5 行、すべてコメント）。\n  - `CommandRecorder#inverse_of` の挙動や、マイグレーションの実行結果には一切影響しません。\n\n3. 影響範囲・注意点  \n\n- 影響範囲:\n  - 実行時の挙動・API には影響なし（ドキュメントのみの修正）。\n  - ただし、以下のようなケースで「前提としていた仕様」がドキュメントと食い違っていたことが明示化される:\n    - `CommandRecorder#inverse_of` が「複数コマンドの配列を返す」ことを前提に、自前でメタプログラミングしているツール・ライブラリ\n    - 古い docstring を読んで、`invert_remove_columns` の戻り値形式を誤解していた開発者\n\n- 注意点:\n  - もし `CommandRecorder#inverse_of` を直接利用し、「逆操作が来たら必ずコマンド配列になる」と決め打ちしているコードがある場合、実際の挙動はすでに数年前から違っている可能性が高いので、戻り値形式を確認した方がよいです。\n  - この PR 以降、公式コメントから「複数コマンドの配列を返す」という一般的な保証は読み取れなくなるため、\n    - `inverse_of` の戻り値は「単一コマンド or 複数コマンド」など、実装依存の部分があるものとして扱うのが安全です。\n\n4. 参考情報 (あれば)  \n\n- 該当 PR:  \n  - https://github.com/rails/rails/pull/58248\n- `invert_remove_columns` を単一 `:add_columns` にまとめるようにした過去コミット:  \n  - 3582de977d (2020 年のリファクタ)  \n- 関連クラス・メソッド:\n  - `ActiveRecord::Migration::CommandRecorder`\n  - `ActiveRecord::Migration::CommandRecorder#inverse_of`\n  - `ActiveRecord::Migration::CommandRecorder#invert_remove_columns`"
+    },
+    {
+      "number": 58238,
+      "title": "Remove `ruby2_keywords` usage {#pr-58238}",
+      "url": "https://github.com/rails/rails/pull/58238",
+      "mergedAt": "2026-07-26T00:00:00.000Z",
+      "author": "kamipo",
+      "authorUrl": "https://github.com/kamipo",
+      "summary": "1. 概要 (1-2文で)  \nRails がサポート Ruby バージョンを 3.3.1+ に引き上げたことに伴い、キーワード引数互換のために使っていた `ruby2_keywords` を全廃し、通常の引数 (`*args`, `**kwargs`, `&block`, `...`) に書き換えた PR です。  \n一部、外部インターフェースやシリアライズ形式を変えられない箇所では、`Hash.ruby2_keywords_hash` による「末尾フラグ付きハッシュ」形式を維持しています。"
+    },
     {
       "number": 58240,
       "title": "Document that `connected_to_all_shards` raises with no shards {#pr-58240}",
@@ -406,51 +451,6 @@
       "author": "nvasilevski",
       "authorUrl": "https://github.com/nvasilevski",
       "summary": "1. 概要 (1-2文で)  \nRails の ActiveSupport::Cache コーダ関連コードから、どこからも参照されていなかった定数 `EMPTY_BINARY_STRING` が削除されました。機能的な挙動の変更はなく、完全にデッドコードのクリーンアップです。"
-    },
-    {
-      "number": 58171,
-      "title": "Fix `bundle install` on `ruby-dev` {#pr-58171}",
-      "url": "https://github.com/rails/rails/pull/58171",
-      "mergedAt": "2026-07-21T00:00:00.000Z",
-      "author": "Earlopain",
-      "authorUrl": "https://github.com/Earlopain",
-      "summary": "1. 概要 (1-2文で)  \n`ruby-dev`（Ruby 開発版）で `bundle install` が失敗していた問題を、利用していた gem を更新して解消した PRです。Rails 本体のコードは変更せず、`Gemfile.lock` の依存バージョンのみを修正しています。"
-    },
-    {
-      "number": 58163,
-      "title": "[ci-skip][doc] Fix inconsistent links in Active Job guide {#pr-58163}",
-      "url": "https://github.com/rails/rails/pull/58163",
-      "mergedAt": "2026-07-21T00:00:00.000Z",
-      "author": "hachi8833",
-      "authorUrl": "https://github.com/hachi8833",
-      "summary": "1. 概要 (1-2文で)  \nActive Jobガイド内のリンク表記ゆれを修正し、ドキュメント内のリンクスタイルを統一したPRです。コードや挙動の変更はなく、ドキュメントのみへの軽微な修正です。\n\n2. 変更内容の詳細  \n\n- 対象ファイル: `guides/source/active_job_basics.md`\n- 変更内容:\n  - Active Jobガイド内にあるリンクの一部で、Markdownのリンク表記に使う角カッコ `[]` が不足しており、他の箇所と形式が不一致だった部分を修正\n  - 実質的には、以下のような「リンクの括弧漏れ」を直していると考えられます（例・イメージ）:\n\n    ```md\n    # 修正前（例）\n    See Active Support Instrumentation(https://guides.rubyonrails.org/active_support_instrumentation.html) for more details.\n\n    # 修正後（例）\n    See [Active Support Instrumentation](https://guides.rubyonrails.org/active_support_instrumentation.html) for more details.\n    ```\n\n  - 追加行数2・削除行数2のため、2箇所程度で `[]` の付け忘れや、他と異なるリンク表現を統一した変更とみられます。\n\n3. 影響範囲・注意点  \n\n- 影響範囲:\n  - Rails本体のコード、API挙動、Active Jobの仕様・インターフェースには一切影響しません。\n  - 影響するのは、Rails Guides（Active Job Basics）の表示のみです。\n  - ガイドをHTMLにビルドした際、該当箇所が正しくリンクとしてレンダリングされるようになります。\n- 注意点:\n  - ドキュメント向けの変更なので、アプリケーション側で対応すべきことはありません。\n  - ドキュメントを翻訳・派生させているプロジェクトでは、同様のリンク表記ゆれがないか確認しておくと良いです。\n\n4. 参考情報 (あれば)  \n\n- PRタイトルの `[ci-skip]` から、CIを走らせる必要がないドキュメント専用の変更として扱われていることがわかります。\n- Rails GuidesのMarkdownでは、基本的に標準的なMarkdownリンク構文（`[テキスト](URL)`）で統一されているため、今後ガイドにPRを出す際もこのスタイルに合わせるのが望ましいです。"
-    },
-    {
-      "number": 58166,
-      "title": "Let dump_schema_migrations_sort_by be :reverse by default {#pr-58166}",
-      "url": "https://github.com/rails/rails/pull/58166",
-      "mergedAt": "2026-07-20T00:00:00.000Z",
-      "author": "fxn",
-      "authorUrl": "https://github.com/fxn",
-      "summary": "1. 概要 (1-2文で)  \n`db/schema.rb` に `schema_migrations` テーブルをダンプする機能について、デフォルトの並び順が「辞書順（昇順）」から「逆順（:reverse、最新のマイグレーションが先）」に変更されました。これにより、この機能を有効化したときに、マージコンフリクトを避けやすい並び順が最初から採用されます。"
-    },
-    {
-      "number": 58157,
-      "title": "Assert @verified directly in the non-StandardError interrupt test {#pr-58157}",
-      "url": "https://github.com/rails/rails/pull/58157",
-      "mergedAt": "2026-07-19T00:00:00.000Z",
-      "author": "yahonda",
-      "authorUrl": "https://github.com/yahonda",
-      "summary": "1. 概要 (1-2文で)  \nRails 8-0-stable で落ちていた `ActiveRecord::AdapterConnectionTest` のテストを、`verified?` メソッドではなくインスタンス変数 `@verified` を直接検査するように変更して修正した PR です。テストの意図（「非 StandardError 系の割り込みが発生すると、接続が再検証対象になること」）は維持されたままです。"
-    },
-    {
-      "number": 58158,
-      "title": "Fix RDoc markup in ActiveSupport::ContinuousIntegration [ci skip] {#pr-58158}",
-      "url": "https://github.com/rails/rails/pull/58158",
-      "mergedAt": "2026-07-19T00:00:00.000Z",
-      "author": "Yuhi-Sato",
-      "authorUrl": "https://github.com/Yuhi-Sato",
-      "summary": "1. 概要 (1-2文で)  \nActiveSupport::ContinuousIntegration のクラスドキュメント内で、コード（等幅）表現に使われていた RDoc マークアップを修正し、API ドキュメント上で正しく固定幅表示されるようにした PRです。コードや挙動には一切変更はなく、ドキュメント表現のみの修正です。"
     }
   ]
 }
