@@ -1,7 +1,52 @@
 {
-  "lastUpdated": "2026-07-27T00:26:50.786Z",
+  "lastUpdated": "2026-07-28T00:23:47.301Z",
   "totalCount": 50,
   "items": [
+    {
+      "number": 58255,
+      "title": "Deprecate `insert_returning` option and `use_insert_returning?` {#pr-58255}",
+      "url": "https://github.com/rails/rails/pull/58255",
+      "mergedAt": "2026-07-27T00:00:00.000Z",
+      "author": "kamipo",
+      "authorUrl": "https://github.com/kamipo",
+      "summary": "1. 概要 (1-2文で)  \nPostgreSQL 用の DB 設定オプション `:insert_returning` と、それを参照する `PostgreSQLAdapter#use_insert_returning?` が「非推奨」としてマークされました。今後は RETURNING の有無は `supports_insert_returning?` / `supports_update_returning?` などのサポート判定に一元化され、`:insert_returning` で挙動をコントロールすることはできなくなっていきます。"
+    },
+    {
+      "number": 58259,
+      "title": "Delegate `ids` back to `pluck` {#pr-58259}",
+      "url": "https://github.com/rails/rails/pull/58259",
+      "mergedAt": "2026-07-27T00:00:00.000Z",
+      "author": "kamipo",
+      "authorUrl": "https://github.com/kamipo",
+      "summary": "1. 概要 (1-2文で)  \n`Relation#ids` の実装を `pluck(primary_key)` ベースに戻し、`ids` と `pluck` の挙動を再び揃えることで、これまで片方だけに入っていたバグ修正の非対称性を解消した PRです。`includes` 利用時の重複 ID 除去だけを特別扱いとして残し、それ以外は `pluck` に処理を委譲するようになりました。"
+    },
+    {
+      "number": 58258,
+      "title": "Remove unused `binds` argument from `update_with_result` {#pr-58258}",
+      "url": "https://github.com/rails/rails/pull/58258",
+      "mergedAt": "2026-07-27T00:00:00.000Z",
+      "author": "kamipo",
+      "authorUrl": "https://github.com/kamipo",
+      "summary": "1. 概要 (1-2文で)  \n`update_with_result` メソッドの引数から、実際には使われていなかった `binds` 引数が削除されました。Arel が自前でバインド値を持つようになった現在の設計に沿って、インターフェイスを整理するリファクタリングです。"
+    },
+    {
+      "number": 58256,
+      "title": "[ci skip] Update Mailgun setup documentation links {#pr-58256}",
+      "url": "https://github.com/rails/rails/pull/58256",
+      "mergedAt": "2026-07-27T00:00:00.000Z",
+      "author": "ajaynomics",
+      "authorUrl": "https://github.com/ajaynomics",
+      "summary": "1. 概要 (1-2文で)  \nMailgun を使った Action Mailbox 連携のドキュメント内リンクが古くなっていたため、Mailgun が公式に案内している `forward()` アクション用ドキュメントへのリンクに更新した PRです。Action Mailbox が依存している `mime` URL サフィックスと `body-mime` ペイロード仕様を説明している正しいページを参照するようになります。"
+    },
+    {
+      "number": 58257,
+      "title": "Require Markdown APIs in new files {#pr-58257}",
+      "url": "https://github.com/rails/rails/pull/58257",
+      "mergedAt": "2026-07-27T00:00:00.000Z",
+      "author": "fxn",
+      "authorUrl": "https://github.com/fxn",
+      "summary": "1. 概要 (1-2文で)  \nRails の API ドキュメントを RDoc から Markdown へ段階的に移行している最中に、新規ファイルへ RDoc 記法が紛れ込むのを防ぐため、CI 上で「新しい Ruby ファイルの API コメントが Markdown かどうか」をチェックする仕組みが追加されました。  \nこれにより、以降追加されるコードは原則として Markdown 形式でドキュメントを書くことが求められます。"
+    },
     {
       "number": 58252,
       "title": "Fix: infinite route reload when after_routes_loaded accesses routes {#pr-58252}",
@@ -406,51 +451,6 @@
       "author": "nvasilevski",
       "authorUrl": "https://github.com/nvasilevski",
       "summary": "1. 概要 (1-2文で)  \nこのPRでは、`ActionController::RequestForgeryProtection` 内で定義されていた未使用の `SAFE_FETCH_SITES` 定数が削除されています。CSRF保護の実装変更により参照されなくなっていた「死んだコード」をクリーンアップするものです。"
-    },
-    {
-      "number": 58183,
-      "title": "Remove unused ConnectionHandler#pool_managers method {#pr-58183}",
-      "url": "https://github.com/rails/rails/pull/58183",
-      "mergedAt": "2026-07-21T00:00:00.000Z",
-      "author": "nvasilevski",
-      "authorUrl": "https://github.com/nvasilevski",
-      "summary": "1. 概要 (1-2文で)  \nActive Record の `ConnectionHandler` に定義されていた未使用メソッド `pool_managers` が削除されました。これは過去の非推奨パス削除後に呼び出し元がなくなっていたヘルパーメソッドの単純なクリーンアップです。"
-    },
-    {
-      "number": 58184,
-      "title": "Remove unused cross_origin_request? method {#pr-58184}",
-      "url": "https://github.com/rails/rails/pull/58184",
-      "mergedAt": "2026-07-21T00:00:00.000Z",
-      "author": "nvasilevski",
-      "authorUrl": "https://github.com/nvasilevski",
-      "summary": "1. 概要 (1-2文で)  \n`ActionController::RequestForgeryProtection` 内に定義されていた未使用メソッド `cross_origin_request?` が削除されました。Fetch Metadata を用いた CSRF 対策実装の一部として追加されていたものの、実際にはどこからも呼ばれていなかったためのクリーンアップです。"
-    },
-    {
-      "number": 58186,
-      "title": "Remove unused Redis cache serialize_entries methods {#pr-58186}",
-      "url": "https://github.com/rails/rails/pull/58186",
-      "mergedAt": "2026-07-21T00:00:00.000Z",
-      "author": "nvasilevski",
-      "authorUrl": "https://github.com/nvasilevski",
-      "summary": "1. 概要 (1-2文で)  \nRedis のキャッシュストア（`RedisCacheStore` と `DeprecatedRedisCacheStore`）に残っていた未使用のヘルパーメソッド `serialize_entries` が削除されました。実際の挙動には影響せず、不要コードの整理によるリファクタリングです。"
-    },
-    {
-      "number": 58147,
-      "title": "[8-1-stable] Avoid loading ActionController::Live early in initializer {#pr-58147}",
-      "url": "https://github.com/rails/rails/pull/58147",
-      "mergedAt": "2026-07-21T00:00:00.000Z",
-      "author": "nurey",
-      "authorUrl": "https://github.com/nurey",
-      "summary": "1. 概要 (1-2文で)  \nRails 8.1 系で、initializer 内で `config.action_dispatch.default_headers = { ... }` を丸ごと置き換え設定しても反映されないリグレッションを修正するバックポートです。原因だった `ActionController::Live` の早期ロードを避けるため、新しい load hook `:action_controller_live` を導入し、設定が正しいタイミングで反映されるようにしています。"
-    },
-    {
-      "number": 58175,
-      "title": "Remove unused EMPTY_BINARY_STRING constant {#pr-58175}",
-      "url": "https://github.com/rails/rails/pull/58175",
-      "mergedAt": "2026-07-21T00:00:00.000Z",
-      "author": "nvasilevski",
-      "authorUrl": "https://github.com/nvasilevski",
-      "summary": "1. 概要 (1-2文で)  \nRails の ActiveSupport::Cache コーダ関連コードから、どこからも参照されていなかった定数 `EMPTY_BINARY_STRING` が削除されました。機能的な挙動の変更はなく、完全にデッドコードのクリーンアップです。"
     }
   ]
 }
