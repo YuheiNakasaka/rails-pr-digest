@@ -1,7 +1,97 @@
 {
-  "lastUpdated": "2026-07-28T00:23:47.301Z",
+  "lastUpdated": "2026-07-29T00:24:54.860Z",
   "totalCount": 50,
   "items": [
+    {
+      "number": 58277,
+      "title": "Remove unreachable single-version branch from `DefaultSchemaVersionsFormatter` {#pr-58277}",
+      "url": "https://github.com/rails/rails/pull/58277",
+      "mergedAt": "2026-07-28T00:00:00.000Z",
+      "author": "55728",
+      "authorUrl": "https://github.com/55728",
+      "summary": "1. 概要 (1-2文で)  \n`DefaultSchemaVersionsFormatter#format` にあった「単一バージョン用」のフォールバック分岐（実際には到達不能）を削除し、常に配列を前提としたマルチ行 `INSERT ... VALUES` のみを使うようにしたPRです。スキーマダンプの出力内容や公開APIには一切影響せず、内部実装のデッドコード整理になります。"
+    },
+    {
+      "number": 58282,
+      "title": "Add `prefetch_primary_key?` test coverage on PostgreSQL {#pr-58282}",
+      "url": "https://github.com/rails/rails/pull/58282",
+      "mergedAt": "2026-07-28T00:00:00.000Z",
+      "author": "kamipo",
+      "authorUrl": "https://github.com/kamipo",
+      "summary": "1. 概要 (1-2文で)  \nPostgreSQL アダプタに `next_sequence_value` が実装され、`prefetch_primary_key?` を `true` にしたモデルでも、実際の PostgreSQL シーケンスを使って主キーを事前採番できるようになりました。加えて、その挙動を end-to-end で検証するテストが追加され、今後の `insert` / `_insert_record` リファクタリングや oracle-enhanced アダプタとの互換性を確認しやすくなっています。"
+    },
+    {
+      "number": 58244,
+      "title": "Use latest ruby patch version in dockerfile {#pr-58244}",
+      "url": "https://github.com/rails/rails/pull/58244",
+      "mergedAt": "2026-07-28T00:00:00.000Z",
+      "author": "adityapandit17",
+      "authorUrl": "https://github.com/adityapandit17",
+      "summary": "1. 概要 (1-2文で)  \nRails リポジトリの開発用コンテナ（.devcontainer）の Dockerfile で使用している Ruby のパッチバージョンが、最新の 4.0.6 に更新されました。機能追加ではなく、開発環境における Ruby バージョンのメンテナンス更新です。\n\n2. 変更内容の詳細(あればサンプルコードも含めて)  \n- 対象ファイル: `.devcontainer/Dockerfile`  \n- 変更点は 1 行のみで、利用する Ruby イメージのバージョン指定が更新されています。\n\n典型的には以下のような変更が入っています（イメージ例）:\n\n```diff\n-FROM ruby:4.0.5\n+FROM ruby:4.0.6\n```\n\nあるいはタグ付きバリアントを使っている場合も同様です:\n\n```diff\n-FROM ruby:4.0.5-bookworm\n+FROM ruby:4.0.6-bookworm\n```\n\n要するに、開発用コンテナが起動する際に取得される Ruby ベースイメージが「4.0.5 → 4.0.6」に切り替わるだけの変更です。\n\n3. 影響範囲・注意点  \n- 影響範囲  \n  - VS Code Dev Containers や GitHub Codespaces、その他 `.devcontainer/Dockerfile` を利用して Rails を開発している環境に影響します。  \n  - CI などで `.devcontainer/Dockerfile` を直接使っている場合も Ruby 4.0.6 で実行されるようになります。\n\n- 実務的な影響  \n  - Ruby 4.0.6 は 4.0 系のパッチリリースであり、後方互換性を保ちつつ、バグ修正・パフォーマンス改善・セキュリティ修正が含まれている可能性があります。  \n  - パッチレベルの更新のため、通常はアプリケーションコードの変更は不要ですが、以下のようなケースでは注意が必要です:\n    - Ruby 本体の細かい挙動に依存したテスト（時間、GC、警告メッセージなど）  \n    - ネイティブ拡張を含む gem を使用しており、Ruby のパッチ更新でビルドが再実行される場合  \n  - 一度コンテナを再ビルド (`docker compose build` や Dev Container の「Rebuild Container」) すると、新バージョンの Ruby が反映されます。\n\n- 注意点  \n  - ローカルで Ruby 4.0.5 など別バージョンを使っている場合、`.devcontainer` 内では 4.0.6 になるため、微妙な差異で挙動がずれないかを確認しておくと安全です。  \n  - もし `Gemfile` や `.ruby-version` で Ruby バージョンを厳密に固定している場合は、それらの指定と Dockerfile のバージョンが不一致になっていないか確認してください（4.0.6 に合わせるのが望ましいです）。\n\n4. 参考情報 (あれば)  \n- Ruby 4.0 系および 4.0.6 の変更内容・リリースノート（※実際のリンクは Ruby の公式サイト・ニュースを参照）  \n  - Ruby 公式: https://www.ruby-lang.org/  \n  - Ruby リリースノート: https://www.ruby-lang.org/en/news/  \n\nこの PR 自体はごく小さい変更ですが、「公式リポジトリが想定している Ruby バージョン」が 4.0.6 に更新された、という指標にもなります。"
+    },
+    {
+      "number": 58108,
+      "title": "Allow to use thread module reader / writer in a ractor: {#pr-58108}",
+      "url": "https://github.com/rails/rails/pull/58108",
+      "mergedAt": "2026-07-28T00:00:00.000Z",
+      "author": "Edouard-chin",
+      "authorUrl": "https://github.com/Edouard-chin",
+      "summary": "1. 概要 (1-2文で)  \nこのPRは、`thread_mattr_reader` / `thread_mattr_writer`（`thread_mattr_accessor`）で定義されたスレッド単位のクラス属性を、Ractor 内からも安全に使えるようにする変更です。Ractor の分離制約に抵触していたクラスインスタンス変数のメモ化をやめる代わりに、毎回キーを計算するようにし、その代償としてごく小さいパフォーマンス低下を受け入れています。"
+    },
+    {
+      "number": 58273,
+      "title": "Fix Markdown doc check {#pr-58273}",
+      "url": "https://github.com/rails/rails/pull/58273",
+      "mergedAt": "2026-07-28T00:00:00.000Z",
+      "author": "flavorjones",
+      "authorUrl": "https://github.com/flavorjones",
+      "summary": "1. 概要 (1-2文で)  \nMarkdown ドキュメントチェック用スクリプトと RuboCop (Layout/EmptyLineAfterMagicComment) のスタイルルールが衝突していた問題を解消する PR です。`# frozen_string_literal: true` の直後の空行を、Markdown チェック側でも許容するように修正しています。\n\n2. 変更内容の詳細  \n\n- 変更ファイル:  \n  - `.github/workflows/scripts/check-markdown-api.rb`（1行変更）\n\nこのスクリプトは、Markdown 内に記載された Ruby のコード例をチェックする用途で使われており、ファイル先頭のフォーマットについて独自のチェック（もしくは前提）を持っていました。\n\n問題となっていたのは以下のようなパターンです:\n\n```ruby\n# frozen_string_literal: true\nclass Example\n  # ...\nend\n```\n\nRuboCop の `Layout/EmptyLineAfterMagicComment` ルールは、上記を次のように**空行を入れる形**に自動修正します:\n\n```ruby\n# frozen_string_literal: true\n\nclass Example\n  # ...\nend\n```\n\nしかし、Markdown ドキュメントのコードブロックを検証する `check-markdown-api.rb` は、この空行があると不正なフォーマットとして扱い、チェックを失敗させていました。\n\nこの PR では、その Markdown チェック側のロジックを修正し、`frozen_string_literal` マジックコメント直後の空行を「許容される形式」として扱うようにしています。  \n具体的には、ファイル先頭（もしくはコードブロック先頭）の判定条件やパターンマッチを 1 行だけ変更し、「空行あり／なし」の両方を受け入れるようにした、という内容です（+1/-1行のみ）。\n\n※ PR 本文の「So let's make that blank line acceptable.」から、Rubocop の推奨スタイルを優先し、それに合わせて Markdown チェックを緩和・修正したことがわかります。\n\n3. 影響範囲・注意点  \n\n- 影響範囲\n  - GitHub Actions などで動く Markdown API チェック ワークフローにのみ影響します。\n  - Rails リポジトリ内の Markdown ドキュメントに含まれる Ruby コード例（特に `# frozen_string_literal: true` を含むもの）が、Rubocop の自動整形後でもチェックエラーにならなくなります。\n- 注意点\n  - これまで「Rubocop が直したコードだと Markdown チェックが落ちる」という CI 上のノイズが出ていた場合、この PR により解消されます。\n  - Markdown 側のチェックがやや緩和される形ですが、影響するのはマジックコメント直後の 1 行だけであり、実コードやその他スタイルには影響しません。\n\n4. 参考情報 (あれば)  \n\n- 関連 PR:  \n  - #58257 — 問題の元になった Markdown doc チェック用スクリプトを導入した PR\n- 関連 RuboCop ルール:  \n  - `Layout/EmptyLineAfterMagicComment`  \n    - マジックコメント（`# frozen_string_literal: true` など）の直後に空行を入れることを要求するスタイルルール。"
+    },
+    {
+      "number": 58211,
+      "title": "Pass scheme to token authentication block in http_atthentication {#pr-58211}",
+      "url": "https://github.com/rails/rails/pull/58211",
+      "mergedAt": "2026-07-28T00:00:00.000Z",
+      "author": "chad-cole",
+      "authorUrl": "https://github.com/chad-cole",
+      "summary": "1. 概要 (1-2文で)  \nRails の HTTP トークン認証 (`ActionController::HttpAuthentication::Token`) において、これまで捨てられていた「スキーム（Bearer など）」情報をブロックへ渡せるようにし、かつコントローラ側で特定スキームを必須とできるようにした PR です。これにより、DPoP などスキーム固有の検証が必要な仕様に対応しやすくなります。"
+    },
+    {
+      "number": 58276,
+      "title": "[8-0-stable] Avoid loading ActionController::Live early in initializer {#pr-58276}",
+      "url": "https://github.com/rails/rails/pull/58276",
+      "mergedAt": "2026-07-28T00:00:00.000Z",
+      "author": "carldaws",
+      "authorUrl": "https://github.com/carldaws",
+      "summary": "1. 概要 (1-2文で)  \nRails 8.0 系の `8-0-stable` ブランチに対して、`ActionController::Live` が Railtie 初期化処理の中で「早いタイミングでロードされてしまう」問題を避ける修正をバックポートした PR です。これにより、ライブストリーミング機能に関連するオートロード・スレッド・設定タイミング周りの問題が軽減されます。"
+    },
+    {
+      "number": 58272,
+      "title": "Fix the `Parameters#deep_transform_values` doc example {#pr-58272}",
+      "url": "https://github.com/rails/rails/pull/58272",
+      "mergedAt": "2026-07-28T00:00:00.000Z",
+      "author": "55728",
+      "authorUrl": "https://github.com/55728",
+      "summary": "1. 概要 (1-2文で)  \n`ActionController::Parameters#deep_transform_values` のドキュメント内サンプルの戻り値が、実際の挙動では起こり得ない形になっていたため、現実の挙動に合わせて修正したPRです。機能自体は未リリースのため、挙動変更ではなく「誤ったドキュメントの修正」に留まります。"
+    },
+    {
+      "number": 58235,
+      "title": "Remove stale requires {#pr-58235}",
+      "url": "https://github.com/rails/rails/pull/58235",
+      "mergedAt": "2026-07-28T00:00:00.000Z",
+      "author": "55728",
+      "authorUrl": "https://github.com/55728",
+      "summary": "1. 概要 (1-2文で)  \nこのPRは、既にコードから使われていない `require` をまとめて削除し、不要な依存関係の読み込みを減らすクリーンアップです。挙動や公開APIの変更はなく、autoload に任せられる部分と参照されていない標準ライブラリの `require` を整理しています。"
+    },
+    {
+      "number": 58275,
+      "title": "Don't swallow `::RangeError` on write queries {#pr-58275}",
+      "url": "https://github.com/rails/rails/pull/58275",
+      "mergedAt": "2026-07-28T00:00:00.000Z",
+      "author": "kamipo",
+      "authorUrl": "https://github.com/kamipo",
+      "summary": "1. 概要 (1-2文で)  \n`QueryIntent#run_query!` が全クエリで `::RangeError` を握りつぶしていた問題を修正し、SELECT では従来どおり「範囲外 WHERE → 空結果」を維持しつつ、INSERT/UPDATE/DELETE などの書き込みクエリでは `RangeError` / `ActiveModel::RangeError` が正しく表に出るようにした PR です。これにより、本来シリアライズ時に発生すべき範囲外エラーが隠蔽されることなく、意図どおり例外として扱えるようになります。"
+    },
     {
       "number": 58255,
       "title": "Deprecate `insert_returning` option and `use_insert_returning?` {#pr-58255}",
@@ -361,96 +451,6 @@
       "author": "nvasilevski",
       "authorUrl": "https://github.com/nvasilevski",
       "summary": "1. 概要 (1-2文で)  \nRails 6.0 用の互換クラス `V6_0::ReferenceDefinition` が、実際にはどこからも使われていない「死んだコード」であることが確認され、削除されました。これにより ActiveRecord のマイグレーション互換レイヤが少しシンプルになっています。"
-    },
-    {
-      "number": 58190,
-      "title": "Deprecate Cookies::HTTP_HEADER constant {#pr-58190}",
-      "url": "https://github.com/rails/rails/pull/58190",
-      "mergedAt": "2026-07-21T00:00:00.000Z",
-      "author": "nvasilevski",
-      "authorUrl": "https://github.com/nvasilevski",
-      "summary": "1. 概要 (1-2文で)  \n`ActionDispatch::Cookies::HTTP_HEADER` 定数が非推奨（deprecated）になり、今後は `Rack::SET_COOKIE` を使うことが推奨されるようにした PR です。既に内部的には未使用ですが、外部利用があるため、即削除ではなく非推奨期間を設けています。"
-    },
-    {
-      "number": 58191,
-      "title": "Deprecate RedisCacheStore::DEFAULT_REDIS_OPTIONS {#pr-58191}",
-      "url": "https://github.com/rails/rails/pull/58191",
-      "mergedAt": "2026-07-21T00:00:00.000Z",
-      "author": "nvasilevski",
-      "authorUrl": "https://github.com/nvasilevski",
-      "summary": "1. 概要 (1-2文で)  \n`ActiveSupport::Cache::RedisCacheStore::DEFAULT_REDIS_OPTIONS` が、Rails 内部では既に使われていないため、**即削除ではなく「非推奨(deprecated)扱い」として残しつつ、将来的な削除に向けた移行パスを示した PR** です。代わりに、アプリ側は `RedisCacheStore` もしくは利用中の Redis クライアントに対して、タイムアウトなどのオプションを明示的に渡すように促されています。"
-    },
-    {
-      "number": 58193,
-      "title": "Remove unused test methods {#pr-58193}",
-      "url": "https://github.com/rails/rails/pull/58193",
-      "mergedAt": "2026-07-21T00:00:00.000Z",
-      "author": "nvasilevski",
-      "authorUrl": "https://github.com/nvasilevski",
-      "summary": "1. 概要 (1-2文で)  \nRails 本体の「テスト専用コード」から、参照されていないメソッド／アクセサ計 24 個を削除するクリーンアップ PR です。  \nすべて `test/` 配下の変更であり、本番コードの挙動や公開 API には影響しません。"
-    },
-    {
-      "number": 58192,
-      "title": "Remove unused Routing::HTTP_METHODS constant {#pr-58192}",
-      "url": "https://github.com/rails/rails/pull/58192",
-      "mergedAt": "2026-07-21T00:00:00.000Z",
-      "author": "nvasilevski",
-      "authorUrl": "https://github.com/nvasilevski",
-      "summary": "1. 概要 (1-2文で)  \n`ActionDispatch::Routing` 内で長らく使われていなかった定数 `HTTP_METHODS` が削除されました。Rails本体からは既に参照されておらず、内部実装の古い残骸をクリーンアップする変更です。"
-    },
-    {
-      "number": 58194,
-      "title": "Restore unregistered tests {#pr-58194}",
-      "url": "https://github.com/rails/rails/pull/58194",
-      "mergedAt": "2026-07-21T00:00:00.000Z",
-      "author": "nvasilevski",
-      "authorUrl": "https://github.com/nvasilevski",
-      "summary": "1. 概要 (1-2文で)  \nこのPRは、`test_` プレフィックスがついておらず Minitest によって実行されていなかった6つのテストメソッドを、正しくテストとして登録し直したものです。テスト内容自体は変えず、メソッド名だけを修正してテストが実行されるようにしています。"
-    },
-    {
-      "number": 58182,
-      "title": "Remove unused ThreadMonitor#mon_try_enter method {#pr-58182}",
-      "url": "https://github.com/rails/rails/pull/58182",
-      "mergedAt": "2026-07-21T00:00:00.000Z",
-      "author": "nvasilevski",
-      "authorUrl": "https://github.com/nvasilevski",
-      "summary": "1. 概要 (1-2文で)  \nRailsの`ActiveSupport::Concurrency::ThreadMonitor`から、既にどこからも呼ばれていなかった`mon_try_enter`メソッドが削除されました。機能追加ではなく、不要コードの整理によるリファクタリングです。"
-    },
-    {
-      "number": 58185,
-      "title": "Remove unused ParamBuilder#new_depth_limit method {#pr-58185}",
-      "url": "https://github.com/rails/rails/pull/58185",
-      "mergedAt": "2026-07-21T00:00:00.000Z",
-      "author": "nvasilevski",
-      "authorUrl": "https://github.com/nvasilevski",
-      "summary": "1. 概要 (1-2文で)  \nRails の `ActionDispatch::Http::ParamBuilder` クラスから、実際には一度も使われていなかった `new_depth_limit` メソッドが削除されました。機能的な変更はなく、内部実装の不要コードの整理（リファクタリング）にあたります。"
-    },
-    {
-      "number": 58176,
-      "title": "Remove unused UriEncoder constants {#pr-58176}",
-      "url": "https://github.com/rails/rails/pull/58176",
-      "mergedAt": "2026-07-21T00:00:00.000Z",
-      "author": "nvasilevski",
-      "authorUrl": "https://github.com/nvasilevski",
-      "summary": "1. 概要 (1-2文で)  \nRails 内部クラス `UriEncoder` に定義されていた未使用の定数 `UTF_8` と `ESCAPED` が削除されました。内部実装のデッドコード整理であり、公開APIの挙動には影響しません。"
-    },
-    {
-      "number": 58178,
-      "title": "Remove unused Journey::GTG::MatchData {#pr-58178}",
-      "url": "https://github.com/rails/rails/pull/58178",
-      "mergedAt": "2026-07-21T00:00:00.000Z",
-      "author": "nvasilevski",
-      "authorUrl": "https://github.com/nvasilevski",
-      "summary": "1. 概要 (1-2文で)  \nRails の内部ルーティングエンジン Journey に存在していた未使用クラス `Journey::GTG::MatchData` が、完全に参照されていない“死んだコード”であるため削除されました。これに伴い、そのクラスを前提としたコメント・コード片が `simulator.rb` から取り除かれています。"
-    },
-    {
-      "number": 58180,
-      "title": "Remove unused SAFE_FETCH_SITES constant {#pr-58180}",
-      "url": "https://github.com/rails/rails/pull/58180",
-      "mergedAt": "2026-07-21T00:00:00.000Z",
-      "author": "nvasilevski",
-      "authorUrl": "https://github.com/nvasilevski",
-      "summary": "1. 概要 (1-2文で)  \nこのPRでは、`ActionController::RequestForgeryProtection` 内で定義されていた未使用の `SAFE_FETCH_SITES` 定数が削除されています。CSRF保護の実装変更により参照されなくなっていた「死んだコード」をクリーンアップするものです。"
     }
   ]
 }
