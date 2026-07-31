@@ -1,7 +1,52 @@
 {
-  "lastUpdated": "2026-07-30T00:28:07.322Z",
+  "lastUpdated": "2026-07-31T00:26:34.717Z",
   "totalCount": 50,
   "items": [
+    {
+      "number": 58311,
+      "title": "Fix `connection.explain(arel)` for Arel input with AST binds {#pr-58311}",
+      "url": "https://github.com/rails/rails/pull/58311",
+      "mergedAt": "2026-07-30T00:00:00.000Z",
+      "author": "kamipo",
+      "authorUrl": "https://github.com/kamipo",
+      "summary": "1. 概要 (1-2文で)  \n`connection.explain(arel)` に Arel（AST binds 付き）を渡した場合に、バインド変数が無視されて `EXPLAIN` が失敗していた問題を修正した PR です。`to_sql` ではなく `to_sql_and_binds` を使うことで、EXPLAIN 実行時にプレースホルダへ正しくバインド値が渡されるようになりました。"
+    },
+    {
+      "number": 58310,
+      "title": "Deprecate passing `binds` to `to_sql` {#pr-58310}",
+      "url": "https://github.com/rails/rails/pull/58310",
+      "mergedAt": "2026-07-30T00:00:00.000Z",
+      "author": "kamipo",
+      "authorUrl": "https://github.com/kamipo",
+      "summary": "1. 概要 (1-2文で)  \nRails 5.2 以降、SQL バインド値は Arel AST 側で管理されており、`to_sql` に `binds` 引数を渡しても実質使われていませんでした。この PR では `to_sql(binds)` の利用を非推奨 (deprecate) にし、将来削除するための警告を追加しています。"
+    },
+    {
+      "number": 58309,
+      "title": "Rename `arel` to `arel_or_sql` {#pr-58309}",
+      "url": "https://github.com/rails/rails/pull/58309",
+      "mergedAt": "2026-07-30T00:00:00.000Z",
+      "author": "kamipo",
+      "authorUrl": "https://github.com/kamipo",
+      "summary": "1. 概要 (1-2文で)  \nこのPRは、ActiveRecordの低レベルクエリメソッドの引数名を「`arel`」から「`arel_or_sql`」にリネームし、Arelオブジェクトと生SQL文字列の両方を受け取ることが分かるようにしたものです。機能的な挙動は変えずに、引数名の一貫性と可読性を向上させています。"
+    },
+    {
+      "number": 58296,
+      "title": "Refactor insert `returning:` handling to take `QueryIntent` directly {#pr-58296}",
+      "url": "https://github.com/rails/rails/pull/58296",
+      "mergedAt": "2026-07-30T00:00:00.000Z",
+      "author": "kamipo",
+      "authorUrl": "https://github.com/kamipo",
+      "summary": "1. 概要 (1-2文で)  \n`INSERT ... RETURNING` の処理を、生のSQL文字列操作ではなく `QueryIntent` を直接扱う形にリファクタリングしたPRです。これにより Arel ベースの INSERT は AST レベルで `RETURNING` を付与できるようになり、アダプタ間での拡張性・一貫性が向上しています。"
+    },
+    {
+      "number": 58299,
+      "title": "Remove dead binds handling in AR log subscribers {#pr-58299}",
+      "url": "https://github.com/rails/rails/pull/58299",
+      "mergedAt": "2026-07-30T00:00:00.000Z",
+      "author": "kamipo",
+      "authorUrl": "https://github.com/kamipo",
+      "summary": "1. 概要 (1-2文で)  \nActive Record のログ関連コードから、既に使われなくなったバインド値処理用のヘルパーメソッドとレガシー形式のバインド値サポートが削除されました。Rails 7.0 で実質廃止されていた旧形式の binds（`[[column, value], ...]`）へのフォールバックも StructuredEventSubscriber から完全に取り除かれています。"
+    },
     {
       "number": 58298,
       "title": "Make `ActiveModel#model_name` accessible from a Ractor: {#pr-58298}",
@@ -406,51 +451,6 @@
       "author": "Saidbek",
       "authorUrl": "https://github.com/Saidbek",
       "summary": "1. 概要 (1-2文で)  \n`ActiveSupport::TimeZone#parse` に対して「不正な文字列を渡したときに必ず `ArgumentError` を投げる」ための設定フラグ `ActiveSupport.raise_on_invalid_time_zone_parse` が追加されました。Rails 8.2 の `config.load_defaults \"8.2\"` ではこのフラグがデフォルトで有効になり、これまで曖昧だった挙動が Ruby 標準の `Time.parse` に揃えられます。"
-    },
-    {
-      "number": 58225,
-      "title": "Make lazy route loading thread-safe {#pr-58225}",
-      "url": "https://github.com/rails/rails/pull/58225",
-      "mergedAt": "2026-07-24T00:00:00.000Z",
-      "author": "grk",
-      "authorUrl": "https://github.com/grk",
-      "summary": "1. 概要 (1-2文で)  \nRails 8 で導入された「ルーティングの遅延読み込み (lazy route loading)」にスレッドセーフでない箇所があり、初回リクエストが並行すると一部ルートが 404 になったり URL ヘルパが未定義になるレースコンディションが発生していました。  \nこのPRでは `RoutesReloader` に再入可能なロックと明示的なロード状態管理を導入し、初回ロードおよびリロードをスレッドセーフにする変更が行われています。"
-    },
-    {
-      "number": 58199,
-      "title": "Stop filtering i18n paths on initialize {#pr-58199}",
-      "url": "https://github.com/rails/rails/pull/58199",
-      "mergedAt": "2026-07-24T00:00:00.000Z",
-      "author": "gmcgibbon",
-      "authorUrl": "https://github.com/gmcgibbon",
-      "summary": "1. 概要 (1-2文で)  \nRails の i18n ロード処理とパスのグロブ処理から「初期化時の不要なフィルタリング」と「不要なソート」を取り除き、高負荷なアプリケーションでの起動・ロード時間を短縮する変更です。i18n のファイルパスの存在チェックを初期化時ではなくリロード時に遅延させることで、数千ファイル規模でもオーバーヘッドを抑えています。"
-    },
-    {
-      "number": 58227,
-      "title": "Remove dead branch in MySQL column introspection {#pr-58227}",
-      "url": "https://github.com/rails/rails/pull/58227",
-      "mergedAt": "2026-07-23T00:00:00.000Z",
-      "author": "hmcguire-shopify",
-      "authorUrl": "https://github.com/hmcguire-shopify",
-      "summary": "1. 概要 (1-2文で)  \nMySQL アダプタのカラム情報取得処理（カラム introspection）から、もはや到達しない条件分岐（デッドブランチ）が削除されました。MariaDB における関数デフォルト値の検出ロジックが別の場所に移されたため、古い最適化用の分岐が不要になったことによるクリーンアップです。"
-    },
-    {
-      "number": 58143,
-      "title": "Carry `disabled` and `form` onto a multiple file field's hidden companion input {#pr-58143}",
-      "url": "https://github.com/rails/rails/pull/58143",
-      "mergedAt": "2026-07-23T00:00:00.000Z",
-      "author": "carldaws",
-      "authorUrl": "https://github.com/carldaws",
-      "summary": "1. 概要 (1-2文で)  \n複数ファイルアップロード用の `file_field`（`multiple: true`）かつ `include_hidden: true` のときに生成される「隠し入力(hidden)」に、元のファイル入力の `disabled` と `form` 属性を正しく引き継ぐようにしたバグ修正です。これにより、無効化されたフィールドや外部フォームに属するフィールドで、送信されるパラメータが意図どおりになるよう整合性が取られました。"
-    },
-    {
-      "number": 58179,
-      "title": "Raise ConfigurationFile::FormatError for invalid YAML {#pr-58179}",
-      "url": "https://github.com/rails/rails/pull/58179",
-      "mergedAt": "2026-07-23T00:00:00.000Z",
-      "author": "nvasilevski",
-      "authorUrl": "https://github.com/nvasilevski",
-      "summary": "1. 概要 (1-2文で)  \n`ActiveSupport::ConfigurationFile` で不正な YAML を読み込んだ際に、これまで汎用的な `RuntimeError` として扱われていた例外を、本来用意されていた専用例外 `ActiveSupport::ConfigurationFile::FormatError` で送出するように変更した PRです。これに伴い、Active Record の fixture ローダー側も、この専用例外を明示的に補足するように修正されています。"
     }
   ]
 }
