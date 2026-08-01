@@ -1,7 +1,70 @@
 {
-  "lastUpdated": "2026-07-31T00:26:34.717Z",
+  "lastUpdated": "2026-08-01T00:26:21.833Z",
   "totalCount": 50,
   "items": [
+    {
+      "number": 58332,
+      "title": "Revert \"Remove migrations filter from the schema dump\" {#pr-58332}",
+      "url": "https://github.com/rails/rails/pull/58332",
+      "mergedAt": "2026-07-31T00:00:00.000Z",
+      "author": "fxn",
+      "authorUrl": "https://github.com/fxn",
+      "summary": "1. 概要 (1-2文で)  \nRails 7.2 付近で一度削除された「スキーマダンプから古いマイグレーションの version をフィルタする仕組み」を取り消し（revert）し、従来どおりフィルタを有効に戻した PR です。  \nチーム開発時に「古いマイグレーションをリポジトリから削除する」運用を、実務的に破綻なく行う手段がまだ整理できていないため、仕様変更を保留にする目的のリバートです。"
+    },
+    {
+      "number": 58274,
+      "title": "Allow prepared statements with query log tags {#pr-58274}",
+      "url": "https://github.com/rails/rails/pull/58274",
+      "mergedAt": "2026-07-31T00:00:00.000Z",
+      "author": "bschrag620",
+      "authorUrl": "https://github.com/bschrag620",
+      "summary": "1. 概要 (1-2文で)  \nRailsでクエリログタグ（`query_log_tags`）を有効にした際でも、アプリ側の選択で prepared statements を無効化せずに使い続けられるオプションが追加されました。これにより、高カーディナリティなコメントを避けるという従来の安全デフォルトを維持しつつ、必要なアプリケーションは両方を併用できるようになります。"
+    },
+    {
+      "number": 58267,
+      "title": "`activerecord`: make sure tests do not rely on implicit `SELECT` order {#pr-58267}",
+      "url": "https://github.com/rails/rails/pull/58267",
+      "mergedAt": "2026-07-31T00:00:00.000Z",
+      "author": "viralpraxis",
+      "authorUrl": "https://github.com/viralpraxis",
+      "summary": "1. 概要 (1–2文で)  \nこのPRは、Active Record のテストが「暗黙の SELECT 結果順序（MVCC に起因する更新順など）」に依存していた部分を洗い出し、すべて明示的な `ORDER BY` を付けるように修正するものです。これにより、DB 実装や実行タイミングによってテスト結果が変わる flakiness を防ぎ、テストの決定性・再現性を高めています。"
+    },
+    {
+      "number": 58297,
+      "title": "Deprecate positional `pk`, `id_value`, and `sequence_name` for `#insert` {#pr-58297}",
+      "url": "https://github.com/rails/rails/pull/58297",
+      "mergedAt": "2026-07-31T00:00:00.000Z",
+      "author": "kamipo",
+      "authorUrl": "https://github.com/kamipo",
+      "summary": "1. 概要 (1-2文で)  \n`ActiveRecord::ConnectionAdapters#insert` の位置引数として使われていた `pk`, `id_value`, `sequence_name` が非推奨になり、それぞれに対応する新しい使い方（特に `returning:` オプション）への移行が明示されました。これにより、`insert` のインターフェイスが整理され、PostgreSQL の `currval` ベースのフォールバックなども段階的に廃止されます。"
+    },
+    {
+      "number": 58322,
+      "title": "Remove migrations filter from the schema dump {#pr-58322}",
+      "url": "https://github.com/rails/rails/pull/58322",
+      "mergedAt": "2026-07-31T00:00:00.000Z",
+      "author": "fxn",
+      "authorUrl": "https://github.com/fxn",
+      "summary": "1. 概要 (1-2文で)  \nRails の schema dump（`db/schema.rb` など）に含める「適用済みマイグレーションのバージョン一覧」から、「ローカルにファイルが存在するものだけに絞り込む」というフィルタリング処理が削除されました。これにより、マイグレーションファイルが手元に無くても、DB 上で適用済みであればそのバージョンは schema dump に書き出されるようになります。"
+    },
+    {
+      "number": 57948,
+      "title": "Make the Action View dependency tracker registry Ractor-shareable {#pr-57948}",
+      "url": "https://github.com/rails/rails/pull/57948",
+      "mergedAt": "2026-07-31T00:00:00.000Z",
+      "author": "etiennebarrie",
+      "authorUrl": "https://github.com/etiennebarrie",
+      "summary": "1. 概要 (1-2文で)  \nActionView のテンプレート依存関係トラッカー (`ActionView::DependencyTracker`) のレジストリを Ractor で共有可能（ractor-shareable）にするための変更です。`Rails.application.ractorize!` を呼んだアプリケーションに限り、依存関係トラッカーのレジストリを Ractor 間で安全に共有できるようになります。"
+    },
+    {
+      "number": 58312,
+      "title": "Show parameter marker for casted binds in SQL logs and EXPLAIN {#pr-58312}",
+      "url": "https://github.com/rails/rails/pull/58312",
+      "mergedAt": "2026-07-31T00:00:00.000Z",
+      "author": "kamipo",
+      "authorUrl": "https://github.com/kamipo",
+      "summary": "1. 概要 (1-2文で)  \n`[[column, value], ...]` 形式から移行中の「casted binds」（単なる値配列）について、SQLログおよび `EXPLAIN` 出力で `[[nil, value], ...]` と表示されていた問題を、位置パラメータ（`$1`, `$2`, ...）を表示するようにして可読性を改善したPRです。PostgreSQL風のパラメータマーカーを導入し、どの値がクエリ中のどのプレースホルダに対応するか一目で分かるようにしています。"
+    },
     {
       "number": 58311,
       "title": "Fix `connection.explain(arel)` for Arel input with AST binds {#pr-58311}",
@@ -388,69 +451,6 @@
       "author": "kamipo",
       "authorUrl": "https://github.com/kamipo",
       "summary": "1. 概要 (1-2文で)  \n`create_join_table`, `build_create_join_table_definition`, `drop_join_table` で `:table_name` を「単なる options の1要素」から「明示的なキーワード引数」に変更し、`options` をその場で破壊的変更していた補助メソッド `find_join_table_name` と `JoinTable` モジュールを削除したリファクタリングです。これにより API が明示的になり、`CommandRecorder` からの不要な `include JoinTable` も除去されています。"
-    },
-    {
-      "number": 58248,
-      "title": "Fix inaccurate docstring in `CommandRecorder#inverse_of` [ci-skip] {#pr-58248}",
-      "url": "https://github.com/rails/rails/pull/58248",
-      "mergedAt": "2026-07-26T00:00:00.000Z",
-      "author": "kamipo",
-      "authorUrl": "https://github.com/kamipo",
-      "summary": "1. 概要 (1-2文で)  \n`ActiveRecord::Migration::CommandRecorder#inverse_of` のドキュメントコメント（docstring）が、現在の実装と食い違っていたため、古い挙動を前提にした説明とサンプルが削除されました。コード本体の挙動変更はなく、ドキュメントのみの修正です。\n\n2. 変更内容の詳細  \n\n- 対象ファイル:  \n  `activerecord/lib/active_record/migration/command_recorder.rb`\n\n- 変更点:  \n  `CommandRecorder#inverse_of` のコメントから、以下のような内容が削除されています。\n\n  - 「あるコマンドの逆操作が複数のコマンドから成る場合は、コマンドの配列を返す」という説明\n  - その具体例として挙げられていた `invert_remove_columns` の説明・サンプル\n\n- 背景となる実装の変化:\n  - もともと `invert_remove_columns` は、「複数カラムの削除」に対する逆操作として、「複数の `[:add_column, ...]` コマンドの配列」を返していました。\n  - しかし 3582de977d (2020年) のリファクタで、逆操作は「単一の `[:add_columns, ...]` コマンド」にフラット化されるようになりました。\n    - 例（イメージ）:\n      - 以前のイメージ:  \n        ```ruby\n        [\n          [:add_column, :users, :name, :string, **options1],\n          [:add_column, :users, :age, :integer, **options2]\n        ]\n        ```\n      - 現在のイメージ:  \n        ```ruby\n        [\n          [:add_columns, :users, [[:name, :string, options1], [:age, :integer, options2]]]\n        ]\n        ```\n  - にもかかわらず docstring 側が「複数コマンドの配列を返す」という古い仕様のまま残っていたため、その部分の記述と例が削除されています。\n\n- 実コードのふるまい:\n  - この PR では Ruby コード自体は一切変更されていません（追加 0 行 / 削除 5 行、すべてコメント）。\n  - `CommandRecorder#inverse_of` の挙動や、マイグレーションの実行結果には一切影響しません。\n\n3. 影響範囲・注意点  \n\n- 影響範囲:\n  - 実行時の挙動・API には影響なし（ドキュメントのみの修正）。\n  - ただし、以下のようなケースで「前提としていた仕様」がドキュメントと食い違っていたことが明示化される:\n    - `CommandRecorder#inverse_of` が「複数コマンドの配列を返す」ことを前提に、自前でメタプログラミングしているツール・ライブラリ\n    - 古い docstring を読んで、`invert_remove_columns` の戻り値形式を誤解していた開発者\n\n- 注意点:\n  - もし `CommandRecorder#inverse_of` を直接利用し、「逆操作が来たら必ずコマンド配列になる」と決め打ちしているコードがある場合、実際の挙動はすでに数年前から違っている可能性が高いので、戻り値形式を確認した方がよいです。\n  - この PR 以降、公式コメントから「複数コマンドの配列を返す」という一般的な保証は読み取れなくなるため、\n    - `inverse_of` の戻り値は「単一コマンド or 複数コマンド」など、実装依存の部分があるものとして扱うのが安全です。\n\n4. 参考情報 (あれば)  \n\n- 該当 PR:  \n  - https://github.com/rails/rails/pull/58248\n- `invert_remove_columns` を単一 `:add_columns` にまとめるようにした過去コミット:  \n  - 3582de977d (2020 年のリファクタ)  \n- 関連クラス・メソッド:\n  - `ActiveRecord::Migration::CommandRecorder`\n  - `ActiveRecord::Migration::CommandRecorder#inverse_of`\n  - `ActiveRecord::Migration::CommandRecorder#invert_remove_columns`"
-    },
-    {
-      "number": 58238,
-      "title": "Remove `ruby2_keywords` usage {#pr-58238}",
-      "url": "https://github.com/rails/rails/pull/58238",
-      "mergedAt": "2026-07-26T00:00:00.000Z",
-      "author": "kamipo",
-      "authorUrl": "https://github.com/kamipo",
-      "summary": "1. 概要 (1-2文で)  \nRails がサポート Ruby バージョンを 3.3.1+ に引き上げたことに伴い、キーワード引数互換のために使っていた `ruby2_keywords` を全廃し、通常の引数 (`*args`, `**kwargs`, `&block`, `...`) に書き換えた PR です。  \n一部、外部インターフェースやシリアライズ形式を変えられない箇所では、`Hash.ruby2_keywords_hash` による「末尾フラグ付きハッシュ」形式を維持しています。"
-    },
-    {
-      "number": 58240,
-      "title": "Document that `connected_to_all_shards` raises with no shards {#pr-58240}",
-      "url": "https://github.com/rails/rails/pull/58240",
-      "mergedAt": "2026-07-25T00:00:00.000Z",
-      "author": "55728",
-      "authorUrl": "https://github.com/55728",
-      "summary": "1. 概要 (1-2文で)  \nRails 8.2 での `connected_to_all_shards` の挙動変更（シャード未設定時に `ArgumentError` を送出）に合わせて、RDoc（API ドキュメント）の説明を実装どおりに修正する PR です。これにより、ドキュメントと実際の挙動の不一致が解消されます。"
-    },
-    {
-      "number": 58236,
-      "title": "Fix dangling Action Text autoloads for `Configurator` and `Registry` {#pr-58236}",
-      "url": "https://github.com/rails/rails/pull/58236",
-      "mergedAt": "2026-07-25T00:00:00.000Z",
-      "author": "55728",
-      "authorUrl": "https://github.com/55728",
-      "summary": "1. 概要 (1-2文で)  \nAction Text が存在しないファイルに対して autoload を設定していたため、未定義定数参照時に本来期待される `NameError` ではなく `LoadError` が発生していた問題を修正した PR です。不要かつ誤った autoload を削除し、`ActionText::Configurator` と `ActionText::Registry` 参照時に `NameError` を返すようにしています。"
-    },
-    {
-      "number": 58231,
-      "title": "Fix reason phrase casing in the 404 error page title {#pr-58231}",
-      "url": "https://github.com/rails/rails/pull/58231",
-      "mergedAt": "2026-07-25T00:00:00.000Z",
-      "author": "55728",
-      "authorUrl": "https://github.com/55728",
-      "summary": "1. 概要 (1-2文で)  \n404エラーページのHTMLタイトルに含まれる HTTP リーズンフレーズの表記を、仕様どおり「Not Found」に統一するPRです。ガイドや各エンジンのダミーアプリを含め、`404 Not found` となっていた箇所をすべて `404 Not Found` に修正しています。"
-    },
-    {
-      "number": 58234,
-      "title": "[ci-skip][doc] Update link styles in generator guide {#pr-58234}",
-      "url": "https://github.com/rails/rails/pull/58234",
-      "mergedAt": "2026-07-25T00:00:00.000Z",
-      "author": "hachi8833",
-      "authorUrl": "https://github.com/hachi8833",
-      "summary": "1. 概要 (1-2文で)  \nRails ガイド「Generators Guide」の中で、ジェネレータ関連 API へのリンクを edge API から安定版 API に変更し、外部リンクの書き方を統一して IDE のシンタックスハイライトと相性が良いスタイルに整えたドキュメント修正の PR です。機能コードは一切変更されていません。"
-    },
-    {
-      "number": 57211,
-      "title": "Add config to raise on invalid TimeZone#parse strings {#pr-57211}",
-      "url": "https://github.com/rails/rails/pull/57211",
-      "mergedAt": "2026-07-25T00:00:00.000Z",
-      "author": "Saidbek",
-      "authorUrl": "https://github.com/Saidbek",
-      "summary": "1. 概要 (1-2文で)  \n`ActiveSupport::TimeZone#parse` に対して「不正な文字列を渡したときに必ず `ArgumentError` を投げる」ための設定フラグ `ActiveSupport.raise_on_invalid_time_zone_parse` が追加されました。Rails 8.2 の `config.load_defaults \"8.2\"` ではこのフラグがデフォルトで有効になり、これまで曖昧だった挙動が Ruby 標準の `Time.parse` に揃えられます。"
     }
   ]
 }
