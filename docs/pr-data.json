@@ -1,7 +1,79 @@
 {
-  "lastUpdated": "2026-08-01T00:26:21.833Z",
+  "lastUpdated": "2026-08-02T00:27:25.717Z",
   "totalCount": 50,
   "items": [
+    {
+      "number": 58336,
+      "title": "Fix `search_field` raising `NameError` when passed `autosave: true` {#pr-58336}",
+      "url": "https://github.com/rails/rails/pull/58336",
+      "mergedAt": "2026-08-01T00:00:00.000Z",
+      "author": "hammadxcm",
+      "authorUrl": "https://github.com/hammadxcm",
+      "summary": "1. 概要 (1-2文で)  \n`search_field` ヘルパーに `autosave: true` を渡すと `NameError` が発生していた不具合を修正し、ドキュメントに記載されている「リクエストホストを反転した autosave 値」が実際に動作するようにしました。あわせて `autosave` オプション周りの挙動を網羅するテストが追加されています。"
+    },
+    {
+      "number": 58339,
+      "title": "Use precompiled Rubies from Mise in Install Rails Guide  {#pr-58339}",
+      "url": "https://github.com/rails/rails/pull/58339",
+      "mergedAt": "2026-08-01T00:00:00.000Z",
+      "author": "excid3",
+      "authorUrl": "https://github.com/excid3",
+      "summary": "1. 概要 (1-2文で)  \nRails公式ガイド「Install Ruby on Rails」で、Rubyのインストール手順が「Miseによる事前コンパイル済みRubyの利用」を前提とした内容に更新されました。これにより、依存関係のインストールやソースからのコンパイル手順が不要となり、ガイド全体がシンプルかつ高速なセットアップ手順に整理されています。"
+    },
+    {
+      "number": 58323,
+      "title": "Deprecate passing `binds` to `insert`, `update`, and `delete` {#pr-58323}",
+      "url": "https://github.com/rails/rails/pull/58323",
+      "mergedAt": "2026-08-01T00:00:00.000Z",
+      "author": "kamipo",
+      "authorUrl": "https://github.com/kamipo",
+      "summary": "1. 概要 (1-2文で)  \n`ActiveRecord::ConnectionAdapters` の `insert`, `update`, `delete` に対して、従来の「第2引数以降で `binds` を渡す」呼び出し方が非推奨になりました。代わりに、SQL文字列とバインド値をまとめた `Arel.sql(..., *binds)` を渡す書き方に移行するための正式なデプリケーションです。"
+    },
+    {
+      "number": 58324,
+      "title": "Fix `String#parameterize` raising `TypeError` when separator is nil {#pr-58324}",
+      "url": "https://github.com/rails/rails/pull/58324",
+      "mergedAt": "2026-08-01T00:00:00.000Z",
+      "author": "hammadxcm",
+      "authorUrl": "https://github.com/hammadxcm",
+      "summary": "1. 概要 (1-2文で)  \n`String#parameterize` に `separator: nil` を渡すと `TypeError` で落ちていた不具合を修正し、`nil` を空文字と同等に扱うようにした PR です。これにより、`separator` を設定ファイルやパラメータからそのまま渡しても安全に動くようになります。"
+    },
+    {
+      "number": 58325,
+      "title": "Add test coverage for `NameError#missing_name` branches {#pr-58325}",
+      "url": "https://github.com/rails/rails/pull/58325",
+      "mergedAt": "2026-08-01T00:00:00.000Z",
+      "author": "hammadxcm",
+      "authorUrl": "https://github.com/hammadxcm",
+      "summary": "1. 概要 (1–2文で)  \n`NameError#missing_name` の全ての分岐をカバーするテストが追加され、これまでテストされていなかったケース（`receiver == Object`、`receiver` 呼び出し時の `ArgumentError`、メッセージからの名前抽出）が網羅されました。機能変更はなく、既存挙動の仕様化・回帰防止が目的です。"
+    },
+    {
+      "number": 58329,
+      "title": "Fix documented strftime format for week_field default value {#pr-58329}",
+      "url": "https://github.com/rails/rails/pull/58329",
+      "mergedAt": "2026-08-01T00:00:00.000Z",
+      "author": "55728",
+      "authorUrl": "https://github.com/55728",
+      "summary": "1. 概要 (1-2文で)  \n`week_field` ヘルパーのデフォルト値に使われる `strftime` フォーマットについて、実装とドキュメントの不一致を解消し、ドキュメント側を実装 (`\"%G-W%V\"`) に合わせる修正です。コードの挙動は既に正しいため、このPRはドキュメントのみの更新です。"
+    },
+    {
+      "number": 58331,
+      "title": "Fix `model_name` crashing when a model has an anonymous ancestor {#pr-58331}",
+      "url": "https://github.com/rails/rails/pull/58331",
+      "mergedAt": "2026-08-01T00:00:00.000Z",
+      "author": "55728",
+      "authorUrl": "https://github.com/55728",
+      "summary": "1. 概要 (1-2文で)  \nRails 7.2 開発中に入った変更 (#58298) により、「無名クラスを祖先にもつモデル」で `model_name` を呼ぶと例外が出るリグレッションが発生していたのを、i18n キー生成時に無名祖先をスキップすることで修正した PR です。通常のモデルの動作や i18n 探索順序は変えずに、無名祖先を介したクラス継承でも `model_name` を安全に使えるようにしています。"
+    },
+    {
+      "number": 58307,
+      "title": "Avoid redundant worker pool dispatch for default Action Cable streams {#pr-58307}",
+      "url": "https://github.com/rails/rails/pull/58307",
+      "mergedAt": "2026-08-01T00:00:00.000Z",
+      "author": "npezza93",
+      "authorUrl": "https://github.com/npezza93",
+      "summary": "1. 概要 (1-2文で)  \nAction Cable の「デフォルトストリーム」におけるメッセージ配送で、同じジョブを executor と connection worker pool の2段階に重ねてディスパッチしていた無駄を取り除き、パフォーマンスを改善する変更です。ユーザー定義コールバックは従来通り worker pool で隔離しつつ、デフォルトハンドラだけ executor 上で完結させることで、レイテンシとスループットが大きく改善されています。"
+    },
     {
       "number": 58332,
       "title": "Revert \"Remove migrations filter from the schema dump\" {#pr-58332}",
@@ -379,78 +451,6 @@
       "author": "kamipo",
       "authorUrl": "https://github.com/kamipo",
       "summary": "1. 概要 (1-2文で)  \n`QueryIntent#run_query!` が全クエリで `::RangeError` を握りつぶしていた問題を修正し、SELECT では従来どおり「範囲外 WHERE → 空結果」を維持しつつ、INSERT/UPDATE/DELETE などの書き込みクエリでは `RangeError` / `ActiveModel::RangeError` が正しく表に出るようにした PR です。これにより、本来シリアライズ時に発生すべき範囲外エラーが隠蔽されることなく、意図どおり例外として扱えるようになります。"
-    },
-    {
-      "number": 58255,
-      "title": "Deprecate `insert_returning` option and `use_insert_returning?` {#pr-58255}",
-      "url": "https://github.com/rails/rails/pull/58255",
-      "mergedAt": "2026-07-27T00:00:00.000Z",
-      "author": "kamipo",
-      "authorUrl": "https://github.com/kamipo",
-      "summary": "1. 概要 (1-2文で)  \nPostgreSQL 用の DB 設定オプション `:insert_returning` と、それを参照する `PostgreSQLAdapter#use_insert_returning?` が「非推奨」としてマークされました。今後は RETURNING の有無は `supports_insert_returning?` / `supports_update_returning?` などのサポート判定に一元化され、`:insert_returning` で挙動をコントロールすることはできなくなっていきます。"
-    },
-    {
-      "number": 58259,
-      "title": "Delegate `ids` back to `pluck` {#pr-58259}",
-      "url": "https://github.com/rails/rails/pull/58259",
-      "mergedAt": "2026-07-27T00:00:00.000Z",
-      "author": "kamipo",
-      "authorUrl": "https://github.com/kamipo",
-      "summary": "1. 概要 (1-2文で)  \n`Relation#ids` の実装を `pluck(primary_key)` ベースに戻し、`ids` と `pluck` の挙動を再び揃えることで、これまで片方だけに入っていたバグ修正の非対称性を解消した PRです。`includes` 利用時の重複 ID 除去だけを特別扱いとして残し、それ以外は `pluck` に処理を委譲するようになりました。"
-    },
-    {
-      "number": 58258,
-      "title": "Remove unused `binds` argument from `update_with_result` {#pr-58258}",
-      "url": "https://github.com/rails/rails/pull/58258",
-      "mergedAt": "2026-07-27T00:00:00.000Z",
-      "author": "kamipo",
-      "authorUrl": "https://github.com/kamipo",
-      "summary": "1. 概要 (1-2文で)  \n`update_with_result` メソッドの引数から、実際には使われていなかった `binds` 引数が削除されました。Arel が自前でバインド値を持つようになった現在の設計に沿って、インターフェイスを整理するリファクタリングです。"
-    },
-    {
-      "number": 58256,
-      "title": "[ci skip] Update Mailgun setup documentation links {#pr-58256}",
-      "url": "https://github.com/rails/rails/pull/58256",
-      "mergedAt": "2026-07-27T00:00:00.000Z",
-      "author": "ajaynomics",
-      "authorUrl": "https://github.com/ajaynomics",
-      "summary": "1. 概要 (1-2文で)  \nMailgun を使った Action Mailbox 連携のドキュメント内リンクが古くなっていたため、Mailgun が公式に案内している `forward()` アクション用ドキュメントへのリンクに更新した PRです。Action Mailbox が依存している `mime` URL サフィックスと `body-mime` ペイロード仕様を説明している正しいページを参照するようになります。"
-    },
-    {
-      "number": 58257,
-      "title": "Require Markdown APIs in new files {#pr-58257}",
-      "url": "https://github.com/rails/rails/pull/58257",
-      "mergedAt": "2026-07-27T00:00:00.000Z",
-      "author": "fxn",
-      "authorUrl": "https://github.com/fxn",
-      "summary": "1. 概要 (1-2文で)  \nRails の API ドキュメントを RDoc から Markdown へ段階的に移行している最中に、新規ファイルへ RDoc 記法が紛れ込むのを防ぐため、CI 上で「新しい Ruby ファイルの API コメントが Markdown かどうか」をチェックする仕組みが追加されました。  \nこれにより、以降追加されるコードは原則として Markdown 形式でドキュメントを書くことが求められます。"
-    },
-    {
-      "number": 58252,
-      "title": "Fix: infinite route reload when after_routes_loaded accesses routes {#pr-58252}",
-      "url": "https://github.com/rails/rails/pull/58252",
-      "mergedAt": "2026-07-26T00:00:00.000Z",
-      "author": "chaadow",
-      "authorUrl": "https://github.com/chaadow",
-      "summary": "1. 概要 (1-2文で)  \nRails のルーティング再読み込み処理において、`after_routes_loaded` フック内でルートセットにアクセスすると無限にルートが再読み込みされてしまう不具合を修正した PR です。`execute_unless_loaded` のクリティカルセクション（ルート定義とフック実行の一連の流れ）全体でロード状態を「loading」に保つように変更しています。"
-    },
-    {
-      "number": 58250,
-      "title": "Fix `number_to_human_size` crashing above a terabyte {#pr-58250}",
-      "url": "https://github.com/rails/rails/pull/58250",
-      "mergedAt": "2026-07-26T00:00:00.000Z",
-      "author": "55728",
-      "authorUrl": "https://github.com/55728",
-      "summary": "1. 概要 (1-2文で)  \n`number_to_human_size` が 1TB を超えるサイズをロケール依存でフォーマットする際、一部ロケールで `TypeError` が発生していた問題を修正し、ペタ/エクサ/ゼタバイトに対しても英語ベースのフォールバックが効くようになりました。これにより、対応する翻訳がないロケールでも `\"1 PB\"`, `\"1 EB\"`, `\"1 ZB\"` などの文字列を返し、例外を出さずに動作します。"
-    },
-    {
-      "number": 58249,
-      "title": "Extract `:table_name` as explicit kwarg in join table helpers {#pr-58249}",
-      "url": "https://github.com/rails/rails/pull/58249",
-      "mergedAt": "2026-07-26T00:00:00.000Z",
-      "author": "kamipo",
-      "authorUrl": "https://github.com/kamipo",
-      "summary": "1. 概要 (1-2文で)  \n`create_join_table`, `build_create_join_table_definition`, `drop_join_table` で `:table_name` を「単なる options の1要素」から「明示的なキーワード引数」に変更し、`options` をその場で破壊的変更していた補助メソッド `find_join_table_name` と `JoinTable` モジュールを削除したリファクタリングです。これにより API が明示的になり、`CommandRecorder` からの不要な `include JoinTable` も除去されています。"
     }
   ]
 }
