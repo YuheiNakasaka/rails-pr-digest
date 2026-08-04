@@ -1,7 +1,52 @@
 {
-  "lastUpdated": "2026-08-03T00:27:20.722Z",
+  "lastUpdated": "2026-08-04T00:26:11.065Z",
   "totalCount": 50,
   "items": [
+    {
+      "number": 58354,
+      "title": "Resolve attribute aliases in belongs_to change tracking {#pr-58354}",
+      "url": "https://github.com/rails/rails/pull/58354",
+      "mergedAt": "2026-08-03T00:00:00.000Z",
+      "author": "55728",
+      "authorUrl": "https://github.com/55728",
+      "summary": "1. 概要 (1-2文で)  \n`belongs_to` の外部キーに `alias_attribute` を定義している場合に、変更検知（Dirty API）がエイリアス名ではなく実カラム名でしか動かず、一部機能が壊れていた問題を修正した PR です。`belongs_to` が Dirty API にアクセスする箇所で、常に「エイリアスを実カラム名に解決してから」参照するように統一されています。"
+    },
+    {
+      "number": 58356,
+      "title": "[ci skip] Fix the table name in the Wishlists guide {#pr-58356}",
+      "url": "https://github.com/rails/rails/pull/58356",
+      "mergedAt": "2026-08-03T00:00:00.000Z",
+      "author": "duffuniverse",
+      "authorUrl": "https://github.com/duffuniverse",
+      "summary": "1. 概要 (1-2文で)  \nRails公式ガイドの「Wishlists」ガイド内で使われているテーブル名の誤記を、正しいテーブル名に修正したドキュメント向けのPRです。コードではなくガイド文書のみの変更で、挙動には影響しません。\n\n2. 変更内容の詳細  \n- 変更ファイル: `guides/source/wishlists.md`  \n- 変更内容は1行のみで、「Wishlists」チュートリアル中に登場するテーブル名を、実際のモデル／マイグレーションで使われるべき正しいテーブル名に合わせる修正です。  \n- タイトルに `[ci skip]` が付いていることからも分かる通り、テストやビルドを走らせる必要のないドキュメントのみの修正です。  \n\n（実際の diff は1行の `+1/-1` で、例えば以下のようなニュアンスの修正が行われています）:\n\n```diff\n- In our migration, we created the table `wishlist`:\n+ In our migration, we created the table `wishlists`:\n```\n\nあるいは:\n\n```diff\n- The products_wishlist table stores...\n+ The products_wishlists table stores...\n```\n\nといった形で、Railsの命名規約（モデル: 単数形 / テーブル: 複数形）に沿ったテーブル名に直されたものと考えられます。\n\n3. 影響範囲・注意点  \n- 影響範囲はRailsガイドの読者のみで、アプリケーションコードやRails本体の挙動には一切影響しません。  \n- ただし、旧バージョンのガイドを参考にしてテーブル名を誤って単数形や不適切な名前で作っていた場合、以下のような不整合が発生している可能性があります:\n  - モデル `Wishlist` とテーブル `wishlist` のような単数形テーブル名の不一致  \n  - 結果として ActiveRecord がテーブルを見つけられず、`ActiveRecord::StatementInvalid` や「relation does not exist」エラーになる  \n- これから「Wishlists」ガイドを参考に実装する場合は、このPR適用後のガイドを参照し、Railsの命名規約に沿ったテーブル名（複数形）で作成するのが安全です。  \n\n4. 参考情報 (あれば)  \n- Railsのモデルとテーブルの命名規約:  \n  - モデル: 単数形・CamelCase（例: `WishlistItem`）  \n  - テーブル: 複数形・snake_case（例: `wishlist_items`）  \n- 関連ガイド:  \n  - Rails Guides – Active Record Basics / Naming Conventions  \n  - Rails Guides – Wishlists（本PRで修正されたガイド）"
+    },
+    {
+      "number": 58353,
+      "title": "Fix Single Table Inheritance doc example for the type column change {#pr-58353}",
+      "url": "https://github.com/rails/rails/pull/58353",
+      "mergedAt": "2026-08-03T00:00:00.000Z",
+      "author": "55728",
+      "authorUrl": "https://github.com/55728",
+      "summary": "1. 概要 (1-2文で)  \nSingle Table Inheritance(STI) のドキュメント中にある `type` カラムの変更例が実際の挙動と食い違っていたため、「空文字列 `\"\"` からの変更」となっていた説明を「`nil` からの変更」に修正した PR です。ドキュメントのみの変更で、挙動・API には一切の変更はありません。"
+    },
+    {
+      "number": 58348,
+      "title": "Restore `alias_attribute` support in associations {#pr-58348}",
+      "url": "https://github.com/rails/rails/pull/58348",
+      "mergedAt": "2026-08-03T00:00:00.000Z",
+      "author": "kamipo",
+      "authorUrl": "https://github.com/kamipo",
+      "summary": "1. 概要 (1-2文で)  \nこのPRは、`belongs_to` などの関連付けで長らく効かなくなっていた `alias_attribute` のサポートを復活させ、外部キーや主キーに定義したエイリアス経由でも関連が正しく読める／書けるように戻す変更です。過去にパフォーマンス目的で導入された `_read_attribute` 経由の「高速パス」を廃止し、再び `read_attribute` / `write_attribute` を使うようにしています。"
+    },
+    {
+      "number": 58347,
+      "title": "Deprecate `write_attribute(:id, value)` writing to the primary key {#pr-58347}",
+      "url": "https://github.com/rails/rails/pull/58347",
+      "mergedAt": "2026-08-03T00:00:00.000Z",
+      "author": "kamipo",
+      "authorUrl": "https://github.com/kamipo",
+      "summary": "1. 概要 (1-2文で)  \n`write_attribute(:id, value)` がカスタム主キー（`@primary_key`）を書き換える挙動を非推奨にし、今後は `:id` というカラムに対する通常の書き込みとして扱うようにする変更です。`read_attribute(:id)` の非推奨・削除 (#49019) に続く「書き込み側」の整合性対応であり、複合主キーの場合も読み取り側と同じ扱いに揃えています。"
+    },
     {
       "number": 58349,
       "title": "Fix test class name collision in Active Storage railties tests {#pr-58349}",
@@ -406,51 +451,6 @@
       "author": "skipkayhil",
       "authorUrl": "https://github.com/skipkayhil",
       "summary": "1. 概要 (1-2文で)  \nRailsの`LoadError`ハンドリングを見直し、「意図した場合のみ `LoadError` を握りつぶす」ようにすることで、予期せぬ例外の隠蔽を防ぐ修正です。`rails/all` のロード処理とテスト用の isolation ヘルパで、捕捉する `LoadError` の範囲をより厳密にしています。"
-    },
-    {
-      "number": 58284,
-      "title": "Bump the minimum supported SQLite version to 3.35.0 {#pr-58284}",
-      "url": "https://github.com/rails/rails/pull/58284",
-      "mergedAt": "2026-07-29T00:00:00.000Z",
-      "author": "kamipo",
-      "authorUrl": "https://github.com/kamipo",
-      "summary": "1. 概要 (1-2文で)  \nRails の SQLite3 アダプタが実質的に依存していた `RETURNING` 句に合わせて、サポートする SQLite の最小バージョンを 3.35.0 に引き上げ、これより古いバージョンでは明示的にエラーを出すようにした PR です。これにより、古い SQLite を使った場合に `record.id` が `nil` になるといった「サイレントな不具合」が、起動時に検出されるようになります。"
-    },
-    {
-      "number": 58283,
-      "title": "Consolidate `returning_column_values` on the abstract adapter {#pr-58283}",
-      "url": "https://github.com/rails/rails/pull/58283",
-      "mergedAt": "2026-07-29T00:00:00.000Z",
-      "author": "kamipo",
-      "authorUrl": "https://github.com/kamipo",
-      "summary": "1. 概要 (1-2文で)  \n`insert` 時に返される主キーなどの値を取得する処理（`returning_column_values`）を、各DBアダプタではなく抽象アダプタ(`AbstractAdapter`)側に集約し、PostgreSQL / SQLite3 / MySQL 側の同一実装を削除したPRです。  \n`supports_insert_returning?` の分岐を共通化しつつ、Trilogy だけが生ドライバ結果を返すという現状の「事実上の契約」を明示した上で、今後のリファクタリングに備える変更になっています。"
-    },
-    {
-      "number": 58277,
-      "title": "Remove unreachable single-version branch from `DefaultSchemaVersionsFormatter` {#pr-58277}",
-      "url": "https://github.com/rails/rails/pull/58277",
-      "mergedAt": "2026-07-28T00:00:00.000Z",
-      "author": "55728",
-      "authorUrl": "https://github.com/55728",
-      "summary": "1. 概要 (1-2文で)  \n`DefaultSchemaVersionsFormatter#format` にあった「単一バージョン用」のフォールバック分岐（実際には到達不能）を削除し、常に配列を前提としたマルチ行 `INSERT ... VALUES` のみを使うようにしたPRです。スキーマダンプの出力内容や公開APIには一切影響せず、内部実装のデッドコード整理になります。"
-    },
-    {
-      "number": 58282,
-      "title": "Add `prefetch_primary_key?` test coverage on PostgreSQL {#pr-58282}",
-      "url": "https://github.com/rails/rails/pull/58282",
-      "mergedAt": "2026-07-28T00:00:00.000Z",
-      "author": "kamipo",
-      "authorUrl": "https://github.com/kamipo",
-      "summary": "1. 概要 (1-2文で)  \nPostgreSQL アダプタに `next_sequence_value` が実装され、`prefetch_primary_key?` を `true` にしたモデルでも、実際の PostgreSQL シーケンスを使って主キーを事前採番できるようになりました。加えて、その挙動を end-to-end で検証するテストが追加され、今後の `insert` / `_insert_record` リファクタリングや oracle-enhanced アダプタとの互換性を確認しやすくなっています。"
-    },
-    {
-      "number": 58244,
-      "title": "Use latest ruby patch version in dockerfile {#pr-58244}",
-      "url": "https://github.com/rails/rails/pull/58244",
-      "mergedAt": "2026-07-28T00:00:00.000Z",
-      "author": "adityapandit17",
-      "authorUrl": "https://github.com/adityapandit17",
-      "summary": "1. 概要 (1-2文で)  \nRails リポジトリの開発用コンテナ（.devcontainer）の Dockerfile で使用している Ruby のパッチバージョンが、最新の 4.0.6 に更新されました。機能追加ではなく、開発環境における Ruby バージョンのメンテナンス更新です。\n\n2. 変更内容の詳細(あればサンプルコードも含めて)  \n- 対象ファイル: `.devcontainer/Dockerfile`  \n- 変更点は 1 行のみで、利用する Ruby イメージのバージョン指定が更新されています。\n\n典型的には以下のような変更が入っています（イメージ例）:\n\n```diff\n-FROM ruby:4.0.5\n+FROM ruby:4.0.6\n```\n\nあるいはタグ付きバリアントを使っている場合も同様です:\n\n```diff\n-FROM ruby:4.0.5-bookworm\n+FROM ruby:4.0.6-bookworm\n```\n\n要するに、開発用コンテナが起動する際に取得される Ruby ベースイメージが「4.0.5 → 4.0.6」に切り替わるだけの変更です。\n\n3. 影響範囲・注意点  \n- 影響範囲  \n  - VS Code Dev Containers や GitHub Codespaces、その他 `.devcontainer/Dockerfile` を利用して Rails を開発している環境に影響します。  \n  - CI などで `.devcontainer/Dockerfile` を直接使っている場合も Ruby 4.0.6 で実行されるようになります。\n\n- 実務的な影響  \n  - Ruby 4.0.6 は 4.0 系のパッチリリースであり、後方互換性を保ちつつ、バグ修正・パフォーマンス改善・セキュリティ修正が含まれている可能性があります。  \n  - パッチレベルの更新のため、通常はアプリケーションコードの変更は不要ですが、以下のようなケースでは注意が必要です:\n    - Ruby 本体の細かい挙動に依存したテスト（時間、GC、警告メッセージなど）  \n    - ネイティブ拡張を含む gem を使用しており、Ruby のパッチ更新でビルドが再実行される場合  \n  - 一度コンテナを再ビルド (`docker compose build` や Dev Container の「Rebuild Container」) すると、新バージョンの Ruby が反映されます。\n\n- 注意点  \n  - ローカルで Ruby 4.0.5 など別バージョンを使っている場合、`.devcontainer` 内では 4.0.6 になるため、微妙な差異で挙動がずれないかを確認しておくと安全です。  \n  - もし `Gemfile` や `.ruby-version` で Ruby バージョンを厳密に固定している場合は、それらの指定と Dockerfile のバージョンが不一致になっていないか確認してください（4.0.6 に合わせるのが望ましいです）。\n\n4. 参考情報 (あれば)  \n- Ruby 4.0 系および 4.0.6 の変更内容・リリースノート（※実際のリンクは Ruby の公式サイト・ニュースを参照）  \n  - Ruby 公式: https://www.ruby-lang.org/  \n  - Ruby リリースノート: https://www.ruby-lang.org/en/news/  \n\nこの PR 自体はごく小さい変更ですが、「公式リポジトリが想定している Ruby バージョン」が 4.0.6 に更新された、という指標にもなります。"
     }
   ]
 }
