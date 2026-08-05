@@ -1,7 +1,88 @@
 {
-  "lastUpdated": "2026-08-04T00:26:11.065Z",
+  "lastUpdated": "2026-08-05T00:28:39.239Z",
   "totalCount": 50,
   "items": [
+    {
+      "number": 58375,
+      "title": "Add `NUL` (`\\0`) to the list of unsafe characters for storage {#pr-58375}",
+      "url": "https://github.com/rails/rails/pull/58375",
+      "mergedAt": "2026-08-04T00:00:00.000Z",
+      "author": "rosa",
+      "authorUrl": "https://github.com/rosa",
+      "summary": "1. 概要 (1-2文で)  \nActive Storage のファイル名サニタイズ処理において、NUL 文字 (`\\0`) を「危険な文字」として明示的に除去するようにした変更です。  \nこれにより、ユーザーアップロード由来のファイル名に NUL バイトが含まれている場合でも、`ArgumentError: string contains null byte` などの例外が発生しにくくなります。"
+    },
+    {
+      "number": 58363,
+      "title": "Make Proc layouts shareable {#pr-58363}",
+      "url": "https://github.com/rails/rails/pull/58363",
+      "mergedAt": "2026-08-04T00:00:00.000Z",
+      "author": "etiennebarrie",
+      "authorUrl": "https://github.com/etiennebarrie",
+      "summary": "1. 概要 (1-2文で)  \nRails のレイアウトとして利用される `Proc` オブジェクトを、Ractor 対応のために「shareable（共有可能）」として扱うようにした変更です。これにより、特に turbo-rails が提供する Proc ベースのレイアウト定義などで、Ractor 実行時の問題を早期に検出しやすくなります。"
+    },
+    {
+      "number": 58362,
+      "title": "Freeze ActionView::Template::Handlers::ERB.escape_ignore_list {#pr-58362}",
+      "url": "https://github.com/rails/rails/pull/58362",
+      "mergedAt": "2026-08-04T00:00:00.000Z",
+      "author": "Edouard-chin",
+      "authorUrl": "https://github.com/Edouard-chin",
+      "summary": "1. 概要 (1-2文で)  \n`ActionView::Template::Handlers::ERB.escape_ignore_list` をアプリ起動時に freeze し、Ractor 内からも安全に参照できるようにした PR です。これにより、マルチ Ractor 環境での ActionView/ERB の設定利用がしやすくなります。"
+    },
+    {
+      "number": 58368,
+      "title": "Use `ActiveRecord::Key` to unify single / composite FK handling in `BelongsToAssociation` {#pr-58368}",
+      "url": "https://github.com/rails/rails/pull/58368",
+      "mergedAt": "2026-08-04T00:00:00.000Z",
+      "author": "kamipo",
+      "authorUrl": "https://github.com/kamipo",
+      "summary": "1. 概要 (1-2文で)  \n`belongs_to` 関連の内部実装で、単一外部キーと複合外部キーの扱いを `ActiveRecord::Key` に統一し、`is_a?(Array)` や `Array(...)` などの分岐を排除してコードを簡潔・一貫化した変更です。これにより、`BelongsToAssociation`（および多態関連）で複合キーを扱うための基盤が整理され、保守性と読みやすさが向上しています。"
+    },
+    {
+      "number": 57994,
+      "title": "Make Mime types ractor-shareable {#pr-57994}",
+      "url": "https://github.com/rails/rails/pull/57994",
+      "mergedAt": "2026-08-04T00:00:00.000Z",
+      "author": "etiennebarrie",
+      "authorUrl": "https://github.com/etiennebarrie",
+      "summary": "1. 概要 (1-2文で)  \nMime::Type のレジストリと関連インデックスを「アプリケーションの eager load 完了後に凍結（freeze）」し、Ractor で共有可能な状態にする変更です。これに伴い、eager load 後に MIME type を登録/解除することは非推奨となり、既存の Mime 定数プロキシや ActionView::Base.default_formats が新しいレジストリを正しく参照するように調整されています。"
+    },
+    {
+      "number": 58326,
+      "title": "Define Tags#field_type when the class is loaded {#pr-58326}",
+      "url": "https://github.com/rails/rails/pull/58326",
+      "mergedAt": "2026-08-04T00:00:00.000Z",
+      "author": "etiennebarrie",
+      "authorUrl": "https://github.com/etiennebarrie",
+      "summary": "1. 概要 (1-2文で)  \n`ActionView::Helpers::Tags` 系の `field_type` が「最初に使われたときに初期化される」実装だったため、メイン Ractor 以外で最初のフォームフィールドを描画すると例外になる問題を修正した PRです。  \nクラスロード時に `field_type` を確定させ、Ractor 間で共有可能なように `freeze` することで、Ractor 環境でも安全にフォームヘルパを利用できるようにしています。"
+    },
+    {
+      "number": 58357,
+      "title": "Define DateTimeSelector datetime readers with shareable lambdas {#pr-58357}",
+      "url": "https://github.com/rails/rails/pull/58357",
+      "mergedAt": "2026-08-04T00:00:00.000Z",
+      "author": "etiennebarrie",
+      "authorUrl": "https://github.com/etiennebarrie",
+      "summary": "1. 概要 (1-2文で)  \n`ActionView::Helpers::DateHelper::DateTimeSelector` が Ractor 内からも安全に使えるように、`year/month/day/hour/min/sec` のリーダーメソッド定義方法を「Ractor 共有可能な lambda」を使った形に変更した PR です。あわせて、この挙動を検証する Ractor 対応テストが追加されています。"
+    },
+    {
+      "number": 58352,
+      "title": "Allow to access the type of an attribute inside a ractor {#pr-58352}",
+      "url": "https://github.com/rails/rails/pull/58352",
+      "mergedAt": "2026-08-04T00:00:00.000Z",
+      "author": "Edouard-chin",
+      "authorUrl": "https://github.com/Edouard-chin",
+      "summary": "1. 概要 (1-2文で)  \nActive Model / Active Record の属性タイプ情報（`attribute_types`）を Ractor 内から安全に参照できるようにするため、属性タイプのオブジェクトグラフを凍結（deep freeze）し、暗号化関連タイプのメモ化ロジックを Ractor セーフな形に修正した PR です。これにより、Ractor 内で属性の型を取得しても分離エラーが発生しないようになります。"
+    },
+    {
+      "number": 58364,
+      "title": "Honor composite / aliased FKs in belongs_to counter cache, autosave, and has_many :through nullify {#pr-58364}",
+      "url": "https://github.com/rails/rails/pull/58364",
+      "mergedAt": "2026-08-04T00:00:00.000Z",
+      "author": "kamipo",
+      "authorUrl": "https://github.com/kamipo",
+      "summary": "1. 概要 (1-2文で)  \n`belongs_to` におけるカウンタキャッシュ、`autosave`、`has_many :through` の `:nullify` 削除処理で、**複合外部キー(Array)** と **エイリアス付き外部キー(仮想属性/別名カラム)** が正しく扱われるように修正した PR です。これにより、これらの機能が複合 FK / エイリアス FK 環境でもサイレントに無視されたり、間違った SQL を生成したりしなくなります。"
+    },
     {
       "number": 58354,
       "title": "Resolve attribute aliases in belongs_to change tracking {#pr-58354}",
@@ -370,87 +451,6 @@
       "author": "55728",
       "authorUrl": "https://github.com/55728",
       "summary": "1. 概要 (1-2文で)  \nこのPRは、Action Textでリッチテキストをプレーンテキストに変換する際、`<h1>` だけでなく `<h2>`〜`<h6>` の見出しも前後に空行を挟んでブロック要素として扱うように修正したものです。これにより、見出しと本文がくっついて「Titlebody」のようになってしまう問題が解消されます。"
-    },
-    {
-      "number": 58287,
-      "title": "Fix Range#sum with a falsey initial value {#pr-58287}",
-      "url": "https://github.com/rails/rails/pull/58287",
-      "mergedAt": "2026-07-29T00:00:00.000Z",
-      "author": "Saidbek",
-      "authorUrl": "https://github.com/Saidbek",
-      "summary": "1. 概要 (1-2文で)  \nRange に対する `sum` メソッドで、初期値に `nil` や `false` のような “falsy” 値を渡したときの挙動が、Array/Enumerable と一致するように修正された PRです。これにより、`Range#sum` が初期値を 0 とみなして勝手に数値加算してしまう不整合な挙動が解消されています。"
-    },
-    {
-      "number": 58241,
-      "title": "Normalize mixed-case percent escapes in paths {#pr-58241}",
-      "url": "https://github.com/rails/rails/pull/58241",
-      "mergedAt": "2026-07-29T00:00:00.000Z",
-      "author": "afurm",
-      "authorUrl": "https://github.com/afurm",
-      "summary": "1. 概要 (1-2文で)  \nRails のルーターが扱うパスの `%` エンコードを正規化する際、「%2f」「%2F」のように大小文字が混在した 16 進表記も含めて、大文字に統一するように修正した PR です。これにより、パスのパーセントエンコードが一貫して正規化され、テストでその挙動が担保されます。"
-    },
-    {
-      "number": 58280,
-      "title": "Resolve the implicit template with a single lookup {#pr-58280}",
-      "url": "https://github.com/rails/rails/pull/58280",
-      "mergedAt": "2026-07-29T00:00:00.000Z",
-      "author": "etiennebarrie",
-      "authorUrl": "https://github.com/etiennebarrie",
-      "summary": "1. 概要 (1-2文で)  \n`default_render` が暗黙テンプレートを探す際のテンプレート探索を「1回の lookup だけ」に統一し、同じテンプレートを二重に探索しないよう最適化するとともに、variants 周りで 406 が誤って返されうる不整合を解消する変更です。"
-    },
-    {
-      "number": 58279,
-      "title": "Resolve the single best template without sorting the whole set {#pr-58279}",
-      "url": "https://github.com/rails/rails/pull/58279",
-      "mergedAt": "2026-07-29T00:00:00.000Z",
-      "author": "etiennebarrie",
-      "authorUrl": "https://github.com/etiennebarrie",
-      "summary": "1. 概要 (1-2文で)  \nテンプレート解決（Resolver#find）のアルゴリズムを見直し、「候補を全部集めてソート」せずに1パスで最適なテンプレートを選ぶようにしたパフォーマンス改善のPRです。`find`/`exists?` は最初に見つかった最適テンプレートで即終了しつつ、`find_all`（ActionMailerのmultipartなど）は従来どおりマッチした全テンプレートを返す挙動を維持しています。"
-    },
-    {
-      "number": 58237,
-      "title": "Fix Encoding::CompatibilityError in template digests. {#pr-58237}",
-      "url": "https://github.com/rails/rails/pull/58237",
-      "mergedAt": "2026-07-29T00:00:00.000Z",
-      "author": "Edilbek",
-      "authorUrl": "https://github.com/Edilbek",
-      "summary": "1. 概要 (1-2文で)  \nRails のテンプレート依存関係トラッキング（`DependencyTracker::RubyTracker`）で、ファイルベースの Haml など非 ASCII テキストを含むテンプレートのダイジェスト計算時に発生していた `Encoding::CompatibilityError` を解消する修正です。`RubyTracker` がテンプレートを処理する際に、通常のコンパイル時と同様にエンコーディングを揃えてからハンドラに渡すように変更されています。"
-    },
-    {
-      "number": 58278,
-      "title": "Fix LazyRouteSet thrashing when url_helpers are included into Object {#pr-58278}",
-      "url": "https://github.com/rails/rails/pull/58278",
-      "mergedAt": "2026-07-29T00:00:00.000Z",
-      "author": "chaadow",
-      "authorUrl": "https://github.com/chaadow",
-      "summary": "1. 概要 (1-2文で)  \nRails の LazyRouteSet が、`url_helpers` を `Object` に include した場合にほぼ全てのメソッド問い合わせでルート再読み込みを試みてしまう問題を修正し、`*_path` / `*_url` だけを遅延ロードのトリガーに限定する変更です。これにより、大規模アプリでコンソールやスクリプト実行時に見える「ハング」のような挙動を防ぎます。"
-    },
-    {
-      "number": 57854,
-      "title": "Make Controller middlewares ractor safe {#pr-57854}",
-      "url": "https://github.com/rails/rails/pull/57854",
-      "mergedAt": "2026-07-29T00:00:00.000Z",
-      "author": "Edouard-chin",
-      "authorUrl": "https://github.com/Edouard-chin",
-      "summary": "1. 概要 (1-2文で)  \nRails のコントローラ専用ミドルウェアスタック（Rack ミドルウェアではない）を Ractor セーフにするため、コピーオンライト(Copy-on-Write)方式で共有可能オブジェクトとして扱えるようにする変更です。`use` 経由だけでなく、スタックへの直接アクセスにも対応するためのプロキシ層が導入されています。"
-    },
-    {
-      "number": 58285,
-      "title": "Simplify `insert` callers to only pass what they need {#pr-58285}",
-      "url": "https://github.com/rails/rails/pull/58285",
-      "mergedAt": "2026-07-29T00:00:00.000Z",
-      "author": "kamipo",
-      "authorUrl": "https://github.com/kamipo",
-      "summary": "1. 概要 (1-2文で)  \n`connection.insert` の呼び出し側から不要な位置引数（`pk`, `id_value`, `sequence_name`）を削除し、`insert`/`sql_for_insert` 周りのインターフェイスと挙動を簡素化・最適化した変更です。あわせて、`schema_migration.create_version` など一部の API の挙動も見直し、無駄な DB ラウンドトリップやコメントを削減しています。"
-    },
-    {
-      "number": 57981,
-      "title": "Only swallow the LoadError we intended to {#pr-57981}",
-      "url": "https://github.com/rails/rails/pull/57981",
-      "mergedAt": "2026-07-29T00:00:00.000Z",
-      "author": "skipkayhil",
-      "authorUrl": "https://github.com/skipkayhil",
-      "summary": "1. 概要 (1-2文で)  \nRailsの`LoadError`ハンドリングを見直し、「意図した場合のみ `LoadError` を握りつぶす」ようにすることで、予期せぬ例外の隠蔽を防ぐ修正です。`rails/all` のロード処理とテスト用の isolation ヘルパで、捕捉する `LoadError` の範囲をより厳密にしています。"
     }
   ]
 }
