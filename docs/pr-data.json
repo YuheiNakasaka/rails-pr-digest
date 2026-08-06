@@ -1,7 +1,79 @@
 {
-  "lastUpdated": "2026-08-05T00:28:39.239Z",
+  "lastUpdated": "2026-08-06T00:23:38.388Z",
   "totalCount": 50,
   "items": [
+    {
+      "number": 58135,
+      "title": "Add query predicate hooks for Active Record types {#pr-58135}",
+      "url": "https://github.com/rails/rails/pull/58135",
+      "mergedAt": "2026-08-05T00:00:00.000Z",
+      "author": "jsaubry",
+      "authorUrl": "https://github.com/jsaubry",
+      "summary": "1. 概要 (1–2文で)  \nActive Record の型ごとに、`where` 句などのクエリ述語の「左辺（カラム側）」と「右辺（値側）」をカスタマイズできるフックが追加されました。これにより、UUID など「書き込み時の表現」と「検索時の表現」が異なる型でも、型クラス側で SQL 生成を制御しやすくなります。"
+    },
+    {
+      "number": 58383,
+      "title": "Delete leaked Cpk::Author in the autosave teardown {#pr-58383}",
+      "url": "https://github.com/rails/rails/pull/58383",
+      "mergedAt": "2026-08-05T00:00:00.000Z",
+      "author": "etiennebarrie",
+      "authorUrl": "https://github.com/etiennebarrie",
+      "summary": "1. 概要 (1-2文で)  \nこのPRは、特定のテスト(`TestDestroyAsPartOfAutosaveAssociation`)がトランザクションなしで実行されることにより、DB上に不要な `Cpk::Author` レコードが残り、その後に実行される別テスト(`WhereChainTest`)を不安定化させていた問題を修正するものです。autosave のテストの teardown で漏れた `Cpk::Author` を削除する1行を追加し、テスト間のデータリークを防いでいます。"
+    },
+    {
+      "number": 58281,
+      "title": "Move the LookupContext::DetailsKey caches to Ractor-local storage {#pr-58281}",
+      "url": "https://github.com/rails/rails/pull/58281",
+      "mergedAt": "2026-08-05T00:00:00.000Z",
+      "author": "etiennebarrie",
+      "authorUrl": "https://github.com/etiennebarrie",
+      "summary": "1. 概要 (1-2文で)  \nLookupContext::DetailsKey 周りのキャッシュを Ractor 間で共有しないようにし、Ractor ごとに独立したキャッシュを持つ形に変更することで、メイン Ractor 以外からのテンプレート lookup を可能にした PRです。あわせて、Ractor ローカルなストレージを簡単に扱うための `ActiveSupport::Ractors.store_if_absent` が追加され、`concurrent-ruby` のバージョン要件も上がっています。"
+    },
+    {
+      "number": 58373,
+      "title": "Honour `prepared_statements` on rails main {#pr-58373}",
+      "url": "https://github.com/rails/rails/pull/58373",
+      "mergedAt": "2026-08-05T00:00:00.000Z",
+      "author": "camallen",
+      "authorUrl": "https://github.com/camallen",
+      "summary": "1. 概要 (1-2文で)  \nRails の ActiveRecord において、`prepared_statements` 設定や `unprepared_statement` ブロックを無視して常にプリペアドステートメントが使われてしまう回 regress を修正し、`prepared_statements` 設定が正しく尊重されるようにした PR です。PostgreSQL かつトランザクションプーリングプロキシ（例: PgBouncer transaction mode）配下で名前付き PREPARE が壊れる問題を解消します。"
+    },
+    {
+      "number": 58360,
+      "title": "Use local fixtures {#pr-58360}",
+      "url": "https://github.com/rails/rails/pull/58360",
+      "mergedAt": "2026-08-05T00:00:00.000Z",
+      "author": "voxik",
+      "authorUrl": "https://github.com/voxik",
+      "summary": "1. 概要 (1-2文で)  \nこのPRは、Railties の Active Storage 関連テストで「グローバルな fixtures ではなく、そのテスト自身が持つローカル fixtures を使う」ように変更したものです。これにより、Railties をフレームワークの他の部分から切り離して単体でテストしやすくなっています。"
+    },
+    {
+      "number": 58045,
+      "title": "Serialize continuation step cursors through Active Job arguments {#pr-58045}",
+      "url": "https://github.com/rails/rails/pull/58045",
+      "mergedAt": "2026-08-05T00:00:00.000Z",
+      "author": "55728",
+      "authorUrl": "https://github.com/55728",
+      "summary": "1. 概要 (1-2文で)  \nActive Job の「継続 (Continuation)」機能で使うステップカーソルを、単なる JSON ではなく `ActiveJob::Arguments` を経由してシリアライズ/デシリアライズするように変更し、`Date`, `Time`, `GlobalID` などのカーソルの型が中断→再開後も維持されるようになりました。これにより、再開後にカーソルが `String` 化してメソッド呼び出しに失敗する問題が解消されます。"
+    },
+    {
+      "number": 58372,
+      "title": "Pluck from the target when the owner is a new record {#pr-58372}",
+      "url": "https://github.com/rails/rails/pull/58372",
+      "mergedAt": "2026-08-05T00:00:00.000Z",
+      "author": "djmb",
+      "authorUrl": "https://github.com/djmb",
+      "summary": "1. 概要 (1-2文で)  \n`Relation#ids` が `pluck` 委譲に変わったことで、新規レコードに紐づく未保存の関連に対する `ids` が空配列になってしまった問題を修正し、`ids` / `pluck` ともに関連の「target」（メモリ上のオブジェクト）から値を取得するようにした変更です。  \nこれにより、新規レコードに関連づけたオブジェクトに対しても、`ids` や `pluck` が直感的な結果を返すようになります。"
+    },
+    {
+      "number": 58374,
+      "title": "Ractor safe Active Record primary key {#pr-58374}",
+      "url": "https://github.com/rails/rails/pull/58374",
+      "mergedAt": "2026-08-05T00:00:00.000Z",
+      "author": "Edouard-chin",
+      "authorUrl": "https://github.com/Edouard-chin",
+      "summary": "1. 概要 (1-2文で)  \nActive Record の「主キーオブジェクト」を Ractor 内でも安全に扱えるようにするため、主キーを表すオブジェクトを freeze する変更が入りました。単一 PK・複合 PK・PK なしのすべてのケースで、計算済みの主キーが不変オブジェクトとして扱われるようになります。"
+    },
     {
       "number": 58375,
       "title": "Add `NUL` (`\\0`) to the list of unsafe characters for storage {#pr-58375}",
@@ -379,78 +451,6 @@
       "author": "Edouard-chin",
       "authorUrl": "https://github.com/Edouard-chin",
       "summary": "1. 概要 (1-2文で)  \n`ActiveModel#model_name` が Ractor 内から安全に利用できるようにするため、`model_name` が返すオブジェクトを「凍結(freeze)」しつつ、内部で使う値を事前に計算・設定する変更です。これにより Ractor 環境でも `model_name.human` などのメソッド呼び出しが行えるようになります。"
-    },
-    {
-      "number": 58304,
-      "title": "Fix releaser_test/rubocop {#pr-58304}",
-      "url": "https://github.com/rails/rails/pull/58304",
-      "mergedAt": "2026-07-29T00:00:00.000Z",
-      "author": "skipkayhil",
-      "authorUrl": "https://github.com/skipkayhil",
-      "summary": "1. 概要 (1-2文で)  \nRails のリリース用テスト (`tools/releaser/test/releaser_test.rb`) において、環境変数 `GITHUB_ACTIONS` の扱いを修正し、CI（GitHub Actions）上でもローカル同様に安定してテストできるようにした PR です。Active Support テストにある `with_env` 実装をコピーして利用することで、環境変数を書き換えるテストの挙動を正しく制御しています。"
-    },
-    {
-      "number": 58226,
-      "title": "Deprecate `TransactionState` predicates and fix stale ivar in `Persistence::ClassMethods#inherited` {#pr-58226}",
-      "url": "https://github.com/rails/rails/pull/58226",
-      "mergedAt": "2026-07-29T00:00:00.000Z",
-      "author": "55728",
-      "authorUrl": "https://github.com/55728",
-      "summary": "1. 概要 (1-2文で)  \nActive Record の `TransactionState` が持つ一部の述語メソッドと `nullify!` が非推奨（deprecate）になり、`Persistence::ClassMethods#inherited` で使っていたクエリ制約用インスタンス変数のリセット先が正しい名前に修正されました。いずれも挙動変更は最小限で、ドキュメント公開された API の整理と内部実装の整合性をとるための変更です。"
-    },
-    {
-      "number": 58295,
-      "title": "Return a Float from `Time#-` with a `DateTime` {#pr-58295}",
-      "url": "https://github.com/rails/rails/pull/58295",
-      "mergedAt": "2026-07-29T00:00:00.000Z",
-      "author": "55728",
-      "authorUrl": "https://github.com/55728",
-      "summary": "1. 概要 (1-2文で)  \n`Time#-` に `DateTime` を渡したときの戻り値を `Rational` ではなく `Float` に統一する変更です。これにより、`Time#-(Time)` や `ActiveSupport::TimeWithZone#-(DateTime)` と同じく秒数の差分が `Float` で返り、扱いやすくなります。"
-    },
-    {
-      "number": 58067,
-      "title": "Make ActiveSupport::TimeZone shareable {#pr-58067}",
-      "url": "https://github.com/rails/rails/pull/58067",
-      "mergedAt": "2026-07-29T00:00:00.000Z",
-      "author": "Edouard-chin",
-      "authorUrl": "https://github.com/Edouard-chin",
-      "summary": "1. 概要 (1-2文で)  \n`ActiveSupport::TimeZone` オブジェクトを生成時に freeze することで、Ractor 間で共有可能（Ractor-shareable）にし、`TimeWithZone` 経由でタイムゾーンにアクセスした際の Ractor Isolation Error を解消する変更です。クラス設計上ミュータブルである必要がないことを前提に、安全に共有できるようにしています。"
-    },
-    {
-      "number": 58291,
-      "title": "Expand `insert_returning` deprecation note with migration path {#pr-58291}",
-      "url": "https://github.com/rails/rails/pull/58291",
-      "mergedAt": "2026-07-29T00:00:00.000Z",
-      "author": "kamipo",
-      "authorUrl": "https://github.com/kamipo",
-      "summary": "1. 概要 (1-2文で)  \nこのPRは、`insert_returning: false` オプションに関する非推奨（deprecation）メッセージを拡張し、代替手段として `prefetch_primary_key?` を利用する移行パスを明示的に案内するものです。コード変更はなく、`CHANGELOG` 上のドキュメント更新のみです。"
-    },
-    {
-      "number": 58290,
-      "title": "Support a single column name for `#insert`'s `returning:` {#pr-58290}",
-      "url": "https://github.com/rails/rails/pull/58290",
-      "mergedAt": "2026-07-29T00:00:00.000Z",
-      "author": "kamipo",
-      "authorUrl": "https://github.com/kamipo",
-      "summary": "1. 概要 (1-2文で)  \n`insert` メソッドの `returning:` オプションで「単一カラム名」を直接指定できるようにし、その場合は配列ではなく「そのカラムの値」を直接返すようにした変更です。これにより、将来廃止予定の `pk` 位置引数を内部的に `returning:` へ移行できるようにしつつ、互換性を保っています。"
-    },
-    {
-      "number": 58294,
-      "title": "Allow to use `ActiveModel#to_partial_path` in a Ractor {#pr-58294}",
-      "url": "https://github.com/rails/rails/pull/58294",
-      "mergedAt": "2026-07-29T00:00:00.000Z",
-      "author": "Edouard-chin",
-      "authorUrl": "https://github.com/Edouard-chin",
-      "summary": "1. 概要 (1-2文で)  \n`ActiveModel#to_partial_path` が Ractor 内から安全に呼び出せるように、返されるパス文字列の生成方法（およびメモ化の仕方）が Ractor フレンドリーになるよう修正した PRです。メモ化自体の Ractor 対応は別PRで行う前提ですが、本PRで少なくとも Ractor 内での `to_partial_path` 呼び出しが可能になります。"
-    },
-    {
-      "number": 57934,
-      "title": "Separate `<h2>` through `<h6>` from neighbors in plain text conversion {#pr-57934}",
-      "url": "https://github.com/rails/rails/pull/57934",
-      "mergedAt": "2026-07-29T00:00:00.000Z",
-      "author": "55728",
-      "authorUrl": "https://github.com/55728",
-      "summary": "1. 概要 (1-2文で)  \nこのPRは、Action Textでリッチテキストをプレーンテキストに変換する際、`<h1>` だけでなく `<h2>`〜`<h6>` の見出しも前後に空行を挟んでブロック要素として扱うように修正したものです。これにより、見出しと本文がくっついて「Titlebody」のようになってしまう問題が解消されます。"
     }
   ]
 }
