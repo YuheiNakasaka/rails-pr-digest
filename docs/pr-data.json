@@ -1,7 +1,106 @@
 {
-  "lastUpdated": "2026-08-06T00:23:38.388Z",
+  "lastUpdated": "2026-08-07T01:13:01.592Z",
   "totalCount": 50,
   "items": [
+    {
+      "number": 58395,
+      "title": "Extract duplicated bind value coercion in QueryMethods {#pr-58395}",
+      "url": "https://github.com/rails/rails/pull/58395",
+      "mergedAt": "2026-08-06T00:00:00.000Z",
+      "author": "seuros",
+      "authorUrl": "https://github.com/seuros",
+      "summary": "1. 概要 (1-2文で)  \n`ActiveRecord::Relation::QueryMethods` 内で、SQLリテラル用のバインド値変換ロジックが重複していた部分を共通メソッド化して整理したPRです。挙動・機能は変わらず、内部実装のリファクタリングのみです。"
+    },
+    {
+      "number": 58382,
+      "title": "Remove collector methods of unregistered Mime types {#pr-58382}",
+      "url": "https://github.com/rails/rails/pull/58382",
+      "mergedAt": "2026-08-06T00:00:00.000Z",
+      "author": "etiennebarrie",
+      "authorUrl": "https://github.com/etiennebarrie",
+      "summary": "1. 概要 (1-2文で)  \n`Mime::Type.unregister` で MIME タイプを削除した後にも、そのフォーマット向けの Collector メソッドが残り続けていた問題を修正し、適切にメソッドを削除してエラーメッセージを分かりやすくしました。これにより、未登録の MIME タイプに対するフォーマットメソッド呼び出し時に、従来の紛らわしい `InvalidMimeType` ではなく、明確な `NoMethodError` が発生するようになります。"
+    },
+    {
+      "number": 58391,
+      "title": "Define shareable compiled_method_container readers {#pr-58391}",
+      "url": "https://github.com/rails/rails/pull/58391",
+      "mergedAt": "2026-08-06T00:00:00.000Z",
+      "author": "etiennebarrie",
+      "authorUrl": "https://github.com/etiennebarrie",
+      "summary": "1. 概要 (1-2文で)  \nRails のビューコンパイル周りで、`compiled_method_container` のリーダメソッド定義を「Ractor で共有可能 (shareable)」な形に修正した PR です。テンプレートのコンパイル/レンダリングが Ractor 環境で動作するように、lambda によるクラスキャプチャのタイミングと方法を見直しています。"
+    },
+    {
+      "number": 58390,
+      "title": "Make template lookup ractor-safe {#pr-58390}",
+      "url": "https://github.com/rails/rails/pull/58390",
+      "mergedAt": "2026-08-06T00:00:00.000Z",
+      "author": "etiennebarrie",
+      "authorUrl": "https://github.com/etiennebarrie",
+      "summary": "1. 概要 (1-2文で)  \nこのPRは、テンプレートの lookup（`LookupContext`）と digest 計算（`Digestor`）周りを Ractor セーフにするための変更です。これによりメイン Ractor 以外からでも `LookupContext` の構築やテンプレート digest の計算が安全に行えるようになります。"
+    },
+    {
+      "number": 58387,
+      "title": "Reduce allocations during attribute definition {#pr-58387}",
+      "url": "https://github.com/rails/rails/pull/58387",
+      "mergedAt": "2026-08-06T00:00:00.000Z",
+      "author": "hmcguire-shopify",
+      "authorUrl": "https://github.com/hmcguire-shopify",
+      "summary": "1. 概要 (1-2文で)  \nActiveModel の attribute メソッド定義時に使われる `\"define_method_\"` 文字列の生成回数を減らし、オブジェクト割り当て（アロケーション）を削減するパフォーマンス改善です。Pattern ごとに 1 回だけ文字列を作るようにし、大量の属性を持つモデルでメモリ負荷を軽減します。"
+    },
+    {
+      "number": 58386,
+      "title": "Make Relation::FromClause.empty Ractor safe {#pr-58386}",
+      "url": "https://github.com/rails/rails/pull/58386",
+      "mergedAt": "2026-08-06T00:00:00.000Z",
+      "author": "hmcguire-shopify",
+      "authorUrl": "https://github.com/hmcguire-shopify",
+      "summary": "1. 概要 (1-2文で)  \nActive Record の `Relation::FromClause.empty` の実装を、Ruby 3 の Ractor（並行実行環境）でも安全に共有できるように変更した PR です。`WhereClause` に対して行われたのと同種の「イミュータブルで Ractor セーフな空オブジェクト」の扱いを `FromClause` にも拡張しています。"
+    },
+    {
+      "number": 58206,
+      "title": "Generate an omakase-compliant config/ci.rb when steps are skipped {#pr-58206}",
+      "url": "https://github.com/rails/rails/pull/58206",
+      "mergedAt": "2026-08-06T00:00:00.000Z",
+      "author": "55728",
+      "authorUrl": "https://github.com/55728",
+      "summary": "1. 概要 (1-2文で)  \n`bin/rails new` 実行時に各種 `--skip-*` オプションを使った場合でも、新規アプリが自前の `bin/rubocop` / `bin/ci`（Style: Ruby）チェックに確実に通るよう、`config/ci.rb` テンプレートの空行出力ロジックが調整されました。  \nとくに `--skip-test` 時に `Layout/EmptyLinesAroundBlockBody` で RuboCop が落ちていた問題を解消します。"
+    },
+    {
+      "number": 58392,
+      "title": "Move duplicated execute_batch up to MySQL::DatabaseStatements {#pr-58392}",
+      "url": "https://github.com/rails/rails/pull/58392",
+      "mergedAt": "2026-08-06T00:00:00.000Z",
+      "author": "seuros",
+      "authorUrl": "https://github.com/seuros",
+      "summary": "1. 概要 (1-2文で)  \nMySQL 系アダプタ（mysql2 / trilogy）でそれぞれ重複実装されていた `execute_batch` を、共通の `ActiveRecord::ConnectionAdapters::MySQL::DatabaseStatements` に集約したリファクタリングです。挙動の変更はほぼなく、コードの重複排除とメンテナンス性向上が主目的です。"
+    },
+    {
+      "number": 58187,
+      "title": "Inspect nested attribute `id` in `RecordNotFound` message {#pr-58187}",
+      "url": "https://github.com/rails/rails/pull/58187",
+      "mergedAt": "2026-08-06T00:00:00.000Z",
+      "author": "flavorjones",
+      "authorUrl": "https://github.com/flavorjones",
+      "summary": "1. 概要 (1-2文で)  \n`accepts_nested_attributes_for` 経由で渡されたネスト属性の `id` が見つからない場合に発生する `ActiveRecord::RecordNotFound` のエラーメッセージ内で、ユーザー入力由来の `id` をそのまま埋め込まず `.inspect` するように変更した PR です。これにより、ANSIエスケープシーケンスなどを含む悪意ある `id` によるログ偽装・視認性の低下リスクを低減します。"
+    },
+    {
+      "number": 58209,
+      "title": "Flatten block content inside links in Action Text markdown conversion {#pr-58209}",
+      "url": "https://github.com/rails/rails/pull/58209",
+      "mergedAt": "2026-08-06T00:00:00.000Z",
+      "author": "flavorjones",
+      "authorUrl": "https://github.com/flavorjones",
+      "summary": "1. 概要 (1-2文で)  \nAction Text の `Content#to_markdown` が、リンク (`<a>`) 内にブロック要素が入っている場合に不正な CommonMark を出力していた問題を修正する PRです。リンク内のブロック要素を Markdown の制約に合わせて「1行のインラインテキスト」にフラット化してからリンク記法に包むように変更しています。"
+    },
+    {
+      "number": 58270,
+      "title": "asset_path: strip the query/fragment tail without a second scan {#pr-58270}",
+      "url": "https://github.com/rails/rails/pull/58270",
+      "mergedAt": "2026-08-06T00:00:00.000Z",
+      "author": "nuclearspike",
+      "authorUrl": "https://github.com/nuclearspike",
+      "summary": "1. 概要 (1-2文で)  \n`asset_path` がクエリ文字列・フラグメント（`?` / `#` 以降）を取り除く処理について、正規表現による2回のスキャンと不要な文字列コピーをやめて、1回のスキャン＋スライスだけで処理するよう最適化したPRです。これにより `image_tag` や `javascript_include_tag` などのヘルパ全般で、オブジェクト割り当て削減と数％のパフォーマンス向上が見込まれます。"
+    },
     {
       "number": 58135,
       "title": "Add query predicate hooks for Active Record types {#pr-58135}",
@@ -352,105 +451,6 @@
       "author": "bschrag620",
       "authorUrl": "https://github.com/bschrag620",
       "summary": "1. 概要 (1-2文で)  \nRailsでクエリログタグ（`query_log_tags`）を有効にした際でも、アプリ側の選択で prepared statements を無効化せずに使い続けられるオプションが追加されました。これにより、高カーディナリティなコメントを避けるという従来の安全デフォルトを維持しつつ、必要なアプリケーションは両方を併用できるようになります。"
-    },
-    {
-      "number": 58267,
-      "title": "`activerecord`: make sure tests do not rely on implicit `SELECT` order {#pr-58267}",
-      "url": "https://github.com/rails/rails/pull/58267",
-      "mergedAt": "2026-07-31T00:00:00.000Z",
-      "author": "viralpraxis",
-      "authorUrl": "https://github.com/viralpraxis",
-      "summary": "1. 概要 (1–2文で)  \nこのPRは、Active Record のテストが「暗黙の SELECT 結果順序（MVCC に起因する更新順など）」に依存していた部分を洗い出し、すべて明示的な `ORDER BY` を付けるように修正するものです。これにより、DB 実装や実行タイミングによってテスト結果が変わる flakiness を防ぎ、テストの決定性・再現性を高めています。"
-    },
-    {
-      "number": 58297,
-      "title": "Deprecate positional `pk`, `id_value`, and `sequence_name` for `#insert` {#pr-58297}",
-      "url": "https://github.com/rails/rails/pull/58297",
-      "mergedAt": "2026-07-31T00:00:00.000Z",
-      "author": "kamipo",
-      "authorUrl": "https://github.com/kamipo",
-      "summary": "1. 概要 (1-2文で)  \n`ActiveRecord::ConnectionAdapters#insert` の位置引数として使われていた `pk`, `id_value`, `sequence_name` が非推奨になり、それぞれに対応する新しい使い方（特に `returning:` オプション）への移行が明示されました。これにより、`insert` のインターフェイスが整理され、PostgreSQL の `currval` ベースのフォールバックなども段階的に廃止されます。"
-    },
-    {
-      "number": 58322,
-      "title": "Remove migrations filter from the schema dump {#pr-58322}",
-      "url": "https://github.com/rails/rails/pull/58322",
-      "mergedAt": "2026-07-31T00:00:00.000Z",
-      "author": "fxn",
-      "authorUrl": "https://github.com/fxn",
-      "summary": "1. 概要 (1-2文で)  \nRails の schema dump（`db/schema.rb` など）に含める「適用済みマイグレーションのバージョン一覧」から、「ローカルにファイルが存在するものだけに絞り込む」というフィルタリング処理が削除されました。これにより、マイグレーションファイルが手元に無くても、DB 上で適用済みであればそのバージョンは schema dump に書き出されるようになります。"
-    },
-    {
-      "number": 57948,
-      "title": "Make the Action View dependency tracker registry Ractor-shareable {#pr-57948}",
-      "url": "https://github.com/rails/rails/pull/57948",
-      "mergedAt": "2026-07-31T00:00:00.000Z",
-      "author": "etiennebarrie",
-      "authorUrl": "https://github.com/etiennebarrie",
-      "summary": "1. 概要 (1-2文で)  \nActionView のテンプレート依存関係トラッカー (`ActionView::DependencyTracker`) のレジストリを Ractor で共有可能（ractor-shareable）にするための変更です。`Rails.application.ractorize!` を呼んだアプリケーションに限り、依存関係トラッカーのレジストリを Ractor 間で安全に共有できるようになります。"
-    },
-    {
-      "number": 58312,
-      "title": "Show parameter marker for casted binds in SQL logs and EXPLAIN {#pr-58312}",
-      "url": "https://github.com/rails/rails/pull/58312",
-      "mergedAt": "2026-07-31T00:00:00.000Z",
-      "author": "kamipo",
-      "authorUrl": "https://github.com/kamipo",
-      "summary": "1. 概要 (1-2文で)  \n`[[column, value], ...]` 形式から移行中の「casted binds」（単なる値配列）について、SQLログおよび `EXPLAIN` 出力で `[[nil, value], ...]` と表示されていた問題を、位置パラメータ（`$1`, `$2`, ...）を表示するようにして可読性を改善したPRです。PostgreSQL風のパラメータマーカーを導入し、どの値がクエリ中のどのプレースホルダに対応するか一目で分かるようにしています。"
-    },
-    {
-      "number": 58311,
-      "title": "Fix `connection.explain(arel)` for Arel input with AST binds {#pr-58311}",
-      "url": "https://github.com/rails/rails/pull/58311",
-      "mergedAt": "2026-07-30T00:00:00.000Z",
-      "author": "kamipo",
-      "authorUrl": "https://github.com/kamipo",
-      "summary": "1. 概要 (1-2文で)  \n`connection.explain(arel)` に Arel（AST binds 付き）を渡した場合に、バインド変数が無視されて `EXPLAIN` が失敗していた問題を修正した PR です。`to_sql` ではなく `to_sql_and_binds` を使うことで、EXPLAIN 実行時にプレースホルダへ正しくバインド値が渡されるようになりました。"
-    },
-    {
-      "number": 58310,
-      "title": "Deprecate passing `binds` to `to_sql` {#pr-58310}",
-      "url": "https://github.com/rails/rails/pull/58310",
-      "mergedAt": "2026-07-30T00:00:00.000Z",
-      "author": "kamipo",
-      "authorUrl": "https://github.com/kamipo",
-      "summary": "1. 概要 (1-2文で)  \nRails 5.2 以降、SQL バインド値は Arel AST 側で管理されており、`to_sql` に `binds` 引数を渡しても実質使われていませんでした。この PR では `to_sql(binds)` の利用を非推奨 (deprecate) にし、将来削除するための警告を追加しています。"
-    },
-    {
-      "number": 58309,
-      "title": "Rename `arel` to `arel_or_sql` {#pr-58309}",
-      "url": "https://github.com/rails/rails/pull/58309",
-      "mergedAt": "2026-07-30T00:00:00.000Z",
-      "author": "kamipo",
-      "authorUrl": "https://github.com/kamipo",
-      "summary": "1. 概要 (1-2文で)  \nこのPRは、ActiveRecordの低レベルクエリメソッドの引数名を「`arel`」から「`arel_or_sql`」にリネームし、Arelオブジェクトと生SQL文字列の両方を受け取ることが分かるようにしたものです。機能的な挙動は変えずに、引数名の一貫性と可読性を向上させています。"
-    },
-    {
-      "number": 58296,
-      "title": "Refactor insert `returning:` handling to take `QueryIntent` directly {#pr-58296}",
-      "url": "https://github.com/rails/rails/pull/58296",
-      "mergedAt": "2026-07-30T00:00:00.000Z",
-      "author": "kamipo",
-      "authorUrl": "https://github.com/kamipo",
-      "summary": "1. 概要 (1-2文で)  \n`INSERT ... RETURNING` の処理を、生のSQL文字列操作ではなく `QueryIntent` を直接扱う形にリファクタリングしたPRです。これにより Arel ベースの INSERT は AST レベルで `RETURNING` を付与できるようになり、アダプタ間での拡張性・一貫性が向上しています。"
-    },
-    {
-      "number": 58299,
-      "title": "Remove dead binds handling in AR log subscribers {#pr-58299}",
-      "url": "https://github.com/rails/rails/pull/58299",
-      "mergedAt": "2026-07-30T00:00:00.000Z",
-      "author": "kamipo",
-      "authorUrl": "https://github.com/kamipo",
-      "summary": "1. 概要 (1-2文で)  \nActive Record のログ関連コードから、既に使われなくなったバインド値処理用のヘルパーメソッドとレガシー形式のバインド値サポートが削除されました。Rails 7.0 で実質廃止されていた旧形式の binds（`[[column, value], ...]`）へのフォールバックも StructuredEventSubscriber から完全に取り除かれています。"
-    },
-    {
-      "number": 58298,
-      "title": "Make `ActiveModel#model_name` accessible from a Ractor: {#pr-58298}",
-      "url": "https://github.com/rails/rails/pull/58298",
-      "mergedAt": "2026-07-29T00:00:00.000Z",
-      "author": "Edouard-chin",
-      "authorUrl": "https://github.com/Edouard-chin",
-      "summary": "1. 概要 (1-2文で)  \n`ActiveModel#model_name` が Ractor 内から安全に利用できるようにするため、`model_name` が返すオブジェクトを「凍結(freeze)」しつつ、内部で使う値を事前に計算・設定する変更です。これにより Ractor 環境でも `model_name.human` などのメソッド呼び出しが行えるようになります。"
     }
   ]
 }
