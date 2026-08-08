@@ -1,7 +1,88 @@
 {
-  "lastUpdated": "2026-08-07T01:13:01.592Z",
+  "lastUpdated": "2026-08-08T00:14:04.277Z",
   "totalCount": 50,
   "items": [
+    {
+      "number": 58404,
+      "title": "Fix the `Request#media_type` documentation example {#pr-58404}",
+      "url": "https://github.com/rails/rails/pull/58404",
+      "mergedAt": "2026-08-07T00:00:00.000Z",
+      "author": "55728",
+      "authorUrl": "https://github.com/55728",
+      "summary": "1. 概要 (1-2文で)  \n`ActionDispatch::Request#media_type` のドキュメント内サンプルが、実際の挙動と一致していなかったため、正しいリクエスト例（`POST`＋ボディ付き）に修正したドキュメント専用のPRです。コードの挙動自体は一切変更されていません。"
+    },
+    {
+      "number": 58384,
+      "title": "Allow `config.active_storage.variant_processor` to be set to a class {#pr-58384}",
+      "url": "https://github.com/rails/rails/pull/58384",
+      "mergedAt": "2026-08-07T00:00:00.000Z",
+      "author": "flavorjones",
+      "authorUrl": "https://github.com/flavorjones",
+      "summary": "1. 概要 (1-2文で)  \nActive Storage の `config.active_storage.variant_processor` に、これまでの `:vips` / `:mini_magick` / `:disabled` というシンボルだけでなく、任意のクラスを直接指定できるようにした PR です。これにより、独自の画像変換パイプラインやサンドボックス化された変換処理などを、Rails の設定レベルで差し替えられるようになります。"
+    },
+    {
+      "number": 58399,
+      "title": "Active Record ivar ractor safety {#pr-58399}",
+      "url": "https://github.com/rails/rails/pull/58399",
+      "mergedAt": "2026-08-07T00:00:00.000Z",
+      "author": "gmcgibbon",
+      "authorUrl": "https://github.com/gmcgibbon",
+      "summary": "1. 概要 (1-2文で)  \nActive Record 内で一部のインスタンス変数が Ractor（マルチスレッド並列実行用の仕組み）上で安全に参照できない問題を解消し、Ractor でも Active Record を扱えるようにするための「Ractor セーフティ」対応 PR です。特に、メモ化済みのインスタンス変数を freeze したり、必要に応じて main Ractor に処理を委譲する形に変更しています。"
+    },
+    {
+      "number": 58359,
+      "title": "Allow to configure ERB options through `ActionView::Base` {#pr-58359}",
+      "url": "https://github.com/rails/rails/pull/58359",
+      "mergedAt": "2026-08-07T00:00:00.000Z",
+      "author": "Edouard-chin",
+      "authorUrl": "https://github.com/Edouard-chin",
+      "summary": "1. 概要 (1–2文で)  \nRails の ERB テンプレートハンドラの各種オプションを、`ActionView::Base`（および `config.action_view.*`）経由で公式に設定できるようにした PR です。これにより、これまで非公開扱い（`:nodoc:`）となった `ActionView::Template::Handlers::ERB` クラスを直接参照して行っていた設定を、公開インターフェイスから行えるようになります。"
+    },
+    {
+      "number": 58060,
+      "title": "Ractor compatible Active Support Notifications {#pr-58060}",
+      "url": "https://github.com/rails/rails/pull/58060",
+      "mergedAt": "2026-08-07T00:00:00.000Z",
+      "author": "Edouard-chin",
+      "authorUrl": "https://github.com/Edouard-chin",
+      "summary": "1. 概要 (1-2文で)  \nActiveSupport::Notifications を Ractor 内でも安全に利用できるようにするため、Ractor ごとに独立した Notifier を持つ仕組みに変更した PRです。既存の `AS::Fanout` を直接 Ractor-safe にするのではなく、「購読情報のスナップショット」をもとに Ractor 単位で Notifier を生成する設計になっています。"
+    },
+    {
+      "number": 58405,
+      "title": "Add back `loaded` to RoutesReloader {#pr-58405}",
+      "url": "https://github.com/rails/rails/pull/58405",
+      "mergedAt": "2026-08-07T00:00:00.000Z",
+      "author": "rafaelfranca",
+      "authorUrl": "https://github.com/rafaelfranca",
+      "summary": "1. 概要 (1-2文で)  \n`Rails::Application::RoutesReloader` から一度削除されていた `loaded` メソッド（属性）が、フレームワークの公開APIであることが判明したため復活させたPRです。これにより、既存アプリやライブラリが `RoutesReloader#loaded` に依存していても、引き続き問題なく動作できるようになります。"
+    },
+    {
+      "number": 58397,
+      "title": "Extract duplicated UPDATE self-join preparation into Arel::Visitors::… {#pr-58397}",
+      "url": "https://github.com/rails/rails/pull/58397",
+      "mergedAt": "2026-08-07T00:00:00.000Z",
+      "author": "seuros",
+      "authorUrl": "https://github.com/seuros",
+      "summary": "1. 概要 (1-2文で)  \nPostgreSQL と SQLite の Arel Visitor に重複していた UPDATE の self join 用の前処理ロジックが、共通の `Arel::Visitors::ToSql#prepare_update_statement_with_self_join` に抽出されました。挙動の変更はなく、内部実装のリファクタリングのみです。"
+    },
+    {
+      "number": 58400,
+      "title": "Extract duplicated local cache multi-read resolution in Strategy::LocalCache {#pr-58400}",
+      "url": "https://github.com/rails/rails/pull/58400",
+      "mergedAt": "2026-08-07T00:00:00.000Z",
+      "author": "seuros",
+      "authorUrl": "https://github.com/seuros",
+      "summary": "1. 概要 (1-2文で)  \n`ActiveSupport::Cache::Strategy::LocalCache` 内で、`fetch_multi` と `read_multi_entries` に重複して書かれていた「ローカルキャッシュからの複数キー解決処理」が共通メソッドに抽出されました。挙動の変更はなく、内部実装のリファクタリングです。"
+    },
+    {
+      "number": 58401,
+      "title": "Extract duplicated job matching logic in ActiveJob::TestHelper {#pr-58401}",
+      "url": "https://github.com/rails/rails/pull/58401",
+      "mergedAt": "2026-08-07T00:00:00.000Z",
+      "author": "seuros",
+      "authorUrl": "https://github.com/seuros",
+      "summary": "1. 概要 (1-2文で)  \nActiveJob::TestHelper 内で `assert_enqueued_with` と `assert_performed_with` がそれぞれ重複して持っていた「ジョブの条件マッチング」処理を、共通のプライベートメソッド `find_matching_job` に切り出した PR です。挙動は変えずに、重複コードを削減しテストヘルパー内部の保守性を高めています。"
+    },
     {
       "number": 58395,
       "title": "Extract duplicated bind value coercion in QueryMethods {#pr-58395}",
@@ -370,87 +451,6 @@
       "author": "hammadxcm",
       "authorUrl": "https://github.com/hammadxcm",
       "summary": "1. 概要 (1-2文で)  \n`search_field` ヘルパーに `autosave: true` を渡すと `NameError` が発生していた不具合を修正し、ドキュメントに記載されている「リクエストホストを反転した autosave 値」が実際に動作するようにしました。あわせて `autosave` オプション周りの挙動を網羅するテストが追加されています。"
-    },
-    {
-      "number": 58339,
-      "title": "Use precompiled Rubies from Mise in Install Rails Guide  {#pr-58339}",
-      "url": "https://github.com/rails/rails/pull/58339",
-      "mergedAt": "2026-08-01T00:00:00.000Z",
-      "author": "excid3",
-      "authorUrl": "https://github.com/excid3",
-      "summary": "1. 概要 (1-2文で)  \nRails公式ガイド「Install Ruby on Rails」で、Rubyのインストール手順が「Miseによる事前コンパイル済みRubyの利用」を前提とした内容に更新されました。これにより、依存関係のインストールやソースからのコンパイル手順が不要となり、ガイド全体がシンプルかつ高速なセットアップ手順に整理されています。"
-    },
-    {
-      "number": 58323,
-      "title": "Deprecate passing `binds` to `insert`, `update`, and `delete` {#pr-58323}",
-      "url": "https://github.com/rails/rails/pull/58323",
-      "mergedAt": "2026-08-01T00:00:00.000Z",
-      "author": "kamipo",
-      "authorUrl": "https://github.com/kamipo",
-      "summary": "1. 概要 (1-2文で)  \n`ActiveRecord::ConnectionAdapters` の `insert`, `update`, `delete` に対して、従来の「第2引数以降で `binds` を渡す」呼び出し方が非推奨になりました。代わりに、SQL文字列とバインド値をまとめた `Arel.sql(..., *binds)` を渡す書き方に移行するための正式なデプリケーションです。"
-    },
-    {
-      "number": 58324,
-      "title": "Fix `String#parameterize` raising `TypeError` when separator is nil {#pr-58324}",
-      "url": "https://github.com/rails/rails/pull/58324",
-      "mergedAt": "2026-08-01T00:00:00.000Z",
-      "author": "hammadxcm",
-      "authorUrl": "https://github.com/hammadxcm",
-      "summary": "1. 概要 (1-2文で)  \n`String#parameterize` に `separator: nil` を渡すと `TypeError` で落ちていた不具合を修正し、`nil` を空文字と同等に扱うようにした PR です。これにより、`separator` を設定ファイルやパラメータからそのまま渡しても安全に動くようになります。"
-    },
-    {
-      "number": 58325,
-      "title": "Add test coverage for `NameError#missing_name` branches {#pr-58325}",
-      "url": "https://github.com/rails/rails/pull/58325",
-      "mergedAt": "2026-08-01T00:00:00.000Z",
-      "author": "hammadxcm",
-      "authorUrl": "https://github.com/hammadxcm",
-      "summary": "1. 概要 (1–2文で)  \n`NameError#missing_name` の全ての分岐をカバーするテストが追加され、これまでテストされていなかったケース（`receiver == Object`、`receiver` 呼び出し時の `ArgumentError`、メッセージからの名前抽出）が網羅されました。機能変更はなく、既存挙動の仕様化・回帰防止が目的です。"
-    },
-    {
-      "number": 58329,
-      "title": "Fix documented strftime format for week_field default value {#pr-58329}",
-      "url": "https://github.com/rails/rails/pull/58329",
-      "mergedAt": "2026-08-01T00:00:00.000Z",
-      "author": "55728",
-      "authorUrl": "https://github.com/55728",
-      "summary": "1. 概要 (1-2文で)  \n`week_field` ヘルパーのデフォルト値に使われる `strftime` フォーマットについて、実装とドキュメントの不一致を解消し、ドキュメント側を実装 (`\"%G-W%V\"`) に合わせる修正です。コードの挙動は既に正しいため、このPRはドキュメントのみの更新です。"
-    },
-    {
-      "number": 58331,
-      "title": "Fix `model_name` crashing when a model has an anonymous ancestor {#pr-58331}",
-      "url": "https://github.com/rails/rails/pull/58331",
-      "mergedAt": "2026-08-01T00:00:00.000Z",
-      "author": "55728",
-      "authorUrl": "https://github.com/55728",
-      "summary": "1. 概要 (1-2文で)  \nRails 7.2 開発中に入った変更 (#58298) により、「無名クラスを祖先にもつモデル」で `model_name` を呼ぶと例外が出るリグレッションが発生していたのを、i18n キー生成時に無名祖先をスキップすることで修正した PR です。通常のモデルの動作や i18n 探索順序は変えずに、無名祖先を介したクラス継承でも `model_name` を安全に使えるようにしています。"
-    },
-    {
-      "number": 58307,
-      "title": "Avoid redundant worker pool dispatch for default Action Cable streams {#pr-58307}",
-      "url": "https://github.com/rails/rails/pull/58307",
-      "mergedAt": "2026-08-01T00:00:00.000Z",
-      "author": "npezza93",
-      "authorUrl": "https://github.com/npezza93",
-      "summary": "1. 概要 (1-2文で)  \nAction Cable の「デフォルトストリーム」におけるメッセージ配送で、同じジョブを executor と connection worker pool の2段階に重ねてディスパッチしていた無駄を取り除き、パフォーマンスを改善する変更です。ユーザー定義コールバックは従来通り worker pool で隔離しつつ、デフォルトハンドラだけ executor 上で完結させることで、レイテンシとスループットが大きく改善されています。"
-    },
-    {
-      "number": 58332,
-      "title": "Revert \"Remove migrations filter from the schema dump\" {#pr-58332}",
-      "url": "https://github.com/rails/rails/pull/58332",
-      "mergedAt": "2026-07-31T00:00:00.000Z",
-      "author": "fxn",
-      "authorUrl": "https://github.com/fxn",
-      "summary": "1. 概要 (1-2文で)  \nRails 7.2 付近で一度削除された「スキーマダンプから古いマイグレーションの version をフィルタする仕組み」を取り消し（revert）し、従来どおりフィルタを有効に戻した PR です。  \nチーム開発時に「古いマイグレーションをリポジトリから削除する」運用を、実務的に破綻なく行う手段がまだ整理できていないため、仕様変更を保留にする目的のリバートです。"
-    },
-    {
-      "number": 58274,
-      "title": "Allow prepared statements with query log tags {#pr-58274}",
-      "url": "https://github.com/rails/rails/pull/58274",
-      "mergedAt": "2026-07-31T00:00:00.000Z",
-      "author": "bschrag620",
-      "authorUrl": "https://github.com/bschrag620",
-      "summary": "1. 概要 (1-2文で)  \nRailsでクエリログタグ（`query_log_tags`）を有効にした際でも、アプリ側の選択で prepared statements を無効化せずに使い続けられるオプションが追加されました。これにより、高カーディナリティなコメントを避けるという従来の安全デフォルトを維持しつつ、必要なアプリケーションは両方を併用できるようになります。"
     }
   ]
 }
