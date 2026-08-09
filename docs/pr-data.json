@@ -1,7 +1,61 @@
 {
-  "lastUpdated": "2026-08-08T00:14:04.277Z",
+  "lastUpdated": "2026-08-09T00:11:55.220Z",
   "totalCount": 50,
   "items": [
+    {
+      "number": 58342,
+      "title": "Refreeze the controller middleware stack for every mutating method {#pr-58342}",
+      "url": "https://github.com/rails/rails/pull/58342",
+      "mergedAt": "2026-08-08T00:00:00.000Z",
+      "author": "55728",
+      "authorUrl": "https://github.com/55728",
+      "summary": "1. 概要 (1-2文で)  \nRactor セーフモード時に `ActionController::Metal.middleware` の一部のミドルウェア操作メソッドが凍結済みスタックを直接変更しようとして `FrozenError` になる不具合を修正し、他の変更系メソッドと同様に「コピーして再凍結」されるように統一した PR です。Ractors 対応（`ActiveSupport::Ractors.unshareable_proc_action` 有効時）のミドルウェアスタック操作が一貫して安全に動作するようになります。"
+    },
+    {
+      "number": 58217,
+      "title": "Remove unused Active Record internals {#pr-58217}",
+      "url": "https://github.com/rails/rails/pull/58217",
+      "mergedAt": "2026-08-08T00:00:00.000Z",
+      "author": "55728",
+      "authorUrl": "https://github.com/55728",
+      "summary": "1. 概要 (1-2文で)  \nこのPRは、Active Record 内部で一切使われていないメソッドや引数・インスタンス変数などの「死んだコード」をまとめて削除するクリーンアップです。挙動の変更や外部APIの破壊的変更は基本的になく、内部実装の整理・単純化が主目的です。"
+    },
+    {
+      "number": 58361,
+      "title": "Fix TimeWithZone#to_s raising in a non-main Ractor {#pr-58361}",
+      "url": "https://github.com/rails/rails/pull/58361",
+      "mergedAt": "2026-08-08T00:00:00.000Z",
+      "author": "55728",
+      "authorUrl": "https://github.com/55728",
+      "summary": "1. 概要 (1-2文で)  \n`ActiveSupport::TimeZone` が Ractor 共有可能になっていたにもかかわらず、非メイン Ractor で `TimeWithZone#to_s` などを呼ぶと `Ractor::IsolationError` が発生していた問題を修正した PRです。内部で使っているタイムゾーンオフセット用の文字列を凍結し、Ractor 間で安全に共有できるようにしています。"
+    },
+    {
+      "number": 58416,
+      "title": "Use `ActiveRecord::Key.for` in remaining `Array(reflection.*_key)` sites {#pr-58416}",
+      "url": "https://github.com/rails/rails/pull/58416",
+      "mergedAt": "2026-08-08T00:00:00.000Z",
+      "author": "kamipo",
+      "authorUrl": "https://github.com/kamipo",
+      "summary": "1. 概要 (1-2文で)  \nRails の ActiveRecord 内で、関連(reflection)のキーを配列化して扱っていた箇所を `Array(...)` から `ActiveRecord::Key.for(...)` に統一し、単一キーと複合キーを同じ Enumerable API で扱えるようにリファクタリングした PR です。機能追加ではなく、#58368 に続く内部実装の揃え・複合主キー対応を見越した整備です。"
+    },
+    {
+      "number": 58396,
+      "title": "Eager load templates {#pr-58396}",
+      "url": "https://github.com/rails/rails/pull/58396",
+      "mergedAt": "2026-08-08T00:00:00.000Z",
+      "author": "etiennebarrie",
+      "authorUrl": "https://github.com/etiennebarrie",
+      "summary": "1. 概要 (1-2文で)  \nこのPRは、Rails起動時にテンプレートを「先読み（eager load）」して共有可能にする仕組みを Action View に導入したものです。まずは strict locals なテンプレートのみを対象とし、テンプレートのコンパイル先コンテナの不整合を明示的に検出する安全チェックも追加されています。"
+    },
+    {
+      "number": 58415,
+      "title": "Remove `symbol_column_to_string` in favor of `columns_hash` + `Symbol#name` {#pr-58415}",
+      "url": "https://github.com/rails/rails/pull/58415",
+      "mergedAt": "2026-08-08T00:00:00.000Z",
+      "author": "kamipo",
+      "authorUrl": "https://github.com/kamipo",
+      "summary": "1. 概要 (1-2文で)  \n`symbol_column_to_string` というヘルパーとそのキャッシュを削除し、代わりに `columns_hash`（クラスレベルでメモ化されたハッシュ）と Ruby 3.0 以降の `Symbol#name` を直接使うようにする変更です。これにより、シンボルを使ったカラム参照で追加のキャッシュ構造が不要になり、コードが簡潔かつ同等のパフォーマンスを維持します。"
+    },
     {
       "number": 58404,
       "title": "Fix the `Request#media_type` documentation example {#pr-58404}",
@@ -397,60 +451,6 @@
       "author": "kamipo",
       "authorUrl": "https://github.com/kamipo",
       "summary": "1. 概要 (1-2文で)  \nActiveRecord の `ActiveRecord::Migration::CommandRecorder` クラスにおいて、内部用メソッドである `#record` と `#inverse_of` を public から private に変更した PR です。将来的なキーワード引数の扱い変更（`Hash.ruby2_keywords_hash` 廃止への対応）に伴ってメソッドシグネチャを壊さざるを得ないため、それを「公開 API 変更」扱いにしないよう、先に「内部 API」であることを明確化しています。"
-    },
-    {
-      "number": 58344,
-      "title": "Pin redis below 6 in the Gemfile {#pr-58344}",
-      "url": "https://github.com/rails/rails/pull/58344",
-      "mergedAt": "2026-08-02T00:00:00.000Z",
-      "author": "yahonda",
-      "authorUrl": "https://github.com/yahonda",
-      "summary": "1. 概要 (1-2文で)  \nRails の Gemfile で `redis` のバージョンを「6未満」に固定し、テストが `redis-6.0.0` のリリースによって落ちる問題を回避する PR です。Action Cable の redis サブスクリプションアダプタが要求するバージョン制約（`>= 4, < 6`）と実際にロードされる gem のバージョンの不整合を解消しています。"
-    },
-    {
-      "number": 58265,
-      "title": "Consolidate MySQL `ALGORITHM` / `LOCK` into `MySQL::AlterTable` state {#pr-58265}",
-      "url": "https://github.com/rails/rails/pull/58265",
-      "mergedAt": "2026-08-02T00:00:00.000Z",
-      "author": "kamipo",
-      "authorUrl": "https://github.com/kamipo",
-      "summary": "1. 概要 (1-2文で)  \nMySQL アダプタにおける `ALTER TABLE` の `ALGORITHM` / `LOCK` 指定を、各操作ごとのバラバラな扱いから `MySQL::AlterTable` オブジェクトの状態として一元管理するようにした PR です。これにより、単発・バルクいずれのスキーマ変更でも、正しい位置・回数で `ALGORITHM` / `LOCK` が出力され、オプションが落ちる不具合も解消されます。"
-    },
-    {
-      "number": 58340,
-      "title": "Transform keys in place in `ActionController::Parameters#deep_transform_keys!` {#pr-58340}",
-      "url": "https://github.com/rails/rails/pull/58340",
-      "mergedAt": "2026-08-02T00:00:00.000Z",
-      "author": "55728",
-      "authorUrl": "https://github.com/55728",
-      "summary": "1. 概要 (1-2文で)  \n`ActionController::Parameters#deep_transform_keys!` が、名前に反してインプレース（破壊的）ではなく新しいハッシュを組み立てていた問題を修正し、内部で `_deep_transform_keys_in_object!` を使って本当にインプレース変換するようにしたPRです。これによりAPIの一貫性とパフォーマンス（割り当て数削減）が改善されますが、返される `Parameters` オブジェクトの見かけ上の挙動は変わりません。"
-    },
-    {
-      "number": 58264,
-      "title": "Consolidate `ALTER TABLE` building into `AlterTable` {#pr-58264}",
-      "url": "https://github.com/rails/rails/pull/58264",
-      "mergedAt": "2026-08-02T00:00:00.000Z",
-      "author": "kamipo",
-      "authorUrl": "https://github.com/kamipo",
-      "summary": "1. 概要 (1-2文で)  \nこのPRは、`ALTER TABLE` 文の生成処理を `AlterTable` クラスに集約し、複数の操作を一度に行う際に不正なSQLが生成されうるバグを根本的に解消しつつ、MySQL/PostgreSQL 含めたアダプタ全体の設計を整理・リファクタリングしたものです。`bulk_change_table` などの経路もすべて `AlterTable` を経由するよう統一されています。"
-    },
-    {
-      "number": 58341,
-      "title": "Fix deprecation proxy doc examples that raise `ArgumentError` {#pr-58341}",
-      "url": "https://github.com/rails/rails/pull/58341",
-      "mergedAt": "2026-08-02T00:00:00.000Z",
-      "author": "55728",
-      "authorUrl": "https://github.com/55728",
-      "summary": "1. 概要 (1-2文で)  \n`ActiveSupport::Deprecation` のプロキシクラス (`DeprecatedInstanceVariableProxy`, `DeprecatedConstantProxy`) のドキュメント中のサンプルコードが、現在のシグネチャと合わずに `ArgumentError` を出していた問題を修正し、実際に動く形に更新したPRです。機能変更はなく、ドキュメント記載の使い方と実装を同期させたものです。"
-    },
-    {
-      "number": 58336,
-      "title": "Fix `search_field` raising `NameError` when passed `autosave: true` {#pr-58336}",
-      "url": "https://github.com/rails/rails/pull/58336",
-      "mergedAt": "2026-08-01T00:00:00.000Z",
-      "author": "hammadxcm",
-      "authorUrl": "https://github.com/hammadxcm",
-      "summary": "1. 概要 (1-2文で)  \n`search_field` ヘルパーに `autosave: true` を渡すと `NameError` が発生していた不具合を修正し、ドキュメントに記載されている「リクエストホストを反転した autosave 値」が実際に動作するようにしました。あわせて `autosave` オプション周りの挙動を網羅するテストが追加されています。"
     }
   ]
 }
