@@ -1,7 +1,79 @@
 {
-  "lastUpdated": "2026-08-09T00:11:55.220Z",
+  "lastUpdated": "2026-08-10T00:14:51.244Z",
   "totalCount": 50,
   "items": [
+    {
+      "number": 58427,
+      "title": "Use bind parameters for array-form arguments in `find_by_sql` / `count_by_sql` {#pr-58427}",
+      "url": "https://github.com/rails/rails/pull/58427",
+      "mergedAt": "2026-08-09T00:00:00.000Z",
+      "author": "kamipo",
+      "authorUrl": "https://github.com/kamipo",
+      "summary": "1. 概要 (1-2文で)  \n`find_by_sql` / `count_by_sql` に配列形式の引数を渡したとき、これまで文字列に埋め込み（`sanitize_sql`）されていた値を、`where` と同様にバインドパラメータとして扱うように変更した PR です。これによりドキュメントどおり `where` と同等の API 挙動になり、SQL インジェクション耐性とプレースホルダ処理が統一されました。"
+    },
+    {
+      "number": 58425,
+      "title": "Stop deserializing column defaults {#pr-58425}",
+      "url": "https://github.com/rails/rails/pull/58425",
+      "mergedAt": "2026-08-09T00:00:00.000Z",
+      "author": "byroot",
+      "authorUrl": "https://github.com/byroot",
+      "summary": "1. 概要 (1-2文で)  \nRails 8.1.0で導入された「カラムのデフォルト値をあらかじめ型変換（deserialize）する」挙動をやめて、再び「デフォルト値は生の値のまま扱う」方向に戻したPRです。  \nこれにより、後から属性タイプが上書きされるケースでデフォルト値の型不整合が起きる問題（#58292）を解消しています。"
+    },
+    {
+      "number": 58350,
+      "title": "Append `TRADITIONAL` instead of `STRICT_ALL_TABLES` to MySQL's `sql_mode` by default {#pr-58350}",
+      "url": "https://github.com/rails/rails/pull/58350",
+      "mergedAt": "2026-08-09T00:00:00.000Z",
+      "author": "kamipo",
+      "authorUrl": "https://github.com/kamipo",
+      "summary": "1. 概要 (1-2文で)  \nRails が MySQL に接続する際のデフォルト `sql_mode` 設定を、`STRICT_ALL_TABLES` 単体ではなく `TRADITIONAL` を付与するように変更した PRです。これにより、RDS/Aurora などグローバル `sql_mode` が空の環境でも、ゼロ日付やゼロ除算などの不正値をサイレントに受け入れない、より厳格な動作が一貫して保証されます。"
+    },
+    {
+      "number": 58424,
+      "title": "Keep the controller middleware proxy in sync with its stack {#pr-58424}",
+      "url": "https://github.com/rails/rails/pull/58424",
+      "mergedAt": "2026-08-09T00:00:00.000Z",
+      "author": "55728",
+      "authorUrl": "https://github.com/55728",
+      "summary": "1. 概要 (1-2文で)  \n`ActionController::Metal.middleware` が返す「ミドルウェア用プロキシ」と実際のミドルウェアスタックの状態がズレていた問題を修正し、常に最新のスタックを正しく反映するようにしたPRです。合わせて、`delete` の戻り値や `middlewares=` の挙動など、従来のインターフェイスからズレていた細かい挙動も元の仕様どおりになるよう整えています。"
+    },
+    {
+      "number": 58071,
+      "title": "Add `delete_multi` method to batch deletes for memcached store if dalli's `delete_multi` is defined {#pr-58071}",
+      "url": "https://github.com/rails/rails/pull/58071",
+      "mergedAt": "2026-08-09T00:00:00.000Z",
+      "author": "ilianah",
+      "authorUrl": "https://github.com/ilianah",
+      "summary": "1. 概要 (1-2文で)  \nRails の `ActiveSupport::Cache::MemCacheStore` に、dalli が `delete_multi` をサポートしている場合にそれを使って一度に複数キーを削除する機能が追加されました。これにより memcached へのラウンドトリップ回数が減り、バッチ削除時のパフォーマンスが向上します。"
+    },
+    {
+      "number": 58358,
+      "title": "Fix incorrect documentation {#pr-58358}",
+      "url": "https://github.com/rails/rails/pull/58358",
+      "mergedAt": "2026-08-09T00:00:00.000Z",
+      "author": "55728",
+      "authorUrl": "https://github.com/55728",
+      "summary": "1. 概要 (1-2文で)  \nActive Record 周辺のドキュメント (RDoc と Guides) に、実際の挙動と矛盾する記述や誤ったサンプルコードがあったため、それらを実装に合わせて修正した PR です。コードロジックの変更はなく、ドキュメントのみの修正です。"
+    },
+    {
+      "number": 58420,
+      "title": "Refactor `MiddlewareStack::Middleware` off `Hash.ruby2_keywords_hash` {#pr-58420}",
+      "url": "https://github.com/rails/rails/pull/58420",
+      "mergedAt": "2026-08-09T00:00:00.000Z",
+      "author": "kamipo",
+      "authorUrl": "https://github.com/kamipo",
+      "summary": "1. 概要 (1-2文で)  \nRails のミドルウェアスタック内部実装から `Hash.ruby2_keywords_hash` への依存を取り除き、Ruby 3系以降のキーワード引数仕様に素直に従う形へリファクタリングした PR です。併せて、`Middleware` / `InstrumentationProxy` クラスを内部実装扱いとしてドキュメント非公開 (`:nodoc:`) にしつつも、デバッグ用途の情報は維持しています。"
+    },
+    {
+      "number": 58239,
+      "title": "Refactor `CommandRecorder` to store args and kwargs separately {#pr-58239}",
+      "url": "https://github.com/rails/rails/pull/58239",
+      "mergedAt": "2026-08-09T00:00:00.000Z",
+      "author": "kamipo",
+      "authorUrl": "https://github.com/kamipo",
+      "summary": "1. 概要 (1–2文で)  \n`ActiveRecord::Migration::CommandRecorder` が、記録するコマンドの引数を「位置引数」と「キーワード引数」に分けて保持する形にリファクタリングされました。これにより、`ruby2_keywords` 時代の互換レイヤを廃止し、Ruby 3 系の kwargs 仕様に素直に従う実装になっています。"
+    },
     {
       "number": 58342,
       "title": "Refreeze the controller middleware stack for every mutating method {#pr-58342}",
@@ -379,78 +451,6 @@
       "author": "Edouard-chin",
       "authorUrl": "https://github.com/Edouard-chin",
       "summary": "1. 概要 (1-2文で)  \nActive Model / Active Record の属性タイプ情報（`attribute_types`）を Ractor 内から安全に参照できるようにするため、属性タイプのオブジェクトグラフを凍結（deep freeze）し、暗号化関連タイプのメモ化ロジックを Ractor セーフな形に修正した PR です。これにより、Ractor 内で属性の型を取得しても分離エラーが発生しないようになります。"
-    },
-    {
-      "number": 58364,
-      "title": "Honor composite / aliased FKs in belongs_to counter cache, autosave, and has_many :through nullify {#pr-58364}",
-      "url": "https://github.com/rails/rails/pull/58364",
-      "mergedAt": "2026-08-04T00:00:00.000Z",
-      "author": "kamipo",
-      "authorUrl": "https://github.com/kamipo",
-      "summary": "1. 概要 (1-2文で)  \n`belongs_to` におけるカウンタキャッシュ、`autosave`、`has_many :through` の `:nullify` 削除処理で、**複合外部キー(Array)** と **エイリアス付き外部キー(仮想属性/別名カラム)** が正しく扱われるように修正した PR です。これにより、これらの機能が複合 FK / エイリアス FK 環境でもサイレントに無視されたり、間違った SQL を生成したりしなくなります。"
-    },
-    {
-      "number": 58354,
-      "title": "Resolve attribute aliases in belongs_to change tracking {#pr-58354}",
-      "url": "https://github.com/rails/rails/pull/58354",
-      "mergedAt": "2026-08-03T00:00:00.000Z",
-      "author": "55728",
-      "authorUrl": "https://github.com/55728",
-      "summary": "1. 概要 (1-2文で)  \n`belongs_to` の外部キーに `alias_attribute` を定義している場合に、変更検知（Dirty API）がエイリアス名ではなく実カラム名でしか動かず、一部機能が壊れていた問題を修正した PR です。`belongs_to` が Dirty API にアクセスする箇所で、常に「エイリアスを実カラム名に解決してから」参照するように統一されています。"
-    },
-    {
-      "number": 58356,
-      "title": "[ci skip] Fix the table name in the Wishlists guide {#pr-58356}",
-      "url": "https://github.com/rails/rails/pull/58356",
-      "mergedAt": "2026-08-03T00:00:00.000Z",
-      "author": "duffuniverse",
-      "authorUrl": "https://github.com/duffuniverse",
-      "summary": "1. 概要 (1-2文で)  \nRails公式ガイドの「Wishlists」ガイド内で使われているテーブル名の誤記を、正しいテーブル名に修正したドキュメント向けのPRです。コードではなくガイド文書のみの変更で、挙動には影響しません。\n\n2. 変更内容の詳細  \n- 変更ファイル: `guides/source/wishlists.md`  \n- 変更内容は1行のみで、「Wishlists」チュートリアル中に登場するテーブル名を、実際のモデル／マイグレーションで使われるべき正しいテーブル名に合わせる修正です。  \n- タイトルに `[ci skip]` が付いていることからも分かる通り、テストやビルドを走らせる必要のないドキュメントのみの修正です。  \n\n（実際の diff は1行の `+1/-1` で、例えば以下のようなニュアンスの修正が行われています）:\n\n```diff\n- In our migration, we created the table `wishlist`:\n+ In our migration, we created the table `wishlists`:\n```\n\nあるいは:\n\n```diff\n- The products_wishlist table stores...\n+ The products_wishlists table stores...\n```\n\nといった形で、Railsの命名規約（モデル: 単数形 / テーブル: 複数形）に沿ったテーブル名に直されたものと考えられます。\n\n3. 影響範囲・注意点  \n- 影響範囲はRailsガイドの読者のみで、アプリケーションコードやRails本体の挙動には一切影響しません。  \n- ただし、旧バージョンのガイドを参考にしてテーブル名を誤って単数形や不適切な名前で作っていた場合、以下のような不整合が発生している可能性があります:\n  - モデル `Wishlist` とテーブル `wishlist` のような単数形テーブル名の不一致  \n  - 結果として ActiveRecord がテーブルを見つけられず、`ActiveRecord::StatementInvalid` や「relation does not exist」エラーになる  \n- これから「Wishlists」ガイドを参考に実装する場合は、このPR適用後のガイドを参照し、Railsの命名規約に沿ったテーブル名（複数形）で作成するのが安全です。  \n\n4. 参考情報 (あれば)  \n- Railsのモデルとテーブルの命名規約:  \n  - モデル: 単数形・CamelCase（例: `WishlistItem`）  \n  - テーブル: 複数形・snake_case（例: `wishlist_items`）  \n- 関連ガイド:  \n  - Rails Guides – Active Record Basics / Naming Conventions  \n  - Rails Guides – Wishlists（本PRで修正されたガイド）"
-    },
-    {
-      "number": 58353,
-      "title": "Fix Single Table Inheritance doc example for the type column change {#pr-58353}",
-      "url": "https://github.com/rails/rails/pull/58353",
-      "mergedAt": "2026-08-03T00:00:00.000Z",
-      "author": "55728",
-      "authorUrl": "https://github.com/55728",
-      "summary": "1. 概要 (1-2文で)  \nSingle Table Inheritance(STI) のドキュメント中にある `type` カラムの変更例が実際の挙動と食い違っていたため、「空文字列 `\"\"` からの変更」となっていた説明を「`nil` からの変更」に修正した PR です。ドキュメントのみの変更で、挙動・API には一切の変更はありません。"
-    },
-    {
-      "number": 58348,
-      "title": "Restore `alias_attribute` support in associations {#pr-58348}",
-      "url": "https://github.com/rails/rails/pull/58348",
-      "mergedAt": "2026-08-03T00:00:00.000Z",
-      "author": "kamipo",
-      "authorUrl": "https://github.com/kamipo",
-      "summary": "1. 概要 (1-2文で)  \nこのPRは、`belongs_to` などの関連付けで長らく効かなくなっていた `alias_attribute` のサポートを復活させ、外部キーや主キーに定義したエイリアス経由でも関連が正しく読める／書けるように戻す変更です。過去にパフォーマンス目的で導入された `_read_attribute` 経由の「高速パス」を廃止し、再び `read_attribute` / `write_attribute` を使うようにしています。"
-    },
-    {
-      "number": 58347,
-      "title": "Deprecate `write_attribute(:id, value)` writing to the primary key {#pr-58347}",
-      "url": "https://github.com/rails/rails/pull/58347",
-      "mergedAt": "2026-08-03T00:00:00.000Z",
-      "author": "kamipo",
-      "authorUrl": "https://github.com/kamipo",
-      "summary": "1. 概要 (1-2文で)  \n`write_attribute(:id, value)` がカスタム主キー（`@primary_key`）を書き換える挙動を非推奨にし、今後は `:id` というカラムに対する通常の書き込みとして扱うようにする変更です。`read_attribute(:id)` の非推奨・削除 (#49019) に続く「書き込み側」の整合性対応であり、複合主キーの場合も読み取り側と同じ扱いに揃えています。"
-    },
-    {
-      "number": 58349,
-      "title": "Fix test class name collision in Active Storage railties tests {#pr-58349}",
-      "url": "https://github.com/rails/rails/pull/58349",
-      "mergedAt": "2026-08-02T00:00:00.000Z",
-      "author": "flavorjones",
-      "authorUrl": "https://github.com/flavorjones",
-      "summary": "1. 概要 (1-2文で)  \nActive Storage の railties テストで、2つのテストファイルが同じテストクラス名 `ApplicationTests::ActiveStorageEngineTest` を定義していたために発生していたクラス名衝突を解消する PR です。クラス名をファイルごとに固有の名前に分けることで、ローカル実行時に発生していた環境変数リーク検出テストの失敗を防いでいます。"
-    },
-    {
-      "number": 58254,
-      "title": "Make `CommandRecorder#record` and `#inverse_of` private {#pr-58254}",
-      "url": "https://github.com/rails/rails/pull/58254",
-      "mergedAt": "2026-08-02T00:00:00.000Z",
-      "author": "kamipo",
-      "authorUrl": "https://github.com/kamipo",
-      "summary": "1. 概要 (1-2文で)  \nActiveRecord の `ActiveRecord::Migration::CommandRecorder` クラスにおいて、内部用メソッドである `#record` と `#inverse_of` を public から private に変更した PR です。将来的なキーワード引数の扱い変更（`Hash.ruby2_keywords_hash` 廃止への対応）に伴ってメソッドシグネチャを壊さざるを得ないため、それを「公開 API 変更」扱いにしないよう、先に「内部 API」であることを明確化しています。"
     }
   ]
 }
