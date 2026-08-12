@@ -1,7 +1,79 @@
 {
-  "lastUpdated": "2026-08-11T00:13:24.557Z",
+  "lastUpdated": "2026-08-12T00:17:17.834Z",
   "totalCount": 50,
   "items": [
+    {
+      "number": 58388,
+      "title": "Cleanup duplicate/unneeded requires {#pr-58388}",
+      "url": "https://github.com/rails/rails/pull/58388",
+      "mergedAt": "2026-08-11T00:00:00.000Z",
+      "author": "skipkayhil",
+      "authorUrl": "https://github.com/skipkayhil",
+      "summary": "1. 概要 (1-2文で)  \nRails内部のいくつかのファイルから、すでに他所で読み込まれているため不要となっていた `require` を削除し、`requires` の重複を整理したPRです。機能追加や挙動変更はなく、コードベースのクリーンアップ・メンテナンスが目的です。"
+    },
+    {
+      "number": 58450,
+      "title": "Dedup Reflection#plural_name {#pr-58450}",
+      "url": "https://github.com/rails/rails/pull/58450",
+      "mergedAt": "2026-08-11T00:00:00.000Z",
+      "author": "hmcguire-shopify",
+      "authorUrl": "https://github.com/hmcguire-shopify",
+      "summary": "1. 概要 (1-2文で)  \n`ActiveRecord::Reflection` の `plural_name` を「重複しない（dedup）」形で扱うようにする、小さなリファクタリングの PR です。内部実装の 1行が置き換えられただけで、外部 API の振る舞いは基本的に変えずに重複処理を整理しています。"
+    },
+    {
+      "number": 58411,
+      "title": "Active Record ractor safe ivars 2 {#pr-58411}",
+      "url": "https://github.com/rails/rails/pull/58411",
+      "mergedAt": "2026-08-11T00:00:00.000Z",
+      "author": "gmcgibbon",
+      "authorUrl": "https://github.com/gmcgibbon",
+      "summary": "1. 概要 (1-2文で)  \nActive Record のクラスインスタンス変数（`@default_attributes` と `@find_by_statement_cache`）が Ractor セーフになるように実装を見直した PRです。これにより、Active Record を Ractor（マルチスレッド＋並列実行）環境で安全に利用しやすくなっています。"
+    },
+    {
+      "number": 58449,
+      "title": "Ensure Active Record models define all attributes {#pr-58449}",
+      "url": "https://github.com/rails/rails/pull/58449",
+      "mergedAt": "2026-08-11T00:00:00.000Z",
+      "author": "hmcguire-shopify",
+      "authorUrl": "https://github.com/hmcguire-shopify",
+      "summary": "1. 概要 (1-2文で)  \nActive Record の `attribute` 定義が、モデルの「属性メソッド自動生成」と常に同期するように修正されています。これにより、あとから追加された `attribute` でも「動的属性」ではなく、通常の getter/setter などのメソッドが必ず生成されるようになります。"
+    },
+    {
+      "number": 58441,
+      "title": "Render Markdown lists that collapse into paragraphs {#pr-58441}",
+      "url": "https://github.com/rails/rails/pull/58441",
+      "mergedAt": "2026-08-11T00:00:00.000Z",
+      "author": "55728",
+      "authorUrl": "https://github.com/55728",
+      "summary": "1. 概要 (1-2文で)  \nこのPRは、Railsソース中の `:markup: markdown` なRDocコメントで、本来リストとして表示されるべき部分が1つの長い段落としてレンダリングされていた箇所をMarkdownとして正しく解釈されるように修正したものです。ついでに、リストではなくサンプル出力として表示すべき箇所をコードブロック（`<pre>`）として出るように整えています。"
+    },
+    {
+      "number": 58439,
+      "title": "Render the `EncryptedFile#read` exception list as a list {#pr-58439}",
+      "url": "https://github.com/rails/rails/pull/58439",
+      "mergedAt": "2026-08-11T00:00:00.000Z",
+      "author": "55728",
+      "authorUrl": "https://github.com/55728",
+      "summary": "1. 概要 (1-2文で)  \n`ActiveSupport::EncryptedFile#read` がどんな例外を投げるかのドキュメント表現が、1つの段落ではなく HTML の箇条書き（リスト）として正しくレンダリングされるように修正された PR です。コードの挙動変更はなく、ドキュメント（RDoc/YARD 出力）の見た目のみが改善されています。"
+    },
+    {
+      "number": 58412,
+      "title": "Omit optional route segments given empty strings {#pr-58412}",
+      "url": "https://github.com/rails/rails/pull/58412",
+      "mergedAt": "2026-08-11T00:00:00.000Z",
+      "author": "carldaws",
+      "authorUrl": "https://github.com/carldaws",
+      "summary": "1. 概要 (1-2文で)  \n`url_for` などでルーティングの「任意セグメント」に空文字列 (`\"\"`) が渡された場合、そのセグメントを URL から省略するように振る舞いを統一した修正です。これにより、フォーム送信などで空文字が来ても壊れた URL が生成されず、`nil` と同じ扱いになります。"
+    },
+    {
+      "number": 58423,
+      "title": "Mark the routes as loaded when the routes reloader runs standalone {#pr-58423}",
+      "url": "https://github.com/rails/rails/pull/58423",
+      "mergedAt": "2026-08-11T00:00:00.000Z",
+      "author": "55728",
+      "authorUrl": "https://github.com/55728",
+      "summary": "1. 概要 (1-2文で)  \nRails のルート再読み込み処理 (`Rails::Application::RoutesReloader`) が「ルートを実際には再描画しているのに loaded フラグが立たない」という退行バグを修正し、重複してルートが描画される問題を防ぐ PR です。`execute` 実行後に適切に「ルートがロード済み」であることを記録しつつ、失敗時は未ロードのままにするように振る舞いを整理しています。"
+    },
     {
       "number": 58433,
       "title": "Keep the string subscribers default when rebuilding a Fanout {#pr-58433}",
@@ -379,78 +451,6 @@
       "author": "jsaubry",
       "authorUrl": "https://github.com/jsaubry",
       "summary": "1. 概要 (1–2文で)  \nActive Record の型ごとに、`where` 句などのクエリ述語の「左辺（カラム側）」と「右辺（値側）」をカスタマイズできるフックが追加されました。これにより、UUID など「書き込み時の表現」と「検索時の表現」が異なる型でも、型クラス側で SQL 生成を制御しやすくなります。"
-    },
-    {
-      "number": 58383,
-      "title": "Delete leaked Cpk::Author in the autosave teardown {#pr-58383}",
-      "url": "https://github.com/rails/rails/pull/58383",
-      "mergedAt": "2026-08-05T00:00:00.000Z",
-      "author": "etiennebarrie",
-      "authorUrl": "https://github.com/etiennebarrie",
-      "summary": "1. 概要 (1-2文で)  \nこのPRは、特定のテスト(`TestDestroyAsPartOfAutosaveAssociation`)がトランザクションなしで実行されることにより、DB上に不要な `Cpk::Author` レコードが残り、その後に実行される別テスト(`WhereChainTest`)を不安定化させていた問題を修正するものです。autosave のテストの teardown で漏れた `Cpk::Author` を削除する1行を追加し、テスト間のデータリークを防いでいます。"
-    },
-    {
-      "number": 58281,
-      "title": "Move the LookupContext::DetailsKey caches to Ractor-local storage {#pr-58281}",
-      "url": "https://github.com/rails/rails/pull/58281",
-      "mergedAt": "2026-08-05T00:00:00.000Z",
-      "author": "etiennebarrie",
-      "authorUrl": "https://github.com/etiennebarrie",
-      "summary": "1. 概要 (1-2文で)  \nLookupContext::DetailsKey 周りのキャッシュを Ractor 間で共有しないようにし、Ractor ごとに独立したキャッシュを持つ形に変更することで、メイン Ractor 以外からのテンプレート lookup を可能にした PRです。あわせて、Ractor ローカルなストレージを簡単に扱うための `ActiveSupport::Ractors.store_if_absent` が追加され、`concurrent-ruby` のバージョン要件も上がっています。"
-    },
-    {
-      "number": 58373,
-      "title": "Honour `prepared_statements` on rails main {#pr-58373}",
-      "url": "https://github.com/rails/rails/pull/58373",
-      "mergedAt": "2026-08-05T00:00:00.000Z",
-      "author": "camallen",
-      "authorUrl": "https://github.com/camallen",
-      "summary": "1. 概要 (1-2文で)  \nRails の ActiveRecord において、`prepared_statements` 設定や `unprepared_statement` ブロックを無視して常にプリペアドステートメントが使われてしまう回 regress を修正し、`prepared_statements` 設定が正しく尊重されるようにした PR です。PostgreSQL かつトランザクションプーリングプロキシ（例: PgBouncer transaction mode）配下で名前付き PREPARE が壊れる問題を解消します。"
-    },
-    {
-      "number": 58360,
-      "title": "Use local fixtures {#pr-58360}",
-      "url": "https://github.com/rails/rails/pull/58360",
-      "mergedAt": "2026-08-05T00:00:00.000Z",
-      "author": "voxik",
-      "authorUrl": "https://github.com/voxik",
-      "summary": "1. 概要 (1-2文で)  \nこのPRは、Railties の Active Storage 関連テストで「グローバルな fixtures ではなく、そのテスト自身が持つローカル fixtures を使う」ように変更したものです。これにより、Railties をフレームワークの他の部分から切り離して単体でテストしやすくなっています。"
-    },
-    {
-      "number": 58045,
-      "title": "Serialize continuation step cursors through Active Job arguments {#pr-58045}",
-      "url": "https://github.com/rails/rails/pull/58045",
-      "mergedAt": "2026-08-05T00:00:00.000Z",
-      "author": "55728",
-      "authorUrl": "https://github.com/55728",
-      "summary": "1. 概要 (1-2文で)  \nActive Job の「継続 (Continuation)」機能で使うステップカーソルを、単なる JSON ではなく `ActiveJob::Arguments` を経由してシリアライズ/デシリアライズするように変更し、`Date`, `Time`, `GlobalID` などのカーソルの型が中断→再開後も維持されるようになりました。これにより、再開後にカーソルが `String` 化してメソッド呼び出しに失敗する問題が解消されます。"
-    },
-    {
-      "number": 58372,
-      "title": "Pluck from the target when the owner is a new record {#pr-58372}",
-      "url": "https://github.com/rails/rails/pull/58372",
-      "mergedAt": "2026-08-05T00:00:00.000Z",
-      "author": "djmb",
-      "authorUrl": "https://github.com/djmb",
-      "summary": "1. 概要 (1-2文で)  \n`Relation#ids` が `pluck` 委譲に変わったことで、新規レコードに紐づく未保存の関連に対する `ids` が空配列になってしまった問題を修正し、`ids` / `pluck` ともに関連の「target」（メモリ上のオブジェクト）から値を取得するようにした変更です。  \nこれにより、新規レコードに関連づけたオブジェクトに対しても、`ids` や `pluck` が直感的な結果を返すようになります。"
-    },
-    {
-      "number": 58374,
-      "title": "Ractor safe Active Record primary key {#pr-58374}",
-      "url": "https://github.com/rails/rails/pull/58374",
-      "mergedAt": "2026-08-05T00:00:00.000Z",
-      "author": "Edouard-chin",
-      "authorUrl": "https://github.com/Edouard-chin",
-      "summary": "1. 概要 (1-2文で)  \nActive Record の「主キーオブジェクト」を Ractor 内でも安全に扱えるようにするため、主キーを表すオブジェクトを freeze する変更が入りました。単一 PK・複合 PK・PK なしのすべてのケースで、計算済みの主キーが不変オブジェクトとして扱われるようになります。"
-    },
-    {
-      "number": 58375,
-      "title": "Add `NUL` (`\\0`) to the list of unsafe characters for storage {#pr-58375}",
-      "url": "https://github.com/rails/rails/pull/58375",
-      "mergedAt": "2026-08-04T00:00:00.000Z",
-      "author": "rosa",
-      "authorUrl": "https://github.com/rosa",
-      "summary": "1. 概要 (1-2文で)  \nActive Storage のファイル名サニタイズ処理において、NUL 文字 (`\\0`) を「危険な文字」として明示的に除去するようにした変更です。  \nこれにより、ユーザーアップロード由来のファイル名に NUL バイトが含まれている場合でも、`ArgumentError: string contains null byte` などの例外が発生しにくくなります。"
     }
   ]
 }
