@@ -1,7 +1,124 @@
 {
-  "lastUpdated": "2026-08-12T00:17:17.834Z",
+  "lastUpdated": "2026-08-13T00:20:28.034Z",
   "totalCount": 50,
   "items": [
+    {
+      "number": 58466,
+      "title": "Restore performance for dynamic attribute read {#pr-58466}",
+      "url": "https://github.com/rails/rails/pull/58466",
+      "mergedAt": "2026-08-12T00:00:00.000Z",
+      "author": "hmcguire-shopify",
+      "authorUrl": "https://github.com/hmcguire-shopify",
+      "summary": "1. 概要 (1-2文で)  \nこのPRは、前回の「パターンキャッシュ削除」によって悪化した ActiveModel の「動的属性読み取り（動的 attribute メソッド）」の性能を取り戻すための調整です。`to_hash` や `permitted?` など、Strong Parameters 周辺で多用される処理のパフォーマンス低下を緩和・解消することが目的です。"
+    },
+    {
+      "number": 58462,
+      "title": "Remove attribute_method_patterns_cache {#pr-58462}",
+      "url": "https://github.com/rails/rails/pull/58462",
+      "mergedAt": "2026-08-12T00:00:00.000Z",
+      "author": "hmcguire-shopify",
+      "authorUrl": "https://github.com/hmcguire-shopify",
+      "summary": "1. 概要 (1-2文で)  \nActiveModel/ActiveRecord の「動的属性メソッド」判定に使っていた `attribute_method_patterns_cache` を撤廃し、代わりに複数のマイクロ最適化でパフォーマンスを補う変更です。キャッシュは性能面では有用だったものの、サイズ無制限かつ Ractor 非対応であるため、将来の並行実行モデルとの整合性を優先して削除されています。"
+    },
+    {
+      "number": 58321,
+      "title": "Add Pacific Time (Canada) and Alberta Time zone mappings {#pr-58321}",
+      "url": "https://github.com/rails/rails/pull/58321",
+      "mergedAt": "2026-08-12T00:00:00.000Z",
+      "author": "Saidbek",
+      "authorUrl": "https://github.com/Saidbek",
+      "summary": "1. 概要 (1-2文で)  \nRails の `ActiveSupport::TimeZone` に、カナダ西部向けの新しいタイムゾーン名マッピング「Pacific Time (Canada)」「Alberta」が追加され、BC（ブリティッシュコロンビア）とアルバータ州での冬時間のズレを避けられるようになりました。既存の「Pacific Time (US & Canada)」「Mountain Time (US & Canada)」は互換性維持のためそのまま残されています。"
+    },
+    {
+      "number": 58446,
+      "title": "Fix where clauses with column-tuple syntax referencing other tables {#pr-58446}",
+      "url": "https://github.com/rails/rails/pull/58446",
+      "mergedAt": "2026-08-12T00:00:00.000Z",
+      "author": "cgunther",
+      "authorUrl": "https://github.com/cgunther",
+      "summary": "1. 概要 (1-2文で)  \n`where` 句で「カラムのタプル構文（配列構文）」を使う際に、他テーブルを `other_table.column` と明示した場合でも、現在のモデルのテーブル名が誤ってプレフィックスされてしまうバグを修正するPRです。これにより、JOIN 先のテーブルカラムを含むタプル条件が正しくSQLに変換されるようになります。"
+    },
+    {
+      "number": 58461,
+      "title": "Allow ffmpeg and ffprobe input arguments to be configured {#pr-58461}",
+      "url": "https://github.com/rails/rails/pull/58461",
+      "mergedAt": "2026-08-12T00:00:00.000Z",
+      "author": "flavorjones",
+      "authorUrl": "https://github.com/flavorjones",
+      "summary": "1. 概要 (1-2文で)  \nActive Storage が内部で呼び出している ffmpeg / ffprobe に対し、「入力側の引数」をアプリケーション側から設定できるようにする PR です。これにより、利用可能なデコーダ・プロトコルをホワイトリスト方式で制限するなど、アップロードメディア処理部分のハードニングが可能になります。"
+    },
+    {
+      "number": 58460,
+      "title": "Introduce `to_ractor_snapshot` / `load_ractor_snapshot` protocol for notifiers {#pr-58460}",
+      "url": "https://github.com/rails/rails/pull/58460",
+      "mergedAt": "2026-08-12T00:00:00.000Z",
+      "author": "kamipo",
+      "authorUrl": "https://github.com/kamipo",
+      "summary": "1. 概要 (1-2文で)  \n`ActiveSupport::Notifications` の notifier に対して、Ractor 間共有用の新しいプロトコル `to_ractor_snapshot` / `load_ractor_snapshot` が導入されました。これにより、カスタム notifier を実装する際に内部実装（Fanout の構造）を真似る必要がなくなり、Ractor 共有対応も任意で選べるようになります。"
+    },
+    {
+      "number": 58445,
+      "title": "Compile non-strict templates Ractor-locally {#pr-58445}",
+      "url": "https://github.com/rails/rails/pull/58445",
+      "mergedAt": "2026-08-12T00:00:00.000Z",
+      "author": "etiennebarrie",
+      "authorUrl": "https://github.com/etiennebarrie",
+      "summary": "1. 概要 (1-2文で)  \n非 strict ローカルなテンプレートでも Ractor 内から安全にコンパイル・実行できるようにする変更です。併せて、既存 Rails で strict locals テンプレート利用時に例外バックトレースが正しく補正されない不具合も修正されています。"
+    },
+    {
+      "number": 58403,
+      "title": "Move duplicated conditional_executor up to Rails::Command::Base {#pr-58403}",
+      "url": "https://github.com/rails/rails/pull/58403",
+      "mergedAt": "2026-08-12T00:00:00.000Z",
+      "author": "seuros",
+      "authorUrl": "https://github.com/seuros",
+      "summary": "1. 概要 (1-2文で)  \n`Rails::Command::ConsoleCommand` と `Rails::Command::RunnerCommand` に重複していた `conditional_executor` の実装が、共通の親クラスである `Rails::Command::Base` に集約されました。これにより、同様の挙動を持つコマンド間でロジックを共有できるようになり、重複コードが削減されています。"
+    },
+    {
+      "number": 58436,
+      "title": "Introduce builder method for alter table definitions {#pr-58436}",
+      "url": "https://github.com/rails/rails/pull/58436",
+      "mergedAt": "2026-08-12T00:00:00.000Z",
+      "author": "adrianna-chang-shopify",
+      "authorUrl": "https://github.com/adrianna-chang-shopify",
+      "summary": "1. 概要 (1-2文で)  \nRails のスキーマ定義まわりに、テーブル変更用の新しいビルダー `build_alter_table_definition` が追加され、既存の `create_alter_table` 呼び出しに依存せず「テーブル変更定義オブジェクト（AlterTable）」を組み立てられるようになりました。これにより、`create_table` と同様のスタイルで「変更予定内容」をオブジェクトとして扱えるようになり、DDL 生成や外部マイグレーション管理との連携がしやすくなります。"
+    },
+    {
+      "number": 57846,
+      "title": "Fix normalizes on an enum attribute raises ArgumentError instead of normalizing before enum casting {#pr-57846}",
+      "url": "https://github.com/rails/rails/pull/57846",
+      "mergedAt": "2026-08-12T00:00:00.000Z",
+      "author": "joaoGabriel55",
+      "authorUrl": "https://github.com/joaoGabriel55",
+      "summary": "1. 概要 (1-2文で)  \n`normalizes` と `enum` を同じ属性に併用した際、正規化前の値に対して `enum` が先にバリデーションして `ArgumentError` を投げていた問題を修正した PR です。正規化を「enum の検証より先」に行うようにし、ユーザー入力を正しくサニタイズしてから enum キャスト・検証できるようになりました。"
+    },
+    {
+      "number": 58455,
+      "title": "Show bin/console startup banner based on IRB {#pr-58455}",
+      "url": "https://github.com/rails/rails/pull/58455",
+      "mergedAt": "2026-08-12T00:00:00.000Z",
+      "author": "byroot",
+      "authorUrl": "https://github.com/byroot",
+      "summary": "1. 概要 (1-2文で)  \n`bin/console` 実行時に表示される起動バナーを、Rails 独自実装ではなく IRB が持つバナー表示機構に合わせて出すように整理し、Rails 側のバナー制御ロジックを IRB ベースに再設計した PR です。これにより、IRB の設定やバージョンに応じた一貫したバナー表示が行われ、テストもそれに合わせて拡充されています。"
+    },
+    {
+      "number": 58454,
+      "title": "Avoid duplicating fixtures path {#pr-58454}",
+      "url": "https://github.com/rails/rails/pull/58454",
+      "mergedAt": "2026-08-12T00:00:00.000Z",
+      "author": "byroot",
+      "authorUrl": "https://github.com/byroot",
+      "summary": "1. 概要 (1-2文で)  \nこのPRは、Rails のテストヘルパー内部で「fixtures のパスを二重に登録してしまっていた」処理を修正し、不要な重複をなくすことでテスト実行を軽量化しています。動作上の機能追加や仕様変更はなく、パフォーマンスと内部実装の整理が主目的です。"
+    },
+    {
+      "number": 57980,
+      "title": "Construct And nodes as Nary instead of Binary {#pr-57980}",
+      "url": "https://github.com/rails/rails/pull/57980",
+      "mergedAt": "2026-08-12T00:00:00.000Z",
+      "author": "skipkayhil",
+      "authorUrl": "https://github.com/skipkayhil",
+      "summary": "1. 概要 (1-2文で)  \nこのPRは、Active Record のクエリ条件を組み立てる際の `And` ノードの構造を、「二分木」ではなく「N分木（可変長）」として構築するように変更したものです。これにより、複数条件を AND で結合したときの AST（抽象構文木）の形がフラットになり、扱いやすく・最適化しやすくなります。"
+    },
     {
       "number": 58388,
       "title": "Cleanup duplicate/unneeded requires {#pr-58388}",
@@ -334,123 +451,6 @@
       "author": "seuros",
       "authorUrl": "https://github.com/seuros",
       "summary": "1. 概要 (1-2文で)  \n`ActiveSupport::Cache::Strategy::LocalCache` 内で、`fetch_multi` と `read_multi_entries` に重複して書かれていた「ローカルキャッシュからの複数キー解決処理」が共通メソッドに抽出されました。挙動の変更はなく、内部実装のリファクタリングです。"
-    },
-    {
-      "number": 58401,
-      "title": "Extract duplicated job matching logic in ActiveJob::TestHelper {#pr-58401}",
-      "url": "https://github.com/rails/rails/pull/58401",
-      "mergedAt": "2026-08-07T00:00:00.000Z",
-      "author": "seuros",
-      "authorUrl": "https://github.com/seuros",
-      "summary": "1. 概要 (1-2文で)  \nActiveJob::TestHelper 内で `assert_enqueued_with` と `assert_performed_with` がそれぞれ重複して持っていた「ジョブの条件マッチング」処理を、共通のプライベートメソッド `find_matching_job` に切り出した PR です。挙動は変えずに、重複コードを削減しテストヘルパー内部の保守性を高めています。"
-    },
-    {
-      "number": 58395,
-      "title": "Extract duplicated bind value coercion in QueryMethods {#pr-58395}",
-      "url": "https://github.com/rails/rails/pull/58395",
-      "mergedAt": "2026-08-06T00:00:00.000Z",
-      "author": "seuros",
-      "authorUrl": "https://github.com/seuros",
-      "summary": "1. 概要 (1-2文で)  \n`ActiveRecord::Relation::QueryMethods` 内で、SQLリテラル用のバインド値変換ロジックが重複していた部分を共通メソッド化して整理したPRです。挙動・機能は変わらず、内部実装のリファクタリングのみです。"
-    },
-    {
-      "number": 58382,
-      "title": "Remove collector methods of unregistered Mime types {#pr-58382}",
-      "url": "https://github.com/rails/rails/pull/58382",
-      "mergedAt": "2026-08-06T00:00:00.000Z",
-      "author": "etiennebarrie",
-      "authorUrl": "https://github.com/etiennebarrie",
-      "summary": "1. 概要 (1-2文で)  \n`Mime::Type.unregister` で MIME タイプを削除した後にも、そのフォーマット向けの Collector メソッドが残り続けていた問題を修正し、適切にメソッドを削除してエラーメッセージを分かりやすくしました。これにより、未登録の MIME タイプに対するフォーマットメソッド呼び出し時に、従来の紛らわしい `InvalidMimeType` ではなく、明確な `NoMethodError` が発生するようになります。"
-    },
-    {
-      "number": 58391,
-      "title": "Define shareable compiled_method_container readers {#pr-58391}",
-      "url": "https://github.com/rails/rails/pull/58391",
-      "mergedAt": "2026-08-06T00:00:00.000Z",
-      "author": "etiennebarrie",
-      "authorUrl": "https://github.com/etiennebarrie",
-      "summary": "1. 概要 (1-2文で)  \nRails のビューコンパイル周りで、`compiled_method_container` のリーダメソッド定義を「Ractor で共有可能 (shareable)」な形に修正した PR です。テンプレートのコンパイル/レンダリングが Ractor 環境で動作するように、lambda によるクラスキャプチャのタイミングと方法を見直しています。"
-    },
-    {
-      "number": 58390,
-      "title": "Make template lookup ractor-safe {#pr-58390}",
-      "url": "https://github.com/rails/rails/pull/58390",
-      "mergedAt": "2026-08-06T00:00:00.000Z",
-      "author": "etiennebarrie",
-      "authorUrl": "https://github.com/etiennebarrie",
-      "summary": "1. 概要 (1-2文で)  \nこのPRは、テンプレートの lookup（`LookupContext`）と digest 計算（`Digestor`）周りを Ractor セーフにするための変更です。これによりメイン Ractor 以外からでも `LookupContext` の構築やテンプレート digest の計算が安全に行えるようになります。"
-    },
-    {
-      "number": 58387,
-      "title": "Reduce allocations during attribute definition {#pr-58387}",
-      "url": "https://github.com/rails/rails/pull/58387",
-      "mergedAt": "2026-08-06T00:00:00.000Z",
-      "author": "hmcguire-shopify",
-      "authorUrl": "https://github.com/hmcguire-shopify",
-      "summary": "1. 概要 (1-2文で)  \nActiveModel の attribute メソッド定義時に使われる `\"define_method_\"` 文字列の生成回数を減らし、オブジェクト割り当て（アロケーション）を削減するパフォーマンス改善です。Pattern ごとに 1 回だけ文字列を作るようにし、大量の属性を持つモデルでメモリ負荷を軽減します。"
-    },
-    {
-      "number": 58386,
-      "title": "Make Relation::FromClause.empty Ractor safe {#pr-58386}",
-      "url": "https://github.com/rails/rails/pull/58386",
-      "mergedAt": "2026-08-06T00:00:00.000Z",
-      "author": "hmcguire-shopify",
-      "authorUrl": "https://github.com/hmcguire-shopify",
-      "summary": "1. 概要 (1-2文で)  \nActive Record の `Relation::FromClause.empty` の実装を、Ruby 3 の Ractor（並行実行環境）でも安全に共有できるように変更した PR です。`WhereClause` に対して行われたのと同種の「イミュータブルで Ractor セーフな空オブジェクト」の扱いを `FromClause` にも拡張しています。"
-    },
-    {
-      "number": 58206,
-      "title": "Generate an omakase-compliant config/ci.rb when steps are skipped {#pr-58206}",
-      "url": "https://github.com/rails/rails/pull/58206",
-      "mergedAt": "2026-08-06T00:00:00.000Z",
-      "author": "55728",
-      "authorUrl": "https://github.com/55728",
-      "summary": "1. 概要 (1-2文で)  \n`bin/rails new` 実行時に各種 `--skip-*` オプションを使った場合でも、新規アプリが自前の `bin/rubocop` / `bin/ci`（Style: Ruby）チェックに確実に通るよう、`config/ci.rb` テンプレートの空行出力ロジックが調整されました。  \nとくに `--skip-test` 時に `Layout/EmptyLinesAroundBlockBody` で RuboCop が落ちていた問題を解消します。"
-    },
-    {
-      "number": 58392,
-      "title": "Move duplicated execute_batch up to MySQL::DatabaseStatements {#pr-58392}",
-      "url": "https://github.com/rails/rails/pull/58392",
-      "mergedAt": "2026-08-06T00:00:00.000Z",
-      "author": "seuros",
-      "authorUrl": "https://github.com/seuros",
-      "summary": "1. 概要 (1-2文で)  \nMySQL 系アダプタ（mysql2 / trilogy）でそれぞれ重複実装されていた `execute_batch` を、共通の `ActiveRecord::ConnectionAdapters::MySQL::DatabaseStatements` に集約したリファクタリングです。挙動の変更はほぼなく、コードの重複排除とメンテナンス性向上が主目的です。"
-    },
-    {
-      "number": 58187,
-      "title": "Inspect nested attribute `id` in `RecordNotFound` message {#pr-58187}",
-      "url": "https://github.com/rails/rails/pull/58187",
-      "mergedAt": "2026-08-06T00:00:00.000Z",
-      "author": "flavorjones",
-      "authorUrl": "https://github.com/flavorjones",
-      "summary": "1. 概要 (1-2文で)  \n`accepts_nested_attributes_for` 経由で渡されたネスト属性の `id` が見つからない場合に発生する `ActiveRecord::RecordNotFound` のエラーメッセージ内で、ユーザー入力由来の `id` をそのまま埋め込まず `.inspect` するように変更した PR です。これにより、ANSIエスケープシーケンスなどを含む悪意ある `id` によるログ偽装・視認性の低下リスクを低減します。"
-    },
-    {
-      "number": 58209,
-      "title": "Flatten block content inside links in Action Text markdown conversion {#pr-58209}",
-      "url": "https://github.com/rails/rails/pull/58209",
-      "mergedAt": "2026-08-06T00:00:00.000Z",
-      "author": "flavorjones",
-      "authorUrl": "https://github.com/flavorjones",
-      "summary": "1. 概要 (1-2文で)  \nAction Text の `Content#to_markdown` が、リンク (`<a>`) 内にブロック要素が入っている場合に不正な CommonMark を出力していた問題を修正する PRです。リンク内のブロック要素を Markdown の制約に合わせて「1行のインラインテキスト」にフラット化してからリンク記法に包むように変更しています。"
-    },
-    {
-      "number": 58270,
-      "title": "asset_path: strip the query/fragment tail without a second scan {#pr-58270}",
-      "url": "https://github.com/rails/rails/pull/58270",
-      "mergedAt": "2026-08-06T00:00:00.000Z",
-      "author": "nuclearspike",
-      "authorUrl": "https://github.com/nuclearspike",
-      "summary": "1. 概要 (1-2文で)  \n`asset_path` がクエリ文字列・フラグメント（`?` / `#` 以降）を取り除く処理について、正規表現による2回のスキャンと不要な文字列コピーをやめて、1回のスキャン＋スライスだけで処理するよう最適化したPRです。これにより `image_tag` や `javascript_include_tag` などのヘルパ全般で、オブジェクト割り当て削減と数％のパフォーマンス向上が見込まれます。"
-    },
-    {
-      "number": 58135,
-      "title": "Add query predicate hooks for Active Record types {#pr-58135}",
-      "url": "https://github.com/rails/rails/pull/58135",
-      "mergedAt": "2026-08-05T00:00:00.000Z",
-      "author": "jsaubry",
-      "authorUrl": "https://github.com/jsaubry",
-      "summary": "1. 概要 (1–2文で)  \nActive Record の型ごとに、`where` 句などのクエリ述語の「左辺（カラム側）」と「右辺（値側）」をカスタマイズできるフックが追加されました。これにより、UUID など「書き込み時の表現」と「検索時の表現」が異なる型でも、型クラス側で SQL 生成を制御しやすくなります。"
     }
   ]
 }
