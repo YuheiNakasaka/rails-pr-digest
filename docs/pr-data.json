@@ -1,7 +1,43 @@
 {
-  "lastUpdated": "2026-08-13T00:20:28.034Z",
+  "lastUpdated": "2026-08-14T00:17:14.613Z",
   "totalCount": 50,
   "items": [
+    {
+      "number": 57629,
+      "title": "Make callbacks ractor-safe {#pr-57629}",
+      "url": "https://github.com/rails/rails/pull/57629",
+      "mergedAt": "2026-08-13T00:00:00.000Z",
+      "author": "gmcgibbon",
+      "authorUrl": "https://github.com/gmcgibbon",
+      "summary": "1. 概要 (1-2文で)  \nこのPRは、`ActiveSupport::Callbacks` を Ractor セーフにするための対応です。具体的には、コールバックチェーンやユーザー定義の Proc を Ractor 共有可能にし、Ractor 環境下でも安全にコールバックが動作するようにしています。"
+    },
+    {
+      "number": 57226,
+      "title": "Fix method_missing performance regression for virtual SELECT alias attributes {#pr-57226}",
+      "url": "https://github.com/rails/rails/pull/57226",
+      "mergedAt": "2026-08-13T00:00:00.000Z",
+      "author": "hammadxcm",
+      "authorUrl": "https://github.com/hammadxcm",
+      "summary": "1. 概要 (1–2文で)  \nRails 7.2.3 で導入された `ActiveRecord::AttributeMethods#method_missing` の変更により、仮想カラム（SELECT 句のエイリアスなど）のアクセスが大幅に遅くなっていた問題を、例外発生を避ける形で解消した PR です。`public_instance_method` 呼び出し前に `public_method_defined?` でチェックすることで、スレッドセーフ性を維持しつつパフォーマンスを改善しています。"
+    },
+    {
+      "number": 58467,
+      "title": "Make ActiveSupport::LogSubscriber ractor safe {#pr-58467}",
+      "url": "https://github.com/rails/rails/pull/58467",
+      "mergedAt": "2026-08-13T00:00:00.000Z",
+      "author": "gmcgibbon",
+      "authorUrl": "https://github.com/gmcgibbon",
+      "summary": "1. 概要 (1-2文で)  \nActiveSupport::LogSubscriber の実装を見直し、Ractor 環境でも安全に動作するように「ログ関連のクラスインスタンス変数の初期化タイミングと場所」を変更した PR です。主に `@supports_flush` とデフォルト logger の設定を「遅延評価」から「メイン Ractor での事前初期化」に切り替えています。"
+    },
+    {
+      "number": 58468,
+      "title": "Reduce Pattern#method_name allocations during boot {#pr-58468}",
+      "url": "https://github.com/rails/rails/pull/58468",
+      "mergedAt": "2026-08-13T00:00:00.000Z",
+      "author": "skipkayhil",
+      "authorUrl": "https://github.com/skipkayhil",
+      "summary": "1. 概要 (1–2文で)  \n`ActiveModel::AttributeMethods` でメソッド名テンプレートを生成する際、`:attr_name` と `:as` が同じ場合に余計な文字列・パターンオブジェクトを生成しないようにし、Railsブート時の `Pattern#method_name` 関連のオブジェクト割り当てを削減する最適化です。機能的な挙動は変えずに、パフォーマンスとメモリ効率を改善する変更です。"
+    },
     {
       "number": 58466,
       "title": "Restore performance for dynamic attribute read {#pr-58466}",
@@ -415,42 +451,6 @@
       "author": "Edouard-chin",
       "authorUrl": "https://github.com/Edouard-chin",
       "summary": "1. 概要 (1–2文で)  \nRails の ERB テンプレートハンドラの各種オプションを、`ActionView::Base`（および `config.action_view.*`）経由で公式に設定できるようにした PR です。これにより、これまで非公開扱い（`:nodoc:`）となった `ActionView::Template::Handlers::ERB` クラスを直接参照して行っていた設定を、公開インターフェイスから行えるようになります。"
-    },
-    {
-      "number": 58060,
-      "title": "Ractor compatible Active Support Notifications {#pr-58060}",
-      "url": "https://github.com/rails/rails/pull/58060",
-      "mergedAt": "2026-08-07T00:00:00.000Z",
-      "author": "Edouard-chin",
-      "authorUrl": "https://github.com/Edouard-chin",
-      "summary": "1. 概要 (1-2文で)  \nActiveSupport::Notifications を Ractor 内でも安全に利用できるようにするため、Ractor ごとに独立した Notifier を持つ仕組みに変更した PRです。既存の `AS::Fanout` を直接 Ractor-safe にするのではなく、「購読情報のスナップショット」をもとに Ractor 単位で Notifier を生成する設計になっています。"
-    },
-    {
-      "number": 58405,
-      "title": "Add back `loaded` to RoutesReloader {#pr-58405}",
-      "url": "https://github.com/rails/rails/pull/58405",
-      "mergedAt": "2026-08-07T00:00:00.000Z",
-      "author": "rafaelfranca",
-      "authorUrl": "https://github.com/rafaelfranca",
-      "summary": "1. 概要 (1-2文で)  \n`Rails::Application::RoutesReloader` から一度削除されていた `loaded` メソッド（属性）が、フレームワークの公開APIであることが判明したため復活させたPRです。これにより、既存アプリやライブラリが `RoutesReloader#loaded` に依存していても、引き続き問題なく動作できるようになります。"
-    },
-    {
-      "number": 58397,
-      "title": "Extract duplicated UPDATE self-join preparation into Arel::Visitors::… {#pr-58397}",
-      "url": "https://github.com/rails/rails/pull/58397",
-      "mergedAt": "2026-08-07T00:00:00.000Z",
-      "author": "seuros",
-      "authorUrl": "https://github.com/seuros",
-      "summary": "1. 概要 (1-2文で)  \nPostgreSQL と SQLite の Arel Visitor に重複していた UPDATE の self join 用の前処理ロジックが、共通の `Arel::Visitors::ToSql#prepare_update_statement_with_self_join` に抽出されました。挙動の変更はなく、内部実装のリファクタリングのみです。"
-    },
-    {
-      "number": 58400,
-      "title": "Extract duplicated local cache multi-read resolution in Strategy::LocalCache {#pr-58400}",
-      "url": "https://github.com/rails/rails/pull/58400",
-      "mergedAt": "2026-08-07T00:00:00.000Z",
-      "author": "seuros",
-      "authorUrl": "https://github.com/seuros",
-      "summary": "1. 概要 (1-2文で)  \n`ActiveSupport::Cache::Strategy::LocalCache` 内で、`fetch_multi` と `read_multi_entries` に重複して書かれていた「ローカルキャッシュからの複数キー解決処理」が共通メソッドに抽出されました。挙動の変更はなく、内部実装のリファクタリングです。"
     }
   ]
 }
