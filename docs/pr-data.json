@@ -1,7 +1,61 @@
 {
-  "lastUpdated": "2026-08-14T00:17:14.613Z",
+  "lastUpdated": "2026-08-15T00:09:09.869Z",
   "totalCount": 50,
   "items": [
+    {
+      "number": 58476,
+      "title": "Make Action View subscribers ractor safe {#pr-58476}",
+      "url": "https://github.com/rails/rails/pull/58476",
+      "mergedAt": "2026-08-14T00:00:00.000Z",
+      "author": "gmcgibbon",
+      "authorUrl": "https://github.com/gmcgibbon",
+      "summary": "1. 概要 (1-2文で)  \nAction View のログ購読クラス（`LogSubscriber` / `StructuredEventSubscriber`）で `Rails.root` の扱いを Ractor セーフにするため、`Rails.root` を「遅延メモ化」ではなく「初期化時に確定」する形に変更した PRです。これにより、マルチ Ractor 環境でも Action View のログ・イベント購読が安全に動作することを意図しています。"
+    },
+    {
+      "number": 58483,
+      "title": "Freeze the Controller `default_url_options` {#pr-58483}",
+      "url": "https://github.com/rails/rails/pull/58483",
+      "mergedAt": "2026-08-14T00:00:00.000Z",
+      "author": "Edouard-chin",
+      "authorUrl": "https://github.com/Edouard-chin",
+      "summary": "1. 概要 (1-2文で)  \nController / View で使われる `default_url_options` を「破壊的に変更できないように凍結（freeze）する」変更です。  \n暗黙のミューテーションによる予測しづらいリダイレクト／URL生成の挙動を防ぎ、将来的な Ractor 対応も見据えた安全性向上が目的です。"
+    },
+    {
+      "number": 58482,
+      "title": "Restore `unshareable_proc_action` with `ensure` in default scoping test {#pr-58482}",
+      "url": "https://github.com/rails/rails/pull/58482",
+      "mergedAt": "2026-08-14T00:00:00.000Z",
+      "author": "ngan",
+      "authorUrl": "https://github.com/ngan",
+      "summary": "1. 概要 (1-2文で)  \n`DefaultScopingTest#test_default_scopes_are_ractor_shareable` 内でグローバル設定 `ActiveSupport::Ractors.unshareable_proc_action` を一時的に変更する際、例外発生時にも必ず元に戻るように、`ActiveSupport::Ractors.with`（内部で `ensure` を使う仕組み）を使うように修正したテスト専用の変更です。これにより、テスト失敗時に Ractors 周りの設定リークが起きて後続テストが巻き添えになる問題を防ぎます。"
+    },
+    {
+      "number": 58421,
+      "title": "Let the schema readers answer for many tables at once {#pr-58421}",
+      "url": "https://github.com/rails/rails/pull/58421",
+      "mergedAt": "2026-08-14T00:00:00.000Z",
+      "author": "ngan",
+      "authorUrl": "https://github.com/ngan",
+      "summary": "1. 概要 (1-2文で)  \nこのPRは、スキーマダンプ時にテーブルごとにバラバラに発行していたメタデータ系クエリ（インデックス・外部キー・制約など）を「複数テーブルまとめて」取得できるようにし、大規模スキーマでの `db:schema:dump` / `db:migrate` の時間とクエリ数を大幅に削減する変更です。出力されるスキーマファイルの内容は（バグ修正を除き）変わらず、内部の問い合わせ方法とAPIシグネチャが拡張されています。"
+    },
+    {
+      "number": 57973,
+      "title": "Add support for the HTTP QUERY method {#pr-57973}",
+      "url": "https://github.com/rails/rails/pull/57973",
+      "mergedAt": "2026-08-14T00:00:00.000Z",
+      "author": "magnogouveia",
+      "authorUrl": "https://github.com/magnogouveia",
+      "summary": "1. 概要 (1–2文で)\n- Rails に HTTP の新メソッド QUERY（RFC 10008）が正式サポートとして追加され、`routes`・`request` オブジェクト・統合テストなど Action Pack 全体で GET 等と同様に扱えるようになりました。  \n- QUERY は「安全かつ冪等な、ボディ付きの GET 相当メソッド」として扱われ、複雑・大容量な検索条件を URL クエリ文字列ではなくリクエストボディで送る用途を想定しています。"
+    },
+    {
+      "number": 58469,
+      "title": "Remove \"missing\" workarounds from Active Record {#pr-58469}",
+      "url": "https://github.com/rails/rails/pull/58469",
+      "mergedAt": "2026-08-14T00:00:00.000Z",
+      "author": "hmcguire-shopify",
+      "authorUrl": "https://github.com/hmcguire-shopify",
+      "summary": "1. 概要 (1-2文で)  \nActive Record の `method_missing` ベースの「missing 系ワークアラウンド」が削除され、6.1 時代の Marshal 互換のためだけに残っていたコードが整理されました。これにより、仮想属性や `respond_to?` 周りのパフォーマンスが向上しつつ、新形式での `Marshal.load` 互換性はテストで担保されています。"
+    },
     {
       "number": 57629,
       "title": "Make callbacks ractor-safe {#pr-57629}",
@@ -397,60 +451,6 @@
       "author": "kamipo",
       "authorUrl": "https://github.com/kamipo",
       "summary": "1. 概要 (1-2文で)  \nRails の ActiveRecord 内で、関連(reflection)のキーを配列化して扱っていた箇所を `Array(...)` から `ActiveRecord::Key.for(...)` に統一し、単一キーと複合キーを同じ Enumerable API で扱えるようにリファクタリングした PR です。機能追加ではなく、#58368 に続く内部実装の揃え・複合主キー対応を見越した整備です。"
-    },
-    {
-      "number": 58396,
-      "title": "Eager load templates {#pr-58396}",
-      "url": "https://github.com/rails/rails/pull/58396",
-      "mergedAt": "2026-08-08T00:00:00.000Z",
-      "author": "etiennebarrie",
-      "authorUrl": "https://github.com/etiennebarrie",
-      "summary": "1. 概要 (1-2文で)  \nこのPRは、Rails起動時にテンプレートを「先読み（eager load）」して共有可能にする仕組みを Action View に導入したものです。まずは strict locals なテンプレートのみを対象とし、テンプレートのコンパイル先コンテナの不整合を明示的に検出する安全チェックも追加されています。"
-    },
-    {
-      "number": 58415,
-      "title": "Remove `symbol_column_to_string` in favor of `columns_hash` + `Symbol#name` {#pr-58415}",
-      "url": "https://github.com/rails/rails/pull/58415",
-      "mergedAt": "2026-08-08T00:00:00.000Z",
-      "author": "kamipo",
-      "authorUrl": "https://github.com/kamipo",
-      "summary": "1. 概要 (1-2文で)  \n`symbol_column_to_string` というヘルパーとそのキャッシュを削除し、代わりに `columns_hash`（クラスレベルでメモ化されたハッシュ）と Ruby 3.0 以降の `Symbol#name` を直接使うようにする変更です。これにより、シンボルを使ったカラム参照で追加のキャッシュ構造が不要になり、コードが簡潔かつ同等のパフォーマンスを維持します。"
-    },
-    {
-      "number": 58404,
-      "title": "Fix the `Request#media_type` documentation example {#pr-58404}",
-      "url": "https://github.com/rails/rails/pull/58404",
-      "mergedAt": "2026-08-07T00:00:00.000Z",
-      "author": "55728",
-      "authorUrl": "https://github.com/55728",
-      "summary": "1. 概要 (1-2文で)  \n`ActionDispatch::Request#media_type` のドキュメント内サンプルが、実際の挙動と一致していなかったため、正しいリクエスト例（`POST`＋ボディ付き）に修正したドキュメント専用のPRです。コードの挙動自体は一切変更されていません。"
-    },
-    {
-      "number": 58384,
-      "title": "Allow `config.active_storage.variant_processor` to be set to a class {#pr-58384}",
-      "url": "https://github.com/rails/rails/pull/58384",
-      "mergedAt": "2026-08-07T00:00:00.000Z",
-      "author": "flavorjones",
-      "authorUrl": "https://github.com/flavorjones",
-      "summary": "1. 概要 (1-2文で)  \nActive Storage の `config.active_storage.variant_processor` に、これまでの `:vips` / `:mini_magick` / `:disabled` というシンボルだけでなく、任意のクラスを直接指定できるようにした PR です。これにより、独自の画像変換パイプラインやサンドボックス化された変換処理などを、Rails の設定レベルで差し替えられるようになります。"
-    },
-    {
-      "number": 58399,
-      "title": "Active Record ivar ractor safety {#pr-58399}",
-      "url": "https://github.com/rails/rails/pull/58399",
-      "mergedAt": "2026-08-07T00:00:00.000Z",
-      "author": "gmcgibbon",
-      "authorUrl": "https://github.com/gmcgibbon",
-      "summary": "1. 概要 (1-2文で)  \nActive Record 内で一部のインスタンス変数が Ractor（マルチスレッド並列実行用の仕組み）上で安全に参照できない問題を解消し、Ractor でも Active Record を扱えるようにするための「Ractor セーフティ」対応 PR です。特に、メモ化済みのインスタンス変数を freeze したり、必要に応じて main Ractor に処理を委譲する形に変更しています。"
-    },
-    {
-      "number": 58359,
-      "title": "Allow to configure ERB options through `ActionView::Base` {#pr-58359}",
-      "url": "https://github.com/rails/rails/pull/58359",
-      "mergedAt": "2026-08-07T00:00:00.000Z",
-      "author": "Edouard-chin",
-      "authorUrl": "https://github.com/Edouard-chin",
-      "summary": "1. 概要 (1–2文で)  \nRails の ERB テンプレートハンドラの各種オプションを、`ActionView::Base`（および `config.action_view.*`）経由で公式に設定できるようにした PR です。これにより、これまで非公開扱い（`:nodoc:`）となった `ActionView::Template::Handlers::ERB` クラスを直接参照して行っていた設定を、公開インターフェイスから行えるようになります。"
     }
   ]
 }
