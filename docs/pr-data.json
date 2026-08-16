@@ -1,7 +1,34 @@
 {
-  "lastUpdated": "2026-08-15T00:09:09.869Z",
+  "lastUpdated": "2026-08-16T00:07:02.697Z",
   "totalCount": 50,
   "items": [
+    {
+      "number": 58488,
+      "title": "Read the schema cache's primary keys and indexes for many tables at once {#pr-58488}",
+      "url": "https://github.com/rails/rails/pull/58488",
+      "mergedAt": "2026-08-15T00:00:00.000Z",
+      "author": "ngan",
+      "authorUrl": "https://github.com/ngan",
+      "summary": "1. 概要 (1-2文で)  \n`SchemaCache#add_all` が、テーブルごとに個別に問い合わせていた「主キー」と「インデックス」の読み込みを、複数テーブルをまとめて取得する形に変更し、スキーマキャッシュのダンプ時の SQL ステートメント数を大幅に削減する変更です。キャッシュされる内容や順序は従来と完全に同一で、パフォーマンス改善のみが目的です。"
+    },
+    {
+      "number": 58487,
+      "title": "Fix the `CollectionProxy#delete_all` documentation return value {#pr-58487}",
+      "url": "https://github.com/rails/rails/pull/58487",
+      "mergedAt": "2026-08-15T00:00:00.000Z",
+      "author": "55728",
+      "authorUrl": "https://github.com/55728",
+      "summary": "1. 概要 (1-2文で)  \n`CollectionProxy#delete_all` のドキュメントが、実際の挙動（削除件数を返す）と食い違っていたのを修正する PR です。特に `:nullify` 戦略のサンプルが「レコード配列を返す」かのように書かれていた点を、正しい戻り値の説明に合わせました。"
+    },
+    {
+      "number": 57852,
+      "title": "Freeze configuration {#pr-57852}",
+      "url": "https://github.com/rails/rails/pull/57852",
+      "mergedAt": "2026-08-15T00:00:00.000Z",
+      "author": "gmcgibbon",
+      "authorUrl": "https://github.com/gmcgibbon",
+      "summary": "1. 概要 (1–2文で)  \nRails の Active Record と Action Pack の一部設定値を、アプリケーション初期化後に freeze（必要な Ruby では make_shareable）することで、Ractor 間で安全に参照できるようにした PR です。これにより、初期化後に特定の設定を動的に書き換えることは基本的にできなくなります。"
+    },
     {
       "number": 58476,
       "title": "Make Action View subscribers ractor safe {#pr-58476}",
@@ -424,33 +451,6 @@
       "author": "55728",
       "authorUrl": "https://github.com/55728",
       "summary": "1. 概要 (1-2文で)  \nRactor セーフモード時に `ActionController::Metal.middleware` の一部のミドルウェア操作メソッドが凍結済みスタックを直接変更しようとして `FrozenError` になる不具合を修正し、他の変更系メソッドと同様に「コピーして再凍結」されるように統一した PR です。Ractors 対応（`ActiveSupport::Ractors.unshareable_proc_action` 有効時）のミドルウェアスタック操作が一貫して安全に動作するようになります。"
-    },
-    {
-      "number": 58217,
-      "title": "Remove unused Active Record internals {#pr-58217}",
-      "url": "https://github.com/rails/rails/pull/58217",
-      "mergedAt": "2026-08-08T00:00:00.000Z",
-      "author": "55728",
-      "authorUrl": "https://github.com/55728",
-      "summary": "1. 概要 (1-2文で)  \nこのPRは、Active Record 内部で一切使われていないメソッドや引数・インスタンス変数などの「死んだコード」をまとめて削除するクリーンアップです。挙動の変更や外部APIの破壊的変更は基本的になく、内部実装の整理・単純化が主目的です。"
-    },
-    {
-      "number": 58361,
-      "title": "Fix TimeWithZone#to_s raising in a non-main Ractor {#pr-58361}",
-      "url": "https://github.com/rails/rails/pull/58361",
-      "mergedAt": "2026-08-08T00:00:00.000Z",
-      "author": "55728",
-      "authorUrl": "https://github.com/55728",
-      "summary": "1. 概要 (1-2文で)  \n`ActiveSupport::TimeZone` が Ractor 共有可能になっていたにもかかわらず、非メイン Ractor で `TimeWithZone#to_s` などを呼ぶと `Ractor::IsolationError` が発生していた問題を修正した PRです。内部で使っているタイムゾーンオフセット用の文字列を凍結し、Ractor 間で安全に共有できるようにしています。"
-    },
-    {
-      "number": 58416,
-      "title": "Use `ActiveRecord::Key.for` in remaining `Array(reflection.*_key)` sites {#pr-58416}",
-      "url": "https://github.com/rails/rails/pull/58416",
-      "mergedAt": "2026-08-08T00:00:00.000Z",
-      "author": "kamipo",
-      "authorUrl": "https://github.com/kamipo",
-      "summary": "1. 概要 (1-2文で)  \nRails の ActiveRecord 内で、関連(reflection)のキーを配列化して扱っていた箇所を `Array(...)` から `ActiveRecord::Key.for(...)` に統一し、単一キーと複合キーを同じ Enumerable API で扱えるようにリファクタリングした PR です。機能追加ではなく、#58368 に続く内部実装の揃え・複合主キー対応を見越した整備です。"
     }
   ]
 }
