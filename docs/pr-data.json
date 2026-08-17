@@ -1,7 +1,52 @@
 {
-  "lastUpdated": "2026-08-16T00:07:02.697Z",
+  "lastUpdated": "2026-08-17T00:07:01.874Z",
   "totalCount": 50,
   "items": [
+    {
+      "number": 58097,
+      "title": "Join an Array `accept` in `file_field_tag` {#pr-58097}",
+      "url": "https://github.com/rails/rails/pull/58097",
+      "mergedAt": "2026-08-16T00:00:00.000Z",
+      "author": "55728",
+      "authorUrl": "https://github.com/55728",
+      "summary": "1. 概要 (1-2文で)\n- `file_field_tag` に `accept` オプションとして配列を渡したときのレンダリングが、HTML仕様に沿ったカンマ区切り形式になるよう修正されました。\n- これにより、`file_field_tag` と `file_field` の挙動が揃い、ブラウザが複数 MIME type を正しく解釈できるようになります。\n\n2. 変更内容の詳細\n- 対象: `ActionView::Helpers::FormTagHelper#file_field_tag`\n\nこれまで:\n\n```ruby\nfile_field_tag(\"picture\", accept: [\"image/png\", \"image/gif\"])\n# => <input type=\"file\" name=\"picture\" accept=\"image/png image/gif\">\n#                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n# 配列がスペース区切りで join されていた\n```\n\n修正後:\n\n```ruby\nfile_field_tag(\"picture\", accept: [\"image/png\", \"image/gif\"])\n# => <input type=\"file\" name=\"picture\" accept=\"image/png,image/gif\">\n#                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n# 配列がカンマ区切りで join される\n```\n\nHTML仕様上、`accept` 属性は「カンマ区切りのトークンのリスト」と定義されていますが、以前の実装はスペース区切りで結合していたため、2つ目以降の値をブラウザが無視するケースがありました。\n\n今回の修正では:\n\n- `accept` に Array が渡された場合、内部で `accept.join(\",\")` 相当の処理を行い、カンマ区切りで出力するように変更\n- `accept` が String の場合はそのまま利用（既存挙動維持）\n- すでにオブジェクトフォーム側 (`file_field`) ではカンマ区切りで join されていたため、それと同じロジックに揃えた\n\nテスト・ドキュメント関連:\n\n- `actionview/test/template/form_tag_helper_test.rb` に、配列 `accept` が期待通りカンマ区切りでレンダリングされることを検証するテストを追加\n- `actionview/CHANGELOG.md` に本変更のエントリを追加\n\n3. 影響範囲・注意点\n- 影響を受けるケース:\n  - `file_field_tag` を使い、`accept` に Array を渡していたコード\n    ```ruby\n    file_field_tag :file, accept: [\"image/png\", \"image/jpeg\"]\n    ```\n    これまで事実上、最初の MIME type しか効いていなかったブラウザが、修正後は複数 MIME type を正しく解釈するようになります。\n- 影響を受けないケース:\n  - `file_field_tag` に単一の MIME type を String で渡している場合\n    ```ruby\n    file_field_tag :file, accept: \"image/png\"\n    ```\n  - `file_field` (モデルバインド版) を使っている場合  \n    → もともとカンマ区切りで join されていたため挙動は変わらない\n- レイアウト・仕様依存の注意:\n  - もしスペース区切りの `accept` を前提とした、独自のパース処理や JS があれば、カンマ区切りに対応しているかを確認する必要があります（一般的なブラウザはもともとカンマ区切り前提なので通常は問題なし）。\n  - HTML仕様・ブラウザの挙動により、修正後のほうが「本来の期待どおりに複数 MIME type が効く」状態になるため、UI 上で選択できるファイルの種類が増えたように見えるケースがあります。\n\n4. 参考情報 (あれば)\n- 関連コード:\n  - `ActionView::Helpers::Tags::FileField#render`  \n    ここではすでに `accept` の Array をカンマ区切りにしており、今回 `file_field_tag` がそれに追従した形です。\n- HTML仕様:\n  - HTML Living Standard: `input` 要素の `accept` 属性は「コンマ区切りの型/拡張子のリスト（“Comma-separated list of items”）」と規定されており、本変更はその仕様順守のための修正となります。"
+    },
+    {
+      "number": 58305,
+      "title": "Require `active_support/rails` in `rails/railtie` {#pr-58305}",
+      "url": "https://github.com/rails/rails/pull/58305",
+      "mergedAt": "2026-08-16T00:00:00.000Z",
+      "author": "55728",
+      "authorUrl": "https://github.com/55728",
+      "summary": "1. 概要 (1-2文で)  \nRails 8.1 で `require \"rails/railtie\"` を単体で実行すると `delegate_missing_to` が未定義で `NoMethodError` になる不具合があり、それを解消するために `rails/railtie` 内で `active_support/rails` を require するようにした PR です。  \nRails 本体より先に Railtie を読み込む一部の gem (`terser`, `inline_svg`, `simple_form`, `scenic` など) が 8.1 で落ちる問題を修正します。"
+    },
+    {
+      "number": 58494,
+      "title": "Read the columns of many tables in one query {#pr-58494}",
+      "url": "https://github.com/rails/rails/pull/58494",
+      "mergedAt": "2026-08-16T00:00:00.000Z",
+      "author": "ngan",
+      "authorUrl": "https://github.com/ngan",
+      "summary": "1. 概要 (1-2文で)  \n`connection.columns` が複数テーブルを一度に取得できるようになり、スキーマキャッシュのダンプ時に発行される SQL 文数と実行時間が大幅に削減されました。MySQL/MariaDB/PostgreSQL 向けにカタログからの一括取得ロジックが追加され、MariaDB のデフォルト値扱いも精緻化されています。"
+    },
+    {
+      "number": 58495,
+      "title": "Fix typo Rails Guide: Active Record Encryption 3.7 Fixtures [ci skip] {#pr-58495}",
+      "url": "https://github.com/rails/rails/pull/58495",
+      "mergedAt": "2026-08-16T00:00:00.000Z",
+      "author": "AmaraFinbarrs",
+      "authorUrl": "https://github.com/AmaraFinbarrs",
+      "summary": "1. 概要 (1-2文で)  \nActive Record Encryption ガイドの「3.7 Fixtures」節における英文の文法ミスを修正したドキュメント専用の PR です。コードや挙動には一切変更がなく、文書の可読性・正確性のみが向上しています。\n\n2. 変更内容の詳細  \n対象ファイル: `guides/source/active_record_encryption.md`  \n\n「3.7 Fixtures」章の冒頭の英文が、以下のように修正されています。\n\n```diff\n- To allow your tests can use plain text values...\n+ To allow your tests to use plain text values...\n```\n\n元の文は文法的に不自然（\"allow A can do B\" は誤用）だったため、正しい構文である \"allow A to do B\" に修正されています。  \n\nRails Guides はそのまま英語で読まれることも多く、ガイドを参照しながら実装・学習する開発者にとって、文法的に自然な英語になるように整備した変更です。\n\n3. 影響範囲・注意点  \n- 影響範囲  \n  - Rails のフレームワーク本体や Active Record Encryption の挙動には一切影響しません。\n  - CI を回さないため `[ci skip]` が付与された、ドキュメント専用の変更です。\n  - Active Record Encryption の Fixtures に関する説明の英語が正しくなり、ガイドの可読性・理解しやすさがわずかに改善されます。\n\n- 注意点  \n  - アプリケーションコードや設定を変更する必要はありません。\n  - ガイドのリンクや章構成などには変更がないため、既存のドキュメント参照（URL や節番号）もそのまま有効です。\n\n4. 参考情報 (あれば)  \n- PR: https://github.com/rails/rails/pull/58495  \n- 対象ガイド: Active Record Encryption ガイド「3.7 Fixtures」節  \n- 一般的な英文法としても \"allow your tests to use ...\" が正しい表現であり、英語ガイドの品質向上の一環と言えます。"
+    },
+    {
+      "number": 58491,
+      "title": "Fix `Relation` documentation return values {#pr-58491}",
+      "url": "https://github.com/rails/rails/pull/58491",
+      "mergedAt": "2026-08-16T00:00:00.000Z",
+      "author": "55728",
+      "authorUrl": "https://github.com/55728",
+      "summary": "1. 概要 (1-2文で)  \n`ActiveRecord::Relation` のドキュメントで誤っていた戻り値の説明とコード例が修正されました。`touch_all` の戻り値と `create` のサンプルコードが、実際の挙動に沿うように整合性を取った変更です。"
+    },
     {
       "number": 58488,
       "title": "Read the schema cache's primary keys and indexes for many tables at once {#pr-58488}",
@@ -406,51 +451,6 @@
       "author": "55728",
       "authorUrl": "https://github.com/55728",
       "summary": "1. 概要 (1-2文で)  \n`ActionController::Metal.middleware` が返す「ミドルウェア用プロキシ」と実際のミドルウェアスタックの状態がズレていた問題を修正し、常に最新のスタックを正しく反映するようにしたPRです。合わせて、`delete` の戻り値や `middlewares=` の挙動など、従来のインターフェイスからズレていた細かい挙動も元の仕様どおりになるよう整えています。"
-    },
-    {
-      "number": 58071,
-      "title": "Add `delete_multi` method to batch deletes for memcached store if dalli's `delete_multi` is defined {#pr-58071}",
-      "url": "https://github.com/rails/rails/pull/58071",
-      "mergedAt": "2026-08-09T00:00:00.000Z",
-      "author": "ilianah",
-      "authorUrl": "https://github.com/ilianah",
-      "summary": "1. 概要 (1-2文で)  \nRails の `ActiveSupport::Cache::MemCacheStore` に、dalli が `delete_multi` をサポートしている場合にそれを使って一度に複数キーを削除する機能が追加されました。これにより memcached へのラウンドトリップ回数が減り、バッチ削除時のパフォーマンスが向上します。"
-    },
-    {
-      "number": 58358,
-      "title": "Fix incorrect documentation {#pr-58358}",
-      "url": "https://github.com/rails/rails/pull/58358",
-      "mergedAt": "2026-08-09T00:00:00.000Z",
-      "author": "55728",
-      "authorUrl": "https://github.com/55728",
-      "summary": "1. 概要 (1-2文で)  \nActive Record 周辺のドキュメント (RDoc と Guides) に、実際の挙動と矛盾する記述や誤ったサンプルコードがあったため、それらを実装に合わせて修正した PR です。コードロジックの変更はなく、ドキュメントのみの修正です。"
-    },
-    {
-      "number": 58420,
-      "title": "Refactor `MiddlewareStack::Middleware` off `Hash.ruby2_keywords_hash` {#pr-58420}",
-      "url": "https://github.com/rails/rails/pull/58420",
-      "mergedAt": "2026-08-09T00:00:00.000Z",
-      "author": "kamipo",
-      "authorUrl": "https://github.com/kamipo",
-      "summary": "1. 概要 (1-2文で)  \nRails のミドルウェアスタック内部実装から `Hash.ruby2_keywords_hash` への依存を取り除き、Ruby 3系以降のキーワード引数仕様に素直に従う形へリファクタリングした PR です。併せて、`Middleware` / `InstrumentationProxy` クラスを内部実装扱いとしてドキュメント非公開 (`:nodoc:`) にしつつも、デバッグ用途の情報は維持しています。"
-    },
-    {
-      "number": 58239,
-      "title": "Refactor `CommandRecorder` to store args and kwargs separately {#pr-58239}",
-      "url": "https://github.com/rails/rails/pull/58239",
-      "mergedAt": "2026-08-09T00:00:00.000Z",
-      "author": "kamipo",
-      "authorUrl": "https://github.com/kamipo",
-      "summary": "1. 概要 (1–2文で)  \n`ActiveRecord::Migration::CommandRecorder` が、記録するコマンドの引数を「位置引数」と「キーワード引数」に分けて保持する形にリファクタリングされました。これにより、`ruby2_keywords` 時代の互換レイヤを廃止し、Ruby 3 系の kwargs 仕様に素直に従う実装になっています。"
-    },
-    {
-      "number": 58342,
-      "title": "Refreeze the controller middleware stack for every mutating method {#pr-58342}",
-      "url": "https://github.com/rails/rails/pull/58342",
-      "mergedAt": "2026-08-08T00:00:00.000Z",
-      "author": "55728",
-      "authorUrl": "https://github.com/55728",
-      "summary": "1. 概要 (1-2文で)  \nRactor セーフモード時に `ActionController::Metal.middleware` の一部のミドルウェア操作メソッドが凍結済みスタックを直接変更しようとして `FrozenError` になる不具合を修正し、他の変更系メソッドと同様に「コピーして再凍結」されるように統一した PR です。Ractors 対応（`ActiveSupport::Ractors.unshareable_proc_action` 有効時）のミドルウェアスタック操作が一貫して安全に動作するようになります。"
     }
   ]
 }
