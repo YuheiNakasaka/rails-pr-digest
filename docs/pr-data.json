@@ -1,7 +1,52 @@
 {
-  "lastUpdated": "2026-08-17T00:07:01.874Z",
+  "lastUpdated": "2026-08-18T00:07:34.423Z",
   "totalCount": 50,
   "items": [
+    {
+      "number": 58464,
+      "title": "Don't raise LoadError when a test:* folder is missing {#pr-58464}",
+      "url": "https://github.com/rails/rails/pull/58464",
+      "mergedAt": "2026-08-17T00:00:00.000Z",
+      "author": "arzezak",
+      "authorUrl": "https://github.com/arzezak",
+      "summary": "1. 概要 (1-2文で)  \nRails の `bin/rails test:*` コマンドが、対応する `test/...` ディレクトリが存在しない場合に `LoadError` で落ちていた挙動を修正し、「テスト0件」として正常終了するようにした PR です。特に、`rails new` 直後のアプリで `test:system` や `test:jobs` などを実行すると CI が真っ赤になる問題を解消します。"
+    },
+    {
+      "number": 58471,
+      "title": "Add --no-banner to bin/rails console {#pr-58471}",
+      "url": "https://github.com/rails/rails/pull/58471",
+      "mergedAt": "2026-08-17T00:00:00.000Z",
+      "author": "Saidbek",
+      "authorUrl": "https://github.com/Saidbek",
+      "summary": "1. 概要 (1–2文で)  \n`bin/rails console` に起動バナー（Railsロゴやバージョン等）を非表示にするための `--no-banner` オプションが追加されました。これにより、スクリプト実行やCIなどで一時的にバナーを消したいケースを、`.irbrc` を編集せずにCLIフラグだけで制御できます。"
+    },
+    {
+      "number": 58474,
+      "title": "delegate ActiveModel::Type::Binary::Data#as_json to its value {#pr-58474}",
+      "url": "https://github.com/rails/rails/pull/58474",
+      "mergedAt": "2026-08-17T00:00:00.000Z",
+      "author": "HoneyryderChuck",
+      "authorUrl": "https://github.com/HoneyryderChuck",
+      "summary": "1. 概要 (1-2文で)  \nActiveModel のバイナリ型 `ActiveModel::Type::Binary::Data` に対して、`as_json` を中身の値（文字列）に委譲する実装が追加されました。これにより、バイナリ属性を含むオブジェクトを JSON 化した際に、意味のない ivar マッピングではなく、期待どおり文字列としてシリアライズされるようになります。"
+    },
+    {
+      "number": 58320,
+      "title": "Keep the relation scope in `Relation#update` and `#update!` {#pr-58320}",
+      "url": "https://github.com/rails/rails/pull/58320",
+      "mergedAt": "2026-08-17T00:00:00.000Z",
+      "author": "pierry01",
+      "authorUrl": "https://github.com/pierry01",
+      "summary": "1. 概要 (1-2文で)\nRails の `Relation#update` / `Relation#update!` が関連・スコープを無視してレコードを更新してしまう問題を修正し、関連経由の更新もきちんとスコープが効くようにした PR です。これに伴い、スコープ外の id を指定した場合は更新されず `ActiveRecord::RecordNotFound` が発生するようになり、一部で挙動が破壊的に変わります。"
+    },
+    {
+      "number": 58497,
+      "title": "Simplify MySQL::IndexDefinition constructor {#pr-58497}",
+      "url": "https://github.com/rails/rails/pull/58497",
+      "mergedAt": "2026-08-17T00:00:00.000Z",
+      "author": "hmcguire-shopify",
+      "authorUrl": "https://github.com/hmcguire-shopify",
+      "summary": "1. 概要 (1-2文で)  \nMySQL 用の `MySQL::IndexDefinition` クラスのコンストラクタが簡素化され、引数まわりの扱いが整理されています。外部からの使い方はほぼ変えずに、内部実装の読みやすさと一貫性を高めるリファクタリングです。"
+    },
     {
       "number": 58097,
       "title": "Join an Array `accept` in `file_field_tag` {#pr-58097}",
@@ -406,51 +451,6 @@
       "author": "hammadxcm",
       "authorUrl": "https://github.com/hammadxcm",
       "summary": "1. 概要 (1-2文で)  \n`ActiveModel::Type::Binary` に対して不足していたテストが追加され、`type`/`binary?`/`changed_in_place?`/`Data#hex` などを含めてファイル全体が行カバレッジ100%になりました。挙動変更はなく、純粋にテスト補強のみのPRです。"
-    },
-    {
-      "number": 58414,
-      "title": "[8-1-stable] Warn when image_processing 2.x is missing ruby-vips or mini_magick {#pr-58414}",
-      "url": "https://github.com/rails/rails/pull/58414",
-      "mergedAt": "2026-08-10T00:00:00.000Z",
-      "author": "lazerg",
-      "authorUrl": "https://github.com/lazerg",
-      "summary": "1. 概要 (1-2文で)  \nRails 8.1 系で `image_processing` 2.x を使う際に `ruby-vips` や `mini_magick` が未インストールだと、アプリ起動時に例外で落ちてしまう問題を「警告ログを出して処理を続行する」本来の挙動に戻すバックポート対応です。`main` ブランチに既に入っていた例外メッセージのマッチ条件を `8-1-stable` に反映しています。"
-    },
-    {
-      "number": 58427,
-      "title": "Use bind parameters for array-form arguments in `find_by_sql` / `count_by_sql` {#pr-58427}",
-      "url": "https://github.com/rails/rails/pull/58427",
-      "mergedAt": "2026-08-09T00:00:00.000Z",
-      "author": "kamipo",
-      "authorUrl": "https://github.com/kamipo",
-      "summary": "1. 概要 (1-2文で)  \n`find_by_sql` / `count_by_sql` に配列形式の引数を渡したとき、これまで文字列に埋め込み（`sanitize_sql`）されていた値を、`where` と同様にバインドパラメータとして扱うように変更した PR です。これによりドキュメントどおり `where` と同等の API 挙動になり、SQL インジェクション耐性とプレースホルダ処理が統一されました。"
-    },
-    {
-      "number": 58425,
-      "title": "Stop deserializing column defaults {#pr-58425}",
-      "url": "https://github.com/rails/rails/pull/58425",
-      "mergedAt": "2026-08-09T00:00:00.000Z",
-      "author": "byroot",
-      "authorUrl": "https://github.com/byroot",
-      "summary": "1. 概要 (1-2文で)  \nRails 8.1.0で導入された「カラムのデフォルト値をあらかじめ型変換（deserialize）する」挙動をやめて、再び「デフォルト値は生の値のまま扱う」方向に戻したPRです。  \nこれにより、後から属性タイプが上書きされるケースでデフォルト値の型不整合が起きる問題（#58292）を解消しています。"
-    },
-    {
-      "number": 58350,
-      "title": "Append `TRADITIONAL` instead of `STRICT_ALL_TABLES` to MySQL's `sql_mode` by default {#pr-58350}",
-      "url": "https://github.com/rails/rails/pull/58350",
-      "mergedAt": "2026-08-09T00:00:00.000Z",
-      "author": "kamipo",
-      "authorUrl": "https://github.com/kamipo",
-      "summary": "1. 概要 (1-2文で)  \nRails が MySQL に接続する際のデフォルト `sql_mode` 設定を、`STRICT_ALL_TABLES` 単体ではなく `TRADITIONAL` を付与するように変更した PRです。これにより、RDS/Aurora などグローバル `sql_mode` が空の環境でも、ゼロ日付やゼロ除算などの不正値をサイレントに受け入れない、より厳格な動作が一貫して保証されます。"
-    },
-    {
-      "number": 58424,
-      "title": "Keep the controller middleware proxy in sync with its stack {#pr-58424}",
-      "url": "https://github.com/rails/rails/pull/58424",
-      "mergedAt": "2026-08-09T00:00:00.000Z",
-      "author": "55728",
-      "authorUrl": "https://github.com/55728",
-      "summary": "1. 概要 (1-2文で)  \n`ActionController::Metal.middleware` が返す「ミドルウェア用プロキシ」と実際のミドルウェアスタックの状態がズレていた問題を修正し、常に最新のスタックを正しく反映するようにしたPRです。合わせて、`delete` の戻り値や `middlewares=` の挙動など、従来のインターフェイスからズレていた細かい挙動も元の仕様どおりになるよう整えています。"
     }
   ]
 }
