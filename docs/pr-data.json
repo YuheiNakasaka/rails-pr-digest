@@ -1,7 +1,88 @@
 {
-  "lastUpdated": "2026-08-18T00:07:34.423Z",
+  "lastUpdated": "2026-08-19T00:08:28.424Z",
   "totalCount": 50,
   "items": [
+    {
+      "number": 58510,
+      "title": "Use class_eval for flash types {#pr-58510}",
+      "url": "https://github.com/rails/rails/pull/58510",
+      "mergedAt": "2026-08-18T00:00:00.000Z",
+      "author": "hmcguire-shopify",
+      "authorUrl": "https://github.com/hmcguire-shopify",
+      "summary": "1. 概要 (1-2文で)  \nRails の `flash` 機能でカスタム flash type 用メソッドを定義する処理が、`define_method` から `class_eval` に変更され、Ractor（並行実行環境）内でも正しく動作するように修正されました。これにより、メイン Ractor 以外でも `add_flash_types` で定義したメソッドが利用可能になります。"
+    },
+    {
+      "number": 58509,
+      "title": "Compute ViewPaths#_prefixes on eager_load! {#pr-58509}",
+      "url": "https://github.com/rails/rails/pull/58509",
+      "mergedAt": "2026-08-18T00:00:00.000Z",
+      "author": "hmcguire-shopify",
+      "authorUrl": "https://github.com/hmcguire-shopify",
+      "summary": "1. 概要 (1-2文で)  \n`ActionView::ViewPaths` の `_prefixes` を `eager_load!` 時に事前計算するように変更し、Ractor 内からでも安全かつ効率的に利用できるようにした PR です。これにより、Ractor 環境での ActionView 利用時のスレッド/メモリ共有まわりの問題を回避する狙いがあります。"
+    },
+    {
+      "number": 58402,
+      "title": "Return a UTC time from `Time.rfc3339` for \"Z\" inputs {#pr-58402}",
+      "url": "https://github.com/rails/rails/pull/58402",
+      "mergedAt": "2026-08-18T00:00:00.000Z",
+      "author": "yahonda",
+      "authorUrl": "https://github.com/yahonda",
+      "summary": "1. 概要 (1-2文で)  \n`Time.rfc3339` に `\"Z\"`（UTC 指定）の文字列を渡したとき、Active Support が「固定オフセット +00:00」ではなく「UTC 時刻（`utc? == true`）」を返すように変更し、今後 Ruby 4.1 以降に標準で入る `Time.rfc3339` の仕様に揃えた PRです。これにより時間値そのものは変わらず、主にシリアライズ時の表記が `\"+00:00\"` から `\"Z\"` に変わる可能性があります。"
+    },
+    {
+      "number": 57625,
+      "title": "Add backticks to `execute` method name in Active Record Migrations guide [ci skip] {#pr-57625}",
+      "url": "https://github.com/rails/rails/pull/57625",
+      "mergedAt": "2026-08-18T00:00:00.000Z",
+      "author": "VladNegara",
+      "authorUrl": "https://github.com/VladNegara",
+      "summary": "1. 概要 (1-2文で)  \nActive Record Migrations ガイド内で、`execute` メソッド名の表記がコードフォントになっていなかった箇所にバッククォートが追加され、他のメソッド表記と統一されました。アプリケーションコードには一切影響せず、ドキュメント上の表記ゆれを修正するものです。\n\n2. 変更内容の詳細(あればサンプルコードも含めて)  \n- 対象ファイル: `guides/source/active_record_migrations.md`  \n- 変更内容は 1 行のみで、テキスト中の `execute` メソッド名にバッククォートを付けたものです。\n\n  例（イメージ）:\n  ```diff\n- You can also use the execute method to run arbitrary SQL.\n+ You can also use the `execute` method to run arbitrary SQL.\n  ```\n\n  これにより、ガイド中でメソッド名が他の `change`, `up`, `down` などと同じくコードフォントで表示され、Markdown 的にも正しい書式になります。\n\n3. 影響範囲・注意点  \n- 影響範囲は Rails ガイド（ドキュメント）の表示のみです。  \n- Rails 本体の挙動や API 仕様、マイグレーションの書き方そのものには一切変更はありません。  \n- 既存コード・既存マイグレーションを修正する必要はありません。  \n- CI スキップ (`[ci skip]`) 指定の通り、テスト実行不要な純ドキュメント変更です。\n\n4. 参考情報 (あれば)  \n- 対象ガイド: Active Record Migrations ガイド  \n- 一般的な利用例（参考・既存仕様のおさらい）:\n  ```ruby\n  class AddIndexToUsersEmail < ActiveRecord::Migration[7.2]\n    def up\n      execute <<~SQL\n        CREATE INDEX index_users_on_email\n        ON users (email);\n      SQL\n    end\n\n    def down\n      execute <<~SQL\n        DROP INDEX index_users_on_email;\n      SQL\n    end\n  end\n  ```\n  上記のように、`execute` はマイグレーション内で任意の SQL を直接実行したい場合に使用するメソッドであり、その説明部分のメソッド名表記が今回の PR で整えられています。"
+    },
+    {
+      "number": 58507,
+      "title": "Remove trailing whitespace from Action Controller guide {#pr-58507}",
+      "url": "https://github.com/rails/rails/pull/58507",
+      "mergedAt": "2026-08-18T00:00:00.000Z",
+      "author": "55728",
+      "authorUrl": "https://github.com/55728",
+      "summary": "1. 概要 (1-2文で)  \nAction Controller ガイド（`guides/source/action_controller_overview.md`）内の行末の余分な半角スペースを 2 箇所削除し、`guides:lint:mdl` の Markdown Lint (`MD009 Trailing spaces`) エラーで `main` ブランチの CI が落ちていた問題を解消する PRです。  \n内容テキスト自体の変更はなく、レンダリング結果も変わらないホワイトスペースのみの修正です。"
+    },
+    {
+      "number": 58229,
+      "title": "[ci skip] Fix explanation of controller callbacks with blocks {#pr-58229}",
+      "url": "https://github.com/rails/rails/pull/58229",
+      "mergedAt": "2026-08-18T00:00:00.000Z",
+      "author": "flavio-b",
+      "authorUrl": "https://github.com/flavio-b",
+      "summary": "1. 概要 (1-2文で)  \nこのPRは、Railsガイド中の「ブロック付きのコントローラコールバックはコントローラインスタンスのスコープで動かない」という説明が実際の挙動と逆であるため、それを修正したドキュメント更新です。実装は変更せず、現状の `instance_exec` による挙動（コントローラインスタンス文脈で評価される）に説明を合わせています。"
+    },
+    {
+      "number": 58447,
+      "title": "Fix grammar errors in Sign Up and Settings guide [ci skip] {#pr-58447}",
+      "url": "https://github.com/rails/rails/pull/58447",
+      "mergedAt": "2026-08-18T00:00:00.000Z",
+      "author": "eglitobias",
+      "authorUrl": "https://github.com/eglitobias",
+      "summary": "1. 概要 (1-2文で)  \nSign Up and Settings ガイド (`guides/source/sign_up_and_settings.md`) に含まれていた英文の文法ミスを修正したドキュメント専用のPRです。アプリケーションの挙動やコードには一切変更はありません。\n\n2. 変更内容の詳細  \n- 対象ファイル: `guides/source/sign_up_and_settings.md`  \n- 修正内容:\n  - 英文の文法的におかしい箇所を6文、読みやすく自然な英語表現に修正\n  - 追加行 8 / 削除行 8 なので、文の差し替えレベルの変更に留まる\n  - 主な変更パターンとして想定されるもの:\n    - 動詞の時制や主語・動詞の一致の修正\n    - 冠詞 (a / an / the) の抜けや誤用の修正\n    - 前置詞 (in / on / at など) の不自然さの修正\n    - 不自然な語順や冗長表現の簡潔化\n\n実際のコード例やAPIの変更はなく、あくまでガイド本文の英文修正のみです。\n\n3. 影響範囲・注意点  \n- 実行コードやテスト、設定ファイルなどには一切変更なし\n  - 挙動変更なし\n  - 互換性への影響なし\n  - ビルド・デプロイ手順への影響なし\n- 対象はガイド文書だけなので、Rails アプリケーションを利用しているプロジェクト側で対応すべき作業はありません。\n- 英語ドキュメントを参照しているユーザーにとって、Sign Up and Settings ガイドの可読性と理解しやすさが向上します。\n- `[ci skip]` が付いているため、このPR自身のマージ時にはCIは実行されていません（ドキュメントのみの変更であることを示唆）。\n\n4. 参考情報 (あれば)  \n- PR: https://github.com/rails/rails/pull/58447  \n- 対象ガイド: `guides/source/sign_up_and_settings.md`  \n  - Sign Up and Settings 機能の利用手順・設定手順を説明する公式ガイドで、ユーザー登録まわりの設定を理解する際に参照される文書です。"
+    },
+    {
+      "number": 58502,
+      "title": "Simplify transaction instrumentation tests with `NotificationAssertions` helpers {#pr-58502}",
+      "url": "https://github.com/rails/rails/pull/58502",
+      "mergedAt": "2026-08-18T00:00:00.000Z",
+      "author": "Saidbek",
+      "authorUrl": "https://github.com/Saidbek",
+      "summary": "1. 概要 (1-2文で)  \nActive Record のトランザクション計測（instrumentation）テストで、手動の `ActiveSupport::Notifications.subscribe` / `unsubscribe` をやめ、`NotificationAssertions` ヘルパーに置き換えたテスト専用のリファクタリングです。アプリケーションの実行時挙動には一切変更がありません。"
+    },
+    {
+      "number": 58484,
+      "title": "Fix clearing PK-overlapping association keys when assigning nil {#pr-58484}",
+      "url": "https://github.com/rails/rails/pull/58484",
+      "mergedAt": "2026-08-18T00:00:00.000Z",
+      "author": "matthewd",
+      "authorUrl": "https://github.com/matthewd",
+      "summary": "1. 概要 (1-2文で)  \n`belongs_to` / `has_one` に `nil` を代入したときの外部キークリア処理で、「外部キーが参照元モデルの主キーと完全に重なっている場合」の挙動を修正した PR です。特に単一カラムFKやポリモーフィック `belongs_to` で、外部キーが正しく `NULL` にされない／type だけ消えるといった不整合な挙動を修正しています。"
+    },
     {
       "number": 58464,
       "title": "Don't raise LoadError when a test:* folder is missing {#pr-58464}",
@@ -370,87 +451,6 @@
       "author": "55728",
       "authorUrl": "https://github.com/55728",
       "summary": "1. 概要 (1-2文で)  \nこのPRは、Railsソース中の `:markup: markdown` なRDocコメントで、本来リストとして表示されるべき部分が1つの長い段落としてレンダリングされていた箇所をMarkdownとして正しく解釈されるように修正したものです。ついでに、リストではなくサンプル出力として表示すべき箇所をコードブロック（`<pre>`）として出るように整えています。"
-    },
-    {
-      "number": 58439,
-      "title": "Render the `EncryptedFile#read` exception list as a list {#pr-58439}",
-      "url": "https://github.com/rails/rails/pull/58439",
-      "mergedAt": "2026-08-11T00:00:00.000Z",
-      "author": "55728",
-      "authorUrl": "https://github.com/55728",
-      "summary": "1. 概要 (1-2文で)  \n`ActiveSupport::EncryptedFile#read` がどんな例外を投げるかのドキュメント表現が、1つの段落ではなく HTML の箇条書き（リスト）として正しくレンダリングされるように修正された PR です。コードの挙動変更はなく、ドキュメント（RDoc/YARD 出力）の見た目のみが改善されています。"
-    },
-    {
-      "number": 58412,
-      "title": "Omit optional route segments given empty strings {#pr-58412}",
-      "url": "https://github.com/rails/rails/pull/58412",
-      "mergedAt": "2026-08-11T00:00:00.000Z",
-      "author": "carldaws",
-      "authorUrl": "https://github.com/carldaws",
-      "summary": "1. 概要 (1-2文で)  \n`url_for` などでルーティングの「任意セグメント」に空文字列 (`\"\"`) が渡された場合、そのセグメントを URL から省略するように振る舞いを統一した修正です。これにより、フォーム送信などで空文字が来ても壊れた URL が生成されず、`nil` と同じ扱いになります。"
-    },
-    {
-      "number": 58423,
-      "title": "Mark the routes as loaded when the routes reloader runs standalone {#pr-58423}",
-      "url": "https://github.com/rails/rails/pull/58423",
-      "mergedAt": "2026-08-11T00:00:00.000Z",
-      "author": "55728",
-      "authorUrl": "https://github.com/55728",
-      "summary": "1. 概要 (1-2文で)  \nRails のルート再読み込み処理 (`Rails::Application::RoutesReloader`) が「ルートを実際には再描画しているのに loaded フラグが立たない」という退行バグを修正し、重複してルートが描画される問題を防ぐ PR です。`execute` 実行後に適切に「ルートがロード済み」であることを記録しつつ、失敗時は未ロードのままにするように振る舞いを整理しています。"
-    },
-    {
-      "number": 58433,
-      "title": "Keep the string subscribers default when rebuilding a Fanout {#pr-58433}",
-      "url": "https://github.com/rails/rails/pull/58433",
-      "mergedAt": "2026-08-10T00:00:00.000Z",
-      "author": "etiennebarrie",
-      "authorUrl": "https://github.com/etiennebarrie",
-      "summary": "1. 概要 (1-2文で)  \nRactor 内で `ActiveSupport::Notifications::Fanout` を再構築する際に、文字列キー用サブスクライバのデフォルト値設定が失われてクラッシュするバグを修正した PR です。サブスクリプションスナップショットから再構築する際に、`Concurrent::Map` とデフォルト値、および配列の複製を正しく行うようにしています。"
-    },
-    {
-      "number": 58385,
-      "title": "Require rack/ractorize in ractorize! {#pr-58385}",
-      "url": "https://github.com/rails/rails/pull/58385",
-      "mergedAt": "2026-08-10T00:00:00.000Z",
-      "author": "hmcguire-shopify",
-      "authorUrl": "https://github.com/hmcguire-shopify",
-      "summary": "1. 概要 (1-2文で)  \nRails の `ractorize!` 実行時に `rack/ractorize` を必ず読み込むようにし、Rack 側で提供される「Ractor 対応のために公開定数を freeze する処理」を Rails アプリの Ractor 実行時に確実に有効化する変更です。これにより、非メイン Ractor 内でのリクエスト処理に必要な Rack の定数 freeze が自動的に行われます。"
-    },
-    {
-      "number": 58426,
-      "title": "Deprecate `create` alias of `insert` in connection adapters {#pr-58426}",
-      "url": "https://github.com/rails/rails/pull/58426",
-      "mergedAt": "2026-08-10T00:00:00.000Z",
-      "author": "kamipo",
-      "authorUrl": "https://github.com/kamipo",
-      "summary": "1. 概要 (1-2文で)  \nRailsのコネクションアダプタにおいて、SQLのINSERTを実行するメソッド`insert`のエイリアスとして提供されていた`create`が非推奨(deprecate)になりました。今後は`create`ではなく`insert`を直接呼び出すことが推奨されます。"
-    },
-    {
-      "number": 58428,
-      "title": "Fix LengthValidator crash with proc minimum and nil value {#pr-58428}",
-      "url": "https://github.com/rails/rails/pull/58428",
-      "mergedAt": "2026-08-10T00:00:00.000Z",
-      "author": "ousamabenyounes",
-      "authorUrl": "https://github.com/ousamabenyounes",
-      "summary": "1. 概要 (1-2文で)  \n`ActiveModel::Validations::LengthValidator` において、`:minimum` や `:is` に Proc を指定し、かつ検証対象の値が `nil` のときに `NoMethodError` で落ちるバグを修正した PRです。Proc を使った長さバリデーションでも、常に数値が I18n に渡るようにし、例外なく動作するようになりました。"
-    },
-    {
-      "number": 58328,
-      "title": "Allow ActiveSupport::ProxyLogger to ignore messages by pattern {#pr-58328}",
-      "url": "https://github.com/rails/rails/pull/58328",
-      "mergedAt": "2026-08-10T00:00:00.000Z",
-      "author": "federico-carrocera",
-      "authorUrl": "https://github.com/federico-carrocera",
-      "summary": "1. 概要 (1-2文で)  \nActiveSupport::ProxyLogger に「メッセージ内容でログを無視する」機能が追加され、正規表現や文字列パターンで特定のログだけをサイレンスできるようになりました。これにより、ログレベルを上げずに特定のノイズログのみを抑制できます。"
-    },
-    {
-      "number": 58335,
-      "title": "Add test coverage for `ActiveModel::Type::Binary` {#pr-58335}",
-      "url": "https://github.com/rails/rails/pull/58335",
-      "mergedAt": "2026-08-10T00:00:00.000Z",
-      "author": "hammadxcm",
-      "authorUrl": "https://github.com/hammadxcm",
-      "summary": "1. 概要 (1-2文で)  \n`ActiveModel::Type::Binary` に対して不足していたテストが追加され、`type`/`binary?`/`changed_in_place?`/`Data#hex` などを含めてファイル全体が行カバレッジ100%になりました。挙動変更はなく、純粋にテスト補強のみのPRです。"
     }
   ]
 }
