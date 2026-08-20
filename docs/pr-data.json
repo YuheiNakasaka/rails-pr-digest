@@ -1,7 +1,34 @@
 {
-  "lastUpdated": "2026-08-19T00:08:28.424Z",
+  "lastUpdated": "2026-08-20T00:07:14.027Z",
   "totalCount": 50,
   "items": [
+    {
+      "number": 58517,
+      "title": "Freeze the Response default_headers at the end of the boot process {#pr-58517}",
+      "url": "https://github.com/rails/rails/pull/58517",
+      "mergedAt": "2026-08-19T00:00:00.000Z",
+      "author": "Edouard-chin",
+      "authorUrl": "https://github.com/Edouard-chin",
+      "summary": "1. 概要 (1-2文で)  \nRails のブート完了時に `ActionDispatch::Response.default_headers` を freeze（凍結）するようにし、アプリケーション実行中にデフォルトレスポンスヘッダが書き換えられないようにした PR です。  \nこれにより Ractor から安全にデフォルトヘッダへアクセスできるようになり、並列実行時のスレッドセーフ性・予測可能性が向上します。"
+    },
+    {
+      "number": 58437,
+      "title": "Extract model schema state into `SchemaContext` {#pr-58437}",
+      "url": "https://github.com/rails/rails/pull/58437",
+      "mergedAt": "2026-08-19T00:00:00.000Z",
+      "author": "adrianna-chang-shopify",
+      "authorUrl": "https://github.com/adrianna-chang-shopify",
+      "summary": "1. 概要 (1-2文で)\nRails の Active Record 各モデルが持っていた「スキーマ依存の状態（カラム情報・型・デフォルト値・ステートメントキャッシュなど）」を、新たに導入された `SchemaContext` オブジェクトに集約し、モデルからはそのコンテキストへ委譲する形にリファクタリングした PR です。将来的な複数スキーマ切り替えを見据えつつも、この PR 自体では「1モデル = 1デフォルトコンテキスト」のみを扱います。"
+    },
+    {
+      "number": 58485,
+      "title": "Honour `all_queries` default scopes in internal queries {#pr-58485}",
+      "url": "https://github.com/rails/rails/pull/58485",
+      "mergedAt": "2026-08-19T00:00:00.000Z",
+      "author": "adrianna-chang-shopify",
+      "authorUrl": "https://github.com/adrianna-chang-shopify",
+      "summary": "1. 概要  \nこのPRは、`all_queries: true` が付いた default scope を「内部クエリ」にも適用するための仕組みを導入し、ユニークネスバリデーション、fixture ロード、カウンタキャッシュ更新などで、`all_queries` default scope が正しく尊重されるようにしたものです。通常の default scope は内部クエリには含めず、`all_queries` 指定のものだけを反映する専用スコープ `all_queries_scope` が追加されています。"
+    },
     {
       "number": 58510,
       "title": "Use class_eval for flash types {#pr-58510}",
@@ -424,33 +451,6 @@
       "author": "hmcguire-shopify",
       "authorUrl": "https://github.com/hmcguire-shopify",
       "summary": "1. 概要 (1-2文で)  \n`ActiveRecord::Reflection` の `plural_name` を「重複しない（dedup）」形で扱うようにする、小さなリファクタリングの PR です。内部実装の 1行が置き換えられただけで、外部 API の振る舞いは基本的に変えずに重複処理を整理しています。"
-    },
-    {
-      "number": 58411,
-      "title": "Active Record ractor safe ivars 2 {#pr-58411}",
-      "url": "https://github.com/rails/rails/pull/58411",
-      "mergedAt": "2026-08-11T00:00:00.000Z",
-      "author": "gmcgibbon",
-      "authorUrl": "https://github.com/gmcgibbon",
-      "summary": "1. 概要 (1-2文で)  \nActive Record のクラスインスタンス変数（`@default_attributes` と `@find_by_statement_cache`）が Ractor セーフになるように実装を見直した PRです。これにより、Active Record を Ractor（マルチスレッド＋並列実行）環境で安全に利用しやすくなっています。"
-    },
-    {
-      "number": 58449,
-      "title": "Ensure Active Record models define all attributes {#pr-58449}",
-      "url": "https://github.com/rails/rails/pull/58449",
-      "mergedAt": "2026-08-11T00:00:00.000Z",
-      "author": "hmcguire-shopify",
-      "authorUrl": "https://github.com/hmcguire-shopify",
-      "summary": "1. 概要 (1-2文で)  \nActive Record の `attribute` 定義が、モデルの「属性メソッド自動生成」と常に同期するように修正されています。これにより、あとから追加された `attribute` でも「動的属性」ではなく、通常の getter/setter などのメソッドが必ず生成されるようになります。"
-    },
-    {
-      "number": 58441,
-      "title": "Render Markdown lists that collapse into paragraphs {#pr-58441}",
-      "url": "https://github.com/rails/rails/pull/58441",
-      "mergedAt": "2026-08-11T00:00:00.000Z",
-      "author": "55728",
-      "authorUrl": "https://github.com/55728",
-      "summary": "1. 概要 (1-2文で)  \nこのPRは、Railsソース中の `:markup: markdown` なRDocコメントで、本来リストとして表示されるべき部分が1つの長い段落としてレンダリングされていた箇所をMarkdownとして正しく解釈されるように修正したものです。ついでに、リストではなくサンプル出力として表示すべき箇所をコードブロック（`<pre>`）として出るように整えています。"
     }
   ]
 }
