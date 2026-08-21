@@ -1,7 +1,115 @@
 {
-  "lastUpdated": "2026-08-20T00:07:14.027Z",
+  "lastUpdated": "2026-08-21T00:10:46.235Z",
   "totalCount": 50,
   "items": [
+    {
+      "number": 58522,
+      "title": "Fix Callbacks only made shareable in :raise mode {#pr-58522}",
+      "url": "https://github.com/rails/rails/pull/58522",
+      "mergedAt": "2026-08-20T00:00:00.000Z",
+      "author": "hmcguire-shopify",
+      "authorUrl": "https://github.com/hmcguire-shopify",
+      "summary": "1. 概要 (1-2文で)  \n`ActiveSupport::Callbacks` が、`Ractors.unshareable_proc_action` を `:warn` にしている場合でもコールバックを「Ractor 共有可能」にするよう修正された PR です。あわせて、`freeze` の可視性バグ修正と、アプリケーションの executor が Ractor 内で動作するために必要な executor 関連コールバックの shareable 化も行われています。"
+    },
+    {
+      "number": 58531,
+      "title": "Allow to call url helpers inside a ractor {#pr-58531}",
+      "url": "https://github.com/rails/rails/pull/58531",
+      "mergedAt": "2026-08-20T00:00:00.000Z",
+      "author": "Edouard-chin",
+      "authorUrl": "https://github.com/Edouard-chin",
+      "summary": "1. 概要 (1-2文で)  \nRails の URL ヘルパー（`post_path` など）を Ractor 内から呼び出せるようにするため、`RouteSet` と URL ヘルパー生成周りの実装が Ractor 対応になるよう調整された PRです。主なポイントは「URL ヘルパーを格納する Proc を Ractor 共有可能（shareable）にするための参照方法の工夫」と「ルーティング確定後に `RouteSet` を freeze すること」です。"
+    },
+    {
+      "number": 58529,
+      "title": "Make url helpers ractor safe {#pr-58529}",
+      "url": "https://github.com/rails/rails/pull/58529",
+      "mergedAt": "2026-08-20T00:00:00.000Z",
+      "author": "Edouard-chin",
+      "authorUrl": "https://github.com/Edouard-chin",
+      "summary": "1. 概要 (1-2文で)  \nRails の URL ヘルパー（`edit_post_path` など）を Ractor 内から呼び出せるようにするための下準備として、URL ヘルパー生成まわりのオブジェクトを「Ractor セーフ（共有可能）」にする変更です。まだこれ単体では Ractor 内で URL ヘルパーを完全に使えるわけではありませんが、そのための重要な一部です。"
+    },
+    {
+      "number": 58528,
+      "title": "`activerecord`: prevent tests from relying on unspecified `SELECT` order {#pr-58528}",
+      "url": "https://github.com/rails/rails/pull/58528",
+      "mergedAt": "2026-08-20T00:00:00.000Z",
+      "author": "viralpraxis",
+      "authorUrl": "https://github.com/viralpraxis",
+      "summary": "1. 概要 (1-2文で)  \nActive Record のテストで、`ORDER BY` を指定していない `SELECT` の結果順序に依存してしまう問題（テストのフレーク化やバグの温床）を防ぐため、SQLite でテストを実行する際に `reverse_unordered_selects` PRAGMA を有効にする設定が `config.example.yml` に追加されました。これにより、今後のテストが「暗黙の順序」を前提としないよう強制されます。\n\n2. 変更内容の詳細  \n\n- 変更ファイル: `activerecord/test/config.example.yml` のみ  \n- 内容: SQLite 用のテスト設定に `reverse_unordered_selects` PRAGMA をオンにする設定項目が追加されています。\n\nイメージとしては、以下のような設定が `config.example.yml` に含まれるようになったと考えられます（実際のキー名は例ですが、趣旨はこれに相当します）:\n\n```yaml\nsqlite:\n  adapter: sqlite3\n  database: db/test.sqlite3\n  variables:\n    reverse_unordered_selects: true\n```\n\nSQLite の `PRAGMA reverse_unordered_selects` は、**ORDER BY が明示されていない SELECT の結果順序を意図的に「逆順」にする**ことで、「実装依存のたまたまの順序」に依存しているコードやテストをあぶり出すためのデバッグ向け機能です。\n\nこの PR では以下の文脈があります:\n\n- 過去に以下の PR で、`ORDER BY` 未指定のレコード順序に依存していたことが原因のテストのフレークやバグが修正された:\n  - https://github.com/rails/rails/pull/58267\n  - https://github.com/rails/rails/pull/58527\n  - バグ修正: https://github.com/rails/rails/pull/58177\n- Byroot 氏のコメント（https://github.com/rails/rails/pull/58267#issuecomment-5113975701）を受けて、「そもそも今後こうした依存が入り込まないよう、テスト環境側で防御した方がよい」という判断になった。\n\nそのため、Rails 本体の Active Record テストスイートを実行するときに、SQLite では原則 `reverse_unordered_selects` をオンにするような設定例が公式に提供される形になっています。\n\n3. 影響範囲・注意点  \n\n- 影響対象\n  - Rails コアの Active Record テストスイート（特に SQLite を使って実行している部分）\n  - Rails 本体にコントリビュートする開発者（特に SQLite でテストを走らせる人）\n\n- 実質的な影響\n  - この PR 自体は **設定サンプル (`config.example.yml`) への追加のみ**で、本番コードや本番デフォルト設定には手を入れていません。\n  - ただし、この `example` を元に実際の `config.yml` を作っている、あるいは同様の設定を自分の環境に適用した場合、**ORDER BY を書いていないテストは予期しない順序で結果が返る**ため、次のようなテストは壊れやすくなります:\n    - `Model.all.first` / `Model.first` / `Model.last` などを、順序指定なしで前提にしているテスト\n    - `pluck` や `map` の結果順に意味を持たせて検証しているが、`order` を指定していないテスト\n  - しかしこれは意図した「防御策」であり、**テストが壊れたら、それは本来 `ORDER BY` を明示すべきだった箇所の発見**につながります。\n\n- 注意点\n  - すべてのテストが SQLite ベースではないため、PostgreSQL 専用テストや SQLite アダプタをスキップしているテストには、この PRAGMA は効きません。したがって「完全な保証」ではなく、「大部分のテストで暗黙順序依存を検出しやすくする」程度の効果です。\n  - 自身のアプリケーションのテストでも同様の問題をあぶり出したい場合、開発・テスト用の SQLite 接続で `reverse_unordered_selects` をオンにすることを検討できますが、その場合は既存テストが壊れる可能性が高いので、段階的な導入を推奨します。\n\n4. 参考情報 (あれば)  \n\n- SQLite 公式ドキュメント（PRAGMA reverse_unordered_selects）  \n  https://sqlite.org/pragma.html#pragma_reverse_unordered_selects  \n\n- 本 PR:  \n  https://github.com/rails/rails/pull/58528  \n\n- 関連 PR:  \n  - フレークテスト/バグ修正の文脈:  \n    - https://github.com/rails/rails/pull/58267  \n    - https://github.com/rails/rails/pull/58527  \n    - https://github.com/rails/rails/pull/58177  \n\n- 一般的な指針:\n  - RDBMS の仕様上、**`ORDER BY` を指定しない限り `SELECT` の結果順序は保証されない**ため、アプリケーション・ライブラリ双方で「順序を期待するときは必ず `order` を書く」ことが推奨されます。今回の PR は、その原則を Rails コアのテストレベルで強制するための一歩です。"
+    },
+    {
+      "number": 58527,
+      "title": "`activerecord`: make sure SQLite tests do not rely on implicit SELECT order {#pr-58527}",
+      "url": "https://github.com/rails/rails/pull/58527",
+      "mergedAt": "2026-08-20T00:00:00.000Z",
+      "author": "viralpraxis",
+      "authorUrl": "https://github.com/viralpraxis",
+      "summary": "1. 概要 (1-2文で)  \nこのPRは、Active Record の has_many 関連のテストのうち、SQLite で暗黙的なレコードの並び順に依存して失敗していたテストを修正し、データベース実装に依存しない決定的なテストにしたものです。MySQL/Trilogy/SQLite でたまたま成り立っていたインデックス順序への依存を取り除いています。"
+    },
+    {
+      "number": 58530,
+      "title": "Make ActiveModel::Conversion._to_partial_path ractor safe {#pr-58530}",
+      "url": "https://github.com/rails/rails/pull/58530",
+      "mergedAt": "2026-08-20T00:00:00.000Z",
+      "author": "cam-woloshyn",
+      "authorUrl": "https://github.com/cam-woloshyn",
+      "summary": "1. 概要 (1-2文で)  \nActiveModel::Conversion の `_to_partial_path` が内部で使うキャッシュの初期化処理を、Ractor に対応できるように変更した PRです。非メイン Ractor から初回アクセスした際に起きていた `Ractor::IsolationError` を回避しつつ、既存のキャッシュヒット時のパフォーマンスは維持しています。"
+    },
+    {
+      "number": 58521,
+      "title": "Add temporary name to App's Executor/Reloader {#pr-58521}",
+      "url": "https://github.com/rails/rails/pull/58521",
+      "mergedAt": "2026-08-20T00:00:00.000Z",
+      "author": "hmcguire-shopify",
+      "authorUrl": "https://github.com/hmcguire-shopify",
+      "summary": "1. 概要 (1-2文で)  \nRails アプリケーションの `Executor` / `Reloader` クラスに、一時的な「わかりやすい名前」を付けるようにした PR です。これにより、コンソールやデバッガでこれらのクラスを確認する際に、匿名クラスではなく、元アプリケーションに紐づいた名前で表示され、デバッグしやすくなります。"
+    },
+    {
+      "number": 58526,
+      "title": "Remove `true:` / `false:` options from `ImmutableString` API doc {#pr-58526}",
+      "url": "https://github.com/rails/rails/pull/58526",
+      "mergedAt": "2026-08-20T00:00:00.000Z",
+      "author": "kamipo",
+      "authorUrl": "https://github.com/kamipo",
+      "summary": "1. 概要 (1-2文で)  \n`ActiveModel::Type::ImmutableString` のAPIドキュメントから、`true:` / `false:` オプションに関する記述が削除されました。これらは内部実装用であり、パブリックAPIとしてはサポートしない方針が明確化されています。"
+    },
+    {
+      "number": 58525,
+      "title": "Deprecate `ActiveRecord::Relation#uniq!` {#pr-58525}",
+      "url": "https://github.com/rails/rails/pull/58525",
+      "mergedAt": "2026-08-20T00:00:00.000Z",
+      "author": "kamipo",
+      "authorUrl": "https://github.com/kamipo",
+      "summary": "1. 概要 (1-2文で)  \n`ActiveRecord::Relation#uniq!` が非推奨（deprecate）となり、Rails 9.0 で削除される予定になりました。Rails 7.0 以降はクエリの重複排除が自動化されているため、このメソッドは役割を終えています。"
+    },
+    {
+      "number": 58489,
+      "title": "Track fixture connection pools as they are pinned {#pr-58489}",
+      "url": "https://github.com/rails/rails/pull/58489",
+      "mergedAt": "2026-08-20T00:00:00.000Z",
+      "author": "ngan",
+      "authorUrl": "https://github.com/ngan",
+      "summary": "1. 概要 (1-2文で)  \nActiveRecord のテスト用フィクスチャで「接続プールのピン止め(pinning)」を行う処理の順序と記録方法を修正し、エラー時に teardown が誤った接続解除を試みて二次的な例外を発生させないようにした PR です。  \nこれにより、実際の障害原因（例: SQLite の `database is locked`）が素直に報告され、ピン止め状態の取り扱いも正しくなります。"
+    },
+    {
+      "number": 58498,
+      "title": "Read the table options of many tables at once, and batch the SQLite readers {#pr-58498}",
+      "url": "https://github.com/rails/rails/pull/58498",
+      "mergedAt": "2026-08-20T00:00:00.000Z",
+      "author": "ngan",
+      "authorUrl": "https://github.com/ngan",
+      "summary": "1. 概要 (1-2文で)  \n`table_options` が複数テーブルを一括で読めるようになり、PostgreSQL/SQLite でテーブルメタデータの読み取りが大幅にバッチ化・高速化された PR です。特に SQLite はカラム・PK・FK・インデックス等の取得をほぼ定数個の SQL にまとめ、スキーマダンプのクエリ数と時間を大きく削減しています。"
+    },
+    {
+      "number": 58520,
+      "title": "Freeze the route polymorphic cache {#pr-58520}",
+      "url": "https://github.com/rails/rails/pull/58520",
+      "mergedAt": "2026-08-20T00:00:00.000Z",
+      "author": "Edouard-chin",
+      "authorUrl": "https://github.com/Edouard-chin",
+      "summary": "1. 概要 (1-2文で)  \nRails のルーティングで使われるポリモーフィック URL ヘルパー用のキャッシュを frozen（不変オブジェクト）にし、Ractor 内から `link_to(record)` などを安全に呼べるようにした PR です。これにより、Ractor 実行時に発生していた「非共有オブジェクトへのアクセス」エラーを防ぎます。"
+    },
     {
       "number": 58517,
       "title": "Freeze the Response default_headers at the end of the boot process {#pr-58517}",
@@ -343,114 +451,6 @@
       "author": "Saidbek",
       "authorUrl": "https://github.com/Saidbek",
       "summary": "1. 概要 (1-2文で)  \nRails の `ActiveSupport::TimeZone` に、カナダ西部向けの新しいタイムゾーン名マッピング「Pacific Time (Canada)」「Alberta」が追加され、BC（ブリティッシュコロンビア）とアルバータ州での冬時間のズレを避けられるようになりました。既存の「Pacific Time (US & Canada)」「Mountain Time (US & Canada)」は互換性維持のためそのまま残されています。"
-    },
-    {
-      "number": 58446,
-      "title": "Fix where clauses with column-tuple syntax referencing other tables {#pr-58446}",
-      "url": "https://github.com/rails/rails/pull/58446",
-      "mergedAt": "2026-08-12T00:00:00.000Z",
-      "author": "cgunther",
-      "authorUrl": "https://github.com/cgunther",
-      "summary": "1. 概要 (1-2文で)  \n`where` 句で「カラムのタプル構文（配列構文）」を使う際に、他テーブルを `other_table.column` と明示した場合でも、現在のモデルのテーブル名が誤ってプレフィックスされてしまうバグを修正するPRです。これにより、JOIN 先のテーブルカラムを含むタプル条件が正しくSQLに変換されるようになります。"
-    },
-    {
-      "number": 58461,
-      "title": "Allow ffmpeg and ffprobe input arguments to be configured {#pr-58461}",
-      "url": "https://github.com/rails/rails/pull/58461",
-      "mergedAt": "2026-08-12T00:00:00.000Z",
-      "author": "flavorjones",
-      "authorUrl": "https://github.com/flavorjones",
-      "summary": "1. 概要 (1-2文で)  \nActive Storage が内部で呼び出している ffmpeg / ffprobe に対し、「入力側の引数」をアプリケーション側から設定できるようにする PR です。これにより、利用可能なデコーダ・プロトコルをホワイトリスト方式で制限するなど、アップロードメディア処理部分のハードニングが可能になります。"
-    },
-    {
-      "number": 58460,
-      "title": "Introduce `to_ractor_snapshot` / `load_ractor_snapshot` protocol for notifiers {#pr-58460}",
-      "url": "https://github.com/rails/rails/pull/58460",
-      "mergedAt": "2026-08-12T00:00:00.000Z",
-      "author": "kamipo",
-      "authorUrl": "https://github.com/kamipo",
-      "summary": "1. 概要 (1-2文で)  \n`ActiveSupport::Notifications` の notifier に対して、Ractor 間共有用の新しいプロトコル `to_ractor_snapshot` / `load_ractor_snapshot` が導入されました。これにより、カスタム notifier を実装する際に内部実装（Fanout の構造）を真似る必要がなくなり、Ractor 共有対応も任意で選べるようになります。"
-    },
-    {
-      "number": 58445,
-      "title": "Compile non-strict templates Ractor-locally {#pr-58445}",
-      "url": "https://github.com/rails/rails/pull/58445",
-      "mergedAt": "2026-08-12T00:00:00.000Z",
-      "author": "etiennebarrie",
-      "authorUrl": "https://github.com/etiennebarrie",
-      "summary": "1. 概要 (1-2文で)  \n非 strict ローカルなテンプレートでも Ractor 内から安全にコンパイル・実行できるようにする変更です。併せて、既存 Rails で strict locals テンプレート利用時に例外バックトレースが正しく補正されない不具合も修正されています。"
-    },
-    {
-      "number": 58403,
-      "title": "Move duplicated conditional_executor up to Rails::Command::Base {#pr-58403}",
-      "url": "https://github.com/rails/rails/pull/58403",
-      "mergedAt": "2026-08-12T00:00:00.000Z",
-      "author": "seuros",
-      "authorUrl": "https://github.com/seuros",
-      "summary": "1. 概要 (1-2文で)  \n`Rails::Command::ConsoleCommand` と `Rails::Command::RunnerCommand` に重複していた `conditional_executor` の実装が、共通の親クラスである `Rails::Command::Base` に集約されました。これにより、同様の挙動を持つコマンド間でロジックを共有できるようになり、重複コードが削減されています。"
-    },
-    {
-      "number": 58436,
-      "title": "Introduce builder method for alter table definitions {#pr-58436}",
-      "url": "https://github.com/rails/rails/pull/58436",
-      "mergedAt": "2026-08-12T00:00:00.000Z",
-      "author": "adrianna-chang-shopify",
-      "authorUrl": "https://github.com/adrianna-chang-shopify",
-      "summary": "1. 概要 (1-2文で)  \nRails のスキーマ定義まわりに、テーブル変更用の新しいビルダー `build_alter_table_definition` が追加され、既存の `create_alter_table` 呼び出しに依存せず「テーブル変更定義オブジェクト（AlterTable）」を組み立てられるようになりました。これにより、`create_table` と同様のスタイルで「変更予定内容」をオブジェクトとして扱えるようになり、DDL 生成や外部マイグレーション管理との連携がしやすくなります。"
-    },
-    {
-      "number": 57846,
-      "title": "Fix normalizes on an enum attribute raises ArgumentError instead of normalizing before enum casting {#pr-57846}",
-      "url": "https://github.com/rails/rails/pull/57846",
-      "mergedAt": "2026-08-12T00:00:00.000Z",
-      "author": "joaoGabriel55",
-      "authorUrl": "https://github.com/joaoGabriel55",
-      "summary": "1. 概要 (1-2文で)  \n`normalizes` と `enum` を同じ属性に併用した際、正規化前の値に対して `enum` が先にバリデーションして `ArgumentError` を投げていた問題を修正した PR です。正規化を「enum の検証より先」に行うようにし、ユーザー入力を正しくサニタイズしてから enum キャスト・検証できるようになりました。"
-    },
-    {
-      "number": 58455,
-      "title": "Show bin/console startup banner based on IRB {#pr-58455}",
-      "url": "https://github.com/rails/rails/pull/58455",
-      "mergedAt": "2026-08-12T00:00:00.000Z",
-      "author": "byroot",
-      "authorUrl": "https://github.com/byroot",
-      "summary": "1. 概要 (1-2文で)  \n`bin/console` 実行時に表示される起動バナーを、Rails 独自実装ではなく IRB が持つバナー表示機構に合わせて出すように整理し、Rails 側のバナー制御ロジックを IRB ベースに再設計した PR です。これにより、IRB の設定やバージョンに応じた一貫したバナー表示が行われ、テストもそれに合わせて拡充されています。"
-    },
-    {
-      "number": 58454,
-      "title": "Avoid duplicating fixtures path {#pr-58454}",
-      "url": "https://github.com/rails/rails/pull/58454",
-      "mergedAt": "2026-08-12T00:00:00.000Z",
-      "author": "byroot",
-      "authorUrl": "https://github.com/byroot",
-      "summary": "1. 概要 (1-2文で)  \nこのPRは、Rails のテストヘルパー内部で「fixtures のパスを二重に登録してしまっていた」処理を修正し、不要な重複をなくすことでテスト実行を軽量化しています。動作上の機能追加や仕様変更はなく、パフォーマンスと内部実装の整理が主目的です。"
-    },
-    {
-      "number": 57980,
-      "title": "Construct And nodes as Nary instead of Binary {#pr-57980}",
-      "url": "https://github.com/rails/rails/pull/57980",
-      "mergedAt": "2026-08-12T00:00:00.000Z",
-      "author": "skipkayhil",
-      "authorUrl": "https://github.com/skipkayhil",
-      "summary": "1. 概要 (1-2文で)  \nこのPRは、Active Record のクエリ条件を組み立てる際の `And` ノードの構造を、「二分木」ではなく「N分木（可変長）」として構築するように変更したものです。これにより、複数条件を AND で結合したときの AST（抽象構文木）の形がフラットになり、扱いやすく・最適化しやすくなります。"
-    },
-    {
-      "number": 58388,
-      "title": "Cleanup duplicate/unneeded requires {#pr-58388}",
-      "url": "https://github.com/rails/rails/pull/58388",
-      "mergedAt": "2026-08-11T00:00:00.000Z",
-      "author": "skipkayhil",
-      "authorUrl": "https://github.com/skipkayhil",
-      "summary": "1. 概要 (1-2文で)  \nRails内部のいくつかのファイルから、すでに他所で読み込まれているため不要となっていた `require` を削除し、`requires` の重複を整理したPRです。機能追加や挙動変更はなく、コードベースのクリーンアップ・メンテナンスが目的です。"
-    },
-    {
-      "number": 58450,
-      "title": "Dedup Reflection#plural_name {#pr-58450}",
-      "url": "https://github.com/rails/rails/pull/58450",
-      "mergedAt": "2026-08-11T00:00:00.000Z",
-      "author": "hmcguire-shopify",
-      "authorUrl": "https://github.com/hmcguire-shopify",
-      "summary": "1. 概要 (1-2文で)  \n`ActiveRecord::Reflection` の `plural_name` を「重複しない（dedup）」形で扱うようにする、小さなリファクタリングの PR です。内部実装の 1行が置き換えられただけで、外部 API の振る舞いは基本的に変えずに重複処理を整理しています。"
     }
   ]
 }
