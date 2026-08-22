@@ -1,7 +1,16 @@
 {
-  "lastUpdated": "2026-08-21T00:10:46.235Z",
+  "lastUpdated": "2026-08-22T00:06:34.948Z",
   "totalCount": 50,
   "items": [
+    {
+      "number": 58534,
+      "title": "Add enumerable to AttributeMethodPatternSet {#pr-58534}",
+      "url": "https://github.com/rails/rails/pull/58534",
+      "mergedAt": "2026-08-21T00:00:00.000Z",
+      "author": "gmcgibbon",
+      "authorUrl": "https://github.com/gmcgibbon",
+      "summary": "1. 概要 (1-2文で)  \nRails の Active Model にある `AttributeMethodPatternSet` に `Enumerable` が追加され、`attribute_method_patterns` が再び列挙可能（each や map などが使用可能）になるように調整した PR です。以前は配列だったものをクラスに置き換えた際に失われた「列挙性」を補う変更です。"
+    },
     {
       "number": 58522,
       "title": "Fix Callbacks only made shareable in :raise mode {#pr-58522}",
@@ -442,15 +451,6 @@
       "author": "hmcguire-shopify",
       "authorUrl": "https://github.com/hmcguire-shopify",
       "summary": "1. 概要 (1-2文で)  \nActiveModel/ActiveRecord の「動的属性メソッド」判定に使っていた `attribute_method_patterns_cache` を撤廃し、代わりに複数のマイクロ最適化でパフォーマンスを補う変更です。キャッシュは性能面では有用だったものの、サイズ無制限かつ Ractor 非対応であるため、将来の並行実行モデルとの整合性を優先して削除されています。"
-    },
-    {
-      "number": 58321,
-      "title": "Add Pacific Time (Canada) and Alberta Time zone mappings {#pr-58321}",
-      "url": "https://github.com/rails/rails/pull/58321",
-      "mergedAt": "2026-08-12T00:00:00.000Z",
-      "author": "Saidbek",
-      "authorUrl": "https://github.com/Saidbek",
-      "summary": "1. 概要 (1-2文で)  \nRails の `ActiveSupport::TimeZone` に、カナダ西部向けの新しいタイムゾーン名マッピング「Pacific Time (Canada)」「Alberta」が追加され、BC（ブリティッシュコロンビア）とアルバータ州での冬時間のズレを避けられるようになりました。既存の「Pacific Time (US & Canada)」「Mountain Time (US & Canada)」は互換性維持のためそのまま残されています。"
     }
   ]
 }
