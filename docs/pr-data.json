@@ -1,7 +1,52 @@
 {
-  "lastUpdated": "2026-08-22T00:06:34.948Z",
+  "lastUpdated": "2026-08-23T00:07:37.787Z",
   "totalCount": 50,
   "items": [
+    {
+      "number": 58541,
+      "title": "Further improve Reflextion#extensions {#pr-58541}",
+      "url": "https://github.com/rails/rails/pull/58541",
+      "mergedAt": "2026-08-22T00:00:00.000Z",
+      "author": "byroot",
+      "authorUrl": "https://github.com/byroot",
+      "summary": "1. 概要 (1-2文で)  \n`ActiveRecord::Reflection#extensions` の実装を前PR(#58540)に続いてリファクタリングし、処理の簡潔化・一貫性向上・不要なコードの削除を行った変更です。挙動自体は基本的に互換を維持しつつ、内部実装を整理しています。"
+    },
+    {
+      "number": 58540,
+      "title": "Avoid needless Array#flatten calls {#pr-58540}",
+      "url": "https://github.com/rails/rails/pull/58540",
+      "mergedAt": "2026-08-22T00:00:00.000Z",
+      "author": "byroot",
+      "authorUrl": "https://github.com/byroot",
+      "summary": "1. 概要 (1-2文で)  \n`extending!` などで使われていた「`*args` を受け取って `args.flatten` する」パターンをやめ、ほとんどの呼び出しで無駄になっている `Array#flatten` 呼び出しを避ける最適化が行われました。これにより、特にネストした配列が渡される場合に発生していた高コストな内部処理（identity Hash の生成）が減り、パフォーマンスがわずかに向上します。"
+    },
+    {
+      "number": 58537,
+      "title": "Fix async `ActiveRecord::StatementCache` execution with out-of-range bind values {#pr-58537}",
+      "url": "https://github.com/rails/rails/pull/58537",
+      "mergedAt": "2026-08-22T00:00:00.000Z",
+      "author": "viralpraxis",
+      "authorUrl": "https://github.com/viralpraxis",
+      "summary": "1. 概要 (1-2文で)  \n`ActiveRecord::StatementCache` の非同期実行パスで、存在しない `Promise.wrap` を呼んでいたことによる例外を修正し、正しく `Promise::Complete.new` を使うようにした PR です。これにより、バインド変数が範囲外のときの非同期実行でも、例外ではなく空結果を返すようになります。"
+    },
+    {
+      "number": 58519,
+      "title": "Load routes lazily when a mounted helper is called {#pr-58519}",
+      "url": "https://github.com/rails/rails/pull/58519",
+      "mergedAt": "2026-08-22T00:00:00.000Z",
+      "author": "seuros",
+      "authorUrl": "https://github.com/seuros",
+      "summary": "1. 概要 (1-2文で)  \nRails のルーティングを「遅延ロード」している環境で、`main_app` やエンジンのマウントヘルパを最初に呼び出した場合に `NoMethodError` が出ていた問題を修正し、必要に応じてルートを自動ロードしてから再実行するようになりました。これにより、URL/パスヘルパと同様に、マウントヘルパもルートの遅延ロードと整合的に動作します。"
+    },
+    {
+      "number": 58535,
+      "title": "Fix the `Relation#create` documentation example {#pr-58535}",
+      "url": "https://github.com/rails/rails/pull/58535",
+      "mergedAt": "2026-08-22T00:00:00.000Z",
+      "author": "55728",
+      "authorUrl": "https://github.com/55728",
+      "summary": "1. 概要 (1-2文で)  \n`ActiveRecord::Relation#create` のドキュメント中のサンプルコードが、スコープ付き `create` の振る舞いと食い違っていたため、正しい例になるように修正した PR です。コードの挙動自体には変更はなく、ドキュメントのみの修正です。"
+    },
     {
       "number": 58534,
       "title": "Add enumerable to AttributeMethodPatternSet {#pr-58534}",
@@ -406,51 +451,6 @@
       "author": "gmcgibbon",
       "authorUrl": "https://github.com/gmcgibbon",
       "summary": "1. 概要 (1-2文で)  \nこのPRは、`ActiveSupport::Callbacks` を Ractor セーフにするための対応です。具体的には、コールバックチェーンやユーザー定義の Proc を Ractor 共有可能にし、Ractor 環境下でも安全にコールバックが動作するようにしています。"
-    },
-    {
-      "number": 57226,
-      "title": "Fix method_missing performance regression for virtual SELECT alias attributes {#pr-57226}",
-      "url": "https://github.com/rails/rails/pull/57226",
-      "mergedAt": "2026-08-13T00:00:00.000Z",
-      "author": "hammadxcm",
-      "authorUrl": "https://github.com/hammadxcm",
-      "summary": "1. 概要 (1–2文で)  \nRails 7.2.3 で導入された `ActiveRecord::AttributeMethods#method_missing` の変更により、仮想カラム（SELECT 句のエイリアスなど）のアクセスが大幅に遅くなっていた問題を、例外発生を避ける形で解消した PR です。`public_instance_method` 呼び出し前に `public_method_defined?` でチェックすることで、スレッドセーフ性を維持しつつパフォーマンスを改善しています。"
-    },
-    {
-      "number": 58467,
-      "title": "Make ActiveSupport::LogSubscriber ractor safe {#pr-58467}",
-      "url": "https://github.com/rails/rails/pull/58467",
-      "mergedAt": "2026-08-13T00:00:00.000Z",
-      "author": "gmcgibbon",
-      "authorUrl": "https://github.com/gmcgibbon",
-      "summary": "1. 概要 (1-2文で)  \nActiveSupport::LogSubscriber の実装を見直し、Ractor 環境でも安全に動作するように「ログ関連のクラスインスタンス変数の初期化タイミングと場所」を変更した PR です。主に `@supports_flush` とデフォルト logger の設定を「遅延評価」から「メイン Ractor での事前初期化」に切り替えています。"
-    },
-    {
-      "number": 58468,
-      "title": "Reduce Pattern#method_name allocations during boot {#pr-58468}",
-      "url": "https://github.com/rails/rails/pull/58468",
-      "mergedAt": "2026-08-13T00:00:00.000Z",
-      "author": "skipkayhil",
-      "authorUrl": "https://github.com/skipkayhil",
-      "summary": "1. 概要 (1–2文で)  \n`ActiveModel::AttributeMethods` でメソッド名テンプレートを生成する際、`:attr_name` と `:as` が同じ場合に余計な文字列・パターンオブジェクトを生成しないようにし、Railsブート時の `Pattern#method_name` 関連のオブジェクト割り当てを削減する最適化です。機能的な挙動は変えずに、パフォーマンスとメモリ効率を改善する変更です。"
-    },
-    {
-      "number": 58466,
-      "title": "Restore performance for dynamic attribute read {#pr-58466}",
-      "url": "https://github.com/rails/rails/pull/58466",
-      "mergedAt": "2026-08-12T00:00:00.000Z",
-      "author": "hmcguire-shopify",
-      "authorUrl": "https://github.com/hmcguire-shopify",
-      "summary": "1. 概要 (1-2文で)  \nこのPRは、前回の「パターンキャッシュ削除」によって悪化した ActiveModel の「動的属性読み取り（動的 attribute メソッド）」の性能を取り戻すための調整です。`to_hash` や `permitted?` など、Strong Parameters 周辺で多用される処理のパフォーマンス低下を緩和・解消することが目的です。"
-    },
-    {
-      "number": 58462,
-      "title": "Remove attribute_method_patterns_cache {#pr-58462}",
-      "url": "https://github.com/rails/rails/pull/58462",
-      "mergedAt": "2026-08-12T00:00:00.000Z",
-      "author": "hmcguire-shopify",
-      "authorUrl": "https://github.com/hmcguire-shopify",
-      "summary": "1. 概要 (1-2文で)  \nActiveModel/ActiveRecord の「動的属性メソッド」判定に使っていた `attribute_method_patterns_cache` を撤廃し、代わりに複数のマイクロ最適化でパフォーマンスを補う変更です。キャッシュは性能面では有用だったものの、サイズ無制限かつ Ractor 非対応であるため、将来の並行実行モデルとの整合性を優先して削除されています。"
     }
   ]
 }
