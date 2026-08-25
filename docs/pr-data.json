@@ -1,7 +1,88 @@
 {
-  "lastUpdated": "2026-08-24T00:06:07.681Z",
+  "lastUpdated": "2026-08-25T00:09:23.922Z",
   "totalCount": 50,
   "items": [
+    {
+      "number": 58049,
+      "title": "Drive result delivery through QueryIntent {#pr-58049}",
+      "url": "https://github.com/rails/rails/pull/58049",
+      "mergedAt": "2026-08-24T00:00:00.000Z",
+      "author": "matthewd",
+      "authorUrl": "https://github.com/matthewd",
+      "summary": "1. 概要 (1–2文で)  \nActiveRecord のクエリ実行フローにおいて、「結果が勝手に返ってくる」受動的なモデルから、「結果を明示的に受け取りに行く」能動的なモデルに変更し、その中核として `QueryIntent` を拡張・活用する PR です。現時点で機能的な挙動は変えずに、今後の非同期実行（query pipelining など）を実装するための土台を整えています。"
+    },
+    {
+      "number": 58479,
+      "title": "Query predicate expressions for Active Record types, take 2 {#pr-58479}",
+      "url": "https://github.com/rails/rails/pull/58479",
+      "mergedAt": "2026-08-24T00:00:00.000Z",
+      "author": "matthewd",
+      "authorUrl": "https://github.com/matthewd",
+      "summary": "1. 概要 (1-2文で)  \nこのPRは、Active Record の各 Type が「比較に使う Arel 式（predicate expression）」を定義できる仕組みを導入し、where / order / association などでの値変換・比較ロジックを型に委譲するものです。これにより、Active Model に AR/Arel 依存を持ち込まずに、型ごとに正しい SQL 比較表現を柔軟に定義・拡張できるようになっています。"
+    },
+    {
+      "number": 58543,
+      "title": "Strip user-supplied `<action-text-markdown>` while canonicalizing {#pr-58543}",
+      "url": "https://github.com/rails/rails/pull/58543",
+      "mergedAt": "2026-08-24T00:00:00.000Z",
+      "author": "flavorjones",
+      "authorUrl": "https://github.com/flavorjones",
+      "summary": "1. 概要 (1-2文で)  \nAction Text の `Content#to_markdown` で使用している内部用タグ `<action-text-markdown>` について、ユーザーが本文中に同名タグを書いた場合でもそれが「信頼済みの生 Markdown」として扱われないようにする修正です。未リリース機能 (`to_markdown`) に対する修正であり、リリース済みの Rails には影響しません。"
+    },
+    {
+      "number": 58504,
+      "title": "Allow `translate`'s `scope:` argument to resolve relative i18n keys with leading period  {#pr-58504}",
+      "url": "https://github.com/rails/rails/pull/58504",
+      "mergedAt": "2026-08-24T00:00:00.000Z",
+      "author": "bensheldon",
+      "authorUrl": "https://github.com/bensheldon",
+      "summary": "1. 概要 (1-2文で)  \n`I18n.translate` / `t` ヘルパーの `scope:` 引数でも、先頭にドットが付いた相対キー（`.foo`）を「現在の翻訳コンテキストに対する相対パス」として解決できるようになりました。これにより、`key` 引数と `scope:` 引数の相対キー挙動が揃い、テンプレート内の翻訳記述が一貫し書きやすくなります。"
+    },
+    {
+      "number": 58539,
+      "title": "Fix the Active Record Store dirty tracking documentation example {#pr-58539}",
+      "url": "https://github.com/rails/rails/pull/58539",
+      "mergedAt": "2026-08-24T00:00:00.000Z",
+      "author": "55728",
+      "authorUrl": "https://github.com/55728",
+      "summary": "1. 概要 (1-2文で)  \nActiveRecord::Store のドキュメントにある「dirty tracking」の例が、実際の挙動（未保存レコード時）と食い違っていたため、例を「保存済みレコード」を前提とする形に修正した PR です。コード本体の挙動には変更はなく、ドキュメントのみの修正です。"
+    },
+    {
+      "number": 58538,
+      "title": "Fix the documented return type of AVG calculations {#pr-58538}",
+      "url": "https://github.com/rails/rails/pull/58538",
+      "mergedAt": "2026-08-24T00:00:00.000Z",
+      "author": "55728",
+      "authorUrl": "https://github.com/55728",
+      "summary": "1. 概要 (1-2文で)  \n`ActiveRecord::Calculations` のドキュメントに書かれていた `AVG` 計算結果の戻り値の型が、実際の挙動と一致するように修正された PR です。コードの挙動自体は変わらず、ドキュメントのみの修正です。"
+    },
+    {
+      "number": 58547,
+      "title": "url_for: use Hash splat to append keys {#pr-58547}",
+      "url": "https://github.com/rails/rails/pull/58547",
+      "mergedAt": "2026-08-24T00:00:00.000Z",
+      "author": "byroot",
+      "authorUrl": "https://github.com/byroot",
+      "summary": "1. 概要 (1-2文で)  \n`ActionController::UrlFor#url_for` 内で、既存の Hash を `dup` してキーを追加する実装をやめ、Hash のキーワード展開（Hash splat）を使うようにしたパフォーマンス改善のPRです。Ruby 4.1 以降で Hash 再確保（reallocation）を避けられ、URL生成まわりの性能・メモリ効率が向上します。"
+    },
+    {
+      "number": 58546,
+      "title": "Fix typo in Reflection initializer {#pr-58546}",
+      "url": "https://github.com/rails/rails/pull/58546",
+      "mergedAt": "2026-08-24T00:00:00.000Z",
+      "author": "bquorning",
+      "authorUrl": "https://github.com/bquorning",
+      "summary": "1. 概要 (1-2文で)  \nReflection 初期化処理内のタイポにより、常に不要な `dup` が行われていたバグを修正する PR です。  \n未定義インスタンス変数 `@extension` を参照していた箇所を、正しく定義済みの `@extensions` に修正しています。"
+    },
+    {
+      "number": 58545,
+      "title": "Don't touch the connection in MySQL's `fetch_indexes` for an empty list {#pr-58545}",
+      "url": "https://github.com/rails/rails/pull/58545",
+      "mergedAt": "2026-08-24T00:00:00.000Z",
+      "author": "kamipo",
+      "authorUrl": "https://github.com/kamipo",
+      "summary": "1. 概要 (1-2文で)  \nMySQL アダプタの `fetch_indexes` が、空のテーブルリストに対しても不要に DB 接続を開いてしまう問題を修正し、SQLite と同様に「空配列なら即 return」するようにした PRです。これにより、`indexes([])` 呼び出し時に接続を触らないため、特定のテストが不安定に落ちる問題も解消されます。"
+    },
     {
       "number": 58541,
       "title": "Further improve Reflextion#extensions {#pr-58541}",
@@ -370,87 +451,6 @@
       "author": "ngan",
       "authorUrl": "https://github.com/ngan",
       "summary": "1. 概要 (1-2文で)  \n`SchemaCache#add_all` が、テーブルごとに個別に問い合わせていた「主キー」と「インデックス」の読み込みを、複数テーブルをまとめて取得する形に変更し、スキーマキャッシュのダンプ時の SQL ステートメント数を大幅に削減する変更です。キャッシュされる内容や順序は従来と完全に同一で、パフォーマンス改善のみが目的です。"
-    },
-    {
-      "number": 58487,
-      "title": "Fix the `CollectionProxy#delete_all` documentation return value {#pr-58487}",
-      "url": "https://github.com/rails/rails/pull/58487",
-      "mergedAt": "2026-08-15T00:00:00.000Z",
-      "author": "55728",
-      "authorUrl": "https://github.com/55728",
-      "summary": "1. 概要 (1-2文で)  \n`CollectionProxy#delete_all` のドキュメントが、実際の挙動（削除件数を返す）と食い違っていたのを修正する PR です。特に `:nullify` 戦略のサンプルが「レコード配列を返す」かのように書かれていた点を、正しい戻り値の説明に合わせました。"
-    },
-    {
-      "number": 57852,
-      "title": "Freeze configuration {#pr-57852}",
-      "url": "https://github.com/rails/rails/pull/57852",
-      "mergedAt": "2026-08-15T00:00:00.000Z",
-      "author": "gmcgibbon",
-      "authorUrl": "https://github.com/gmcgibbon",
-      "summary": "1. 概要 (1–2文で)  \nRails の Active Record と Action Pack の一部設定値を、アプリケーション初期化後に freeze（必要な Ruby では make_shareable）することで、Ractor 間で安全に参照できるようにした PR です。これにより、初期化後に特定の設定を動的に書き換えることは基本的にできなくなります。"
-    },
-    {
-      "number": 58476,
-      "title": "Make Action View subscribers ractor safe {#pr-58476}",
-      "url": "https://github.com/rails/rails/pull/58476",
-      "mergedAt": "2026-08-14T00:00:00.000Z",
-      "author": "gmcgibbon",
-      "authorUrl": "https://github.com/gmcgibbon",
-      "summary": "1. 概要 (1-2文で)  \nAction View のログ購読クラス（`LogSubscriber` / `StructuredEventSubscriber`）で `Rails.root` の扱いを Ractor セーフにするため、`Rails.root` を「遅延メモ化」ではなく「初期化時に確定」する形に変更した PRです。これにより、マルチ Ractor 環境でも Action View のログ・イベント購読が安全に動作することを意図しています。"
-    },
-    {
-      "number": 58483,
-      "title": "Freeze the Controller `default_url_options` {#pr-58483}",
-      "url": "https://github.com/rails/rails/pull/58483",
-      "mergedAt": "2026-08-14T00:00:00.000Z",
-      "author": "Edouard-chin",
-      "authorUrl": "https://github.com/Edouard-chin",
-      "summary": "1. 概要 (1-2文で)  \nController / View で使われる `default_url_options` を「破壊的に変更できないように凍結（freeze）する」変更です。  \n暗黙のミューテーションによる予測しづらいリダイレクト／URL生成の挙動を防ぎ、将来的な Ractor 対応も見据えた安全性向上が目的です。"
-    },
-    {
-      "number": 58482,
-      "title": "Restore `unshareable_proc_action` with `ensure` in default scoping test {#pr-58482}",
-      "url": "https://github.com/rails/rails/pull/58482",
-      "mergedAt": "2026-08-14T00:00:00.000Z",
-      "author": "ngan",
-      "authorUrl": "https://github.com/ngan",
-      "summary": "1. 概要 (1-2文で)  \n`DefaultScopingTest#test_default_scopes_are_ractor_shareable` 内でグローバル設定 `ActiveSupport::Ractors.unshareable_proc_action` を一時的に変更する際、例外発生時にも必ず元に戻るように、`ActiveSupport::Ractors.with`（内部で `ensure` を使う仕組み）を使うように修正したテスト専用の変更です。これにより、テスト失敗時に Ractors 周りの設定リークが起きて後続テストが巻き添えになる問題を防ぎます。"
-    },
-    {
-      "number": 58421,
-      "title": "Let the schema readers answer for many tables at once {#pr-58421}",
-      "url": "https://github.com/rails/rails/pull/58421",
-      "mergedAt": "2026-08-14T00:00:00.000Z",
-      "author": "ngan",
-      "authorUrl": "https://github.com/ngan",
-      "summary": "1. 概要 (1-2文で)  \nこのPRは、スキーマダンプ時にテーブルごとにバラバラに発行していたメタデータ系クエリ（インデックス・外部キー・制約など）を「複数テーブルまとめて」取得できるようにし、大規模スキーマでの `db:schema:dump` / `db:migrate` の時間とクエリ数を大幅に削減する変更です。出力されるスキーマファイルの内容は（バグ修正を除き）変わらず、内部の問い合わせ方法とAPIシグネチャが拡張されています。"
-    },
-    {
-      "number": 57973,
-      "title": "Add support for the HTTP QUERY method {#pr-57973}",
-      "url": "https://github.com/rails/rails/pull/57973",
-      "mergedAt": "2026-08-14T00:00:00.000Z",
-      "author": "magnogouveia",
-      "authorUrl": "https://github.com/magnogouveia",
-      "summary": "1. 概要 (1–2文で)\n- Rails に HTTP の新メソッド QUERY（RFC 10008）が正式サポートとして追加され、`routes`・`request` オブジェクト・統合テストなど Action Pack 全体で GET 等と同様に扱えるようになりました。  \n- QUERY は「安全かつ冪等な、ボディ付きの GET 相当メソッド」として扱われ、複雑・大容量な検索条件を URL クエリ文字列ではなくリクエストボディで送る用途を想定しています。"
-    },
-    {
-      "number": 58469,
-      "title": "Remove \"missing\" workarounds from Active Record {#pr-58469}",
-      "url": "https://github.com/rails/rails/pull/58469",
-      "mergedAt": "2026-08-14T00:00:00.000Z",
-      "author": "hmcguire-shopify",
-      "authorUrl": "https://github.com/hmcguire-shopify",
-      "summary": "1. 概要 (1-2文で)  \nActive Record の `method_missing` ベースの「missing 系ワークアラウンド」が削除され、6.1 時代の Marshal 互換のためだけに残っていたコードが整理されました。これにより、仮想属性や `respond_to?` 周りのパフォーマンスが向上しつつ、新形式での `Marshal.load` 互換性はテストで担保されています。"
-    },
-    {
-      "number": 57629,
-      "title": "Make callbacks ractor-safe {#pr-57629}",
-      "url": "https://github.com/rails/rails/pull/57629",
-      "mergedAt": "2026-08-13T00:00:00.000Z",
-      "author": "gmcgibbon",
-      "authorUrl": "https://github.com/gmcgibbon",
-      "summary": "1. 概要 (1-2文で)  \nこのPRは、`ActiveSupport::Callbacks` を Ractor セーフにするための対応です。具体的には、コールバックチェーンやユーザー定義の Proc を Ractor 共有可能にし、Ractor 環境下でも安全にコールバックが動作するようにしています。"
     }
   ]
 }
