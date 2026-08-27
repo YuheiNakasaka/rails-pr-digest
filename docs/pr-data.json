@@ -1,7 +1,115 @@
 {
-  "lastUpdated": "2026-08-26T00:08:49.325Z",
+  "lastUpdated": "2026-08-27T01:18:23.535Z",
   "totalCount": 50,
   "items": [
+    {
+      "number": 58590,
+      "title": "Fix flaky connection pool disconnect tests {#pr-58590}",
+      "url": "https://github.com/rails/rails/pull/58590",
+      "mergedAt": "2026-08-27T00:00:00.000Z",
+      "author": "gmcgibbon",
+      "authorUrl": "https://github.com/gmcgibbon",
+      "summary": "1. 概要 (1-2文で)  \nこのPRは、Active Record のコネクションプール関連テストがローカル実行時にときどき失敗する（flakyになる）問題を減らすため、テストのエラー報告まわりのコンテキストを正しく隔離するよう修正したものです。`ConnectionPoolTests` に `ActiveSupport::ExecutionContext::TestHelper` を mixin することで、テスト実行ごとのコンテキスト汚染を防いでいます。"
+    },
+    {
+      "number": 58581,
+      "title": "[8-1-stable] Silence `Time.rfc3339` redefinition warning {#pr-58581}",
+      "url": "https://github.com/rails/rails/pull/58581",
+      "mergedAt": "2026-08-26T00:00:00.000Z",
+      "author": "yahonda",
+      "authorUrl": "https://github.com/yahonda",
+      "summary": "1. 概要 (1-2文で)  \nRuby 4.1 で `time` 標準ライブラリに `Time.rfc3339` が入ることにより、Active Support 側の同名メソッド定義と衝突して警告が出ていた問題を、警告だけを抑制する形で解消する PR です。8-1-stable では挙動を一切変えず、CI での strict warnings エラーだけをなくすことを目的としています。"
+    },
+    {
+      "number": 58576,
+      "title": "Actionpack ractorize {#pr-58576}",
+      "url": "https://github.com/rails/rails/pull/58576",
+      "mergedAt": "2026-08-26T00:00:00.000Z",
+      "author": "gmcgibbon",
+      "authorUrl": "https://github.com/gmcgibbon",
+      "summary": "1. 概要 (1-2文で)  \nAction Pack 内のいくつかのグローバル／共有オブジェクトを Ractor セーフにするための PRです。`ParamBuilder` のデフォルト、`Request` の `LOCALHOST`、`Response` のデフォルト文字コードとヘッダが、Ractor から安全に扱えるように変更されています。"
+    },
+    {
+      "number": 58574,
+      "title": "Fix RedisCacheStore#clear and #stats with multiple Redis URLs {#pr-58574}",
+      "url": "https://github.com/rails/rails/pull/58574",
+      "mergedAt": "2026-08-26T00:00:00.000Z",
+      "author": "Saidbek",
+      "authorUrl": "https://github.com/Saidbek",
+      "summary": "1. 概要 (1–2文で)  \n複数の Redis URL を指定して `RedisCacheStore` を構成した場合に、`clear` と `stats` が `NoMethodError` で落ちてしまうバグを修正した PRです。これらのメソッドが「リング全体を 1 クライアント」と誤って扱っていたのを、各 Redis サーバーごとに正しく処理するように変更しています。"
+    },
+    {
+      "number": 58584,
+      "title": "Optimize schema cache dump load {#pr-58584}",
+      "url": "https://github.com/rails/rails/pull/58584",
+      "mergedAt": "2026-08-26T00:00:00.000Z",
+      "author": "MrChoclate",
+      "authorUrl": "https://github.com/MrChoclate",
+      "summary": "1. 概要 (1-2文で)  \nRails の schema cache（`.schema_cache.dump` / `.dump.gz`）読み込み処理で、Ruby 2.7 以降の `Marshal.load(freeze: true)` を利用することで、文字列の intern / freeze を C 側で一括で行い、Ruby レベルの後処理を省いて高速化した PRです。1000+ テーブル規模のコードベースで、スキーマ読み込みから約 40ms を削減できたと報告されています。"
+    },
+    {
+      "number": 58577,
+      "title": "Support primary key resetting on Ractors {#pr-58577}",
+      "url": "https://github.com/rails/rails/pull/58577",
+      "mergedAt": "2026-08-26T00:00:00.000Z",
+      "author": "gmcgibbon",
+      "authorUrl": "https://github.com/gmcgibbon",
+      "summary": "1. 概要 (1-2文で)  \nRailsのActive Recordにおいて、Ractor（並列実行用の機能）上でのプライマリキー割り当てが正しく動かない問題を修正し、非メインRactorからでも主キーリセット・取得が正しく行えるようにしたPRです。`reset_primary_key` の実行をメインRactorに委譲することで、Ractor間で一貫した主キー情報を扱えるようにしています。"
+    },
+    {
+      "number": 58559,
+      "title": "Allow redis gem 6 in the Action Cable adapter on Rails 8.1 {#pr-58559}",
+      "url": "https://github.com/rails/rails/pull/58559",
+      "mergedAt": "2026-08-26T00:00:00.000Z",
+      "author": "mugitti9",
+      "authorUrl": "https://github.com/mugitti9",
+      "summary": "1. 概要 (1-2文で)  \nRails 8.1系のAction Cable Redisアダプタが、`redis` gem 6系も利用できるように依存バージョン制約を緩和したPRです。これにより、`redis` 6.0.0 を利用するアプリケーションでも、Action Cable の Redis pubsub アダプタを問題なくロードできるようになります。"
+    },
+    {
+      "number": 58569,
+      "title": "Remove unreachable default for DerivedSecretKeyProvider#derive_key_from {#pr-58569}",
+      "url": "https://github.com/rails/rails/pull/58569",
+      "mergedAt": "2026-08-26T00:00:00.000Z",
+      "author": "aryrabelo",
+      "authorUrl": "https://github.com/aryrabelo",
+      "summary": "1. 概要 (1-2文で)  \n`ActiveRecord::Encryption::DerivedSecretKeyProvider#derive_key_from` のキーワード引数 `using:` に設定されていた到達不能なデフォルト値（`key_generator`）を削除し、必須キーワードに変更したクリーンアップ PRです。挙動は実質的に変わらず、「間違った呼び出し時の例外の種類」が `NameError` から `ArgumentError` に変わる程度の影響に留まります。"
+    },
+    {
+      "number": 58567,
+      "title": "Remove unused `request` helper from RouteSetTest {#pr-58567}",
+      "url": "https://github.com/rails/rails/pull/58567",
+      "mergedAt": "2026-08-26T00:00:00.000Z",
+      "author": "aryrabelo",
+      "authorUrl": "https://github.com/aryrabelo",
+      "summary": "1. 概要 (1-2文で)  \n`RouteSetTest` 内で定義されていた、実際には一度も使われておらず、呼び出すと例外が出てしまう `request` ヘルパーメソッドを削除する PR です。テストコード中の「死んだコード」を整理することで、テストスイートの可読性と健全性を高めています。"
+    },
+    {
+      "number": 58568,
+      "title": "Remove unused Active Record internals {#pr-58568}",
+      "url": "https://github.com/rails/rails/pull/58568",
+      "mergedAt": "2026-08-26T00:00:00.000Z",
+      "author": "aryrabelo",
+      "authorUrl": "https://github.com/aryrabelo",
+      "summary": "1. 概要 (1-2文で)  \nActive Record / Arel 内部の実際には到達不能なコード（死んでいる分岐・メソッド呼び出し）を削除し、代わりに本来使われている経路にはテストを追加してカバーした PR です。挙動の変更はなく、型チェックや静的解析上のノイズを減らすリファクタリングです。"
+    },
+    {
+      "number": 58580,
+      "title": "Get rid of `QueryCacheRegistry#clear` {#pr-58580}",
+      "url": "https://github.com/rails/rails/pull/58580",
+      "mergedAt": "2026-08-26T00:00:00.000Z",
+      "author": "byroot",
+      "authorUrl": "https://github.com/byroot",
+      "summary": "1. 概要 (1-2文で)  \n`ActiveRecord::QueryCacheRegistry` に定義されていた未使用メソッド `#clear` が削除されました。機能的な挙動変更はなく、不要なデッドコードの整理のみです。"
+    },
+    {
+      "number": 58554,
+      "title": "Add config.active_record.schema_ignored_tables {#pr-58554}",
+      "url": "https://github.com/rails/rails/pull/58554",
+      "mergedAt": "2026-08-26T00:00:00.000Z",
+      "author": "edcarvio",
+      "authorUrl": "https://github.com/edcarvio",
+      "summary": "1. 概要 (1-2文で)  \nRails の Active Record に、新しい設定 `config.active_record.schema_ignored_tables` が追加され、これまで別々だった `SchemaDumper` 用 (`ignore_tables`) と `SchemaCache` 用 (`schema_cache_ignored_tables`) の無視テーブル設定が統合されました。これに伴い、既存の2つの設定は非推奨となり、テーブル名のマッチ方法も「物理名ベース」に統一されています。"
+    },
     {
       "number": 58570,
       "title": "Fix RedisCacheStore clear and stats with redis-client {#pr-58570}",
@@ -343,114 +451,6 @@
       "author": "yahonda",
       "authorUrl": "https://github.com/yahonda",
       "summary": "1. 概要 (1-2文で)  \n`Time.rfc3339` に `\"Z\"`（UTC 指定）の文字列を渡したとき、Active Support が「固定オフセット +00:00」ではなく「UTC 時刻（`utc? == true`）」を返すように変更し、今後 Ruby 4.1 以降に標準で入る `Time.rfc3339` の仕様に揃えた PRです。これにより時間値そのものは変わらず、主にシリアライズ時の表記が `\"+00:00\"` から `\"Z\"` に変わる可能性があります。"
-    },
-    {
-      "number": 57625,
-      "title": "Add backticks to `execute` method name in Active Record Migrations guide [ci skip] {#pr-57625}",
-      "url": "https://github.com/rails/rails/pull/57625",
-      "mergedAt": "2026-08-18T00:00:00.000Z",
-      "author": "VladNegara",
-      "authorUrl": "https://github.com/VladNegara",
-      "summary": "1. 概要 (1-2文で)  \nActive Record Migrations ガイド内で、`execute` メソッド名の表記がコードフォントになっていなかった箇所にバッククォートが追加され、他のメソッド表記と統一されました。アプリケーションコードには一切影響せず、ドキュメント上の表記ゆれを修正するものです。\n\n2. 変更内容の詳細(あればサンプルコードも含めて)  \n- 対象ファイル: `guides/source/active_record_migrations.md`  \n- 変更内容は 1 行のみで、テキスト中の `execute` メソッド名にバッククォートを付けたものです。\n\n  例（イメージ）:\n  ```diff\n- You can also use the execute method to run arbitrary SQL.\n+ You can also use the `execute` method to run arbitrary SQL.\n  ```\n\n  これにより、ガイド中でメソッド名が他の `change`, `up`, `down` などと同じくコードフォントで表示され、Markdown 的にも正しい書式になります。\n\n3. 影響範囲・注意点  \n- 影響範囲は Rails ガイド（ドキュメント）の表示のみです。  \n- Rails 本体の挙動や API 仕様、マイグレーションの書き方そのものには一切変更はありません。  \n- 既存コード・既存マイグレーションを修正する必要はありません。  \n- CI スキップ (`[ci skip]`) 指定の通り、テスト実行不要な純ドキュメント変更です。\n\n4. 参考情報 (あれば)  \n- 対象ガイド: Active Record Migrations ガイド  \n- 一般的な利用例（参考・既存仕様のおさらい）:\n  ```ruby\n  class AddIndexToUsersEmail < ActiveRecord::Migration[7.2]\n    def up\n      execute <<~SQL\n        CREATE INDEX index_users_on_email\n        ON users (email);\n      SQL\n    end\n\n    def down\n      execute <<~SQL\n        DROP INDEX index_users_on_email;\n      SQL\n    end\n  end\n  ```\n  上記のように、`execute` はマイグレーション内で任意の SQL を直接実行したい場合に使用するメソッドであり、その説明部分のメソッド名表記が今回の PR で整えられています。"
-    },
-    {
-      "number": 58507,
-      "title": "Remove trailing whitespace from Action Controller guide {#pr-58507}",
-      "url": "https://github.com/rails/rails/pull/58507",
-      "mergedAt": "2026-08-18T00:00:00.000Z",
-      "author": "55728",
-      "authorUrl": "https://github.com/55728",
-      "summary": "1. 概要 (1-2文で)  \nAction Controller ガイド（`guides/source/action_controller_overview.md`）内の行末の余分な半角スペースを 2 箇所削除し、`guides:lint:mdl` の Markdown Lint (`MD009 Trailing spaces`) エラーで `main` ブランチの CI が落ちていた問題を解消する PRです。  \n内容テキスト自体の変更はなく、レンダリング結果も変わらないホワイトスペースのみの修正です。"
-    },
-    {
-      "number": 58229,
-      "title": "[ci skip] Fix explanation of controller callbacks with blocks {#pr-58229}",
-      "url": "https://github.com/rails/rails/pull/58229",
-      "mergedAt": "2026-08-18T00:00:00.000Z",
-      "author": "flavio-b",
-      "authorUrl": "https://github.com/flavio-b",
-      "summary": "1. 概要 (1-2文で)  \nこのPRは、Railsガイド中の「ブロック付きのコントローラコールバックはコントローラインスタンスのスコープで動かない」という説明が実際の挙動と逆であるため、それを修正したドキュメント更新です。実装は変更せず、現状の `instance_exec` による挙動（コントローラインスタンス文脈で評価される）に説明を合わせています。"
-    },
-    {
-      "number": 58447,
-      "title": "Fix grammar errors in Sign Up and Settings guide [ci skip] {#pr-58447}",
-      "url": "https://github.com/rails/rails/pull/58447",
-      "mergedAt": "2026-08-18T00:00:00.000Z",
-      "author": "eglitobias",
-      "authorUrl": "https://github.com/eglitobias",
-      "summary": "1. 概要 (1-2文で)  \nSign Up and Settings ガイド (`guides/source/sign_up_and_settings.md`) に含まれていた英文の文法ミスを修正したドキュメント専用のPRです。アプリケーションの挙動やコードには一切変更はありません。\n\n2. 変更内容の詳細  \n- 対象ファイル: `guides/source/sign_up_and_settings.md`  \n- 修正内容:\n  - 英文の文法的におかしい箇所を6文、読みやすく自然な英語表現に修正\n  - 追加行 8 / 削除行 8 なので、文の差し替えレベルの変更に留まる\n  - 主な変更パターンとして想定されるもの:\n    - 動詞の時制や主語・動詞の一致の修正\n    - 冠詞 (a / an / the) の抜けや誤用の修正\n    - 前置詞 (in / on / at など) の不自然さの修正\n    - 不自然な語順や冗長表現の簡潔化\n\n実際のコード例やAPIの変更はなく、あくまでガイド本文の英文修正のみです。\n\n3. 影響範囲・注意点  \n- 実行コードやテスト、設定ファイルなどには一切変更なし\n  - 挙動変更なし\n  - 互換性への影響なし\n  - ビルド・デプロイ手順への影響なし\n- 対象はガイド文書だけなので、Rails アプリケーションを利用しているプロジェクト側で対応すべき作業はありません。\n- 英語ドキュメントを参照しているユーザーにとって、Sign Up and Settings ガイドの可読性と理解しやすさが向上します。\n- `[ci skip]` が付いているため、このPR自身のマージ時にはCIは実行されていません（ドキュメントのみの変更であることを示唆）。\n\n4. 参考情報 (あれば)  \n- PR: https://github.com/rails/rails/pull/58447  \n- 対象ガイド: `guides/source/sign_up_and_settings.md`  \n  - Sign Up and Settings 機能の利用手順・設定手順を説明する公式ガイドで、ユーザー登録まわりの設定を理解する際に参照される文書です。"
-    },
-    {
-      "number": 58502,
-      "title": "Simplify transaction instrumentation tests with `NotificationAssertions` helpers {#pr-58502}",
-      "url": "https://github.com/rails/rails/pull/58502",
-      "mergedAt": "2026-08-18T00:00:00.000Z",
-      "author": "Saidbek",
-      "authorUrl": "https://github.com/Saidbek",
-      "summary": "1. 概要 (1-2文で)  \nActive Record のトランザクション計測（instrumentation）テストで、手動の `ActiveSupport::Notifications.subscribe` / `unsubscribe` をやめ、`NotificationAssertions` ヘルパーに置き換えたテスト専用のリファクタリングです。アプリケーションの実行時挙動には一切変更がありません。"
-    },
-    {
-      "number": 58484,
-      "title": "Fix clearing PK-overlapping association keys when assigning nil {#pr-58484}",
-      "url": "https://github.com/rails/rails/pull/58484",
-      "mergedAt": "2026-08-18T00:00:00.000Z",
-      "author": "matthewd",
-      "authorUrl": "https://github.com/matthewd",
-      "summary": "1. 概要 (1-2文で)  \n`belongs_to` / `has_one` に `nil` を代入したときの外部キークリア処理で、「外部キーが参照元モデルの主キーと完全に重なっている場合」の挙動を修正した PR です。特に単一カラムFKやポリモーフィック `belongs_to` で、外部キーが正しく `NULL` にされない／type だけ消えるといった不整合な挙動を修正しています。"
-    },
-    {
-      "number": 58464,
-      "title": "Don't raise LoadError when a test:* folder is missing {#pr-58464}",
-      "url": "https://github.com/rails/rails/pull/58464",
-      "mergedAt": "2026-08-17T00:00:00.000Z",
-      "author": "arzezak",
-      "authorUrl": "https://github.com/arzezak",
-      "summary": "1. 概要 (1-2文で)  \nRails の `bin/rails test:*` コマンドが、対応する `test/...` ディレクトリが存在しない場合に `LoadError` で落ちていた挙動を修正し、「テスト0件」として正常終了するようにした PR です。特に、`rails new` 直後のアプリで `test:system` や `test:jobs` などを実行すると CI が真っ赤になる問題を解消します。"
-    },
-    {
-      "number": 58471,
-      "title": "Add --no-banner to bin/rails console {#pr-58471}",
-      "url": "https://github.com/rails/rails/pull/58471",
-      "mergedAt": "2026-08-17T00:00:00.000Z",
-      "author": "Saidbek",
-      "authorUrl": "https://github.com/Saidbek",
-      "summary": "1. 概要 (1–2文で)  \n`bin/rails console` に起動バナー（Railsロゴやバージョン等）を非表示にするための `--no-banner` オプションが追加されました。これにより、スクリプト実行やCIなどで一時的にバナーを消したいケースを、`.irbrc` を編集せずにCLIフラグだけで制御できます。"
-    },
-    {
-      "number": 58474,
-      "title": "delegate ActiveModel::Type::Binary::Data#as_json to its value {#pr-58474}",
-      "url": "https://github.com/rails/rails/pull/58474",
-      "mergedAt": "2026-08-17T00:00:00.000Z",
-      "author": "HoneyryderChuck",
-      "authorUrl": "https://github.com/HoneyryderChuck",
-      "summary": "1. 概要 (1-2文で)  \nActiveModel のバイナリ型 `ActiveModel::Type::Binary::Data` に対して、`as_json` を中身の値（文字列）に委譲する実装が追加されました。これにより、バイナリ属性を含むオブジェクトを JSON 化した際に、意味のない ivar マッピングではなく、期待どおり文字列としてシリアライズされるようになります。"
-    },
-    {
-      "number": 58320,
-      "title": "Keep the relation scope in `Relation#update` and `#update!` {#pr-58320}",
-      "url": "https://github.com/rails/rails/pull/58320",
-      "mergedAt": "2026-08-17T00:00:00.000Z",
-      "author": "pierry01",
-      "authorUrl": "https://github.com/pierry01",
-      "summary": "1. 概要 (1-2文で)\nRails の `Relation#update` / `Relation#update!` が関連・スコープを無視してレコードを更新してしまう問題を修正し、関連経由の更新もきちんとスコープが効くようにした PR です。これに伴い、スコープ外の id を指定した場合は更新されず `ActiveRecord::RecordNotFound` が発生するようになり、一部で挙動が破壊的に変わります。"
-    },
-    {
-      "number": 58497,
-      "title": "Simplify MySQL::IndexDefinition constructor {#pr-58497}",
-      "url": "https://github.com/rails/rails/pull/58497",
-      "mergedAt": "2026-08-17T00:00:00.000Z",
-      "author": "hmcguire-shopify",
-      "authorUrl": "https://github.com/hmcguire-shopify",
-      "summary": "1. 概要 (1-2文で)  \nMySQL 用の `MySQL::IndexDefinition` クラスのコンストラクタが簡素化され、引数まわりの扱いが整理されています。外部からの使い方はほぼ変えずに、内部実装の読みやすさと一貫性を高めるリファクタリングです。"
-    },
-    {
-      "number": 58097,
-      "title": "Join an Array `accept` in `file_field_tag` {#pr-58097}",
-      "url": "https://github.com/rails/rails/pull/58097",
-      "mergedAt": "2026-08-16T00:00:00.000Z",
-      "author": "55728",
-      "authorUrl": "https://github.com/55728",
-      "summary": "1. 概要 (1-2文で)\n- `file_field_tag` に `accept` オプションとして配列を渡したときのレンダリングが、HTML仕様に沿ったカンマ区切り形式になるよう修正されました。\n- これにより、`file_field_tag` と `file_field` の挙動が揃い、ブラウザが複数 MIME type を正しく解釈できるようになります。\n\n2. 変更内容の詳細\n- 対象: `ActionView::Helpers::FormTagHelper#file_field_tag`\n\nこれまで:\n\n```ruby\nfile_field_tag(\"picture\", accept: [\"image/png\", \"image/gif\"])\n# => <input type=\"file\" name=\"picture\" accept=\"image/png image/gif\">\n#                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n# 配列がスペース区切りで join されていた\n```\n\n修正後:\n\n```ruby\nfile_field_tag(\"picture\", accept: [\"image/png\", \"image/gif\"])\n# => <input type=\"file\" name=\"picture\" accept=\"image/png,image/gif\">\n#                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n# 配列がカンマ区切りで join される\n```\n\nHTML仕様上、`accept` 属性は「カンマ区切りのトークンのリスト」と定義されていますが、以前の実装はスペース区切りで結合していたため、2つ目以降の値をブラウザが無視するケースがありました。\n\n今回の修正では:\n\n- `accept` に Array が渡された場合、内部で `accept.join(\",\")` 相当の処理を行い、カンマ区切りで出力するように変更\n- `accept` が String の場合はそのまま利用（既存挙動維持）\n- すでにオブジェクトフォーム側 (`file_field`) ではカンマ区切りで join されていたため、それと同じロジックに揃えた\n\nテスト・ドキュメント関連:\n\n- `actionview/test/template/form_tag_helper_test.rb` に、配列 `accept` が期待通りカンマ区切りでレンダリングされることを検証するテストを追加\n- `actionview/CHANGELOG.md` に本変更のエントリを追加\n\n3. 影響範囲・注意点\n- 影響を受けるケース:\n  - `file_field_tag` を使い、`accept` に Array を渡していたコード\n    ```ruby\n    file_field_tag :file, accept: [\"image/png\", \"image/jpeg\"]\n    ```\n    これまで事実上、最初の MIME type しか効いていなかったブラウザが、修正後は複数 MIME type を正しく解釈するようになります。\n- 影響を受けないケース:\n  - `file_field_tag` に単一の MIME type を String で渡している場合\n    ```ruby\n    file_field_tag :file, accept: \"image/png\"\n    ```\n  - `file_field` (モデルバインド版) を使っている場合  \n    → もともとカンマ区切りで join されていたため挙動は変わらない\n- レイアウト・仕様依存の注意:\n  - もしスペース区切りの `accept` を前提とした、独自のパース処理や JS があれば、カンマ区切りに対応しているかを確認する必要があります（一般的なブラウザはもともとカンマ区切り前提なので通常は問題なし）。\n  - HTML仕様・ブラウザの挙動により、修正後のほうが「本来の期待どおりに複数 MIME type が効く」状態になるため、UI 上で選択できるファイルの種類が増えたように見えるケースがあります。\n\n4. 参考情報 (あれば)\n- 関連コード:\n  - `ActionView::Helpers::Tags::FileField#render`  \n    ここではすでに `accept` の Array をカンマ区切りにしており、今回 `file_field_tag` がそれに追従した形です。\n- HTML仕様:\n  - HTML Living Standard: `input` 要素の `accept` 属性は「コンマ区切りの型/拡張子のリスト（“Comma-separated list of items”）」と規定されており、本変更はその仕様順守のための修正となります。"
     }
   ]
 }
