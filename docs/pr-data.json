@@ -1,7 +1,25 @@
 {
-  "lastUpdated": "2026-08-27T01:18:23.535Z",
+  "lastUpdated": "2026-08-28T02:39:10.801Z",
   "totalCount": 50,
   "items": [
+    {
+      "number": 58593,
+      "title": "Remove no-op `Marshalling.format_version` handling from tests {#pr-58593}",
+      "url": "https://github.com/rails/rails/pull/58593",
+      "mergedAt": "2026-08-27T00:00:00.000Z",
+      "author": "kamipo",
+      "authorUrl": "https://github.com/kamipo",
+      "summary": "1. 概要 (1-2文で)  \nRails 7.1 以降で `ActiveRecord::Marshalling.format_version` が常に 7.1 固定になった仕様を前提に、もはや意味を持たないテスト上の `format_version` の保存・復元処理と、それに依存していた重複テストを削除した PR です。結果として、マージ後はテストコードがシンプルになりつつ、実質的なテストカバレッジは変わりません。"
+    },
+    {
+      "number": 58592,
+      "title": "More small hash optimizations {#pr-58592}",
+      "url": "https://github.com/rails/rails/pull/58592",
+      "mergedAt": "2026-08-27T00:00:00.000Z",
+      "author": "byroot",
+      "authorUrl": "https://github.com/byroot",
+      "summary": "1. 概要 (1-2文で)  \nRails のルーティング処理（`ActionDispatch::Routing::RouteSet`）において、URL オプション用ハッシュに対する不要な処理を減らすことで、パフォーマンスをわずかに改善するための最適化 PR です。機能仕様は変えずに、内部でのハッシュ操作（コピーやマージなど）を避ける形でコードが整理されています。"
+    },
     {
       "number": 58590,
       "title": "Fix flaky connection pool disconnect tests {#pr-58590}",
@@ -433,24 +451,6 @@
       "author": "hmcguire-shopify",
       "authorUrl": "https://github.com/hmcguire-shopify",
       "summary": "1. 概要 (1-2文で)  \nRails の `flash` 機能でカスタム flash type 用メソッドを定義する処理が、`define_method` から `class_eval` に変更され、Ractor（並行実行環境）内でも正しく動作するように修正されました。これにより、メイン Ractor 以外でも `add_flash_types` で定義したメソッドが利用可能になります。"
-    },
-    {
-      "number": 58509,
-      "title": "Compute ViewPaths#_prefixes on eager_load! {#pr-58509}",
-      "url": "https://github.com/rails/rails/pull/58509",
-      "mergedAt": "2026-08-18T00:00:00.000Z",
-      "author": "hmcguire-shopify",
-      "authorUrl": "https://github.com/hmcguire-shopify",
-      "summary": "1. 概要 (1-2文で)  \n`ActionView::ViewPaths` の `_prefixes` を `eager_load!` 時に事前計算するように変更し、Ractor 内からでも安全かつ効率的に利用できるようにした PR です。これにより、Ractor 環境での ActionView 利用時のスレッド/メモリ共有まわりの問題を回避する狙いがあります。"
-    },
-    {
-      "number": 58402,
-      "title": "Return a UTC time from `Time.rfc3339` for \"Z\" inputs {#pr-58402}",
-      "url": "https://github.com/rails/rails/pull/58402",
-      "mergedAt": "2026-08-18T00:00:00.000Z",
-      "author": "yahonda",
-      "authorUrl": "https://github.com/yahonda",
-      "summary": "1. 概要 (1-2文で)  \n`Time.rfc3339` に `\"Z\"`（UTC 指定）の文字列を渡したとき、Active Support が「固定オフセット +00:00」ではなく「UTC 時刻（`utc? == true`）」を返すように変更し、今後 Ruby 4.1 以降に標準で入る `Time.rfc3339` の仕様に揃えた PRです。これにより時間値そのものは変わらず、主にシリアライズ時の表記が `\"+00:00\"` から `\"Z\"` に変わる可能性があります。"
     }
   ]
 }
