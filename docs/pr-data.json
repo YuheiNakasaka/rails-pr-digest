@@ -1,7 +1,43 @@
 {
-  "lastUpdated": "2026-08-28T02:39:10.801Z",
+  "lastUpdated": "2026-08-29T00:11:46.723Z",
   "totalCount": 50,
   "items": [
+    {
+      "number": 58601,
+      "title": "Fix compatibility with json 3.0 {#pr-58601}",
+      "url": "https://github.com/rails/rails/pull/58601",
+      "mergedAt": "2026-08-28T00:00:00.000Z",
+      "author": "Earlopain",
+      "authorUrl": "https://github.com/Earlopain",
+      "summary": "1. 概要 (1-2文で)  \nRails の `ActiveSupport::JSON.decode` と Active Record の JSON コーダーが、`json` gem 3.0 で導入された「オプションはキーワード引数として扱う」という仕様変更により落ちる問題を、両バージョン（2.x / 3.x）で動く形に修正した PR です。"
+    },
+    {
+      "number": 58602,
+      "title": "remove DS_Store {#pr-58602}",
+      "url": "https://github.com/rails/rails/pull/58602",
+      "mergedAt": "2026-08-28T00:00:00.000Z",
+      "author": "tenderlove",
+      "authorUrl": "https://github.com/tenderlove",
+      "summary": "1. 概要 (1-2文で)  \nこのPRは、`activerecord` ディレクトリ配下に誤ってコミットされていた macOS のメタデータファイル `.DS_Store` をリポジトリから削除するものです。機能追加やバグ修正は一切なく、純粋な不要ファイルの掃除です。\n\n2. 変更内容の詳細  \n- 変更ファイル: `activerecord/.DS_Store`  \n- 内容: `.DS_Store` ファイルの削除（実質的にバイナリ/メタデータファイルの除去であり、コード差分はありません）\n\n`.DS_Store` は macOS Finder が各ディレクトリごとに自動生成する、表示設定などを保持する隠しファイルです。  \nRails のコードベースやテストに関する変更は一切行われていません。\n\n3. 影響範囲・注意点  \n- ランタイム動作への影響: なし  \n  - アプリケーションの挙動、Active Record の機能、パフォーマンスには関係ありません。  \n- ビルド/テストへの影響: なし  \n  - 単に不要な OS 依存ファイルがリポジトリから取り除かれただけです。  \n- 開発プロセス上の意味合い:  \n  - 他の開発者環境で `.DS_Store` による差分が出にくくなり、クリーンな Git 履歴を維持できます。  \n  - もし `.gitignore` に `.DS_Store` が未登録なら、今後の混入防止のために `.gitignore` で無視することが推奨されます（このPR自体では `.gitignore` は変更されていません）。\n\n4. 参考情報 (あれば)  \n- `.DS_Store` について:  \n  - Apple公式ドキュメント: 「About the .DS_Store file」などを参照  \n- 一般的な対策例:  \n  - `.gitignore` に以下を追加してコミット対象から除外する運用がよく行われます:  \n    ```gitignore\n    .DS_Store\n    ```  \n  - グローバル Git 設定で無視する場合（開発者ローカルの設定例）:  \n    ```bash\n    git config --global core.excludesfile ~/.gitignore_global\n    echo .DS_Store >> ~/.gitignore_global\n    ```"
+    },
+    {
+      "number": 58595,
+      "title": "Set timeout-minutes for ci.yml jobs {#pr-58595}",
+      "url": "https://github.com/rails/rails/pull/58595",
+      "mergedAt": "2026-08-28T00:00:00.000Z",
+      "author": "t27duck",
+      "authorUrl": "https://github.com/t27duck",
+      "summary": "1. 概要 (1-2文で)  \nこのPRは、Rails が新規アプリ生成時に出力する GitHub Actions 設定 (`ci.yml`) に、各ジョブ共通の `timeout-minutes: 15` を設定する変更です。これにより、ネットワーク障害などで処理がハングした場合でも、デフォルトの360分待たずに15分でタイムアウトし、無駄なランナー時間の消費を防ぎます。"
+    },
+    {
+      "number": 58599,
+      "title": "Prefixed partial names ractor safe {#pr-58599}",
+      "url": "https://github.com/rails/rails/pull/58599",
+      "mergedAt": "2026-08-28T00:00:00.000Z",
+      "author": "gmcgibbon",
+      "authorUrl": "https://github.com/gmcgibbon",
+      "summary": "1. 概要 (1-2文で)  \nAction View の「オブジェクトレンダリング」と ActiveSupport のイベントレポーター周りで、Ractor 非対応だったグローバル状態を「Ractorごとの状態管理」に変更し、Ractor セーフにした PR です。マルチ Ractor 実行時にも部分テンプレートのプレフィックスキャッシュとイベント通知が安全に動くようになります。"
+    },
     {
       "number": 58593,
       "title": "Remove no-op `Marshalling.format_version` handling from tests {#pr-58593}",
@@ -415,42 +451,6 @@
       "author": "Edouard-chin",
       "authorUrl": "https://github.com/Edouard-chin",
       "summary": "1. 概要 (1-2文で)  \nRails のルーティングで使われるポリモーフィック URL ヘルパー用のキャッシュを frozen（不変オブジェクト）にし、Ractor 内から `link_to(record)` などを安全に呼べるようにした PR です。これにより、Ractor 実行時に発生していた「非共有オブジェクトへのアクセス」エラーを防ぎます。"
-    },
-    {
-      "number": 58517,
-      "title": "Freeze the Response default_headers at the end of the boot process {#pr-58517}",
-      "url": "https://github.com/rails/rails/pull/58517",
-      "mergedAt": "2026-08-19T00:00:00.000Z",
-      "author": "Edouard-chin",
-      "authorUrl": "https://github.com/Edouard-chin",
-      "summary": "1. 概要 (1-2文で)  \nRails のブート完了時に `ActionDispatch::Response.default_headers` を freeze（凍結）するようにし、アプリケーション実行中にデフォルトレスポンスヘッダが書き換えられないようにした PR です。  \nこれにより Ractor から安全にデフォルトヘッダへアクセスできるようになり、並列実行時のスレッドセーフ性・予測可能性が向上します。"
-    },
-    {
-      "number": 58437,
-      "title": "Extract model schema state into `SchemaContext` {#pr-58437}",
-      "url": "https://github.com/rails/rails/pull/58437",
-      "mergedAt": "2026-08-19T00:00:00.000Z",
-      "author": "adrianna-chang-shopify",
-      "authorUrl": "https://github.com/adrianna-chang-shopify",
-      "summary": "1. 概要 (1-2文で)\nRails の Active Record 各モデルが持っていた「スキーマ依存の状態（カラム情報・型・デフォルト値・ステートメントキャッシュなど）」を、新たに導入された `SchemaContext` オブジェクトに集約し、モデルからはそのコンテキストへ委譲する形にリファクタリングした PR です。将来的な複数スキーマ切り替えを見据えつつも、この PR 自体では「1モデル = 1デフォルトコンテキスト」のみを扱います。"
-    },
-    {
-      "number": 58485,
-      "title": "Honour `all_queries` default scopes in internal queries {#pr-58485}",
-      "url": "https://github.com/rails/rails/pull/58485",
-      "mergedAt": "2026-08-19T00:00:00.000Z",
-      "author": "adrianna-chang-shopify",
-      "authorUrl": "https://github.com/adrianna-chang-shopify",
-      "summary": "1. 概要  \nこのPRは、`all_queries: true` が付いた default scope を「内部クエリ」にも適用するための仕組みを導入し、ユニークネスバリデーション、fixture ロード、カウンタキャッシュ更新などで、`all_queries` default scope が正しく尊重されるようにしたものです。通常の default scope は内部クエリには含めず、`all_queries` 指定のものだけを反映する専用スコープ `all_queries_scope` が追加されています。"
-    },
-    {
-      "number": 58510,
-      "title": "Use class_eval for flash types {#pr-58510}",
-      "url": "https://github.com/rails/rails/pull/58510",
-      "mergedAt": "2026-08-18T00:00:00.000Z",
-      "author": "hmcguire-shopify",
-      "authorUrl": "https://github.com/hmcguire-shopify",
-      "summary": "1. 概要 (1-2文で)  \nRails の `flash` 機能でカスタム flash type 用メソッドを定義する処理が、`define_method` から `class_eval` に変更され、Ractor（並行実行環境）内でも正しく動作するように修正されました。これにより、メイン Ractor 以外でも `add_flash_types` で定義したメソッドが利用可能になります。"
     }
   ]
 }
