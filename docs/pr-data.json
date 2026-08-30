@@ -1,7 +1,25 @@
 {
-  "lastUpdated": "2026-08-29T00:11:46.723Z",
+  "lastUpdated": "2026-08-30T00:13:29.430Z",
   "totalCount": 50,
   "items": [
+    {
+      "number": 58604,
+      "title": "Improve performance of Active Record model class predicate builders {#pr-58604}",
+      "url": "https://github.com/rails/rails/pull/58604",
+      "mergedAt": "2026-08-29T00:00:00.000Z",
+      "author": "gmcgibbon",
+      "authorUrl": "https://github.com/gmcgibbon",
+      "summary": "1. 概要 (1-2文で)  \nActive Record のモデルクラスにおける「predicate builder」（`where` などで使われるクエリ条件生成オブジェクト）の初期化方法を見直し、遅延初期化時のプロキシ処理をやめて「最初から実体をセットする」形に変えることでパフォーマンスを改善した PR です。初回リクエスト／クエリ時に発生していた余分なオーバーヘッドを減らすことが目的です。"
+    },
+    {
+      "number": 58549,
+      "title": "Upgrade to Marcel 2 for Active Storage content type detection {#pr-58549}",
+      "url": "https://github.com/rails/rails/pull/58549",
+      "mergedAt": "2026-08-29T00:00:00.000Z",
+      "author": "jeremy",
+      "authorUrl": "https://github.com/jeremy",
+      "summary": "1. 概要 (1-2文で)  \nActive Storage が依存する MIME タイプ判定ライブラリ「marcel」のバージョンを `~> 1.0` から `~> 2.0` に引き上げ、より精度の高いコンテンツタイプ検出とセキュリティ強化を Rails 本体のデフォルト挙動にしました。  \nこれにより、新規に解析・アップロードされる Blob の MIME タイプが一部「正準（canonical）なタイプ」に変わりますが、既存の Blob には影響しないよう配慮されています。"
+    },
     {
       "number": 58601,
       "title": "Fix compatibility with json 3.0 {#pr-58601}",
@@ -433,24 +451,6 @@
       "author": "ngan",
       "authorUrl": "https://github.com/ngan",
       "summary": "1. 概要 (1-2文で)  \nActiveRecord のテスト用フィクスチャで「接続プールのピン止め(pinning)」を行う処理の順序と記録方法を修正し、エラー時に teardown が誤った接続解除を試みて二次的な例外を発生させないようにした PR です。  \nこれにより、実際の障害原因（例: SQLite の `database is locked`）が素直に報告され、ピン止め状態の取り扱いも正しくなります。"
-    },
-    {
-      "number": 58498,
-      "title": "Read the table options of many tables at once, and batch the SQLite readers {#pr-58498}",
-      "url": "https://github.com/rails/rails/pull/58498",
-      "mergedAt": "2026-08-20T00:00:00.000Z",
-      "author": "ngan",
-      "authorUrl": "https://github.com/ngan",
-      "summary": "1. 概要 (1-2文で)  \n`table_options` が複数テーブルを一括で読めるようになり、PostgreSQL/SQLite でテーブルメタデータの読み取りが大幅にバッチ化・高速化された PR です。特に SQLite はカラム・PK・FK・インデックス等の取得をほぼ定数個の SQL にまとめ、スキーマダンプのクエリ数と時間を大きく削減しています。"
-    },
-    {
-      "number": 58520,
-      "title": "Freeze the route polymorphic cache {#pr-58520}",
-      "url": "https://github.com/rails/rails/pull/58520",
-      "mergedAt": "2026-08-20T00:00:00.000Z",
-      "author": "Edouard-chin",
-      "authorUrl": "https://github.com/Edouard-chin",
-      "summary": "1. 概要 (1-2文で)  \nRails のルーティングで使われるポリモーフィック URL ヘルパー用のキャッシュを frozen（不変オブジェクト）にし、Ractor 内から `link_to(record)` などを安全に呼べるようにした PR です。これにより、Ractor 実行時に発生していた「非共有オブジェクトへのアクセス」エラーを防ぎます。"
     }
   ]
 }
