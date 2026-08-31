@@ -1,7 +1,16 @@
 {
-  "lastUpdated": "2026-08-30T00:13:29.430Z",
+  "lastUpdated": "2026-08-31T00:13:23.885Z",
   "totalCount": 50,
   "items": [
+    {
+      "number": 58548,
+      "title": "`activerecord`: add an option to shuffle unordered `SELECT` results {#pr-58548}",
+      "url": "https://github.com/rails/rails/pull/58548",
+      "mergedAt": "2026-08-30T00:00:00.000Z",
+      "author": "viralpraxis",
+      "authorUrl": "https://github.com/viralpraxis",
+      "summary": "1. 概要 (1-2文で)  \nこのPRは、Active Record が生成する `ORDER BY` なしの `SELECT` 結果をランダムにシャッフルできる設定オプション `config.active_record.shuffle_unordered_selects` を追加し、テスト環境などで「暗黙の順序依存」をあぶり出せるようにする変更です。デフォルトは無効で、本番挙動は変えずに、順序に依存した危ういコードやテストを早期に検出することが目的です。"
+    },
     {
       "number": 58604,
       "title": "Improve performance of Active Record model class predicate builders {#pr-58604}",
@@ -442,15 +451,6 @@
       "author": "kamipo",
       "authorUrl": "https://github.com/kamipo",
       "summary": "1. 概要 (1-2文で)  \n`ActiveRecord::Relation#uniq!` が非推奨（deprecate）となり、Rails 9.0 で削除される予定になりました。Rails 7.0 以降はクエリの重複排除が自動化されているため、このメソッドは役割を終えています。"
-    },
-    {
-      "number": 58489,
-      "title": "Track fixture connection pools as they are pinned {#pr-58489}",
-      "url": "https://github.com/rails/rails/pull/58489",
-      "mergedAt": "2026-08-20T00:00:00.000Z",
-      "author": "ngan",
-      "authorUrl": "https://github.com/ngan",
-      "summary": "1. 概要 (1-2文で)  \nActiveRecord のテスト用フィクスチャで「接続プールのピン止め(pinning)」を行う処理の順序と記録方法を修正し、エラー時に teardown が誤った接続解除を試みて二次的な例外を発生させないようにした PR です。  \nこれにより、実際の障害原因（例: SQLite の `database is locked`）が素直に報告され、ピン止め状態の取り扱いも正しくなります。"
     }
   ]
 }
