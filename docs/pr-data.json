@@ -1,7 +1,34 @@
 {
-  "lastUpdated": "2026-08-31T00:13:23.885Z",
+  "lastUpdated": "2026-09-01T00:14:43.575Z",
   "totalCount": 50,
   "items": [
+    {
+      "number": 58620,
+      "title": "Make some ActionView::Base settings shareable {#pr-58620}",
+      "url": "https://github.com/rails/rails/pull/58620",
+      "mergedAt": "2026-08-31T00:00:00.000Z",
+      "author": "etiennebarrie",
+      "authorUrl": "https://github.com/etiennebarrie",
+      "summary": "1. 概要 (1-2文で)  \n`ActionView::Base` が持ついくつかの設定値を Ractor 間で共有可能（shareable）にし、Ractor を使ったビュー描画が Ruby 4.0 でも問題なく行えるようにする変更です。クラス変数ベースの `cattr_accessor` を、シングルトンクラス上の `attr_accessor` に置き換えることで、Ractor の shareable 制約に対応しています。"
+    },
+    {
+      "number": 58606,
+      "title": "Fix encrypted fixtures for JSON columns {#pr-58606}",
+      "url": "https://github.com/rails/rails/pull/58606",
+      "mergedAt": "2026-08-31T00:00:00.000Z",
+      "author": "carlosdanielpohlod",
+      "authorUrl": "https://github.com/carlosdanielpohlod",
+      "summary": "1. 概要 (1-2文で)  \n`config.active_record.encryption.encrypt_fixtures = true` を有効にした状態で、`json` / `jsonb` カラムを `encrypts` している属性のフィクスチャ読込時に発生していた復号エラー（#48601）が、暗号化フィクスチャのシリアライズ処理を修正することで解消されています。暗号化済みペイロードが JSON カラム用に二重シリアライズされていたのを防ぐパッチです。"
+    },
+    {
+      "number": 58612,
+      "title": "Fix `NameError` when `ActiveRecord::Coders::JSON` is given encode options {#pr-58612}",
+      "url": "https://github.com/rails/rails/pull/58612",
+      "mergedAt": "2026-08-31T00:00:00.000Z",
+      "author": "lazerg",
+      "authorUrl": "https://github.com/lazerg",
+      "summary": "1. 概要 (1-2文で)  \nActiveRecord の `ActiveRecord::Coders::JSON` に `encode_options` を渡したときに `NameError` が発生していた回 regresson を修正した PRです。イニシャライザ引数名のリネーム漏れによるバグを直し、encode オプション付きの利用を担保するテストが追加されています。"
+    },
     {
       "number": 58548,
       "title": "`activerecord`: add an option to shuffle unordered `SELECT` results {#pr-58548}",
@@ -424,33 +451,6 @@
       "author": "cam-woloshyn",
       "authorUrl": "https://github.com/cam-woloshyn",
       "summary": "1. 概要 (1-2文で)  \nActiveModel::Conversion の `_to_partial_path` が内部で使うキャッシュの初期化処理を、Ractor に対応できるように変更した PRです。非メイン Ractor から初回アクセスした際に起きていた `Ractor::IsolationError` を回避しつつ、既存のキャッシュヒット時のパフォーマンスは維持しています。"
-    },
-    {
-      "number": 58521,
-      "title": "Add temporary name to App's Executor/Reloader {#pr-58521}",
-      "url": "https://github.com/rails/rails/pull/58521",
-      "mergedAt": "2026-08-20T00:00:00.000Z",
-      "author": "hmcguire-shopify",
-      "authorUrl": "https://github.com/hmcguire-shopify",
-      "summary": "1. 概要 (1-2文で)  \nRails アプリケーションの `Executor` / `Reloader` クラスに、一時的な「わかりやすい名前」を付けるようにした PR です。これにより、コンソールやデバッガでこれらのクラスを確認する際に、匿名クラスではなく、元アプリケーションに紐づいた名前で表示され、デバッグしやすくなります。"
-    },
-    {
-      "number": 58526,
-      "title": "Remove `true:` / `false:` options from `ImmutableString` API doc {#pr-58526}",
-      "url": "https://github.com/rails/rails/pull/58526",
-      "mergedAt": "2026-08-20T00:00:00.000Z",
-      "author": "kamipo",
-      "authorUrl": "https://github.com/kamipo",
-      "summary": "1. 概要 (1-2文で)  \n`ActiveModel::Type::ImmutableString` のAPIドキュメントから、`true:` / `false:` オプションに関する記述が削除されました。これらは内部実装用であり、パブリックAPIとしてはサポートしない方針が明確化されています。"
-    },
-    {
-      "number": 58525,
-      "title": "Deprecate `ActiveRecord::Relation#uniq!` {#pr-58525}",
-      "url": "https://github.com/rails/rails/pull/58525",
-      "mergedAt": "2026-08-20T00:00:00.000Z",
-      "author": "kamipo",
-      "authorUrl": "https://github.com/kamipo",
-      "summary": "1. 概要 (1-2文で)  \n`ActiveRecord::Relation#uniq!` が非推奨（deprecate）となり、Rails 9.0 で削除される予定になりました。Rails 7.0 以降はクエリの重複排除が自動化されているため、このメソッドは役割を終えています。"
     }
   ]
 }
