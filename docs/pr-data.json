@@ -1,7 +1,43 @@
 {
-  "lastUpdated": "2026-09-01T00:14:43.575Z",
+  "lastUpdated": "2026-09-02T00:13:14.284Z",
   "totalCount": 50,
   "items": [
+    {
+      "number": 58625,
+      "title": "Avoid a redundant join in scoped through associations {#pr-58625}",
+      "url": "https://github.com/rails/rails/pull/58625",
+      "mergedAt": "2026-09-01T00:00:00.000Z",
+      "author": "dpaluy",
+      "authorUrl": "https://github.com/dpaluy",
+      "summary": "1. 概要 (1-2文で)  \n`has_many :through` の関連にスコープをマージする際、すでに through の結合（JOIN）で登場しているテーブルがスコープ側でも再度 JOIN されてしまうケースで、その冗長な JOIN を自動的に削除するようにした変更です。`belongs_to` / `has_one` 方向の単一レコード JOIN に限って重複を取り除き、クエリ結果が変わり得るコレクション JOIN はそのまま残すようになっています。"
+    },
+    {
+      "number": 58622,
+      "title": "Avoid preloading nil converted association keys {#pr-58622}",
+      "url": "https://github.com/rails/rails/pull/58622",
+      "mergedAt": "2026-09-01T00:00:00.000Z",
+      "author": "ThrwatElmo",
+      "authorUrl": "https://github.com/ThrwatElmo",
+      "summary": "1. 概要 (1-2文で)  \nRails の Active Record プリロード処理で、関連の外部キーが `nil` の場合に余計なクエリが発行されていた問題を修正し、`nil` キーを正しくスキップするようにした PR です。外部キー／主キーの型が異なり、プリローダがキーを文字列化するケースでも、`nil` は空文字列に変換せず `nil` のまま保持します。"
+    },
+    {
+      "number": 58626,
+      "title": "Optimize EventReporter::LogSubscriber#subscription_filter {#pr-58626}",
+      "url": "https://github.com/rails/rails/pull/58626",
+      "mergedAt": "2026-09-01T00:00:00.000Z",
+      "author": "byroot",
+      "authorUrl": "https://github.com/byroot",
+      "summary": "1. 概要 (1-2文で)  \n`EventReporter::LogSubscriber#subscription_filter` の実装を見直し、イベント名から namespace を抽出するのではなく、namespace から prefix を組み立てる形に変更することで、処理を単純化・最適化した PR です。挙動は従来と同等で、主に内部実装の整理・パフォーマンス改善が目的です。"
+    },
+    {
+      "number": 58303,
+      "title": "Require concurrent before using in ActionCable {#pr-58303}",
+      "url": "https://github.com/rails/rails/pull/58303",
+      "mergedAt": "2026-09-01T00:00:00.000Z",
+      "author": "josevalim",
+      "authorUrl": "https://github.com/josevalim",
+      "summary": "1. 概要 (1–2文で)  \nAction Cable を単体で読み込んだときにクラッシュしていた問題を、必要な `concurrent` 系モジュールを明示的に `require` することで解消した PRです。Action Cable を Rails 本体経由ではなく、直接ロードして使うケースでの初期化エラーを防ぐためのバグフィックスです。"
+    },
     {
       "number": 58620,
       "title": "Make some ActionView::Base settings shareable {#pr-58620}",
@@ -415,42 +451,6 @@
       "author": "Edouard-chin",
       "authorUrl": "https://github.com/Edouard-chin",
       "summary": "1. 概要 (1-2文で)  \nRails の URL ヘルパー（`post_path` など）を Ractor 内から呼び出せるようにするため、`RouteSet` と URL ヘルパー生成周りの実装が Ractor 対応になるよう調整された PRです。主なポイントは「URL ヘルパーを格納する Proc を Ractor 共有可能（shareable）にするための参照方法の工夫」と「ルーティング確定後に `RouteSet` を freeze すること」です。"
-    },
-    {
-      "number": 58529,
-      "title": "Make url helpers ractor safe {#pr-58529}",
-      "url": "https://github.com/rails/rails/pull/58529",
-      "mergedAt": "2026-08-20T00:00:00.000Z",
-      "author": "Edouard-chin",
-      "authorUrl": "https://github.com/Edouard-chin",
-      "summary": "1. 概要 (1-2文で)  \nRails の URL ヘルパー（`edit_post_path` など）を Ractor 内から呼び出せるようにするための下準備として、URL ヘルパー生成まわりのオブジェクトを「Ractor セーフ（共有可能）」にする変更です。まだこれ単体では Ractor 内で URL ヘルパーを完全に使えるわけではありませんが、そのための重要な一部です。"
-    },
-    {
-      "number": 58528,
-      "title": "`activerecord`: prevent tests from relying on unspecified `SELECT` order {#pr-58528}",
-      "url": "https://github.com/rails/rails/pull/58528",
-      "mergedAt": "2026-08-20T00:00:00.000Z",
-      "author": "viralpraxis",
-      "authorUrl": "https://github.com/viralpraxis",
-      "summary": "1. 概要 (1-2文で)  \nActive Record のテストで、`ORDER BY` を指定していない `SELECT` の結果順序に依存してしまう問題（テストのフレーク化やバグの温床）を防ぐため、SQLite でテストを実行する際に `reverse_unordered_selects` PRAGMA を有効にする設定が `config.example.yml` に追加されました。これにより、今後のテストが「暗黙の順序」を前提としないよう強制されます。\n\n2. 変更内容の詳細  \n\n- 変更ファイル: `activerecord/test/config.example.yml` のみ  \n- 内容: SQLite 用のテスト設定に `reverse_unordered_selects` PRAGMA をオンにする設定項目が追加されています。\n\nイメージとしては、以下のような設定が `config.example.yml` に含まれるようになったと考えられます（実際のキー名は例ですが、趣旨はこれに相当します）:\n\n```yaml\nsqlite:\n  adapter: sqlite3\n  database: db/test.sqlite3\n  variables:\n    reverse_unordered_selects: true\n```\n\nSQLite の `PRAGMA reverse_unordered_selects` は、**ORDER BY が明示されていない SELECT の結果順序を意図的に「逆順」にする**ことで、「実装依存のたまたまの順序」に依存しているコードやテストをあぶり出すためのデバッグ向け機能です。\n\nこの PR では以下の文脈があります:\n\n- 過去に以下の PR で、`ORDER BY` 未指定のレコード順序に依存していたことが原因のテストのフレークやバグが修正された:\n  - https://github.com/rails/rails/pull/58267\n  - https://github.com/rails/rails/pull/58527\n  - バグ修正: https://github.com/rails/rails/pull/58177\n- Byroot 氏のコメント（https://github.com/rails/rails/pull/58267#issuecomment-5113975701）を受けて、「そもそも今後こうした依存が入り込まないよう、テスト環境側で防御した方がよい」という判断になった。\n\nそのため、Rails 本体の Active Record テストスイートを実行するときに、SQLite では原則 `reverse_unordered_selects` をオンにするような設定例が公式に提供される形になっています。\n\n3. 影響範囲・注意点  \n\n- 影響対象\n  - Rails コアの Active Record テストスイート（特に SQLite を使って実行している部分）\n  - Rails 本体にコントリビュートする開発者（特に SQLite でテストを走らせる人）\n\n- 実質的な影響\n  - この PR 自体は **設定サンプル (`config.example.yml`) への追加のみ**で、本番コードや本番デフォルト設定には手を入れていません。\n  - ただし、この `example` を元に実際の `config.yml` を作っている、あるいは同様の設定を自分の環境に適用した場合、**ORDER BY を書いていないテストは予期しない順序で結果が返る**ため、次のようなテストは壊れやすくなります:\n    - `Model.all.first` / `Model.first` / `Model.last` などを、順序指定なしで前提にしているテスト\n    - `pluck` や `map` の結果順に意味を持たせて検証しているが、`order` を指定していないテスト\n  - しかしこれは意図した「防御策」であり、**テストが壊れたら、それは本来 `ORDER BY` を明示すべきだった箇所の発見**につながります。\n\n- 注意点\n  - すべてのテストが SQLite ベースではないため、PostgreSQL 専用テストや SQLite アダプタをスキップしているテストには、この PRAGMA は効きません。したがって「完全な保証」ではなく、「大部分のテストで暗黙順序依存を検出しやすくする」程度の効果です。\n  - 自身のアプリケーションのテストでも同様の問題をあぶり出したい場合、開発・テスト用の SQLite 接続で `reverse_unordered_selects` をオンにすることを検討できますが、その場合は既存テストが壊れる可能性が高いので、段階的な導入を推奨します。\n\n4. 参考情報 (あれば)  \n\n- SQLite 公式ドキュメント（PRAGMA reverse_unordered_selects）  \n  https://sqlite.org/pragma.html#pragma_reverse_unordered_selects  \n\n- 本 PR:  \n  https://github.com/rails/rails/pull/58528  \n\n- 関連 PR:  \n  - フレークテスト/バグ修正の文脈:  \n    - https://github.com/rails/rails/pull/58267  \n    - https://github.com/rails/rails/pull/58527  \n    - https://github.com/rails/rails/pull/58177  \n\n- 一般的な指針:\n  - RDBMS の仕様上、**`ORDER BY` を指定しない限り `SELECT` の結果順序は保証されない**ため、アプリケーション・ライブラリ双方で「順序を期待するときは必ず `order` を書く」ことが推奨されます。今回の PR は、その原則を Rails コアのテストレベルで強制するための一歩です。"
-    },
-    {
-      "number": 58527,
-      "title": "`activerecord`: make sure SQLite tests do not rely on implicit SELECT order {#pr-58527}",
-      "url": "https://github.com/rails/rails/pull/58527",
-      "mergedAt": "2026-08-20T00:00:00.000Z",
-      "author": "viralpraxis",
-      "authorUrl": "https://github.com/viralpraxis",
-      "summary": "1. 概要 (1-2文で)  \nこのPRは、Active Record の has_many 関連のテストのうち、SQLite で暗黙的なレコードの並び順に依存して失敗していたテストを修正し、データベース実装に依存しない決定的なテストにしたものです。MySQL/Trilogy/SQLite でたまたま成り立っていたインデックス順序への依存を取り除いています。"
-    },
-    {
-      "number": 58530,
-      "title": "Make ActiveModel::Conversion._to_partial_path ractor safe {#pr-58530}",
-      "url": "https://github.com/rails/rails/pull/58530",
-      "mergedAt": "2026-08-20T00:00:00.000Z",
-      "author": "cam-woloshyn",
-      "authorUrl": "https://github.com/cam-woloshyn",
-      "summary": "1. 概要 (1-2文で)  \nActiveModel::Conversion の `_to_partial_path` が内部で使うキャッシュの初期化処理を、Ractor に対応できるように変更した PRです。非メイン Ractor から初回アクセスした際に起きていた `Ractor::IsolationError` を回避しつつ、既存のキャッシュヒット時のパフォーマンスは維持しています。"
     }
   ]
 }
