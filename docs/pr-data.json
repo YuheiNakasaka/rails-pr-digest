@@ -1,7 +1,97 @@
 {
-  "lastUpdated": "2026-09-02T00:13:14.284Z",
+  "lastUpdated": "2026-09-03T00:16:16.957Z",
   "totalCount": 50,
   "items": [
+    {
+      "number": 58647,
+      "title": "Make the controller configs shareable in ractorize! {#pr-58647}",
+      "url": "https://github.com/rails/rails/pull/58647",
+      "mergedAt": "2026-09-02T00:00:00.000Z",
+      "author": "etiennebarrie",
+      "authorUrl": "https://github.com/etiennebarrie",
+      "summary": "1. 概要 (1-2文で)  \nRailsアプリを `ractorize!` した際に、コントローラのコンフィグ（設定オブジェクト）が Ractor 間で安全に共有できるようにした PR です。アプリケーションブート後の「コントローラレベルの設定」は共有可能な形に固定し、各コントローラインスタンス側で変更可能なコピーを持つ設計に寄せています。"
+    },
+    {
+      "number": 58653,
+      "title": "Freeze Active Record specific `on` callbacks {#pr-58653}",
+      "url": "https://github.com/rails/rails/pull/58653",
+      "mergedAt": "2026-09-02T00:00:00.000Z",
+      "author": "Edouard-chin",
+      "authorUrl": "https://github.com/Edouard-chin",
+      "summary": "1. 概要 (1-2文で)  \nActive Record のトランザクション系コールバック（`after_create_commit` などの `on` オプション付き）を Ractor でも共有可能（shareable）にするため、これらのコールバック定義を freeze する変更です。これにより、Ractor モード `:raise` でアプリ起動時に落ちてしまう問題が解消されます。"
+    },
+    {
+      "number": 58639,
+      "title": "Preserve fetch_multi key order when local cache is active {#pr-58639}",
+      "url": "https://github.com/rails/rails/pull/58639",
+      "mergedAt": "2026-09-02T00:00:00.000Z",
+      "author": "moizafzal936",
+      "authorUrl": "https://github.com/moizafzal936",
+      "summary": "1. 概要 (1-2文で)  \n`ActiveSupport::Cache::Store#fetch_multi` が「渡したキー順で結果を返す」という仕様を、ローカルキャッシュ (`Strategy::LocalCache`) 使用時にも正しく守るようにしたバグ修正です。ローカルキャッシュ命中／ミスの有無に関わらず、呼び出し側が指定したキー順で結果が返るようになります。"
+    },
+    {
+      "number": 58642,
+      "title": "Freeze Active Record time zone related configuration {#pr-58642}",
+      "url": "https://github.com/rails/rails/pull/58642",
+      "mergedAt": "2026-09-02T00:00:00.000Z",
+      "author": "Edouard-chin",
+      "authorUrl": "https://github.com/Edouard-chin",
+      "summary": "1. 概要 (1-2文で)  \nRails 7 での Ractor 対応の一環として、Active Record の「タイムゾーン関連設定」をフリーズ（凍結）し、Ractor 間の共有時に起きる不変性違反・Isolation 問題を解消する PR です。これにより、属性セット（attribute set）が Ractor ごとに遅延構築されても、安全に設定を共有できるようになります。"
+    },
+    {
+      "number": 58627,
+      "title": "Make ActionPack settings instance variables {#pr-58627}",
+      "url": "https://github.com/rails/rails/pull/58627",
+      "mergedAt": "2026-09-02T00:00:00.000Z",
+      "author": "etiennebarrie",
+      "authorUrl": "https://github.com/etiennebarrie",
+      "summary": "1. 概要 (1-2文で)  \nActionPack 内の一部設定を `mattr_accessor` ベースのクラス変数管理から、インスタンス変数ベースの設定管理に切り替える変更です。特に `ActionDispatch::Request` の MIME ネゴシエーション設定（`ignore_accept_header`）などで、「インスタンスからクラス設定が書き換わる」不自然な挙動をやめ、より一貫した設定の扱いにしています。"
+    },
+    {
+      "number": 58643,
+      "title": "Store the AssetTagHelper settings in singleton class attributes {#pr-58643}",
+      "url": "https://github.com/rails/rails/pull/58643",
+      "mergedAt": "2026-09-02T00:00:00.000Z",
+      "author": "etiennebarrie",
+      "authorUrl": "https://github.com/etiennebarrie",
+      "summary": "1. 概要 (1-2文で)  \nAssetTagHelper が持つ6つの設定値の保持方法を、クラス変数からモジュール自身のインスタンス変数（単一オブジェクト上の属性）へ変更し、インスタンス経由でグローバル設定を書き換える仕組みを削除して、Ractor 対応と設計の明確化を図る変更です。Rails 7以降で予定される Ruby 4.0 / Ractor 環境でも AssetTagHelper の設定が安全に参照できるようにすることが主目的です。"
+    },
+    {
+      "number": 58629,
+      "title": "Make the allow_browser callback shareable {#pr-58629}",
+      "url": "https://github.com/rails/rails/pull/58629",
+      "mergedAt": "2026-09-02T00:00:00.000Z",
+      "author": "etiennebarrie",
+      "authorUrl": "https://github.com/etiennebarrie",
+      "summary": "1. 概要 (1-2文で)  \n`allow_browser` の「未サポートブラウザに対するデフォルト動作」が Ractor でも共有可能なオブジェクト（shareable proc）になるよう修正された PR です。あわせて、Ruby の制約に対応するため、オプションキーワード引数 `:block` の扱いが変更されています。"
+    },
+    {
+      "number": 58645,
+      "title": "Fix TypeCaster sometimes leaking connection {#pr-58645}",
+      "url": "https://github.com/rails/rails/pull/58645",
+      "mergedAt": "2026-09-02T00:00:00.000Z",
+      "author": "skipkayhil",
+      "authorUrl": "https://github.com/skipkayhil",
+      "summary": "1. 概要 (1-2文で)  \nTypeCaster が内部で使う DB コネクションを「借りっぱなし」にしてしまうケースがあり、接続プールからコネクションがリークする不具合を修正した PRです。Executor によるクリーンアップに依存せず、`with_connection` を使って即座にコネクションを返却するように変更されています。"
+    },
+    {
+      "number": 58578,
+      "title": "Ractorize Active Record schema context {#pr-58578}",
+      "url": "https://github.com/rails/rails/pull/58578",
+      "mergedAt": "2026-09-02T00:00:00.000Z",
+      "author": "gmcgibbon",
+      "authorUrl": "https://github.com/gmcgibbon",
+      "summary": "1. 概要 (1–2文で)  \nActive Record の `SchemaContext` を、Ractor（マルチスレッド/マルチRactor環境）でも安全に扱えるように再設計したPRです。`SchemaContext` の中に `Attributes` オブジェクトを埋め込み、スキーマ関連の状態を Ractor ごとに分離しつつ、モデルクラス側の ivar はメイン Ractor で遅延評価できるように整理しています。"
+    },
+    {
+      "number": 58636,
+      "title": "Remove leftover perform_query stubs in TrilogyAdapterTest {#pr-58636}",
+      "url": "https://github.com/rails/rails/pull/58636",
+      "mergedAt": "2026-09-02T00:00:00.000Z",
+      "author": "yahonda",
+      "authorUrl": "https://github.com/yahonda",
+      "summary": "1. 概要 (1-2文で)  \nTrilogyAdapterTest で `perform_query` をスタブしていたテストが、スタブ後に元のメソッドを正しく戻さずにコネクションプールへ返していたため、非同期クエリのリトライ系テストが期待どおりに失敗を注入できなくなっていました。  \nこのPRでは、スタブ終了後にコネクションインスタンスに残ってしまう `perform_query` のシングルトンメソッドを `ensure` ブロックで確実に削除し、後続テストへの副作用をなくしています。"
+    },
     {
       "number": 58625,
       "title": "Avoid a redundant join in scoped through associations {#pr-58625}",
@@ -361,96 +451,6 @@
       "author": "byroot",
       "authorUrl": "https://github.com/byroot",
       "summary": "1. 概要 (1-2文で)  \n`ActionController::UrlFor#url_for` 内で、既存の Hash を `dup` してキーを追加する実装をやめ、Hash のキーワード展開（Hash splat）を使うようにしたパフォーマンス改善のPRです。Ruby 4.1 以降で Hash 再確保（reallocation）を避けられ、URL生成まわりの性能・メモリ効率が向上します。"
-    },
-    {
-      "number": 58546,
-      "title": "Fix typo in Reflection initializer {#pr-58546}",
-      "url": "https://github.com/rails/rails/pull/58546",
-      "mergedAt": "2026-08-24T00:00:00.000Z",
-      "author": "bquorning",
-      "authorUrl": "https://github.com/bquorning",
-      "summary": "1. 概要 (1-2文で)  \nReflection 初期化処理内のタイポにより、常に不要な `dup` が行われていたバグを修正する PR です。  \n未定義インスタンス変数 `@extension` を参照していた箇所を、正しく定義済みの `@extensions` に修正しています。"
-    },
-    {
-      "number": 58545,
-      "title": "Don't touch the connection in MySQL's `fetch_indexes` for an empty list {#pr-58545}",
-      "url": "https://github.com/rails/rails/pull/58545",
-      "mergedAt": "2026-08-24T00:00:00.000Z",
-      "author": "kamipo",
-      "authorUrl": "https://github.com/kamipo",
-      "summary": "1. 概要 (1-2文で)  \nMySQL アダプタの `fetch_indexes` が、空のテーブルリストに対しても不要に DB 接続を開いてしまう問題を修正し、SQLite と同様に「空配列なら即 return」するようにした PRです。これにより、`indexes([])` 呼び出し時に接続を触らないため、特定のテストが不安定に落ちる問題も解消されます。"
-    },
-    {
-      "number": 58541,
-      "title": "Further improve Reflextion#extensions {#pr-58541}",
-      "url": "https://github.com/rails/rails/pull/58541",
-      "mergedAt": "2026-08-22T00:00:00.000Z",
-      "author": "byroot",
-      "authorUrl": "https://github.com/byroot",
-      "summary": "1. 概要 (1-2文で)  \n`ActiveRecord::Reflection#extensions` の実装を前PR(#58540)に続いてリファクタリングし、処理の簡潔化・一貫性向上・不要なコードの削除を行った変更です。挙動自体は基本的に互換を維持しつつ、内部実装を整理しています。"
-    },
-    {
-      "number": 58540,
-      "title": "Avoid needless Array#flatten calls {#pr-58540}",
-      "url": "https://github.com/rails/rails/pull/58540",
-      "mergedAt": "2026-08-22T00:00:00.000Z",
-      "author": "byroot",
-      "authorUrl": "https://github.com/byroot",
-      "summary": "1. 概要 (1-2文で)  \n`extending!` などで使われていた「`*args` を受け取って `args.flatten` する」パターンをやめ、ほとんどの呼び出しで無駄になっている `Array#flatten` 呼び出しを避ける最適化が行われました。これにより、特にネストした配列が渡される場合に発生していた高コストな内部処理（identity Hash の生成）が減り、パフォーマンスがわずかに向上します。"
-    },
-    {
-      "number": 58537,
-      "title": "Fix async `ActiveRecord::StatementCache` execution with out-of-range bind values {#pr-58537}",
-      "url": "https://github.com/rails/rails/pull/58537",
-      "mergedAt": "2026-08-22T00:00:00.000Z",
-      "author": "viralpraxis",
-      "authorUrl": "https://github.com/viralpraxis",
-      "summary": "1. 概要 (1-2文で)  \n`ActiveRecord::StatementCache` の非同期実行パスで、存在しない `Promise.wrap` を呼んでいたことによる例外を修正し、正しく `Promise::Complete.new` を使うようにした PR です。これにより、バインド変数が範囲外のときの非同期実行でも、例外ではなく空結果を返すようになります。"
-    },
-    {
-      "number": 58519,
-      "title": "Load routes lazily when a mounted helper is called {#pr-58519}",
-      "url": "https://github.com/rails/rails/pull/58519",
-      "mergedAt": "2026-08-22T00:00:00.000Z",
-      "author": "seuros",
-      "authorUrl": "https://github.com/seuros",
-      "summary": "1. 概要 (1-2文で)  \nRails のルーティングを「遅延ロード」している環境で、`main_app` やエンジンのマウントヘルパを最初に呼び出した場合に `NoMethodError` が出ていた問題を修正し、必要に応じてルートを自動ロードしてから再実行するようになりました。これにより、URL/パスヘルパと同様に、マウントヘルパもルートの遅延ロードと整合的に動作します。"
-    },
-    {
-      "number": 58535,
-      "title": "Fix the `Relation#create` documentation example {#pr-58535}",
-      "url": "https://github.com/rails/rails/pull/58535",
-      "mergedAt": "2026-08-22T00:00:00.000Z",
-      "author": "55728",
-      "authorUrl": "https://github.com/55728",
-      "summary": "1. 概要 (1-2文で)  \n`ActiveRecord::Relation#create` のドキュメント中のサンプルコードが、スコープ付き `create` の振る舞いと食い違っていたため、正しい例になるように修正した PR です。コードの挙動自体には変更はなく、ドキュメントのみの修正です。"
-    },
-    {
-      "number": 58534,
-      "title": "Add enumerable to AttributeMethodPatternSet {#pr-58534}",
-      "url": "https://github.com/rails/rails/pull/58534",
-      "mergedAt": "2026-08-21T00:00:00.000Z",
-      "author": "gmcgibbon",
-      "authorUrl": "https://github.com/gmcgibbon",
-      "summary": "1. 概要 (1-2文で)  \nRails の Active Model にある `AttributeMethodPatternSet` に `Enumerable` が追加され、`attribute_method_patterns` が再び列挙可能（each や map などが使用可能）になるように調整した PR です。以前は配列だったものをクラスに置き換えた際に失われた「列挙性」を補う変更です。"
-    },
-    {
-      "number": 58522,
-      "title": "Fix Callbacks only made shareable in :raise mode {#pr-58522}",
-      "url": "https://github.com/rails/rails/pull/58522",
-      "mergedAt": "2026-08-20T00:00:00.000Z",
-      "author": "hmcguire-shopify",
-      "authorUrl": "https://github.com/hmcguire-shopify",
-      "summary": "1. 概要 (1-2文で)  \n`ActiveSupport::Callbacks` が、`Ractors.unshareable_proc_action` を `:warn` にしている場合でもコールバックを「Ractor 共有可能」にするよう修正された PR です。あわせて、`freeze` の可視性バグ修正と、アプリケーションの executor が Ractor 内で動作するために必要な executor 関連コールバックの shareable 化も行われています。"
-    },
-    {
-      "number": 58531,
-      "title": "Allow to call url helpers inside a ractor {#pr-58531}",
-      "url": "https://github.com/rails/rails/pull/58531",
-      "mergedAt": "2026-08-20T00:00:00.000Z",
-      "author": "Edouard-chin",
-      "authorUrl": "https://github.com/Edouard-chin",
-      "summary": "1. 概要 (1-2文で)  \nRails の URL ヘルパー（`post_path` など）を Ractor 内から呼び出せるようにするため、`RouteSet` と URL ヘルパー生成周りの実装が Ractor 対応になるよう調整された PRです。主なポイントは「URL ヘルパーを格納する Proc を Ractor 共有可能（shareable）にするための参照方法の工夫」と「ルーティング確定後に `RouteSet` を freeze すること」です。"
     }
   ]
 }
