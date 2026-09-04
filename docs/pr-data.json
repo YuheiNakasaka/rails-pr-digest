@@ -1,7 +1,52 @@
 {
-  "lastUpdated": "2026-09-03T00:16:16.957Z",
+  "lastUpdated": "2026-09-04T00:18:25.885Z",
   "totalCount": 50,
   "items": [
+    {
+      "number": 58623,
+      "title": "Check PATCH and QUERY in routing assertions with method: :all {#pr-58623}",
+      "url": "https://github.com/rails/rails/pull/58623",
+      "mergedAt": "2026-09-03T00:00:00.000Z",
+      "author": "carlosdanielpohlod",
+      "authorUrl": "https://github.com/carlosdanielpohlod",
+      "summary": "1. 概要 (1-2文で)  \nRails のルーティングテスト用アサーション `assert_recognizes` / `assert_routing` において、`method: :all` 指定時に `PATCH` と新たに追加された `QUERY` メソッドも検証対象とするように修正した PR です。これにより、「全ての HTTP メソッドを受け付けるはず」という前提で書かれたテストが、実際には `PATCH` や `QUERY` を受け付けていないルートを正しく検出できるようになります。"
+    },
+    {
+      "number": 58651,
+      "title": "SchemaContext#attributes: preload schemas to prevent deadlock {#pr-58651}",
+      "url": "https://github.com/rails/rails/pull/58651",
+      "mergedAt": "2026-09-03T00:00:00.000Z",
+      "author": "kyrofa",
+      "authorUrl": "https://github.com/kyrofa",
+      "summary": "1. 概要 (1-2文で)  \n`SchemaContext#attributes` で `Ractor.store_if_absent` によるロックを使って `Attributes` を初期化していた結果、スキーマ読み込み時に再帰的に同じロックを取りに行ってデッドロックが発生しうる問題を解消した PR です。  \nロックを完全に取り除き、デッドロックを防ぎつつ動作をテストで担保しています。"
+    },
+    {
+      "number": 58656,
+      "title": "Prevent freezing Action Dispatch default headers config itself {#pr-58656}",
+      "url": "https://github.com/rails/rails/pull/58656",
+      "mergedAt": "2026-09-03T00:00:00.000Z",
+      "author": "Edouard-chin",
+      "authorUrl": "https://github.com/Edouard-chin",
+      "summary": "1. 概要 (1-2文で)  \nRails の `ActionDispatch` が持つ「デフォルトレスポンスヘッダ設定」を Ractor 安全性のために freeze する際、`Rails.application.config.action_dispatch.default_headers` そのものが凍結されてしまう問題を修正し、設定オブジェクト自体は凍結されないようにした PR です。これにより、古くから存在する「load hook 内で config を破壊的変更する」ようなコードがクラッシュせず動作（※実質的な効果は元々ほぼなかった）を続けられるようになります。"
+    },
+    {
+      "number": 58635,
+      "title": "Re-enable PostgreSQL triggers when `disable_referential_integrity` raises {#pr-58635}",
+      "url": "https://github.com/rails/rails/pull/58635",
+      "mergedAt": "2026-09-03T00:00:00.000Z",
+      "author": "lukasedw",
+      "authorUrl": "https://github.com/lukasedw",
+      "summary": "1. 概要 (1-2文で)  \nPostgreSQL 18.4 未満の環境で `disable_referential_integrity` 実行中に例外が発生した場合でも、必ずトリガーが再有効化されるように修正した PR です。これにより、テストやクリーナー処理の失敗をきっかけに、DB 全体の外部キー制約が恒久的に無効化されてしまうバグを防ぎます。"
+    },
+    {
+      "number": 58638,
+      "title": "Add PostgreSQL adapter support for configuring error_verbosity {#pr-58638}",
+      "url": "https://github.com/rails/rails/pull/58638",
+      "mergedAt": "2026-09-03T00:00:00.000Z",
+      "author": "beauraF",
+      "authorUrl": "https://github.com/beauraF",
+      "summary": "1. 概要 (1-2文で)  \nPostgreSQL アダプタに、接続設定 (`database.yml`) から `error_verbosity` を指定して libpq のエラーメッセージ詳細度を制御できる機能が追加されました。これにより、ユニーク制約違反などのエラーに含まれる PII（メールアドレス等）がログ経由で漏洩することを抑制しやすくなります。"
+    },
     {
       "number": 58647,
       "title": "Make the controller configs shareable in ractorize! {#pr-58647}",
@@ -406,51 +451,6 @@
       "author": "matthewd",
       "authorUrl": "https://github.com/matthewd",
       "summary": "1. 概要 (1-2文で)  \nこのPRは、Active Record の各 Type が「比較に使う Arel 式（predicate expression）」を定義できる仕組みを導入し、where / order / association などでの値変換・比較ロジックを型に委譲するものです。これにより、Active Model に AR/Arel 依存を持ち込まずに、型ごとに正しい SQL 比較表現を柔軟に定義・拡張できるようになっています。"
-    },
-    {
-      "number": 58543,
-      "title": "Strip user-supplied `<action-text-markdown>` while canonicalizing {#pr-58543}",
-      "url": "https://github.com/rails/rails/pull/58543",
-      "mergedAt": "2026-08-24T00:00:00.000Z",
-      "author": "flavorjones",
-      "authorUrl": "https://github.com/flavorjones",
-      "summary": "1. 概要 (1-2文で)  \nAction Text の `Content#to_markdown` で使用している内部用タグ `<action-text-markdown>` について、ユーザーが本文中に同名タグを書いた場合でもそれが「信頼済みの生 Markdown」として扱われないようにする修正です。未リリース機能 (`to_markdown`) に対する修正であり、リリース済みの Rails には影響しません。"
-    },
-    {
-      "number": 58504,
-      "title": "Allow `translate`'s `scope:` argument to resolve relative i18n keys with leading period  {#pr-58504}",
-      "url": "https://github.com/rails/rails/pull/58504",
-      "mergedAt": "2026-08-24T00:00:00.000Z",
-      "author": "bensheldon",
-      "authorUrl": "https://github.com/bensheldon",
-      "summary": "1. 概要 (1-2文で)  \n`I18n.translate` / `t` ヘルパーの `scope:` 引数でも、先頭にドットが付いた相対キー（`.foo`）を「現在の翻訳コンテキストに対する相対パス」として解決できるようになりました。これにより、`key` 引数と `scope:` 引数の相対キー挙動が揃い、テンプレート内の翻訳記述が一貫し書きやすくなります。"
-    },
-    {
-      "number": 58539,
-      "title": "Fix the Active Record Store dirty tracking documentation example {#pr-58539}",
-      "url": "https://github.com/rails/rails/pull/58539",
-      "mergedAt": "2026-08-24T00:00:00.000Z",
-      "author": "55728",
-      "authorUrl": "https://github.com/55728",
-      "summary": "1. 概要 (1-2文で)  \nActiveRecord::Store のドキュメントにある「dirty tracking」の例が、実際の挙動（未保存レコード時）と食い違っていたため、例を「保存済みレコード」を前提とする形に修正した PR です。コード本体の挙動には変更はなく、ドキュメントのみの修正です。"
-    },
-    {
-      "number": 58538,
-      "title": "Fix the documented return type of AVG calculations {#pr-58538}",
-      "url": "https://github.com/rails/rails/pull/58538",
-      "mergedAt": "2026-08-24T00:00:00.000Z",
-      "author": "55728",
-      "authorUrl": "https://github.com/55728",
-      "summary": "1. 概要 (1-2文で)  \n`ActiveRecord::Calculations` のドキュメントに書かれていた `AVG` 計算結果の戻り値の型が、実際の挙動と一致するように修正された PR です。コードの挙動自体は変わらず、ドキュメントのみの修正です。"
-    },
-    {
-      "number": 58547,
-      "title": "url_for: use Hash splat to append keys {#pr-58547}",
-      "url": "https://github.com/rails/rails/pull/58547",
-      "mergedAt": "2026-08-24T00:00:00.000Z",
-      "author": "byroot",
-      "authorUrl": "https://github.com/byroot",
-      "summary": "1. 概要 (1-2文で)  \n`ActionController::UrlFor#url_for` 内で、既存の Hash を `dup` してキーを追加する実装をやめ、Hash のキーワード展開（Hash splat）を使うようにしたパフォーマンス改善のPRです。Ruby 4.1 以降で Hash 再確保（reallocation）を避けられ、URL生成まわりの性能・メモリ効率が向上します。"
     }
   ]
 }
