@@ -1,7 +1,70 @@
 {
-  "lastUpdated": "2026-09-04T00:18:25.885Z",
+  "lastUpdated": "2026-09-05T00:12:52.366Z",
   "totalCount": 50,
   "items": [
+    {
+      "number": 58640,
+      "title": "Allow to access view paths in a Ractor {#pr-58640}",
+      "url": "https://github.com/rails/rails/pull/58640",
+      "mergedAt": "2026-09-04T00:00:00.000Z",
+      "author": "Edouard-chin",
+      "authorUrl": "https://github.com/Edouard-chin",
+      "summary": "1. 概要 (1-2文で)  \nRailsアプリケーションをRactor対応（並列実行）した際に、「ビューのテンプレート探索(view paths lookup)」ができない問題を修正し、Ractor内からもビューのパスにアクセスできるようにした変更です。具体的には、Ractorで共有できなかったビュー関連キャッシュを「Ractor-shareable」になるように扱う（freezeする）ことで、Ractor内からのテンプレート検索を可能にしています。"
+    },
+    {
+      "number": 58659,
+      "title": "Fix Ractor unshareable procs at boot {#pr-58659}",
+      "url": "https://github.com/rails/rails/pull/58659",
+      "mergedAt": "2026-09-04T00:00:00.000Z",
+      "author": "etiennebarrie",
+      "authorUrl": "https://github.com/etiennebarrie",
+      "summary": "1. 概要 (1-2文で)  \nRails のブート時に生成されるいくつかの proc / lambda が Ractor 的に「共有不可能（unshareable）」になっていた問題を、キャプチャするローカル変数を整理することで「共有可能（shareable）」にする修正です。Ractor ワーカー利用時の IsolationError を避けつつ、ルートリローダーなど一部の「どうしても共有できない値」は Ractor 非対応機能として扱う方針を明示しています。"
+    },
+    {
+      "number": 58669,
+      "title": "Fix broken link to Redirecting Requests in layouts_and_rendering.md {#pr-58669}",
+      "url": "https://github.com/rails/rails/pull/58669",
+      "mergedAt": "2026-09-04T00:00:00.000Z",
+      "author": "yahonda",
+      "authorUrl": "https://github.com/yahonda",
+      "summary": "1. 概要 (1-2文で)  \nRails ガイド「Layouts and Rendering」の中で、存在しないアンカー `#redirecting-requests` への自己リンクがあったため、正しいガイド「Action Controller Overview」の該当セクションへのリンクに修正した PR です。これにより `rake guides:lint` のリンクチェックが再び通るようになっています。"
+    },
+    {
+      "number": 57152,
+      "title": "[RF-DOCS] Rewrite the Layouts and Rendering guide {#pr-57152}",
+      "url": "https://github.com/rails/rails/pull/57152",
+      "mergedAt": "2026-09-04T00:00:00.000Z",
+      "author": "ayushn21",
+      "authorUrl": "https://github.com/ayushn21",
+      "summary": "1. 概要 (1-2文で)  \nLayouts and Rendering ガイドがほぼ全面的に書き直され、内容の重複を整理しつつ「コントローラとビューの関係」を中心とした構成に再編されました。これに伴い、レイアウト構造やパーシャルなどの説明は Action View Overview へ移動され、リクエストバリアントの説明は Action Controller Overview から本ガイドへ移されています。"
+    },
+    {
+      "number": 58628,
+      "title": "Use new max_connections instead of pool in guide [ci skip] {#pr-58628}",
+      "url": "https://github.com/rails/rails/pull/58628",
+      "mergedAt": "2026-09-04T00:00:00.000Z",
+      "author": "rnestler",
+      "authorUrl": "https://github.com/rnestler",
+      "summary": "1. 概要 (1-2文で)  \nRails 8.1 でデータベース設定オプション `pool` が `max_connections` に名称変更されたことを受けて、公式ガイド内の記述を新しいオプション名に合わせて修正した PR です。コードや挙動の変更ではなく、ドキュメント（ガイド）のみを対象とした修正です。"
+    },
+    {
+      "number": 58665,
+      "title": "[8-1-stable] Fixed guard around AS::TC.run_order {#pr-58665}",
+      "url": "https://github.com/rails/rails/pull/58665",
+      "mergedAt": "2026-09-04T00:00:00.000Z",
+      "author": "fesiqueira",
+      "authorUrl": "https://github.com/fesiqueira",
+      "summary": "1. 概要 (1-2文で)  \nRails 8.1系（`8-1-stable` ブランチ）で、`ActiveSupport::TestCase.run_order` を扱うガード条件（安全な存在チェック）が誤っていたのを 1行だけ修正したバックポートPRです。Minitest 6 対応のフォローアップで、テスト実行順序の取得まわりで発生しうる不具合を防ぐ目的の修正です。"
+    },
+    {
+      "number": 58666,
+      "title": "Use equality comparison when fetching information about a single table {#pr-58666}",
+      "url": "https://github.com/rails/rails/pull/58666",
+      "mergedAt": "2026-09-04T00:00:00.000Z",
+      "author": "ilianah",
+      "authorUrl": "https://github.com/ilianah",
+      "summary": "1. 概要 (1-2文で)  \nMySQL 用スキーマリーダが「単一テーブル」に対しても `IN (...)` を使って `information_schema` を問い合わせていた挙動を、1件の場合は `=` 比較に戻すPRです。Vitess 環境で `remove_index` などが正しく動かずエラーになっていた問題を、古い Vitess バージョンも含めてワークアラウンドする目的があります。"
+    },
     {
       "number": 58623,
       "title": "Check PATCH and QUERY in routing assertions with method: :all {#pr-58623}",
@@ -388,69 +451,6 @@
       "author": "edcarvio",
       "authorUrl": "https://github.com/edcarvio",
       "summary": "1. 概要 (1-2文で)  \nRails の Active Record に、新しい設定 `config.active_record.schema_ignored_tables` が追加され、これまで別々だった `SchemaDumper` 用 (`ignore_tables`) と `SchemaCache` 用 (`schema_cache_ignored_tables`) の無視テーブル設定が統合されました。これに伴い、既存の2つの設定は非推奨となり、テーブル名のマッチ方法も「物理名ベース」に統一されています。"
-    },
-    {
-      "number": 58570,
-      "title": "Fix RedisCacheStore clear and stats with redis-client {#pr-58570}",
-      "url": "https://github.com/rails/rails/pull/58570",
-      "mergedAt": "2026-08-25T00:00:00.000Z",
-      "author": "luizkowalski",
-      "authorUrl": "https://github.com/luizkowalski",
-      "summary": "1. 概要 (1-2文で)  \nRedis 用キャッシュストア `RedisCacheStore` が、`redis-client` を使った場合に `clear` と `stats` で `NoMethodError` が出る問題を修正した PRです。`FLUSHDB` と `INFO` コマンドの呼び出し方法を `RedisClient#call` ベースに揃え、回帰テストを追加しています。"
-    },
-    {
-      "number": 58552,
-      "title": "Add Herb as an HTML-aware ERB implementation {#pr-58552}",
-      "url": "https://github.com/rails/rails/pull/58552",
-      "mergedAt": "2026-08-25T00:00:00.000Z",
-      "author": "marcoroth",
-      "authorUrl": "https://github.com/marcoroth",
-      "summary": "1. 概要 (1-2文で)  \nRails の Action View に、HTML 構造を理解する ERB 実装「Herb::Engine」を使うためのハンドラ `ActionView::Template::Handlers::ERB::Herb` が追加されました。これにより、HTML+ERB テンプレートを構文木ベースで解析しつつ、現行の Erubi とほぼ互換なインターフェイスで利用できる土台が整えられています。"
-    },
-    {
-      "number": 58563,
-      "title": "Fix PostgreSQL exclusion constraints with multiline expressions {#pr-58563}",
-      "url": "https://github.com/rails/rails/pull/58563",
-      "mergedAt": "2026-08-25T00:00:00.000Z",
-      "author": "jakemcallister",
-      "authorUrl": "https://github.com/jakemcallister",
-      "summary": "1. 概要 (1-2文で)  \nPostgreSQL の排他制約（exclusion constraint）定義に改行を含む場合、Active Record がそれを正しくパースできず `exclusion_constraints` 呼び出しやスキーマダンプが壊れる不具合を修正した PR です。制約定義をパースする正規表現に「複数行マッチ」を有効化し、CASE 式を含む排他制約でも正しく読み取れるようにしています。"
-    },
-    {
-      "number": 58562,
-      "title": "Make en.rb translation load path contents ractor safe {#pr-58562}",
-      "url": "https://github.com/rails/rails/pull/58562",
-      "mergedAt": "2026-08-25T00:00:00.000Z",
-      "author": "gmcgibbon",
-      "authorUrl": "https://github.com/gmcgibbon",
-      "summary": "1. 概要 (1-2文で)  \nRails が内部で設定している I18n の英語ロケール (`en.rb`) のロードパス用 `Proc` を、Ruby の Ractor から安全に共有できる形に変更した PRです。これにより、Ractor を用いた並行実行環境でも Rails のデフォルト I18n 設定が問題なく動作するようになります。"
-    },
-    {
-      "number": 58553,
-      "title": "Escape attachment captions in `Attachment#to_markdown` {#pr-58553}",
-      "url": "https://github.com/rails/rails/pull/58553",
-      "mergedAt": "2026-08-25T00:00:00.000Z",
-      "author": "flavorjones",
-      "authorUrl": "https://github.com/flavorjones",
-      "summary": "1. 概要 (1-2文で)  \n`ActionText::Attachment#to_markdown` が添付ファイルの caption（キャプション）をエスケープせずにそのまま Markdown に出力していた問題を修正し、Markdown 用に適切にエスケープするようにした PR です。これにより、ユーザー由来のキャプションから不正なリンクなどが Markdown として機能してしまうクラスの問題を防ぎます。"
-    },
-    {
-      "number": 58049,
-      "title": "Drive result delivery through QueryIntent {#pr-58049}",
-      "url": "https://github.com/rails/rails/pull/58049",
-      "mergedAt": "2026-08-24T00:00:00.000Z",
-      "author": "matthewd",
-      "authorUrl": "https://github.com/matthewd",
-      "summary": "1. 概要 (1–2文で)  \nActiveRecord のクエリ実行フローにおいて、「結果が勝手に返ってくる」受動的なモデルから、「結果を明示的に受け取りに行く」能動的なモデルに変更し、その中核として `QueryIntent` を拡張・活用する PR です。現時点で機能的な挙動は変えずに、今後の非同期実行（query pipelining など）を実装するための土台を整えています。"
-    },
-    {
-      "number": 58479,
-      "title": "Query predicate expressions for Active Record types, take 2 {#pr-58479}",
-      "url": "https://github.com/rails/rails/pull/58479",
-      "mergedAt": "2026-08-24T00:00:00.000Z",
-      "author": "matthewd",
-      "authorUrl": "https://github.com/matthewd",
-      "summary": "1. 概要 (1-2文で)  \nこのPRは、Active Record の各 Type が「比較に使う Arel 式（predicate expression）」を定義できる仕組みを導入し、where / order / association などでの値変換・比較ロジックを型に委譲するものです。これにより、Active Model に AR/Arel 依存を持ち込まずに、型ごとに正しい SQL 比較表現を柔軟に定義・拡張できるようになっています。"
     }
   ]
 }
