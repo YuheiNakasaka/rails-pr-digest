@@ -1,7 +1,16 @@
 {
-  "lastUpdated": "2026-09-05T00:12:52.366Z",
+  "lastUpdated": "2026-09-06T00:13:15.467Z",
   "totalCount": 50,
   "items": [
+    {
+      "number": 58673,
+      "title": "Refactor more class variables to accessors and delegators {#pr-58673}",
+      "url": "https://github.com/rails/rails/pull/58673",
+      "mergedAt": "2026-09-05T00:00:00.000Z",
+      "author": "gmcgibbon",
+      "authorUrl": "https://github.com/gmcgibbon",
+      "summary": "1. 概要 (1-2文で)  \nこのPRは、Rails内部で使われていたクラス変数ベースの設定（`mattr_accessor`）をインスタンス用の`attr_accessor`等に置き換え、Ruby 4.0.6 でも Ractor から安全に参照できるようにするリファクタリングです。主に Action Pack / Action View の各種ヘルパの設定値の持ち方が変わり、それに対応するテストが追加されています。"
+    },
     {
       "number": 58640,
       "title": "Allow to access view paths in a Ractor {#pr-58640}",
@@ -442,15 +451,6 @@
       "author": "byroot",
       "authorUrl": "https://github.com/byroot",
       "summary": "1. 概要 (1-2文で)  \n`ActiveRecord::QueryCacheRegistry` に定義されていた未使用メソッド `#clear` が削除されました。機能的な挙動変更はなく、不要なデッドコードの整理のみです。"
-    },
-    {
-      "number": 58554,
-      "title": "Add config.active_record.schema_ignored_tables {#pr-58554}",
-      "url": "https://github.com/rails/rails/pull/58554",
-      "mergedAt": "2026-08-26T00:00:00.000Z",
-      "author": "edcarvio",
-      "authorUrl": "https://github.com/edcarvio",
-      "summary": "1. 概要 (1-2文で)  \nRails の Active Record に、新しい設定 `config.active_record.schema_ignored_tables` が追加され、これまで別々だった `SchemaDumper` 用 (`ignore_tables`) と `SchemaCache` 用 (`schema_cache_ignored_tables`) の無視テーブル設定が統合されました。これに伴い、既存の2つの設定は非推奨となり、テーブル名のマッチ方法も「物理名ベース」に統一されています。"
     }
   ]
 }
