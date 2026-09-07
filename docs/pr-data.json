@@ -1,7 +1,16 @@
 {
-  "lastUpdated": "2026-09-06T00:13:15.467Z",
+  "lastUpdated": "2026-09-07T00:12:56.976Z",
   "totalCount": 50,
   "items": [
+    {
+      "number": 58675,
+      "title": "Fix docker-entrypoint check to support extra bin/rails server flags {#pr-58675}",
+      "url": "https://github.com/rails/rails/pull/58675",
+      "mergedAt": "2026-09-06T00:00:00.000Z",
+      "author": "iamdipak39p",
+      "authorUrl": "https://github.com/iamdipak39p",
+      "summary": "1. 概要 (1-2文で)  \nRails のアプリ生成時に作られる `bin/docker-entrypoint` が、`bin/rails server` に追加フラグを付けた場合に `db:prepare` を実行しなくなる問題を修正した PR です。Docker の `CMD [\"./bin/rails\", \"server\"]` 形式に合わせて、引数のチェック方法を「末尾2つ」から「先頭2つ」に変更し、あわせてテストを追加しています。"
+    },
     {
       "number": 58673,
       "title": "Refactor more class variables to accessors and delegators {#pr-58673}",
@@ -442,15 +451,6 @@
       "author": "aryrabelo",
       "authorUrl": "https://github.com/aryrabelo",
       "summary": "1. 概要 (1-2文で)  \nActive Record / Arel 内部の実際には到達不能なコード（死んでいる分岐・メソッド呼び出し）を削除し、代わりに本来使われている経路にはテストを追加してカバーした PR です。挙動の変更はなく、型チェックや静的解析上のノイズを減らすリファクタリングです。"
-    },
-    {
-      "number": 58580,
-      "title": "Get rid of `QueryCacheRegistry#clear` {#pr-58580}",
-      "url": "https://github.com/rails/rails/pull/58580",
-      "mergedAt": "2026-08-26T00:00:00.000Z",
-      "author": "byroot",
-      "authorUrl": "https://github.com/byroot",
-      "summary": "1. 概要 (1-2文で)  \n`ActiveRecord::QueryCacheRegistry` に定義されていた未使用メソッド `#clear` が削除されました。機能的な挙動変更はなく、不要なデッドコードの整理のみです。"
     }
   ]
 }
