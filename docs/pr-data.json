@@ -1,7 +1,70 @@
 {
-  "lastUpdated": "2026-09-07T00:12:56.976Z",
+  "lastUpdated": "2026-09-08T00:13:37.027Z",
   "totalCount": 50,
   "items": [
+    {
+      "number": 58678,
+      "title": "Use Regexp#source instead of Regexp#to_s to detect deep filters {#pr-58678}",
+      "url": "https://github.com/rails/rails/pull/58678",
+      "mergedAt": "2026-09-07T00:00:00.000Z",
+      "author": "eregon",
+      "authorUrl": "https://github.com/eregon",
+      "summary": "1. 概要 (1-2文で)  \nRails のパラメータフィルタ (`ActiveSupport::ParameterFilter`) で「ディープフィルタ」を検出する際、`Regexp#to_s` の代わりに `Regexp#source` を使うように変更し、不要な文字列生成を避けてパフォーマンスを改善した PR です。挙動は変えずに、高頻度パスでのオーバーヘッドを削減しています。"
+    },
+    {
+      "number": 57198,
+      "title": "Fix retry_job to respect enqueue options when enqueue is deferred {#pr-57198}",
+      "url": "https://github.com/rails/rails/pull/57198",
+      "mergedAt": "2026-09-07T00:00:00.000Z",
+      "author": "Saidbek",
+      "authorUrl": "https://github.com/Saidbek",
+      "summary": "1. 概要 (1-2文で)  \n`enqueue_after_transaction_commit` を有効にした状態でトランザクション内から `retry_job` を呼び出した場合に、`wait` / `queue` / `priority` といった enqueue オプションが無視されてしまうバグを修正する PR です。トランザクションコミット後に実際の enqueue が行われるケースでも、`retry_job` で指定したオプションが正しく反映されるようになります。"
+    },
+    {
+      "number": 58684,
+      "title": "Fix Active Support loading on JRuby without Ractor {#pr-58684}",
+      "url": "https://github.com/rails/rails/pull/58684",
+      "mergedAt": "2026-09-07T00:00:00.000Z",
+      "author": "nicolasva",
+      "authorUrl": "https://github.com/nicolasva",
+      "summary": "1. 概要 (1-2文で)  \nJRuby 10 が `RUBY_VERSION = \"4.0.0\"` を名乗る一方で `Ractor` 定数を定義していないために、Active Support の Ractor 対応コードが NameError で落ちていた問題を修正する PRです。`Ractor` 定数の有無を見て挙動を切り替えることで、Ractor を持たない実装（JRuby など）でも安全に `active_support/core_ext` がロードできるようになりました。"
+    },
+    {
+      "number": 58688,
+      "title": "Upgrade rubocop {#pr-58688}",
+      "url": "https://github.com/rails/rails/pull/58688",
+      "mergedAt": "2026-09-07T00:00:00.000Z",
+      "author": "byroot",
+      "authorUrl": "https://github.com/byroot",
+      "summary": "1. 概要  \nRubocop をアップグレードしたうえで、それに伴いコードスタイルやテストコードを新しいルールに合わせて修正し、あわせて `json` gem を一時的に `< 3.0` にロックした PR です。機能追加はなく、主に開発環境・テスト用の整備が目的です。"
+    },
+    {
+      "number": 58686,
+      "title": "ExceptionWrapper: build backtrace lazily {#pr-58686}",
+      "url": "https://github.com/rails/rails/pull/58686",
+      "mergedAt": "2026-09-07T00:00:00.000Z",
+      "author": "byroot",
+      "authorUrl": "https://github.com/byroot",
+      "summary": "1. 概要 (1-2文で)  \n`ActionDispatch::ExceptionWrapper` が例外のバックトレース（backtrace）を「遅延評価（lazily）」で構築するように変更され、例外ラップ時点では backtrace を組み立てず、必要になったタイミングで初めて生成することでパフォーマンスの無駄なコストを避けるようになりました。"
+    },
+    {
+      "number": 58687,
+      "title": "Skip testing Action Mailbox and Active Storage scripts {#pr-58687}",
+      "url": "https://github.com/rails/rails/pull/58687",
+      "mergedAt": "2026-09-07T00:00:00.000Z",
+      "author": "byroot",
+      "authorUrl": "https://github.com/byroot",
+      "summary": "1. 概要 (1-2文で)  \nこのPRは、Action Mailbox と Active Storage に関するガイド用バグレポートテンプレートのスクリプトテストを、一時的にスキップする変更です。原因は、テスト実行時に使用される `rails 8.1.3` と `json 3.0` の組み合わせが非互換であり、`rails 8.1.4` が出るまでテストが正常に動かないためです。"
+    },
+    {
+      "number": 58109,
+      "title": "Re-document application template advanced usage [ci skip] {#pr-58109}",
+      "url": "https://github.com/rails/rails/pull/58109",
+      "mergedAt": "2026-09-07T00:00:00.000Z",
+      "author": "jeromedalbert",
+      "authorUrl": "https://github.com/jeromedalbert",
+      "summary": "1. 概要 (1-2文で)  \nRailsガイドから消えてしまっていた「Application Template の高度な使い方（Advanced Usage）」セクションを、Generatorsガイド内に復活させるドキュメント修正のPRです。特に、テンプレートのディレクトリ（`__dir__`）を基準に Thor の `copy_file` などが使えるようにする `source_paths` の設定方法が再度明示的にドキュメント化されました。"
+    },
     {
       "number": 58675,
       "title": "Fix docker-entrypoint check to support extra bin/rails server flags {#pr-58675}",
@@ -388,69 +451,6 @@
       "author": "gmcgibbon",
       "authorUrl": "https://github.com/gmcgibbon",
       "summary": "1. 概要 (1-2文で)  \nAction Pack 内のいくつかのグローバル／共有オブジェクトを Ractor セーフにするための PRです。`ParamBuilder` のデフォルト、`Request` の `LOCALHOST`、`Response` のデフォルト文字コードとヘッダが、Ractor から安全に扱えるように変更されています。"
-    },
-    {
-      "number": 58574,
-      "title": "Fix RedisCacheStore#clear and #stats with multiple Redis URLs {#pr-58574}",
-      "url": "https://github.com/rails/rails/pull/58574",
-      "mergedAt": "2026-08-26T00:00:00.000Z",
-      "author": "Saidbek",
-      "authorUrl": "https://github.com/Saidbek",
-      "summary": "1. 概要 (1–2文で)  \n複数の Redis URL を指定して `RedisCacheStore` を構成した場合に、`clear` と `stats` が `NoMethodError` で落ちてしまうバグを修正した PRです。これらのメソッドが「リング全体を 1 クライアント」と誤って扱っていたのを、各 Redis サーバーごとに正しく処理するように変更しています。"
-    },
-    {
-      "number": 58584,
-      "title": "Optimize schema cache dump load {#pr-58584}",
-      "url": "https://github.com/rails/rails/pull/58584",
-      "mergedAt": "2026-08-26T00:00:00.000Z",
-      "author": "MrChoclate",
-      "authorUrl": "https://github.com/MrChoclate",
-      "summary": "1. 概要 (1-2文で)  \nRails の schema cache（`.schema_cache.dump` / `.dump.gz`）読み込み処理で、Ruby 2.7 以降の `Marshal.load(freeze: true)` を利用することで、文字列の intern / freeze を C 側で一括で行い、Ruby レベルの後処理を省いて高速化した PRです。1000+ テーブル規模のコードベースで、スキーマ読み込みから約 40ms を削減できたと報告されています。"
-    },
-    {
-      "number": 58577,
-      "title": "Support primary key resetting on Ractors {#pr-58577}",
-      "url": "https://github.com/rails/rails/pull/58577",
-      "mergedAt": "2026-08-26T00:00:00.000Z",
-      "author": "gmcgibbon",
-      "authorUrl": "https://github.com/gmcgibbon",
-      "summary": "1. 概要 (1-2文で)  \nRailsのActive Recordにおいて、Ractor（並列実行用の機能）上でのプライマリキー割り当てが正しく動かない問題を修正し、非メインRactorからでも主キーリセット・取得が正しく行えるようにしたPRです。`reset_primary_key` の実行をメインRactorに委譲することで、Ractor間で一貫した主キー情報を扱えるようにしています。"
-    },
-    {
-      "number": 58559,
-      "title": "Allow redis gem 6 in the Action Cable adapter on Rails 8.1 {#pr-58559}",
-      "url": "https://github.com/rails/rails/pull/58559",
-      "mergedAt": "2026-08-26T00:00:00.000Z",
-      "author": "mugitti9",
-      "authorUrl": "https://github.com/mugitti9",
-      "summary": "1. 概要 (1-2文で)  \nRails 8.1系のAction Cable Redisアダプタが、`redis` gem 6系も利用できるように依存バージョン制約を緩和したPRです。これにより、`redis` 6.0.0 を利用するアプリケーションでも、Action Cable の Redis pubsub アダプタを問題なくロードできるようになります。"
-    },
-    {
-      "number": 58569,
-      "title": "Remove unreachable default for DerivedSecretKeyProvider#derive_key_from {#pr-58569}",
-      "url": "https://github.com/rails/rails/pull/58569",
-      "mergedAt": "2026-08-26T00:00:00.000Z",
-      "author": "aryrabelo",
-      "authorUrl": "https://github.com/aryrabelo",
-      "summary": "1. 概要 (1-2文で)  \n`ActiveRecord::Encryption::DerivedSecretKeyProvider#derive_key_from` のキーワード引数 `using:` に設定されていた到達不能なデフォルト値（`key_generator`）を削除し、必須キーワードに変更したクリーンアップ PRです。挙動は実質的に変わらず、「間違った呼び出し時の例外の種類」が `NameError` から `ArgumentError` に変わる程度の影響に留まります。"
-    },
-    {
-      "number": 58567,
-      "title": "Remove unused `request` helper from RouteSetTest {#pr-58567}",
-      "url": "https://github.com/rails/rails/pull/58567",
-      "mergedAt": "2026-08-26T00:00:00.000Z",
-      "author": "aryrabelo",
-      "authorUrl": "https://github.com/aryrabelo",
-      "summary": "1. 概要 (1-2文で)  \n`RouteSetTest` 内で定義されていた、実際には一度も使われておらず、呼び出すと例外が出てしまう `request` ヘルパーメソッドを削除する PR です。テストコード中の「死んだコード」を整理することで、テストスイートの可読性と健全性を高めています。"
-    },
-    {
-      "number": 58568,
-      "title": "Remove unused Active Record internals {#pr-58568}",
-      "url": "https://github.com/rails/rails/pull/58568",
-      "mergedAt": "2026-08-26T00:00:00.000Z",
-      "author": "aryrabelo",
-      "authorUrl": "https://github.com/aryrabelo",
-      "summary": "1. 概要 (1-2文で)  \nActive Record / Arel 内部の実際には到達不能なコード（死んでいる分岐・メソッド呼び出し）を削除し、代わりに本来使われている経路にはテストを追加してカバーした PR です。挙動の変更はなく、型チェックや静的解析上のノイズを減らすリファクタリングです。"
     }
   ]
 }
