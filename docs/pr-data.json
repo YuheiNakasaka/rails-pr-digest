@@ -1,7 +1,52 @@
 {
-  "lastUpdated": "2026-09-08T00:13:37.027Z",
+  "lastUpdated": "2026-09-09T00:13:45.553Z",
   "totalCount": 50,
   "items": [
+    {
+      "number": 58695,
+      "title": "Allow exception backtraces from Ractor workers {#pr-58695}",
+      "url": "https://github.com/rails/rails/pull/58695",
+      "mergedAt": "2026-09-08T00:00:00.000Z",
+      "author": "etiennebarrie",
+      "authorUrl": "https://github.com/etiennebarrie",
+      "summary": "1. 概要 (1-2文で)  \nこのPRは、Ractor ワーカー内でリクエスト処理中に例外が発生した場合でも、通常のマルチスレッド環境と同様に Rails が例外およびバックトレースを正しくログ・レポートできるようにする対応です。Ractor が要求する「shareable（共有可能）」制約を満たすように、エラーレポータ・ロガー・バックトレースクリーナなどの実装が調整されています。"
+    },
+    {
+      "number": 58702,
+      "title": "Remove the dead encryption performance reject clause from the Active Record Rakefile {#pr-58702}",
+      "url": "https://github.com/rails/rails/pull/58702",
+      "mergedAt": "2026-09-08T00:00:00.000Z",
+      "author": "dersam",
+      "authorUrl": "https://github.com/dersam",
+      "summary": "1. 概要 (1-2文で)  \nActive Record の Rakefile に残っていた「暗号化パフォーマンス関連テストを除外するための条件分岐」が、既に存在しないテストパスを対象としており不要になっていたため削除されました。テストタスクのフィルタ条件を整理するだけの変更で、機能面の挙動には影響しません。"
+    },
+    {
+      "number": 58697,
+      "title": "Remove stale Active Record encryption performance tasks {#pr-58697}",
+      "url": "https://github.com/rails/rails/pull/58697",
+      "mergedAt": "2026-09-08T00:00:00.000Z",
+      "author": "dersam",
+      "authorUrl": "https://github.com/dersam",
+      "summary": "1. 概要 (1-2文で)  \nActive Record の「暗号化のパフォーマンステスト」用 Rake タスクおよび関連ドキュメント・コメントが、実際には何も実行していない「空タスク」になっていたため、それらを削除する PR です。機能追加・仕様変更ではなく、不要になったテスト関連のコードとドキュメントのクリーンアップです。"
+    },
+    {
+      "number": 58693,
+      "title": "Exclude generated error pages from GitHub language stats {#pr-58693}",
+      "url": "https://github.com/rails/rails/pull/58693",
+      "mergedAt": "2026-09-08T00:00:00.000Z",
+      "author": "irinanazarova",
+      "authorUrl": "https://github.com/irinanazarova",
+      "summary": "1. 概要 (1-2文で)  \nRails 8 以降で生成される新規アプリが GitHub 上で「HTML リポジトリ」と判定されてしまう問題を解消するため、`rails new` が作成する静的エラーページを GitHub Linguist の「generated ファイル」として扱う設定を `.gitattributes` に自動生成するようにした PR です。これにより、新しい Rails アプリは正しく「Ruby リポジトリ」として集計されるようになります。"
+    },
+    {
+      "number": 58690,
+      "title": "Update json to 3.0 {#pr-58690}",
+      "url": "https://github.com/rails/rails/pull/58690",
+      "mergedAt": "2026-09-08T00:00:00.000Z",
+      "author": "byroot",
+      "authorUrl": "https://github.com/byroot",
+      "summary": "1. 概要 (1-2文で)  \nこのPRは Rails の依存関係として利用している `json` gem を 3.0 系に更新するものです。ただし、`resque` → `multi_json` → `json` という依存関係の互換性問題により、一部の処理がエラーになるため、その対応が前提条件になっています。"
+    },
     {
       "number": 58678,
       "title": "Use Regexp#source instead of Regexp#to_s to detect deep filters {#pr-58678}",
@@ -406,51 +451,6 @@
       "author": "gmcgibbon",
       "authorUrl": "https://github.com/gmcgibbon",
       "summary": "1. 概要 (1-2文で)  \nAction View の「オブジェクトレンダリング」と ActiveSupport のイベントレポーター周りで、Ractor 非対応だったグローバル状態を「Ractorごとの状態管理」に変更し、Ractor セーフにした PR です。マルチ Ractor 実行時にも部分テンプレートのプレフィックスキャッシュとイベント通知が安全に動くようになります。"
-    },
-    {
-      "number": 58593,
-      "title": "Remove no-op `Marshalling.format_version` handling from tests {#pr-58593}",
-      "url": "https://github.com/rails/rails/pull/58593",
-      "mergedAt": "2026-08-27T00:00:00.000Z",
-      "author": "kamipo",
-      "authorUrl": "https://github.com/kamipo",
-      "summary": "1. 概要 (1-2文で)  \nRails 7.1 以降で `ActiveRecord::Marshalling.format_version` が常に 7.1 固定になった仕様を前提に、もはや意味を持たないテスト上の `format_version` の保存・復元処理と、それに依存していた重複テストを削除した PR です。結果として、マージ後はテストコードがシンプルになりつつ、実質的なテストカバレッジは変わりません。"
-    },
-    {
-      "number": 58592,
-      "title": "More small hash optimizations {#pr-58592}",
-      "url": "https://github.com/rails/rails/pull/58592",
-      "mergedAt": "2026-08-27T00:00:00.000Z",
-      "author": "byroot",
-      "authorUrl": "https://github.com/byroot",
-      "summary": "1. 概要 (1-2文で)  \nRails のルーティング処理（`ActionDispatch::Routing::RouteSet`）において、URL オプション用ハッシュに対する不要な処理を減らすことで、パフォーマンスをわずかに改善するための最適化 PR です。機能仕様は変えずに、内部でのハッシュ操作（コピーやマージなど）を避ける形でコードが整理されています。"
-    },
-    {
-      "number": 58590,
-      "title": "Fix flaky connection pool disconnect tests {#pr-58590}",
-      "url": "https://github.com/rails/rails/pull/58590",
-      "mergedAt": "2026-08-27T00:00:00.000Z",
-      "author": "gmcgibbon",
-      "authorUrl": "https://github.com/gmcgibbon",
-      "summary": "1. 概要 (1-2文で)  \nこのPRは、Active Record のコネクションプール関連テストがローカル実行時にときどき失敗する（flakyになる）問題を減らすため、テストのエラー報告まわりのコンテキストを正しく隔離するよう修正したものです。`ConnectionPoolTests` に `ActiveSupport::ExecutionContext::TestHelper` を mixin することで、テスト実行ごとのコンテキスト汚染を防いでいます。"
-    },
-    {
-      "number": 58581,
-      "title": "[8-1-stable] Silence `Time.rfc3339` redefinition warning {#pr-58581}",
-      "url": "https://github.com/rails/rails/pull/58581",
-      "mergedAt": "2026-08-26T00:00:00.000Z",
-      "author": "yahonda",
-      "authorUrl": "https://github.com/yahonda",
-      "summary": "1. 概要 (1-2文で)  \nRuby 4.1 で `time` 標準ライブラリに `Time.rfc3339` が入ることにより、Active Support 側の同名メソッド定義と衝突して警告が出ていた問題を、警告だけを抑制する形で解消する PR です。8-1-stable では挙動を一切変えず、CI での strict warnings エラーだけをなくすことを目的としています。"
-    },
-    {
-      "number": 58576,
-      "title": "Actionpack ractorize {#pr-58576}",
-      "url": "https://github.com/rails/rails/pull/58576",
-      "mergedAt": "2026-08-26T00:00:00.000Z",
-      "author": "gmcgibbon",
-      "authorUrl": "https://github.com/gmcgibbon",
-      "summary": "1. 概要 (1-2文で)  \nAction Pack 内のいくつかのグローバル／共有オブジェクトを Ractor セーフにするための PRです。`ParamBuilder` のデフォルト、`Request` の `LOCALHOST`、`Response` のデフォルト文字コードとヘッダが、Ractor から安全に扱えるように変更されています。"
     }
   ]
 }
