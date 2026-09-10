@@ -1,7 +1,61 @@
 {
-  "lastUpdated": "2026-09-09T00:13:45.553Z",
+  "lastUpdated": "2026-09-10T00:11:57.976Z",
   "totalCount": 50,
   "items": [
+    {
+      "number": 58717,
+      "title": "[ci skip] Use supported positional enum form in Calculations guide example {#pr-58717}",
+      "url": "https://github.com/rails/rails/pull/58717",
+      "mergedAt": "2026-09-09T00:00:00.000Z",
+      "author": "dersam",
+      "authorUrl": "https://github.com/dersam",
+      "summary": "1. 概要 (1-2文で)  \nActive Record Querying ガイド内の `enum` のサンプルコードが、現在の Rails で非対応な書き方になっていたため、サポートされている「位置引数形式（positional enum form）」に修正したドキュメント専用の変更です。コード本体には変更はなく、ガイドの記述のみが更新されています。"
+    },
+    {
+      "number": 58337,
+      "title": "Add alternative text to Action Text attachments {#pr-58337}",
+      "url": "https://github.com/rails/rails/pull/58337",
+      "mergedAt": "2026-09-09T00:00:00.000Z",
+      "author": "lylo",
+      "authorUrl": "https://github.com/lylo",
+      "summary": "1. 概要 (1-2文で)  \nAction Text の添付画像に `alt`（代替テキスト）属性を正式に持たせ、保存〜レンダリングまでラウンドトリップできるようにした PR です。これにより、スクリーンリーダー向けの説明文をキャプションとは独立して扱え、WCAG 1.1.1 対応もしやすくなります。"
+    },
+    {
+      "number": 58718,
+      "title": "Remove the dead racc compile task from Action Pack {#pr-58718}",
+      "url": "https://github.com/rails/rails/pull/58718",
+      "mergedAt": "2026-09-09T00:00:00.000Z",
+      "author": "dersam",
+      "authorUrl": "https://github.com/dersam",
+      "summary": "1. 概要 (1-2文で)  \nAction Pack の `Rakefile` から、既に存在しない `.y` 文法ファイル向けの racc コンパイルタスク（`compile`）が削除されました。これにより、何もしていない「死んだ」タスクが整理され、Rake タスク定義が実態に揃えられます。"
+    },
+    {
+      "number": 58712,
+      "title": "Remove the deprecated guides:generate:kindle task {#pr-58712}",
+      "url": "https://github.com/rails/rails/pull/58712",
+      "mergedAt": "2026-09-09T00:00:00.000Z",
+      "author": "dersam",
+      "authorUrl": "https://github.com/dersam",
+      "summary": "1. 概要 (1-2文で)  \nRails のガイド生成用 Rake タスク `guides:generate:kindle` が、非推奨期間を経て完全に削除されました。今後は e-reader 向けフォーマットとして `guides:generate:epub` のみが正式にサポートされます。"
+    },
+    {
+      "number": 58707,
+      "title": "[ci skip] Correct the prepared statements opt-out config key in guides {#pr-58707}",
+      "url": "https://github.com/rails/rails/pull/58707",
+      "mergedAt": "2026-09-09T00:00:00.000Z",
+      "author": "dersam",
+      "authorUrl": "https://github.com/dersam",
+      "summary": "1. 概要 (1-2文で)  \nRailsガイド内で、Prepared Statements を無効化する設定キー名が誤記されていたため、正しいキー名に修正したドキュメントのみの変更です。アプリケーションコードや挙動そのものには影響しません。"
+    },
+    {
+      "number": 58708,
+      "title": "[ci skip] Fix MissingAttributeError reference in querying guide {#pr-58708}",
+      "url": "https://github.com/rails/rails/pull/58708",
+      "mergedAt": "2026-09-09T00:00:00.000Z",
+      "author": "dersam",
+      "authorUrl": "https://github.com/dersam",
+      "summary": "1. 概要 (1-2文で)  \nこのPRは、Active Record クエリガイド内の誤ったクラス名 `ActiveRecord::MissingAttributeError` を、正しい `ActiveModel::MissingAttributeError` へ修正するドキュメント更新です。コード自体の挙動には一切変更がなく、ガイドの技術的正確性を高めるための修正となります。"
+    },
     {
       "number": 58695,
       "title": "Allow exception backtraces from Ractor workers {#pr-58695}",
@@ -397,60 +451,6 @@
       "author": "viralpraxis",
       "authorUrl": "https://github.com/viralpraxis",
       "summary": "1. 概要 (1-2文で)  \nこのPRは、Active Record が生成する `ORDER BY` なしの `SELECT` 結果をランダムにシャッフルできる設定オプション `config.active_record.shuffle_unordered_selects` を追加し、テスト環境などで「暗黙の順序依存」をあぶり出せるようにする変更です。デフォルトは無効で、本番挙動は変えずに、順序に依存した危ういコードやテストを早期に検出することが目的です。"
-    },
-    {
-      "number": 58604,
-      "title": "Improve performance of Active Record model class predicate builders {#pr-58604}",
-      "url": "https://github.com/rails/rails/pull/58604",
-      "mergedAt": "2026-08-29T00:00:00.000Z",
-      "author": "gmcgibbon",
-      "authorUrl": "https://github.com/gmcgibbon",
-      "summary": "1. 概要 (1-2文で)  \nActive Record のモデルクラスにおける「predicate builder」（`where` などで使われるクエリ条件生成オブジェクト）の初期化方法を見直し、遅延初期化時のプロキシ処理をやめて「最初から実体をセットする」形に変えることでパフォーマンスを改善した PR です。初回リクエスト／クエリ時に発生していた余分なオーバーヘッドを減らすことが目的です。"
-    },
-    {
-      "number": 58549,
-      "title": "Upgrade to Marcel 2 for Active Storage content type detection {#pr-58549}",
-      "url": "https://github.com/rails/rails/pull/58549",
-      "mergedAt": "2026-08-29T00:00:00.000Z",
-      "author": "jeremy",
-      "authorUrl": "https://github.com/jeremy",
-      "summary": "1. 概要 (1-2文で)  \nActive Storage が依存する MIME タイプ判定ライブラリ「marcel」のバージョンを `~> 1.0` から `~> 2.0` に引き上げ、より精度の高いコンテンツタイプ検出とセキュリティ強化を Rails 本体のデフォルト挙動にしました。  \nこれにより、新規に解析・アップロードされる Blob の MIME タイプが一部「正準（canonical）なタイプ」に変わりますが、既存の Blob には影響しないよう配慮されています。"
-    },
-    {
-      "number": 58601,
-      "title": "Fix compatibility with json 3.0 {#pr-58601}",
-      "url": "https://github.com/rails/rails/pull/58601",
-      "mergedAt": "2026-08-28T00:00:00.000Z",
-      "author": "Earlopain",
-      "authorUrl": "https://github.com/Earlopain",
-      "summary": "1. 概要 (1-2文で)  \nRails の `ActiveSupport::JSON.decode` と Active Record の JSON コーダーが、`json` gem 3.0 で導入された「オプションはキーワード引数として扱う」という仕様変更により落ちる問題を、両バージョン（2.x / 3.x）で動く形に修正した PR です。"
-    },
-    {
-      "number": 58602,
-      "title": "remove DS_Store {#pr-58602}",
-      "url": "https://github.com/rails/rails/pull/58602",
-      "mergedAt": "2026-08-28T00:00:00.000Z",
-      "author": "tenderlove",
-      "authorUrl": "https://github.com/tenderlove",
-      "summary": "1. 概要 (1-2文で)  \nこのPRは、`activerecord` ディレクトリ配下に誤ってコミットされていた macOS のメタデータファイル `.DS_Store` をリポジトリから削除するものです。機能追加やバグ修正は一切なく、純粋な不要ファイルの掃除です。\n\n2. 変更内容の詳細  \n- 変更ファイル: `activerecord/.DS_Store`  \n- 内容: `.DS_Store` ファイルの削除（実質的にバイナリ/メタデータファイルの除去であり、コード差分はありません）\n\n`.DS_Store` は macOS Finder が各ディレクトリごとに自動生成する、表示設定などを保持する隠しファイルです。  \nRails のコードベースやテストに関する変更は一切行われていません。\n\n3. 影響範囲・注意点  \n- ランタイム動作への影響: なし  \n  - アプリケーションの挙動、Active Record の機能、パフォーマンスには関係ありません。  \n- ビルド/テストへの影響: なし  \n  - 単に不要な OS 依存ファイルがリポジトリから取り除かれただけです。  \n- 開発プロセス上の意味合い:  \n  - 他の開発者環境で `.DS_Store` による差分が出にくくなり、クリーンな Git 履歴を維持できます。  \n  - もし `.gitignore` に `.DS_Store` が未登録なら、今後の混入防止のために `.gitignore` で無視することが推奨されます（このPR自体では `.gitignore` は変更されていません）。\n\n4. 参考情報 (あれば)  \n- `.DS_Store` について:  \n  - Apple公式ドキュメント: 「About the .DS_Store file」などを参照  \n- 一般的な対策例:  \n  - `.gitignore` に以下を追加してコミット対象から除外する運用がよく行われます:  \n    ```gitignore\n    .DS_Store\n    ```  \n  - グローバル Git 設定で無視する場合（開発者ローカルの設定例）:  \n    ```bash\n    git config --global core.excludesfile ~/.gitignore_global\n    echo .DS_Store >> ~/.gitignore_global\n    ```"
-    },
-    {
-      "number": 58595,
-      "title": "Set timeout-minutes for ci.yml jobs {#pr-58595}",
-      "url": "https://github.com/rails/rails/pull/58595",
-      "mergedAt": "2026-08-28T00:00:00.000Z",
-      "author": "t27duck",
-      "authorUrl": "https://github.com/t27duck",
-      "summary": "1. 概要 (1-2文で)  \nこのPRは、Rails が新規アプリ生成時に出力する GitHub Actions 設定 (`ci.yml`) に、各ジョブ共通の `timeout-minutes: 15` を設定する変更です。これにより、ネットワーク障害などで処理がハングした場合でも、デフォルトの360分待たずに15分でタイムアウトし、無駄なランナー時間の消費を防ぎます。"
-    },
-    {
-      "number": 58599,
-      "title": "Prefixed partial names ractor safe {#pr-58599}",
-      "url": "https://github.com/rails/rails/pull/58599",
-      "mergedAt": "2026-08-28T00:00:00.000Z",
-      "author": "gmcgibbon",
-      "authorUrl": "https://github.com/gmcgibbon",
-      "summary": "1. 概要 (1-2文で)  \nAction View の「オブジェクトレンダリング」と ActiveSupport のイベントレポーター周りで、Ractor 非対応だったグローバル状態を「Ractorごとの状態管理」に変更し、Ractor セーフにした PR です。マルチ Ractor 実行時にも部分テンプレートのプレフィックスキャッシュとイベント通知が安全に動くようになります。"
     }
   ]
 }
