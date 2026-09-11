@@ -1,7 +1,52 @@
 {
-  "lastUpdated": "2026-09-10T00:11:57.976Z",
+  "lastUpdated": "2026-09-11T00:13:06.197Z",
   "totalCount": 50,
   "items": [
+    {
+      "number": 58668,
+      "title": "Introduce CoW when adding Active Record reflections {#pr-58668}",
+      "url": "https://github.com/rails/rails/pull/58668",
+      "mergedAt": "2026-09-10T00:00:00.000Z",
+      "author": "Edouard-chin",
+      "authorUrl": "https://github.com/Edouard-chin",
+      "summary": "1. 概要 (1–2文で)\n- Active Record のリフレクション（関連付け情報）を Copy-on-Write (CoW) / deep freeze することで、Ractor 内から `Post.find`, `Post.where` などを安全に実行できるようにする変更です。  \n- リフレクションキャッシュを凍結するために、各種メモ化を事前に評価しつつ、Ractor セーフな形でキャッシュを扱うように内部実装が見直されています。"
+    },
+    {
+      "number": 58711,
+      "title": "Don't write to the reloader class when there is nothing to reload {#pr-58711}",
+      "url": "https://github.com/rails/rails/pull/58711",
+      "mergedAt": "2026-09-10T00:00:00.000Z",
+      "author": "etiennebarrie",
+      "authorUrl": "https://github.com/etiennebarrie",
+      "summary": "1. 概要 (1-2文で)  \nRails のリローダ（`ActiveSupport::Reloader`）が「実際にはリロードしない」設定の場合に、不要なインスタンス変数の書き込みを行わないようにし、Ractor（マルチスレッド/並列実行機構）から安全に利用できるようにした変更です。特に Active Job を Ractor セーフにする際に問題となる、「Ractor からの書き込み禁止」に抵触しないよう動作が調整されています。"
+    },
+    {
+      "number": 58729,
+      "title": "Clarify article casing in guide headings {#pr-58729}",
+      "url": "https://github.com/rails/rails/pull/58729",
+      "mergedAt": "2026-09-10T00:00:00.000Z",
+      "author": "p8",
+      "authorUrl": "https://github.com/p8",
+      "summary": "1. 概要 (1-2文で)  \nRailsガイドの執筆ガイドラインにおいて、見出し（heading）内の英語の冠詞（\"the\"、\"a\"、\"an\"）は常に小文字で書く、というルールを明確化したPRです。あわせて「Internal articles」という、文法用語として不正確な表現を修正しています。"
+    },
+    {
+      "number": 58719,
+      "title": "Speed up dispatch of BroadcastLogger {#pr-58719}",
+      "url": "https://github.com/rails/rails/pull/58719",
+      "mergedAt": "2026-09-10T00:00:00.000Z",
+      "author": "jhawthorn",
+      "authorUrl": "https://github.com/jhawthorn",
+      "summary": "1. 概要 (1-2文で)  \nBroadcastLogger が、特に `logger.debug` のような「実際にはログが出ない」ケースでより高速に動作するように最適化されました。Ruby 4.0+ の引数転送最適化を活かしつつ、不要なオブジェクト生成（配列・Proc など）を削減する変更です。"
+    },
+    {
+      "number": 58722,
+      "title": "[ci-skip][doc] Fix Action Cable guide for connection callbacks {#pr-58722}",
+      "url": "https://github.com/rails/rails/pull/58722",
+      "mergedAt": "2026-09-10T00:00:00.000Z",
+      "author": "hachi8833",
+      "authorUrl": "https://github.com/hachi8833",
+      "summary": "1. 概要 (1-2文で)  \nAction Cable の「connection callbacks」に関するドキュメントの説明が実装と逆の意味になっていたため、「クライアントへの送信時」ではなく「クライアントからの受信時」にコールバックが呼ばれることを正しく反映する修正が行われました。併せて `ActionCable::Connection::Callbacks` のコメントも同様に修正されています。"
+    },
     {
       "number": 58717,
       "title": "[ci skip] Use supported positional enum form in Calculations guide example {#pr-58717}",
@@ -406,51 +451,6 @@
       "author": "byroot",
       "authorUrl": "https://github.com/byroot",
       "summary": "1. 概要 (1-2文で)  \n`EventReporter::LogSubscriber#subscription_filter` の実装を見直し、イベント名から namespace を抽出するのではなく、namespace から prefix を組み立てる形に変更することで、処理を単純化・最適化した PR です。挙動は従来と同等で、主に内部実装の整理・パフォーマンス改善が目的です。"
-    },
-    {
-      "number": 58303,
-      "title": "Require concurrent before using in ActionCable {#pr-58303}",
-      "url": "https://github.com/rails/rails/pull/58303",
-      "mergedAt": "2026-09-01T00:00:00.000Z",
-      "author": "josevalim",
-      "authorUrl": "https://github.com/josevalim",
-      "summary": "1. 概要 (1–2文で)  \nAction Cable を単体で読み込んだときにクラッシュしていた問題を、必要な `concurrent` 系モジュールを明示的に `require` することで解消した PRです。Action Cable を Rails 本体経由ではなく、直接ロードして使うケースでの初期化エラーを防ぐためのバグフィックスです。"
-    },
-    {
-      "number": 58620,
-      "title": "Make some ActionView::Base settings shareable {#pr-58620}",
-      "url": "https://github.com/rails/rails/pull/58620",
-      "mergedAt": "2026-08-31T00:00:00.000Z",
-      "author": "etiennebarrie",
-      "authorUrl": "https://github.com/etiennebarrie",
-      "summary": "1. 概要 (1-2文で)  \n`ActionView::Base` が持ついくつかの設定値を Ractor 間で共有可能（shareable）にし、Ractor を使ったビュー描画が Ruby 4.0 でも問題なく行えるようにする変更です。クラス変数ベースの `cattr_accessor` を、シングルトンクラス上の `attr_accessor` に置き換えることで、Ractor の shareable 制約に対応しています。"
-    },
-    {
-      "number": 58606,
-      "title": "Fix encrypted fixtures for JSON columns {#pr-58606}",
-      "url": "https://github.com/rails/rails/pull/58606",
-      "mergedAt": "2026-08-31T00:00:00.000Z",
-      "author": "carlosdanielpohlod",
-      "authorUrl": "https://github.com/carlosdanielpohlod",
-      "summary": "1. 概要 (1-2文で)  \n`config.active_record.encryption.encrypt_fixtures = true` を有効にした状態で、`json` / `jsonb` カラムを `encrypts` している属性のフィクスチャ読込時に発生していた復号エラー（#48601）が、暗号化フィクスチャのシリアライズ処理を修正することで解消されています。暗号化済みペイロードが JSON カラム用に二重シリアライズされていたのを防ぐパッチです。"
-    },
-    {
-      "number": 58612,
-      "title": "Fix `NameError` when `ActiveRecord::Coders::JSON` is given encode options {#pr-58612}",
-      "url": "https://github.com/rails/rails/pull/58612",
-      "mergedAt": "2026-08-31T00:00:00.000Z",
-      "author": "lazerg",
-      "authorUrl": "https://github.com/lazerg",
-      "summary": "1. 概要 (1-2文で)  \nActiveRecord の `ActiveRecord::Coders::JSON` に `encode_options` を渡したときに `NameError` が発生していた回 regresson を修正した PRです。イニシャライザ引数名のリネーム漏れによるバグを直し、encode オプション付きの利用を担保するテストが追加されています。"
-    },
-    {
-      "number": 58548,
-      "title": "`activerecord`: add an option to shuffle unordered `SELECT` results {#pr-58548}",
-      "url": "https://github.com/rails/rails/pull/58548",
-      "mergedAt": "2026-08-30T00:00:00.000Z",
-      "author": "viralpraxis",
-      "authorUrl": "https://github.com/viralpraxis",
-      "summary": "1. 概要 (1-2文で)  \nこのPRは、Active Record が生成する `ORDER BY` なしの `SELECT` 結果をランダムにシャッフルできる設定オプション `config.active_record.shuffle_unordered_selects` を追加し、テスト環境などで「暗黙の順序依存」をあぶり出せるようにする変更です。デフォルトは無効で、本番挙動は変えずに、順序に依存した危ういコードやテストを早期に検出することが目的です。"
     }
   ]
 }
