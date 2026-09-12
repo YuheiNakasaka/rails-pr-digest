@@ -1,7 +1,43 @@
 {
-  "lastUpdated": "2026-09-11T00:13:06.197Z",
+  "lastUpdated": "2026-09-12T00:11:45.333Z",
   "totalCount": 50,
   "items": [
+    {
+      "number": 58747,
+      "title": "Make finder_needs_type_condition? ractor safe {#pr-58747}",
+      "url": "https://github.com/rails/rails/pull/58747",
+      "mergedAt": "2026-09-11T00:00:00.000Z",
+      "author": "gmcgibbon",
+      "authorUrl": "https://github.com/gmcgibbon",
+      "summary": "1. 概要 (1-2文で)  \n`ActiveRecord::Base.finder_needs_type_condition?` の実装を、マルチ Ractor（特に main 以外の Ractor）でも正しく動作するように変更し、メモ化の計算を常に main Ractor に委譲するようにした PRです。これにより、Ractor 環境下でも継承を伴う finder の挙動が安全・一貫して利用できます。"
+    },
+    {
+      "number": 58710,
+      "title": "Share the time zone caches with Ractor workers {#pr-58710}",
+      "url": "https://github.com/rails/rails/pull/58710",
+      "mergedAt": "2026-09-11T00:00:00.000Z",
+      "author": "etiennebarrie",
+      "authorUrl": "https://github.com/etiennebarrie",
+      "summary": "1. 概要 (1-2文で)  \nRactor 化された Rails アプリケーションでも `ActiveSupport::TimeZone` を安全に共有・参照できるように、タイムゾーン関連キャッシュを eager-load し、Ractor 共有可能な構造（凍結された Hash）に変更した PR です。これにより Ractor ワーカーからもタイムゾーン情報にアクセス可能になりますが、Ractor 化時のブートに ~200ms のオーバーヘッドが追加されます。"
+    },
+    {
+      "number": 53403,
+      "title": "Include default headers in ActionController::Live responses. {#pr-53403}",
+      "url": "https://github.com/rails/rails/pull/53403",
+      "mergedAt": "2026-09-11T00:00:00.000Z",
+      "author": "afn",
+      "authorUrl": "https://github.com/afn",
+      "summary": "1. 概要 (1-2文で)  \nActionController::Live でストリーミングレスポンスを返す際にも、通常のコントローラレスポンスと同じ「デフォルトヘッダ」が確実に付与されるようにした修正です。これにより、Live レスポンスだけヘッダが欠けるという不整合バグ (#53402) が解消されました。"
+    },
+    {
+      "number": 58735,
+      "title": "Move timestamp_attributes_for into SchemaContext {#pr-58735}",
+      "url": "https://github.com/rails/rails/pull/58735",
+      "mergedAt": "2026-09-11T00:00:00.000Z",
+      "author": "hmcguire-shopify",
+      "authorUrl": "https://github.com/hmcguire-shopify",
+      "summary": "1. 概要 (1-2文で)  \n`created_at` / `updated_at` などのタイムスタンプ属性の決定ロジックを、遅延評価から「スキーマ読み込み時に確定する」形に変更し、その処理場所を `SchemaContext` に移動した PRです。これにより Ractor 環境でも、メイン Ractor でスキーマがロードされていれば他 Ractor から安全にタイムスタンプ属性を利用できるようになります。"
+    },
     {
       "number": 58668,
       "title": "Introduce CoW when adding Active Record reflections {#pr-58668}",
@@ -415,42 +451,6 @@
       "author": "gmcgibbon",
       "authorUrl": "https://github.com/gmcgibbon",
       "summary": "1. 概要 (1–2文で)  \nActive Record の `SchemaContext` を、Ractor（マルチスレッド/マルチRactor環境）でも安全に扱えるように再設計したPRです。`SchemaContext` の中に `Attributes` オブジェクトを埋め込み、スキーマ関連の状態を Ractor ごとに分離しつつ、モデルクラス側の ivar はメイン Ractor で遅延評価できるように整理しています。"
-    },
-    {
-      "number": 58636,
-      "title": "Remove leftover perform_query stubs in TrilogyAdapterTest {#pr-58636}",
-      "url": "https://github.com/rails/rails/pull/58636",
-      "mergedAt": "2026-09-02T00:00:00.000Z",
-      "author": "yahonda",
-      "authorUrl": "https://github.com/yahonda",
-      "summary": "1. 概要 (1-2文で)  \nTrilogyAdapterTest で `perform_query` をスタブしていたテストが、スタブ後に元のメソッドを正しく戻さずにコネクションプールへ返していたため、非同期クエリのリトライ系テストが期待どおりに失敗を注入できなくなっていました。  \nこのPRでは、スタブ終了後にコネクションインスタンスに残ってしまう `perform_query` のシングルトンメソッドを `ensure` ブロックで確実に削除し、後続テストへの副作用をなくしています。"
-    },
-    {
-      "number": 58625,
-      "title": "Avoid a redundant join in scoped through associations {#pr-58625}",
-      "url": "https://github.com/rails/rails/pull/58625",
-      "mergedAt": "2026-09-01T00:00:00.000Z",
-      "author": "dpaluy",
-      "authorUrl": "https://github.com/dpaluy",
-      "summary": "1. 概要 (1-2文で)  \n`has_many :through` の関連にスコープをマージする際、すでに through の結合（JOIN）で登場しているテーブルがスコープ側でも再度 JOIN されてしまうケースで、その冗長な JOIN を自動的に削除するようにした変更です。`belongs_to` / `has_one` 方向の単一レコード JOIN に限って重複を取り除き、クエリ結果が変わり得るコレクション JOIN はそのまま残すようになっています。"
-    },
-    {
-      "number": 58622,
-      "title": "Avoid preloading nil converted association keys {#pr-58622}",
-      "url": "https://github.com/rails/rails/pull/58622",
-      "mergedAt": "2026-09-01T00:00:00.000Z",
-      "author": "ThrwatElmo",
-      "authorUrl": "https://github.com/ThrwatElmo",
-      "summary": "1. 概要 (1-2文で)  \nRails の Active Record プリロード処理で、関連の外部キーが `nil` の場合に余計なクエリが発行されていた問題を修正し、`nil` キーを正しくスキップするようにした PR です。外部キー／主キーの型が異なり、プリローダがキーを文字列化するケースでも、`nil` は空文字列に変換せず `nil` のまま保持します。"
-    },
-    {
-      "number": 58626,
-      "title": "Optimize EventReporter::LogSubscriber#subscription_filter {#pr-58626}",
-      "url": "https://github.com/rails/rails/pull/58626",
-      "mergedAt": "2026-09-01T00:00:00.000Z",
-      "author": "byroot",
-      "authorUrl": "https://github.com/byroot",
-      "summary": "1. 概要 (1-2文で)  \n`EventReporter::LogSubscriber#subscription_filter` の実装を見直し、イベント名から namespace を抽出するのではなく、namespace から prefix を組み立てる形に変更することで、処理を単純化・最適化した PR です。挙動は従来と同等で、主に内部実装の整理・パフォーマンス改善が目的です。"
     }
   ]
 }
