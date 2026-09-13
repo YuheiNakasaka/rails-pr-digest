@@ -1,7 +1,52 @@
 {
-  "lastUpdated": "2026-09-12T00:11:45.333Z",
+  "lastUpdated": "2026-09-13T00:15:20.088Z",
   "totalCount": 50,
   "items": [
+    {
+      "number": 58754,
+      "title": "to_markdown code/pre content escapes its delimiter (stored XSS) {#pr-58754}",
+      "url": "https://github.com/rails/rails/pull/58754",
+      "mergedAt": "2026-09-12T00:00:00.000Z",
+      "author": "flavorjones",
+      "authorUrl": "https://github.com/flavorjones",
+      "summary": "1. 概要 (1-2文で)  \nAction Text の `to_markdown` 変換処理において、`<code>`/`<pre>` 内のテキストが Markdown のデリミタ（バッククォートやフェンス）から「はみ出す」ことで、`javascript:` リンクなどを Markdown ソースとしてそのまま出力できてしまう stored XSS 脆弱性を修正した PRです。  \nデリミタが必ず有効な形で Markdown レンダラに渡されるよう、`code`/`pre` の扱いとコンテナ要素の行構成ロジックが見直されています。"
+    },
+    {
+      "number": 58753,
+      "title": "Action View test stubs Rails.root and breaks main {#pr-58753}",
+      "url": "https://github.com/rails/rails/pull/58753",
+      "mergedAt": "2026-09-12T00:00:00.000Z",
+      "author": "flavorjones",
+      "authorUrl": "https://github.com/flavorjones",
+      "summary": "1. 概要 (1-2文で)  \nこのPRは、Action View のテストで `Rails.root` を stub しようとして失敗していた問題を修正し、`main` ブランチのテストを再び通るようにするものです。`Rails.root` への依存を排除し、すでに導入済みの `StructuredEventSubscriber.rails_root` を用いる形にテストを整理しています。"
+    },
+    {
+      "number": 58743,
+      "title": "Boot when ruby-vips cannot load its libraries {#pr-58743}",
+      "url": "https://github.com/rails/rails/pull/58743",
+      "mergedAt": "2026-09-12T00:00:00.000Z",
+      "author": "flavorjones",
+      "authorUrl": "https://github.com/flavorjones",
+      "summary": "1. 概要 (1-2文で)  \nruby-vips gem がインストールされているものの、ネイティブライブラリ libvips が存在しない環境でも Rails アプリがブートできるように、Active Storage の vips 周りの例外処理と読み込み順序が修正されています。これにより、これまで初期化時にアプリごと落ちていたケースが、ブートは成功しつつログで適切に警告される挙動になります。"
+    },
+    {
+      "number": 58261,
+      "title": "Restore silenced? on the Action View render Start subscriber {#pr-58261}",
+      "url": "https://github.com/rails/rails/pull/58261",
+      "mergedAt": "2026-09-12T00:00:00.000Z",
+      "author": "nuclearspike",
+      "authorUrl": "https://github.com/nuclearspike",
+      "summary": "1. 概要 (1-2文で)  \nAction View の構造化イベント用 `Start` サブスクライバに `silenced?` を復活させ、デバッグモードがオフのときには `render_template.action_view` / `render_layout.action_view` の通知処理自体をスキップできるようにした PR です。これにより、本番相当環境 (debug_mode: false) でのレンダリング時のオブジェクト生成とオーバーヘッドが大きく削減されます。"
+    },
+    {
+      "number": 58734,
+      "title": "Boot with an unsecurable libvips unless the processor uses it {#pr-58734}",
+      "url": "https://github.com/rails/rails/pull/58734",
+      "mergedAt": "2026-09-12T00:00:00.000Z",
+      "author": "flavorjones",
+      "authorUrl": "https://github.com/flavorjones",
+      "summary": "1. 概要 (1-2文で)  \nActive Storage が libvips/ruby-vips のセキュリティ設定 (`Vips.block_untrusted(true)`) を「常にブート時に行う」一方で、「実際に libvips を使う場合にだけエラーを投げる」ように挙動を変更し、`:mini_magick` 利用アプリが古い libvips 環境でもブートできるようにした PR です。  \nこれにより、vips を使わないアプリは libvips が「unsecurable（安全に設定できない）」であっても起動可能となり、vips を使うアプリだけが安全でない環境を検出して落ちるようになります。"
+    },
     {
       "number": 58747,
       "title": "Make finder_needs_type_condition? ractor safe {#pr-58747}",
@@ -406,51 +451,6 @@
       "author": "Edouard-chin",
       "authorUrl": "https://github.com/Edouard-chin",
       "summary": "1. 概要 (1-2文で)  \nRails 7 での Ractor 対応の一環として、Active Record の「タイムゾーン関連設定」をフリーズ（凍結）し、Ractor 間の共有時に起きる不変性違反・Isolation 問題を解消する PR です。これにより、属性セット（attribute set）が Ractor ごとに遅延構築されても、安全に設定を共有できるようになります。"
-    },
-    {
-      "number": 58627,
-      "title": "Make ActionPack settings instance variables {#pr-58627}",
-      "url": "https://github.com/rails/rails/pull/58627",
-      "mergedAt": "2026-09-02T00:00:00.000Z",
-      "author": "etiennebarrie",
-      "authorUrl": "https://github.com/etiennebarrie",
-      "summary": "1. 概要 (1-2文で)  \nActionPack 内の一部設定を `mattr_accessor` ベースのクラス変数管理から、インスタンス変数ベースの設定管理に切り替える変更です。特に `ActionDispatch::Request` の MIME ネゴシエーション設定（`ignore_accept_header`）などで、「インスタンスからクラス設定が書き換わる」不自然な挙動をやめ、より一貫した設定の扱いにしています。"
-    },
-    {
-      "number": 58643,
-      "title": "Store the AssetTagHelper settings in singleton class attributes {#pr-58643}",
-      "url": "https://github.com/rails/rails/pull/58643",
-      "mergedAt": "2026-09-02T00:00:00.000Z",
-      "author": "etiennebarrie",
-      "authorUrl": "https://github.com/etiennebarrie",
-      "summary": "1. 概要 (1-2文で)  \nAssetTagHelper が持つ6つの設定値の保持方法を、クラス変数からモジュール自身のインスタンス変数（単一オブジェクト上の属性）へ変更し、インスタンス経由でグローバル設定を書き換える仕組みを削除して、Ractor 対応と設計の明確化を図る変更です。Rails 7以降で予定される Ruby 4.0 / Ractor 環境でも AssetTagHelper の設定が安全に参照できるようにすることが主目的です。"
-    },
-    {
-      "number": 58629,
-      "title": "Make the allow_browser callback shareable {#pr-58629}",
-      "url": "https://github.com/rails/rails/pull/58629",
-      "mergedAt": "2026-09-02T00:00:00.000Z",
-      "author": "etiennebarrie",
-      "authorUrl": "https://github.com/etiennebarrie",
-      "summary": "1. 概要 (1-2文で)  \n`allow_browser` の「未サポートブラウザに対するデフォルト動作」が Ractor でも共有可能なオブジェクト（shareable proc）になるよう修正された PR です。あわせて、Ruby の制約に対応するため、オプションキーワード引数 `:block` の扱いが変更されています。"
-    },
-    {
-      "number": 58645,
-      "title": "Fix TypeCaster sometimes leaking connection {#pr-58645}",
-      "url": "https://github.com/rails/rails/pull/58645",
-      "mergedAt": "2026-09-02T00:00:00.000Z",
-      "author": "skipkayhil",
-      "authorUrl": "https://github.com/skipkayhil",
-      "summary": "1. 概要 (1-2文で)  \nTypeCaster が内部で使う DB コネクションを「借りっぱなし」にしてしまうケースがあり、接続プールからコネクションがリークする不具合を修正した PRです。Executor によるクリーンアップに依存せず、`with_connection` を使って即座にコネクションを返却するように変更されています。"
-    },
-    {
-      "number": 58578,
-      "title": "Ractorize Active Record schema context {#pr-58578}",
-      "url": "https://github.com/rails/rails/pull/58578",
-      "mergedAt": "2026-09-02T00:00:00.000Z",
-      "author": "gmcgibbon",
-      "authorUrl": "https://github.com/gmcgibbon",
-      "summary": "1. 概要 (1–2文で)  \nActive Record の `SchemaContext` を、Ractor（マルチスレッド/マルチRactor環境）でも安全に扱えるように再設計したPRです。`SchemaContext` の中に `Attributes` オブジェクトを埋め込み、スキーマ関連の状態を Ractor ごとに分離しつつ、モデルクラス側の ivar はメイン Ractor で遅延評価できるように整理しています。"
     }
   ]
 }
