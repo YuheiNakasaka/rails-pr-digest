@@ -1,7 +1,124 @@
 {
-  "lastUpdated": "2026-09-15T00:11:36.494Z",
+  "lastUpdated": "2026-09-16T00:14:39.799Z",
   "totalCount": 50,
   "items": [
+    {
+      "number": 58768,
+      "title": "[ci skip] Remove obsolete DateTime fallback notes from core extensions guide {#pr-58768}",
+      "url": "https://github.com/rails/rails/pull/58768",
+      "mergedAt": "2026-09-15T00:00:00.000Z",
+      "author": "dersam",
+      "authorUrl": "https://github.com/dersam",
+      "summary": "1. 概要 (1-2文で)  \nこのPRは、Active Support Core Extensionsガイドから、すでに存在しない「Time が範囲外になったときに DateTime にフォールバックする」という挙動を説明していた古い記述を削除するものです。実装としては何も変わらず、ドキュメントの整合性を取るための変更です。"
+    },
+    {
+      "number": 58777,
+      "title": "File.atomic_write: close the temp file before renaming it {#pr-58777}",
+      "url": "https://github.com/rails/rails/pull/58777",
+      "mergedAt": "2026-09-15T00:00:00.000Z",
+      "author": "americodls",
+      "authorUrl": "https://github.com/americodls",
+      "summary": "1. 概要 (1-2文で)  \n`File.atomic_write` が一時ファイルを「開いたままリネーム」していたため、リネーム直後に中身が空のファイルが現れる問題を修正し、「一時ファイルを close してから rename する」ようにした PR です。これにより、atomic_write の宛先ファイルは生成された瞬間から正しい内容を持つことが保証されます。"
+    },
+    {
+      "number": 58770,
+      "title": "Add `herb:check` task to verify Herb compatibility {#pr-58770}",
+      "url": "https://github.com/rails/rails/pull/58770",
+      "mergedAt": "2026-09-15T00:00:00.000Z",
+      "author": "marcoroth",
+      "authorUrl": "https://github.com/marcoroth",
+      "summary": "1. 概要 (1-2文で)  \nこのPRでは、HTML+ERBテンプレートが新しいERB実装「Herb」に対応できるか事前チェックするための `bin/rails herb:check` タスクと、その裏側の `ActionView::HerbChecker` が追加されています。アプリ全体のテンプレートを一括コンパイルしてエラーを検出し、ビルドを落とせるようにすることで、Herb への移行を安全に行えるようにします。"
+    },
+    {
+      "number": 58725,
+      "title": "Pass Trilogy's SSL configuration to the mysql and mysqldump commands {#pr-58725}",
+      "url": "https://github.com/rails/rails/pull/58725",
+      "mergedAt": "2026-09-15T00:00:00.000Z",
+      "author": "ngan",
+      "authorUrl": "https://github.com/ngan",
+      "summary": "1. 概要 (1-2文で)  \nTrilogy アダプタ使用時に、`dbconsole` や `db:structure:dump` / `db:structure:load` が MySQL クライアント (`mysql`, `mysqldump`) へ正しく SSL オプションを渡していなかった問題を修正し、接続と同じ SSL 設定が CLI コマンドにも反映されるようにした PRです。SSL 設定のキー名の違い（`ssl_ca` vs `sslca` など）を吸収する共通マッピングを導入し、Trilogy 固有の SSL オプションにも対応しています。"
+    },
+    {
+      "number": 58726,
+      "title": "Filter the database password out of failed database task commands {#pr-58726}",
+      "url": "https://github.com/rails/rails/pull/58726",
+      "mergedAt": "2026-09-15T00:00:00.000Z",
+      "author": "ngan",
+      "authorUrl": "https://github.com/ngan",
+      "summary": "1. 概要 (1-2文で)  \nRails の DB タスクが失敗した際に表示されるコマンド文字列から、`--password=<値>` という形のパスワードを `[FILTERED]` にマスクする変更です。主に MySQL 系アダプタ（mysql2 / Trilogy）の `structure_dump` / `structure_load` 実行失敗時に、CI ログや標準出力へ DB パスワードが漏洩することを防ぎます。"
+    },
+    {
+      "number": 58714,
+      "title": "Fix keepalive: false being ignored in database.yml {#pr-58714}",
+      "url": "https://github.com/rails/rails/pull/58714",
+      "mergedAt": "2026-09-15T00:00:00.000Z",
+      "author": "joemsak",
+      "authorUrl": "https://github.com/joemsak",
+      "summary": "1. 概要 (1-2文で)  \n`database.yml` で `keepalive: false` を指定しても無視され、デフォルトの 600 秒が適用されていたバグを修正した PR です。`keepalive` の値が「未指定」「false」「0」などの場合の挙動を正しく区別するようにし、その動作をテストで保証しています。"
+    },
+    {
+      "number": 58716,
+      "title": "Bound background-maintenance checkout wait to checkout_timeout {#pr-58716}",
+      "url": "https://github.com/rails/rails/pull/58716",
+      "mergedAt": "2026-09-15T00:00:00.000Z",
+      "author": "joemsak",
+      "authorUrl": "https://github.com/joemsak",
+      "summary": "1. 概要 (1-2文で)  \nRails のコネクションプールが「バックグラウンドメンテナンス中のコネクション待ち」の際に、プール設定の `checkout_timeout` を無視して最大 100 秒まで待ってしまう不具合を修正し、`checkout_timeout` の値で待ち時間を正しく制限するようにした PR です。これにより、メンテナンス中のコネクションによりスレッドが長時間ハングする問題が解消されます。"
+    },
+    {
+      "number": 58720,
+      "title": "Preserve read_multi key order when local cache is active {#pr-58720}",
+      "url": "https://github.com/rails/rails/pull/58720",
+      "mergedAt": "2026-09-15T00:00:00.000Z",
+      "author": "carlosdanielpohlod",
+      "authorUrl": "https://github.com/carlosdanielpohlod",
+      "summary": "1. 概要 (1-2文で)  \n`with_local_cache` ブロック内で `read_multi` を呼び出した際、返却されるハッシュのキー順が引数の順序どおりになるように修正した PR です。`fetch_multi` では既に修正済みだった挙動を `read_multi` にも揃えるバグフィックスです。"
+    },
+    {
+      "number": 58663,
+      "title": "LazyAttributeSet: Use a mutable indexed row for casted values {#pr-58663}",
+      "url": "https://github.com/rails/rails/pull/58663",
+      "mergedAt": "2026-09-15T00:00:00.000Z",
+      "author": "byroot",
+      "authorUrl": "https://github.com/byroot",
+      "summary": "1. 概要 (1–2文で)  \n`LazyAttributeSet` が属性値のキャスト済み値 (`@casted_values`) を保持するときに、`Hash` ではなく `IndexedRow` ベースの「インデックス付き・可変な行」を使うようにしてメモリ効率とパフォーマンスを改善する変更です。主に Active Record のクエリ結果・関連のプリロード周りで `IndexedRow` の活用範囲が広がっています。"
+    },
+    {
+      "number": 58740,
+      "title": "Fix docker-entrypoint to detect bin/rails server behind Thruster too {#pr-58740}",
+      "url": "https://github.com/rails/rails/pull/58740",
+      "mergedAt": "2026-09-15T00:00:00.000Z",
+      "author": "iamdipak39p",
+      "authorUrl": "https://github.com/iamdipak39p",
+      "summary": "1. 概要 (1-2文で)  \nRails が生成する Docker 用エントリポイントスクリプト（`bin/docker-entrypoint`）で、`bin/rails server` 実行時に `db:prepare` を自動実行する判定ロジックを修正し、Thruster 経由 (`./bin/thrust ./bin/rails server`) でも正しく動くようになりました。  \n引数の「先頭2つ」または「末尾2つ」の固定位置チェックをやめ、引数全体から `./bin/rails` と `server` の組み合わせを検出する方式に変更しています。"
+    },
+    {
+      "number": 58727,
+      "title": "Fix the debug error page for SyntaxErrors with multi-line messages {#pr-58727}",
+      "url": "https://github.com/rails/rails/pull/58727",
+      "mergedAt": "2026-09-15T00:00:00.000Z",
+      "author": "marcoroth",
+      "authorUrl": "https://github.com/marcoroth",
+      "summary": "1. 概要 (1-2文で)  \n開発環境のデバッグエラーページが、複数行メッセージを持つ `SyntaxError` で壊れて 500 公開エラーページにフォールバックしてしまう不具合を修正したPRです。  \n`SyntaxError` メッセージのうち実際のスタックトレース行だけを抽出するようにし、かつエラーページでのソースコード抽出時に「ディレクトリをファイルとして読む」ケースを防いでいます。"
+    },
+    {
+      "number": 58764,
+      "title": "Make ActiveJob Ractor-safe {#pr-58764}",
+      "url": "https://github.com/rails/rails/pull/58764",
+      "mergedAt": "2026-09-15T00:00:00.000Z",
+      "author": "etiennebarrie",
+      "authorUrl": "https://github.com/etiennebarrie",
+      "summary": "1. 概要 (1-2文で)  \nこのPRは、Active Job を Ractor（Ruby 3 の並列実行機構）内から安全に enqueue できるようにするための対応です。主にクラスレベルの設定の持ち方を Ractor 共有可能な形に改め、`ractorize!` 実行時に queue adapter が shareable になるようにしています。"
+    },
+    {
+      "number": 58765,
+      "title": "[ci skip] Correct the Time.rfc3339 documentation example {#pr-58765}",
+      "url": "https://github.com/rails/rails/pull/58765",
+      "mergedAt": "2026-09-15T00:00:00.000Z",
+      "author": "dersam",
+      "authorUrl": "https://github.com/dersam",
+      "summary": "1. 概要 (1-2文で)  \nTime.rfc3339 のドキュメントに記載されていた使用例が、実際の戻り値と一致していなかったため、それを正しい例に修正した PR です。コードの挙動そのものは変わらず、コメント／ドキュメントの整合性を取るだけの変更です。\n\n2. 変更内容の詳細  \n\n- 対象ファイル: `activesupport/lib/active_support/core_ext/time/calculations.rb`\n- 変更内容: `Time.rfc3339` メソッドのドキュメントコメント内にあるサンプルコードの出力例を 1 行だけ修正。\n\nPR 説明にある通り、実際には:\n\n```ruby\nTime.rfc3339('1999-12-31T14:00:00-10:00')\n# => 1999-12-31 14:00:00 -1000\n```\n\nという結果になりますが、ドキュメント内のサンプルがこの実際の出力と食い違っていました。  \n今回の修正では、この「入力した RFC3339 文字列に対応する Time オブジェクトの出力表示」を、実行結果と一致する形に直しています。\n\n実装ロジック（パース処理やタイムゾーン計算）はまったく変更されていません。あくまで「コメント上の例示の戻り値」を 1 行書き換えただけです。\n\n3. 影響範囲・注意点  \n\n- 影響範囲:\n  - ランタイムの挙動（Time.rfc3339 の動き）には一切変更なし。\n  - ドキュメント生成（RDoc / API ドキュメント閲覧時）の表示が正しくなるだけです。\n- 注意点:\n  - これまで古いドキュメント例を見てテストや他のドキュメントを書いていた場合、その例が実際の挙動と食い違っている可能性があります。  \n    → 自前ドキュメントや README などに Time.rfc3339 の出力例をコピペしている場合は、実行結果と合っているかを確認するとよいです。\n\n4. 参考情報 (あれば)  \n\n- Ruby 標準ライブラリの Time と RFC3339:\n  - `Time.rfc3339(str)` は RFC3339 形式 (`YYYY-MM-DDTHH:MM:SS±HH:MM` など) の文字列を Time オブジェクトに変換するユーティリティです。\n  - 例: `Time.rfc3339(\"2024-01-01T00:00:00Z\") #=> 2024-01-01 00:00:00 UTC`  \n- Rails 側では ActiveSupport が Time 拡張を提供していますが、この PR はその拡張ロジックではなく、あくまでその「説明用コメント」の修正のみです。"
+    },
     {
       "number": 58759,
       "title": "Enable `Layout/BlockAlignment` {#pr-58759}",
@@ -334,123 +451,6 @@
       "author": "gmcgibbon",
       "authorUrl": "https://github.com/gmcgibbon",
       "summary": "1. 概要 (1-2文で)  \nこのPRは、Rails内部で使われていたクラス変数ベースの設定（`mattr_accessor`）をインスタンス用の`attr_accessor`等に置き換え、Ruby 4.0.6 でも Ractor から安全に参照できるようにするリファクタリングです。主に Action Pack / Action View の各種ヘルパの設定値の持ち方が変わり、それに対応するテストが追加されています。"
-    },
-    {
-      "number": 58640,
-      "title": "Allow to access view paths in a Ractor {#pr-58640}",
-      "url": "https://github.com/rails/rails/pull/58640",
-      "mergedAt": "2026-09-04T00:00:00.000Z",
-      "author": "Edouard-chin",
-      "authorUrl": "https://github.com/Edouard-chin",
-      "summary": "1. 概要 (1-2文で)  \nRailsアプリケーションをRactor対応（並列実行）した際に、「ビューのテンプレート探索(view paths lookup)」ができない問題を修正し、Ractor内からもビューのパスにアクセスできるようにした変更です。具体的には、Ractorで共有できなかったビュー関連キャッシュを「Ractor-shareable」になるように扱う（freezeする）ことで、Ractor内からのテンプレート検索を可能にしています。"
-    },
-    {
-      "number": 58659,
-      "title": "Fix Ractor unshareable procs at boot {#pr-58659}",
-      "url": "https://github.com/rails/rails/pull/58659",
-      "mergedAt": "2026-09-04T00:00:00.000Z",
-      "author": "etiennebarrie",
-      "authorUrl": "https://github.com/etiennebarrie",
-      "summary": "1. 概要 (1-2文で)  \nRails のブート時に生成されるいくつかの proc / lambda が Ractor 的に「共有不可能（unshareable）」になっていた問題を、キャプチャするローカル変数を整理することで「共有可能（shareable）」にする修正です。Ractor ワーカー利用時の IsolationError を避けつつ、ルートリローダーなど一部の「どうしても共有できない値」は Ractor 非対応機能として扱う方針を明示しています。"
-    },
-    {
-      "number": 58669,
-      "title": "Fix broken link to Redirecting Requests in layouts_and_rendering.md {#pr-58669}",
-      "url": "https://github.com/rails/rails/pull/58669",
-      "mergedAt": "2026-09-04T00:00:00.000Z",
-      "author": "yahonda",
-      "authorUrl": "https://github.com/yahonda",
-      "summary": "1. 概要 (1-2文で)  \nRails ガイド「Layouts and Rendering」の中で、存在しないアンカー `#redirecting-requests` への自己リンクがあったため、正しいガイド「Action Controller Overview」の該当セクションへのリンクに修正した PR です。これにより `rake guides:lint` のリンクチェックが再び通るようになっています。"
-    },
-    {
-      "number": 57152,
-      "title": "[RF-DOCS] Rewrite the Layouts and Rendering guide {#pr-57152}",
-      "url": "https://github.com/rails/rails/pull/57152",
-      "mergedAt": "2026-09-04T00:00:00.000Z",
-      "author": "ayushn21",
-      "authorUrl": "https://github.com/ayushn21",
-      "summary": "1. 概要 (1-2文で)  \nLayouts and Rendering ガイドがほぼ全面的に書き直され、内容の重複を整理しつつ「コントローラとビューの関係」を中心とした構成に再編されました。これに伴い、レイアウト構造やパーシャルなどの説明は Action View Overview へ移動され、リクエストバリアントの説明は Action Controller Overview から本ガイドへ移されています。"
-    },
-    {
-      "number": 58628,
-      "title": "Use new max_connections instead of pool in guide [ci skip] {#pr-58628}",
-      "url": "https://github.com/rails/rails/pull/58628",
-      "mergedAt": "2026-09-04T00:00:00.000Z",
-      "author": "rnestler",
-      "authorUrl": "https://github.com/rnestler",
-      "summary": "1. 概要 (1-2文で)  \nRails 8.1 でデータベース設定オプション `pool` が `max_connections` に名称変更されたことを受けて、公式ガイド内の記述を新しいオプション名に合わせて修正した PR です。コードや挙動の変更ではなく、ドキュメント（ガイド）のみを対象とした修正です。"
-    },
-    {
-      "number": 58665,
-      "title": "[8-1-stable] Fixed guard around AS::TC.run_order {#pr-58665}",
-      "url": "https://github.com/rails/rails/pull/58665",
-      "mergedAt": "2026-09-04T00:00:00.000Z",
-      "author": "fesiqueira",
-      "authorUrl": "https://github.com/fesiqueira",
-      "summary": "1. 概要 (1-2文で)  \nRails 8.1系（`8-1-stable` ブランチ）で、`ActiveSupport::TestCase.run_order` を扱うガード条件（安全な存在チェック）が誤っていたのを 1行だけ修正したバックポートPRです。Minitest 6 対応のフォローアップで、テスト実行順序の取得まわりで発生しうる不具合を防ぐ目的の修正です。"
-    },
-    {
-      "number": 58666,
-      "title": "Use equality comparison when fetching information about a single table {#pr-58666}",
-      "url": "https://github.com/rails/rails/pull/58666",
-      "mergedAt": "2026-09-04T00:00:00.000Z",
-      "author": "ilianah",
-      "authorUrl": "https://github.com/ilianah",
-      "summary": "1. 概要 (1-2文で)  \nMySQL 用スキーマリーダが「単一テーブル」に対しても `IN (...)` を使って `information_schema` を問い合わせていた挙動を、1件の場合は `=` 比較に戻すPRです。Vitess 環境で `remove_index` などが正しく動かずエラーになっていた問題を、古い Vitess バージョンも含めてワークアラウンドする目的があります。"
-    },
-    {
-      "number": 58623,
-      "title": "Check PATCH and QUERY in routing assertions with method: :all {#pr-58623}",
-      "url": "https://github.com/rails/rails/pull/58623",
-      "mergedAt": "2026-09-03T00:00:00.000Z",
-      "author": "carlosdanielpohlod",
-      "authorUrl": "https://github.com/carlosdanielpohlod",
-      "summary": "1. 概要 (1-2文で)  \nRails のルーティングテスト用アサーション `assert_recognizes` / `assert_routing` において、`method: :all` 指定時に `PATCH` と新たに追加された `QUERY` メソッドも検証対象とするように修正した PR です。これにより、「全ての HTTP メソッドを受け付けるはず」という前提で書かれたテストが、実際には `PATCH` や `QUERY` を受け付けていないルートを正しく検出できるようになります。"
-    },
-    {
-      "number": 58651,
-      "title": "SchemaContext#attributes: preload schemas to prevent deadlock {#pr-58651}",
-      "url": "https://github.com/rails/rails/pull/58651",
-      "mergedAt": "2026-09-03T00:00:00.000Z",
-      "author": "kyrofa",
-      "authorUrl": "https://github.com/kyrofa",
-      "summary": "1. 概要 (1-2文で)  \n`SchemaContext#attributes` で `Ractor.store_if_absent` によるロックを使って `Attributes` を初期化していた結果、スキーマ読み込み時に再帰的に同じロックを取りに行ってデッドロックが発生しうる問題を解消した PR です。  \nロックを完全に取り除き、デッドロックを防ぎつつ動作をテストで担保しています。"
-    },
-    {
-      "number": 58656,
-      "title": "Prevent freezing Action Dispatch default headers config itself {#pr-58656}",
-      "url": "https://github.com/rails/rails/pull/58656",
-      "mergedAt": "2026-09-03T00:00:00.000Z",
-      "author": "Edouard-chin",
-      "authorUrl": "https://github.com/Edouard-chin",
-      "summary": "1. 概要 (1-2文で)  \nRails の `ActionDispatch` が持つ「デフォルトレスポンスヘッダ設定」を Ractor 安全性のために freeze する際、`Rails.application.config.action_dispatch.default_headers` そのものが凍結されてしまう問題を修正し、設定オブジェクト自体は凍結されないようにした PR です。これにより、古くから存在する「load hook 内で config を破壊的変更する」ようなコードがクラッシュせず動作（※実質的な効果は元々ほぼなかった）を続けられるようになります。"
-    },
-    {
-      "number": 58635,
-      "title": "Re-enable PostgreSQL triggers when `disable_referential_integrity` raises {#pr-58635}",
-      "url": "https://github.com/rails/rails/pull/58635",
-      "mergedAt": "2026-09-03T00:00:00.000Z",
-      "author": "lukasedw",
-      "authorUrl": "https://github.com/lukasedw",
-      "summary": "1. 概要 (1-2文で)  \nPostgreSQL 18.4 未満の環境で `disable_referential_integrity` 実行中に例外が発生した場合でも、必ずトリガーが再有効化されるように修正した PR です。これにより、テストやクリーナー処理の失敗をきっかけに、DB 全体の外部キー制約が恒久的に無効化されてしまうバグを防ぎます。"
-    },
-    {
-      "number": 58638,
-      "title": "Add PostgreSQL adapter support for configuring error_verbosity {#pr-58638}",
-      "url": "https://github.com/rails/rails/pull/58638",
-      "mergedAt": "2026-09-03T00:00:00.000Z",
-      "author": "beauraF",
-      "authorUrl": "https://github.com/beauraF",
-      "summary": "1. 概要 (1-2文で)  \nPostgreSQL アダプタに、接続設定 (`database.yml`) から `error_verbosity` を指定して libpq のエラーメッセージ詳細度を制御できる機能が追加されました。これにより、ユニーク制約違反などのエラーに含まれる PII（メールアドレス等）がログ経由で漏洩することを抑制しやすくなります。"
-    },
-    {
-      "number": 58647,
-      "title": "Make the controller configs shareable in ractorize! {#pr-58647}",
-      "url": "https://github.com/rails/rails/pull/58647",
-      "mergedAt": "2026-09-02T00:00:00.000Z",
-      "author": "etiennebarrie",
-      "authorUrl": "https://github.com/etiennebarrie",
-      "summary": "1. 概要 (1-2文で)  \nRailsアプリを `ractorize!` した際に、コントローラのコンフィグ（設定オブジェクト）が Ractor 間で安全に共有できるようにした PR です。アプリケーションブート後の「コントローラレベルの設定」は共有可能な形に固定し、各コントローラインスタンス側で変更可能なコピーを持つ設計に寄せています。"
     }
   ]
 }
