@@ -1,7 +1,70 @@
 {
-  "lastUpdated": "2026-09-16T00:14:39.799Z",
+  "lastUpdated": "2026-09-17T00:12:51.542Z",
   "totalCount": 50,
   "items": [
+    {
+      "number": 58791,
+      "title": "Replace the `mysql5` fallback in `ActiveRecord.database_cli` with `mariadb` {#pr-58791}",
+      "url": "https://github.com/rails/rails/pull/58791",
+      "mergedAt": "2026-09-16T00:00:00.000Z",
+      "author": "kamipo",
+      "authorUrl": "https://github.com/kamipo",
+      "summary": "1. 概要 (1-2文で)  \nActiveRecord の `database_cli`（`rails dbconsole` などから使われる DB クライアント実行コマンド）の MySQL 系クライアント検出ロジックで、古い `mysql5` バイナリのフォールバックを廃止し、代わりに `mariadb` をフォールバック候補として扱うように変更した PR です。これにより、近年の MariaDB 環境でも、`rails dbconsole` がより確実に動作するようになります。"
+    },
+    {
+      "number": 58790,
+      "title": "Consolidate common methods of `Mysql2Adapter` and `TrilogyAdapter` {#pr-58790}",
+      "url": "https://github.com/rails/rails/pull/58790",
+      "mergedAt": "2026-09-16T00:00:00.000Z",
+      "author": "kamipo",
+      "authorUrl": "https://github.com/kamipo",
+      "summary": "1. 概要 (1–2文で)  \n`Mysql2Adapter` と `TrilogyAdapter` の共通処理が `AbstractMysqlAdapter` に集約され、重複コードが削減されました。あわせて `text_type?` と `error_number` の可視性が、実際の利用状況に合わせて整理されています。"
+    },
+    {
+      "number": 58789,
+      "title": "Don't reference connection in on_main block {#pr-58789}",
+      "url": "https://github.com/rails/rails/pull/58789",
+      "mergedAt": "2026-09-16T00:00:00.000Z",
+      "author": "hmcguire-shopify",
+      "authorUrl": "https://github.com/hmcguire-shopify",
+      "summary": "1. 概要 (1-2文で)  \n`ActiveRecord::ModelSchema` 内で `on_main` ブロックの中から DB コネクションオブジェクトを直接参照しないようにリファクタリングし、Ractor 間でブロックを共有する際に発生していたエラーを回避する変更です。非メイン Ractor からの呼び出し時にも安全に `on_main` を使えるようにするためのスレッド／Ractor 対応の改善です。"
+    },
+    {
+      "number": 58786,
+      "title": "Avoid some allocations and speed up the template lookup path {#pr-58786}",
+      "url": "https://github.com/rails/rails/pull/58786",
+      "mergedAt": "2026-09-16T00:00:00.000Z",
+      "author": "jhawthorn",
+      "authorUrl": "https://github.com/jhawthorn",
+      "summary": "1. 概要 (1–2文で)\nRails のテンプレート探索（lookup）周りの実装を見直し、余分なオブジェクト割り当て（allocation）を削減してパフォーマンスを改善する変更です。特に `LookupContext` から `PathSet` にパス正規化処理を移すことでテンプレート検索時の配列生成を避け、部分テンプレート大量レンダリング時のスループットが約 12% 向上しています。"
+    },
+    {
+      "number": 58780,
+      "title": "Skip leaky ractor tests {#pr-58780}",
+      "url": "https://github.com/rails/rails/pull/58780",
+      "mergedAt": "2026-09-16T00:00:00.000Z",
+      "author": "byroot",
+      "authorUrl": "https://github.com/byroot",
+      "summary": "1. 概要 (1-2文で)  \nRactor 内で `require` が呼ばれてしまうテストをスキップすることで、`Kernel#require` をエイリアス／ラップしている Zeitwerk・Bootsnap・Rubygems などとの互換性問題を回避する PR です。Ractor の制約に反する「リーキー」なテストを一時的に無効化し、テスト環境の安定性を優先しています。"
+    },
+    {
+      "number": 58769,
+      "title": "Add JSON schema cache serializer {#pr-58769}",
+      "url": "https://github.com/rails/rails/pull/58769",
+      "mergedAt": "2026-09-16T00:00:00.000Z",
+      "author": "ilianah",
+      "authorUrl": "https://github.com/ilianah",
+      "summary": "1. 概要 (1-2文で)  \nRails の `SchemaCache` を JSON 形式でダンプ／ロードできる新しいシリアライザが追加され、既存の YAML に比べて約 20 倍以上高速に読み込めるようになりました。ActiveRecord のスキーマキャッシュの内部表現を JSON で安全にシリアライズできるようにするため、型周りを中心に多数のクラスに JSON 対応が入っています。"
+    },
+    {
+      "number": 58751,
+      "title": "Speed up TimeWithZone#xmlschema, #to_s and TimeZone.seconds_to_utc_offset {#pr-58751}",
+      "url": "https://github.com/rails/rails/pull/58751",
+      "mergedAt": "2026-09-16T00:00:00.000Z",
+      "author": "yaroslav",
+      "authorUrl": "https://github.com/yaroslav",
+      "summary": "1. 概要 (1-2文で)  \nTimeWithZone の文字列表現関連メソッドと TimeZone.seconds_to_utc_offset の実装を見直し、同じ出力を維持したままパフォーマンスとメモリ効率を大きく改善する変更です。ActiveSupport 全体で時刻のフォーマットを行う箇所が、少ないオブジェクト確保で数倍高速になります。"
+    },
     {
       "number": 58768,
       "title": "[ci skip] Remove obsolete DateTime fallback notes from core extensions guide {#pr-58768}",
@@ -388,69 +451,6 @@
       "author": "Saidbek",
       "authorUrl": "https://github.com/Saidbek",
       "summary": "1. 概要 (1-2文で)  \n`enqueue_after_transaction_commit` を有効にした状態でトランザクション内から `retry_job` を呼び出した場合に、`wait` / `queue` / `priority` といった enqueue オプションが無視されてしまうバグを修正する PR です。トランザクションコミット後に実際の enqueue が行われるケースでも、`retry_job` で指定したオプションが正しく反映されるようになります。"
-    },
-    {
-      "number": 58684,
-      "title": "Fix Active Support loading on JRuby without Ractor {#pr-58684}",
-      "url": "https://github.com/rails/rails/pull/58684",
-      "mergedAt": "2026-09-07T00:00:00.000Z",
-      "author": "nicolasva",
-      "authorUrl": "https://github.com/nicolasva",
-      "summary": "1. 概要 (1-2文で)  \nJRuby 10 が `RUBY_VERSION = \"4.0.0\"` を名乗る一方で `Ractor` 定数を定義していないために、Active Support の Ractor 対応コードが NameError で落ちていた問題を修正する PRです。`Ractor` 定数の有無を見て挙動を切り替えることで、Ractor を持たない実装（JRuby など）でも安全に `active_support/core_ext` がロードできるようになりました。"
-    },
-    {
-      "number": 58688,
-      "title": "Upgrade rubocop {#pr-58688}",
-      "url": "https://github.com/rails/rails/pull/58688",
-      "mergedAt": "2026-09-07T00:00:00.000Z",
-      "author": "byroot",
-      "authorUrl": "https://github.com/byroot",
-      "summary": "1. 概要  \nRubocop をアップグレードしたうえで、それに伴いコードスタイルやテストコードを新しいルールに合わせて修正し、あわせて `json` gem を一時的に `< 3.0` にロックした PR です。機能追加はなく、主に開発環境・テスト用の整備が目的です。"
-    },
-    {
-      "number": 58686,
-      "title": "ExceptionWrapper: build backtrace lazily {#pr-58686}",
-      "url": "https://github.com/rails/rails/pull/58686",
-      "mergedAt": "2026-09-07T00:00:00.000Z",
-      "author": "byroot",
-      "authorUrl": "https://github.com/byroot",
-      "summary": "1. 概要 (1-2文で)  \n`ActionDispatch::ExceptionWrapper` が例外のバックトレース（backtrace）を「遅延評価（lazily）」で構築するように変更され、例外ラップ時点では backtrace を組み立てず、必要になったタイミングで初めて生成することでパフォーマンスの無駄なコストを避けるようになりました。"
-    },
-    {
-      "number": 58687,
-      "title": "Skip testing Action Mailbox and Active Storage scripts {#pr-58687}",
-      "url": "https://github.com/rails/rails/pull/58687",
-      "mergedAt": "2026-09-07T00:00:00.000Z",
-      "author": "byroot",
-      "authorUrl": "https://github.com/byroot",
-      "summary": "1. 概要 (1-2文で)  \nこのPRは、Action Mailbox と Active Storage に関するガイド用バグレポートテンプレートのスクリプトテストを、一時的にスキップする変更です。原因は、テスト実行時に使用される `rails 8.1.3` と `json 3.0` の組み合わせが非互換であり、`rails 8.1.4` が出るまでテストが正常に動かないためです。"
-    },
-    {
-      "number": 58109,
-      "title": "Re-document application template advanced usage [ci skip] {#pr-58109}",
-      "url": "https://github.com/rails/rails/pull/58109",
-      "mergedAt": "2026-09-07T00:00:00.000Z",
-      "author": "jeromedalbert",
-      "authorUrl": "https://github.com/jeromedalbert",
-      "summary": "1. 概要 (1-2文で)  \nRailsガイドから消えてしまっていた「Application Template の高度な使い方（Advanced Usage）」セクションを、Generatorsガイド内に復活させるドキュメント修正のPRです。特に、テンプレートのディレクトリ（`__dir__`）を基準に Thor の `copy_file` などが使えるようにする `source_paths` の設定方法が再度明示的にドキュメント化されました。"
-    },
-    {
-      "number": 58675,
-      "title": "Fix docker-entrypoint check to support extra bin/rails server flags {#pr-58675}",
-      "url": "https://github.com/rails/rails/pull/58675",
-      "mergedAt": "2026-09-06T00:00:00.000Z",
-      "author": "iamdipak39p",
-      "authorUrl": "https://github.com/iamdipak39p",
-      "summary": "1. 概要 (1-2文で)  \nRails のアプリ生成時に作られる `bin/docker-entrypoint` が、`bin/rails server` に追加フラグを付けた場合に `db:prepare` を実行しなくなる問題を修正した PR です。Docker の `CMD [\"./bin/rails\", \"server\"]` 形式に合わせて、引数のチェック方法を「末尾2つ」から「先頭2つ」に変更し、あわせてテストを追加しています。"
-    },
-    {
-      "number": 58673,
-      "title": "Refactor more class variables to accessors and delegators {#pr-58673}",
-      "url": "https://github.com/rails/rails/pull/58673",
-      "mergedAt": "2026-09-05T00:00:00.000Z",
-      "author": "gmcgibbon",
-      "authorUrl": "https://github.com/gmcgibbon",
-      "summary": "1. 概要 (1-2文で)  \nこのPRは、Rails内部で使われていたクラス変数ベースの設定（`mattr_accessor`）をインスタンス用の`attr_accessor`等に置き換え、Ruby 4.0.6 でも Ractor から安全に参照できるようにするリファクタリングです。主に Action Pack / Action View の各種ヘルパの設定値の持ち方が変わり、それに対応するテストが追加されています。"
     }
   ]
 }
