@@ -1,7 +1,61 @@
 {
-  "lastUpdated": "2026-09-17T00:12:51.542Z",
+  "lastUpdated": "2026-09-18T00:14:36.544Z",
   "totalCount": 50,
   "items": [
+    {
+      "number": 58809,
+      "title": "Deprecate `supports_datetime_with_precision?` {#pr-58809}",
+      "url": "https://github.com/rails/rails/pull/58809",
+      "mergedAt": "2026-09-18T00:00:00.000Z",
+      "author": "kamipo",
+      "authorUrl": "https://github.com/kamipo",
+      "summary": "1. 概要 (1-2文で)  \n`supports_datetime_with_precision?` が非推奨になり、実質常に `true` を返すだけのメソッドとして整理されました。これに伴い、datetime/time カラムの `precision` オプションをサポートしていない DB を考慮した分岐やテストコードが削除・簡略化されています。"
+    },
+    {
+      "number": 58808,
+      "title": "Read related PostgreSQL relation names with `::regclass` {#pr-58808}",
+      "url": "https://github.com/rails/rails/pull/58808",
+      "mergedAt": "2026-09-17T00:00:00.000Z",
+      "author": "kamipo",
+      "authorUrl": "https://github.com/kamipo",
+      "summary": "1. 概要 (1-2文で)  \nPostgreSQL 用アダプタで、関連テーブル名の取得に `pg_class` の JOIN を使わず `::regclass` を用いるように変更し、外部キー・継承テーブルの名前解決を簡潔かつ正確にしました。これにより、スキーマの異なる親テーブルやクオートが必要なテーブル名も正しく `schema.rb` などにダンプされます。"
+    },
+    {
+      "number": 58806,
+      "title": "Update CHANGELOGs for 8-1-stable backports {#pr-58806}",
+      "url": "https://github.com/rails/rails/pull/58806",
+      "mergedAt": "2026-09-17T00:00:00.000Z",
+      "author": "hmcguire-shopify",
+      "authorUrl": "https://github.com/hmcguire-shopify",
+      "summary": "1. 概要 (1–2文で)  \nこのPRは、Rails 8.1 系の安定ブランチ（8-1-stable）にバックポートされた変更内容を、各コンポーネントの CHANGELOG にまとめて追記したものです。実際の機能追加やバグ修正はすでに別 PR で取り込まれており、本 PR は「8.1.3.1 以降に何が変わったか」を公式ドキュメントとして整理・反映する目的のメンテナンス変更です。"
+    },
+    {
+      "number": 58799,
+      "title": "Fix tuple `where` key corrupting later association conditions {#pr-58799}",
+      "url": "https://github.com/rails/rails/pull/58799",
+      "mergedAt": "2026-09-17T00:00:00.000Z",
+      "author": "e-akashsaini",
+      "authorUrl": "https://github.com/e-akashsaini",
+      "summary": "1. 概要 (1-2文で)  \nActiveRecord の `where` における「タプル（複合）キー」と「関連（association）キー」を同時に使ったとき、キーの順序によってクエリが壊れる回帰バグを修正する PR です。ブロック内でメソッド引数 `attributes` を上書きしていたことにより、無限再帰防止用のガードロジックに誤った値が渡され、関連の展開が壊れていました。"
+    },
+    {
+      "number": 58766,
+      "title": "[Ractor] Compute `serialize_cast_value_compatible?` on the main Ractor {#pr-58766}",
+      "url": "https://github.com/rails/rails/pull/58766",
+      "mergedAt": "2026-09-17T00:00:00.000Z",
+      "author": "yaroslav-shopify",
+      "authorUrl": "https://github.com/yaroslav-shopify",
+      "summary": "1. 概要 (1-2文で)  \nRails の ActiveRecord 型システムにおいて、`serialize_cast_value_compatible?` のメモ化を「メイン Ractor でのみ」実行するように変更し、Ractor 使用時に発生していた `IsolationError`（`@serialize_cast_value_compatible` 関連）を解消する修正です。Ractor 環境でも型のシリアライズ・キャスト互換判定が安全かつ一貫して行えるようになります。"
+    },
+    {
+      "number": 58795,
+      "title": "Read PostgreSQL indexes and constraints from the table a name resolves to {#pr-58795}",
+      "url": "https://github.com/rails/rails/pull/58795",
+      "mergedAt": "2026-09-17T00:00:00.000Z",
+      "author": "kamipo",
+      "authorUrl": "https://github.com/kamipo",
+      "summary": "1. 概要 (1–2文で)  \nPostgreSQL アダプタが、スキーマを省略したテーブル名からインデックスや制約を取得する際の挙動を修正し、「名前解決された 1 つのテーブル」だけを対象にするように統一した PR です。`::regclass` と同等の名前解決ロジックを共通化し、複数スキーマに同名テーブルがある場合でも誤って両方のインデックス・制約を取ってきてしまう問題を防ぎます。"
+    },
     {
       "number": 58791,
       "title": "Replace the `mysql5` fallback in `ActiveRecord.database_cli` with `mariadb` {#pr-58791}",
@@ -397,60 +451,6 @@
       "author": "etiennebarrie",
       "authorUrl": "https://github.com/etiennebarrie",
       "summary": "1. 概要 (1-2文で)  \nこのPRは、Ractor ワーカー内でリクエスト処理中に例外が発生した場合でも、通常のマルチスレッド環境と同様に Rails が例外およびバックトレースを正しくログ・レポートできるようにする対応です。Ractor が要求する「shareable（共有可能）」制約を満たすように、エラーレポータ・ロガー・バックトレースクリーナなどの実装が調整されています。"
-    },
-    {
-      "number": 58702,
-      "title": "Remove the dead encryption performance reject clause from the Active Record Rakefile {#pr-58702}",
-      "url": "https://github.com/rails/rails/pull/58702",
-      "mergedAt": "2026-09-08T00:00:00.000Z",
-      "author": "dersam",
-      "authorUrl": "https://github.com/dersam",
-      "summary": "1. 概要 (1-2文で)  \nActive Record の Rakefile に残っていた「暗号化パフォーマンス関連テストを除外するための条件分岐」が、既に存在しないテストパスを対象としており不要になっていたため削除されました。テストタスクのフィルタ条件を整理するだけの変更で、機能面の挙動には影響しません。"
-    },
-    {
-      "number": 58697,
-      "title": "Remove stale Active Record encryption performance tasks {#pr-58697}",
-      "url": "https://github.com/rails/rails/pull/58697",
-      "mergedAt": "2026-09-08T00:00:00.000Z",
-      "author": "dersam",
-      "authorUrl": "https://github.com/dersam",
-      "summary": "1. 概要 (1-2文で)  \nActive Record の「暗号化のパフォーマンステスト」用 Rake タスクおよび関連ドキュメント・コメントが、実際には何も実行していない「空タスク」になっていたため、それらを削除する PR です。機能追加・仕様変更ではなく、不要になったテスト関連のコードとドキュメントのクリーンアップです。"
-    },
-    {
-      "number": 58693,
-      "title": "Exclude generated error pages from GitHub language stats {#pr-58693}",
-      "url": "https://github.com/rails/rails/pull/58693",
-      "mergedAt": "2026-09-08T00:00:00.000Z",
-      "author": "irinanazarova",
-      "authorUrl": "https://github.com/irinanazarova",
-      "summary": "1. 概要 (1-2文で)  \nRails 8 以降で生成される新規アプリが GitHub 上で「HTML リポジトリ」と判定されてしまう問題を解消するため、`rails new` が作成する静的エラーページを GitHub Linguist の「generated ファイル」として扱う設定を `.gitattributes` に自動生成するようにした PR です。これにより、新しい Rails アプリは正しく「Ruby リポジトリ」として集計されるようになります。"
-    },
-    {
-      "number": 58690,
-      "title": "Update json to 3.0 {#pr-58690}",
-      "url": "https://github.com/rails/rails/pull/58690",
-      "mergedAt": "2026-09-08T00:00:00.000Z",
-      "author": "byroot",
-      "authorUrl": "https://github.com/byroot",
-      "summary": "1. 概要 (1-2文で)  \nこのPRは Rails の依存関係として利用している `json` gem を 3.0 系に更新するものです。ただし、`resque` → `multi_json` → `json` という依存関係の互換性問題により、一部の処理がエラーになるため、その対応が前提条件になっています。"
-    },
-    {
-      "number": 58678,
-      "title": "Use Regexp#source instead of Regexp#to_s to detect deep filters {#pr-58678}",
-      "url": "https://github.com/rails/rails/pull/58678",
-      "mergedAt": "2026-09-07T00:00:00.000Z",
-      "author": "eregon",
-      "authorUrl": "https://github.com/eregon",
-      "summary": "1. 概要 (1-2文で)  \nRails のパラメータフィルタ (`ActiveSupport::ParameterFilter`) で「ディープフィルタ」を検出する際、`Regexp#to_s` の代わりに `Regexp#source` を使うように変更し、不要な文字列生成を避けてパフォーマンスを改善した PR です。挙動は変えずに、高頻度パスでのオーバーヘッドを削減しています。"
-    },
-    {
-      "number": 57198,
-      "title": "Fix retry_job to respect enqueue options when enqueue is deferred {#pr-57198}",
-      "url": "https://github.com/rails/rails/pull/57198",
-      "mergedAt": "2026-09-07T00:00:00.000Z",
-      "author": "Saidbek",
-      "authorUrl": "https://github.com/Saidbek",
-      "summary": "1. 概要 (1-2文で)  \n`enqueue_after_transaction_commit` を有効にした状態でトランザクション内から `retry_job` を呼び出した場合に、`wait` / `queue` / `priority` といった enqueue オプションが無視されてしまうバグを修正する PR です。トランザクションコミット後に実際の enqueue が行われるケースでも、`retry_job` で指定したオプションが正しく反映されるようになります。"
     }
   ]
 }
