@@ -1,7 +1,61 @@
 {
-  "lastUpdated": "2026-09-18T00:14:36.544Z",
+  "lastUpdated": "2026-09-19T00:13:29.264Z",
   "totalCount": 50,
   "items": [
+    {
+      "number": 58822,
+      "title": "Make ActionController::ParamsWrapper._wrapper_options ractor safe {#pr-58822}",
+      "url": "https://github.com/rails/rails/pull/58822",
+      "mergedAt": "2026-09-18T00:00:00.000Z",
+      "author": "gmcgibbon",
+      "authorUrl": "https://github.com/gmcgibbon",
+      "summary": "1. 概要 (1-2文で)  \n`ActionController::ParamsWrapper::_wrapper_options` が Ractor 共有可能になるよう、内部オプションオブジェクトを「深い freeze」とミューテックスのクリアで Ractor-safe にした PR です。合わせて `Rails::Application#ractorize!` に ParamsWrapper 用の初期化処理を追加し、テストで Ractor 対応を検証しています。"
+    },
+    {
+      "number": 58733,
+      "title": "Avoid deadlocks when concurrent find_or_create_by calls read back the… {#pr-58733}",
+      "url": "https://github.com/rails/rails/pull/58733",
+      "mergedAt": "2026-09-18T00:00:00.000Z",
+      "author": "kwestein",
+      "authorUrl": "https://github.com/kwestein",
+      "summary": "1. 概要 (1-2文で)  \nMySQL 環境で `find_or_create_by` / `create_or_find_by` をトランザクション内で並行実行した際に起きていたデッドロック（`1213`）を防ぐため、重複 INSERT 後の「読み直し」のロック戦略を変更した PRです。`SELECT ... FOR UPDATE` ではなく共有ロックを使った読み直しに切り替えることで、意図せずデッドロックが発生するケースを解消します。"
+    },
+    {
+      "number": 58818,
+      "title": "Add `bundle exec` to guides help command example [ci-skip] {#pr-58818}",
+      "url": "https://github.com/rails/rails/pull/58818",
+      "mergedAt": "2026-09-18T00:00:00.000Z",
+      "author": "p8",
+      "authorUrl": "https://github.com/p8",
+      "summary": "1. 概要 (1-2文で)  \nRailsガイド執筆者向けドキュメント中の「ヘルプコマンド」の実行例に、`bundle exec` を付けるよう修正したPRです。実行例を、より実際の開発環境に即した正しい形に揃えるためのドキュメントのみの変更です。"
+    },
+    {
+      "number": 57181,
+      "title": "[RF-DOCS] Rewrite the Asset Pipeline Guide {#pr-57181}",
+      "url": "https://github.com/rails/rails/pull/57181",
+      "mergedAt": "2026-09-18T00:00:00.000Z",
+      "author": "ayushn21",
+      "authorUrl": "https://github.com/ayushn21",
+      "summary": "1. 概要 (1-2文で)  \nAsset Pipelineガイドが Propshaft を前提に、開発者視点で「どう使うか」にフォーカスした内容へほぼ全面的に書き換えられました。Sprockets からの移行や特定ライブラリ(Tailwindなど)の細かい手順はガイド外部へのリンクに整理され、全体構成・見出し・導入文が見直されています。"
+    },
+    {
+      "number": 58794,
+      "title": "Deprecate `ActiveRecord::Callbacks::CALLBACKS` {#pr-58794}",
+      "url": "https://github.com/rails/rails/pull/58794",
+      "mergedAt": "2026-09-18T00:00:00.000Z",
+      "author": "kamipo",
+      "authorUrl": "https://github.com/kamipo",
+      "summary": "1. 概要 (1-2文で)  \n`ActiveRecord::Callbacks::CALLBACKS` 定数が非推奨になり、Rails 9.0 で削除予定になりました。  \nこの定数は長年更新されておらず、特にトランザクション関連のコールバックが含まれていないため、利用するとコールバックが一部無視される危険があることが明示されています。"
+    },
+    {
+      "number": 58793,
+      "title": "Stop probing for a local MySQL socket when generating `config/database.yml` {#pr-58793}",
+      "url": "https://github.com/rails/rails/pull/58793",
+      "mergedAt": "2026-09-18T00:00:00.000Z",
+      "author": "kamipo",
+      "authorUrl": "https://github.com/kamipo",
+      "summary": "1. 概要 (1-2文で)  \n`rails new --database=mysql` 実行時に、ローカルの MySQL ソケットファイルを探して `config/database.yml` に `socket:` を書き込む挙動を廃止し、常に `host:` ベースの設定を生成するようにした PR です。Docker/devcontainer などコンテナ環境とより相性の良い、シンプルで持ち運びしやすい設定になります。"
+    },
     {
       "number": 58809,
       "title": "Deprecate `supports_datetime_with_precision?` {#pr-58809}",
@@ -397,60 +451,6 @@
       "author": "dersam",
       "authorUrl": "https://github.com/dersam",
       "summary": "1. 概要 (1-2文で)  \nActive Record Querying ガイド内の `enum` のサンプルコードが、現在の Rails で非対応な書き方になっていたため、サポートされている「位置引数形式（positional enum form）」に修正したドキュメント専用の変更です。コード本体には変更はなく、ガイドの記述のみが更新されています。"
-    },
-    {
-      "number": 58337,
-      "title": "Add alternative text to Action Text attachments {#pr-58337}",
-      "url": "https://github.com/rails/rails/pull/58337",
-      "mergedAt": "2026-09-09T00:00:00.000Z",
-      "author": "lylo",
-      "authorUrl": "https://github.com/lylo",
-      "summary": "1. 概要 (1-2文で)  \nAction Text の添付画像に `alt`（代替テキスト）属性を正式に持たせ、保存〜レンダリングまでラウンドトリップできるようにした PR です。これにより、スクリーンリーダー向けの説明文をキャプションとは独立して扱え、WCAG 1.1.1 対応もしやすくなります。"
-    },
-    {
-      "number": 58718,
-      "title": "Remove the dead racc compile task from Action Pack {#pr-58718}",
-      "url": "https://github.com/rails/rails/pull/58718",
-      "mergedAt": "2026-09-09T00:00:00.000Z",
-      "author": "dersam",
-      "authorUrl": "https://github.com/dersam",
-      "summary": "1. 概要 (1-2文で)  \nAction Pack の `Rakefile` から、既に存在しない `.y` 文法ファイル向けの racc コンパイルタスク（`compile`）が削除されました。これにより、何もしていない「死んだ」タスクが整理され、Rake タスク定義が実態に揃えられます。"
-    },
-    {
-      "number": 58712,
-      "title": "Remove the deprecated guides:generate:kindle task {#pr-58712}",
-      "url": "https://github.com/rails/rails/pull/58712",
-      "mergedAt": "2026-09-09T00:00:00.000Z",
-      "author": "dersam",
-      "authorUrl": "https://github.com/dersam",
-      "summary": "1. 概要 (1-2文で)  \nRails のガイド生成用 Rake タスク `guides:generate:kindle` が、非推奨期間を経て完全に削除されました。今後は e-reader 向けフォーマットとして `guides:generate:epub` のみが正式にサポートされます。"
-    },
-    {
-      "number": 58707,
-      "title": "[ci skip] Correct the prepared statements opt-out config key in guides {#pr-58707}",
-      "url": "https://github.com/rails/rails/pull/58707",
-      "mergedAt": "2026-09-09T00:00:00.000Z",
-      "author": "dersam",
-      "authorUrl": "https://github.com/dersam",
-      "summary": "1. 概要 (1-2文で)  \nRailsガイド内で、Prepared Statements を無効化する設定キー名が誤記されていたため、正しいキー名に修正したドキュメントのみの変更です。アプリケーションコードや挙動そのものには影響しません。"
-    },
-    {
-      "number": 58708,
-      "title": "[ci skip] Fix MissingAttributeError reference in querying guide {#pr-58708}",
-      "url": "https://github.com/rails/rails/pull/58708",
-      "mergedAt": "2026-09-09T00:00:00.000Z",
-      "author": "dersam",
-      "authorUrl": "https://github.com/dersam",
-      "summary": "1. 概要 (1-2文で)  \nこのPRは、Active Record クエリガイド内の誤ったクラス名 `ActiveRecord::MissingAttributeError` を、正しい `ActiveModel::MissingAttributeError` へ修正するドキュメント更新です。コード自体の挙動には一切変更がなく、ガイドの技術的正確性を高めるための修正となります。"
-    },
-    {
-      "number": 58695,
-      "title": "Allow exception backtraces from Ractor workers {#pr-58695}",
-      "url": "https://github.com/rails/rails/pull/58695",
-      "mergedAt": "2026-09-08T00:00:00.000Z",
-      "author": "etiennebarrie",
-      "authorUrl": "https://github.com/etiennebarrie",
-      "summary": "1. 概要 (1-2文で)  \nこのPRは、Ractor ワーカー内でリクエスト処理中に例外が発生した場合でも、通常のマルチスレッド環境と同様に Rails が例外およびバックトレースを正しくログ・レポートできるようにする対応です。Ractor が要求する「shareable（共有可能）」制約を満たすように、エラーレポータ・ロガー・バックトレースクリーナなどの実装が調整されています。"
     }
   ]
 }
