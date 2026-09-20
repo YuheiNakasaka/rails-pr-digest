@@ -1,7 +1,34 @@
 {
-  "lastUpdated": "2026-09-19T00:13:29.264Z",
+  "lastUpdated": "2026-09-20T00:13:45.563Z",
   "totalCount": 50,
   "items": [
+    {
+      "number": 58812,
+      "title": "Update Active Model Ractor tests skips {#pr-58812}",
+      "url": "https://github.com/rails/rails/pull/58812",
+      "mergedAt": "2026-09-19T00:00:00.000Z",
+      "author": "byroot",
+      "authorUrl": "https://github.com/byroot",
+      "summary": "1. 概要 (1-2文で)  \nこのPRは、Active Model における Ractor 関連テストのスキップ条件を、最新の Ruby 本体側の修正状況に合わせて更新したものです。Ruby本体にマージされた https://github.com/ruby/ruby/pull/18515 により Ruby 4.1 ではテストが動作するはず、という前提で、Ractorテストの「どのバージョンで実行してどのバージョンでスキップするか」を整理しています。"
+    },
+    {
+      "number": 58820,
+      "title": "Stop leaking `RACK_ENV` out of `Rails::DBConsoleTest#test_env` {#pr-58820}",
+      "url": "https://github.com/rails/rails/pull/58820",
+      "mergedAt": "2026-09-19T00:00:00.000Z",
+      "author": "yahonda",
+      "authorUrl": "https://github.com/yahonda",
+      "summary": "1. 概要 (1-2文で)  \n`Rails::DBConsoleTest#test_env` がテスト実行前に設定されていた `RACK_ENV` をテスト後に消してしまい、`LeakChecker` によって「環境変数リーク」と判定されていた問題を修正するPRです。テスト開始時点の `RAILS_ENV` / `RACK_ENV` の値を保存し、`ensure` で必ず元の状態に戻すように変更しています。"
+    },
+    {
+      "number": 58792,
+      "title": "Stop leaking RAILS_ENV when `build_app` is called twice {#pr-58792}",
+      "url": "https://github.com/rails/rails/pull/58792",
+      "mergedAt": "2026-09-19T00:00:00.000Z",
+      "author": "yahonda",
+      "authorUrl": "https://github.com/yahonda",
+      "summary": "1. 概要 (1-2文で)  \n`build_app` が同一テスト内で複数回呼ばれた際に `RAILS_ENV` 環境変数がリークする問題を修正した PR です。`RAILS_ENV` の元の値の保持方法を `||=` から `defined?` チェックに変更し、1回だけ正しくキャプチャされるようにしています。"
+    },
     {
       "number": 58822,
       "title": "Make ActionController::ParamsWrapper._wrapper_options ractor safe {#pr-58822}",
@@ -424,33 +451,6 @@
       "author": "p8",
       "authorUrl": "https://github.com/p8",
       "summary": "1. 概要 (1-2文で)  \nRailsガイドの執筆ガイドラインにおいて、見出し（heading）内の英語の冠詞（\"the\"、\"a\"、\"an\"）は常に小文字で書く、というルールを明確化したPRです。あわせて「Internal articles」という、文法用語として不正確な表現を修正しています。"
-    },
-    {
-      "number": 58719,
-      "title": "Speed up dispatch of BroadcastLogger {#pr-58719}",
-      "url": "https://github.com/rails/rails/pull/58719",
-      "mergedAt": "2026-09-10T00:00:00.000Z",
-      "author": "jhawthorn",
-      "authorUrl": "https://github.com/jhawthorn",
-      "summary": "1. 概要 (1-2文で)  \nBroadcastLogger が、特に `logger.debug` のような「実際にはログが出ない」ケースでより高速に動作するように最適化されました。Ruby 4.0+ の引数転送最適化を活かしつつ、不要なオブジェクト生成（配列・Proc など）を削減する変更です。"
-    },
-    {
-      "number": 58722,
-      "title": "[ci-skip][doc] Fix Action Cable guide for connection callbacks {#pr-58722}",
-      "url": "https://github.com/rails/rails/pull/58722",
-      "mergedAt": "2026-09-10T00:00:00.000Z",
-      "author": "hachi8833",
-      "authorUrl": "https://github.com/hachi8833",
-      "summary": "1. 概要 (1-2文で)  \nAction Cable の「connection callbacks」に関するドキュメントの説明が実装と逆の意味になっていたため、「クライアントへの送信時」ではなく「クライアントからの受信時」にコールバックが呼ばれることを正しく反映する修正が行われました。併せて `ActionCable::Connection::Callbacks` のコメントも同様に修正されています。"
-    },
-    {
-      "number": 58717,
-      "title": "[ci skip] Use supported positional enum form in Calculations guide example {#pr-58717}",
-      "url": "https://github.com/rails/rails/pull/58717",
-      "mergedAt": "2026-09-09T00:00:00.000Z",
-      "author": "dersam",
-      "authorUrl": "https://github.com/dersam",
-      "summary": "1. 概要 (1-2文で)  \nActive Record Querying ガイド内の `enum` のサンプルコードが、現在の Rails で非対応な書き方になっていたため、サポートされている「位置引数形式（positional enum form）」に修正したドキュメント専用の変更です。コード本体には変更はなく、ガイドの記述のみが更新されています。"
     }
   ]
 }
