@@ -1,7 +1,25 @@
 {
-  "lastUpdated": "2026-09-20T00:13:45.563Z",
+  "lastUpdated": "2026-09-21T00:13:19.036Z",
   "totalCount": 50,
   "items": [
+    {
+      "number": 58817,
+      "title": "Avoid aliasing `Kernel#respond_to?` in `ActiveModel::AttributeMethods` {#pr-58817}",
+      "url": "https://github.com/rails/rails/pull/58817",
+      "mergedAt": "2026-09-20T00:00:00.000Z",
+      "author": "yahonda",
+      "authorUrl": "https://github.com/yahonda",
+      "summary": "1. 概要 (1-2文で)  \nActiveModel::AttributeMethods 内で `Kernel#respond_to?` を `alias` で別名定義していた実装を、Ruby 4.1 以降の仕様変更に対応するために `define_method` を使う実装に置き換えた PRです。これにより Ruby master / 将来の Ruby 4.2〜4.3 での警告・エラーを回避しつつ、挙動は従来どおり維持されます。"
+    },
+    {
+      "number": 58826,
+      "title": "Avoid implied <p> tags in collection cache test {#pr-58826}",
+      "url": "https://github.com/rails/rails/pull/58826",
+      "mergedAt": "2026-09-20T00:00:00.000Z",
+      "author": "Saidbek",
+      "authorUrl": "https://github.com/Saidbek",
+      "summary": "1. 概要 (1-2文で)  \nRails の `CollectionCacheTest` が、libxml2 2.15 以降で暗黙的に挿入されなくなった `<p>` タグに依存して失敗していたため、HTML スナップショットではなくテキスト内容と順序を検証する形にテストを修正した PR です。動作仕様やランタイムの挙動には影響せず、テストのみの変更です。\n\n2. 変更内容の詳細(あればサンプルコードも含めて)  \n- 変更ファイル: `actionpack/test/controller/caching_test.rb`  \n- 行数レベルの小さな変更ですが、主な内容は以下です。\n\n従来のテストは、HTML パーサ（libxml2）によって補完される「暗黙の `<p>` タグ」を含んだ HTML 断片を期待値として保持し、「HTML の文字列全体が一致するか」を見る形だったと考えられます。  \nlibxml2 2.15 からは HTML パーサの挙動が変わり、以前は自動的に挿入されていた `<p>` タグが入らなくなり、その結果「期待している HTML スナップショット」と実際の出力 HTML が不一致になってテストが落ちていました。\n\nこの PR では、以下のような方向性でアサーションが書き換えられています。\n\n- 「タグ構造（暗黙の `<p>` の有無）」に依存せず\n- 「コレクションとしてのテキスト内容」と「その順序」が正しいかを検証\n\nイメージとしては、例えば以前が:\n\n```ruby\n# 例: 暗黙の <p> を含む HTML 文字列をそのまま比較していた\nassert_dom_equal <<~HTML, response.body\n  <div>\n    <p>item 1</p>\n    <p>item 2</p>\n  </div>\nHTML\n```\n\nのような形だったのに対し、今回の変更後は:\n\n```ruby\n# 例: DOM をパースし、テキストのリストと順序を検証するような形\nassert_equal [\"item 1\", \"item 2\"], extracted_collection_texts\n```\n\nといった形に近づけた、という意図です（実際のコードは 1 行差分のみですが、ロジック上はこういう方向への修正）。\n\nポイント:\n\n- libxml2 のバージョンによって HTML の「タグ補完」結果が変わってもテストが安定するようにした\n- 元々確認したかったのは「コレクションキャッシュの内容と並び」であり、「HTML パーサがどうタグを埋めるか」ではないため、テストの目的にもより忠実な形になっている\n\n3. 影響範囲・注意点  \n- 影響範囲:\n  - Rails のテストコードのみ（`CollectionCacheTest`）。  \n  - 本番環境・アプリケーションコードの挙動や API は一切変更されません。\n- 注意点:\n  - Rails 本体を開発しつつ、libxml2 2.15 以降の環境でテストを回している場合、この PR により `CollectionCacheTest` の失敗が解消されます。\n  - 同様に「HTML スナップショットをそのまま文字列比較していて、libxml2 のタグ補完挙動に依存しているテスト」が他にもある場合、今後もバージョン差で落ちうるため、同じように「本当に検証したい内容（テキストや要素の順序など）」に絞ったアサーションに変更するのが望ましいです。\n\n4. 参考情報 (あれば)  \n- 関連 issue: #58825 — libxml2 2.15 環境での `CollectionCacheTest` 失敗の報告。  \n- libxml2 2.13 と 2.15 の両方でテストが通ることが明示されており、「HTML パーサ実装依存のテストを避ける」というテスト設計上のベストプラクティスの一例と言えます。"
+    },
     {
       "number": 58812,
       "title": "Update Active Model Ractor tests skips {#pr-58812}",
@@ -433,24 +451,6 @@
       "author": "Edouard-chin",
       "authorUrl": "https://github.com/Edouard-chin",
       "summary": "1. 概要 (1–2文で)\n- Active Record のリフレクション（関連付け情報）を Copy-on-Write (CoW) / deep freeze することで、Ractor 内から `Post.find`, `Post.where` などを安全に実行できるようにする変更です。  \n- リフレクションキャッシュを凍結するために、各種メモ化を事前に評価しつつ、Ractor セーフな形でキャッシュを扱うように内部実装が見直されています。"
-    },
-    {
-      "number": 58711,
-      "title": "Don't write to the reloader class when there is nothing to reload {#pr-58711}",
-      "url": "https://github.com/rails/rails/pull/58711",
-      "mergedAt": "2026-09-10T00:00:00.000Z",
-      "author": "etiennebarrie",
-      "authorUrl": "https://github.com/etiennebarrie",
-      "summary": "1. 概要 (1-2文で)  \nRails のリローダ（`ActiveSupport::Reloader`）が「実際にはリロードしない」設定の場合に、不要なインスタンス変数の書き込みを行わないようにし、Ractor（マルチスレッド/並列実行機構）から安全に利用できるようにした変更です。特に Active Job を Ractor セーフにする際に問題となる、「Ractor からの書き込み禁止」に抵触しないよう動作が調整されています。"
-    },
-    {
-      "number": 58729,
-      "title": "Clarify article casing in guide headings {#pr-58729}",
-      "url": "https://github.com/rails/rails/pull/58729",
-      "mergedAt": "2026-09-10T00:00:00.000Z",
-      "author": "p8",
-      "authorUrl": "https://github.com/p8",
-      "summary": "1. 概要 (1-2文で)  \nRailsガイドの執筆ガイドラインにおいて、見出し（heading）内の英語の冠詞（\"the\"、\"a\"、\"an\"）は常に小文字で書く、というルールを明確化したPRです。あわせて「Internal articles」という、文法用語として不正確な表現を修正しています。"
     }
   ]
 }
