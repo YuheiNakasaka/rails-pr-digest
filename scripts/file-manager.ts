@@ -278,7 +278,9 @@ lastUpdated: ${new Date().toISOString().split("T")[0]}
       const match = matches[i];
       const prNumber = Number.parseInt(match[1], 10);
       const prUrl = match[2];
-      const prTitle = match[3].trim();
+      // Titles are stored with `<` escaped for Vue (see sanitizeForVitePress);
+      // pr-data.json feeds the RSS <title>, which wants plain text
+      const prTitle = match[3].trim().replace(/&lt;/g, "<");
 
       // Get the content between this PR and the next PR (or end of file)
       const startIndex = match.index || 0;

@@ -118,6 +118,24 @@ describe("formatter", () => {
       expect(result).not.toContain("Array<String>");
     });
 
+    it("should sanitize tags in the PR title", () => {
+      const mockPR = {
+        number: 58826,
+        title: "Avoid implied <p> tags in collection cache test",
+        html_url: "https://github.com/rails/rails/pull/58826",
+        merged_at: "2026-09-20T10:00:00Z",
+        user: {
+          login: "testuser",
+          html_url: "https://github.com/testuser",
+        },
+      };
+
+      const result = formatPREntry(mockPR, "summary");
+
+      expect(result).toContain("Avoid implied &lt;p> tags in collection cache test");
+      expect(result).not.toContain("<p>");
+    });
+
     it("should handle PR with null user", () => {
       const mockPR = {
         number: 12345,
@@ -144,8 +162,28 @@ describe("formatter", () => {
       expect(sanitizeForVitePress("Map<Key, Value>")).toBe("Map&lt;Key, Value>");
     });
 
-    it("should not escape standard HTML like <div>", () => {
-      expect(sanitizeForVitePress("<div>hello</div>")).toBe("<div>hello</div>");
+    it("should escape lowercase HTML tags like <div>", () => {
+      expect(sanitizeForVitePress("<div>hello</div>")).toBe("&lt;div>hello&lt;/div>");
+    });
+
+    it("should escape an unpaired tag such as <p>", () => {
+      expect(sanitizeForVitePress("Avoid implied <p> tags")).toBe("Avoid implied &lt;p> tags");
+    });
+
+    it("should not escape inside inline code spans", () => {
+      expect(sanitizeForVitePress("`<p>` と <p>")).toBe("`<p>` と &lt;p>");
+    });
+
+    it("should not escape inside fenced code blocks", () => {
+      const text = ["<p> outside", "```html", "<div>inside</div>", "```", "<p> outside again"].join(
+        "\n",
+      );
+
+      expect(sanitizeForVitePress(text)).toBe(
+        ["&lt;p> outside", "```html", "<div>inside</div>", "```", "&lt;p> outside again"].join(
+          "\n",
+        ),
+      );
     });
 
     it("should not modify content without angle brackets", () => {
