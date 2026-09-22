@@ -1,7 +1,52 @@
 {
-  "lastUpdated": "2026-09-21T00:13:19.036Z",
+  "lastUpdated": "2026-09-22T00:12:53.087Z",
   "totalCount": 50,
   "items": [
+    {
+      "number": 58429,
+      "title": "Fix BroadcastLogger#tagged when broadcasting to multiple tagging loggers {#pr-58429}",
+      "url": "https://github.com/rails/rails/pull/58429",
+      "mergedAt": "2026-09-21T00:00:00.000Z",
+      "author": "ousamabenyounes",
+      "authorUrl": "https://github.com/ousamabenyounes",
+      "summary": "1. 概要 (1-2文で)  \nActiveSupport::BroadcastLogger が複数の TaggedLogging ロガーに対して `#tagged` を呼ぶと壊れていた挙動を修正し、ブロックあり/なし両方のケースで直感的かつ一貫したタグ付きロギングができるようにした PR です。`#tagged` を明示的に実装し、これまで `method_missing` で起きていた Array 返却やブロックの多重実行を解消しています。"
+    },
+    {
+      "number": 58840,
+      "title": "Use RenderedTemplate for EMPTY_SPACER {#pr-58840}",
+      "url": "https://github.com/rails/rails/pull/58840",
+      "mergedAt": "2026-09-21T00:00:00.000Z",
+      "author": "jhawthorn",
+      "authorUrl": "https://github.com/jhawthorn",
+      "summary": "1. 概要 (1-2文で)  \n`EMPTY_SPACER` を「RenderedTemplate として振る舞う単なるオブジェクト」から、実際の `RenderedTemplate` インスタンスに置き換えた微修正です。Action View の内部実装をより一貫した形に整えるリファクタリングで、外部APIの挙動への影響はほぼありません。"
+    },
+    {
+      "number": 58827,
+      "title": "Backport alias fallback fixes for Active Model to 8-1-stable {#pr-58827}",
+      "url": "https://github.com/rails/rails/pull/58827",
+      "mergedAt": "2026-09-21T00:00:00.000Z",
+      "author": "yahonda",
+      "authorUrl": "https://github.com/yahonda",
+      "summary": "1. 概要 (1-2文で)  \nRuby 4.1.0dev 以降で非推奨となる「モジュール内での `alias` が暗黙に `Object` を参照する」パターンを、Active Model 8.1 系で解消するバックポートです。`alias` 使用箇所を明示的なメソッド定義に置き換えることで、Ruby 4.3 で `NameError` になる将来の問題を事前に防ぎ、同時に API ドキュメントにもメソッドが適切に掲載されるようにしています。"
+    },
+    {
+      "number": 58832,
+      "title": "Restore integer bounds from JSON schema cache {#pr-58832}",
+      "url": "https://github.com/rails/rails/pull/58832",
+      "mergedAt": "2026-09-21T00:00:00.000Z",
+      "author": "luizkowalski",
+      "authorUrl": "https://github.com/luizkowalski",
+      "summary": "1. 概要 (1-2文で)  \nJSON スキーマキャッシュ経由で読み込まれた `ActiveModel::Type::Integer` が、`min`/`max` の境界値を持たないまま freeze されてしまい、fixture ロード時に `FrozenError` が発生する問題を修正した PRです。JSON から復元する際に `Integer` 型の最小値・最大値を再設定することで、シリアライズ時にエラーにならないようにしています。"
+    },
+    {
+      "number": 58783,
+      "title": "Avoid materializing `descendants` when resolving an STI subclass {#pr-58783}",
+      "url": "https://github.com/rails/rails/pull/58783",
+      "mergedAt": "2026-09-21T00:00:00.000Z",
+      "author": "stahor",
+      "authorUrl": "https://github.com/stahor",
+      "summary": "1. 概要 (1-2文で)  \nSingle Table Inheritance(STI) のサブクラス解決時に `descendants.include?(subclass)` を使っていたチェックを、`subclass <= self` に置き換えることで、STI モデルのインスタンス生成コスト（CPU時間・メモリ割り当て）を大幅に削減した変更です。挙動は変えずに、STI クラス解決のガードロジックだけを高速化しています。"
+    },
     {
       "number": 58817,
       "title": "Avoid aliasing `Kernel#respond_to?` in `ActiveModel::AttributeMethods` {#pr-58817}",
@@ -406,51 +451,6 @@
       "author": "flavorjones",
       "authorUrl": "https://github.com/flavorjones",
       "summary": "1. 概要 (1-2文で)  \nActive Storage が libvips/ruby-vips のセキュリティ設定 (`Vips.block_untrusted(true)`) を「常にブート時に行う」一方で、「実際に libvips を使う場合にだけエラーを投げる」ように挙動を変更し、`:mini_magick` 利用アプリが古い libvips 環境でもブートできるようにした PR です。  \nこれにより、vips を使わないアプリは libvips が「unsecurable（安全に設定できない）」であっても起動可能となり、vips を使うアプリだけが安全でない環境を検出して落ちるようになります。"
-    },
-    {
-      "number": 58747,
-      "title": "Make finder_needs_type_condition? ractor safe {#pr-58747}",
-      "url": "https://github.com/rails/rails/pull/58747",
-      "mergedAt": "2026-09-11T00:00:00.000Z",
-      "author": "gmcgibbon",
-      "authorUrl": "https://github.com/gmcgibbon",
-      "summary": "1. 概要 (1-2文で)  \n`ActiveRecord::Base.finder_needs_type_condition?` の実装を、マルチ Ractor（特に main 以外の Ractor）でも正しく動作するように変更し、メモ化の計算を常に main Ractor に委譲するようにした PRです。これにより、Ractor 環境下でも継承を伴う finder の挙動が安全・一貫して利用できます。"
-    },
-    {
-      "number": 58710,
-      "title": "Share the time zone caches with Ractor workers {#pr-58710}",
-      "url": "https://github.com/rails/rails/pull/58710",
-      "mergedAt": "2026-09-11T00:00:00.000Z",
-      "author": "etiennebarrie",
-      "authorUrl": "https://github.com/etiennebarrie",
-      "summary": "1. 概要 (1-2文で)  \nRactor 化された Rails アプリケーションでも `ActiveSupport::TimeZone` を安全に共有・参照できるように、タイムゾーン関連キャッシュを eager-load し、Ractor 共有可能な構造（凍結された Hash）に変更した PR です。これにより Ractor ワーカーからもタイムゾーン情報にアクセス可能になりますが、Ractor 化時のブートに ~200ms のオーバーヘッドが追加されます。"
-    },
-    {
-      "number": 53403,
-      "title": "Include default headers in ActionController::Live responses. {#pr-53403}",
-      "url": "https://github.com/rails/rails/pull/53403",
-      "mergedAt": "2026-09-11T00:00:00.000Z",
-      "author": "afn",
-      "authorUrl": "https://github.com/afn",
-      "summary": "1. 概要 (1-2文で)  \nActionController::Live でストリーミングレスポンスを返す際にも、通常のコントローラレスポンスと同じ「デフォルトヘッダ」が確実に付与されるようにした修正です。これにより、Live レスポンスだけヘッダが欠けるという不整合バグ (#53402) が解消されました。"
-    },
-    {
-      "number": 58735,
-      "title": "Move timestamp_attributes_for into SchemaContext {#pr-58735}",
-      "url": "https://github.com/rails/rails/pull/58735",
-      "mergedAt": "2026-09-11T00:00:00.000Z",
-      "author": "hmcguire-shopify",
-      "authorUrl": "https://github.com/hmcguire-shopify",
-      "summary": "1. 概要 (1-2文で)  \n`created_at` / `updated_at` などのタイムスタンプ属性の決定ロジックを、遅延評価から「スキーマ読み込み時に確定する」形に変更し、その処理場所を `SchemaContext` に移動した PRです。これにより Ractor 環境でも、メイン Ractor でスキーマがロードされていれば他 Ractor から安全にタイムスタンプ属性を利用できるようになります。"
-    },
-    {
-      "number": 58668,
-      "title": "Introduce CoW when adding Active Record reflections {#pr-58668}",
-      "url": "https://github.com/rails/rails/pull/58668",
-      "mergedAt": "2026-09-10T00:00:00.000Z",
-      "author": "Edouard-chin",
-      "authorUrl": "https://github.com/Edouard-chin",
-      "summary": "1. 概要 (1–2文で)\n- Active Record のリフレクション（関連付け情報）を Copy-on-Write (CoW) / deep freeze することで、Ractor 内から `Post.find`, `Post.where` などを安全に実行できるようにする変更です。  \n- リフレクションキャッシュを凍結するために、各種メモ化を事前に評価しつつ、Ractor セーフな形でキャッシュを扱うように内部実装が見直されています。"
     }
   ]
 }
