@@ -1,7 +1,25 @@
 {
-  "lastUpdated": "2026-09-23T00:12:00.875Z",
+  "lastUpdated": "2026-09-24T00:11:13.839Z",
   "totalCount": 50,
   "items": [
+    {
+      "number": 58829,
+      "title": "Use standard input for MySQL `db:schema:load` {#pr-58829}",
+      "url": "https://github.com/rails/rails/pull/58829",
+      "mergedAt": "2026-09-23T00:00:00.000Z",
+      "author": "yahonda",
+      "authorUrl": "https://github.com/yahonda",
+      "summary": "1. 概要 (1-2文で)  \nMySQL 向け `db:schema:load`（`schema_format = :sql`）で、`mysql --execute \"SOURCE ...\" ` を使う方式をやめ、構造 SQL を標準入力から流し込む方式に変更した PRです。これにより、MySQL 9.4+ などで導入された `--commands` オプションのデフォルト設定に影響されず、最新クライアントでも `db:schema:load` が失敗しなくなります。"
+    },
+    {
+      "number": 58828,
+      "title": "Drop the explicit SET FOREIGN_KEY_CHECKS statements from MySQL `db:schema:load` {#pr-58828}",
+      "url": "https://github.com/rails/rails/pull/58828",
+      "mergedAt": "2026-09-23T00:00:00.000Z",
+      "author": "yahonda",
+      "authorUrl": "https://github.com/yahonda",
+      "summary": "1. 概要 (1–2文で)  \nMySQL用の `db:schema:load`（正確には `structure_load`）処理から、Rails側で明示的に送っていた `SET FOREIGN_KEY_CHECKS = 0/1` を削除し、`mysqldump` / `mariadb-dump` が出力するスキーマファイル内の設定に依存するように変更したPRです。これに伴い、ダンプファイル側に外部キー制約チェックのON/OFFが含まれていることを保証するためのテストと、カスタマイズ方法のドキュメントが追加されています。"
+    },
     {
       "number": 58800,
       "title": "Fix #48375: Server-Timing double-counting of nested same-name events {#pr-58800}",
@@ -433,24 +451,6 @@
       "author": "amaksimo",
       "authorUrl": "https://github.com/amaksimo",
       "summary": "1. 概要 (1-2文で)  \nPostgreSQLで「カバリングインデックス付きの主キー」がある場合に、Active Record が主キー列を誤って認識してしまう不具合を修正するPRです。`pg_index.indkey`ではなく、主キー制約の正しい列リストである`pg_constraint.conkey`を用いることで、主キー列とINCLUDEされた列を区別できるようにしています。"
-    },
-    {
-      "number": 58754,
-      "title": "to_markdown code/pre content escapes its delimiter (stored XSS) {#pr-58754}",
-      "url": "https://github.com/rails/rails/pull/58754",
-      "mergedAt": "2026-09-12T00:00:00.000Z",
-      "author": "flavorjones",
-      "authorUrl": "https://github.com/flavorjones",
-      "summary": "1. 概要 (1-2文で)  \nAction Text の `to_markdown` 変換処理において、`<code>`/`<pre>` 内のテキストが Markdown のデリミタ（バッククォートやフェンス）から「はみ出す」ことで、`javascript:` リンクなどを Markdown ソースとしてそのまま出力できてしまう stored XSS 脆弱性を修正した PRです。  \nデリミタが必ず有効な形で Markdown レンダラに渡されるよう、`code`/`pre` の扱いとコンテナ要素の行構成ロジックが見直されています。"
-    },
-    {
-      "number": 58753,
-      "title": "Action View test stubs Rails.root and breaks main {#pr-58753}",
-      "url": "https://github.com/rails/rails/pull/58753",
-      "mergedAt": "2026-09-12T00:00:00.000Z",
-      "author": "flavorjones",
-      "authorUrl": "https://github.com/flavorjones",
-      "summary": "1. 概要 (1-2文で)  \nこのPRは、Action View のテストで `Rails.root` を stub しようとして失敗していた問題を修正し、`main` ブランチのテストを再び通るようにするものです。`Rails.root` への依存を排除し、すでに導入済みの `StructuredEventSubscriber.rails_root` を用いる形にテストを整理しています。"
     }
   ]
 }
