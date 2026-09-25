@@ -1,7 +1,34 @@
 {
-  "lastUpdated": "2026-09-24T00:11:13.839Z",
+  "lastUpdated": "2026-09-25T00:12:15.451Z",
   "totalCount": 50,
   "items": [
+    {
+      "number": 58863,
+      "title": "Add Manitoba time zone mapping {#pr-58863}",
+      "url": "https://github.com/rails/rails/pull/58863",
+      "mergedAt": "2026-09-24T00:00:00.000Z",
+      "author": "dawilliams929",
+      "authorUrl": "https://github.com/dawilliams929",
+      "summary": "1. 概要 (1-2文で)  \nRails のタイムゾーンマッピングに「Manitoba」を追加し、`America/Winnipeg` に対応付ける変更です。これにより、従来 `Central Time (US & Canada)` をマニトバ州の代理として使っていた場合に冬時間で1時間ずれる問題を防ぎます。"
+    },
+    {
+      "number": 58854,
+      "title": "Fix non-ASCII strict locals defaults in ASCII-only templates {#pr-58854}",
+      "url": "https://github.com/rails/rails/pull/58854",
+      "mergedAt": "2026-09-24T00:00:00.000Z",
+      "author": "carlosdanielpohlod",
+      "authorUrl": "https://github.com/carlosdanielpohlod",
+      "summary": "1. 概要 (1-2文で)  \nERB テンプレートの `locals:` マジックコメントで非ASCII文字(例: `\"café\"`)をデフォルト値に指定し、テンプレート本体が ASCII のみの場合に文字化けしていたバグを修正した PRです。テンプレートのコンパイル結果のエンコーディング処理を見直し、magic comment の非ASCIIデフォルト値が正しく UTF-8 として扱われるようにしています。"
+    },
+    {
+      "number": 58721,
+      "title": "Add a framework default to compile HTML+ERB templates through Herb {#pr-58721}",
+      "url": "https://github.com/rails/rails/pull/58721",
+      "mergedAt": "2026-09-24T00:00:00.000Z",
+      "author": "marcoroth",
+      "authorUrl": "https://github.com/marcoroth",
+      "summary": "1. 概要 (1–2文で)\nRails 8.2のフレームワークデフォルトとして、HTML+ERBテンプレートを新しいERB実装「Herb」でコンパイルする設定が追加されました。HTML以外のフォーマット（text, js など）は従来どおり Erubi が使われ、既存アプリは設定で簡単に従来動作へ戻せます。"
+    },
     {
       "number": 58829,
       "title": "Use standard input for MySQL `db:schema:load` {#pr-58829}",
@@ -424,33 +451,6 @@
       "author": "dersam",
       "authorUrl": "https://github.com/dersam",
       "summary": "1. 概要 (1-2文で)  \nTime.rfc3339 のドキュメントに記載されていた使用例が、実際の戻り値と一致していなかったため、それを正しい例に修正した PR です。コードの挙動そのものは変わらず、コメント／ドキュメントの整合性を取るだけの変更です。\n\n2. 変更内容の詳細  \n\n- 対象ファイル: `activesupport/lib/active_support/core_ext/time/calculations.rb`\n- 変更内容: `Time.rfc3339` メソッドのドキュメントコメント内にあるサンプルコードの出力例を 1 行だけ修正。\n\nPR 説明にある通り、実際には:\n\n```ruby\nTime.rfc3339('1999-12-31T14:00:00-10:00')\n# => 1999-12-31 14:00:00 -1000\n```\n\nという結果になりますが、ドキュメント内のサンプルがこの実際の出力と食い違っていました。  \n今回の修正では、この「入力した RFC3339 文字列に対応する Time オブジェクトの出力表示」を、実行結果と一致する形に直しています。\n\n実装ロジック（パース処理やタイムゾーン計算）はまったく変更されていません。あくまで「コメント上の例示の戻り値」を 1 行書き換えただけです。\n\n3. 影響範囲・注意点  \n\n- 影響範囲:\n  - ランタイムの挙動（Time.rfc3339 の動き）には一切変更なし。\n  - ドキュメント生成（RDoc / API ドキュメント閲覧時）の表示が正しくなるだけです。\n- 注意点:\n  - これまで古いドキュメント例を見てテストや他のドキュメントを書いていた場合、その例が実際の挙動と食い違っている可能性があります。  \n    → 自前ドキュメントや README などに Time.rfc3339 の出力例をコピペしている場合は、実行結果と合っているかを確認するとよいです。\n\n4. 参考情報 (あれば)  \n\n- Ruby 標準ライブラリの Time と RFC3339:\n  - `Time.rfc3339(str)` は RFC3339 形式 (`YYYY-MM-DDTHH:MM:SS±HH:MM` など) の文字列を Time オブジェクトに変換するユーティリティです。\n  - 例: `Time.rfc3339(\"2024-01-01T00:00:00Z\") #=> 2024-01-01 00:00:00 UTC`  \n- Rails 側では ActiveSupport が Time 拡張を提供していますが、この PR はその拡張ロジックではなく、あくまでその「説明用コメント」の修正のみです。"
-    },
-    {
-      "number": 58759,
-      "title": "Enable `Layout/BlockAlignment` {#pr-58759}",
-      "url": "https://github.com/rails/rails/pull/58759",
-      "mergedAt": "2026-09-13T00:00:00.000Z",
-      "author": "kamipo",
-      "authorUrl": "https://github.com/kamipo",
-      "summary": "1. 概要 (1-2文で)  \n`Layout/BlockAlignment` Cop を RuboCop 設定で有効化し、それにより検出されるブロックのインデントずれを Rails 本体・テストコード・ガイド内で一括修正した PR です。  \n従来は `Layout/IndentationWidth` では検知できなかった「ブロック開始行に対する相対インデントのずれ」を検出・是正できるようにしています。"
-    },
-    {
-      "number": 58377,
-      "title": "Introduce `config.active_storage.draw_direct_upload_route` {#pr-58377}",
-      "url": "https://github.com/rails/rails/pull/58377",
-      "mergedAt": "2026-09-13T00:00:00.000Z",
-      "author": "codergeek121",
-      "authorUrl": "https://github.com/codergeek121",
-      "summary": "1. 概要 (1-2文で)  \nRails の Active Storage に `config.active_storage.draw_direct_upload_route` という新しい設定が追加され、Active Storage 自体は有効のまま「直接アップロード用のルート（`/rails/active_storage/direct_uploads`）」だけを無効化できるようになりました。これに合わせて Action Text 側の JavaScript・ヘルパーもこの設定を尊重するように更新され、ガイドやテストが整備されています。"
-    },
-    {
-      "number": 58555,
-      "title": "Fix PostgreSQL primary key introspection for covering indexes {#pr-58555}",
-      "url": "https://github.com/rails/rails/pull/58555",
-      "mergedAt": "2026-09-13T00:00:00.000Z",
-      "author": "amaksimo",
-      "authorUrl": "https://github.com/amaksimo",
-      "summary": "1. 概要 (1-2文で)  \nPostgreSQLで「カバリングインデックス付きの主キー」がある場合に、Active Record が主キー列を誤って認識してしまう不具合を修正するPRです。`pg_index.indkey`ではなく、主キー制約の正しい列リストである`pg_constraint.conkey`を用いることで、主キー列とINCLUDEされた列を区別できるようにしています。"
     }
   ]
 }
