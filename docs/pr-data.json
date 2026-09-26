@@ -1,7 +1,115 @@
 {
-  "lastUpdated": "2026-09-25T00:12:15.451Z",
+  "lastUpdated": "2026-09-26T00:15:25.245Z",
   "totalCount": 50,
   "items": [
+    {
+      "number": 58819,
+      "title": "Improve headings in Guides Guidelines guide. {#pr-58819}",
+      "url": "https://github.com/rails/rails/pull/58819",
+      "mergedAt": "2026-09-25T00:00:00.000Z",
+      "author": "p8",
+      "authorUrl": "https://github.com/p8",
+      "summary": "1. 概要 (1-2文で)  \nこのPRは、Railsガイド「Guides Guidelines」ドキュメント内の見出しレベルと行折り(行幅)のルールを整理・統一したものです。ガイド内で `h2` 見出しを使う箇所を限定しつつ、テキストを80カラムで折り返すように編集しています。"
+    },
+    {
+      "number": 58165,
+      "title": "[RF-DOCS] Update the JavaScript in Rails guide {#pr-58165}",
+      "url": "https://github.com/rails/rails/pull/58165",
+      "mergedAt": "2026-09-25T00:00:00.000Z",
+      "author": "ayushn21",
+      "authorUrl": "https://github.com/ayushn21",
+      "summary": "1. 概要 (1-2文で)  \n「Working with JavaScript in Rails」ガイドを大幅に書き換え、Importmap と JavaScript バンドラの位置づけ整理、Hotwire（Turbo / Stimulus）の詳説、`request.js` の紹介など、現行 Rails に即した JavaScript 周りの公式ドキュメントをアップデートした PRです。従来よりも構成を整理し、実際の選択・導入・連携方法の理解がしやすくなる内容になっています。"
+    },
+    {
+      "number": 57573,
+      "title": "[RF-DOCS] Update the guide for using Rails as an API {#pr-57573}",
+      "url": "https://github.com/rails/rails/pull/57573",
+      "mergedAt": "2026-09-25T00:00:00.000Z",
+      "author": "ayushn21",
+      "authorUrl": "https://github.com/ayushn21",
+      "summary": "1. 概要 (1–2文で)  \nRails Guides の「Rails を API として使う」ガイドが、ステップバイステップのチュートリアル寄りな構成から、より一般的で最新の情報に沿ったリファレンス的な内容へ整理・改訂されました。あわせて JBuilder / Builder や XML レスポンス、Rack ミドルウェア・ActionController モジュールに関する説明が追補・更新されています。"
+    },
+    {
+      "number": 58879,
+      "title": "Skip the real structure dump test when MySQL's mysqldump targets MariaDB {#pr-58879}",
+      "url": "https://github.com/rails/rails/pull/58879",
+      "mergedAt": "2026-09-25T00:00:00.000Z",
+      "author": "yahonda",
+      "authorUrl": "https://github.com/yahonda",
+      "summary": "1. 概要 (1-2文で)  \nMySQL クライアントの `mysqldump` で MariaDB サーバーに対して実行すると失敗するテスト `test_structure_dump_output_disables_foreign_key_checks` を、該当環境ではスキップするように変更した PRです。これにより、Rails nightly の MariaDB ジョブが MySQL 8.0 クライアントとの組み合わせで落ちる問題を回避します。"
+    },
+    {
+      "number": 58263,
+      "title": "[RF-DOCS] Rewrite the debugging guide {#pr-58263}",
+      "url": "https://github.com/rails/rails/pull/58263",
+      "mergedAt": "2026-09-25T00:00:00.000Z",
+      "author": "ayushn21",
+      "authorUrl": "https://github.com/ayushn21",
+      "summary": "1. 概要 (1–2文で)  \nRailsガイド「Debugging Rails Applications」がほぼ全面的に書き換えられ、`debug` gem を中心にした現代的・実践的なデバッグフローに合わせて再構成されました。ビュー用ヘルパやログ、リモートデバッグ、メモリリークなどの章立ても整理され、古い／重複した情報が削除・置き換えられています。"
+    },
+    {
+      "number": 57348,
+      "title": "[RF-Docs] [ci-skip] Update Active Record Composite Primary Keys Guide  {#pr-57348}",
+      "url": "https://github.com/rails/rails/pull/57348",
+      "mergedAt": "2026-09-25T00:00:00.000Z",
+      "author": "bhumi1102",
+      "authorUrl": "https://github.com/bhumi1102",
+      "summary": "1. 概要 (1–2文で)  \nActive Record の「複合主キー」ガイド (Active Record Composite Primary Keys Guide) を全面的に更新し、コード例や説明を大幅に追加したドキュメント改善の PR です。Rails Foundation のドキュメンテーションプロジェクトの一環であり、実装そのものではなくガイドの内容を最新かつ実践的にすることが目的です。"
+    },
+    {
+      "number": 58855,
+      "title": "Drop needless schema qualification from db/schema.rb on PostgreSQL {#pr-58855}",
+      "url": "https://github.com/rails/rails/pull/58855",
+      "mergedAt": "2026-09-25T00:00:00.000Z",
+      "author": "yahonda",
+      "authorUrl": "https://github.com/yahonda",
+      "summary": "1. 概要 (1-2文で)  \nPostgreSQL 環境で生成される `db/schema.rb` から「不要なスキーマ修飾」を取り除き、拡張機能やテーブル/enum 名に余計な `public.` や `tiger.` などを付けないようにした PR です。これにより、Rails 8.0 相当のシンプルな出力形式に戻しつつ、複数スキーマ利用時でも新規DBへのロードが失敗しにくくなります。"
+    },
+    {
+      "number": 58875,
+      "title": "Schema-qualify the regclass cast in check_all_foreign_keys_valid! {#pr-58875}",
+      "url": "https://github.com/rails/rails/pull/58875",
+      "mergedAt": "2026-09-25T00:00:00.000Z",
+      "author": "sedubois",
+      "authorUrl": "https://github.com/sedubois",
+      "summary": "1. 概要 (1-2文で)  \nRails 8.1.4 で導入された `check_all_foreign_keys_valid!` のバグにより、PostgreSQL (&lt; 18.4) 環境でスキーマ付きテーブルの外部キー検証が失敗またはすり抜ける問題を、`regclass` キャスト時にスキーマを明示することで修正する PR です。フィクスチャ読み込み時の `PG::UndefinedTable` や、別スキーマの外部キー違反の見逃しを防ぎます。"
+    },
+    {
+      "number": 58873,
+      "title": "Fix typos in Layouts and Rendering guide [ci skip] {#pr-58873}",
+      "url": "https://github.com/rails/rails/pull/58873",
+      "mergedAt": "2026-09-25T00:00:00.000Z",
+      "author": "bastin27",
+      "authorUrl": "https://github.com/bastin27",
+      "summary": "1. 概要 (1-2文で)  \nLayouts and Rendering ガイド (`guides/source/layouts_and_rendering.md`) に含まれていたスペルミスを修正する、ドキュメントのみの変更です。アプリケーションコードや挙動には一切影響しません。\n\n2. 変更内容の詳細(あればサンプルコードも含めて)  \n対象: `guides/source/layouts_and_rendering.md` のみ（+8 / -8 行）\n\n修正されたスペルミス:\n- セクション見出し  \n  - `Hierarcy` → `Hierarchy`  \n    - レイアウトやテンプレートの「階層構造」を説明するセクション見出しのタイポ修正。\n- 本文中の単語  \n  - `reponses` → `responses`  \n    - コントローラが返す HTTP レスポンス等を説明している箇所のタイポ修正。\n  - `explicity` / `Explicity` / `Explitly` → `explicitly` / `Explicitly`  \n    - レイアウトやテンプレートを「明示的に」指定する説明で、同じ単語のスペルミスが複数箇所あったものを統一して修正。\n  - `stucturally` → `structurally`  \n    - ビューやレイアウトの構造的な側面を説明している文でのタイポ修正。\n\nいずれも英単語の綴りのみを変更しており、文章の意味やサンプルコードの挙動に変更はありません。\n\n3. 影響範囲・注意点  \n- 影響範囲  \n  - Rails Guides（英語版ドキュメント）の「Layouts and Rendering」ガイドに限定されます。\n  - フレームワーク本体のコード、API、挙動、互換性には一切変更がありません。\n- 注意点  \n  - ドキュメントを引用しているブログ記事・資料などで、古い綴りのまま残っている可能性がありますが、機能的な問題にはなりません。\n  - ガイドを自前で翻訳・ミラーしている場合は、該当ファイルの差分を取り込むことで誤記を解消できます。\n\n4. 参考情報 (あれば)  \n- PR: https://github.com/rails/rails/pull/58873  \n- Rails ドキュメント貢献ガイド:  \n  https://edgeguides.rubyonrails.org/contributing_to_ruby_on_rails.html#contributing-to-the-rails-documentation  \n- 対象ガイド (edge guides):  \n  https://edgeguides.rubyonrails.org/layouts_and_rendering.html"
+    },
+    {
+      "number": 58872,
+      "title": "Fix BigInteger casting truncating strings to 16 bytes {#pr-58872}",
+      "url": "https://github.com/rails/rails/pull/58872",
+      "mergedAt": "2026-09-25T00:00:00.000Z",
+      "author": "SulimanAbdulrazzaq",
+      "authorUrl": "https://github.com/SulimanAbdulrazzaq",
+      "summary": "1. 概要 (1-2文で)  \nBigInteger と scale なし decimal カラムに対する文字列 → 整数キャスト時に、先頭 16 バイトで暗黙に切り捨てられていたバグを修正する PR です。`Integer` のバイト数上限の考え方を整理しつつ、`BigInteger` では精度（precision）に応じたより妥当な上限を使うように変更しています。"
+    },
+    {
+      "number": 58306,
+      "title": "Active Record Ractor-friendly connection handling {#pr-58306}",
+      "url": "https://github.com/rails/rails/pull/58306",
+      "mergedAt": "2026-09-25T00:00:00.000Z",
+      "author": "gmcgibbon",
+      "authorUrl": "https://github.com/gmcgibbon",
+      "summary": "1. 概要 (1-2文で)  \nこのPRは、Rails を Ractor 化した際に「メイン Ractor 以外から Active Record のクエリを実行できるようにする」ためのコネクションハンドリングを導入するものです。非 Ractor 化アプリには挙動変更を与えず、非メイン Ractor でのクエリはすべてメイン Ractor にディスパッチして実行されます。"
+    },
+    {
+      "number": 58874,
+      "title": "Manually specify security validator in herb checker {#pr-58874}",
+      "url": "https://github.com/rails/rails/pull/58874",
+      "mergedAt": "2026-09-25T00:00:00.000Z",
+      "author": "gmcgibbon",
+      "authorUrl": "https://github.com/gmcgibbon",
+      "summary": "1. 概要 (1-2文で)  \nHerb 0.11 から「セキュリティバリデータ」がデフォルトで使われなくなったため、Rails 側で明示的に security validator を指定するようにした PRです。これにより、使用する Herb のバージョンにかかわらず、Herb チェッカーの挙動を一貫してセキュアなものに保ちます。"
+    },
     {
       "number": 58863,
       "title": "Add Manitoba time zone mapping {#pr-58863}",
@@ -343,114 +451,6 @@
       "author": "dersam",
       "authorUrl": "https://github.com/dersam",
       "summary": "1. 概要 (1-2文で)  \nこのPRは、Active Support Core Extensionsガイドから、すでに存在しない「Time が範囲外になったときに DateTime にフォールバックする」という挙動を説明していた古い記述を削除するものです。実装としては何も変わらず、ドキュメントの整合性を取るための変更です。"
-    },
-    {
-      "number": 58777,
-      "title": "File.atomic_write: close the temp file before renaming it {#pr-58777}",
-      "url": "https://github.com/rails/rails/pull/58777",
-      "mergedAt": "2026-09-15T00:00:00.000Z",
-      "author": "americodls",
-      "authorUrl": "https://github.com/americodls",
-      "summary": "1. 概要 (1-2文で)  \n`File.atomic_write` が一時ファイルを「開いたままリネーム」していたため、リネーム直後に中身が空のファイルが現れる問題を修正し、「一時ファイルを close してから rename する」ようにした PR です。これにより、atomic_write の宛先ファイルは生成された瞬間から正しい内容を持つことが保証されます。"
-    },
-    {
-      "number": 58770,
-      "title": "Add `herb:check` task to verify Herb compatibility {#pr-58770}",
-      "url": "https://github.com/rails/rails/pull/58770",
-      "mergedAt": "2026-09-15T00:00:00.000Z",
-      "author": "marcoroth",
-      "authorUrl": "https://github.com/marcoroth",
-      "summary": "1. 概要 (1-2文で)  \nこのPRでは、HTML+ERBテンプレートが新しいERB実装「Herb」に対応できるか事前チェックするための `bin/rails herb:check` タスクと、その裏側の `ActionView::HerbChecker` が追加されています。アプリ全体のテンプレートを一括コンパイルしてエラーを検出し、ビルドを落とせるようにすることで、Herb への移行を安全に行えるようにします。"
-    },
-    {
-      "number": 58725,
-      "title": "Pass Trilogy's SSL configuration to the mysql and mysqldump commands {#pr-58725}",
-      "url": "https://github.com/rails/rails/pull/58725",
-      "mergedAt": "2026-09-15T00:00:00.000Z",
-      "author": "ngan",
-      "authorUrl": "https://github.com/ngan",
-      "summary": "1. 概要 (1-2文で)  \nTrilogy アダプタ使用時に、`dbconsole` や `db:structure:dump` / `db:structure:load` が MySQL クライアント (`mysql`, `mysqldump`) へ正しく SSL オプションを渡していなかった問題を修正し、接続と同じ SSL 設定が CLI コマンドにも反映されるようにした PRです。SSL 設定のキー名の違い（`ssl_ca` vs `sslca` など）を吸収する共通マッピングを導入し、Trilogy 固有の SSL オプションにも対応しています。"
-    },
-    {
-      "number": 58726,
-      "title": "Filter the database password out of failed database task commands {#pr-58726}",
-      "url": "https://github.com/rails/rails/pull/58726",
-      "mergedAt": "2026-09-15T00:00:00.000Z",
-      "author": "ngan",
-      "authorUrl": "https://github.com/ngan",
-      "summary": "1. 概要 (1-2文で)  \nRails の DB タスクが失敗した際に表示されるコマンド文字列から、`--password=<値>` という形のパスワードを `[FILTERED]` にマスクする変更です。主に MySQL 系アダプタ（mysql2 / Trilogy）の `structure_dump` / `structure_load` 実行失敗時に、CI ログや標準出力へ DB パスワードが漏洩することを防ぎます。"
-    },
-    {
-      "number": 58714,
-      "title": "Fix keepalive: false being ignored in database.yml {#pr-58714}",
-      "url": "https://github.com/rails/rails/pull/58714",
-      "mergedAt": "2026-09-15T00:00:00.000Z",
-      "author": "joemsak",
-      "authorUrl": "https://github.com/joemsak",
-      "summary": "1. 概要 (1-2文で)  \n`database.yml` で `keepalive: false` を指定しても無視され、デフォルトの 600 秒が適用されていたバグを修正した PR です。`keepalive` の値が「未指定」「false」「0」などの場合の挙動を正しく区別するようにし、その動作をテストで保証しています。"
-    },
-    {
-      "number": 58716,
-      "title": "Bound background-maintenance checkout wait to checkout_timeout {#pr-58716}",
-      "url": "https://github.com/rails/rails/pull/58716",
-      "mergedAt": "2026-09-15T00:00:00.000Z",
-      "author": "joemsak",
-      "authorUrl": "https://github.com/joemsak",
-      "summary": "1. 概要 (1-2文で)  \nRails のコネクションプールが「バックグラウンドメンテナンス中のコネクション待ち」の際に、プール設定の `checkout_timeout` を無視して最大 100 秒まで待ってしまう不具合を修正し、`checkout_timeout` の値で待ち時間を正しく制限するようにした PR です。これにより、メンテナンス中のコネクションによりスレッドが長時間ハングする問題が解消されます。"
-    },
-    {
-      "number": 58720,
-      "title": "Preserve read_multi key order when local cache is active {#pr-58720}",
-      "url": "https://github.com/rails/rails/pull/58720",
-      "mergedAt": "2026-09-15T00:00:00.000Z",
-      "author": "carlosdanielpohlod",
-      "authorUrl": "https://github.com/carlosdanielpohlod",
-      "summary": "1. 概要 (1-2文で)  \n`with_local_cache` ブロック内で `read_multi` を呼び出した際、返却されるハッシュのキー順が引数の順序どおりになるように修正した PR です。`fetch_multi` では既に修正済みだった挙動を `read_multi` にも揃えるバグフィックスです。"
-    },
-    {
-      "number": 58663,
-      "title": "LazyAttributeSet: Use a mutable indexed row for casted values {#pr-58663}",
-      "url": "https://github.com/rails/rails/pull/58663",
-      "mergedAt": "2026-09-15T00:00:00.000Z",
-      "author": "byroot",
-      "authorUrl": "https://github.com/byroot",
-      "summary": "1. 概要 (1–2文で)  \n`LazyAttributeSet` が属性値のキャスト済み値 (`@casted_values`) を保持するときに、`Hash` ではなく `IndexedRow` ベースの「インデックス付き・可変な行」を使うようにしてメモリ効率とパフォーマンスを改善する変更です。主に Active Record のクエリ結果・関連のプリロード周りで `IndexedRow` の活用範囲が広がっています。"
-    },
-    {
-      "number": 58740,
-      "title": "Fix docker-entrypoint to detect bin/rails server behind Thruster too {#pr-58740}",
-      "url": "https://github.com/rails/rails/pull/58740",
-      "mergedAt": "2026-09-15T00:00:00.000Z",
-      "author": "iamdipak39p",
-      "authorUrl": "https://github.com/iamdipak39p",
-      "summary": "1. 概要 (1-2文で)  \nRails が生成する Docker 用エントリポイントスクリプト（`bin/docker-entrypoint`）で、`bin/rails server` 実行時に `db:prepare` を自動実行する判定ロジックを修正し、Thruster 経由 (`./bin/thrust ./bin/rails server`) でも正しく動くようになりました。  \n引数の「先頭2つ」または「末尾2つ」の固定位置チェックをやめ、引数全体から `./bin/rails` と `server` の組み合わせを検出する方式に変更しています。"
-    },
-    {
-      "number": 58727,
-      "title": "Fix the debug error page for SyntaxErrors with multi-line messages {#pr-58727}",
-      "url": "https://github.com/rails/rails/pull/58727",
-      "mergedAt": "2026-09-15T00:00:00.000Z",
-      "author": "marcoroth",
-      "authorUrl": "https://github.com/marcoroth",
-      "summary": "1. 概要 (1-2文で)  \n開発環境のデバッグエラーページが、複数行メッセージを持つ `SyntaxError` で壊れて 500 公開エラーページにフォールバックしてしまう不具合を修正したPRです。  \n`SyntaxError` メッセージのうち実際のスタックトレース行だけを抽出するようにし、かつエラーページでのソースコード抽出時に「ディレクトリをファイルとして読む」ケースを防いでいます。"
-    },
-    {
-      "number": 58764,
-      "title": "Make ActiveJob Ractor-safe {#pr-58764}",
-      "url": "https://github.com/rails/rails/pull/58764",
-      "mergedAt": "2026-09-15T00:00:00.000Z",
-      "author": "etiennebarrie",
-      "authorUrl": "https://github.com/etiennebarrie",
-      "summary": "1. 概要 (1-2文で)  \nこのPRは、Active Job を Ractor（Ruby 3 の並列実行機構）内から安全に enqueue できるようにするための対応です。主にクラスレベルの設定の持ち方を Ractor 共有可能な形に改め、`ractorize!` 実行時に queue adapter が shareable になるようにしています。"
-    },
-    {
-      "number": 58765,
-      "title": "[ci skip] Correct the Time.rfc3339 documentation example {#pr-58765}",
-      "url": "https://github.com/rails/rails/pull/58765",
-      "mergedAt": "2026-09-15T00:00:00.000Z",
-      "author": "dersam",
-      "authorUrl": "https://github.com/dersam",
-      "summary": "1. 概要 (1-2文で)  \nTime.rfc3339 のドキュメントに記載されていた使用例が、実際の戻り値と一致していなかったため、それを正しい例に修正した PR です。コードの挙動そのものは変わらず、コメント／ドキュメントの整合性を取るだけの変更です。\n\n2. 変更内容の詳細  \n\n- 対象ファイル: `activesupport/lib/active_support/core_ext/time/calculations.rb`\n- 変更内容: `Time.rfc3339` メソッドのドキュメントコメント内にあるサンプルコードの出力例を 1 行だけ修正。\n\nPR 説明にある通り、実際には:\n\n```ruby\nTime.rfc3339('1999-12-31T14:00:00-10:00')\n# => 1999-12-31 14:00:00 -1000\n```\n\nという結果になりますが、ドキュメント内のサンプルがこの実際の出力と食い違っていました。  \n今回の修正では、この「入力した RFC3339 文字列に対応する Time オブジェクトの出力表示」を、実行結果と一致する形に直しています。\n\n実装ロジック（パース処理やタイムゾーン計算）はまったく変更されていません。あくまで「コメント上の例示の戻り値」を 1 行書き換えただけです。\n\n3. 影響範囲・注意点  \n\n- 影響範囲:\n  - ランタイムの挙動（Time.rfc3339 の動き）には一切変更なし。\n  - ドキュメント生成（RDoc / API ドキュメント閲覧時）の表示が正しくなるだけです。\n- 注意点:\n  - これまで古いドキュメント例を見てテストや他のドキュメントを書いていた場合、その例が実際の挙動と食い違っている可能性があります。  \n    → 自前ドキュメントや README などに Time.rfc3339 の出力例をコピペしている場合は、実行結果と合っているかを確認するとよいです。\n\n4. 参考情報 (あれば)  \n\n- Ruby 標準ライブラリの Time と RFC3339:\n  - `Time.rfc3339(str)` は RFC3339 形式 (`YYYY-MM-DDTHH:MM:SS±HH:MM` など) の文字列を Time オブジェクトに変換するユーティリティです。\n  - 例: `Time.rfc3339(\"2024-01-01T00:00:00Z\") #=> 2024-01-01 00:00:00 UTC`  \n- Rails 側では ActiveSupport が Time 拡張を提供していますが、この PR はその拡張ロジックではなく、あくまでその「説明用コメント」の修正のみです。"
     }
   ]
 }
