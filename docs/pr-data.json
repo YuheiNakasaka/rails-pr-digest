@@ -1,7 +1,25 @@
 {
-  "lastUpdated": "2026-09-26T00:15:25.245Z",
+  "lastUpdated": "2026-09-27T00:13:59.156Z",
   "totalCount": 50,
   "items": [
+    {
+      "number": 58886,
+      "title": "Fix typos in guides [ci skip] {#pr-58886}",
+      "url": "https://github.com/rails/rails/pull/58886",
+      "mergedAt": "2026-09-26T00:00:00.000Z",
+      "author": "bastin27",
+      "authorUrl": "https://github.com/bastin27",
+      "summary": "1. 概要 (1-2文で)  \nこのPRは、Rails公式ガイド内（Action View Overview、Action Controller Overview、Asset Pipeline）の誤字を修正した、ドキュメント専用の変更です。アプリケーションコードや挙動には一切影響しません。\n\n2. 変更内容の詳細(あればサンプルコードも含めて)  \n- 対象ファイル  \n  - `guides/source/action_view_overview.md`\n  - `guides/source/action_controller_overview.md`\n  - `guides/source/asset_pipeline.md`  \n\n- 内容  \n  - 各ガイド内のスペルミス・タイポを4行分修正（+4 / -4）。  \n  - 修正はあくまで文章上の誤字脱字のみで、サンプルコードやAPIの使い方の変更は含まれていません。  \n  - ガイドの可読性・正確性を高める目的の微修正です。\n\n（PR本文からも「This Pull Request fixes typos…」「Documentation-only change; no code or behavior is affected.」と明示されています）\n\n3. 影響範囲・注意点  \n- 影響範囲  \n  - Railsガイドの文章のみが対象で、フレームワークの本体コード、API仕様、挙動、パフォーマンスには影響しません。  \n  - 既存アプリケーション、テストコードの修正は不要です。  \n\n- 注意点  \n  - ドキュメントを日本語訳しているプロジェクトや社内Wikiなどで、該当ガイドを翻訳・引用している場合は、原文の更新に追随するかどうかを確認するとよいです。  \n  - タイポ修正のみのため、バージョン互換性などを気にする必要はありません。\n\n4. 参考情報 (あれば)  \n- ガイド執筆・修正に関する公式ガイドライン  \n  - https://edgeguides.rubyonrails.org/contributing_to_ruby_on_rails.html#contributing-to-the-rails-documentation  \n- 対象ガイド（Edge Guides版）  \n  - Action Controller Overview: https://edgeguides.rubyonrails.org/action_controller_overview.html  \n  - Action View Overview: https://edgeguides.rubyonrails.org/action_view_overview.html  \n  - Asset Pipeline: https://edgeguides.rubyonrails.org/asset_pipeline.html"
+    },
+    {
+      "number": 58878,
+      "title": "Skip extension member tables, enum types and schemas in the Ruby schema dump {#pr-58878}",
+      "url": "https://github.com/rails/rails/pull/58878",
+      "mergedAt": "2026-09-26T00:00:00.000Z",
+      "author": "yahonda",
+      "authorUrl": "https://github.com/yahonda",
+      "summary": "1. 概要 (1-2文で)  \nPostgreSQL の拡張機能が所有しているテーブル・enum 型・スキーマを、Rails の `db/schema.rb` ダンプから自動的に除外する変更です。これにより、PostGIS や TimescaleDB、Citus などを使う環境でも `schema.rb` のロードがエラーで止まらず、拡張機能は `enable_extension` 経由で正しく再現されます。"
+    },
     {
       "number": 58819,
       "title": "Improve headings in Guides Guidelines guide. {#pr-58819}",
@@ -433,24 +451,6 @@
       "author": "ilianah",
       "authorUrl": "https://github.com/ilianah",
       "summary": "1. 概要 (1-2文で)  \nRails の `SchemaCache` を JSON 形式でダンプ／ロードできる新しいシリアライザが追加され、既存の YAML に比べて約 20 倍以上高速に読み込めるようになりました。ActiveRecord のスキーマキャッシュの内部表現を JSON で安全にシリアライズできるようにするため、型周りを中心に多数のクラスに JSON 対応が入っています。"
-    },
-    {
-      "number": 58751,
-      "title": "Speed up TimeWithZone#xmlschema, #to_s and TimeZone.seconds_to_utc_offset {#pr-58751}",
-      "url": "https://github.com/rails/rails/pull/58751",
-      "mergedAt": "2026-09-16T00:00:00.000Z",
-      "author": "yaroslav",
-      "authorUrl": "https://github.com/yaroslav",
-      "summary": "1. 概要 (1-2文で)  \nTimeWithZone の文字列表現関連メソッドと TimeZone.seconds_to_utc_offset の実装を見直し、同じ出力を維持したままパフォーマンスとメモリ効率を大きく改善する変更です。ActiveSupport 全体で時刻のフォーマットを行う箇所が、少ないオブジェクト確保で数倍高速になります。"
-    },
-    {
-      "number": 58768,
-      "title": "[ci skip] Remove obsolete DateTime fallback notes from core extensions guide {#pr-58768}",
-      "url": "https://github.com/rails/rails/pull/58768",
-      "mergedAt": "2026-09-15T00:00:00.000Z",
-      "author": "dersam",
-      "authorUrl": "https://github.com/dersam",
-      "summary": "1. 概要 (1-2文で)  \nこのPRは、Active Support Core Extensionsガイドから、すでに存在しない「Time が範囲外になったときに DateTime にフォールバックする」という挙動を説明していた古い記述を削除するものです。実装としては何も変わらず、ドキュメントの整合性を取るための変更です。"
     }
   ]
 }
