@@ -1,7 +1,25 @@
 {
-  "lastUpdated": "2026-09-27T00:13:59.156Z",
+  "lastUpdated": "2026-09-28T00:14:11.381Z",
   "totalCount": 50,
   "items": [
+    {
+      "number": 58876,
+      "title": "Fix error matching for validations using except_on {#pr-58876}",
+      "url": "https://github.com/rails/rails/pull/58876",
+      "mergedAt": "2026-09-27T00:00:00.000Z",
+      "author": "afurm",
+      "authorUrl": "https://github.com/afurm",
+      "summary": "1. 概要 (1-2文で)  \n`except_on:` オプション付きバリデーションで、エラーが正しく一致判定されず `errors.details` にも余計な情報が残っていた不具合を修正する PR です。`except_on:` を `on:` などと同様に「コールバック用オプション」として扱うことで、エラー検索・表示が期待通りの挙動になります。"
+    },
+    {
+      "number": 58807,
+      "title": "Treat `false` as disabled for `idle_timeout`, `reaping_frequency` and `max_age` {#pr-58807}",
+      "url": "https://github.com/rails/rails/pull/58807",
+      "mergedAt": "2026-09-27T00:00:00.000Z",
+      "author": "carlosdanielpohlod",
+      "authorUrl": "https://github.com/carlosdanielpohlod",
+      "summary": "1. 概要 (1-2文で)  \nRails の DB 接続設定（`idle_timeout`, `reaping_frequency`, `max_age`）に対して、`database.yml` で `false` を指定した場合に起きていた `NoMethodError` を解消し、`false` を「無効化」、`true` を「デフォルト値を使う」として扱うようにした変更です。これにより、`off`/`no`/`on`/`yes` といった YAML のブール表現でも直感的かつ一貫した設定ができるようになります。"
+    },
     {
       "number": 58886,
       "title": "Fix typos in guides [ci skip] {#pr-58886}",
@@ -433,24 +451,6 @@
       "author": "jhawthorn",
       "authorUrl": "https://github.com/jhawthorn",
       "summary": "1. 概要 (1–2文で)\nRails のテンプレート探索（lookup）周りの実装を見直し、余分なオブジェクト割り当て（allocation）を削減してパフォーマンスを改善する変更です。特に `LookupContext` から `PathSet` にパス正規化処理を移すことでテンプレート検索時の配列生成を避け、部分テンプレート大量レンダリング時のスループットが約 12% 向上しています。"
-    },
-    {
-      "number": 58780,
-      "title": "Skip leaky ractor tests {#pr-58780}",
-      "url": "https://github.com/rails/rails/pull/58780",
-      "mergedAt": "2026-09-16T00:00:00.000Z",
-      "author": "byroot",
-      "authorUrl": "https://github.com/byroot",
-      "summary": "1. 概要 (1-2文で)  \nRactor 内で `require` が呼ばれてしまうテストをスキップすることで、`Kernel#require` をエイリアス／ラップしている Zeitwerk・Bootsnap・Rubygems などとの互換性問題を回避する PR です。Ractor の制約に反する「リーキー」なテストを一時的に無効化し、テスト環境の安定性を優先しています。"
-    },
-    {
-      "number": 58769,
-      "title": "Add JSON schema cache serializer {#pr-58769}",
-      "url": "https://github.com/rails/rails/pull/58769",
-      "mergedAt": "2026-09-16T00:00:00.000Z",
-      "author": "ilianah",
-      "authorUrl": "https://github.com/ilianah",
-      "summary": "1. 概要 (1-2文で)  \nRails の `SchemaCache` を JSON 形式でダンプ／ロードできる新しいシリアライザが追加され、既存の YAML に比べて約 20 倍以上高速に読み込めるようになりました。ActiveRecord のスキーマキャッシュの内部表現を JSON で安全にシリアライズできるようにするため、型周りを中心に多数のクラスに JSON 対応が入っています。"
     }
   ]
 }
