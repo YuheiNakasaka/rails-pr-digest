@@ -1,7 +1,25 @@
 {
-  "lastUpdated": "2026-09-28T00:14:11.381Z",
+  "lastUpdated": "2026-09-29T00:13:08.439Z",
   "totalCount": 50,
   "items": [
+    {
+      "number": 58894,
+      "title": "Share MySQL-specific test schema between mysql2 and trilogy {#pr-58894}",
+      "url": "https://github.com/rails/rails/pull/58894",
+      "mergedAt": "2026-09-28T00:00:00.000Z",
+      "author": "seuros",
+      "authorUrl": "https://github.com/seuros",
+      "summary": "1. 概要 (1-2文で)  \nMySQL系アダプタ（mysql2 と trilogy）のテスト用スキーマ定義を1つのファイルに統合し、重複とドリフト（内容のズレ）を防ぐ変更です。trilogy 専用のスキーマファイルを削除し、mysql2 用と共通の `mysql_specific_schema.rb` を両方のアダプタで読み込むようにしています。"
+    },
+    {
+      "number": 58884,
+      "title": "Fix the Trilogy migration_strategy example in the migrations guide [ci skip] {#pr-58884}",
+      "url": "https://github.com/rails/rails/pull/58884",
+      "mergedAt": "2026-09-28T00:00:00.000Z",
+      "author": "ramen2020",
+      "authorUrl": "https://github.com/ramen2020",
+      "summary": "1. 概要 (1-2文で)  \nTrilogy アダプタ向けの `migration_strategy` 設定例が間違っており、そのままコピペすると例外が出てしまう問題を、ドキュメント上のクラス名を正しいものに修正した PR です。挙動変更はなく、Active Record Migrations ガイドのサンプルコードのみが修正されています。\n\n2. 変更内容の詳細(あればサンプルコードも含めて)  \nActive Record Migrations ガイドの「アダプタごとの `migration_strategy` を設定する例」で、Trilogy 用のサンプルが次のようになっていました：\n\n```ruby\nActiveSupport.on_load(:active_record_trilogyadapter) do\n  ActiveRecord::ConnectionAdapters::Trilogy.migration_strategy =\n    MySQLMigrationStrategy\nend\n```\n\nここで使われている `ActiveRecord::ConnectionAdapters::Trilogy` は、Trilogy のアダプタクラスではなく「モジュール」であり、`migration_strategy` は `AbstractAdapter` 上の `class_attribute` なので、「アダプタクラス」に対して設定する必要があります。\n\nTrilogy のアダプタクラスは `TrilogyAdapter` なので、正しくは以下のように書く必要があります：\n\n```ruby\nActiveSupport.on_load(:active_record_trilogyadapter) do\n  ActiveRecord::ConnectionAdapters::TrilogyAdapter.migration_strategy =\n    MySQLMigrationStrategy\nend\n```\n\nPR では、この一行だけが以下のように置き換えられています。\n\n- 修正前: `ActiveRecord::ConnectionAdapters::Trilogy.migration_strategy = ...`\n- 修正後: `ActiveRecord::ConnectionAdapters::TrilogyAdapter.migration_strategy = ...`\n\n作者は実際に `active_record/connection_adapters/trilogy_adapter` をロードした上で動作を確認しており、\n\n- 旧コード: `NoMethodError: undefined method 'migration_strategy=' for module ActiveRecord::ConnectionAdapters::Trilogy`\n- 修正後: 問題なく `TrilogyAdapter.migration_strategy = MySQLMigrationStrategy` が実行可能\n\nとなることを確認済みです。\n\n3. 影響範囲・注意点  \n\n- 影響範囲  \n  - ドキュメントのみの変更であり、本体コードや挙動には一切変更がありません。\n  - ただし、これまでガイドを見てそのままコピペしていた場合は、`NoMethodError` が発生していたはずで、それを防ぐ形になります。\n\n- 注意点 / 実際に書くべきコードのポイント  \n  - `migration_strategy` はアダプタクラス（ここでは `ActiveRecord::ConnectionAdapters::TrilogyAdapter`）に対して設定する必要があります。\n  - PostgreSQL 用の例では既に `PostgreSQLAdapter` に対して設定しており、Trilogy だけがモジュールを参照する誤りになっていました。\n  - `on_load` のフック名は `:active_record_trilogyadapter` を使う想定になっていますが、Trilogy を利用しているアプリ側でこれと整合するように記述する必要があります。\n  - MySQL 用に独自の `MySQLMigrationStrategy` を作る場合は、通常の `ActiveRecord::MigrationContext` などの利用パターンと同様に、マイグレーション実行戦略をカスタマイズするクラスを実装したうえで、この `class_attribute` を差し替える運用になります。\n\n4. 参考情報 (あれば)  \n\n- 修正対象: `guides/source/active_record_migrations.md` の Trilogy 用 `migration_strategy` 設定例\n- 背景知識:\n  - `migration_strategy` は `ActiveRecord::ConnectionAdapters::AbstractAdapter` の `class_attribute`\n  - アダプタごとに異なるマイグレーション戦略を使いたいときに、各アダプタクラス (`PostgreSQLAdapter`, `TrilogyAdapter` など) に対して上書きして使う\n- 関連する正しいパターンの例（PostgreSQL）:\n  ```ruby\n  ActiveSupport.on_load(:active_record_postgresqladapter) do\n    ActiveRecord::ConnectionAdapters::PostgreSQLAdapter.migration_strategy =\n      PostgreSQLMigrationStrategy\n  end\n  ```"
+    },
     {
       "number": 58876,
       "title": "Fix error matching for validations using except_on {#pr-58876}",
@@ -433,24 +451,6 @@
       "author": "kamipo",
       "authorUrl": "https://github.com/kamipo",
       "summary": "1. 概要 (1–2文で)  \n`Mysql2Adapter` と `TrilogyAdapter` の共通処理が `AbstractMysqlAdapter` に集約され、重複コードが削減されました。あわせて `text_type?` と `error_number` の可視性が、実際の利用状況に合わせて整理されています。"
-    },
-    {
-      "number": 58789,
-      "title": "Don't reference connection in on_main block {#pr-58789}",
-      "url": "https://github.com/rails/rails/pull/58789",
-      "mergedAt": "2026-09-16T00:00:00.000Z",
-      "author": "hmcguire-shopify",
-      "authorUrl": "https://github.com/hmcguire-shopify",
-      "summary": "1. 概要 (1-2文で)  \n`ActiveRecord::ModelSchema` 内で `on_main` ブロックの中から DB コネクションオブジェクトを直接参照しないようにリファクタリングし、Ractor 間でブロックを共有する際に発生していたエラーを回避する変更です。非メイン Ractor からの呼び出し時にも安全に `on_main` を使えるようにするためのスレッド／Ractor 対応の改善です。"
-    },
-    {
-      "number": 58786,
-      "title": "Avoid some allocations and speed up the template lookup path {#pr-58786}",
-      "url": "https://github.com/rails/rails/pull/58786",
-      "mergedAt": "2026-09-16T00:00:00.000Z",
-      "author": "jhawthorn",
-      "authorUrl": "https://github.com/jhawthorn",
-      "summary": "1. 概要 (1–2文で)\nRails のテンプレート探索（lookup）周りの実装を見直し、余分なオブジェクト割り当て（allocation）を削減してパフォーマンスを改善する変更です。特に `LookupContext` から `PathSet` にパス正規化処理を移すことでテンプレート検索時の配列生成を避け、部分テンプレート大量レンダリング時のスループットが約 12% 向上しています。"
     }
   ]
 }
