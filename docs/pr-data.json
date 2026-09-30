@@ -1,7 +1,34 @@
 {
-  "lastUpdated": "2026-09-29T00:13:08.439Z",
+  "lastUpdated": "2026-09-30T00:13:29.049Z",
   "totalCount": 50,
   "items": [
+    {
+      "number": 58903,
+      "title": "Fix `to_markdown` links that Markdown renderers turn into `javascript:` links {#pr-58903}",
+      "url": "https://github.com/rails/rails/pull/58903",
+      "mergedAt": "2026-09-29T00:00:00.000Z",
+      "author": "flavorjones",
+      "authorUrl": "https://github.com/flavorjones",
+      "summary": "1. 概要 (1-2文で)  \n`ActionText#to_markdown` が生成するリンクについて、一部の Markdown レンダラーで `javascript:` スキームに変換されてしまうケースがあった問題を修正した PRです。`allowed_uri?` によるスキームチェックがレンダリング後も有効に機能するよう、リンク先 href のエンコード方法が見直されています。"
+    },
+    {
+      "number": 58896,
+      "title": "Fix IndexedRow lookups when columns aren't unique {#pr-58896}",
+      "url": "https://github.com/rails/rails/pull/58896",
+      "mergedAt": "2026-09-29T00:00:00.000Z",
+      "author": "hmcguire-shopify",
+      "authorUrl": "https://github.com/hmcguire-shopify",
+      "summary": "1. 概要 (1-2文で)  \nIndexedRow が「同じカラム名が複数回選択される」ケースで、内部インデックスが実際の行配列のサイズを超えてしまう不整合を修正した PR です。行配列の長さを実際のクエリ結果行と揃えることで、インデックスアクセス時の範囲外参照を防いでいます。"
+    },
+    {
+      "number": 58888,
+      "title": "Don't assume a tagging logger keeps tags in its formatter {#pr-58888}",
+      "url": "https://github.com/rails/rails/pull/58888",
+      "mergedAt": "2026-09-29T00:00:00.000Z",
+      "author": "carlosdanielpohlod",
+      "authorUrl": "https://github.com/carlosdanielpohlod",
+      "summary": "1. 概要 (1-2文で)  \nAction Cable の `TaggedLoggerProxy` が「tag 機能を持つ logger は必ず formatter がタグを保持している」と仮定していたため、`BroadcastLogger` 利用時に例外が発生するバグを修正する PR です。タグを読むのは「formatter がタグを保持する場合だけ」に限定し、Action Job 側でしたのと同種の修正を Action Cable にも反映しています。"
+    },
     {
       "number": 58894,
       "title": "Share MySQL-specific test schema between mysql2 and trilogy {#pr-58894}",
@@ -424,33 +451,6 @@
       "author": "yaroslav-shopify",
       "authorUrl": "https://github.com/yaroslav-shopify",
       "summary": "1. 概要 (1-2文で)  \nRails の ActiveRecord 型システムにおいて、`serialize_cast_value_compatible?` のメモ化を「メイン Ractor でのみ」実行するように変更し、Ractor 使用時に発生していた `IsolationError`（`@serialize_cast_value_compatible` 関連）を解消する修正です。Ractor 環境でも型のシリアライズ・キャスト互換判定が安全かつ一貫して行えるようになります。"
-    },
-    {
-      "number": 58795,
-      "title": "Read PostgreSQL indexes and constraints from the table a name resolves to {#pr-58795}",
-      "url": "https://github.com/rails/rails/pull/58795",
-      "mergedAt": "2026-09-17T00:00:00.000Z",
-      "author": "kamipo",
-      "authorUrl": "https://github.com/kamipo",
-      "summary": "1. 概要 (1–2文で)  \nPostgreSQL アダプタが、スキーマを省略したテーブル名からインデックスや制約を取得する際の挙動を修正し、「名前解決された 1 つのテーブル」だけを対象にするように統一した PR です。`::regclass` と同等の名前解決ロジックを共通化し、複数スキーマに同名テーブルがある場合でも誤って両方のインデックス・制約を取ってきてしまう問題を防ぎます。"
-    },
-    {
-      "number": 58791,
-      "title": "Replace the `mysql5` fallback in `ActiveRecord.database_cli` with `mariadb` {#pr-58791}",
-      "url": "https://github.com/rails/rails/pull/58791",
-      "mergedAt": "2026-09-16T00:00:00.000Z",
-      "author": "kamipo",
-      "authorUrl": "https://github.com/kamipo",
-      "summary": "1. 概要 (1-2文で)  \nActiveRecord の `database_cli`（`rails dbconsole` などから使われる DB クライアント実行コマンド）の MySQL 系クライアント検出ロジックで、古い `mysql5` バイナリのフォールバックを廃止し、代わりに `mariadb` をフォールバック候補として扱うように変更した PR です。これにより、近年の MariaDB 環境でも、`rails dbconsole` がより確実に動作するようになります。"
-    },
-    {
-      "number": 58790,
-      "title": "Consolidate common methods of `Mysql2Adapter` and `TrilogyAdapter` {#pr-58790}",
-      "url": "https://github.com/rails/rails/pull/58790",
-      "mergedAt": "2026-09-16T00:00:00.000Z",
-      "author": "kamipo",
-      "authorUrl": "https://github.com/kamipo",
-      "summary": "1. 概要 (1–2文で)  \n`Mysql2Adapter` と `TrilogyAdapter` の共通処理が `AbstractMysqlAdapter` に集約され、重複コードが削減されました。あわせて `text_type?` と `error_number` の可視性が、実際の利用状況に合わせて整理されています。"
     }
   ]
 }
