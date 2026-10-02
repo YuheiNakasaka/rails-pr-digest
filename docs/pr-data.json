@@ -1,7 +1,79 @@
 {
-  "lastUpdated": "2026-10-01T00:15:16.112Z",
+  "lastUpdated": "2026-10-02T00:14:23.801Z",
   "totalCount": 50,
   "items": [
+    {
+      "number": 58917,
+      "title": "Remove dead code for Ruby < 3.3.1 {#pr-58917}",
+      "url": "https://github.com/rails/rails/pull/58917",
+      "mergedAt": "2026-10-01T00:00:00.000Z",
+      "author": "hmcguire-shopify",
+      "authorUrl": "https://github.com/hmcguire-shopify",
+      "summary": "1. 概要 (1-2文で)  \nRubyのサポート下限バージョンが 3.3.1 になったことを前提に、`Time` 計算まわりで「Ruby 3.3.1 未満向けのワークアラウンド（死んだコード）」を削除したPRです。テストは 3.3.1 以降の動作確認として有用なため、そのまま維持されています。"
+    },
+    {
+      "number": 58908,
+      "title": "Bump minimum Ruby version to 3.3.5 {#pr-58908}",
+      "url": "https://github.com/rails/rails/pull/58908",
+      "mergedAt": "2026-10-01T00:00:00.000Z",
+      "author": "hmcguire-shopify",
+      "authorUrl": "https://github.com/hmcguire-shopify",
+      "summary": "1. 概要 (1-2文で)  \nRails がサポートする最低 Ruby バージョンを 3.3.5 に引き上げる PR です。  \nこれにより、Weak{Key,}Map の use-after-free バグを前提にした独自ポリフィルを廃止でき、今後 Active Record のクエリキャッシュ周りをより効率的にリファクタリングできるようにする意図があります。"
+    },
+    {
+      "number": 58911,
+      "title": "Fix typos in guides [ci skip] {#pr-58911}",
+      "url": "https://github.com/rails/rails/pull/58911",
+      "mergedAt": "2026-10-01T00:00:00.000Z",
+      "author": "bastin27",
+      "authorUrl": "https://github.com/bastin27",
+      "summary": "1. 概要 (1-2文で)  \nRails の公式ガイドドキュメント内に含まれていた誤字・軽微な文法ミスを修正する PR です。コードや挙動への影響はなく、ドキュメントの可読性と正確さを高める目的の変更です。"
+    },
+    {
+      "number": 58898,
+      "title": "Avoid reprocessing ActiveRecord::Result column names {#pr-58898}",
+      "url": "https://github.com/rails/rails/pull/58898",
+      "mergedAt": "2026-10-01T00:00:00.000Z",
+      "author": "dersam",
+      "authorUrl": "https://github.com/dersam",
+      "summary": "1. 概要 (1-2文で)  \nActiveRecord::Result が内部で「カラム名の再処理（主に String の intern / freeze）」を行うのをやめ、DBアダプタ側での処理に一元化したパフォーマンス改善のPRです。  \nこれにより、不要な文字列オブジェクトの割り当てを避けつつ、カラム名配列は引き続き freeze される形になります。"
+    },
+    {
+      "number": 58892,
+      "title": "Fix input `id` not matching label `for` when collection value is an empty string {#pr-58892}",
+      "url": "https://github.com/rails/rails/pull/58892",
+      "mergedAt": "2026-10-01T00:00:00.000Z",
+      "author": "55728",
+      "authorUrl": "https://github.com/55728",
+      "summary": "1. 概要 (1-2文で)  \n`collection_radio_buttons` / `collection_check_boxes` などで、値が空文字列 `\"\"` のときに生成される `<input>` の `id` と `<label>` の `for` が一致しなくなるバグを修正した PRです。`nil` の場合の修正 (#57209) を拡張し、「サニタイズ結果が空文字列になる値」全般に対して一貫した ID 付与になるようにしています。"
+    },
+    {
+      "number": 58882,
+      "title": "Fix the :validate default in the Association Basics guide [ci skip] {#pr-58882}",
+      "url": "https://github.com/rails/rails/pull/58882",
+      "mergedAt": "2026-10-01T00:00:00.000Z",
+      "author": "ramen2020",
+      "authorUrl": "https://github.com/ramen2020",
+      "summary": "1. 概要 (1-2文で)  \nAssociation Basics ガイドの`:validate`オプションのデフォルト値説明が実装と食い違っていたため、関連の種類ごとに正しいデフォルト挙動が分かるように修正したドキュメント更新PRです。あわせて、`has_and_belongs_to_many` は `:validate` をサポートしないという誤った記述も削除されています。"
+    },
+    {
+      "number": 58883,
+      "title": "Fix range_field_tag and time_field_tag examples in the API docs [ci skip] {#pr-58883}",
+      "url": "https://github.com/rails/rails/pull/58883",
+      "mergedAt": "2026-10-01T00:00:00.000Z",
+      "author": "ramen2020",
+      "authorUrl": "https://github.com/ramen2020",
+      "summary": "1. 概要 (1-2文で)  \n`FormTagHelper` の API ドキュメント中で、`range_field_tag` / `time_field_tag` / `datetime_field_tag` のサンプルコードが実際の出力と食い違っていた問題を修正した PR です。実装の挙動は変えず、「ドキュメント上の例が正しく動く／正しく説明している状態」に揃えています。"
+    },
+    {
+      "number": 58864,
+      "title": "Generator tests avoid collisions by using a temporary directory. {#pr-58864}",
+      "url": "https://github.com/rails/rails/pull/58864",
+      "mergedAt": "2026-10-01T00:00:00.000Z",
+      "author": "ChaelCodes",
+      "authorUrl": "https://github.com/ChaelCodes",
+      "summary": "1. 概要 (1-2文で)\nRails のジェネレータ用テストが、テストごとに一時ディレクトリを使うようになり、`tmp/generators` 共有による並列実行時のファイル競合・テストのフレークが解消されました。これに伴い、テスト用の出力ディレクトリの削除タイミングが `setup` から `teardown` に変更されています。"
+    },
     {
       "number": 58893,
       "title": "Remove support for dynamic controller/action in routes {#pr-58893}",
@@ -379,78 +451,6 @@
       "author": "yahonda",
       "authorUrl": "https://github.com/yahonda",
       "summary": "1. 概要 (1-2文で)  \n`Rails::DBConsoleTest#test_env` がテスト実行前に設定されていた `RACK_ENV` をテスト後に消してしまい、`LeakChecker` によって「環境変数リーク」と判定されていた問題を修正するPRです。テスト開始時点の `RAILS_ENV` / `RACK_ENV` の値を保存し、`ensure` で必ず元の状態に戻すように変更しています。"
-    },
-    {
-      "number": 58792,
-      "title": "Stop leaking RAILS_ENV when `build_app` is called twice {#pr-58792}",
-      "url": "https://github.com/rails/rails/pull/58792",
-      "mergedAt": "2026-09-19T00:00:00.000Z",
-      "author": "yahonda",
-      "authorUrl": "https://github.com/yahonda",
-      "summary": "1. 概要 (1-2文で)  \n`build_app` が同一テスト内で複数回呼ばれた際に `RAILS_ENV` 環境変数がリークする問題を修正した PR です。`RAILS_ENV` の元の値の保持方法を `||=` から `defined?` チェックに変更し、1回だけ正しくキャプチャされるようにしています。"
-    },
-    {
-      "number": 58822,
-      "title": "Make ActionController::ParamsWrapper._wrapper_options ractor safe {#pr-58822}",
-      "url": "https://github.com/rails/rails/pull/58822",
-      "mergedAt": "2026-09-18T00:00:00.000Z",
-      "author": "gmcgibbon",
-      "authorUrl": "https://github.com/gmcgibbon",
-      "summary": "1. 概要 (1-2文で)  \n`ActionController::ParamsWrapper::_wrapper_options` が Ractor 共有可能になるよう、内部オプションオブジェクトを「深い freeze」とミューテックスのクリアで Ractor-safe にした PR です。合わせて `Rails::Application#ractorize!` に ParamsWrapper 用の初期化処理を追加し、テストで Ractor 対応を検証しています。"
-    },
-    {
-      "number": 58733,
-      "title": "Avoid deadlocks when concurrent find_or_create_by calls read back the… {#pr-58733}",
-      "url": "https://github.com/rails/rails/pull/58733",
-      "mergedAt": "2026-09-18T00:00:00.000Z",
-      "author": "kwestein",
-      "authorUrl": "https://github.com/kwestein",
-      "summary": "1. 概要 (1-2文で)  \nMySQL 環境で `find_or_create_by` / `create_or_find_by` をトランザクション内で並行実行した際に起きていたデッドロック（`1213`）を防ぐため、重複 INSERT 後の「読み直し」のロック戦略を変更した PRです。`SELECT ... FOR UPDATE` ではなく共有ロックを使った読み直しに切り替えることで、意図せずデッドロックが発生するケースを解消します。"
-    },
-    {
-      "number": 58818,
-      "title": "Add `bundle exec` to guides help command example [ci-skip] {#pr-58818}",
-      "url": "https://github.com/rails/rails/pull/58818",
-      "mergedAt": "2026-09-18T00:00:00.000Z",
-      "author": "p8",
-      "authorUrl": "https://github.com/p8",
-      "summary": "1. 概要 (1-2文で)  \nRailsガイド執筆者向けドキュメント中の「ヘルプコマンド」の実行例に、`bundle exec` を付けるよう修正したPRです。実行例を、より実際の開発環境に即した正しい形に揃えるためのドキュメントのみの変更です。"
-    },
-    {
-      "number": 57181,
-      "title": "[RF-DOCS] Rewrite the Asset Pipeline Guide {#pr-57181}",
-      "url": "https://github.com/rails/rails/pull/57181",
-      "mergedAt": "2026-09-18T00:00:00.000Z",
-      "author": "ayushn21",
-      "authorUrl": "https://github.com/ayushn21",
-      "summary": "1. 概要 (1-2文で)  \nAsset Pipelineガイドが Propshaft を前提に、開発者視点で「どう使うか」にフォーカスした内容へほぼ全面的に書き換えられました。Sprockets からの移行や特定ライブラリ(Tailwindなど)の細かい手順はガイド外部へのリンクに整理され、全体構成・見出し・導入文が見直されています。"
-    },
-    {
-      "number": 58794,
-      "title": "Deprecate `ActiveRecord::Callbacks::CALLBACKS` {#pr-58794}",
-      "url": "https://github.com/rails/rails/pull/58794",
-      "mergedAt": "2026-09-18T00:00:00.000Z",
-      "author": "kamipo",
-      "authorUrl": "https://github.com/kamipo",
-      "summary": "1. 概要 (1-2文で)  \n`ActiveRecord::Callbacks::CALLBACKS` 定数が非推奨になり、Rails 9.0 で削除予定になりました。  \nこの定数は長年更新されておらず、特にトランザクション関連のコールバックが含まれていないため、利用するとコールバックが一部無視される危険があることが明示されています。"
-    },
-    {
-      "number": 58793,
-      "title": "Stop probing for a local MySQL socket when generating `config/database.yml` {#pr-58793}",
-      "url": "https://github.com/rails/rails/pull/58793",
-      "mergedAt": "2026-09-18T00:00:00.000Z",
-      "author": "kamipo",
-      "authorUrl": "https://github.com/kamipo",
-      "summary": "1. 概要 (1-2文で)  \n`rails new --database=mysql` 実行時に、ローカルの MySQL ソケットファイルを探して `config/database.yml` に `socket:` を書き込む挙動を廃止し、常に `host:` ベースの設定を生成するようにした PR です。Docker/devcontainer などコンテナ環境とより相性の良い、シンプルで持ち運びしやすい設定になります。"
-    },
-    {
-      "number": 58809,
-      "title": "Deprecate `supports_datetime_with_precision?` {#pr-58809}",
-      "url": "https://github.com/rails/rails/pull/58809",
-      "mergedAt": "2026-09-18T00:00:00.000Z",
-      "author": "kamipo",
-      "authorUrl": "https://github.com/kamipo",
-      "summary": "1. 概要 (1-2文で)  \n`supports_datetime_with_precision?` が非推奨になり、実質常に `true` を返すだけのメソッドとして整理されました。これに伴い、datetime/time カラムの `precision` オプションをサポートしていない DB を考慮した分岐やテストコードが削除・簡略化されています。"
     }
   ]
 }
