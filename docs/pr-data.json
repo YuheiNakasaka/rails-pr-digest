@@ -1,7 +1,70 @@
 {
-  "lastUpdated": "2026-10-02T00:14:23.801Z",
+  "lastUpdated": "2026-10-03T00:13:25.549Z",
   "totalCount": 50,
   "items": [
+    {
+      "number": 58869,
+      "title": "Add test for OOB/in_order_of/CTE {#pr-58869}",
+      "url": "https://github.com/rails/rails/pull/58869",
+      "mergedAt": "2026-10-02T00:00:00.000Z",
+      "author": "hmcguire-shopify",
+      "authorUrl": "https://github.com/hmcguire-shopify",
+      "summary": "1. 概要 (1-2文で)  \nこのPRは、Active Record の `in_order_of` と CTE (Common Table Expression) を組み合わせた場合に、Out-of-Band (OOB) ローディング周りの挙動が正しく動作することを確認するテストを追加するものです。機能追加や挙動変更はなく、既存機能の回 regressions 防止のためのテスト強化が目的です。"
+    },
+    {
+      "number": 58913,
+      "title": "Freeze events emitted by ActiveSupport::EventReporter {#pr-58913}",
+      "url": "https://github.com/rails/rails/pull/58913",
+      "mergedAt": "2026-10-02T00:00:00.000Z",
+      "author": "keshavbiswa",
+      "authorUrl": "https://github.com/keshavbiswa",
+      "summary": "1. 概要 (1-2文で)  \nActiveSupport::EventReporter がサブスクライバに渡すイベントデータ（ハッシュ）を `freeze` することで、サブスクライバ間での副作用や順序依存を防ぐ変更です。  \nこれにより、イベントの内容を書き換えようとするサブスクライバは `FrozenError` となり、通知されるイベントの整合性が保証されます。"
+    },
+    {
+      "number": 58680,
+      "title": "Cache ActiveSupport::ParameterFilter instances across requests {#pr-58680}",
+      "url": "https://github.com/rails/rails/pull/58680",
+      "mergedAt": "2026-10-02T00:00:00.000Z",
+      "author": "eregon",
+      "authorUrl": "https://github.com/eregon",
+      "summary": "1. 概要 (1-2文で)  \n各リクエストごとに生成されていた `ActiveSupport::ParameterFilter`（内部で複数の `Regexp` を生成）が、同じフィルタ一覧であればグローバルに再利用されるようになり、ログ用パラメータフィルタの構築コストが削減されました。これにより特にフィルタ数が多いアプリケーションや `config.precompile_filter_parameters` を無効にしている環境で、リクエストあたりのオーバーヘッドが有意に減少します。"
+    },
+    {
+      "number": 58289,
+      "title": "Roll back when a before_commit callback raises a rollback error {#pr-58289}",
+      "url": "https://github.com/rails/rails/pull/58289",
+      "mergedAt": "2026-10-02T00:00:00.000Z",
+      "author": "adam-h",
+      "authorUrl": "https://github.com/adam-h",
+      "summary": "1. 概要 (1–2文で)  \n`before_commit` コールバック内で `TransactionRollbackError` が発生した場合でも、トランザクションを正しくロールバックするように `within_new_transaction` の挙動が修正されました。これにより、トランザクションが開いたまま接続プールに戻ってしまう不具合が解消されます。"
+    },
+    {
+      "number": 58813,
+      "title": "Include extra node state in Arel equality {#pr-58813}",
+      "url": "https://github.com/rails/rails/pull/58813",
+      "mergedAt": "2026-10-02T00:00:00.000Z",
+      "author": "e-akashsaini",
+      "authorUrl": "https://github.com/e-akashsaini",
+      "summary": "1. 概要 (1–2文で)  \nArel の一部ノード (`Matches`, `DoesNotMatch`, `Regexp`, `NotRegexp`, `InfixOperation`, `UnaryOperation`) について、SQL 出力に影響する追加状態（escape 文字や大文字小文字区別フラグ、演算子）を `eql?` / `hash` 判定に含めるようにし、異なる条件が `where` のマージや `or` 結合時に誤って同一視されて消えてしまう問題を修正する PR です。  \nこれにより、`Relation#or` / `merge` / `WhereClause` の重複排除が、より直感的かつ安全な挙動になります（Active Record が自前で生成する通常のクエリは影響なし）。"
+    },
+    {
+      "number": 58918,
+      "title": "Remove dead code for Ruby < 3.3.5 {#pr-58918}",
+      "url": "https://github.com/rails/rails/pull/58918",
+      "mergedAt": "2026-10-02T00:00:00.000Z",
+      "author": "hmcguire-shopify",
+      "authorUrl": "https://github.com/hmcguire-shopify",
+      "summary": "1. 概要 (1-2文で)  \nRuby 3.3.5 未満向けのポリフィル（互換コード）を Active Record のコネクションプール／クエリキャッシュ周りから削除し、Ruby 3.3.5 以降を前提にした実装へ整理した PR です。これにより、Thread/Fiber 以外のキーを内部マップに使えるようになり、クエリキャッシュのクリア処理などで今後のパフォーマンス改善がしやすくなります。"
+    },
+    {
+      "number": 58919,
+      "title": "Don't duplicate integration tests' fixture paths {#pr-58919}",
+      "url": "https://github.com/rails/rails/pull/58919",
+      "mergedAt": "2026-10-02T00:00:00.000Z",
+      "author": "earlofurl",
+      "authorUrl": "https://github.com/earlofurl",
+      "summary": "1. 概要 (1-2文で)  \n`ActionDispatch::IntegrationTest` の `fixture_paths` が二重に登録されてしまう問題を修正し、同じフィクスチャを何度もロードし直してしまう非効率さを解消する PR です。これにより、特にフィクスチャ数が多いアプリケーションで、テスト全体の実行時間が大きく短縮されます。"
+    },
     {
       "number": 58917,
       "title": "Remove dead code for Ruby < 3.3.1 {#pr-58917}",
@@ -388,69 +451,6 @@
       "author": "jhawthorn",
       "authorUrl": "https://github.com/jhawthorn",
       "summary": "1. 概要 (1-2文で)  \n`EMPTY_SPACER` を「RenderedTemplate として振る舞う単なるオブジェクト」から、実際の `RenderedTemplate` インスタンスに置き換えた微修正です。Action View の内部実装をより一貫した形に整えるリファクタリングで、外部APIの挙動への影響はほぼありません。"
-    },
-    {
-      "number": 58827,
-      "title": "Backport alias fallback fixes for Active Model to 8-1-stable {#pr-58827}",
-      "url": "https://github.com/rails/rails/pull/58827",
-      "mergedAt": "2026-09-21T00:00:00.000Z",
-      "author": "yahonda",
-      "authorUrl": "https://github.com/yahonda",
-      "summary": "1. 概要 (1-2文で)  \nRuby 4.1.0dev 以降で非推奨となる「モジュール内での `alias` が暗黙に `Object` を参照する」パターンを、Active Model 8.1 系で解消するバックポートです。`alias` 使用箇所を明示的なメソッド定義に置き換えることで、Ruby 4.3 で `NameError` になる将来の問題を事前に防ぎ、同時に API ドキュメントにもメソッドが適切に掲載されるようにしています。"
-    },
-    {
-      "number": 58832,
-      "title": "Restore integer bounds from JSON schema cache {#pr-58832}",
-      "url": "https://github.com/rails/rails/pull/58832",
-      "mergedAt": "2026-09-21T00:00:00.000Z",
-      "author": "luizkowalski",
-      "authorUrl": "https://github.com/luizkowalski",
-      "summary": "1. 概要 (1-2文で)  \nJSON スキーマキャッシュ経由で読み込まれた `ActiveModel::Type::Integer` が、`min`/`max` の境界値を持たないまま freeze されてしまい、fixture ロード時に `FrozenError` が発生する問題を修正した PRです。JSON から復元する際に `Integer` 型の最小値・最大値を再設定することで、シリアライズ時にエラーにならないようにしています。"
-    },
-    {
-      "number": 58783,
-      "title": "Avoid materializing `descendants` when resolving an STI subclass {#pr-58783}",
-      "url": "https://github.com/rails/rails/pull/58783",
-      "mergedAt": "2026-09-21T00:00:00.000Z",
-      "author": "stahor",
-      "authorUrl": "https://github.com/stahor",
-      "summary": "1. 概要 (1-2文で)  \nSingle Table Inheritance(STI) のサブクラス解決時に `descendants.include?(subclass)` を使っていたチェックを、`subclass <= self` に置き換えることで、STI モデルのインスタンス生成コスト（CPU時間・メモリ割り当て）を大幅に削減した変更です。挙動は変えずに、STI クラス解決のガードロジックだけを高速化しています。"
-    },
-    {
-      "number": 58817,
-      "title": "Avoid aliasing `Kernel#respond_to?` in `ActiveModel::AttributeMethods` {#pr-58817}",
-      "url": "https://github.com/rails/rails/pull/58817",
-      "mergedAt": "2026-09-20T00:00:00.000Z",
-      "author": "yahonda",
-      "authorUrl": "https://github.com/yahonda",
-      "summary": "1. 概要 (1-2文で)  \nActiveModel::AttributeMethods 内で `Kernel#respond_to?` を `alias` で別名定義していた実装を、Ruby 4.1 以降の仕様変更に対応するために `define_method` を使う実装に置き換えた PRです。これにより Ruby master / 将来の Ruby 4.2〜4.3 での警告・エラーを回避しつつ、挙動は従来どおり維持されます。"
-    },
-    {
-      "number": 58826,
-      "title": "Avoid implied <p> tags in collection cache test {#pr-58826}",
-      "url": "https://github.com/rails/rails/pull/58826",
-      "mergedAt": "2026-09-20T00:00:00.000Z",
-      "author": "Saidbek",
-      "authorUrl": "https://github.com/Saidbek",
-      "summary": "1. 概要 (1-2文で)  \nRails の `CollectionCacheTest` が、libxml2 2.15 以降で暗黙的に挿入されなくなった `<p>` タグに依存して失敗していたため、HTML スナップショットではなくテキスト内容と順序を検証する形にテストを修正した PR です。動作仕様やランタイムの挙動には影響せず、テストのみの変更です。\n\n2. 変更内容の詳細(あればサンプルコードも含めて)  \n- 変更ファイル: `actionpack/test/controller/caching_test.rb`  \n- 行数レベルの小さな変更ですが、主な内容は以下です。\n\n従来のテストは、HTML パーサ（libxml2）によって補完される「暗黙の `<p>` タグ」を含んだ HTML 断片を期待値として保持し、「HTML の文字列全体が一致するか」を見る形だったと考えられます。  \nlibxml2 2.15 からは HTML パーサの挙動が変わり、以前は自動的に挿入されていた `<p>` タグが入らなくなり、その結果「期待している HTML スナップショット」と実際の出力 HTML が不一致になってテストが落ちていました。\n\nこの PR では、以下のような方向性でアサーションが書き換えられています。\n\n- 「タグ構造（暗黙の `<p>` の有無）」に依存せず\n- 「コレクションとしてのテキスト内容」と「その順序」が正しいかを検証\n\nイメージとしては、例えば以前が:\n\n```ruby\n# 例: 暗黙の <p> を含む HTML 文字列をそのまま比較していた\nassert_dom_equal <<~HTML, response.body\n  <div>\n    <p>item 1</p>\n    <p>item 2</p>\n  </div>\nHTML\n```\n\nのような形だったのに対し、今回の変更後は:\n\n```ruby\n# 例: DOM をパースし、テキストのリストと順序を検証するような形\nassert_equal [\"item 1\", \"item 2\"], extracted_collection_texts\n```\n\nといった形に近づけた、という意図です（実際のコードは 1 行差分のみですが、ロジック上はこういう方向への修正）。\n\nポイント:\n\n- libxml2 のバージョンによって HTML の「タグ補完」結果が変わってもテストが安定するようにした\n- 元々確認したかったのは「コレクションキャッシュの内容と並び」であり、「HTML パーサがどうタグを埋めるか」ではないため、テストの目的にもより忠実な形になっている\n\n3. 影響範囲・注意点  \n- 影響範囲:\n  - Rails のテストコードのみ（`CollectionCacheTest`）。  \n  - 本番環境・アプリケーションコードの挙動や API は一切変更されません。\n- 注意点:\n  - Rails 本体を開発しつつ、libxml2 2.15 以降の環境でテストを回している場合、この PR により `CollectionCacheTest` の失敗が解消されます。\n  - 同様に「HTML スナップショットをそのまま文字列比較していて、libxml2 のタグ補完挙動に依存しているテスト」が他にもある場合、今後もバージョン差で落ちうるため、同じように「本当に検証したい内容（テキストや要素の順序など）」に絞ったアサーションに変更するのが望ましいです。\n\n4. 参考情報 (あれば)  \n- 関連 issue: #58825 — libxml2 2.15 環境での `CollectionCacheTest` 失敗の報告。  \n- libxml2 2.13 と 2.15 の両方でテストが通ることが明示されており、「HTML パーサ実装依存のテストを避ける」というテスト設計上のベストプラクティスの一例と言えます。"
-    },
-    {
-      "number": 58812,
-      "title": "Update Active Model Ractor tests skips {#pr-58812}",
-      "url": "https://github.com/rails/rails/pull/58812",
-      "mergedAt": "2026-09-19T00:00:00.000Z",
-      "author": "byroot",
-      "authorUrl": "https://github.com/byroot",
-      "summary": "1. 概要 (1-2文で)  \nこのPRは、Active Model における Ractor 関連テストのスキップ条件を、最新の Ruby 本体側の修正状況に合わせて更新したものです。Ruby本体にマージされた https://github.com/ruby/ruby/pull/18515 により Ruby 4.1 ではテストが動作するはず、という前提で、Ractorテストの「どのバージョンで実行してどのバージョンでスキップするか」を整理しています。"
-    },
-    {
-      "number": 58820,
-      "title": "Stop leaking `RACK_ENV` out of `Rails::DBConsoleTest#test_env` {#pr-58820}",
-      "url": "https://github.com/rails/rails/pull/58820",
-      "mergedAt": "2026-09-19T00:00:00.000Z",
-      "author": "yahonda",
-      "authorUrl": "https://github.com/yahonda",
-      "summary": "1. 概要 (1-2文で)  \n`Rails::DBConsoleTest#test_env` がテスト実行前に設定されていた `RACK_ENV` をテスト後に消してしまい、`LeakChecker` によって「環境変数リーク」と判定されていた問題を修正するPRです。テスト開始時点の `RAILS_ENV` / `RACK_ENV` の値を保存し、`ensure` で必ず元の状態に戻すように変更しています。"
     }
   ]
 }
