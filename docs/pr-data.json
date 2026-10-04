@@ -1,7 +1,16 @@
 {
-  "lastUpdated": "2026-10-03T00:13:25.549Z",
+  "lastUpdated": "2026-10-04T00:55:39.080Z",
   "totalCount": 50,
   "items": [
+    {
+      "number": 58929,
+      "title": "Clarify scope of record reloading {#pr-58929}",
+      "url": "https://github.com/rails/rails/pull/58929",
+      "mergedAt": "2026-10-03T00:00:00.000Z",
+      "author": "fxn",
+      "authorUrl": "https://github.com/fxn",
+      "summary": "1. 概要 (1-2文で)  \n`ActiveRecord::Persistence#reload` が「何を」「どこまで」リロードするのかを明確にするため、ドキュメント文言の改善と、それに対応するテストが追加された PR です。  \n主に「属性値と AR が管理する内部状態はリセットされるが、開発者が独自に持たせたカスタム状態はそのまま残る」ことが明示されました。"
+    },
     {
       "number": 58869,
       "title": "Add test for OOB/in_order_of/CTE {#pr-58869}",
@@ -442,15 +451,6 @@
       "author": "ousamabenyounes",
       "authorUrl": "https://github.com/ousamabenyounes",
       "summary": "1. 概要 (1-2文で)  \nActiveSupport::BroadcastLogger が複数の TaggedLogging ロガーに対して `#tagged` を呼ぶと壊れていた挙動を修正し、ブロックあり/なし両方のケースで直感的かつ一貫したタグ付きロギングができるようにした PR です。`#tagged` を明示的に実装し、これまで `method_missing` で起きていた Array 返却やブロックの多重実行を解消しています。"
-    },
-    {
-      "number": 58840,
-      "title": "Use RenderedTemplate for EMPTY_SPACER {#pr-58840}",
-      "url": "https://github.com/rails/rails/pull/58840",
-      "mergedAt": "2026-09-21T00:00:00.000Z",
-      "author": "jhawthorn",
-      "authorUrl": "https://github.com/jhawthorn",
-      "summary": "1. 概要 (1-2文で)  \n`EMPTY_SPACER` を「RenderedTemplate として振る舞う単なるオブジェクト」から、実際の `RenderedTemplate` インスタンスに置き換えた微修正です。Action View の内部実装をより一貫した形に整えるリファクタリングで、外部APIの挙動への影響はほぼありません。"
     }
   ]
 }
