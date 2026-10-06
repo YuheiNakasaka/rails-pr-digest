@@ -1,7 +1,106 @@
 {
-  "lastUpdated": "2026-10-05T00:13:19.756Z",
+  "lastUpdated": "2026-10-06T00:16:19.955Z",
   "totalCount": 50,
   "items": [
+    {
+      "number": 58943,
+      "title": "Fix default_headers example in new_framework_defaults_8_2 {#pr-58943}",
+      "url": "https://github.com/rails/rails/pull/58943",
+      "mergedAt": "2026-10-05T00:00:00.000Z",
+      "author": "excid3",
+      "authorUrl": "https://github.com/excid3",
+      "summary": "1. 概要 (1-2文で)  \nRails 8.2 用の `new_framework_defaults_8_2.rb` 初期化ファイルテンプレート内で、`default_headers` の設定例がそのままではエラーになる不備を修正した PR です。トップレベルの initializer でも正しく動作するよう、`config` を `Rails.application.config` に修正しています。"
+    },
+    {
+      "number": 58847,
+      "title": "Compose compatibility TableDefinition modules in Migration::Current {#pr-58847}",
+      "url": "https://github.com/rails/rails/pull/58847",
+      "mergedAt": "2026-10-05T00:00:00.000Z",
+      "author": "yahonda",
+      "authorUrl": "https://github.com/yahonda",
+      "summary": "1. 概要 (1-2文で)  \nこのPRは、マイグレーション互換クラス (V8_0, V7_0, V6_1, V6_0, V5_2, V5_0, V4_2) に重複していた `compatible_table_definition` 実装を、`Migration::Current` に一箇所へ集約し、`TableDefinition` モジュールの適用を動的に行うようにしたリファクタリングです。挙動は一切変えずに、DRYかつ保守しやすい構造に整理しています。"
+    },
+    {
+      "number": 58846,
+      "title": "Fix V5_1 change_column to honor table_name_prefix {#pr-58846}",
+      "url": "https://github.com/rails/rails/pull/58846",
+      "mergedAt": "2026-10-05T00:00:00.000Z",
+      "author": "yahonda",
+      "authorUrl": "https://github.com/yahonda",
+      "summary": "1. 概要 (1-2文で)  \nRails の ActiveRecord において、`config.active_record.table_name_prefix` を使っている環境で、`ActiveRecord::Migration[5.1]` 以前の `change_column` が誤ったテーブル（プレフィックスなし）に対して `DEFAULT` などを設定してしまう不具合を修正した PR です。これにより、古いバージョン互換モードのマイグレーションでも、テーブルプレフィックスが一貫して尊重されるようになります。"
+    },
+    {
+      "number": 58845,
+      "title": "Honor an explicit `type:` on SQLite references in 6.0 migrations {#pr-58845}",
+      "url": "https://github.com/rails/rails/pull/58845",
+      "mergedAt": "2026-10-05T00:00:00.000Z",
+      "author": "yahonda",
+      "authorUrl": "https://github.com/yahonda",
+      "summary": "1. 概要 (1-2文で)  \nSQLite を使っている環境で、`ActiveRecord::Migration[6.0]` の `add_reference` に明示的な `type:` オプションを渡した場合に、その型指定（例: `type: :bigint`）が正しく反映されるようにする修正です。互換性レイヤで SQLite に対して常に `:integer` を強制していたコードを削除し、アダプタ本来の挙動を尊重するようにしています。"
+    },
+    {
+      "number": 58932,
+      "title": "Remove orphaned Active Support dependencies test fixtures {#pr-58932}",
+      "url": "https://github.com/rails/rails/pull/58932",
+      "mergedAt": "2026-10-05T00:00:00.000Z",
+      "author": "dpep",
+      "authorUrl": "https://github.com/dpep",
+      "summary": "1. 概要 (1-2文で)  \nActive Support の dependencies 周りのテストフィクスチャ（8ファイル）が、どこからも参照されていない「孤立ファイル」になっていたため、まとめて削除した PR です。実行時の挙動や API には一切影響のない、テスト専用ファイルのクリーンアップです。"
+    },
+    {
+      "number": 58933,
+      "title": "Remove unused Contact#pseudonyms from Active Model tests {#pr-58933}",
+      "url": "https://github.com/rails/rails/pull/58933",
+      "mergedAt": "2026-10-05T00:00:00.000Z",
+      "author": "dpep",
+      "authorUrl": "https://github.com/dpep",
+      "summary": "1. 概要 (1-2文で)  \nActive Model のテスト用モデル `Contact` に定義されていた未使用メソッド `pseudonyms` を削除する PR です。テストコード内でのみ利用されていたメソッドであり、本体機能への振る舞い変更はありません。"
+    },
+    {
+      "number": 58844,
+      "title": "Add regression tests for adapter-specific migration compatibility {#pr-58844}",
+      "url": "https://github.com/rails/rails/pull/58844",
+      "mergedAt": "2026-10-05T00:00:00.000Z",
+      "author": "yahonda",
+      "authorUrl": "https://github.com/yahonda",
+      "summary": "1. 概要 (1-2文で)  \nこのPRは、Rails のバージョン付きマイグレーションが「当時のRails＋DBアダプタで生成していたスキーマ」を継続して再現できているかを確認するためのリグレッションテストを追加するものです。コードの分岐ではなく「実際に生成されるスキーマ」を検証しており、挙動が壊れた場合に検知できるようにしています。"
+    },
+    {
+      "number": 58781,
+      "title": "Stop setting the `public-read` ACL on S3 uploads for services configured with `public: true` {#pr-58781}",
+      "url": "https://github.com/rails/rails/pull/58781",
+      "mergedAt": "2026-10-05T00:00:00.000Z",
+      "author": "beauraF",
+      "authorUrl": "https://github.com/beauraF",
+      "summary": "1. 概要 (1-2文で)  \nActive Storage の S3 サービスが、`public: true` 設定時に必ず `public-read` ACL を付けてアップロードしていた挙動を制御できるようにし、ACL 無効（\"Bucket owner enforced\"）がデフォルトの S3 バケットでもエラーなく動作させられるようにした PR です。新しいフラグ `config.active_storage.s3_public_uploads_via_acl` を導入し、デフォルトでは現状維持、新しいアプリ（load_defaults 8.2）では ACL なしでの公開を前提とするように切り替えています。"
+    },
+    {
+      "number": 58941,
+      "title": "Restore 100ms between checkins in test_checkout_fairness {#pr-58941}",
+      "url": "https://github.com/rails/rails/pull/58941",
+      "mergedAt": "2026-10-05T00:00:00.000Z",
+      "author": "yahonda",
+      "authorUrl": "https://github.com/yahonda",
+      "summary": "1. 概要 (1-2文で)  \n`ActiveRecord::ConnectionAdapters::ConnectionPoolThreadTest#test_checkout_fairness` が CI 上でときどき失敗する問題に対処するため、接続の「チェックイン間のスリープ時間」を 10ms から 100ms に戻し、テストの安定性を優先する変更です。テストの実行時間はわずかに増えますが、フェアネス検証の信頼性が向上します。"
+    },
+    {
+      "number": 58923,
+      "title": "Add maintenance_database option to the PostgreSQL adapter {#pr-58923}",
+      "url": "https://github.com/rails/rails/pull/58923",
+      "mergedAt": "2026-10-05T00:00:00.000Z",
+      "author": "yahonda",
+      "authorUrl": "https://github.com/yahonda",
+      "summary": "1. 概要 (1-2文で)  \nRails の PostgreSQL アダプタに `maintenance_database` オプションが追加され、`db:create`, `db:drop`, `db:purge` が接続に使うデータベースを `postgres` 以外に変更できるようになりました。これにより、DigitalOcean など `postgres` データベースが存在しない / 接続できないマネージド PostgreSQL でも Rails の DB タスクが正常に動作します。"
+    },
+    {
+      "number": 58934,
+      "title": "Remove orphaned legacy adapter test fixtures {#pr-58934}",
+      "url": "https://github.com/rails/rails/pull/58934",
+      "mergedAt": "2026-10-05T00:00:00.000Z",
+      "author": "dpep",
+      "authorUrl": "https://github.com/dpep",
+      "summary": "1. 概要 (1-2文で)  \nRails Active Record のテスト用に一時的に置かれていた「レガシーアダプタ登録 API」向けのダミーアダプタ（`fake_legacy_adapter.rb` / `fake_misleading_legacy_adapter.rb`）が、もはやどこからも読み込まれておらず不要になったため削除された PR です。実行時の挙動やテスト結果に影響はなく、純粋なテストフィクスチャの掃除です。"
+    },
     {
       "number": 58929,
       "title": "Clarify scope of record reloading {#pr-58929}",
@@ -352,105 +451,6 @@
       "author": "SulimanAbdulrazzaq",
       "authorUrl": "https://github.com/SulimanAbdulrazzaq",
       "summary": "1. 概要 (1-2文で)  \nBigInteger と scale なし decimal カラムに対する文字列 → 整数キャスト時に、先頭 16 バイトで暗黙に切り捨てられていたバグを修正する PR です。`Integer` のバイト数上限の考え方を整理しつつ、`BigInteger` では精度（precision）に応じたより妥当な上限を使うように変更しています。"
-    },
-    {
-      "number": 58306,
-      "title": "Active Record Ractor-friendly connection handling {#pr-58306}",
-      "url": "https://github.com/rails/rails/pull/58306",
-      "mergedAt": "2026-09-25T00:00:00.000Z",
-      "author": "gmcgibbon",
-      "authorUrl": "https://github.com/gmcgibbon",
-      "summary": "1. 概要 (1-2文で)  \nこのPRは、Rails を Ractor 化した際に「メイン Ractor 以外から Active Record のクエリを実行できるようにする」ためのコネクションハンドリングを導入するものです。非 Ractor 化アプリには挙動変更を与えず、非メイン Ractor でのクエリはすべてメイン Ractor にディスパッチして実行されます。"
-    },
-    {
-      "number": 58874,
-      "title": "Manually specify security validator in herb checker {#pr-58874}",
-      "url": "https://github.com/rails/rails/pull/58874",
-      "mergedAt": "2026-09-25T00:00:00.000Z",
-      "author": "gmcgibbon",
-      "authorUrl": "https://github.com/gmcgibbon",
-      "summary": "1. 概要 (1-2文で)  \nHerb 0.11 から「セキュリティバリデータ」がデフォルトで使われなくなったため、Rails 側で明示的に security validator を指定するようにした PRです。これにより、使用する Herb のバージョンにかかわらず、Herb チェッカーの挙動を一貫してセキュアなものに保ちます。"
-    },
-    {
-      "number": 58863,
-      "title": "Add Manitoba time zone mapping {#pr-58863}",
-      "url": "https://github.com/rails/rails/pull/58863",
-      "mergedAt": "2026-09-24T00:00:00.000Z",
-      "author": "dawilliams929",
-      "authorUrl": "https://github.com/dawilliams929",
-      "summary": "1. 概要 (1-2文で)  \nRails のタイムゾーンマッピングに「Manitoba」を追加し、`America/Winnipeg` に対応付ける変更です。これにより、従来 `Central Time (US & Canada)` をマニトバ州の代理として使っていた場合に冬時間で1時間ずれる問題を防ぎます。"
-    },
-    {
-      "number": 58854,
-      "title": "Fix non-ASCII strict locals defaults in ASCII-only templates {#pr-58854}",
-      "url": "https://github.com/rails/rails/pull/58854",
-      "mergedAt": "2026-09-24T00:00:00.000Z",
-      "author": "carlosdanielpohlod",
-      "authorUrl": "https://github.com/carlosdanielpohlod",
-      "summary": "1. 概要 (1-2文で)  \nERB テンプレートの `locals:` マジックコメントで非ASCII文字(例: `\"café\"`)をデフォルト値に指定し、テンプレート本体が ASCII のみの場合に文字化けしていたバグを修正した PRです。テンプレートのコンパイル結果のエンコーディング処理を見直し、magic comment の非ASCIIデフォルト値が正しく UTF-8 として扱われるようにしています。"
-    },
-    {
-      "number": 58721,
-      "title": "Add a framework default to compile HTML+ERB templates through Herb {#pr-58721}",
-      "url": "https://github.com/rails/rails/pull/58721",
-      "mergedAt": "2026-09-24T00:00:00.000Z",
-      "author": "marcoroth",
-      "authorUrl": "https://github.com/marcoroth",
-      "summary": "1. 概要 (1–2文で)\nRails 8.2のフレームワークデフォルトとして、HTML+ERBテンプレートを新しいERB実装「Herb」でコンパイルする設定が追加されました。HTML以外のフォーマット（text, js など）は従来どおり Erubi が使われ、既存アプリは設定で簡単に従来動作へ戻せます。"
-    },
-    {
-      "number": 58829,
-      "title": "Use standard input for MySQL `db:schema:load` {#pr-58829}",
-      "url": "https://github.com/rails/rails/pull/58829",
-      "mergedAt": "2026-09-23T00:00:00.000Z",
-      "author": "yahonda",
-      "authorUrl": "https://github.com/yahonda",
-      "summary": "1. 概要 (1-2文で)  \nMySQL 向け `db:schema:load`（`schema_format = :sql`）で、`mysql --execute \"SOURCE ...\" ` を使う方式をやめ、構造 SQL を標準入力から流し込む方式に変更した PRです。これにより、MySQL 9.4+ などで導入された `--commands` オプションのデフォルト設定に影響されず、最新クライアントでも `db:schema:load` が失敗しなくなります。"
-    },
-    {
-      "number": 58828,
-      "title": "Drop the explicit SET FOREIGN_KEY_CHECKS statements from MySQL `db:schema:load` {#pr-58828}",
-      "url": "https://github.com/rails/rails/pull/58828",
-      "mergedAt": "2026-09-23T00:00:00.000Z",
-      "author": "yahonda",
-      "authorUrl": "https://github.com/yahonda",
-      "summary": "1. 概要 (1–2文で)  \nMySQL用の `db:schema:load`（正確には `structure_load`）処理から、Rails側で明示的に送っていた `SET FOREIGN_KEY_CHECKS = 0/1` を削除し、`mysqldump` / `mariadb-dump` が出力するスキーマファイル内の設定に依存するように変更したPRです。これに伴い、ダンプファイル側に外部キー制約チェックのON/OFFが含まれていることを保証するためのテストと、カスタマイズ方法のドキュメントが追加されています。"
-    },
-    {
-      "number": 58800,
-      "title": "Fix #48375: Server-Timing double-counting of nested same-name events {#pr-58800}",
-      "url": "https://github.com/rails/rails/pull/58800",
-      "mergedAt": "2026-09-22T00:00:00.000Z",
-      "author": "Edilbek",
-      "authorUrl": "https://github.com/Edilbek",
-      "summary": "1. 概要 (1-2文で)  \n`ActionDispatch::ServerTiming` が同一名前のネストしたイベントを「二重計上」していたため、`Server-Timing` ヘッダの時間が実際の処理時間より過大になる問題(#48375)を修正し、同一イベント名ごとに **排他的（exclusive）な時間の合計** を出すように変更した PR です。  \nこれにより、`render_partial.action_view` などのメトリクスがリクエスト全体時間を超えるといった不自然な表示が解消されます。"
-    },
-    {
-      "number": 58852,
-      "title": "Memoize `MacroReflection#klass` for self-referential associations {#pr-58852}",
-      "url": "https://github.com/rails/rails/pull/58852",
-      "mergedAt": "2026-09-22T00:00:00.000Z",
-      "author": "55728",
-      "authorUrl": "https://github.com/55728",
-      "summary": "1. 概要 (1-2文で)  \n自己参照関連（`class_name: \"Comment\"` のように自分自身を指す関連）に対して、`MacroReflection#klass` のメモ化が効いていなかったバグを修正するPRです。これにより、自己参照関連でも関連先クラスの解決が1度だけ行われ、以降はキャッシュされたクラスが利用されるようになります。"
-    },
-    {
-      "number": 58850,
-      "title": "Fix NoMethodError when Active Job's logger is a BroadcastLogger {#pr-58850}",
-      "url": "https://github.com/rails/rails/pull/58850",
-      "mergedAt": "2026-09-22T00:00:00.000Z",
-      "author": "petrenkorf",
-      "authorUrl": "https://github.com/petrenkorf",
-      "summary": "1. 概要 (1-2文で)  \nActive Job が `BroadcastLogger` を使っているときに、非タグ付きロガーに対して `NoMethodError` (`current_tags` がない) が発生していた不具合を修正する PR です。`logger.respond_to?(:tagged)` に依存せず、`formatter` が `current_tags` に対応しているかを正しく判定するように変更されています。"
-    },
-    {
-      "number": 58429,
-      "title": "Fix BroadcastLogger#tagged when broadcasting to multiple tagging loggers {#pr-58429}",
-      "url": "https://github.com/rails/rails/pull/58429",
-      "mergedAt": "2026-09-21T00:00:00.000Z",
-      "author": "ousamabenyounes",
-      "authorUrl": "https://github.com/ousamabenyounes",
-      "summary": "1. 概要 (1-2文で)  \nActiveSupport::BroadcastLogger が複数の TaggedLogging ロガーに対して `#tagged` を呼ぶと壊れていた挙動を修正し、ブロックあり/なし両方のケースで直感的かつ一貫したタグ付きロギングができるようにした PR です。`#tagged` を明示的に実装し、これまで `method_missing` で起きていた Array 返却やブロックの多重実行を解消しています。"
     }
   ]
 }
