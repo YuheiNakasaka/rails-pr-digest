@@ -1,7 +1,43 @@
 {
-  "lastUpdated": "2026-10-06T00:16:19.955Z",
+  "lastUpdated": "2026-10-07T00:15:07.300Z",
   "totalCount": 50,
   "items": [
+    {
+      "number": 58904,
+      "title": "Use a BoundSchemaReflection for the Ractor proxy pool's schema cache {#pr-58904}",
+      "url": "https://github.com/rails/rails/pull/58904",
+      "mergedAt": "2026-10-06T00:00:00.000Z",
+      "author": "gmcgibbon",
+      "authorUrl": "https://github.com/gmcgibbon",
+      "summary": "1. 概要 (1-2文で)  \nRactor 用の Active Record プロキシ接続プールが持つスキーマキャッシュの実装を、独自クラスではなく「BoundSchemaReflection」を用いたよりシンプルな仕組みに置き換えた PRです。これにより、Ractor 向けアダプタ周辺のスキーマキャッシュ用コードが整理・削減され、保守性と一貫性が向上しています。"
+    },
+    {
+      "number": 58956,
+      "title": "Fix `to_markdown` code spans broken by tables and adjacent code {#pr-58956}",
+      "url": "https://github.com/rails/rails/pull/58956",
+      "mergedAt": "2026-10-06T00:00:00.000Z",
+      "author": "flavorjones",
+      "authorUrl": "https://github.com/flavorjones",
+      "summary": "1. 概要 (1-2文で)  \nAction Text の `to_markdown` が `<code>`/`<pre>` 含みの HTML を Markdown に変換する際に、テーブル内のコードや隣接するコード要素が原因でコードスパンが壊れ、結果として本来除去されるべき危険なリンク（`javascript:` など）がレンダリングされてしまう不具合を修正した PR です。併せて、「`to_markdown` はベストエフォートで unsafe link を落とすが、最終的な HTML は別途サニタイズすべき」という注意書きも追加されています。"
+    },
+    {
+      "number": 58949,
+      "title": "[ci skip] Fix broken RDoc markup reference links in API guidelines {#pr-58949}",
+      "url": "https://github.com/rails/rails/pull/58949",
+      "mergedAt": "2026-10-06T00:00:00.000Z",
+      "author": "estebansa19",
+      "authorUrl": "https://github.com/estebansa19",
+      "summary": "1. 概要 (1-2文で)  \nRails のガイド「API Documentation Guidelines」に含まれていた RDoc のマークアップリファレンスへのリンクが 404 になっていたため、現在有効な URL に差し替えた修正です。コードには一切影響せず、ドキュメントのリンク切れのみを解消しています。"
+    },
+    {
+      "number": 58946,
+      "title": "Build the insert values list once for raw `on_duplicate` upserts on MySQL {#pr-58946}",
+      "url": "https://github.com/rails/rails/pull/58946",
+      "mergedAt": "2026-10-06T00:00:00.000Z",
+      "author": "fabbyd",
+      "authorUrl": "https://github.com/fabbyd",
+      "summary": "1. 概要 (1-2文で)  \nMySQL 8.0.19以降で、`upsert_all` / `upsert` に「生の SQL フラグメント」を `on_duplicate:` オプションとして渡した場合に、INSERT の `VALUES` 句が二重に組み立てられてしまう問題を解消し、Ruby 側の処理コストを大きく削減するパフォーマンス改善です。挙動や生成される SQL 自体は変わらず、同じバイト列を維持したまま内部の組み立て順序だけ最適化しています。"
+    },
     {
       "number": 58943,
       "title": "Fix default_headers example in new_framework_defaults_8_2 {#pr-58943}",
@@ -415,42 +451,6 @@
       "author": "bhumi1102",
       "authorUrl": "https://github.com/bhumi1102",
       "summary": "1. 概要 (1–2文で)  \nActive Record の「複合主キー」ガイド (Active Record Composite Primary Keys Guide) を全面的に更新し、コード例や説明を大幅に追加したドキュメント改善の PR です。Rails Foundation のドキュメンテーションプロジェクトの一環であり、実装そのものではなくガイドの内容を最新かつ実践的にすることが目的です。"
-    },
-    {
-      "number": 58855,
-      "title": "Drop needless schema qualification from db/schema.rb on PostgreSQL {#pr-58855}",
-      "url": "https://github.com/rails/rails/pull/58855",
-      "mergedAt": "2026-09-25T00:00:00.000Z",
-      "author": "yahonda",
-      "authorUrl": "https://github.com/yahonda",
-      "summary": "1. 概要 (1-2文で)  \nPostgreSQL 環境で生成される `db/schema.rb` から「不要なスキーマ修飾」を取り除き、拡張機能やテーブル/enum 名に余計な `public.` や `tiger.` などを付けないようにした PR です。これにより、Rails 8.0 相当のシンプルな出力形式に戻しつつ、複数スキーマ利用時でも新規DBへのロードが失敗しにくくなります。"
-    },
-    {
-      "number": 58875,
-      "title": "Schema-qualify the regclass cast in check_all_foreign_keys_valid! {#pr-58875}",
-      "url": "https://github.com/rails/rails/pull/58875",
-      "mergedAt": "2026-09-25T00:00:00.000Z",
-      "author": "sedubois",
-      "authorUrl": "https://github.com/sedubois",
-      "summary": "1. 概要 (1-2文で)  \nRails 8.1.4 で導入された `check_all_foreign_keys_valid!` のバグにより、PostgreSQL (&lt; 18.4) 環境でスキーマ付きテーブルの外部キー検証が失敗またはすり抜ける問題を、`regclass` キャスト時にスキーマを明示することで修正する PR です。フィクスチャ読み込み時の `PG::UndefinedTable` や、別スキーマの外部キー違反の見逃しを防ぎます。"
-    },
-    {
-      "number": 58873,
-      "title": "Fix typos in Layouts and Rendering guide [ci skip] {#pr-58873}",
-      "url": "https://github.com/rails/rails/pull/58873",
-      "mergedAt": "2026-09-25T00:00:00.000Z",
-      "author": "bastin27",
-      "authorUrl": "https://github.com/bastin27",
-      "summary": "1. 概要 (1-2文で)  \nLayouts and Rendering ガイド (`guides/source/layouts_and_rendering.md`) に含まれていたスペルミスを修正する、ドキュメントのみの変更です。アプリケーションコードや挙動には一切影響しません。\n\n2. 変更内容の詳細(あればサンプルコードも含めて)  \n対象: `guides/source/layouts_and_rendering.md` のみ（+8 / -8 行）\n\n修正されたスペルミス:\n- セクション見出し  \n  - `Hierarcy` → `Hierarchy`  \n    - レイアウトやテンプレートの「階層構造」を説明するセクション見出しのタイポ修正。\n- 本文中の単語  \n  - `reponses` → `responses`  \n    - コントローラが返す HTTP レスポンス等を説明している箇所のタイポ修正。\n  - `explicity` / `Explicity` / `Explitly` → `explicitly` / `Explicitly`  \n    - レイアウトやテンプレートを「明示的に」指定する説明で、同じ単語のスペルミスが複数箇所あったものを統一して修正。\n  - `stucturally` → `structurally`  \n    - ビューやレイアウトの構造的な側面を説明している文でのタイポ修正。\n\nいずれも英単語の綴りのみを変更しており、文章の意味やサンプルコードの挙動に変更はありません。\n\n3. 影響範囲・注意点  \n- 影響範囲  \n  - Rails Guides（英語版ドキュメント）の「Layouts and Rendering」ガイドに限定されます。\n  - フレームワーク本体のコード、API、挙動、互換性には一切変更がありません。\n- 注意点  \n  - ドキュメントを引用しているブログ記事・資料などで、古い綴りのまま残っている可能性がありますが、機能的な問題にはなりません。\n  - ガイドを自前で翻訳・ミラーしている場合は、該当ファイルの差分を取り込むことで誤記を解消できます。\n\n4. 参考情報 (あれば)  \n- PR: https://github.com/rails/rails/pull/58873  \n- Rails ドキュメント貢献ガイド:  \n  https://edgeguides.rubyonrails.org/contributing_to_ruby_on_rails.html#contributing-to-the-rails-documentation  \n- 対象ガイド (edge guides):  \n  https://edgeguides.rubyonrails.org/layouts_and_rendering.html"
-    },
-    {
-      "number": 58872,
-      "title": "Fix BigInteger casting truncating strings to 16 bytes {#pr-58872}",
-      "url": "https://github.com/rails/rails/pull/58872",
-      "mergedAt": "2026-09-25T00:00:00.000Z",
-      "author": "SulimanAbdulrazzaq",
-      "authorUrl": "https://github.com/SulimanAbdulrazzaq",
-      "summary": "1. 概要 (1-2文で)  \nBigInteger と scale なし decimal カラムに対する文字列 → 整数キャスト時に、先頭 16 バイトで暗黙に切り捨てられていたバグを修正する PR です。`Integer` のバイト数上限の考え方を整理しつつ、`BigInteger` では精度（precision）に応じたより妥当な上限を使うように変更しています。"
     }
   ]
 }
