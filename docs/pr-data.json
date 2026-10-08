@@ -1,7 +1,61 @@
 {
-  "lastUpdated": "2026-10-07T00:15:07.300Z",
+  "lastUpdated": "2026-10-08T00:13:07.772Z",
   "totalCount": 50,
   "items": [
+    {
+      "number": 58973,
+      "title": "[doc][ci skip] Fix incorrect route in Generators guide {#pr-58973}",
+      "url": "https://github.com/rails/rails/pull/58973",
+      "mergedAt": "2026-10-07T00:00:00.000Z",
+      "author": "hachi8833",
+      "authorUrl": "https://github.com/hachi8833",
+      "summary": "1. 概要 (1-2文で)  \nGenerators ガイド内のルーティング例で、`PeopleController#index` に対応するパスが誤って単数形 `person` になっていたのを、正しい複数形 `people` に修正するドキュメントのみの変更です。アプリケーションコードや挙動には一切影響しません。"
+    },
+    {
+      "number": 58971,
+      "title": "[doc][ci skip] Fix wrong job name in config.active_record.queues.destroy docs {#pr-58971}",
+      "url": "https://github.com/rails/rails/pull/58971",
+      "mergedAt": "2026-10-07T00:00:00.000Z",
+      "author": "hachi8833",
+      "authorUrl": "https://github.com/hachi8833",
+      "summary": "1. 概要 (1-2文で)  \n`config.active_record.queues.destroy` の公式ガイドの説明文に、誤って「purge jobs」を指している箇所があり、実際に設定対象となる「destroy jobs」に修正したドキュメントのみの変更です。コードや挙動は一切変わっておらず、説明文の内容が実装に揃えられました。\n\n2. 変更内容の詳細  \n\n対象:  \nRails ガイドの Configuring Rails Applications 内のセクション  \n[`config.active_record.queues.destroy`](https://guides.rubyonrails.org/configuring.html#config-active-record-queues-destroy)\n\n元の説明では:\n\n- `config.active_record.queues.destroy = nil` の場合、  \n  「purge jobs が default キューに送られる」  \n  という趣旨の文言になっていました。\n\nしかし、実際のオプションは:\n\n- `ActiveRecord::DestroyAssociationAsyncJob`（関連削除を非同期で行うジョブ）\n- つまり「destroy jobs」の実行キューを指定するオプション\n\nであり、「purge jobs（おそらく ActiveRecord::Purge… 系のジョブ）」のキュー設定ではありません。\n\nこの PR では説明文中の「purge jobs」を「destroy jobs」に修正し、実装とドキュメントの整合性を取っています。  \n※ guides/source/configuring.md における 1 行のみの修正で、サンプルコード等はありません。\n\n3. 影響範囲・注意点  \n\n- 影響範囲:\n  - 公式ドキュメントを読んでキュー設定を行う開発者に対する認識修正のみ\n  - Rails 本体の挙動や API は一切変更されていません\n- 注意点:\n  - 今まで「purge jobs のキュー設定」と誤解して `config.active_record.queues.destroy` を使っていた場合、その理解が間違いだったことに注意が必要です。\n  - destroy 関連（`ActiveRecord::DestroyAssociationAsyncJob`）と purge 関連（例: Active Storage や Active Record のクリーンアップ系ジョブ）のキュー設定を混同しないようにする必要があります。\n  - queue 設定の確認時には、対応するジョブクラス（この場合 `ActiveRecord::DestroyAssociationAsyncJob`）とオプション名を突き合わせると安全です。\n\n4. 参考情報 (あれば)  \n\n- 該当ガイド:  \n  https://guides.rubyonrails.org/configuring.html#config-active-record-queues-destroy  \n- 実装上関係するジョブクラス（参考）:  \n  - `ActiveRecord::DestroyAssociationAsyncJob`  \n    - has_many :through などの関連削除を非同期で行う際に利用されるジョブ  \n- 類似オプション（混同注意）:\n  - `config.active_record.queues.purge`（もし別途存在する場合）など、purge 系のキュー設定オプションとは用途が異なる点に注意してください。"
+    },
+    {
+      "number": 58969,
+      "title": "[doc][ci skip] Fix wrong config name for CheckPending in Rails on Rack guide {#pr-58969}",
+      "url": "https://github.com/rails/rails/pull/58969",
+      "mergedAt": "2026-10-07T00:00:00.000Z",
+      "author": "hachi8833",
+      "authorUrl": "https://github.com/hachi8833",
+      "summary": "1. 概要 (1-2文で)  \nRails Guides「Rails on Rack」で、未実行マイグレーション検知用ミドルウェア `ActiveRecord::Migration::CheckPending` を有効化する設定名が誤っていたため、正しい設定項目に修正し、併せてその設定を「Configuring Rails Applications」ガイドにも正式に追記したドキュメント修正です。アプリの動作には影響せず、ガイドの記述のみが更新されています。"
+    },
+    {
+      "number": 58968,
+      "title": "[doc][ci skip] Fix typo in caching_with_rails.md {#pr-58968}",
+      "url": "https://github.com/rails/rails/pull/58968",
+      "mergedAt": "2026-10-07T00:00:00.000Z",
+      "author": "hachi8833",
+      "authorUrl": "https://github.com/hachi8833",
+      "summary": "1. 概要 (1-2文で)  \nRailsガイド「caching_with_rails.md」において、権限ロール名の表記ゆれ／誤記を `superusers` から `super_admins` に修正したドキュメント専用のPRです。機能コードには一切変更がなく、挙動には影響しません。"
+    },
+    {
+      "number": 58963,
+      "title": "Use QueryResponse as raw result in ractor proxy adapters {#pr-58963}",
+      "url": "https://github.com/rails/rails/pull/58963",
+      "mergedAt": "2026-10-07T00:00:00.000Z",
+      "author": "gmcgibbon",
+      "authorUrl": "https://github.com/gmcgibbon",
+      "summary": "1. 概要 (1-2文で)  \nRails の Ractor 用プロキシアダプタで使われていた独自のクエリ結果オブジェクトを廃止し、標準の `QueryResponse` を「生の結果」として採用する変更です。これにより、`last_inserted_id` などの扱いがシンプルかつ一貫した形になります。"
+    },
+    {
+      "number": 58972,
+      "title": "File.atomic_write: better cleanup on error {#pr-58972}",
+      "url": "https://github.com/rails/rails/pull/58972",
+      "mergedAt": "2026-10-07T00:00:00.000Z",
+      "author": "byroot",
+      "authorUrl": "https://github.com/byroot",
+      "summary": "1. 概要 (1-2文で)  \n`File.atomic_write` で一時ファイルから本来のファイルへの `rename` が失敗した場合でも、一時ファイルを確実に削除するように後始末処理が改善されました。これにより、例外発生時に一時ファイルがディスク上に残り続ける問題が解消されます。"
+    },
     {
       "number": 58904,
       "title": "Use a BoundSchemaReflection for the Ractor proxy pool's schema cache {#pr-58904}",
@@ -397,60 +451,6 @@
       "author": "yahonda",
       "authorUrl": "https://github.com/yahonda",
       "summary": "1. 概要 (1-2文で)  \nPostgreSQL の拡張機能が所有しているテーブル・enum 型・スキーマを、Rails の `db/schema.rb` ダンプから自動的に除外する変更です。これにより、PostGIS や TimescaleDB、Citus などを使う環境でも `schema.rb` のロードがエラーで止まらず、拡張機能は `enable_extension` 経由で正しく再現されます。"
-    },
-    {
-      "number": 58819,
-      "title": "Improve headings in Guides Guidelines guide. {#pr-58819}",
-      "url": "https://github.com/rails/rails/pull/58819",
-      "mergedAt": "2026-09-25T00:00:00.000Z",
-      "author": "p8",
-      "authorUrl": "https://github.com/p8",
-      "summary": "1. 概要 (1-2文で)  \nこのPRは、Railsガイド「Guides Guidelines」ドキュメント内の見出しレベルと行折り(行幅)のルールを整理・統一したものです。ガイド内で `h2` 見出しを使う箇所を限定しつつ、テキストを80カラムで折り返すように編集しています。"
-    },
-    {
-      "number": 58165,
-      "title": "[RF-DOCS] Update the JavaScript in Rails guide {#pr-58165}",
-      "url": "https://github.com/rails/rails/pull/58165",
-      "mergedAt": "2026-09-25T00:00:00.000Z",
-      "author": "ayushn21",
-      "authorUrl": "https://github.com/ayushn21",
-      "summary": "1. 概要 (1-2文で)  \n「Working with JavaScript in Rails」ガイドを大幅に書き換え、Importmap と JavaScript バンドラの位置づけ整理、Hotwire（Turbo / Stimulus）の詳説、`request.js` の紹介など、現行 Rails に即した JavaScript 周りの公式ドキュメントをアップデートした PRです。従来よりも構成を整理し、実際の選択・導入・連携方法の理解がしやすくなる内容になっています。"
-    },
-    {
-      "number": 57573,
-      "title": "[RF-DOCS] Update the guide for using Rails as an API {#pr-57573}",
-      "url": "https://github.com/rails/rails/pull/57573",
-      "mergedAt": "2026-09-25T00:00:00.000Z",
-      "author": "ayushn21",
-      "authorUrl": "https://github.com/ayushn21",
-      "summary": "1. 概要 (1–2文で)  \nRails Guides の「Rails を API として使う」ガイドが、ステップバイステップのチュートリアル寄りな構成から、より一般的で最新の情報に沿ったリファレンス的な内容へ整理・改訂されました。あわせて JBuilder / Builder や XML レスポンス、Rack ミドルウェア・ActionController モジュールに関する説明が追補・更新されています。"
-    },
-    {
-      "number": 58879,
-      "title": "Skip the real structure dump test when MySQL's mysqldump targets MariaDB {#pr-58879}",
-      "url": "https://github.com/rails/rails/pull/58879",
-      "mergedAt": "2026-09-25T00:00:00.000Z",
-      "author": "yahonda",
-      "authorUrl": "https://github.com/yahonda",
-      "summary": "1. 概要 (1-2文で)  \nMySQL クライアントの `mysqldump` で MariaDB サーバーに対して実行すると失敗するテスト `test_structure_dump_output_disables_foreign_key_checks` を、該当環境ではスキップするように変更した PRです。これにより、Rails nightly の MariaDB ジョブが MySQL 8.0 クライアントとの組み合わせで落ちる問題を回避します。"
-    },
-    {
-      "number": 58263,
-      "title": "[RF-DOCS] Rewrite the debugging guide {#pr-58263}",
-      "url": "https://github.com/rails/rails/pull/58263",
-      "mergedAt": "2026-09-25T00:00:00.000Z",
-      "author": "ayushn21",
-      "authorUrl": "https://github.com/ayushn21",
-      "summary": "1. 概要 (1–2文で)  \nRailsガイド「Debugging Rails Applications」がほぼ全面的に書き換えられ、`debug` gem を中心にした現代的・実践的なデバッグフローに合わせて再構成されました。ビュー用ヘルパやログ、リモートデバッグ、メモリリークなどの章立ても整理され、古い／重複した情報が削除・置き換えられています。"
-    },
-    {
-      "number": 57348,
-      "title": "[RF-Docs] [ci-skip] Update Active Record Composite Primary Keys Guide  {#pr-57348}",
-      "url": "https://github.com/rails/rails/pull/57348",
-      "mergedAt": "2026-09-25T00:00:00.000Z",
-      "author": "bhumi1102",
-      "authorUrl": "https://github.com/bhumi1102",
-      "summary": "1. 概要 (1–2文で)  \nActive Record の「複合主キー」ガイド (Active Record Composite Primary Keys Guide) を全面的に更新し、コード例や説明を大幅に追加したドキュメント改善の PR です。Rails Foundation のドキュメンテーションプロジェクトの一環であり、実装そのものではなくガイドの内容を最新かつ実践的にすることが目的です。"
     }
   ]
 }
