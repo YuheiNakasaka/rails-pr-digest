@@ -1,7 +1,70 @@
 {
-  "lastUpdated": "2026-10-08T00:13:07.772Z",
+  "lastUpdated": "2026-10-09T00:14:48.341Z",
   "totalCount": 50,
   "items": [
+    {
+      "number": 58767,
+      "title": "Store query constraints in `SchemaContext` {#pr-58767}",
+      "url": "https://github.com/rails/rails/pull/58767",
+      "mergedAt": "2026-10-08T00:00:00.000Z",
+      "author": "adrianna-chang-shopify",
+      "authorUrl": "https://github.com/adrianna-chang-shopify",
+      "summary": "1. 概要 (1-2文で)  \nこのPRでは、モデルに紐づく「クエリ制約（query constraints）」を `ActiveRecord::ModelSchema::SchemaContext` に保存・管理するように変更し、スキーマ読み込み時に制約を解決（resolve）する仕組みに移行しています。これにより、クエリ制約の評価タイミングがスキーマロード時に統一され、モデルレベルのアクセスはスキーマコンテキスト経由の委譲に整理されます。"
+    },
+    {
+      "number": 58992,
+      "title": "Require rails/structured_event_subscriber on boot {#pr-58992}",
+      "url": "https://github.com/rails/rails/pull/58992",
+      "mergedAt": "2026-10-08T00:00:00.000Z",
+      "author": "azmi2409",
+      "authorUrl": "https://github.com/azmi2409",
+      "summary": "1. 概要 (1-2文で)  \n`Rails::StructuredEventSubscriber` がフレームワーク起動時に自動で `require` されておらず、`config.active_support.deprecation = :notify` を設定しても `rails.deprecation` の構造化イベントが発火しない問題を修正した PR です。今後は `require \"rails\"` しただけでこのサブスクライバが読み込まれ、テストもその前提で動作するようになりました。"
+    },
+    {
+      "number": 58860,
+      "title": "Forward other options from has_one_attached and has_many_attached {#pr-58860}",
+      "url": "https://github.com/rails/rails/pull/58860",
+      "mergedAt": "2026-10-08T00:00:00.000Z",
+      "author": "jsaubry",
+      "authorUrl": "https://github.com/jsaubry",
+      "summary": "1. 概要 (1-2文で)  \n`has_one_attached` / `has_many_attached` が、`dependent`, `service`, `strict_loading`, `analyze` 以外の関連オプションも受け取り、内部で生成される `ActiveStorage::Attachment` 側の `has_one` / `has_many` にそのまま委譲できるようになりました。これにより、`validate:`, `after_add:`, `deprecated:` など通常の関連オプションを Active Storage の添付ファイル関連にも自然に指定できます。"
+    },
+    {
+      "number": 58988,
+      "title": "[doc][ci skip] Fix internal link for Active Support Instrumentation guide {#pr-58988}",
+      "url": "https://github.com/rails/rails/pull/58988",
+      "mergedAt": "2026-10-08T00:00:00.000Z",
+      "author": "hachi8833",
+      "authorUrl": "https://github.com/hachi8833",
+      "summary": "1. 概要 (1-2文で)  \nActive Support Instrumentationガイド内の内部リンク表記の誤りを修正した、ドキュメント専用のごく小さな変更です。コードや挙動には一切影響せず、ガイド内から`Continuation`クラスへのリンクが正しく表示されるようになります。"
+    },
+    {
+      "number": 58982,
+      "title": "Make the Ractor snapshot of the subscriptions an immutable registry {#pr-58982}",
+      "url": "https://github.com/rails/rails/pull/58982",
+      "mergedAt": "2026-10-08T00:00:00.000Z",
+      "author": "kamipo",
+      "authorUrl": "https://github.com/kamipo",
+      "summary": "1. 概要 (1-2文で)  \nRails の ActiveSupport::Notifications において、Ractor が利用する「購読情報（subscriptions）のスナップショット」の実装を、Hash のコピーから「イミュータブルなレジストリオブジェクト」への差し替えにより、スレッド／Ractor セーフかつシンプルな形に整理した PR です。Ractor 間での通知購読状態の取り扱いを安全かつ効率的にするための内部実装変更で、外部 API は基本的に変わりません。"
+    },
+    {
+      "number": 58976,
+      "title": "Make TimeZone.all and offset lookups work in non-main Ractors {#pr-58976}",
+      "url": "https://github.com/rails/rails/pull/58976",
+      "mergedAt": "2026-10-08T00:00:00.000Z",
+      "author": "yaroslav-shopify",
+      "authorUrl": "https://github.com/yaroslav-shopify",
+      "summary": "1. 概要 (1-2文で)  \n`ActiveSupport::TimeZone` を Ractor 環境で安全に使えるようにするため、`TimeZone.all` や `TimeZone[-5]` などがメイン Ractor 以外でも `Ractor::IsolationError` を出さずに動くよう、内部データ構造を `make_shareable!` で共有可能オブジェクトにする修正です。これにより `ractorize!` 利用時のタイムゾーン関連メソッドの不具合が解消されます。"
+    },
+    {
+      "number": 58985,
+      "title": "[doc][ci skip] Fix `local:` to `locals:` in Action View Overview guide {#pr-58985}",
+      "url": "https://github.com/rails/rails/pull/58985",
+      "mergedAt": "2026-10-08T00:00:00.000Z",
+      "author": "hachi8833",
+      "authorUrl": "https://github.com/hachi8833",
+      "summary": "1. 概要 (1-2文で)  \nAction View Overviewガイド中のヘルパーメソッドのシグネチャ表記で、誤って `local:` と書かれていた箇所を正しい `locals:` に修正したドキュメント専用PRです。コード本体には一切変更はなく、あくまでガイドの記述ミス修正です。"
+    },
     {
       "number": 58973,
       "title": "[doc][ci skip] Fix incorrect route in Generators guide {#pr-58973}",
@@ -388,69 +451,6 @@
       "author": "hmcguire-shopify",
       "authorUrl": "https://github.com/hmcguire-shopify",
       "summary": "1. 概要 (1-2文で)  \nIndexedRow が「同じカラム名が複数回選択される」ケースで、内部インデックスが実際の行配列のサイズを超えてしまう不整合を修正した PR です。行配列の長さを実際のクエリ結果行と揃えることで、インデックスアクセス時の範囲外参照を防いでいます。"
-    },
-    {
-      "number": 58888,
-      "title": "Don't assume a tagging logger keeps tags in its formatter {#pr-58888}",
-      "url": "https://github.com/rails/rails/pull/58888",
-      "mergedAt": "2026-09-29T00:00:00.000Z",
-      "author": "carlosdanielpohlod",
-      "authorUrl": "https://github.com/carlosdanielpohlod",
-      "summary": "1. 概要 (1-2文で)  \nAction Cable の `TaggedLoggerProxy` が「tag 機能を持つ logger は必ず formatter がタグを保持している」と仮定していたため、`BroadcastLogger` 利用時に例外が発生するバグを修正する PR です。タグを読むのは「formatter がタグを保持する場合だけ」に限定し、Action Job 側でしたのと同種の修正を Action Cable にも反映しています。"
-    },
-    {
-      "number": 58894,
-      "title": "Share MySQL-specific test schema between mysql2 and trilogy {#pr-58894}",
-      "url": "https://github.com/rails/rails/pull/58894",
-      "mergedAt": "2026-09-28T00:00:00.000Z",
-      "author": "seuros",
-      "authorUrl": "https://github.com/seuros",
-      "summary": "1. 概要 (1-2文で)  \nMySQL系アダプタ（mysql2 と trilogy）のテスト用スキーマ定義を1つのファイルに統合し、重複とドリフト（内容のズレ）を防ぐ変更です。trilogy 専用のスキーマファイルを削除し、mysql2 用と共通の `mysql_specific_schema.rb` を両方のアダプタで読み込むようにしています。"
-    },
-    {
-      "number": 58884,
-      "title": "Fix the Trilogy migration_strategy example in the migrations guide [ci skip] {#pr-58884}",
-      "url": "https://github.com/rails/rails/pull/58884",
-      "mergedAt": "2026-09-28T00:00:00.000Z",
-      "author": "ramen2020",
-      "authorUrl": "https://github.com/ramen2020",
-      "summary": "1. 概要 (1-2文で)  \nTrilogy アダプタ向けの `migration_strategy` 設定例が間違っており、そのままコピペすると例外が出てしまう問題を、ドキュメント上のクラス名を正しいものに修正した PR です。挙動変更はなく、Active Record Migrations ガイドのサンプルコードのみが修正されています。\n\n2. 変更内容の詳細(あればサンプルコードも含めて)  \nActive Record Migrations ガイドの「アダプタごとの `migration_strategy` を設定する例」で、Trilogy 用のサンプルが次のようになっていました：\n\n```ruby\nActiveSupport.on_load(:active_record_trilogyadapter) do\n  ActiveRecord::ConnectionAdapters::Trilogy.migration_strategy =\n    MySQLMigrationStrategy\nend\n```\n\nここで使われている `ActiveRecord::ConnectionAdapters::Trilogy` は、Trilogy のアダプタクラスではなく「モジュール」であり、`migration_strategy` は `AbstractAdapter` 上の `class_attribute` なので、「アダプタクラス」に対して設定する必要があります。\n\nTrilogy のアダプタクラスは `TrilogyAdapter` なので、正しくは以下のように書く必要があります：\n\n```ruby\nActiveSupport.on_load(:active_record_trilogyadapter) do\n  ActiveRecord::ConnectionAdapters::TrilogyAdapter.migration_strategy =\n    MySQLMigrationStrategy\nend\n```\n\nPR では、この一行だけが以下のように置き換えられています。\n\n- 修正前: `ActiveRecord::ConnectionAdapters::Trilogy.migration_strategy = ...`\n- 修正後: `ActiveRecord::ConnectionAdapters::TrilogyAdapter.migration_strategy = ...`\n\n作者は実際に `active_record/connection_adapters/trilogy_adapter` をロードした上で動作を確認しており、\n\n- 旧コード: `NoMethodError: undefined method 'migration_strategy=' for module ActiveRecord::ConnectionAdapters::Trilogy`\n- 修正後: 問題なく `TrilogyAdapter.migration_strategy = MySQLMigrationStrategy` が実行可能\n\nとなることを確認済みです。\n\n3. 影響範囲・注意点  \n\n- 影響範囲  \n  - ドキュメントのみの変更であり、本体コードや挙動には一切変更がありません。\n  - ただし、これまでガイドを見てそのままコピペしていた場合は、`NoMethodError` が発生していたはずで、それを防ぐ形になります。\n\n- 注意点 / 実際に書くべきコードのポイント  \n  - `migration_strategy` はアダプタクラス（ここでは `ActiveRecord::ConnectionAdapters::TrilogyAdapter`）に対して設定する必要があります。\n  - PostgreSQL 用の例では既に `PostgreSQLAdapter` に対して設定しており、Trilogy だけがモジュールを参照する誤りになっていました。\n  - `on_load` のフック名は `:active_record_trilogyadapter` を使う想定になっていますが、Trilogy を利用しているアプリ側でこれと整合するように記述する必要があります。\n  - MySQL 用に独自の `MySQLMigrationStrategy` を作る場合は、通常の `ActiveRecord::MigrationContext` などの利用パターンと同様に、マイグレーション実行戦略をカスタマイズするクラスを実装したうえで、この `class_attribute` を差し替える運用になります。\n\n4. 参考情報 (あれば)  \n\n- 修正対象: `guides/source/active_record_migrations.md` の Trilogy 用 `migration_strategy` 設定例\n- 背景知識:\n  - `migration_strategy` は `ActiveRecord::ConnectionAdapters::AbstractAdapter` の `class_attribute`\n  - アダプタごとに異なるマイグレーション戦略を使いたいときに、各アダプタクラス (`PostgreSQLAdapter`, `TrilogyAdapter` など) に対して上書きして使う\n- 関連する正しいパターンの例（PostgreSQL）:\n  ```ruby\n  ActiveSupport.on_load(:active_record_postgresqladapter) do\n    ActiveRecord::ConnectionAdapters::PostgreSQLAdapter.migration_strategy =\n      PostgreSQLMigrationStrategy\n  end\n  ```"
-    },
-    {
-      "number": 58876,
-      "title": "Fix error matching for validations using except_on {#pr-58876}",
-      "url": "https://github.com/rails/rails/pull/58876",
-      "mergedAt": "2026-09-27T00:00:00.000Z",
-      "author": "afurm",
-      "authorUrl": "https://github.com/afurm",
-      "summary": "1. 概要 (1-2文で)  \n`except_on:` オプション付きバリデーションで、エラーが正しく一致判定されず `errors.details` にも余計な情報が残っていた不具合を修正する PR です。`except_on:` を `on:` などと同様に「コールバック用オプション」として扱うことで、エラー検索・表示が期待通りの挙動になります。"
-    },
-    {
-      "number": 58807,
-      "title": "Treat `false` as disabled for `idle_timeout`, `reaping_frequency` and `max_age` {#pr-58807}",
-      "url": "https://github.com/rails/rails/pull/58807",
-      "mergedAt": "2026-09-27T00:00:00.000Z",
-      "author": "carlosdanielpohlod",
-      "authorUrl": "https://github.com/carlosdanielpohlod",
-      "summary": "1. 概要 (1-2文で)  \nRails の DB 接続設定（`idle_timeout`, `reaping_frequency`, `max_age`）に対して、`database.yml` で `false` を指定した場合に起きていた `NoMethodError` を解消し、`false` を「無効化」、`true` を「デフォルト値を使う」として扱うようにした変更です。これにより、`off`/`no`/`on`/`yes` といった YAML のブール表現でも直感的かつ一貫した設定ができるようになります。"
-    },
-    {
-      "number": 58886,
-      "title": "Fix typos in guides [ci skip] {#pr-58886}",
-      "url": "https://github.com/rails/rails/pull/58886",
-      "mergedAt": "2026-09-26T00:00:00.000Z",
-      "author": "bastin27",
-      "authorUrl": "https://github.com/bastin27",
-      "summary": "1. 概要 (1-2文で)  \nこのPRは、Rails公式ガイド内（Action View Overview、Action Controller Overview、Asset Pipeline）の誤字を修正した、ドキュメント専用の変更です。アプリケーションコードや挙動には一切影響しません。\n\n2. 変更内容の詳細(あればサンプルコードも含めて)  \n- 対象ファイル  \n  - `guides/source/action_view_overview.md`\n  - `guides/source/action_controller_overview.md`\n  - `guides/source/asset_pipeline.md`  \n\n- 内容  \n  - 各ガイド内のスペルミス・タイポを4行分修正（+4 / -4）。  \n  - 修正はあくまで文章上の誤字脱字のみで、サンプルコードやAPIの使い方の変更は含まれていません。  \n  - ガイドの可読性・正確性を高める目的の微修正です。\n\n（PR本文からも「This Pull Request fixes typos…」「Documentation-only change; no code or behavior is affected.」と明示されています）\n\n3. 影響範囲・注意点  \n- 影響範囲  \n  - Railsガイドの文章のみが対象で、フレームワークの本体コード、API仕様、挙動、パフォーマンスには影響しません。  \n  - 既存アプリケーション、テストコードの修正は不要です。  \n\n- 注意点  \n  - ドキュメントを日本語訳しているプロジェクトや社内Wikiなどで、該当ガイドを翻訳・引用している場合は、原文の更新に追随するかどうかを確認するとよいです。  \n  - タイポ修正のみのため、バージョン互換性などを気にする必要はありません。\n\n4. 参考情報 (あれば)  \n- ガイド執筆・修正に関する公式ガイドライン  \n  - https://edgeguides.rubyonrails.org/contributing_to_ruby_on_rails.html#contributing-to-the-rails-documentation  \n- 対象ガイド（Edge Guides版）  \n  - Action Controller Overview: https://edgeguides.rubyonrails.org/action_controller_overview.html  \n  - Action View Overview: https://edgeguides.rubyonrails.org/action_view_overview.html  \n  - Asset Pipeline: https://edgeguides.rubyonrails.org/asset_pipeline.html"
-    },
-    {
-      "number": 58878,
-      "title": "Skip extension member tables, enum types and schemas in the Ruby schema dump {#pr-58878}",
-      "url": "https://github.com/rails/rails/pull/58878",
-      "mergedAt": "2026-09-26T00:00:00.000Z",
-      "author": "yahonda",
-      "authorUrl": "https://github.com/yahonda",
-      "summary": "1. 概要 (1-2文で)  \nPostgreSQL の拡張機能が所有しているテーブル・enum 型・スキーマを、Rails の `db/schema.rb` ダンプから自動的に除外する変更です。これにより、PostGIS や TimescaleDB、Citus などを使う環境でも `schema.rb` のロードがエラーで止まらず、拡張機能は `enable_extension` 経由で正しく再現されます。"
     }
   ]
 }
