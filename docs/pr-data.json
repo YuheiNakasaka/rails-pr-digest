@@ -1,7 +1,178 @@
 {
-  "lastUpdated": "2026-10-09T00:14:48.341Z",
+  "lastUpdated": "2026-10-10T00:18:25.348Z",
   "totalCount": 50,
   "items": [
+    {
+      "number": 58745,
+      "title": "Speed up String#blank? by scanning bytes instead of running a regexp {#pr-58745}",
+      "url": "https://github.com/rails/rails/pull/58745",
+      "mergedAt": "2026-10-09T00:00:00.000Z",
+      "author": "yaroslav",
+      "authorUrl": "https://github.com/yaroslav",
+      "summary": "1. 概要 (1-2文で)  \n`String#blank?` の実装に「ASCII 文字列専用の高速パス」が追加され、ほとんどのアプリで多用される ASCII 文字列に対して、正規表現を使わずバイト列をスキャンすることで 3〜10倍程度高速化しています。非 ASCII 文字列や既存の判定ロジック・仕様は基本的にそのまま維持されます。"
+    },
+    {
+      "number": 59013,
+      "title": "Fix #59012: Range conditions on single-mapping composed_of aggregations {#pr-59013}",
+      "url": "https://github.com/rails/rails/pull/59013",
+      "mergedAt": "2026-10-09T00:00:00.000Z",
+      "author": "kushagr3",
+      "authorUrl": "https://github.com/kushagr3",
+      "summary": "1. 概要 (1-2文で)  \n`composed_of` で単一カラムにマッピングされた属性（例: `balance` に対する `Money`）に対して `Range` 条件を指定した際、SQL が `BETWEEN NULL AND NULL` になってしまう不具合を修正した PRです。`Range` の両端値を正しく元カラムの値にマッピングしてから既存のクエリ生成ロジックに渡すことで、`BETWEEN` 句が期待どおり生成されるようになりました。"
+    },
+    {
+      "number": 59014,
+      "title": "Combine constraint operations into bulk `ALTER TABLE` {#pr-59014}",
+      "url": "https://github.com/rails/rails/pull/59014",
+      "mergedAt": "2026-10-09T00:00:00.000Z",
+      "author": "kamipo",
+      "authorUrl": "https://github.com/kamipo",
+      "summary": "1. 概要 (1-2文で)  \n`bulk_change_table` などでの制約操作（外部キー・ユニーク・チェック・排他制約）を、単一の `ALTER TABLE` にまとめて発行できるようにするため、`AlterTable` を制約系の単一責任ポイントに整理した PR です。あわせて MySQL で `remove_column` と `remove_foreign_key` を同時に行う場合の二重 DROP 問題も解消しています。"
+    },
+    {
+      "number": 58998,
+      "title": "Don't break the debug page on JRuby (w/o ErrorHighlight or RubyVM::AbstractSyntaxTree) {#pr-58998}",
+      "url": "https://github.com/rails/rails/pull/58998",
+      "mergedAt": "2026-10-09T00:00:00.000Z",
+      "author": "mjansing",
+      "authorUrl": "https://github.com/mjansing",
+      "summary": "1. 概要 (1-2文で)  \nこのPRは、JRuby や `--disable-error_highlight` 環境の CRuby で、Rails のデバッグページ（開発時の「Action Controller: Exception caught」画面）が 500 の汎用エラーページにフォールバックしてしまう不具合を修正するものです。`ErrorHighlight` や `RubyVM::AbstractSyntaxTree` が存在しない環境では、それらを使ったカラム位置特定処理をスキップし、デバッグページ自体は正常表示されるようにします。"
+    },
+    {
+      "number": 59015,
+      "title": "[8-0-stable] Don't break the debug page on JRuby (w/o ErrorHighlight or RubyVM::AbstractSyntaxTree) {#pr-59015}",
+      "url": "https://github.com/rails/rails/pull/59015",
+      "mergedAt": "2026-10-09T00:00:00.000Z",
+      "author": "mjansing",
+      "authorUrl": "https://github.com/mjansing",
+      "summary": "1. 概要 (1-2文で)  \nRails 8.0 系で、JRuby や `--disable-error_highlight` 環境のときにデバッグページ（例外ページ）が壊れてしまう問題を修正した PR のバックポートです。`ErrorHighlight` や `RubyVM::AbstractSyntaxTree` が使えない環境でも、例外表示とソースコード抜粋まわりが安全に動くように調整されています。"
+    },
+    {
+      "number": 59006,
+      "title": "Make `ActiveSupport::Ractors.shareable?` version independent {#pr-59006}",
+      "url": "https://github.com/rails/rails/pull/59006",
+      "mergedAt": "2026-10-09T00:00:00.000Z",
+      "author": "kamipo",
+      "authorUrl": "https://github.com/kamipo",
+      "summary": "1. 概要 (1-2文で)  \n`ActiveSupport::Ractors.shareable?` の実装から Ruby バージョン依存のガードを外し、`Ractor` が存在する環境では常に `Ractor.shareable?` に委譲するように変更した PR です。これにより、`shareable?(nil)` など一部のケースで誤った偽値が返っていた不具合も修正されています。"
+    },
+    {
+      "number": 58964,
+      "title": "Speed up structured event logging {#pr-58964}",
+      "url": "https://github.com/rails/rails/pull/58964",
+      "mergedAt": "2026-10-09T00:00:00.000Z",
+      "author": "linyiru",
+      "authorUrl": "https://github.com/linyiru",
+      "summary": "1. 概要 (1-2文で)  \n本PRは、Railsの構造化イベントロギング（`start_processing`, `process_action` など）の内部実装を最適化し、ログの内容・挙動を変えずにリクエストあたり数％レベルで処理コストを削減する変更です。主に `ActiveSupport::EventReporter` と `LogSubscriber`、および `ColorizeLogging` の内部実装を見直し、不要なオブジェクト生成や命令数を抑えています。"
+    },
+    {
+      "number": 59011,
+      "title": "Fix broken cross-guide anchor links [ci skip] {#pr-59011}",
+      "url": "https://github.com/rails/rails/pull/59011",
+      "mergedAt": "2026-10-09T00:00:00.000Z",
+      "author": "SatvikMishra08",
+      "authorUrl": "https://github.com/SatvikMishra08",
+      "summary": "1. 概要 (1-2文で)  \nRails Guides 間のクロスリンクのうち、アンカー先のセクション名変更や移動によって壊れていたリンクを現状のアンカーIDに合わせて修正した PR です。ドキュメントのみの変更で、アプリケーションコードや挙動には影響しません。"
+    },
+    {
+      "number": 58953,
+      "title": "[ci skip] Remove schema.rb column sorting from 8.1 guides {#pr-58953}",
+      "url": "https://github.com/rails/rails/pull/58953",
+      "mergedAt": "2026-10-09T00:00:00.000Z",
+      "author": "trysmr",
+      "authorUrl": "https://github.com/trysmr",
+      "summary": "1. 概要 (1-2文で)  \nRails 8.1 で導入されたと説明されていた「`schema.rb` のカラム名アルファベット順ソート」の記述が、実際には 8.1.4 でリバートされていることに合わせて、公式ガイドから削除された PR です。挙動自体は既に元に戻っており、ドキュメントだけを実態に合わせて修正しています。"
+    },
+    {
+      "number": 58961,
+      "title": "Reuse a frozen Mime::Type when looking up */* {#pr-58961}",
+      "url": "https://github.com/rails/rails/pull/58961",
+      "mergedAt": "2026-10-09T00:00:00.000Z",
+      "author": "linyiru",
+      "authorUrl": "https://github.com/linyiru",
+      "summary": "1. 概要 (1-2文で)  \nこのPRは、`Accept: */*` のリクエストごとに毎回新しい `Mime::Type` オブジェクトが生成されていた非効率な挙動を改善し、`\"*/*\"` の lookup 時に単一の凍結済みインスタンスを再利用するようにしてパフォーマンスとメモリアロケーションを削減するものです。外部から見た挙動（`request.format` や `respond_to` の動作など）は変えずに最適化のみを行っています。"
+    },
+    {
+      "number": 59010,
+      "title": "[docs][ci skip] Fix description of default_scope when building records {#pr-59010}",
+      "url": "https://github.com/rails/rails/pull/59010",
+      "mergedAt": "2026-10-09T00:00:00.000Z",
+      "author": "hachi8833",
+      "authorUrl": "https://github.com/hachi8833",
+      "summary": "1. 概要 (1-2文で)  \nRailsガイド（Active Record Query Interface）の「default_scope がレコード生成時にどう作用するか」の説明が、実際の挙動とずれていたため修正したドキュメント専用PRです。`default_scope` よりも「明示的に渡された属性」が優先されることを、文章とコード例で正しく示すようにしています。"
+    },
+    {
+      "number": 58991,
+      "title": "Log CSRF warnings at :warn level {#pr-58991}",
+      "url": "https://github.com/rails/rails/pull/58991",
+      "mergedAt": "2026-10-09T00:00:00.000Z",
+      "author": "azmi2409",
+      "authorUrl": "https://github.com/azmi2409",
+      "summary": "1. 概要 (1-2文で)  \nCSRF 関連のログイベント（`csrf_token_fallback`, `csrf_request_blocked`, `csrf_javascript_blocked`）が `:info` レベルで出力されるようになっていたため、`config.log_level = :warn` などの設定下でログに出なくなっていた問題を修正し、従来どおり `:warn` レベルで出るように戻した PR です。あわせて、`ActiveSupport::EventReporter::LogSubscriber` が `:warn` レベルのイベントを正しく処理できるようにし、関連するテストを追加しています。"
+    },
+    {
+      "number": 58999,
+      "title": "Enable summary output if -q/--quiet used with `rails test` {#pr-58999}",
+      "url": "https://github.com/rails/rails/pull/58999",
+      "mergedAt": "2026-10-09T00:00:00.000Z",
+      "author": "zenspider",
+      "authorUrl": "https://github.com/zenspider",
+      "summary": "1. 概要 (1-2文で)  \n`rails test` に `-q` / `--quiet` を付けたときでも、テストのサマリー出力（失敗数などの概要）が正しく表示されるようにする修正です。Minitest のレポーター構成まわりの挙動を、Rails プラグイン側で 1 行だけ調整しています。"
+    },
+    {
+      "number": 58881,
+      "title": "Don't modify a connected_to stack shared with another thread {#pr-58881}",
+      "url": "https://github.com/rails/rails/pull/58881",
+      "mergedAt": "2026-10-09T00:00:00.000Z",
+      "author": "SulimanAbdulrazzaq",
+      "authorUrl": "https://github.com/SulimanAbdulrazzaq",
+      "summary": "1. 概要 (1-2文で)  \n`ActiveRecord::Base.connected_to` 系が、スレッド間で共有されうる `connected_to` スタック配列を「その場で破壊的に変更」していたため、`ActionController::Live` 等でスレッドを共有した場合にロール／シャードが意図せず混線するバグを修正する PR です。スタック操作を「コピーして差し替える」方式に変更し、親スレッドと子スレッドでスタックが干渉しないようにしています。"
+    },
+    {
+      "number": 59002,
+      "title": "[doc][ci skip] Remove broken link to nonexistent Transactions section {#pr-59002}",
+      "url": "https://github.com/rails/rails/pull/59002",
+      "mergedAt": "2026-10-09T00:00:00.000Z",
+      "author": "hachi8833",
+      "authorUrl": "https://github.com/hachi8833",
+      "summary": "1. 概要 (1-2文で)  \nActive Record のガイド内で、存在しない「Transactions」セクションへのリンクが削除されたドキュメント修正PRです。壊れたリンクを取り除くだけの変更で、挙動やAPIには影響しません。\n\n2. 変更内容の詳細  \n- 対象ファイル: `guides/source/active_record_querying.md`  \n- 変更内容:  \n  - 「関連ガイド」リストの中から、`active_record_basics.html#transactions` へのリンクが削除されています。\n  - Active Record Basics ガイドには `#transactions` セクションが存在しないため、そのアンカー付きリンクが 404 になる状態でした。\n  - 元々 #56341 でトランザクション／ロッキングのガイドが将来的に追加されることを見越して残されていたものを、現状に合わせて一旦削除した形です。\n\n疑似的には、以下のような行が消えたイメージです（実際のテキストは若干異なる可能性があります）:\n\n```markdown\n* [Transactions](active_record_basics.html#transactions)\n```\n\n3. 影響範囲・注意点  \n- 影響範囲:\n  - Rails ガイド (特に Active Record Querying ガイド) から辿れるリンクが1つ減るのみで、アプリケーションコードやフレームワークの振る舞いには一切影響しません。\n  - 外部サイトや社内Wikiなどで、この壊れたURL (`active_record_basics.html#transactions`) に直接リンクしている場合、それはもともと 404 だったため、今回の変更で悪化することも改善することもありません（公式ガイド内からの導線が消えるだけ）。\n- 注意点:\n  - 今後「Transactions & Locking」などの新規ガイドが追加されたタイミングで、改めて正しいURLを指すリンクを追加する前提になっています。\n  - ドキュメントを翻訳・ミラーしているプロジェクトでは、同様に該当リンクの削除を取り込んでおくと、ユーザー体験の向上につながります。\n\n4. 参考情報 (あれば)  \n- 元になったPR・議論:\n  - #56341: Active Record 関連のガイド整備の中で、トランザクション／ロッキングのガイド案に紐づくリンクが追加されていた。\n  - #59002（本PR）: その未実装セクションへのリンクを一旦削除して整合性を取ったもの。\n- 今後、トランザクションについて学ぶ際の代替情報:\n  - 現在の Rails Guides では「Active Record Transactions」専用ガイド、または Locking に関する独立したセクションが存在するかどうかを、該当バージョンの Guides から別途確認する必要があります。  \n  - 公式APIドキュメント (`ActiveRecord::Base.transaction` など) も、トランザクションの挙動確認には有用です。"
+    },
+    {
+      "number": 59005,
+      "title": "[docs][ci skip] Fix inconsistent enum item {#pr-59005}",
+      "url": "https://github.com/rails/rails/pull/59005",
+      "mergedAt": "2026-10-09T00:00:00.000Z",
+      "author": "hachi8833",
+      "authorUrl": "https://github.com/hachi8833",
+      "summary": "1. 概要 (1-2文で)  \nこのPRは、Railsガイド（ドキュメント）内の enum の項目名が一箇所だけ他の箇所と不整合になっていた箇所を修正するものです。アプリケーションコードや挙動には影響せず、ドキュメント上の表記ゆれを揃えています。"
+    },
+    {
+      "number": 59008,
+      "title": "[docs][ci skip] Fix outdated reference to association order in `reorder` docs {#pr-59008}",
+      "url": "https://github.com/rails/rails/pull/59008",
+      "mergedAt": "2026-10-09T00:00:00.000Z",
+      "author": "hachi8833",
+      "authorUrl": "https://github.com/hachi8833",
+      "summary": "1. 概要 (1-2文で)  \nActive Record Query Interface ガイドの `reorder` セクションで、サンプルコードと説明文の内容が食い違っていた箇所を修正したドキュメント専用のPRです。`reorder` が「何の ORDER BY を上書きするのか」という説明を、実際の `default_scope` ベースのサンプルに合うように書き換えています。"
+    },
+    {
+      "number": 59004,
+      "title": "[docs][ci skip] Fix env var check in Active Job halting callbacks example {#pr-59004}",
+      "url": "https://github.com/rails/rails/pull/59004",
+      "mergedAt": "2026-10-09T00:00:00.000Z",
+      "author": "hachi8833",
+      "authorUrl": "https://github.com/hachi8833",
+      "summary": "1. 概要 (1-2文で)  \nActive Job ガイドの「Halting Callbacks」例で、環境変数の判定ロジックが常にジョブを中断してしまう不具合があったため、意図どおり「環境変数が `\"true\"` のときだけ中断」になるようにドキュメントが修正されています。コード本体ではなくドキュメントのみの変更です。"
+    },
+    {
+      "number": 59003,
+      "title": "[docs][ci skip] Fix typo in Active Job guide {#pr-59003}",
+      "url": "https://github.com/rails/rails/pull/59003",
+      "mergedAt": "2026-10-09T00:00:00.000Z",
+      "author": "hachi8833",
+      "authorUrl": "https://github.com/hachi8833",
+      "summary": "1. 概要 (1-2文で)  \nこのPRは、Active Job ガイド (`active_job_basics.md`) 内の単純な英単語のタイポを修正したドキュメント専用の変更です。機能コードには一切手が入っておらず、挙動の変更や互換性への影響はありません。\n\n2. 変更内容の詳細  \n\n- 変更対象ファイル: `guides/source/active_job_basics.md`\n- 変更内容: 英文中の誤記 `\"users\"` を `\"uses\"` に修正  \n\n文脈としては、Active Job の使い方・利用例を説明するガイドの中で、  \n「〜を users する」ではなく「〜を uses する」が正しい文法になる箇所を修正したものです。\n\n（擬似的な例）  \n修正前（イメージ）:\n```markdown\nActive Job users the configured queue adapter to enqueue jobs.\n```\n\n修正後（イメージ）:\n```markdown\nActive Job uses the configured queue adapter to enqueue jobs.\n```\n\n実際には、上記はイメージですが、同様に `\"users\"` → `\"uses\"` という単語レベルの修正のみが行われています。\n\n3. 影響範囲・注意点  \n\n- 影響範囲  \n  - Railsガイド（ドキュメント）のみ。  \n  - フレームワークのコード、API、挙動、パフォーマンスには一切影響しません。\n  - テストや本番環境の挙動も変化しません。\n\n- 注意点  \n  - ドキュメントの英語表現が自然になり、読解性が向上しただけの変更です。\n  - コードベースの更新や設定変更など、開発者が追随する必要はありません。\n\n4. 参考情報 (あれば)  \n\n- PRタイトルに `[ci skip]` が付いており、CI を走らせないドキュメント専用修正であることが明示されています。\n- 変更は 1 ファイル・1行の置換のみで、他機能との関連や副作用はありません。"
+    },
     {
       "number": 58767,
       "title": "Store query constraints in `SchemaContext` {#pr-58767}",
@@ -280,177 +451,6 @@
       "author": "keshavbiswa",
       "authorUrl": "https://github.com/keshavbiswa",
       "summary": "1. 概要 (1-2文で)  \nActiveSupport::EventReporter がサブスクライバに渡すイベントデータ（ハッシュ）を `freeze` することで、サブスクライバ間での副作用や順序依存を防ぐ変更です。  \nこれにより、イベントの内容を書き換えようとするサブスクライバは `FrozenError` となり、通知されるイベントの整合性が保証されます。"
-    },
-    {
-      "number": 58680,
-      "title": "Cache ActiveSupport::ParameterFilter instances across requests {#pr-58680}",
-      "url": "https://github.com/rails/rails/pull/58680",
-      "mergedAt": "2026-10-02T00:00:00.000Z",
-      "author": "eregon",
-      "authorUrl": "https://github.com/eregon",
-      "summary": "1. 概要 (1-2文で)  \n各リクエストごとに生成されていた `ActiveSupport::ParameterFilter`（内部で複数の `Regexp` を生成）が、同じフィルタ一覧であればグローバルに再利用されるようになり、ログ用パラメータフィルタの構築コストが削減されました。これにより特にフィルタ数が多いアプリケーションや `config.precompile_filter_parameters` を無効にしている環境で、リクエストあたりのオーバーヘッドが有意に減少します。"
-    },
-    {
-      "number": 58289,
-      "title": "Roll back when a before_commit callback raises a rollback error {#pr-58289}",
-      "url": "https://github.com/rails/rails/pull/58289",
-      "mergedAt": "2026-10-02T00:00:00.000Z",
-      "author": "adam-h",
-      "authorUrl": "https://github.com/adam-h",
-      "summary": "1. 概要 (1–2文で)  \n`before_commit` コールバック内で `TransactionRollbackError` が発生した場合でも、トランザクションを正しくロールバックするように `within_new_transaction` の挙動が修正されました。これにより、トランザクションが開いたまま接続プールに戻ってしまう不具合が解消されます。"
-    },
-    {
-      "number": 58813,
-      "title": "Include extra node state in Arel equality {#pr-58813}",
-      "url": "https://github.com/rails/rails/pull/58813",
-      "mergedAt": "2026-10-02T00:00:00.000Z",
-      "author": "e-akashsaini",
-      "authorUrl": "https://github.com/e-akashsaini",
-      "summary": "1. 概要 (1–2文で)  \nArel の一部ノード (`Matches`, `DoesNotMatch`, `Regexp`, `NotRegexp`, `InfixOperation`, `UnaryOperation`) について、SQL 出力に影響する追加状態（escape 文字や大文字小文字区別フラグ、演算子）を `eql?` / `hash` 判定に含めるようにし、異なる条件が `where` のマージや `or` 結合時に誤って同一視されて消えてしまう問題を修正する PR です。  \nこれにより、`Relation#or` / `merge` / `WhereClause` の重複排除が、より直感的かつ安全な挙動になります（Active Record が自前で生成する通常のクエリは影響なし）。"
-    },
-    {
-      "number": 58918,
-      "title": "Remove dead code for Ruby < 3.3.5 {#pr-58918}",
-      "url": "https://github.com/rails/rails/pull/58918",
-      "mergedAt": "2026-10-02T00:00:00.000Z",
-      "author": "hmcguire-shopify",
-      "authorUrl": "https://github.com/hmcguire-shopify",
-      "summary": "1. 概要 (1-2文で)  \nRuby 3.3.5 未満向けのポリフィル（互換コード）を Active Record のコネクションプール／クエリキャッシュ周りから削除し、Ruby 3.3.5 以降を前提にした実装へ整理した PR です。これにより、Thread/Fiber 以外のキーを内部マップに使えるようになり、クエリキャッシュのクリア処理などで今後のパフォーマンス改善がしやすくなります。"
-    },
-    {
-      "number": 58919,
-      "title": "Don't duplicate integration tests' fixture paths {#pr-58919}",
-      "url": "https://github.com/rails/rails/pull/58919",
-      "mergedAt": "2026-10-02T00:00:00.000Z",
-      "author": "earlofurl",
-      "authorUrl": "https://github.com/earlofurl",
-      "summary": "1. 概要 (1-2文で)  \n`ActionDispatch::IntegrationTest` の `fixture_paths` が二重に登録されてしまう問題を修正し、同じフィクスチャを何度もロードし直してしまう非効率さを解消する PR です。これにより、特にフィクスチャ数が多いアプリケーションで、テスト全体の実行時間が大きく短縮されます。"
-    },
-    {
-      "number": 58917,
-      "title": "Remove dead code for Ruby < 3.3.1 {#pr-58917}",
-      "url": "https://github.com/rails/rails/pull/58917",
-      "mergedAt": "2026-10-01T00:00:00.000Z",
-      "author": "hmcguire-shopify",
-      "authorUrl": "https://github.com/hmcguire-shopify",
-      "summary": "1. 概要 (1-2文で)  \nRubyのサポート下限バージョンが 3.3.1 になったことを前提に、`Time` 計算まわりで「Ruby 3.3.1 未満向けのワークアラウンド（死んだコード）」を削除したPRです。テストは 3.3.1 以降の動作確認として有用なため、そのまま維持されています。"
-    },
-    {
-      "number": 58908,
-      "title": "Bump minimum Ruby version to 3.3.5 {#pr-58908}",
-      "url": "https://github.com/rails/rails/pull/58908",
-      "mergedAt": "2026-10-01T00:00:00.000Z",
-      "author": "hmcguire-shopify",
-      "authorUrl": "https://github.com/hmcguire-shopify",
-      "summary": "1. 概要 (1-2文で)  \nRails がサポートする最低 Ruby バージョンを 3.3.5 に引き上げる PR です。  \nこれにより、Weak{Key,}Map の use-after-free バグを前提にした独自ポリフィルを廃止でき、今後 Active Record のクエリキャッシュ周りをより効率的にリファクタリングできるようにする意図があります。"
-    },
-    {
-      "number": 58911,
-      "title": "Fix typos in guides [ci skip] {#pr-58911}",
-      "url": "https://github.com/rails/rails/pull/58911",
-      "mergedAt": "2026-10-01T00:00:00.000Z",
-      "author": "bastin27",
-      "authorUrl": "https://github.com/bastin27",
-      "summary": "1. 概要 (1-2文で)  \nRails の公式ガイドドキュメント内に含まれていた誤字・軽微な文法ミスを修正する PR です。コードや挙動への影響はなく、ドキュメントの可読性と正確さを高める目的の変更です。"
-    },
-    {
-      "number": 58898,
-      "title": "Avoid reprocessing ActiveRecord::Result column names {#pr-58898}",
-      "url": "https://github.com/rails/rails/pull/58898",
-      "mergedAt": "2026-10-01T00:00:00.000Z",
-      "author": "dersam",
-      "authorUrl": "https://github.com/dersam",
-      "summary": "1. 概要 (1-2文で)  \nActiveRecord::Result が内部で「カラム名の再処理（主に String の intern / freeze）」を行うのをやめ、DBアダプタ側での処理に一元化したパフォーマンス改善のPRです。  \nこれにより、不要な文字列オブジェクトの割り当てを避けつつ、カラム名配列は引き続き freeze される形になります。"
-    },
-    {
-      "number": 58892,
-      "title": "Fix input `id` not matching label `for` when collection value is an empty string {#pr-58892}",
-      "url": "https://github.com/rails/rails/pull/58892",
-      "mergedAt": "2026-10-01T00:00:00.000Z",
-      "author": "55728",
-      "authorUrl": "https://github.com/55728",
-      "summary": "1. 概要 (1-2文で)  \n`collection_radio_buttons` / `collection_check_boxes` などで、値が空文字列 `\"\"` のときに生成される `<input>` の `id` と `<label>` の `for` が一致しなくなるバグを修正した PRです。`nil` の場合の修正 (#57209) を拡張し、「サニタイズ結果が空文字列になる値」全般に対して一貫した ID 付与になるようにしています。"
-    },
-    {
-      "number": 58882,
-      "title": "Fix the :validate default in the Association Basics guide [ci skip] {#pr-58882}",
-      "url": "https://github.com/rails/rails/pull/58882",
-      "mergedAt": "2026-10-01T00:00:00.000Z",
-      "author": "ramen2020",
-      "authorUrl": "https://github.com/ramen2020",
-      "summary": "1. 概要 (1-2文で)  \nAssociation Basics ガイドの`:validate`オプションのデフォルト値説明が実装と食い違っていたため、関連の種類ごとに正しいデフォルト挙動が分かるように修正したドキュメント更新PRです。あわせて、`has_and_belongs_to_many` は `:validate` をサポートしないという誤った記述も削除されています。"
-    },
-    {
-      "number": 58883,
-      "title": "Fix range_field_tag and time_field_tag examples in the API docs [ci skip] {#pr-58883}",
-      "url": "https://github.com/rails/rails/pull/58883",
-      "mergedAt": "2026-10-01T00:00:00.000Z",
-      "author": "ramen2020",
-      "authorUrl": "https://github.com/ramen2020",
-      "summary": "1. 概要 (1-2文で)  \n`FormTagHelper` の API ドキュメント中で、`range_field_tag` / `time_field_tag` / `datetime_field_tag` のサンプルコードが実際の出力と食い違っていた問題を修正した PR です。実装の挙動は変えず、「ドキュメント上の例が正しく動く／正しく説明している状態」に揃えています。"
-    },
-    {
-      "number": 58864,
-      "title": "Generator tests avoid collisions by using a temporary directory. {#pr-58864}",
-      "url": "https://github.com/rails/rails/pull/58864",
-      "mergedAt": "2026-10-01T00:00:00.000Z",
-      "author": "ChaelCodes",
-      "authorUrl": "https://github.com/ChaelCodes",
-      "summary": "1. 概要 (1-2文で)\nRails のジェネレータ用テストが、テストごとに一時ディレクトリを使うようになり、`tmp/generators` 共有による並列実行時のファイル競合・テストのフレークが解消されました。これに伴い、テスト用の出力ディレクトリの削除タイミングが `setup` から `teardown` に変更されています。"
-    },
-    {
-      "number": 58893,
-      "title": "Remove support for dynamic controller/action in routes {#pr-58893}",
-      "url": "https://github.com/rails/rails/pull/58893",
-      "mergedAt": "2026-09-30T00:00:00.000Z",
-      "author": "tenderlove",
-      "authorUrl": "https://github.com/tenderlove",
-      "summary": "1. 概要 (1–2文で)  \nこのPRでは、Railsのルーティングから「URLパラメータから `:controller` や `:action` を動的に読み取る」仕組みが完全に削除されました。Rails 5.0 から非推奨だった `get \":controller(/:action(/:id))\"` 形式などが今後はエラーとなり、コントローラとアクションを明示的に指定する書き方へ移行する必要があります。"
-    },
-    {
-      "number": 58907,
-      "title": "Document minimum Ruby version for 8.2 {#pr-58907}",
-      "url": "https://github.com/rails/rails/pull/58907",
-      "mergedAt": "2026-09-30T00:00:00.000Z",
-      "author": "hmcguire-shopify",
-      "authorUrl": "https://github.com/hmcguire-shopify",
-      "summary": "1. 概要 (1-2文で)  \nRails 8.2 で必要となる「最低 Ruby バージョン」を、公式アップグレードガイドに明示したドキュメント修正の PR です。コード変更はなく、ガイドラインの追記のみが行われています。\n\n2. 変更内容の詳細  \n\n- 変更ファイル: `guides/source/upgrading_ruby_on_rails.md`  \n- 行追加: 1行（削除なし）\n\n内容としては、「Rails 8.2 にアップグレードする際に要求される Ruby の最低バージョン」をアップグレードガイドに追記しています。  \n実際の文面は PR 情報からは読み取れませんが、典型的には以下のような形で記載されます:\n\n```md\nRails 8.2 requires Ruby X.Y.Z or newer.\n```\n\nもしくは、既存の「バージョンごとの必要 Ruby バージョン一覧」の表や箇条書きに、Rails 8.2 分が1行追加されている可能性が高いです。\n\nコード例が変わったわけではなく、「この Rails バージョンで使ってよい Ruby の範囲」を明示するためのドキュメント更新です。\n\n3. 影響範囲・注意点  \n\n- 実行時挙動・API には一切変更がなく、**ドキュメントのみの変更**です。\n- ただし、この記述により以下が明確になります:\n  - Rails 8.2 にアップグレードする前に、使用中の Ruby が最低バージョンを満たしているかを確認する必要がある。\n  - CI の Ruby バージョンマトリックスや `.ruby-version`, `Gemfile` の `ruby` 宣言などを、ドキュメントの要件に合わせて更新すべきかどうか判断しやすくなる。\n- 「まだ Rails 8.2 の最低 Ruby バージョンを誤って低く想定していた」プロジェクトでは、実際のアップグレード作業前に Ruby 自体のアップグレード計画が必要になる点に注意してください。\n\n4. 参考情報 (あれば)  \n\n- 実際の最低 Ruby バージョンは、以下のいずれかを確認するのが確実です:\n  - 該当 PR (#58907) の diff（`upgrading_ruby_on_rails.md` 内の記述）\n  - Rails ガイド: Upgrading Ruby on Rails  \n    https://guides.rubyonrails.org/upgrading_ruby_on_rails.html\n  - Rails の gemspec (`rails.gemspec`) や各コンポーネントの gemspec に書かれている `required_ruby_version`  \n\nこれらを確認して、`Gemfile` 等に:\n\n```ruby\nruby \"X.Y.Z\"\n```\n\nのように明示することで、チーム全体で Rails 8.2 対応の Ruby バージョンを統一できます。"
-    },
-    {
-      "number": 58905,
-      "title": "Lazy call_arg inspection for attribute methods {#pr-58905}",
-      "url": "https://github.com/rails/rails/pull/58905",
-      "mergedAt": "2026-09-30T00:00:00.000Z",
-      "author": "hmcguire-shopify",
-      "authorUrl": "https://github.com/hmcguire-shopify",
-      "summary": "1. 概要 (1-2文で)  \n`ActiveModel::AttributeMethods` 内で、属性メソッド生成時の `call_args` の `inspect` 呼び出しを「必要になった時だけ実行する」ように変更し、無駄な String オブジェクトの生成を減らすパフォーマンス改善です。モデル × カラム × 属性メソッドごとに発生していた余計な文字列割り当てが、ほとんどのケースで発生しなくなります。"
-    },
-    {
-      "number": 58746,
-      "title": "Escape JSON with String#tr!  {#pr-58746}",
-      "url": "https://github.com/rails/rails/pull/58746",
-      "mergedAt": "2026-09-30T00:00:00.000Z",
-      "author": "federico-carrocera",
-      "authorUrl": "https://github.com/federico-carrocera",
-      "summary": "1. 概要 (1-2文で)  \nRails の JSON エンコード処理において、特殊文字のエスケープを `String#gsub!` ベースから `String#tr!`（ハッシュ対応版）を用いた実装へ最適化し、大きめの JSON ドキュメントで大きなパフォーマンス向上を図った PR です。エンコードが不正な場合は従来どおり `gsub!` にフォールバックするため、互換性を保ちつつ高速化しています。"
-    },
-    {
-      "number": 58903,
-      "title": "Fix `to_markdown` links that Markdown renderers turn into `javascript:` links {#pr-58903}",
-      "url": "https://github.com/rails/rails/pull/58903",
-      "mergedAt": "2026-09-29T00:00:00.000Z",
-      "author": "flavorjones",
-      "authorUrl": "https://github.com/flavorjones",
-      "summary": "1. 概要 (1-2文で)  \n`ActionText#to_markdown` が生成するリンクについて、一部の Markdown レンダラーで `javascript:` スキームに変換されてしまうケースがあった問題を修正した PRです。`allowed_uri?` によるスキームチェックがレンダリング後も有効に機能するよう、リンク先 href のエンコード方法が見直されています。"
-    },
-    {
-      "number": 58896,
-      "title": "Fix IndexedRow lookups when columns aren't unique {#pr-58896}",
-      "url": "https://github.com/rails/rails/pull/58896",
-      "mergedAt": "2026-09-29T00:00:00.000Z",
-      "author": "hmcguire-shopify",
-      "authorUrl": "https://github.com/hmcguire-shopify",
-      "summary": "1. 概要 (1-2文で)  \nIndexedRow が「同じカラム名が複数回選択される」ケースで、内部インデックスが実際の行配列のサイズを超えてしまう不整合を修正した PR です。行配列の長さを実際のクエリ結果行と揃えることで、インデックスアクセス時の範囲外参照を防いでいます。"
     }
   ]
 }
