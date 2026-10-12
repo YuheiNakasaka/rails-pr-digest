@@ -1,7 +1,16 @@
 {
-  "lastUpdated": "2026-10-11T00:13:56.306Z",
+  "lastUpdated": "2026-10-12T00:14:25.802Z",
   "totalCount": 50,
   "items": [
+    {
+      "number": 59030,
+      "title": "Speed up `String#blank?` further by avoiding repeated `bytesize` calls {#pr-59030}",
+      "url": "https://github.com/rails/rails/pull/59030",
+      "mergedAt": "2026-10-11T00:00:00.000Z",
+      "author": "fatkodima",
+      "authorUrl": "https://github.com/fatkodima",
+      "summary": "1. 概要 (1-2文で)  \n`String#blank?` の実装を微調整し、ASCII文字列かつ全体が空白かどうかを調べる処理で `bytesize` を何度も呼ばないようにすることで、一部ケースで高速化した PR です。特に先頭が空白の ASCII 文字列や空白のみの長い文字列で 1.1〜1.4倍程度の改善が確認されています。"
+    },
     {
       "number": 58745,
       "title": "Speed up String#blank? by scanning bytes instead of running a regexp {#pr-58745}",
@@ -442,15 +451,6 @@
       "author": "hmcguire-shopify",
       "authorUrl": "https://github.com/hmcguire-shopify",
       "summary": "1. 概要 (1-2文で)  \nこのPRは、Active Record の `in_order_of` と CTE (Common Table Expression) を組み合わせた場合に、Out-of-Band (OOB) ローディング周りの挙動が正しく動作することを確認するテストを追加するものです。機能追加や挙動変更はなく、既存機能の回 regressions 防止のためのテスト強化が目的です。"
-    },
-    {
-      "number": 58913,
-      "title": "Freeze events emitted by ActiveSupport::EventReporter {#pr-58913}",
-      "url": "https://github.com/rails/rails/pull/58913",
-      "mergedAt": "2026-10-02T00:00:00.000Z",
-      "author": "keshavbiswa",
-      "authorUrl": "https://github.com/keshavbiswa",
-      "summary": "1. 概要 (1-2文で)  \nActiveSupport::EventReporter がサブスクライバに渡すイベントデータ（ハッシュ）を `freeze` することで、サブスクライバ間での副作用や順序依存を防ぐ変更です。  \nこれにより、イベントの内容を書き換えようとするサブスクライバは `FrozenError` となり、通知されるイベントの整合性が保証されます。"
     }
   ]
 }
