@@ -1,7 +1,34 @@
 {
-  "lastUpdated": "2026-10-12T00:14:25.802Z",
+  "lastUpdated": "2026-10-13T00:14:23.612Z",
   "totalCount": 50,
   "items": [
+    {
+      "number": 59040,
+      "title": "Fix disable_joins through associations with a composite owner foreign key {#pr-59040}",
+      "url": "https://github.com/rails/rails/pull/59040",
+      "mergedAt": "2026-10-12T00:00:00.000Z",
+      "author": "federico-carrocera",
+      "authorUrl": "https://github.com/federico-carrocera",
+      "summary": "1. 概要 (1-2文で)  \n`disable_joins: true` を使った `has_many :through` で、オーナー側の外部キーが複合キー（例: `[:tenant_id, :id]`）の場合に発生していたバグを修正する PR です。複合外部キーを正しく読み取ることで、`ArgumentError` が出て関連がロードできない問題が解消されています。"
+    },
+    {
+      "number": 59039,
+      "title": "Extract ActiveSupport::WeakSet as an internal API {#pr-59039}",
+      "url": "https://github.com/rails/rails/pull/59039",
+      "mergedAt": "2026-10-12T00:00:00.000Z",
+      "author": "byroot",
+      "authorUrl": "https://github.com/byroot",
+      "summary": "1. 概要 (1-2文で)  \nActiveSupport 内部で使っていた「弱参照による Set 相当の仕組み」を `ActiveSupport::WeakSet` として独立した内部 API に切り出した PRです。主な利用箇所だった `ActiveSupport::DescendantsTracker` から実装を分離し、再利用しやすい形に整理しています。"
+    },
+    {
+      "number": 59034,
+      "title": "Use Ruby::Prism in ActionView::Template#spot when available {#pr-59034}",
+      "url": "https://github.com/rails/rails/pull/59034",
+      "mergedAt": "2026-10-12T00:00:00.000Z",
+      "author": "yahonda",
+      "authorUrl": "https://github.com/yahonda",
+      "summary": "1. 概要 (1-2文で)  \nRails 8.1 の ActionView テンプレートエラー時のハイライト機能が、Ruby master の変更（ErrorHighlight の挙動変更と Ruby::Prism 組み込み）によって壊れていた問題を修正する PR です。テストが不安定に落ちる原因を解消しつつ、Ruby 本体に組み込まれた `Ruby::Prism` を優先的に使うようにして、テンプレートのエラーハイライトを正しく動作させます。"
+    },
     {
       "number": 59030,
       "title": "Speed up `String#blank?` further by avoiding repeated `bytesize` calls {#pr-59030}",
@@ -424,33 +451,6 @@
       "author": "yahonda",
       "authorUrl": "https://github.com/yahonda",
       "summary": "1. 概要 (1-2文で)  \nRails の PostgreSQL アダプタに `maintenance_database` オプションが追加され、`db:create`, `db:drop`, `db:purge` が接続に使うデータベースを `postgres` 以外に変更できるようになりました。これにより、DigitalOcean など `postgres` データベースが存在しない / 接続できないマネージド PostgreSQL でも Rails の DB タスクが正常に動作します。"
-    },
-    {
-      "number": 58934,
-      "title": "Remove orphaned legacy adapter test fixtures {#pr-58934}",
-      "url": "https://github.com/rails/rails/pull/58934",
-      "mergedAt": "2026-10-05T00:00:00.000Z",
-      "author": "dpep",
-      "authorUrl": "https://github.com/dpep",
-      "summary": "1. 概要 (1-2文で)  \nRails Active Record のテスト用に一時的に置かれていた「レガシーアダプタ登録 API」向けのダミーアダプタ（`fake_legacy_adapter.rb` / `fake_misleading_legacy_adapter.rb`）が、もはやどこからも読み込まれておらず不要になったため削除された PR です。実行時の挙動やテスト結果に影響はなく、純粋なテストフィクスチャの掃除です。"
-    },
-    {
-      "number": 58929,
-      "title": "Clarify scope of record reloading {#pr-58929}",
-      "url": "https://github.com/rails/rails/pull/58929",
-      "mergedAt": "2026-10-03T00:00:00.000Z",
-      "author": "fxn",
-      "authorUrl": "https://github.com/fxn",
-      "summary": "1. 概要 (1-2文で)  \n`ActiveRecord::Persistence#reload` が「何を」「どこまで」リロードするのかを明確にするため、ドキュメント文言の改善と、それに対応するテストが追加された PR です。  \n主に「属性値と AR が管理する内部状態はリセットされるが、開発者が独自に持たせたカスタム状態はそのまま残る」ことが明示されました。"
-    },
-    {
-      "number": 58869,
-      "title": "Add test for OOB/in_order_of/CTE {#pr-58869}",
-      "url": "https://github.com/rails/rails/pull/58869",
-      "mergedAt": "2026-10-02T00:00:00.000Z",
-      "author": "hmcguire-shopify",
-      "authorUrl": "https://github.com/hmcguire-shopify",
-      "summary": "1. 概要 (1-2文で)  \nこのPRは、Active Record の `in_order_of` と CTE (Common Table Expression) を組み合わせた場合に、Out-of-Band (OOB) ローディング周りの挙動が正しく動作することを確認するテストを追加するものです。機能追加や挙動変更はなく、既存機能の回 regressions 防止のためのテスト強化が目的です。"
     }
   ]
 }
