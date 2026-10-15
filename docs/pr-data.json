@@ -1,7 +1,178 @@
 {
-  "lastUpdated": "2026-10-14T00:13:44.760Z",
+  "lastUpdated": "2026-10-15T00:16:01.774Z",
   "totalCount": 50,
   "items": [
+    {
+      "number": 59082,
+      "title": "Fix Action Text system tests leaving Chrome offline and leaking RACK_ENV {#pr-59082}",
+      "url": "https://github.com/rails/rails/pull/59082",
+      "mergedAt": "2026-10-14T00:00:00.000Z",
+      "author": "flavorjones",
+      "authorUrl": "https://github.com/flavorjones",
+      "summary": "1. 概要 (1-2文で)  \nAction Text のシステムテストがローカル環境で失敗し、Chrome がオフライン状態のまま残ってしまう問題と、Puma 起動時に `RACK_ENV` がリークしたように見える問題を修正する PR です。テストコード側でネットワーク条件の扱いと `RACK_ENV` の初期化方法を変更することで、JSON 3.0 以降での例外や LeakChecker の誤検知を防いでいます。"
+    },
+    {
+      "number": 59068,
+      "title": "ActiveRecord perf {#pr-59068}",
+      "url": "https://github.com/rails/rails/pull/59068",
+      "mergedAt": "2026-10-14T00:00:00.000Z",
+      "author": "tenderlove",
+      "authorUrl": "https://github.com/tenderlove",
+      "summary": "1. 概要 (1-2文で)  \nActiveRecord のキー処理で「単一キー（非複合主キー）」のケースを特別扱いし、不要な `Array` 経由のメソッド呼び出しを避けることでパフォーマンスを改善した PR です。RubyBench の ActiveRecord ベンチマークで、おおよそ 210ms → 201ms 程度（約 4〜5%）の短縮が報告されています。"
+    },
+    {
+      "number": 59081,
+      "title": "Remove the unused `left_side` association from the habtm join model {#pr-59081}",
+      "url": "https://github.com/rails/rails/pull/59081",
+      "mergedAt": "2026-10-14T00:00:00.000Z",
+      "author": "kamipo",
+      "authorUrl": "https://github.com/kamipo",
+      "summary": "1. 概要 (1-2文で)  \n`has_and_belongs_to_many` が内部的に生成していた中間モデルの `left_side` 関連（`belongs_to :left_side`）が、実際にはまったく機能しておらず常に `nil` を返していたため、不要なコードとして削除された PR です。これにより、HABTM の実装が少しシンプルかつ一貫したものになります。"
+    },
+    {
+      "number": 58975,
+      "title": "Don't modify the job data a job was deserialized from when it's retried {#pr-58975}",
+      "url": "https://github.com/rails/rails/pull/58975",
+      "mergedAt": "2026-10-14T00:00:00.000Z",
+      "author": "yaroslav-shopify",
+      "authorUrl": "https://github.com/yaroslav-shopify",
+      "summary": "1. 概要 (1–2文で)  \nActive Job のリトライ処理で、デシリアライズ元のジョブデータ（特に `exception_executions`）が書き換えられてしまう問題を修正し、ジョブごとに独立したカウンタを持つようにした PR です。これにより、オリジナルのジョブデータが意図せず変化したり、凍結オブジェクトで `FrozenError` が発生する問題が解消されます。"
+    },
+    {
+      "number": 58978,
+      "title": "Make Active Job argument serialization work in non-main Ractors {#pr-58978}",
+      "url": "https://github.com/rails/rails/pull/58978",
+      "mergedAt": "2026-10-14T00:00:00.000Z",
+      "author": "yaroslav-shopify",
+      "authorUrl": "https://github.com/yaroslav-shopify",
+      "summary": "1. 概要 (1-2文で)  \nActive Job が Ractor（特にメイン Ractor 以外）上でジョブ引数をシリアライズ / デシリアライズする際に `Ractor::IsolationError` が発生していた問題を修正し、Ractor 対応を強化する PR です。  \n`ractorize!` 実行時に Active Job のシリアライザ関連オブジェクトを「shareable」にする仕組みを追加し、非メイン Ractor からでも安全に利用できるようにしています。"
+    },
+    {
+      "number": 58979,
+      "title": "Make Active Job's exception handlers work in non-main Ractors {#pr-58979}",
+      "url": "https://github.com/rails/rails/pull/58979",
+      "mergedAt": "2026-10-14T00:00:00.000Z",
+      "author": "yaroslav-shopify",
+      "authorUrl": "https://github.com/yaroslav-shopify",
+      "summary": "1. 概要 (1-2文で)  \nActive Job がマルチ Ractor（特に非メイン Ractor）で実行される際に、`rescue_from` / `retry_on` / `discard_on` / `after_discard` といった例外ハンドラが `Ractor::IsolationError` で落ちていた問題を修正し、Ractor 対応の例外処理が正しく動作するようにした PR です。  \nこれにより、`ractorize!` 使用時でも Active Job / controllers / mailers / channels の `rescue_from` が非メイン Ractor 上で安全に動作します。"
+    },
+    {
+      "number": 59080,
+      "title": "Reach the joined table's model through the table itself {#pr-59080}",
+      "url": "https://github.com/rails/rails/pull/59080",
+      "mergedAt": "2026-10-14T00:00:00.000Z",
+      "author": "kamipo",
+      "authorUrl": "https://github.com/kamipo",
+      "summary": "1. 概要 (1-2文で)  \nこのPRは、`Arel::Table` や `Arel::Nodes::TableAlias` から元の Active Record モデル (`klass`) を直接取得できるようにし、`association_scope` 内のスコープ適用処理が「テーブル」からモデルに自然に到達できるようにするリファクタリングです。これにより、関連スコープ構築時にリフレクション経由ではなくテーブルオブジェクト経由で `PredicateBuilder` を組み立てられるようになります。"
+    },
+    {
+      "number": 59066,
+      "title": "Use an ivar for the primary key definition {#pr-59066}",
+      "url": "https://github.com/rails/rails/pull/59066",
+      "mergedAt": "2026-10-14T00:00:00.000Z",
+      "author": "tenderlove",
+      "authorUrl": "https://github.com/tenderlove",
+      "summary": "1. 概要 (1-2文で)  \nこのPRは、Active Record の `primary_key_definition` の計算結果をインスタンス変数にキャッシュすることで、Rails main で劣化していた ActiveRecord ベンチマークのパフォーマンスを一部取り戻す変更です。内部実装のみを触っており、外から見たAPIや挙動は（バグがなければ）変わりません。"
+    },
+    {
+      "number": 59078,
+      "title": "Zip keys without going through Enumerable {#pr-59078}",
+      "url": "https://github.com/rails/rails/pull/59078",
+      "mergedAt": "2026-10-14T00:00:00.000Z",
+      "author": "matthewd",
+      "authorUrl": "https://github.com/matthewd",
+      "summary": "1. 概要 (1-2文で)  \nActiveRecord の `ActiveRecord::Key` に専用の `zip` 実装を追加し、`Enumerable` 経由の汎用実装を避けることで、主キー／外部キーまわりのペア操作のメモリアロケーションを大幅に削減した PR です。これに伴い、`replace_keys`・`keys_match?`・`join_scope` などの内部ループが `zip` ベースに書き換えられ、パフォーマンス改善が期待できます。"
+    },
+    {
+      "number": 58948,
+      "title": "Apply the table name prefix to the index name 4.2 migrations compute {#pr-58948}",
+      "url": "https://github.com/rails/rails/pull/58948",
+      "mergedAt": "2026-10-14T00:00:00.000Z",
+      "author": "carlosdanielpohlod",
+      "authorUrl": "https://github.com/carlosdanielpohlod",
+      "summary": "1. 概要 (1-2文で)  \nRails 4.2 互換レイヤのマイグレーションで、`table_name_prefix` が設定されている場合にインデックス名の計算が間違っていた問題を修正する PR です。`index_exists?` と `remove_index` が、プレフィックス付きの正しいテーブル名からインデックス名を計算するように変更されています。"
+    },
+    {
+      "number": 59033,
+      "title": "Skip ROLLBACK when SQLite already rolled back the transaction {#pr-59033}",
+      "url": "https://github.com/rails/rails/pull/59033",
+      "mergedAt": "2026-10-14T00:00:00.000Z",
+      "author": "cole-robertson",
+      "authorUrl": "https://github.com/cole-robertson",
+      "summary": "1. 概要 (1-2文で)  \nSQLite が自動でトランザクションをロールバックしている場合に、Rails 側で余計な `ROLLBACK` を発行しないようにした修正です。これにより、SQLite のディスクフルなどで発生する本来の例外が正しく表に出るようになり、トランザクション内のレコード状態や `after_rollback` コールバックの挙動も一貫性のあるものになります。"
+    },
+    {
+      "number": 59072,
+      "title": "Deprecate supports_native_partitioning? on the PostgreSQL adapter {#pr-59072}",
+      "url": "https://github.com/rails/rails/pull/59072",
+      "mergedAt": "2026-10-14T00:00:00.000Z",
+      "author": "yahonda",
+      "authorUrl": "https://github.com/yahonda",
+      "summary": "1. 概要 (1-2文で)  \nPostgreSQL Adapter の `supports_native_partitioning?` メソッドが、サポート対象の PostgreSQL バージョンが 10 以上になったことで常に `true` しか返さなくなったため、非推奨化された PR です。これに合わせて、このメソッドに依存していた内部処理とテストが整理されています。"
+    },
+    {
+      "number": 59069,
+      "title": "Match sequence reset rows by the table name given, not regclass::text {#pr-59069}",
+      "url": "https://github.com/rails/rails/pull/59069",
+      "mergedAt": "2026-10-14T00:00:00.000Z",
+      "author": "yahonda",
+      "authorUrl": "https://github.com/yahonda",
+      "summary": "1. 概要 (1-2文で)  \nPostgreSQL アダプタで `reset_pk_sequence!` / `reset_column_sequences!` が、スキーマ付きテーブル名（例: `\"public.posts\"`）に対して `NoMethodError` になる不具合を修正した PR です。テーブルとシーケンスの紐付け方法を `regclass::text` ベースから OID ベースに変更することで、スキーマ付きのテーブル名でも安全にシーケンスリセットできるようにしています。"
+    },
+    {
+      "number": 59070,
+      "title": "Don't require ActiveStorage service that is already defined {#pr-59070}",
+      "url": "https://github.com/rails/rails/pull/59070",
+      "mergedAt": "2026-10-14T00:00:00.000Z",
+      "author": "bogdan",
+      "authorUrl": "https://github.com/bogdan",
+      "summary": "1. 概要 (1–2文で)  \nActive Storage のサービス設定時に、既に定義済みのサービスクラスに対して不要な `require` を行わないように `ActiveStorage::Service::Configurator` が変更されています。これにより、独自サービスクラスを Active Storage 内部のディレクトリ構造に従って配置しなくても利用しやすくなります。"
+    },
+    {
+      "number": 58981,
+      "title": "Make deprecation warnings work in non-main Ractors {#pr-58981}",
+      "url": "https://github.com/rails/rails/pull/58981",
+      "mergedAt": "2026-10-14T00:00:00.000Z",
+      "author": "yaroslav-shopify",
+      "authorUrl": "https://github.com/yaroslav-shopify",
+      "summary": "1. 概要 (1-2文で)  \nRails アプリを `ractorize!` した後でも、非メイン Ractor（ジョブやバックグラウンド処理など）で ActiveSupport の非推奨警告（deprecation）が本来の設定どおりに動作するようにする修正です。これにより、これまで非メイン Ractor 上で deprecation を扱おうとすると発生していた `Ractor::IsolationError` や `FrozenError` を回避します。"
+    },
+    {
+      "number": 59017,
+      "title": "Dump create_schema if_not_exists for every schema that holds an extension {#pr-59017}",
+      "url": "https://github.com/rails/rails/pull/59017",
+      "mergedAt": "2026-10-14T00:00:00.000Z",
+      "author": "tusshar2000",
+      "authorUrl": "https://github.com/tusshar2000",
+      "summary": "1. 概要 (1-2文で)  \nRails の PostgreSQL 用 SchemaDumper が、拡張機能（extensions）が存在するスキーマを漏れなく `create_schema ... if_not_exists: true` でダンプするようになり、`dump_schemas` に含まれないスキーマにインストールされた拡張でも `db:schema:load` が失敗しないように修正されています。特に `btree_gin` や `pg_trgm` のような「移動可能（relocatable）」な拡張をカスタムスキーマに入れているアプリのスキーマロード問題を解消します。"
+    },
+    {
+      "number": 59065,
+      "title": "Reduce method calls in fast path {#pr-59065}",
+      "url": "https://github.com/rails/rails/pull/59065",
+      "mergedAt": "2026-10-14T00:00:00.000Z",
+      "author": "tenderlove",
+      "authorUrl": "https://github.com/tenderlove",
+      "summary": "1. 概要 (1-2文で)  \n`primary_key_definition` メソッドの「よく通るパス（fast path）」でのメソッド呼び出し回数を 2 回から 1 回に削減し、パフォーマンスを改善するための微調整が行われました。機能的な挙動は変えずに、内部実装の呼び出しコストを下げるリファクタリングです。"
+    },
+    {
+      "number": 59064,
+      "title": "Stop directly asking for columns from Key {#pr-59064}",
+      "url": "https://github.com/rails/rails/pull/59064",
+      "mergedAt": "2026-10-14T00:00:00.000Z",
+      "author": "tenderlove",
+      "authorUrl": "https://github.com/tenderlove",
+      "summary": "1. 概要 (1–2文で)  \nKey クラスの内部実装である `@columns` を外部から直接参照しないようにし、`belongs_to` 関連の実装を Key の公開インターフェイス経由で扱う形にリファクタリングした PR です。これにより ActiveRecord::Key のカプセル化が強化され、将来的な内部実装の変更に耐えやすくなっています。"
+    },
+    {
+      "number": 59063,
+      "title": "Introduce \"definition\" methods that return ActiveRecord::Key {#pr-59063}",
+      "url": "https://github.com/rails/rails/pull/59063",
+      "mergedAt": "2026-10-14T00:00:00.000Z",
+      "author": "tenderlove",
+      "authorUrl": "https://github.com/tenderlove",
+      "summary": "1. 概要 (1-2文で)  \nActiveRecord の関連・主キー周りで使われる `ActiveRecord::Key` オブジェクトの生成を抑えるため、「definition メソッド」を導入し、`Key` 自体をキャッシュして再利用するようにした PR です。これにより複合キー情報の扱いを効率化しつつ、`includes` などの関連ロード時のオブジェクトアロケーションと実行時間を削減しています。"
+    },
     {
       "number": 59062,
       "title": "Clean up how a relation's join values are sorted into the query {#pr-59062}",
@@ -280,177 +451,6 @@
       "author": "hachi8833",
       "authorUrl": "https://github.com/hachi8833",
       "summary": "1. 概要 (1-2文で)  \nActive Job ガイドの「Halting Callbacks」例で、環境変数の判定ロジックが常にジョブを中断してしまう不具合があったため、意図どおり「環境変数が `\"true\"` のときだけ中断」になるようにドキュメントが修正されています。コード本体ではなくドキュメントのみの変更です。"
-    },
-    {
-      "number": 59003,
-      "title": "[docs][ci skip] Fix typo in Active Job guide {#pr-59003}",
-      "url": "https://github.com/rails/rails/pull/59003",
-      "mergedAt": "2026-10-09T00:00:00.000Z",
-      "author": "hachi8833",
-      "authorUrl": "https://github.com/hachi8833",
-      "summary": "1. 概要 (1-2文で)  \nこのPRは、Active Job ガイド (`active_job_basics.md`) 内の単純な英単語のタイポを修正したドキュメント専用の変更です。機能コードには一切手が入っておらず、挙動の変更や互換性への影響はありません。\n\n2. 変更内容の詳細  \n\n- 変更対象ファイル: `guides/source/active_job_basics.md`\n- 変更内容: 英文中の誤記 `\"users\"` を `\"uses\"` に修正  \n\n文脈としては、Active Job の使い方・利用例を説明するガイドの中で、  \n「〜を users する」ではなく「〜を uses する」が正しい文法になる箇所を修正したものです。\n\n（擬似的な例）  \n修正前（イメージ）:\n```markdown\nActive Job users the configured queue adapter to enqueue jobs.\n```\n\n修正後（イメージ）:\n```markdown\nActive Job uses the configured queue adapter to enqueue jobs.\n```\n\n実際には、上記はイメージですが、同様に `\"users\"` → `\"uses\"` という単語レベルの修正のみが行われています。\n\n3. 影響範囲・注意点  \n\n- 影響範囲  \n  - Railsガイド（ドキュメント）のみ。  \n  - フレームワークのコード、API、挙動、パフォーマンスには一切影響しません。\n  - テストや本番環境の挙動も変化しません。\n\n- 注意点  \n  - ドキュメントの英語表現が自然になり、読解性が向上しただけの変更です。\n  - コードベースの更新や設定変更など、開発者が追随する必要はありません。\n\n4. 参考情報 (あれば)  \n\n- PRタイトルに `[ci skip]` が付いており、CI を走らせないドキュメント専用修正であることが明示されています。\n- 変更は 1 ファイル・1行の置換のみで、他機能との関連や副作用はありません。"
-    },
-    {
-      "number": 58767,
-      "title": "Store query constraints in `SchemaContext` {#pr-58767}",
-      "url": "https://github.com/rails/rails/pull/58767",
-      "mergedAt": "2026-10-08T00:00:00.000Z",
-      "author": "adrianna-chang-shopify",
-      "authorUrl": "https://github.com/adrianna-chang-shopify",
-      "summary": "1. 概要 (1-2文で)  \nこのPRでは、モデルに紐づく「クエリ制約（query constraints）」を `ActiveRecord::ModelSchema::SchemaContext` に保存・管理するように変更し、スキーマ読み込み時に制約を解決（resolve）する仕組みに移行しています。これにより、クエリ制約の評価タイミングがスキーマロード時に統一され、モデルレベルのアクセスはスキーマコンテキスト経由の委譲に整理されます。"
-    },
-    {
-      "number": 58992,
-      "title": "Require rails/structured_event_subscriber on boot {#pr-58992}",
-      "url": "https://github.com/rails/rails/pull/58992",
-      "mergedAt": "2026-10-08T00:00:00.000Z",
-      "author": "azmi2409",
-      "authorUrl": "https://github.com/azmi2409",
-      "summary": "1. 概要 (1-2文で)  \n`Rails::StructuredEventSubscriber` がフレームワーク起動時に自動で `require` されておらず、`config.active_support.deprecation = :notify` を設定しても `rails.deprecation` の構造化イベントが発火しない問題を修正した PR です。今後は `require \"rails\"` しただけでこのサブスクライバが読み込まれ、テストもその前提で動作するようになりました。"
-    },
-    {
-      "number": 58860,
-      "title": "Forward other options from has_one_attached and has_many_attached {#pr-58860}",
-      "url": "https://github.com/rails/rails/pull/58860",
-      "mergedAt": "2026-10-08T00:00:00.000Z",
-      "author": "jsaubry",
-      "authorUrl": "https://github.com/jsaubry",
-      "summary": "1. 概要 (1-2文で)  \n`has_one_attached` / `has_many_attached` が、`dependent`, `service`, `strict_loading`, `analyze` 以外の関連オプションも受け取り、内部で生成される `ActiveStorage::Attachment` 側の `has_one` / `has_many` にそのまま委譲できるようになりました。これにより、`validate:`, `after_add:`, `deprecated:` など通常の関連オプションを Active Storage の添付ファイル関連にも自然に指定できます。"
-    },
-    {
-      "number": 58988,
-      "title": "[doc][ci skip] Fix internal link for Active Support Instrumentation guide {#pr-58988}",
-      "url": "https://github.com/rails/rails/pull/58988",
-      "mergedAt": "2026-10-08T00:00:00.000Z",
-      "author": "hachi8833",
-      "authorUrl": "https://github.com/hachi8833",
-      "summary": "1. 概要 (1-2文で)  \nActive Support Instrumentationガイド内の内部リンク表記の誤りを修正した、ドキュメント専用のごく小さな変更です。コードや挙動には一切影響せず、ガイド内から`Continuation`クラスへのリンクが正しく表示されるようになります。"
-    },
-    {
-      "number": 58982,
-      "title": "Make the Ractor snapshot of the subscriptions an immutable registry {#pr-58982}",
-      "url": "https://github.com/rails/rails/pull/58982",
-      "mergedAt": "2026-10-08T00:00:00.000Z",
-      "author": "kamipo",
-      "authorUrl": "https://github.com/kamipo",
-      "summary": "1. 概要 (1-2文で)  \nRails の ActiveSupport::Notifications において、Ractor が利用する「購読情報（subscriptions）のスナップショット」の実装を、Hash のコピーから「イミュータブルなレジストリオブジェクト」への差し替えにより、スレッド／Ractor セーフかつシンプルな形に整理した PR です。Ractor 間での通知購読状態の取り扱いを安全かつ効率的にするための内部実装変更で、外部 API は基本的に変わりません。"
-    },
-    {
-      "number": 58976,
-      "title": "Make TimeZone.all and offset lookups work in non-main Ractors {#pr-58976}",
-      "url": "https://github.com/rails/rails/pull/58976",
-      "mergedAt": "2026-10-08T00:00:00.000Z",
-      "author": "yaroslav-shopify",
-      "authorUrl": "https://github.com/yaroslav-shopify",
-      "summary": "1. 概要 (1-2文で)  \n`ActiveSupport::TimeZone` を Ractor 環境で安全に使えるようにするため、`TimeZone.all` や `TimeZone[-5]` などがメイン Ractor 以外でも `Ractor::IsolationError` を出さずに動くよう、内部データ構造を `make_shareable!` で共有可能オブジェクトにする修正です。これにより `ractorize!` 利用時のタイムゾーン関連メソッドの不具合が解消されます。"
-    },
-    {
-      "number": 58985,
-      "title": "[doc][ci skip] Fix `local:` to `locals:` in Action View Overview guide {#pr-58985}",
-      "url": "https://github.com/rails/rails/pull/58985",
-      "mergedAt": "2026-10-08T00:00:00.000Z",
-      "author": "hachi8833",
-      "authorUrl": "https://github.com/hachi8833",
-      "summary": "1. 概要 (1-2文で)  \nAction View Overviewガイド中のヘルパーメソッドのシグネチャ表記で、誤って `local:` と書かれていた箇所を正しい `locals:` に修正したドキュメント専用PRです。コード本体には一切変更はなく、あくまでガイドの記述ミス修正です。"
-    },
-    {
-      "number": 58973,
-      "title": "[doc][ci skip] Fix incorrect route in Generators guide {#pr-58973}",
-      "url": "https://github.com/rails/rails/pull/58973",
-      "mergedAt": "2026-10-07T00:00:00.000Z",
-      "author": "hachi8833",
-      "authorUrl": "https://github.com/hachi8833",
-      "summary": "1. 概要 (1-2文で)  \nGenerators ガイド内のルーティング例で、`PeopleController#index` に対応するパスが誤って単数形 `person` になっていたのを、正しい複数形 `people` に修正するドキュメントのみの変更です。アプリケーションコードや挙動には一切影響しません。"
-    },
-    {
-      "number": 58971,
-      "title": "[doc][ci skip] Fix wrong job name in config.active_record.queues.destroy docs {#pr-58971}",
-      "url": "https://github.com/rails/rails/pull/58971",
-      "mergedAt": "2026-10-07T00:00:00.000Z",
-      "author": "hachi8833",
-      "authorUrl": "https://github.com/hachi8833",
-      "summary": "1. 概要 (1-2文で)  \n`config.active_record.queues.destroy` の公式ガイドの説明文に、誤って「purge jobs」を指している箇所があり、実際に設定対象となる「destroy jobs」に修正したドキュメントのみの変更です。コードや挙動は一切変わっておらず、説明文の内容が実装に揃えられました。\n\n2. 変更内容の詳細  \n\n対象:  \nRails ガイドの Configuring Rails Applications 内のセクション  \n[`config.active_record.queues.destroy`](https://guides.rubyonrails.org/configuring.html#config-active-record-queues-destroy)\n\n元の説明では:\n\n- `config.active_record.queues.destroy = nil` の場合、  \n  「purge jobs が default キューに送られる」  \n  という趣旨の文言になっていました。\n\nしかし、実際のオプションは:\n\n- `ActiveRecord::DestroyAssociationAsyncJob`（関連削除を非同期で行うジョブ）\n- つまり「destroy jobs」の実行キューを指定するオプション\n\nであり、「purge jobs（おそらく ActiveRecord::Purge… 系のジョブ）」のキュー設定ではありません。\n\nこの PR では説明文中の「purge jobs」を「destroy jobs」に修正し、実装とドキュメントの整合性を取っています。  \n※ guides/source/configuring.md における 1 行のみの修正で、サンプルコード等はありません。\n\n3. 影響範囲・注意点  \n\n- 影響範囲:\n  - 公式ドキュメントを読んでキュー設定を行う開発者に対する認識修正のみ\n  - Rails 本体の挙動や API は一切変更されていません\n- 注意点:\n  - 今まで「purge jobs のキュー設定」と誤解して `config.active_record.queues.destroy` を使っていた場合、その理解が間違いだったことに注意が必要です。\n  - destroy 関連（`ActiveRecord::DestroyAssociationAsyncJob`）と purge 関連（例: Active Storage や Active Record のクリーンアップ系ジョブ）のキュー設定を混同しないようにする必要があります。\n  - queue 設定の確認時には、対応するジョブクラス（この場合 `ActiveRecord::DestroyAssociationAsyncJob`）とオプション名を突き合わせると安全です。\n\n4. 参考情報 (あれば)  \n\n- 該当ガイド:  \n  https://guides.rubyonrails.org/configuring.html#config-active-record-queues-destroy  \n- 実装上関係するジョブクラス（参考）:  \n  - `ActiveRecord::DestroyAssociationAsyncJob`  \n    - has_many :through などの関連削除を非同期で行う際に利用されるジョブ  \n- 類似オプション（混同注意）:\n  - `config.active_record.queues.purge`（もし別途存在する場合）など、purge 系のキュー設定オプションとは用途が異なる点に注意してください。"
-    },
-    {
-      "number": 58969,
-      "title": "[doc][ci skip] Fix wrong config name for CheckPending in Rails on Rack guide {#pr-58969}",
-      "url": "https://github.com/rails/rails/pull/58969",
-      "mergedAt": "2026-10-07T00:00:00.000Z",
-      "author": "hachi8833",
-      "authorUrl": "https://github.com/hachi8833",
-      "summary": "1. 概要 (1-2文で)  \nRails Guides「Rails on Rack」で、未実行マイグレーション検知用ミドルウェア `ActiveRecord::Migration::CheckPending` を有効化する設定名が誤っていたため、正しい設定項目に修正し、併せてその設定を「Configuring Rails Applications」ガイドにも正式に追記したドキュメント修正です。アプリの動作には影響せず、ガイドの記述のみが更新されています。"
-    },
-    {
-      "number": 58968,
-      "title": "[doc][ci skip] Fix typo in caching_with_rails.md {#pr-58968}",
-      "url": "https://github.com/rails/rails/pull/58968",
-      "mergedAt": "2026-10-07T00:00:00.000Z",
-      "author": "hachi8833",
-      "authorUrl": "https://github.com/hachi8833",
-      "summary": "1. 概要 (1-2文で)  \nRailsガイド「caching_with_rails.md」において、権限ロール名の表記ゆれ／誤記を `superusers` から `super_admins` に修正したドキュメント専用のPRです。機能コードには一切変更がなく、挙動には影響しません。"
-    },
-    {
-      "number": 58963,
-      "title": "Use QueryResponse as raw result in ractor proxy adapters {#pr-58963}",
-      "url": "https://github.com/rails/rails/pull/58963",
-      "mergedAt": "2026-10-07T00:00:00.000Z",
-      "author": "gmcgibbon",
-      "authorUrl": "https://github.com/gmcgibbon",
-      "summary": "1. 概要 (1-2文で)  \nRails の Ractor 用プロキシアダプタで使われていた独自のクエリ結果オブジェクトを廃止し、標準の `QueryResponse` を「生の結果」として採用する変更です。これにより、`last_inserted_id` などの扱いがシンプルかつ一貫した形になります。"
-    },
-    {
-      "number": 58972,
-      "title": "File.atomic_write: better cleanup on error {#pr-58972}",
-      "url": "https://github.com/rails/rails/pull/58972",
-      "mergedAt": "2026-10-07T00:00:00.000Z",
-      "author": "byroot",
-      "authorUrl": "https://github.com/byroot",
-      "summary": "1. 概要 (1-2文で)  \n`File.atomic_write` で一時ファイルから本来のファイルへの `rename` が失敗した場合でも、一時ファイルを確実に削除するように後始末処理が改善されました。これにより、例外発生時に一時ファイルがディスク上に残り続ける問題が解消されます。"
-    },
-    {
-      "number": 58904,
-      "title": "Use a BoundSchemaReflection for the Ractor proxy pool's schema cache {#pr-58904}",
-      "url": "https://github.com/rails/rails/pull/58904",
-      "mergedAt": "2026-10-06T00:00:00.000Z",
-      "author": "gmcgibbon",
-      "authorUrl": "https://github.com/gmcgibbon",
-      "summary": "1. 概要 (1-2文で)  \nRactor 用の Active Record プロキシ接続プールが持つスキーマキャッシュの実装を、独自クラスではなく「BoundSchemaReflection」を用いたよりシンプルな仕組みに置き換えた PRです。これにより、Ractor 向けアダプタ周辺のスキーマキャッシュ用コードが整理・削減され、保守性と一貫性が向上しています。"
-    },
-    {
-      "number": 58956,
-      "title": "Fix `to_markdown` code spans broken by tables and adjacent code {#pr-58956}",
-      "url": "https://github.com/rails/rails/pull/58956",
-      "mergedAt": "2026-10-06T00:00:00.000Z",
-      "author": "flavorjones",
-      "authorUrl": "https://github.com/flavorjones",
-      "summary": "1. 概要 (1-2文で)  \nAction Text の `to_markdown` が `<code>`/`<pre>` 含みの HTML を Markdown に変換する際に、テーブル内のコードや隣接するコード要素が原因でコードスパンが壊れ、結果として本来除去されるべき危険なリンク（`javascript:` など）がレンダリングされてしまう不具合を修正した PR です。併せて、「`to_markdown` はベストエフォートで unsafe link を落とすが、最終的な HTML は別途サニタイズすべき」という注意書きも追加されています。"
-    },
-    {
-      "number": 58949,
-      "title": "[ci skip] Fix broken RDoc markup reference links in API guidelines {#pr-58949}",
-      "url": "https://github.com/rails/rails/pull/58949",
-      "mergedAt": "2026-10-06T00:00:00.000Z",
-      "author": "estebansa19",
-      "authorUrl": "https://github.com/estebansa19",
-      "summary": "1. 概要 (1-2文で)  \nRails のガイド「API Documentation Guidelines」に含まれていた RDoc のマークアップリファレンスへのリンクが 404 になっていたため、現在有効な URL に差し替えた修正です。コードには一切影響せず、ドキュメントのリンク切れのみを解消しています。"
-    },
-    {
-      "number": 58946,
-      "title": "Build the insert values list once for raw `on_duplicate` upserts on MySQL {#pr-58946}",
-      "url": "https://github.com/rails/rails/pull/58946",
-      "mergedAt": "2026-10-06T00:00:00.000Z",
-      "author": "fabbyd",
-      "authorUrl": "https://github.com/fabbyd",
-      "summary": "1. 概要 (1-2文で)  \nMySQL 8.0.19以降で、`upsert_all` / `upsert` に「生の SQL フラグメント」を `on_duplicate:` オプションとして渡した場合に、INSERT の `VALUES` 句が二重に組み立てられてしまう問題を解消し、Ruby 側の処理コストを大きく削減するパフォーマンス改善です。挙動や生成される SQL 自体は変わらず、同じバイト列を維持したまま内部の組み立て順序だけ最適化しています。"
-    },
-    {
-      "number": 58943,
-      "title": "Fix default_headers example in new_framework_defaults_8_2 {#pr-58943}",
-      "url": "https://github.com/rails/rails/pull/58943",
-      "mergedAt": "2026-10-05T00:00:00.000Z",
-      "author": "excid3",
-      "authorUrl": "https://github.com/excid3",
-      "summary": "1. 概要 (1-2文で)  \nRails 8.2 用の `new_framework_defaults_8_2.rb` 初期化ファイルテンプレート内で、`default_headers` の設定例がそのままではエラーになる不備を修正した PR です。トップレベルの initializer でも正しく動作するよう、`config` を `Rails.application.config` に修正しています。"
     }
   ]
 }
