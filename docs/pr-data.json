@@ -1,7 +1,88 @@
 {
-  "lastUpdated": "2026-10-16T00:24:06.065Z",
+  "lastUpdated": "2026-10-17T00:13:08.520Z",
   "totalCount": 50,
   "items": [
+    {
+      "number": 59026,
+      "title": "Add `before_ractorize` load hook and move framework ractorizing into railties {#pr-59026}",
+      "url": "https://github.com/rails/rails/pull/59026",
+      "mergedAt": "2026-10-16T00:00:00.000Z",
+      "author": "bensheldon",
+      "authorUrl": "https://github.com/bensheldon",
+      "summary": "1. 概要 (1-2文で)  \nRails の `ractorize!` に対して `before_ractorize` という load hook が追加され、Ractor 対応のための処理を各フレームワーク専用の railtie 側へ分離しました。これにより、GoodJob などの外部 gem を含む各フレームワーク・エンジンが、Rails 本体の実装に依存せず、自前で Ractor 対応の初期化を行いやすくなります。"
+    },
+    {
+      "number": 59120,
+      "title": "AssociationRoute: consolidate how association keys are read and written {#pr-59120}",
+      "url": "https://github.com/rails/rails/pull/59120",
+      "mergedAt": "2026-10-16T00:00:00.000Z",
+      "author": "matthewd",
+      "authorUrl": "https://github.com/matthewd",
+      "summary": "1. 概要 (1-2文で)  \nRails の関連（belongs_to / has_many / has_one / through など）で「外部キー・主キー・型カラム」の扱い方を「AssociationRoute」というクラスに集約し、  \nクエリ生成・メモリ上のマッチング・書き込みのすべてをこの共通ルート経由で行うようにした PR です。  \nこれにより、多数のエッジケースバグが修正され、関連キー解決のロジックが一貫化・明確化されています。"
+    },
+    {
+      "number": 59119,
+      "title": "Keep Ractor-proxied connection state on the main Ractor {#pr-59119}",
+      "url": "https://github.com/rails/rails/pull/59119",
+      "mergedAt": "2026-10-16T00:00:00.000Z",
+      "author": "matthewd",
+      "authorUrl": "https://github.com/matthewd",
+      "summary": "1. 概要 (1-2文で)  \nこのPRは、Ractor 環境での ActiveRecord コネクション管理を見直し、「プロキシ側（ワーカーRactor）」ではなく「メインRactor側」で接続状態・トランザクション状態を保持・制御するように変更したものです。これにより、再接続時のトランザクション復元処理が通常の接続と同様の安全な挙動になり、書き込みロストなどの不整合を防ぎます。"
+    },
+    {
+      "number": 58977,
+      "title": "Make Active Job's queue adapter name and queue name prefix readable from non-main Ractors {#pr-58977}",
+      "url": "https://github.com/rails/rails/pull/58977",
+      "mergedAt": "2026-10-16T00:00:00.000Z",
+      "author": "yaroslav-shopify",
+      "authorUrl": "https://github.com/yaroslav-shopify",
+      "summary": "1. 概要 (1-2文で)  \nActive Job の `queue_adapter_name` とキュー名プレフィックス関連の設定値を「常に freeze されたオブジェクト」として扱うようにし、Ractor（特に非メイン Ractor）からも `Ractor::IsolationError` なしで読めるようにした PR です。`ractorize!` 使用時の Active Job 実行で発生していた Ractor 互換性のバグを解消する目的があります。"
+    },
+    {
+      "number": 59123,
+      "title": "Use resolve_alias for all instance methods {#pr-59123}",
+      "url": "https://github.com/rails/rails/pull/59123",
+      "mergedAt": "2026-10-16T00:00:00.000Z",
+      "author": "hmcguire-shopify",
+      "authorUrl": "https://github.com/hmcguire-shopify",
+      "summary": "1. 概要 (1–2文で)  \nこのPRは、Active Record のインスタンスメソッド全体で属性エイリアス解決処理 `resolve_alias` を統一的に利用するようにしつつ、「エイリアスを定義していないモデルではエイリアス探索をスキップする」最適化を導入した変更です。  \nあわせて、`resolve_alias` 関連コードを `Read` モジュールからより共通的な場所へ移動し、読み取り以外（書き込み・永続化など）でも再利用できるようにしています。"
+    },
+    {
+      "number": 59134,
+      "title": "Fix the `translation_missing` class name in the `translate` docs {#pr-59134}",
+      "url": "https://github.com/rails/rails/pull/59134",
+      "mergedAt": "2026-10-16T00:00:00.000Z",
+      "author": "55728",
+      "authorUrl": "https://github.com/55728",
+      "summary": "1. 概要 (1-2文で)  \n`translate` ヘルパーのドキュメント内で、存在しない翻訳キーに対して出力される `<span>` 要素の CSS クラス名が、実際の実装と食い違っていた問題を修正した PR です。実装・テスト・サンプルコードが使っている `translation_missing` に合わせるため、説明文中の `translation-missing` を `translation_missing` に修正しています。"
+    },
+    {
+      "number": 59024,
+      "title": "Avoid building separator regexps on every strip_insignificant_zeros call {#pr-59024}",
+      "url": "https://github.com/rails/rails/pull/59024",
+      "mergedAt": "2026-10-16T00:00:00.000Z",
+      "author": "bruno-costanzo",
+      "authorUrl": "https://github.com/bruno-costanzo",
+      "summary": "1. 概要 (1-2文で)  \n`number_to_human_size` / `number_to_human` / `number_to_rounded(strip_insignificant_zeros: true)` で、小数点などのセパレータに基づいて毎回正規表現を生成していた処理を、`.` と `,` に限って定数キャッシュすることで、オブジェクト確保数と実行時間を削減するパフォーマンス改善です。  \n動作仕様は変えず、`.` / `,` 以外のセパレータ利用時は従来通りの挙動・コストとなります。"
+    },
+    {
+      "number": 59045,
+      "title": "Keep the lock when re-pinning a pinned connection {#pr-59045}",
+      "url": "https://github.com/rails/rails/pull/59045",
+      "mergedAt": "2026-10-16T00:00:00.000Z",
+      "author": "darronschall",
+      "authorUrl": "https://github.com/darronschall",
+      "summary": "1. 概要 (1-2文で)  \nこのPRは、`ActiveRecord::ConnectionAdapters::ConnectionPool#pin_connection!` が「入れ子で呼ばれたときに既存のロックを上書きしてしまう」問題を修正し、外側で取得したロックを維持したまま再ピン留め（re-pin）できるようにします。これにより、特に TestProf の `before_all` + transactional fixtures のように `pin_connection!(true)` をネストして使う環境で発生していた、PostgreSQL での `NoMethodError` や `PG::UnableToSend`、ハングが解消されます。"
+    },
+    {
+      "number": 59092,
+      "title": "Automatically detect Aube as a JavaScript package manager {#pr-59092}",
+      "url": "https://github.com/rails/rails/pull/59092",
+      "mergedAt": "2026-10-16T00:00:00.000Z",
+      "author": "beauraF",
+      "authorUrl": "https://github.com/beauraF",
+      "summary": "1. 概要 (1-2文で)  \nRails のジェネレータが JavaScript パッケージマネージャを自動判別する際に、新たに Aube（`aube-lock.yaml`）をサポートする変更です。Aube を使ったプロジェクトでも、Rails の各種ジェネレータが適切なコマンドを自動選択できるようになります。"
+    },
     {
       "number": 59121,
       "title": "Use new resolve_alias method in read_attribute too {#pr-59121}",
@@ -370,87 +451,6 @@
       "author": "amatsuda",
       "authorUrl": "https://github.com/amatsuda",
       "summary": "1. 概要 (1-2文で)  \nRails の構造化イベント（`EventReporter` 経由のイベント）について、「最終的に誰も消費しないイベント」はそもそも生成しないようにして、リクエストごとの無駄なオブジェクト生成を削減する最適化が入っています。特にログレベルを上げている本番環境などで、`action_controller.request_started` / `request_completed` イベントの生成コストを大きく減らせます。"
-    },
-    {
-      "number": 59053,
-      "title": "Skip static file candidates whose top-level entry doesn't exist in public/ {#pr-59053}",
-      "url": "https://github.com/rails/rails/pull/59053",
-      "mergedAt": "2026-10-15T00:00:00.000Z",
-      "author": "amatsuda",
-      "authorUrl": "https://github.com/amatsuda",
-      "summary": "1. 概要 (1-2文で)  \n`ActionDispatch::Static` / `ActionDispatch::FileHandler` が、存在しない静的ファイルを探すために毎回大量の `stat(2)` とオブジェクト生成を行っていたのを最適化し、動的リクエストに対するオーバーヘッドを大幅に削減する変更です。  \n`public/` 直下のトップレベル要素の存在確認を先に行うことで無駄な候補探索をスキップし、`Rack::Request` 生成や `Accept-Encoding` のパースも「静的ファイルが見つかった時だけ」行うようにしました。"
-    },
-    {
-      "number": 59082,
-      "title": "Fix Action Text system tests leaving Chrome offline and leaking RACK_ENV {#pr-59082}",
-      "url": "https://github.com/rails/rails/pull/59082",
-      "mergedAt": "2026-10-14T00:00:00.000Z",
-      "author": "flavorjones",
-      "authorUrl": "https://github.com/flavorjones",
-      "summary": "1. 概要 (1-2文で)  \nAction Text のシステムテストがローカル環境で失敗し、Chrome がオフライン状態のまま残ってしまう問題と、Puma 起動時に `RACK_ENV` がリークしたように見える問題を修正する PR です。テストコード側でネットワーク条件の扱いと `RACK_ENV` の初期化方法を変更することで、JSON 3.0 以降での例外や LeakChecker の誤検知を防いでいます。"
-    },
-    {
-      "number": 59068,
-      "title": "ActiveRecord perf {#pr-59068}",
-      "url": "https://github.com/rails/rails/pull/59068",
-      "mergedAt": "2026-10-14T00:00:00.000Z",
-      "author": "tenderlove",
-      "authorUrl": "https://github.com/tenderlove",
-      "summary": "1. 概要 (1-2文で)  \nActiveRecord のキー処理で「単一キー（非複合主キー）」のケースを特別扱いし、不要な `Array` 経由のメソッド呼び出しを避けることでパフォーマンスを改善した PR です。RubyBench の ActiveRecord ベンチマークで、おおよそ 210ms → 201ms 程度（約 4〜5%）の短縮が報告されています。"
-    },
-    {
-      "number": 59081,
-      "title": "Remove the unused `left_side` association from the habtm join model {#pr-59081}",
-      "url": "https://github.com/rails/rails/pull/59081",
-      "mergedAt": "2026-10-14T00:00:00.000Z",
-      "author": "kamipo",
-      "authorUrl": "https://github.com/kamipo",
-      "summary": "1. 概要 (1-2文で)  \n`has_and_belongs_to_many` が内部的に生成していた中間モデルの `left_side` 関連（`belongs_to :left_side`）が、実際にはまったく機能しておらず常に `nil` を返していたため、不要なコードとして削除された PR です。これにより、HABTM の実装が少しシンプルかつ一貫したものになります。"
-    },
-    {
-      "number": 58975,
-      "title": "Don't modify the job data a job was deserialized from when it's retried {#pr-58975}",
-      "url": "https://github.com/rails/rails/pull/58975",
-      "mergedAt": "2026-10-14T00:00:00.000Z",
-      "author": "yaroslav-shopify",
-      "authorUrl": "https://github.com/yaroslav-shopify",
-      "summary": "1. 概要 (1–2文で)  \nActive Job のリトライ処理で、デシリアライズ元のジョブデータ（特に `exception_executions`）が書き換えられてしまう問題を修正し、ジョブごとに独立したカウンタを持つようにした PR です。これにより、オリジナルのジョブデータが意図せず変化したり、凍結オブジェクトで `FrozenError` が発生する問題が解消されます。"
-    },
-    {
-      "number": 58978,
-      "title": "Make Active Job argument serialization work in non-main Ractors {#pr-58978}",
-      "url": "https://github.com/rails/rails/pull/58978",
-      "mergedAt": "2026-10-14T00:00:00.000Z",
-      "author": "yaroslav-shopify",
-      "authorUrl": "https://github.com/yaroslav-shopify",
-      "summary": "1. 概要 (1-2文で)  \nActive Job が Ractor（特にメイン Ractor 以外）上でジョブ引数をシリアライズ / デシリアライズする際に `Ractor::IsolationError` が発生していた問題を修正し、Ractor 対応を強化する PR です。  \n`ractorize!` 実行時に Active Job のシリアライザ関連オブジェクトを「shareable」にする仕組みを追加し、非メイン Ractor からでも安全に利用できるようにしています。"
-    },
-    {
-      "number": 58979,
-      "title": "Make Active Job's exception handlers work in non-main Ractors {#pr-58979}",
-      "url": "https://github.com/rails/rails/pull/58979",
-      "mergedAt": "2026-10-14T00:00:00.000Z",
-      "author": "yaroslav-shopify",
-      "authorUrl": "https://github.com/yaroslav-shopify",
-      "summary": "1. 概要 (1-2文で)  \nActive Job がマルチ Ractor（特に非メイン Ractor）で実行される際に、`rescue_from` / `retry_on` / `discard_on` / `after_discard` といった例外ハンドラが `Ractor::IsolationError` で落ちていた問題を修正し、Ractor 対応の例外処理が正しく動作するようにした PR です。  \nこれにより、`ractorize!` 使用時でも Active Job / controllers / mailers / channels の `rescue_from` が非メイン Ractor 上で安全に動作します。"
-    },
-    {
-      "number": 59080,
-      "title": "Reach the joined table's model through the table itself {#pr-59080}",
-      "url": "https://github.com/rails/rails/pull/59080",
-      "mergedAt": "2026-10-14T00:00:00.000Z",
-      "author": "kamipo",
-      "authorUrl": "https://github.com/kamipo",
-      "summary": "1. 概要 (1-2文で)  \nこのPRは、`Arel::Table` や `Arel::Nodes::TableAlias` から元の Active Record モデル (`klass`) を直接取得できるようにし、`association_scope` 内のスコープ適用処理が「テーブル」からモデルに自然に到達できるようにするリファクタリングです。これにより、関連スコープ構築時にリフレクション経由ではなくテーブルオブジェクト経由で `PredicateBuilder` を組み立てられるようになります。"
-    },
-    {
-      "number": 59066,
-      "title": "Use an ivar for the primary key definition {#pr-59066}",
-      "url": "https://github.com/rails/rails/pull/59066",
-      "mergedAt": "2026-10-14T00:00:00.000Z",
-      "author": "tenderlove",
-      "authorUrl": "https://github.com/tenderlove",
-      "summary": "1. 概要 (1-2文で)  \nこのPRは、Active Record の `primary_key_definition` の計算結果をインスタンス変数にキャッシュすることで、Rails main で劣化していた ActiveRecord ベンチマークのパフォーマンスを一部取り戻す変更です。内部実装のみを触っており、外から見たAPIや挙動は（バグがなければ）変わりません。"
     }
   ]
 }
