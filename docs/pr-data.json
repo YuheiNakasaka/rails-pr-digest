@@ -1,7 +1,43 @@
 {
-  "lastUpdated": "2026-10-17T00:13:08.520Z",
+  "lastUpdated": "2026-10-18T00:12:50.266Z",
   "totalCount": 50,
   "items": [
+    {
+      "number": 59140,
+      "title": "Extract missing_attribute from generated reader {#pr-59140}",
+      "url": "https://github.com/rails/rails/pull/59140",
+      "mergedAt": "2026-10-17T00:00:00.000Z",
+      "author": "hmcguire-shopify",
+      "authorUrl": "https://github.com/hmcguire-shopify",
+      "summary": "1. 概要 (1-2文で)  \nActive Record の属性リーダー生成処理で、`missing_attribute` ハンドリングを共通メソッドに切り出し、新しい「例外を投げるがエイリアスを持たない」内部メソッド `_read_attribute!` を導入することで、メモリ使用量削減とパフォーマンス向上を図った PR です。これにより生成されたリーダーメソッドは約 1.5x（YJIT では 1.06x）高速化し、内部 instruction sequence も半減します。"
+    },
+    {
+      "number": 59100,
+      "title": "Disable triggers of tables shadowed on the PostgreSQL search path {#pr-59100}",
+      "url": "https://github.com/rails/rails/pull/59100",
+      "mergedAt": "2026-10-17T00:00:00.000Z",
+      "author": "xronos-i-am",
+      "authorUrl": "https://github.com/xronos-i-am",
+      "summary": "1. 概要 (1-2文で)  \nPostgreSQL 18.4 未満の環境で `disable_referential_integrity` を使った際、`search_path` 上で別スキーマに同名テーブルが存在すると「手前のテーブルだけトリガが無効化され、影になっているテーブルのトリガが有効のまま」というバグがあり、それを修正する PR です。`DISABLE TRIGGER ALL` / `ENABLE TRIGGER ALL` 実行時に、テーブル名解決を `regclass::text` ベースの「自分自身を一意に指す名前」に切り替えることで、shadowed なテーブルも正しくトリガ無効化の対象になります。"
+    },
+    {
+      "number": 59101,
+      "title": "Truncate tables shadowed on the PostgreSQL search path {#pr-59101}",
+      "url": "https://github.com/rails/rails/pull/59101",
+      "mergedAt": "2026-10-17T00:00:00.000Z",
+      "author": "xronos-i-am",
+      "authorUrl": "https://github.com/xronos-i-am",
+      "summary": "1. 概要 (1-2文で)  \nPostgreSQL で複数スキーマに同名テーブルが存在する場合に、`db:truncate_all` や並列テスト用DBリセットで「search_path 上で影になっているテーブル」がtruncateされず、先頭スキーマ側だけが2回truncateされていたバグを修正するPRです。テーブル一覧の取得方法を見直し、PostgreSQLではスキーマ付きテーブル名を用いて確実に全テーブルをtruncateするようにしました。"
+    },
+    {
+      "number": 59143,
+      "title": "Fix failing sqlite ractor profile test {#pr-59143}",
+      "url": "https://github.com/rails/rails/pull/59143",
+      "mergedAt": "2026-10-17T00:00:00.000Z",
+      "author": "gmcgibbon",
+      "authorUrl": "https://github.com/gmcgibbon",
+      "summary": "1. 概要 (1-2文で)  \nActive Record のアダプタ系テストで、Ractor 経由のエラーが通常のアダプタエラーと cause 構造が異なる問題に対応するため、`driver_error_class` というテスト用ヘルパを導入し、sqlite3_ractor を含む複数のアダプタテストがこのヘルパ経由でエラークラスを判定するように修正した PR です。これにより sqlite3_ractor プロファイルのテストが安定して通るようになります。"
+    },
     {
       "number": 59026,
       "title": "Add `before_ractorize` load hook and move framework ractorizing into railties {#pr-59026}",
@@ -415,42 +451,6 @@
       "author": "amatsuda",
       "authorUrl": "https://github.com/amatsuda",
       "summary": "1. 概要 (1-2文で)  \n`ActionController::Metal::UrlFor#url_options` が、`script_name` を含んだ形でもメモ化されるようになり、同一リクエスト内での繰り返し呼び出し時のオブジェクト生成・処理コストが削減されました。あわせて、テスト環境でのコントローラ再利用時や `script_name` 変更時のキャッシュ無効化も適切に行われるようになっています。"
-    },
-    {
-      "number": 59087,
-      "title": "Fast path for single primary keys in to_param {#pr-59087}",
-      "url": "https://github.com/rails/rails/pull/59087",
-      "mergedAt": "2026-10-15T00:00:00.000Z",
-      "author": "amatsuda",
-      "authorUrl": "https://github.com/amatsuda",
-      "summary": "1. 概要 (1-2文で)  \n`ActiveRecord::Integration#to_param` が、単一の主キー（integer / string）の場合に高速に処理されるよう最適化されました。これにより、通常の単一カラム主キーのモデルで、URLヘルパー使用時のオブジェクト生成数と処理時間が削減されています。"
-    },
-    {
-      "number": 59088,
-      "title": "Build ActionDispatch::Request's inner Rack::Request lazily {#pr-59088}",
-      "url": "https://github.com/rails/rails/pull/59088",
-      "mergedAt": "2026-10-15T00:00:00.000Z",
-      "author": "amatsuda",
-      "authorUrl": "https://github.com/amatsuda",
-      "summary": "1. 概要 (1-2文で)  \n`ActionDispatch::Request` が内部で保持している `Rack::Request` オブジェクトの生成を「遅延生成（lazy）」に変更し、実際に必要になったときにだけ作るようにしたパフォーマンス改善のPRです。これにより、Rails標準スタックで1リクエストあたり複数回発生していた不要な `Rack::Request` の生成が削減されます。"
-    },
-    {
-      "number": 59054,
-      "title": "Short-circuit route matching for static paths {#pr-59054}",
-      "url": "https://github.com/rails/rails/pull/59054",
-      "mergedAt": "2026-10-15T00:00:00.000Z",
-      "author": "amatsuda",
-      "authorUrl": "https://github.com/amatsuda",
-      "summary": "1. 概要 (1-2文で)  \nRails のルーティング(Journey)に「完全一致テーブル」が導入され、`GET /posts` のような静的ルートについては正規表現マッチやパラメータ抽出をスキップして、HTTPメソッド＋パスだけで即座に対応ルートを特定できるようになりました。これにより、典型的なアプリが多く持つ静的ルートへのリクエスト性能が大幅に向上しつつ、マッチングの挙動自体は従来どおり維持されます。"
-    },
-    {
-      "number": 59056,
-      "title": "Don't build structured events that no subscriber will consume {#pr-59056}",
-      "url": "https://github.com/rails/rails/pull/59056",
-      "mergedAt": "2026-10-15T00:00:00.000Z",
-      "author": "amatsuda",
-      "authorUrl": "https://github.com/amatsuda",
-      "summary": "1. 概要 (1-2文で)  \nRails の構造化イベント（`EventReporter` 経由のイベント）について、「最終的に誰も消費しないイベント」はそもそも生成しないようにして、リクエストごとの無駄なオブジェクト生成を削減する最適化が入っています。特にログレベルを上げている本番環境などで、`action_controller.request_started` / `request_completed` イベントの生成コストを大きく減らせます。"
     }
   ]
 }
