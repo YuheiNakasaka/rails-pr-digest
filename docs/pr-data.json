@@ -1,7 +1,115 @@
 {
-  "lastUpdated": "2026-10-18T00:12:50.266Z",
+  "lastUpdated": "2026-10-19T00:15:02.795Z",
   "totalCount": 50,
   "items": [
+    {
+      "number": 59170,
+      "title": "Share the remaining constant Arel nodes instead of building them per query {#pr-59170}",
+      "url": "https://github.com/rails/rails/pull/59170",
+      "mergedAt": "2026-10-18T00:00:00.000Z",
+      "author": "sampokuokkanen",
+      "authorUrl": "https://github.com/sampokuokkanen",
+      "summary": "1. 概要 (1-2文で)  \nこのPRは、Active Record が内部で生成する Arel ノードのうち「毎回同じ内容のもの」を共有することで、クエリ毎のオブジェクト生成をさらに減らす最適化です。`DISTINCT` や MySQL 向けの `DUAL`、`*` といった定数的な Arel ノードを一度だけ生成し、以降はそれを使い回すようにしています。"
+    },
+    {
+      "number": 59154,
+      "title": "Add missing comma in the 8.2 default headers example [ci skip] {#pr-59154}",
+      "url": "https://github.com/rails/rails/pull/59154",
+      "mergedAt": "2026-10-18T00:00:00.000Z",
+      "author": "sngsmz",
+      "authorUrl": "https://github.com/sngsmz",
+      "summary": "1. 概要 (1-2文で)  \nRails 8.2 の設定ガイドに掲載されている `config.action_dispatch.default_headers` のサンプルコードに足りなかったカンマを追加し、Ruby として正しく動く例に修正したドキュメント専用のPRです。アプリケーションの挙動やコード本体には一切影響しません。"
+    },
+    {
+      "number": 59133,
+      "title": "Fix link to the autoloading guide in the 4.2 release notes [ci skip] {#pr-59133}",
+      "url": "https://github.com/rails/rails/pull/59133",
+      "mergedAt": "2026-10-18T00:00:00.000Z",
+      "author": "ttrweb",
+      "authorUrl": "https://github.com/ttrweb",
+      "summary": "1. 概要 (1-2文で)  \nRails 4.2 のリリースノート内にあるオートローディングガイドへのリンク切れを、バージョン付き URL（v4.2 向けのガイド）に差し替えたドキュメント修正です。挙動変更は一切なく、ドキュメント品質の向上のみを目的としています。\n\n2. 変更内容の詳細  \n\n- 対象ファイル: `guides/source/4_2_release_notes.md`\n- 変更前のリンク先:  \n  `autoloading_and_reloading_constants_classic_mode.html`  \n  → Rails 本体から classic autoloader が削除されたタイミング（コミット `5e8a26d705`）で、対応するガイドも削除されており 404 になっていた。\n- 変更後のリンク先:  \n  `https://guides.rubyonrails.org/v4.2/autoloading_and_reloading_constants.html`  \n  → 他の 4.2 リリースノート内のリンクと同様に、「v4.2 固有のガイド」に向ける形式に統一。\n\n変更イメージ（擬似的な例）:\n\n```md\n- 変更前:\nSee the [autoloading guide](autoloading_and_reloading_constants_classic_mode.html) for more details.\n\n+ 変更後:\nSee the [autoloading guide](https://guides.rubyonrails.org/v4.2/autoloading_and_reloading_constants.html) for more details.\n```\n\nまた、Rails のガイド用リンクチェッカー `rake guides:lint:check_links` は「フラグメント（`#anchor`）」を含むリンクのみ検証対象にしているため、今回のような「素の HTML へのリンク切れ」は検出できず、これまで見落とされていた背景も説明されています。\n\n3. 影響範囲・注意点  \n\n- ランタイム挙動・API への影響: なし（ドキュメントのみの変更）。\n- 対象バージョン: Rails 4.2 のリリースノート（現時点では主に Web 上で読む人向け）。\n- 開発者・ユーザーへの影響:\n  - Rails 4.2 のリリースノートからオートローディングに関する詳細情報へ正しく遷移できるようになる。\n  - 過去バージョンの動作や classic autoloader 周りを調査する際の UX が改善される。\n- テスト・CHANGELOG:\n  - 動作変更がないためテスト追加・更新は行われていない。\n  - CHANGELOG も更新なし（ドキュメントのみの微修正のため）。\n\n4. 参考情報 (あれば)  \n\n- 修正先ガイド:  \n  https://guides.rubyonrails.org/v4.2/autoloading_and_reloading_constants.html\n- リンクチェックタスク:  \n  `rake guides:lint:check_links`  \n  → フラグメント付きリンクしか検証しない仕様であることが、今回のリンク切れ見逃しの一因になっていると説明されています。"
+    },
+    {
+      "number": 59132,
+      "title": "Remove references to the discontinued sqlpkg registry from the configuring guide [ci skip] {#pr-59132}",
+      "url": "https://github.com/rails/rails/pull/59132",
+      "mergedAt": "2026-10-18T00:00:00.000Z",
+      "author": "ttrweb",
+      "authorUrl": "https://github.com/ttrweb",
+      "summary": "1. 概要 (1-2文で)  \nRailsガイド「Configuring an SQLite3 Database」から、メンテナンス終了かつ動作しなくなった sqlpkg（sqlpkg.org / sqlpkg-ruby）への参照を削除し、依然として利用可能な sqlean-ruby だけを案内するようにしたドキュメント修正です。アプリケーションの挙動には一切変更がなく、ドキュメントのみの更新です。"
+    },
+    {
+      "number": 59171,
+      "title": "Use key-value conditions in guides and API docs {#pr-59171}",
+      "url": "https://github.com/rails/rails/pull/59171",
+      "mergedAt": "2026-10-18T00:00:00.000Z",
+      "author": "kamipo",
+      "authorUrl": "https://github.com/kamipo",
+      "summary": "1. 概要 (1-2文で)  \nこのPRは、Active Record ガイドおよび API ドキュメント内の `where(\"...\")` / `order(\"...\")` など「生SQL文字列」を使った例を、可能な限り「キー・バリュー形式（ハッシュ形式）」の記法に差し替えたものです。あわせて、`Relation#structurally_compatible?` の `joins` に関するドキュメント例が、実際の挙動と食い違っていた点も修正されています。"
+    },
+    {
+      "number": 59166,
+      "title": "Find the media type of a request without a Regexp {#pr-59166}",
+      "url": "https://github.com/rails/rails/pull/59166",
+      "mergedAt": "2026-10-18T00:00:00.000Z",
+      "author": "amatsuda",
+      "authorUrl": "https://github.com/amatsuda",
+      "summary": "1. 概要 (1-2文で)\n- `ActionDispatch::Request#content_mime_type` が、`Content-Type` ヘッダからメディアタイプを取り出す際に正規表現をやめて `String#index` ベースの実装になり、オブジェクト割り当てと処理時間が削減されました。  \n- 外部から見える振る舞い（どの入力ヘッダがどの MIME type に解決されるか）は従来通りで、互換性を保ったまま性能最適化を行っています。"
+    },
+    {
+      "number": 59162,
+      "title": "Avoid String allocations in Request#content_mime_type {#pr-59162}",
+      "url": "https://github.com/rails/rails/pull/59162",
+      "mergedAt": "2026-10-18T00:00:00.000Z",
+      "author": "kehra",
+      "authorUrl": "https://github.com/kehra",
+      "summary": "1. 概要 (1-2文で)  \n`ActionDispatch::Request#content_mime_type` が、`CONTENT_TYPE` ヘッダから MIME Type を取り出す際の不要な String オブジェクト生成を避けることで、割りとホットパスになりがちな処理のメモリアロケーションと実行時間を削減する変更です。典型的な `application/json` などの小文字・余白なしの Content-Type では、`strip` / `downcase` をスキップできるようになりました。"
+    },
+    {
+      "number": 59165,
+      "title": "Share the constant Arel.sql literals instead of building them per query {#pr-59165}",
+      "url": "https://github.com/rails/rails/pull/59165",
+      "mergedAt": "2026-10-18T00:00:00.000Z",
+      "author": "amatsuda",
+      "authorUrl": "https://github.com/amatsuda",
+      "summary": "1. 概要 (1-2文で)  \nこのPRは、Active Record が内部で毎回生成していた固定的な `Arel.sql` リテラルを定数として共有し、オブジェクト生成を削減してパフォーマンスと再試行性（retryable 判定）を改善するものです。`exists?` や `count`、`lock` などで使われる特定の SQL フラグメントが対象です。"
+    },
+    {
+      "number": 59163,
+      "title": "Share one frozen Arel.star instead of building it per call {#pr-59163}",
+      "url": "https://github.com/rails/rails/pull/59163",
+      "mergedAt": "2026-10-18T00:00:00.000Z",
+      "author": "sampokuokkanen",
+      "authorUrl": "https://github.com/sampokuokkanen",
+      "summary": "1. 概要 (1-2文で)  \nこのPRは、`Arel.star` (`SELECT *` に相当する Arel のリテラル) を呼び出すたびに新しいオブジェクトを生成していた処理を、凍結済みかつ Ractor 共有可能な単一インスタンスを使い回すように変更し、メモリ割り当てとパフォーマンスを改善するものです。結果として、多くのクエリで発生していた不要なオブジェクト生成が削減されます。"
+    },
+    {
+      "number": 59164,
+      "title": "Raise ActiveModel::MissingAttributeError with a real backtrace {#pr-59164}",
+      "url": "https://github.com/rails/rails/pull/59164",
+      "mergedAt": "2026-10-18T00:00:00.000Z",
+      "author": "byroot",
+      "authorUrl": "https://github.com/byroot",
+      "summary": "1. 概要 (1–2文で)  \n`ActiveModel::MissingAttributeError` を発生させる際に、Ruby 3.4 から利用可能になった `caller_locations` を `Kernel#raise` に渡すようにし、例外オブジェクトのバックトレース情報が「本当にエラーが起きた場所」を正しく指すように改善した PR です。これにより、backtrace cleaner やエラーレポーターがより正確なスタックトレースを扱えるようになります。"
+    },
+    {
+      "number": 59158,
+      "title": "Share a collection buffer only between ERB templates {#pr-59158}",
+      "url": "https://github.com/rails/rails/pull/59158",
+      "mergedAt": "2026-10-18T00:00:00.000Z",
+      "author": "amatsuda",
+      "authorUrl": "https://github.com/amatsuda",
+      "summary": "1. 概要 (1-2文で)  \n`render partial: ..., collection: ...` の高速化の一環で導入された「コレクションを1つのバッファにまとめてレンダリングする最適化」を、**ERBテンプレート専用に限定**する変更です。これにより、HTML/raw/jb など「戻り値として文字列やオブジェクトを返す」テンプレートハンドラで、コレクションレンダリング結果が消えたりエラーになっていた不具合を解消します。"
+    },
+    {
+      "number": 59155,
+      "title": "Keep per-item collection rendering for CollectionRenderer subclasses {#pr-59155}",
+      "url": "https://github.com/rails/rails/pull/59155",
+      "mergedAt": "2026-10-18T00:00:00.000Z",
+      "author": "excid3",
+      "authorUrl": "https://github.com/excid3",
+      "summary": "1. 概要 (1-2文で)  \nRails 7.2系(?)で導入された「コレクションを1つの共有バッファにまとめて描画する最適化」が、Jbuilder のコレクション部分テンプレートを壊していた問題を修正する PR です。`CollectionRenderer` 本体には共有バッファ最適化を残しつつ、Jbuilder のようなサブクラスでは従来どおり「要素ごとに描画してからまとめる」挙動を維持するように変更しています。"
+    },
     {
       "number": 59140,
       "title": "Extract missing_attribute from generated reader {#pr-59140}",
@@ -343,114 +451,6 @@
       "author": "amatsuda",
       "authorUrl": "https://github.com/amatsuda",
       "summary": "1. 概要 (1-2文で)  \nRails の `ActionDispatch::Request` において、`host`/`raw_host_with_port` の取得結果をリクエスト単位でメモ化し、かつポートが含まれない場合はポート除去用の正規表現処理をスキップすることで、ホスト名取得まわりのオブジェクト生成と処理コストを削減する変更です。併せてテスト用リクエスト (`TestRequest`) が `host=` / `port=` で値を変えたときにメモ化された値もリセットされるようになりました。"
-    },
-    {
-      "number": 59103,
-      "title": "Cache derived controller constant names {#pr-59103}",
-      "url": "https://github.com/rails/rails/pull/59103",
-      "mergedAt": "2026-10-15T00:00:00.000Z",
-      "author": "amatsuda",
-      "authorUrl": "https://github.com/amatsuda",
-      "summary": "1. 概要 (1-2文で)  \n`controller_class_for` が毎回パラメータ文字列を underscore / camelize していた処理を、「パラメータ → コントローラ定数名文字列」の対応をキャッシュすることで高速化した PR です。キャッシュしているのは定数そのものではなく「名前文字列」なので、クラスリロードの安全性を保ったままリクエストあたりの文字列変換を削減しています。"
-    },
-    {
-      "number": 59102,
-      "title": "Use Symbol#name for session key stringification {#pr-59102}",
-      "url": "https://github.com/rails/rails/pull/59102",
-      "mergedAt": "2026-10-15T00:00:00.000Z",
-      "author": "amatsuda",
-      "authorUrl": "https://github.com/amatsuda",
-      "summary": "1. 概要 (1-2文で)  \nRails のセッションアクセスで、キーが Symbol の場合に `to_s` ではなく `Symbol#name` を使って文字列化するようにして、余計な String オブジェクトの生成をなくすパフォーマンス改善です。セッションの API の挙動（Symbol/String キーの互換性）は維持したまま、アクセスごとのアロケーション削減と高速化を行っています。"
-    },
-    {
-      "number": 59099,
-      "title": "Skip path normalization for already-normalized request paths {#pr-59099}",
-      "url": "https://github.com/rails/rails/pull/59099",
-      "mergedAt": "2026-10-15T00:00:00.000Z",
-      "author": "amatsuda",
-      "authorUrl": "https://github.com/amatsuda",
-      "summary": "1. 概要 (1-2文で)  \n`ActionDispatch::Routing::RouteSet#call` 内で、すでに正規化済みのパスについては再度正規化処理を行わないようにし、リクエストごとの不要な String アロケーションを削減するパフォーマンス改善です。挙動（どのパスがどう正規化されるか）は変えずに、既存の挙動を保ったまま高速化しています。"
-    },
-    {
-      "number": 59098,
-      "title": "Make the abstract controller logger test order independent {#pr-59098}",
-      "url": "https://github.com/rails/rails/pull/59098",
-      "mergedAt": "2026-10-15T00:00:00.000Z",
-      "author": "amatsuda",
-      "authorUrl": "https://github.com/amatsuda",
-      "summary": "1. 概要 (1-2文で)  \nRails の `abstract controller logger` に関するテストが「テスト実行順序に依存して失敗する」問題を解消するため、テストコードが修正されました。特定のシード値でのみ落ちる不安定テストを、クラス設定の汚染を避ける形で安定化しています。"
-    },
-    {
-      "number": 59097,
-      "title": "Memoize the attribute builder per schema context {#pr-59097}",
-      "url": "https://github.com/rails/rails/pull/59097",
-      "mergedAt": "2026-10-15T00:00:00.000Z",
-      "author": "amatsuda",
-      "authorUrl": "https://github.com/amatsuda",
-      "summary": "1. 概要 (1-2文で)  \nActive Record のレコード生成時に使われる `attributes_builder` を「スキーマコンテキストごと」にメモ化し、毎回新しく計算・生成していたオブジェクトを再利用することで、レコードインスタンス化のオーバーヘッドを削減する変更です。これにより、レコード大量生成時のオブジェクトアロケーションと処理時間が大幅に改善されています。"
-    },
-    {
-      "number": 59096,
-      "title": "Spare the Content-Type parsing on the response for headers it set itself {#pr-59096}",
-      "url": "https://github.com/rails/rails/pull/59096",
-      "mergedAt": "2026-10-15T00:00:00.000Z",
-      "author": "amatsuda",
-      "authorUrl": "https://github.com/amatsuda",
-      "summary": "1. 概要 (1-2文で)  \nRails の `ActionDispatch::Response` において、レスポンス自身が設定した `Content-Type` ヘッダを再パースしないようにメモ化を導入し、不要な正規表現マッチとオブジェクト生成を削減するパフォーマンス改善です。これにより、`response.media_type` などの呼び出しでのアロケーションが減り、1リクエストあたりのオブジェクト生成数がわずかに削減されます。"
-    },
-    {
-      "number": 59095,
-      "title": "Allocate nothing in the notifications fanout for silenced subscribers {#pr-59095}",
-      "url": "https://github.com/rails/rails/pull/59095",
-      "mergedAt": "2026-10-15T00:00:00.000Z",
-      "author": "amatsuda",
-      "authorUrl": "https://github.com/amatsuda",
-      "summary": "1. 概要 (1-2文で)  \nActiveSupport::Notifications の `Fanout#groups_for` が、サイレンス（silence）された購読者に対して不要な配列割り当てを行わないように最適化されました。これにより、特に `sql.active_record` などデバッグ用サブスクライバが常時サイレンスされている本番環境で、アロケーション削減とわずかな性能改善が見込めます。"
-    },
-    {
-      "number": 59093,
-      "title": "Fix the `link_to` nil name documentation example {#pr-59093}",
-      "url": "https://github.com/rails/rails/pull/59093",
-      "mergedAt": "2026-10-15T00:00:00.000Z",
-      "author": "55728",
-      "authorUrl": "https://github.com/55728",
-      "summary": "1. 概要 (1-2文で)  \n`link_to` ヘルパで name に `nil` を渡したときの挙動について、ドキュメント内の出力例が実際の動作と食い違っていたため、正しい出力例に修正した PR です。コードの挙動自体は変わっておらず、ドキュメントのみの修正です。\n\n2. 変更内容の詳細  \n\n対象箇所: `actionview/lib/action_view/helpers/navigation_helper.rb` の `link_to` のドキュメントコメント\n\n元のドキュメント例では、次のように書かれていました:\n\n```ruby\nlink_to nil, \"http://example.com\"\n# => <a href=\"http://www.example.com\">http://www.example.com</a>\n```\n\nしかし実際の `link_to` の挙動は、引数で渡した URL をそのまま `href` とリンクテキストの両方に使うため、正しい出力は:\n\n```ruby\nlink_to nil, \"http://example.com\"\n# => <a href=\"http://example.com\">http://example.com</a>\n```\n\nとなります。\n\nこの PR は、ドキュメント中の例を上記の正しい出力に差し替えただけです（`www.` がついている点も含めて修正）。  \n挙動が正しいことは、既存テスト `test_link_tag_with_query_and_no_name`（`actionview/test/template/navigation_helper_test.rb`）でも確認済みであり、実際に `ActionView::Base.empty` で実行した結果とも一致しています。\n\n3. 影響範囲・注意点  \n\n- ランタイムのコード変更は一切なく、`link_to` の動作は従来どおりです。\n- 影響があるのはドキュメントのみであり、既存アプリケーションの挙動に変更はありません。\n- これまでドキュメントを見て「`nil` を渡すと URL が正規化されて `www.example.com` のようになる」と誤解していた場合、その理解を改める必要があります。実際には「渡した URL 文字列がそのまま `href` とリンクテキストに使われる」仕様です。\n\n4. 参考情報 (あれば)  \n\n- PRで言及されている既存テスト:  \n  `actionview/test/template/navigation_helper_test.rb` の `test_link_tag_with_query_and_no_name`  \n  → クエリ付き URL でも、渡した URL と完全一致する文字列が `href` とリンクテキストに使われることを確認するテストです。\n- 元の例が `www.` 付きだったのは、古いコミット `46a4ac8a36` での追加時からの記述ミスであり、今回の PR はその歴史的な誤りを訂正するものです。"
-    },
-    {
-      "number": 59094,
-      "title": "Spare the thunk in before callbacks for known terminators {#pr-59094}",
-      "url": "https://github.com/rails/rails/pull/59094",
-      "mergedAt": "2026-10-15T00:00:00.000Z",
-      "author": "amatsuda",
-      "authorUrl": "https://github.com/amatsuda",
-      "summary": "1. 概要 (1-2文で)  \nRails の before コールバック実行時に毎回生成されていた `lambda`（Thunk）を、特定の「終端処理オブジェクト（terminator）」については省略できるようにし、オブジェクト割り当てを大幅に削減する最適化です。`run_callbacks` の内部プロトコルを拡張しつつ、既存のカスタム terminator との互換性は維持されています。"
-    },
-    {
-      "number": 59091,
-      "title": "Allocation-free reads through OrderedOptions#method_missing {#pr-59091}",
-      "url": "https://github.com/rails/rails/pull/59091",
-      "mergedAt": "2026-10-15T00:00:00.000Z",
-      "author": "amatsuda",
-      "authorUrl": "https://github.com/amatsuda",
-      "summary": "1. 概要 (1-2文で)  \n`ActiveSupport::OrderedOptions` / `InheritableOptions`（主に `config.x` で使われる）の動的読み取りが、オブジェクトを追加生成せずに済むよう最適化されたPRです。`method_missing` のシグネチャ変更とキーの扱いの見直しにより、読み取りが高速化・省メモリ化されます。"
-    },
-    {
-      "number": 59090,
-      "title": "Read the controller logger from the config hash directly {#pr-59090}",
-      "url": "https://github.com/rails/rails/pull/59090",
-      "mergedAt": "2026-10-15T00:00:00.000Z",
-      "author": "amatsuda",
-      "authorUrl": "https://github.com/amatsuda",
-      "summary": "1. 概要 (1-2文で)  \nRails の `AbstractController::Logger` が、これまで `config.logger`（`method_missing` ベースの動的呼び出し）経由で読んでいたロガーを、`config[:logger]` を直接読む明示的アクセサに変更し、コントローラ／メイラー／ビューでのロガーアクセスを高速化する PR です。  \n動作仕様（`config.logger` と `logger` の互換性や継承挙動）は維持したまま、オブジェクト生成と動的ディスパッチのコストを削減しています。"
-    },
-    {
-      "number": 59089,
-      "title": "Memoize controller url_options with script_name across calls {#pr-59089}",
-      "url": "https://github.com/rails/rails/pull/59089",
-      "mergedAt": "2026-10-15T00:00:00.000Z",
-      "author": "amatsuda",
-      "authorUrl": "https://github.com/amatsuda",
-      "summary": "1. 概要 (1-2文で)  \n`ActionController::Metal::UrlFor#url_options` が、`script_name` を含んだ形でもメモ化されるようになり、同一リクエスト内での繰り返し呼び出し時のオブジェクト生成・処理コストが削減されました。あわせて、テスト環境でのコントローラ再利用時や `script_name` 変更時のキャッシュ無効化も適切に行われるようになっています。"
     }
   ]
 }
