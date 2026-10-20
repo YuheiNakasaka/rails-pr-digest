@@ -1,7 +1,88 @@
 {
-  "lastUpdated": "2026-10-19T00:15:02.795Z",
+  "lastUpdated": "2026-10-20T00:14:44.197Z",
   "totalCount": 50,
   "items": [
+    {
+      "number": 59195,
+      "title": "fix tests on Ruby master {#pr-59195}",
+      "url": "https://github.com/rails/rails/pull/59195",
+      "mergedAt": "2026-10-19T00:00:00.000Z",
+      "author": "tenderlove",
+      "authorUrl": "https://github.com/tenderlove",
+      "summary": "1. 概要 (1-2文で)  \nRubyの最新開発版（Ruby master）でActiveSupportのJSON関連テストが落ちていた問題を、`ActiveSupport::JSON::Encoding` の実装を微調整することで修正したPRです。Ruby本体側の仕様／挙動の変化に追従するための、互換性対応パッチです。"
+    },
+    {
+      "number": 59142,
+      "title": "Remove Enumerable from ActiveRecord::Key {#pr-59142}",
+      "url": "https://github.com/rails/rails/pull/59142",
+      "mergedAt": "2026-10-19T00:00:00.000Z",
+      "author": "jhawthorn",
+      "authorUrl": "https://github.com/jhawthorn",
+      "summary": "1. 概要 (1-2文で)  \nActiveRecord::Key から `Enumerable` のインクルードを削除し、代わりに内部の `columns` 配列への委譲で済ませることで、`each` 呼び出し時などの余計なオブジェクト確保(アロケーション)を避けるパフォーマンス改善のPRです。CコードからRubyの `each` を呼び出す際に発生していたコストを抑え、より軽量に列操作できるようにしています。"
+    },
+    {
+      "number": 59190,
+      "title": "Use ParameterFilter#filter_param when filtering query strings {#pr-59190}",
+      "url": "https://github.com/rails/rails/pull/59190",
+      "mergedAt": "2026-10-19T00:00:00.000Z",
+      "author": "amatsuda",
+      "authorUrl": "https://github.com/amatsuda",
+      "summary": "1. 概要 (1–2文で)  \nこのPRは、クエリストリングのパラメータフィルタリングで `ActiveSupport::ParameterFilter#filter_param` を使うように変更し、余計なオブジェクト生成を減らしてパフォーマンスを改善しつつ、Proc ベースのフィルタが期待どおり動くように挙動を揃えたものです。結果として、ログ用の `filtered_path` やリダイレクト先 URL のマスキングが速くなり、かつ挙動は従来（ドキュメント記載どおり）と同一になるよう調整されています。"
+    },
+    {
+      "number": 59185,
+      "title": "Avoid allocating duplicate hash in `PredicateBuilder#convert_dot_notation_to_hash` when no conversion is needed {#pr-59185}",
+      "url": "https://github.com/rails/rails/pull/59185",
+      "mergedAt": "2026-10-19T00:00:00.000Z",
+      "author": "kehra",
+      "authorUrl": "https://github.com/kehra",
+      "summary": "1. 概要 (1-2文で)  \nActive Record の `PredicateBuilder#convert_dot_notation_to_hash` にガード句を追加し、変換不要な場合はそのままハッシュを返すことで、`where` などのよくあるクエリでの無駄なハッシュ生成を削減したパフォーマンス改善です。API や挙動は変えずに、オブジェクト・メモリ割り当てを減らし、数％のスループット向上を実現しています。"
+    },
+    {
+      "number": 59151,
+      "title": "Compute `Metal.controller_name` on `eager_load!` {#pr-59151}",
+      "url": "https://github.com/rails/rails/pull/59151",
+      "mergedAt": "2026-10-19T00:00:00.000Z",
+      "author": "mhenrixon",
+      "authorUrl": "https://github.com/mhenrixon",
+      "summary": "1. 概要 (1-2文で)  \n`ActionController::Metal.controller_name` が Ractor 化後の非メイン Ractor から安全に読めるように、`eager_load!` のタイミングでコントローラ名を事前計算し、かつ凍結された文字列としてメモ化するようにした PR です。  \nこれにより、Ractor 使用時に `controller_name` 取得で発生していた `Ractor::IsolationError` を防ぎます。"
+    },
+    {
+      "number": 59184,
+      "title": "Update the MySQL minimum version in the database.yml templates {#pr-59184}",
+      "url": "https://github.com/rails/rails/pull/59184",
+      "mergedAt": "2026-10-19T00:00:00.000Z",
+      "author": "yahonda",
+      "authorUrl": "https://github.com/yahonda",
+      "summary": "1. 概要 (1-2文で)  \nRails がサポートする MySQL の最小バージョンが 5.7.9 に引き上げられたにもかかわらず、`database.yml` のテンプレートコメントが古い 5.6.4 のままだったため、それを 5.7.9 に更新するドキュメント的修正です。機能変更や挙動変更はなく、コメントの内容のみが最新仕様に追随しました。"
+    },
+    {
+      "number": 59183,
+      "title": "Add config.zjit to enable ZJIT after boot {#pr-59183}",
+      "url": "https://github.com/rails/rails/pull/59183",
+      "mergedAt": "2026-10-19T00:00:00.000Z",
+      "author": "sampokuokkanen",
+      "authorUrl": "https://github.com/sampokuokkanen",
+      "summary": "1. 概要 (1-2文で)  \nRails に `config.zjit` オプションが追加され、アプリケーションのブート完了後に ZJIT を有効化できるようになりました。これにより、ブート時の一時的なコードを JIT 対象から外しつつ、YJIT/ZJIT を切り替えやすくなります。"
+    },
+    {
+      "number": 59181,
+      "title": "Deprecate `ssl_default_redirect_status:` argument of `ActionDispatch::SSL` {#pr-59181}",
+      "url": "https://github.com/rails/rails/pull/59181",
+      "mergedAt": "2026-10-19T00:00:00.000Z",
+      "author": "bensheldon",
+      "authorUrl": "https://github.com/bensheldon",
+      "summary": "1. 概要 (1–2文で)  \n`ActionDispatch::SSL` の `ssl_default_redirect_status:` キーワード引数が非推奨になり、リダイレクトのデフォルトステータスコードが 307 から 308 へと統一されました。Rails 本体のミドルウェアスタック側の挙動もそれに合わせて調整され、古いデフォルトを使うアプリには非推奨警告を出しつつ既存動作を維持します。"
+    },
+    {
+      "number": 59175,
+      "title": "Bump the minimum supported MySQL version to 5.7.9 {#pr-59175}",
+      "url": "https://github.com/rails/rails/pull/59175",
+      "mergedAt": "2026-10-19T00:00:00.000Z",
+      "author": "kamipo",
+      "authorUrl": "https://github.com/kamipo",
+      "summary": "1. 概要 (1-2文で)  \nRails（Active Record）がサポートする MySQL の最小バージョンが **5.7.9 以上** に引き上げられ、これに伴い MySQL 5.6 向けの各種ワークアラウンド（ROW_FORMAT, utf8mb4 制限回避など）が削除されました。  \nあわせて MariaDB に対しても 10.2 系のプレ GA 向け分岐が整理され、実質的に MariaDB 10.2 安定版以降を前提としたコードに簡素化されています。"
+    },
     {
       "number": 59170,
       "title": "Share the remaining constant Arel nodes instead of building them per query {#pr-59170}",
@@ -370,87 +451,6 @@
       "author": "matthewd",
       "authorUrl": "https://github.com/matthewd",
       "summary": "1. 概要 (1-2文で)  \n`where(as_association: relation)` で生成される「ポリモーフィック関連の型条件」に関する2つのバグが修正されています。特に、(1) 明示的な type 条件があっても無視されるケースと、(2) 抽象クラスなどで `polymorphic_name` が食い違うケースで誤った type が使われる問題が解消されました。"
-    },
-    {
-      "number": 59073,
-      "title": "Preserve array-valued composite keys in find_by {#pr-59073}",
-      "url": "https://github.com/rails/rails/pull/59073",
-      "mergedAt": "2026-10-15T00:00:00.000Z",
-      "author": "matthewd",
-      "authorUrl": "https://github.com/matthewd",
-      "summary": "1. 概要 (1-2文で)  \n`find_by(association: record)` が複合主キー＋PostgreSQLの配列カラムを含む場合に、バインド値が誤ってフラット化されるバグを修正し、既に正しく動いている `where` と同じ処理経路にフォールバックさせる変更です。これにより、配列型を含む複合キーを持つ関連オブジェクトを使った検索でも、配列が正しく1カラム分の値として扱われます。"
-    },
-    {
-      "number": 59071,
-      "title": "Define an internal ActiveSupport::WeakKeyMap {#pr-59071}",
-      "url": "https://github.com/rails/rails/pull/59071",
-      "mergedAt": "2026-10-15T00:00:00.000Z",
-      "author": "matthewd",
-      "authorUrl": "https://github.com/matthewd",
-      "summary": "1. 概要 (1-2文で)  \n`ObjectSpace::WeakKeyMap` をラップする内部用の `ActiveSupport::WeakKeyMap` クラスが追加され、これまで `LeaseRegistry`（connection_pool 内部）側に散在していたランタイム依存の同期処理が ActiveSupport に一本化されました。これにより、WeakMap 利用箇所で同じ同期ロジックを再利用しやすくなり、今後の利用拡大に備えた基盤整備が行われています。"
-    },
-    {
-      "number": 59109,
-      "title": "Skip the %Z substitution in TimeWithZone#strftime when the format has none {#pr-59109}",
-      "url": "https://github.com/rails/rails/pull/59109",
-      "mergedAt": "2026-10-15T00:00:00.000Z",
-      "author": "amatsuda",
-      "authorUrl": "https://github.com/amatsuda",
-      "summary": "1. 概要 (1-2文で)  \n`ActiveSupport::TimeWithZone#strftime` が、フォーマット文字列に `%Z` が含まれない場合には置換処理をスキップするようになり、挙動は変えずにメモリアロケーションと実行時間を削減するパフォーマンス改善です。\n\n2. 変更内容の詳細(サンプルコード含む)  \n- 従来の実装  \n  - `TimeWithZone#strftime` は常に内部で `gsub` を使い、フォーマット文字列中の `%Z` をタイムゾーン略称（例: \"UTC\", \"PST\" など）に置き換える前処理を行っていました。\n  - このため、フォーマット文字列に `%Z` が含まれていなくても、毎回 `gsub` による新しい文字列の生成（アロケーション）が発生していました。\n\n- 変更点  \n  - フォーマット文字列に `\"%Z\"` が含まれているかどうかを事前にチェックし、含まれていない場合は `gsub` を走らせないようにしました。\n  - 擬似コードで表すと、以下のようなイメージです（実際のコードは1行の変更のみ）:\n\n    ```ruby\n    # 変更前（イメージ）\n    def strftime(format)\n      format = format.gsub(/%Z/, zone_abbr) # 常に gsub 実行\n      time.strftime(format)\n    end\n\n    # 変更後（イメージ）\n    def strftime(format)\n      if format.include?(\"%Z\")\n        format = format.gsub(/%Z/, zone_abbr)\n      end\n      time.strftime(format)\n    end\n    ```\n\n  - `\"%%Z\"` のようなエスケープされたシーケンスを含むケースでの挙動（既存テストでカバー済み）は変わらないことが明示されています。つまり、仕様面の振る舞いは完全に従来どおりです。\n\n- パフォーマンス計測結果（`TimeWithZone` in UTC）  \n  - オブジェクトアロケーション数:\n    - `strftime(\"%d %b %H:%M\")` : 7 → 4\n    - `to_fs(:short)`           : 6 → 2  \n    - `strftime(\"%H:%M %Z\")`    : 11 → 11（%Z を含むケースは変化なし）\n  - 実行時間 (`300,000` 回呼び出し):\n    - 0.184s → 0.147s\n\n  `%Z` を使わないフォーマットが一般的であるため、実運用では多くのビュー / I18n フォーマットで恩恵があります。\n\n3. 影響範囲・注意点  \n- 影響範囲\n  - `ActiveSupport::TimeWithZone#strftime` を経由する日時フォーマット全般:\n    - I18n の `config/locales/*.yml` に定義された日付・時刻フォーマット\n    - `to_fs` / `to_formatted_s` 経由のフォーマット\n    - アプリケーションコード内で `Time.zone.now.strftime(...)` などを呼び出している箇所\n  - `%Z` を含まないフォーマットでメモリ使用量・速度が改善されます。\n  - `%Z` を含むフォーマットや、`\"%%Z\"` のようなエスケープケースでは挙動・性能ともに従来と変わりません。\n\n- 注意点\n  - 仕様の変更ではなく最適化のみであり、フォーマット結果（出力文字列）は全ケースで従来と同一になることが意図されています。\n  - `%Z` の判定はシンプルな `\"format.include?(\"%Z\")\"` タイプのチェックのため、`%Z` を含むか否かに関するユーザーの期待と食い違うケースは基本的にありません。\n  - 既存テスト（特に `\"%%Z\"` を含むパターン）で互換性が確認されているため、通常のアプリケーションコード側で特別な対応は不要です。\n\n4. 参考情報 (あれば)  \n- 対象メソッド: `activesupport/lib/active_support/time_with_zone.rb` 内の `TimeWithZone#strftime`\n- 変更行数: +1 / -1（ロジック上は条件分岐を加えただけの非常に小さい変更）\n- パフォーマンスに関心がある場合は、`Time.zone.now.to_fs(:short)` や `I18n.l(Time.zone.now)` などを大量に実行する箇所でプロファイルを取ると、本変更の効果を観測しやすいです。"
-    },
-    {
-      "number": 59108,
-      "title": "Build Enumerable#index_with without a pair array per element {#pr-59108}",
-      "url": "https://github.com/rails/rails/pull/59108",
-      "mergedAt": "2026-10-15T00:00:00.000Z",
-      "author": "amatsuda",
-      "authorUrl": "https://github.com/amatsuda",
-      "summary": "1. 概要 (1-2文で)  \n`Enumerable#index_with` の内部実装を、`to_h` 経由ではなくシンプルな `each` ループでハッシュを構築する形に変更し、挙動を変えずにオブジェクト割り当て数と処理速度を改善するPRです。特に Active Model の `serializable_hash` など、JSON シリアライズ時のホットパスでメモリアロケーションを削減します。"
-    },
-    {
-      "number": 59107,
-      "title": "Dispatch polymorphic URL helpers for a model without intermediate arrays {#pr-59107}",
-      "url": "https://github.com/rails/rails/pull/59107",
-      "mergedAt": "2026-10-15T00:00:00.000Z",
-      "author": "amatsuda",
-      "authorUrl": "https://github.com/amatsuda",
-      "summary": "1. 概要 (1-2文で)  \n`polymorphic_url` / `polymorphic_path` / `url_for(record)` などの「レコードを渡すURLヘルパ」の内部実装を整理し、不要な配列・ハッシュの生成を減らしてパフォーマンスを改善したPRです。生成されるURLそのものの挙動・仕様は変えずに、オブジェクト割り当て数を削減するリファクタリングになっています。"
-    },
-    {
-      "number": 59106,
-      "title": "Cut allocations in per-form CSRF token generation {#pr-59106}",
-      "url": "https://github.com/rails/rails/pull/59106",
-      "mergedAt": "2026-10-15T00:00:00.000Z",
-      "author": "amatsuda",
-      "authorUrl": "https://github.com/amatsuda",
-      "summary": "1. 概要 (1-2文で)  \nRails の per-form CSRF トークン生成まわりの処理を見直し、主にオブジェクト割り当て（allocation）を大きく削減してパフォーマンスを改善した PR です。CSRF トークンの生成・検証処理の振る舞いは変えずに、URI 解析・Base64 デコード・ハッシュ構築などを効率化しています。"
-    },
-    {
-      "number": 59058,
-      "title": "Reduce allocations across URL generation {#pr-59058}",
-      "url": "https://github.com/rails/rails/pull/59058",
-      "mergedAt": "2026-10-15T00:00:00.000Z",
-      "author": "amatsuda",
-      "authorUrl": "https://github.com/amatsuda",
-      "summary": "1. 概要 (1-2文で)  \nRails の URL 生成処理（`*_path` / `*_url` / polymorphic helpers / `url_for`）において、オブジェクト確保（allocation）を減らすための最適化を行った PRです。生成される URL の文字列自体は一切変えずに、メモリ効率とパフォーマンスを改善しています。"
-    },
-    {
-      "number": 59105,
-      "title": "Avoid materializing per-instance config copies for common reads {#pr-59105}",
-      "url": "https://github.com/rails/rails/pull/59105",
-      "mergedAt": "2026-10-15T00:00:00.000Z",
-      "author": "amatsuda",
-      "authorUrl": "https://github.com/amatsuda",
-      "summary": "1. 概要 (1-2文で)  \nRails のコントローラ / ビューの設定 (`config`) を、リクエストごとに必ず複製していた挙動を「初回アクセス時にだけ複製する」ように変更し、不要なオブジェクト生成を減らしてパフォーマンスを改善する PR です。既存の API 振る舞いは維持しつつ、特にログ出力だけを行うような軽いアクションでのオブジェクト割り当て数が削減されています。"
-    },
-    {
-      "number": 59104,
-      "title": "Memoize the host on the request and skip the port regexp when there is none {#pr-59104}",
-      "url": "https://github.com/rails/rails/pull/59104",
-      "mergedAt": "2026-10-15T00:00:00.000Z",
-      "author": "amatsuda",
-      "authorUrl": "https://github.com/amatsuda",
-      "summary": "1. 概要 (1-2文で)  \nRails の `ActionDispatch::Request` において、`host`/`raw_host_with_port` の取得結果をリクエスト単位でメモ化し、かつポートが含まれない場合はポート除去用の正規表現処理をスキップすることで、ホスト名取得まわりのオブジェクト生成と処理コストを削減する変更です。併せてテスト用リクエスト (`TestRequest`) が `host=` / `port=` で値を変えたときにメモ化された値もリセットされるようになりました。"
     }
   ]
 }
