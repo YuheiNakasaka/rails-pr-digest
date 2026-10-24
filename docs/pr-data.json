@@ -1,7 +1,205 @@
 {
-  "lastUpdated": "2026-10-23T00:21:09.667Z",
+  "lastUpdated": "2026-10-24T00:19:27.979Z",
   "totalCount": 50,
   "items": [
+    {
+      "number": 59322,
+      "title": "Fast-path canonical UUID casting in the PostgreSQL adapter {#pr-59322}",
+      "url": "https://github.com/rails/rails/pull/59322",
+      "mergedAt": "2026-10-23T00:00:00.000Z",
+      "author": "oleksii-leonov",
+      "authorUrl": "https://github.com/oleksii-leonov",
+      "summary": "1. 概要 (1-2文で)  \nPostgreSQLアダプタのUUIDキャスト処理（`PostgreSQL::OID::Uuid#cast_value`）に「正規形式(canonical)用の高速パス」が追加され、PostgreSQLが返す標準的なUUID文字列に対する処理が大幅に高速化されました。代わりに、大文字や不正なUUID入力の処理はやや遅くなりますが、UUID主流ケースでの性能向上を優先するトレードオフになっています。"
+    },
+    {
+      "number": 58924,
+      "title": "Avoid allocations in `Mime::Type#==` {#pr-58924}",
+      "url": "https://github.com/rails/rails/pull/58924",
+      "mergedAt": "2026-10-23T00:00:00.000Z",
+      "author": "njarrar",
+      "authorUrl": "https://github.com/njarrar",
+      "summary": "1. 概要 (1-2文で)  \n`Mime::Type#==` が比較のたびにオブジェクトを余計に生成していた問題を解消し、文字列・シンボル・Mime::Type 同士の比較をより効率的に行うようにしたパフォーマンス改善PRです。特に `request.format == :json` のような頻出パスでメモリアロケーションと時間コストが大きく削減されています。"
+    },
+    {
+      "number": 59327,
+      "title": "Define AssociationRelation bulk methods {#pr-59327}",
+      "url": "https://github.com/rails/rails/pull/59327",
+      "mergedAt": "2026-10-23T00:00:00.000Z",
+      "author": "dersam",
+      "authorUrl": "https://github.com/dersam",
+      "summary": "1. 概要 (1-2文で)  \nAssociationRelation が持つ「一括挿入系メソッド」（`insert_all` など）を明示的に定義し直し、Bootsnap がコードをキャッシュしやすい形にした PR です。機能的な挙動はほぼ維持しつつ、パフォーマンスや読みやすさ・テストを整えています。"
+    },
+    {
+      "number": 59326,
+      "title": "Unroll polymorphic route helper methods {#pr-59326}",
+      "url": "https://github.com/rails/rails/pull/59326",
+      "mergedAt": "2026-10-23T00:00:00.000Z",
+      "author": "dersam",
+      "authorUrl": "https://github.com/dersam",
+      "summary": "1. 概要 (1-2文で)  \npolymorphic ルーティング用のヘルパーメソッドを「動的定義」から「明示的にメソッドを定義する」形に変更し、Bootsnap がこれらをキャッシュしやすくするパフォーマンス改善の PR です。機能的な挙動はそのままに、Rails 起動時やルーティングヘルパー呼び出し時のオーバーヘッド削減が目的です。"
+    },
+    {
+      "number": 59311,
+      "title": "Fix find with select for composite primary key models {#pr-59311}",
+      "url": "https://github.com/rails/rails/pull/59311",
+      "mergedAt": "2026-10-23T00:00:00.000Z",
+      "author": "kehra",
+      "authorUrl": "https://github.com/kehra",
+      "summary": "1. 概要 (1-2文で)  \n`select` を指定した状態で複合主キー(composite primary key, CPK)モデルに対して `find`（内部的には `find_some` / `find_some_ordered`）を呼ぶと不正な SQL が生成されるバグを修正した PRです。単一カラム主キーの挙動は維持したまま、CPK でも正しく主キーが SELECT されるように内部実装を統一しています。"
+    },
+    {
+      "number": 59325,
+      "title": "Base the deprecation proxies on BasicObject {#pr-59325}",
+      "url": "https://github.com/rails/rails/pull/59325",
+      "mergedAt": "2026-10-23T00:00:00.000Z",
+      "author": "amatsuda",
+      "authorUrl": "https://github.com/amatsuda",
+      "summary": "1. 概要 (1-2文で)  \n`ActiveSupport::Deprecation::DeprecationProxy`（`DeprecatedObjectProxy` / `DeprecatedInstanceVariableProxy` のベースクラス）が `Object` ではなく `BasicObject` を継承するようになり、`to_json` や `blank?` など Object へ後から追加されるメソッドも、正しく deprecate された実オブジェクトに委譲されるようになりました。これにより、これまで「警告なくおかしな値を返していた」ケースが、1回の deprecation 警告付きで正しい動作をするように修正されています。"
+    },
+    {
+      "number": 59323,
+      "title": "Avoid Rational allocations in Time#change when usec is zero {#pr-59323}",
+      "url": "https://github.com/rails/rails/pull/59323",
+      "mergedAt": "2026-10-23T00:00:00.000Z",
+      "author": "czj",
+      "authorUrl": "https://github.com/czj",
+      "summary": "1. 概要 (1-2文で)  \nTime#change で usec（マイクロ秒）が 0 の場合でも不要な Rational オブジェクトを生成していた処理をスキップし、オブジェクト割り当てと処理時間を削減する最適化が行われました。これにより beginning_of_day などの時間操作メソッドのパフォーマンスが向上します。"
+    },
+    {
+      "number": 59321,
+      "title": "Document that Action Mailbox routing is not authentication [ci skip] {#pr-59321}",
+      "url": "https://github.com/rails/rails/pull/59321",
+      "mergedAt": "2026-10-23T00:00:00.000Z",
+      "author": "flavorjones",
+      "authorUrl": "https://github.com/flavorjones",
+      "summary": "1. 概要 (1-2文で)  \nAction Mailbox がメールをどのヘッダでルーティングしているかを明示し、「ルーティングは認証ではない」という警告をドキュメントに追加する変更です。挙動自体は変わらず、ガイドと `ActionMailbox::Base` の説明をより正確かつセキュアな観点で分かりやすくしています。"
+    },
+    {
+      "number": 59281,
+      "title": "Define Rails::Paths::Path flag methods explicitly {#pr-59281}",
+      "url": "https://github.com/rails/rails/pull/59281",
+      "mergedAt": "2026-10-23T00:00:00.000Z",
+      "author": "dersam",
+      "authorUrl": "https://github.com/dersam",
+      "summary": "1. 概要 (1-2文で)  \nRails の `Rails::Paths::Path` クラスで、これまで `method_missing` などで動的に扱っていた「フラグ系メソッド」を明示的に定義し直し、Bootsnap によるメソッドキャッシュが効くようにした変更です。これにより、ロード時・実行時のパフォーマンス向上が期待できます。"
+    },
+    {
+      "number": 59297,
+      "title": "Only keep the original url options when path params are given {#pr-59297}",
+      "url": "https://github.com/rails/rails/pull/59297",
+      "mergedAt": "2026-10-23T00:00:00.000Z",
+      "author": "sampokuokkanen",
+      "authorUrl": "https://github.com/sampokuokkanen",
+      "summary": "1. 概要 (1-2文で)  \n`Journey::Formatter#generate` が常に URL オプション Hash をコピーしていた挙動を見直し、`path_params` が Hash の場合にだけ元のオプションを保持するようにして、不要なオブジェクト生成を減らすパフォーマンス改善の PR です。機能的な振る舞いは変えず、1回の呼び出しあたりの割り当て数をわずかに削減しています。"
+    },
+    {
+      "number": 59309,
+      "title": "Only rewrite error attribute names that need it {#pr-59309}",
+      "url": "https://github.com/rails/rails/pull/59309",
+      "mergedAt": "2026-10-23T00:00:00.000Z",
+      "author": "sampokuokkanen",
+      "authorUrl": "https://github.com/sampokuokkanen",
+      "summary": "1. 概要 (1-2文で)  \n`ActiveModel::Error` がエラーメッセージ用に属性名を整形する際、「.」や「[」を含まない単純な属性名に対しては不要な文字列操作をスキップするようにし、`full_messages` などのパフォーマンスとメモリアロケーションをわずかに改善する変更です。機能・挙動は変えず、オーバーヘッドだけを減らしています。"
+    },
+    {
+      "number": 59310,
+      "title": "[8-1-stable] Revert \"Merge pull request #59223 from bensheldon/porto-v5/active-record-async-fallback\" {#pr-59310}",
+      "url": "https://github.com/rails/rails/pull/59310",
+      "mergedAt": "2026-10-23T00:00:00.000Z",
+      "author": "yahonda",
+      "authorUrl": "https://github.com/yahonda",
+      "summary": "1. 概要 (1–2文で)  \nRails 8-1-stable ブランチに対して行われた PR #59223 のバックポートが CI を落としていたため、その変更を丸ごとリバートする PR です。非同期クエリ (`async_*`) 周りの実装が main と 8-1-stable で揃っておらず、未定義メソッド呼び出しやトランザクション内の非同期クエリ例外が発生していたのを、一旦なかったことにしています。"
+    },
+    {
+      "number": 59298,
+      "title": "Don't build the cache instrumentation event name on every operation {#pr-59298}",
+      "url": "https://github.com/rails/rails/pull/59298",
+      "mergedAt": "2026-10-23T00:00:00.000Z",
+      "author": "sampokuokkanen",
+      "authorUrl": "https://github.com/sampokuokkanen",
+      "summary": "1. 概要 (1-2文で)  \nRails のキャッシュ計測 (`ActiveSupport::Cache::Store#instrument` / `#instrument_multi`) で、毎回イベント名文字列を生成していた処理を見直し、代表的な操作については事前に凍結済みのイベント名を使い回すようにしてメモリアロケーションと実行時間を削減した PR です。機能やイベント名そのものの挙動は変えずに、内部のパフォーマンスだけを改善しています。"
+    },
+    {
+      "number": 59296,
+      "title": "Name XmlMini's shipped backends where they are chosen {#pr-59296}",
+      "url": "https://github.com/rails/rails/pull/59296",
+      "mergedAt": "2026-10-23T00:00:00.000Z",
+      "author": "amatsuda",
+      "authorUrl": "https://github.com/amatsuda",
+      "summary": "1. 概要 (1-2文で)  \nActiveSupport::XmlMini で利用可能な標準バックエンド（REXML, Nokogiri など）を、動的ではなく `case` で明示的に分岐して `require` するようにした PRです。挙動は変えずに、静的解析ツールや AOT コンパイラが依存関係を解決しやすくなるようにしています。"
+    },
+    {
+      "number": 59295,
+      "title": "Keep a railtie's registered blocks in one Hash, not in per-type ivars {#pr-59295}",
+      "url": "https://github.com/rails/rails/pull/59295",
+      "mergedAt": "2026-10-23T00:00:00.000Z",
+      "author": "amatsuda",
+      "authorUrl": "https://github.com/amatsuda",
+      "summary": "1. 概要 (1-2文で)  \n`Rails::Railtie.register_block_for` が、これまでタイプごとに別々のインスタンス変数（`@rake_tasks`, `@load_console` など）に保持していたブロックを、1つのハッシュインスタンス変数 `@registered_blocks` にまとめて管理するように変更した PR です。挙動の変更はなく、内部実装の簡素化・静的解析やAOTコンパイルとの相性改善が目的です。"
+    },
+    {
+      "number": 59293,
+      "title": "Avoid allocating a rest argument when building an indifferent hash {#pr-59293}",
+      "url": "https://github.com/rails/rails/pull/59293",
+      "mergedAt": "2026-10-23T00:00:00.000Z",
+      "author": "sampokuokkanen",
+      "authorUrl": "https://github.com/sampokuokkanen",
+      "summary": "1. 概要 (1-2文で)  \n`HashWithIndifferentAccess#initialize` から `update`（可変長引数版）を呼ぶのをやめ、単一ハッシュ専用のメソッドを直接呼び出すことで、余計な配列割り当てを避けてパフォーマンスを改善する変更です。ActiveSupport の `HashWithIndifferentAccess` の生成・複製・マージがメモリ効率・速度の両面で少し軽くなります。"
+    },
+    {
+      "number": 59291,
+      "title": "Define EnvironmentInquirer default environment predicates explicitly {#pr-59291}",
+      "url": "https://github.com/rails/rails/pull/59291",
+      "mergedAt": "2026-10-23T00:00:00.000Z",
+      "author": "sampokuokkanen",
+      "authorUrl": "https://github.com/sampokuokkanen",
+      "summary": "1. 概要 (1-2文で)  \n`ActiveSupport::EnvironmentInquirer` が `development?`, `test?`, `production?` を `class_eval` で動的定義していたのをやめ、3つのメソッドをクラス内で明示的に定義する変更です。これにより bootsnap のコンパイルキャッシュが効くようになり、起動時の再コンパイルコストが減ります。"
+    },
+    {
+      "number": 59129,
+      "title": "Return a plain String from String#truncate on SafeBuffer {#pr-59129}",
+      "url": "https://github.com/rails/rails/pull/59129",
+      "mergedAt": "2026-10-23T00:00:00.000Z",
+      "author": "bruno-costanzo",
+      "authorUrl": "https://github.com/bruno-costanzo",
+      "summary": "1. 概要 (1–2文で)  \n`String#truncate` が `ActiveSupport::SafeBuffer` に対して HTML セーフなまま短縮文字列を返してしまう回帰を修正し、再び「短縮後の文字列はプレーンな String（非 html_safe）」になるようにした PR です。これにより、HTML を途中で切った場合でも escape がスキップされず、壊れたタグがそのまま描画される問題を防ぎます。"
+    },
+    {
+      "number": 59290,
+      "title": "Don't allocate empty locals keys when rendering without locals {#pr-59290}",
+      "url": "https://github.com/rails/rails/pull/59290",
+      "mergedAt": "2026-10-23T00:00:00.000Z",
+      "author": "sampokuokkanen",
+      "authorUrl": "https://github.com/sampokuokkanen",
+      "summary": "1. 概要 (1-2文で)  \n`render` 時に `locals` を指定しなかった場合でも毎回空配列を生成していた処理を、共有の「凍結済み空配列」に置き換え、不要なオブジェクトアロケーションを削減するパフォーマンス微改善のPRです。挙動は変えずに、1リクエストあたりのオブジェクト数をわずかに減らしています。"
+    },
+    {
+      "number": 59286,
+      "title": "Check content security policy sources for whitespace without copying them {#pr-59286}",
+      "url": "https://github.com/rails/rails/pull/59286",
+      "mergedAt": "2026-10-23T00:00:00.000Z",
+      "author": "sampokuokkanen",
+      "authorUrl": "https://github.com/sampokuokkanen",
+      "summary": "1. 概要 (1-2文で)  \nRails の Content Security Policy ヘッダ生成時に行われる「ソース値に空白文字が含まれていないか」のチェック処理を、文字列をコピーせずに行うよう最適化した PR です。これにより、CSP ヘッダ構築時のオブジェクトアロケーション数と実行時間がわずかに改善されます。"
+    },
+    {
+      "number": 59285,
+      "title": "Skip copying the current attributes instances when there are none {#pr-59285}",
+      "url": "https://github.com/rails/rails/pull/59285",
+      "mergedAt": "2026-10-23T00:00:00.000Z",
+      "author": "sampokuokkanen",
+      "authorUrl": "https://github.com/sampokuokkanen",
+      "summary": "1. 概要 (1-2文で)  \n`ActiveSupport::CurrentAttributes.clear_all` が、実行中に一度も CurrentAttributes が使われなかった場合には内部インスタンスのコピー・クリア処理をスキップするようになり、余計な空配列アロケーションが発生しないよう最適化されました。実質的な挙動の互換性は保ちつつ、リクエスト/ジョブ毎の後処理コストを削減するパフォーマンス・チューニングです。"
+    },
+    {
+      "number": 59271,
+      "title": "Check render option keys without building arrays {#pr-59271}",
+      "url": "https://github.com/rails/rails/pull/59271",
+      "mergedAt": "2026-10-23T00:00:00.000Z",
+      "author": "sampokuokkanen",
+      "authorUrl": "https://github.com/sampokuokkanen",
+      "summary": "1. 概要 (1-2文で)  \nRailsのコントローラで`render`を呼ぶ際のオプション判定ロジックを改善し、`options.keys.intersect?(...)`による余計な配列生成をやめて`options.key?`連鎖に置き換えることで、軽微なパフォーマンス向上とオブジェクト割り当て削減を行うPRです。  \n機能的な挙動は変えず、Action View / Action Pack のテストはすべて通過しています。"
+    },
     {
       "number": 59280,
       "title": "Define TimeWithZone time readers explicitly {#pr-59280}",
@@ -253,204 +451,6 @@
       "author": "tenderlove",
       "authorUrl": "https://github.com/tenderlove",
       "summary": "1. 概要 (1-2文で)  \nActiveRecord の enum が生成する判定メソッド（`paid?` など）について、これまでの `public_send` ベースの「動的 bmethod 定義」から、「通常の Ruby メソッド定義」に変更して Ruby/JIT に最適化されやすくした PR です。これにより enum 判定メソッドを多用するコードの実行速度が大幅に向上します。"
-    },
-    {
-      "number": 59247,
-      "title": "Create tmp/local_secret.txt with owner-only permissions {#pr-59247}",
-      "url": "https://github.com/rails/rails/pull/59247",
-      "mergedAt": "2026-10-21T00:00:00.000Z",
-      "author": "bastidotnet",
-      "authorUrl": "https://github.com/bastidotnet",
-      "summary": "1. 概要 (1-2文で)  \nRails が development / test 用に生成する `tmp/local_secret.txt` について、常に「所有者のみ読み書き可能 (0600)」で作成・更新するようにし、既存の緩いパーミッションのファイルも可能な範囲で締めるハードニングが行われました。これにより同一マシン上の他ユーザーから `secret_key_base` が読み取られるリスクを下げます。"
-    },
-    {
-      "number": 59251,
-      "title": "Preserve schema order when materializing LazyAttributeSet {#pr-59251}",
-      "url": "https://github.com/rails/rails/pull/59251",
-      "mergedAt": "2026-10-21T00:00:00.000Z",
-      "author": "AIndrewn617",
-      "authorUrl": "https://github.com/AIndrewn617",
-      "summary": "1. 概要 (1-2文で)  \n`LazyAttributeSet` を実体化（materialize）するときに、属性の並び順が「代入順」になってしまっていた挙動を修正し、従来どおり「スキーマ定義順（schema order）」で返すように戻した PR です。これにより、新規レコードで `attributes_for_database` を呼んだ際のキー順が、従来と同じになるように調整されています。"
-    },
-    {
-      "number": 59252,
-      "title": "Avoid pair arrays when generating error translations {#pr-59252}",
-      "url": "https://github.com/rails/rails/pull/59252",
-      "mergedAt": "2026-10-21T00:00:00.000Z",
-      "author": "thomasklemm",
-      "authorUrl": "https://github.com/thomasklemm",
-      "summary": "1. 概要 (1-2文で)  \nActiveModel::Error のエラーメッセージ生成処理で、一時的な配列オブジェクトの生成を避けることでメモリアロケーションを減らす最適化を行った PR です。I18n のキー探索順はそのまま維持され、挙動は変えずに各ルックアップあたりのオブジェクト生成数だけを削減しています。"
-    },
-    {
-      "number": 59218,
-      "title": "Keep route redirects from a string template on the request host {#pr-59218}",
-      "url": "https://github.com/rails/rails/pull/59218",
-      "mergedAt": "2026-10-21T00:00:00.000Z",
-      "author": "flavorjones",
-      "authorUrl": "https://github.com/flavorjones",
-      "summary": "1. 概要 (1-2文で)  \nこのPRは、Railsのルーティングで「文字列テンプレートによる redirect」を行う際、パラメータにエンコードされたスラッシュ等が含まれていても、意図せず別ホストへリダイレクトされないように挙動を修正するものです。アプリ自身のホストを前提としたテンプレート (`\"/%{path}\"` など) では、パラメータからスキームやホストが「生えて」こないようにし、オープンリダイレクトを防ぎます。"
-    },
-    {
-      "number": 59244,
-      "title": "Avoid copying nested Symbol attribute keys {#pr-59244}",
-      "url": "https://github.com/rails/rails/pull/59244",
-      "mergedAt": "2026-10-21T00:00:00.000Z",
-      "author": "thomasklemm",
-      "authorUrl": "https://github.com/thomasklemm",
-      "summary": "1. 概要 (1-2文で)  \nこのPRは、`data:` や `aria:` などのネストしたHTML属性ハッシュのキーが Symbol の場合に、`to_s` ではなく `Symbol#name` を使うようにして、不要な文字列オブジェクトの生成を抑えるマイクロ最適化です。動作仕様は変えず、割り当てオブジェクト数の削減とわずかなパフォーマンス改善を目的とした変更です。"
-    },
-    {
-      "number": 59236,
-      "title": "Avoid pair allocations when resolving CurrentAttributes defaults {#pr-59236}",
-      "url": "https://github.com/rails/rails/pull/59236",
-      "mergedAt": "2026-10-21T00:00:00.000Z",
-      "author": "thomasklemm",
-      "authorUrl": "https://github.com/thomasklemm",
-      "summary": "1. 概要 (1-2文で)  \n`ActiveSupport::CurrentAttributes` がデフォルト値を解決する処理で、余計なオブジェクト（配列ペア）が毎回大量に生成されていたのを解消し、`reset` などの処理をメモリ効率・スループットともに改善するリファクタリングです。挙動やAPIは一切変えず、内部実装のみを最小変更で最適化しています。"
-    },
-    {
-      "number": 59243,
-      "title": "Avoid out-of-bounds getbyte in String#blank? to prevent YJIT side exits {#pr-59243}",
-      "url": "https://github.com/rails/rails/pull/59243",
-      "mergedAt": "2026-10-21T00:00:00.000Z",
-      "author": "yaroslav-shopify",
-      "authorUrl": "https://github.com/yaroslav-shopify",
-      "summary": "1. 概要 (1-2文で)\n- `String#blank?` の ASCII 判定ループで、文字列末尾の1バイト先まで `getbyte` を読みに行っていたため、YJIT で毎回サイドエグジットが発生していた問題を解消する PR です。  \n- ループ条件を明示的に `i < bytesize` で制御することで、YJIT 有効時の短い空白文字列の性能を元の高速版レベルまで戻しつつ、挙動自体は一切変えていません。"
-    },
-    {
-      "number": 59241,
-      "title": "Skip type casting empty binds {#pr-59241}",
-      "url": "https://github.com/rails/rails/pull/59241",
-      "mergedAt": "2026-10-21T00:00:00.000Z",
-      "author": "sampokuokkanen",
-      "authorUrl": "https://github.com/sampokuokkanen",
-      "summary": "1. 概要 (1-2文で)  \n`ActiveRecord::ConnectionAdapters` の `type_casted_binds` が、バインド変数が存在しない場合でも必ず空配列を生成していた挙動を修正し、`nil` または空のバインドの場合はキャスト処理をスキップしてそのまま返すようにしたパフォーマンス改善 PR です。BEGIN/COMMIT などバインドなしの SQL 実行時のオブジェクトアロケーションを削減しつつ、PostgreSQL 用のオーバーライド挙動は維持しています。"
-    },
-    {
-      "number": 59242,
-      "title": "Restore reads that don't expect a missing attribute to raise {#pr-59242}",
-      "url": "https://github.com/rails/rails/pull/59242",
-      "mergedAt": "2026-10-21T00:00:00.000Z",
-      "author": "matthewd",
-      "authorUrl": "https://github.com/matthewd",
-      "summary": "1. 概要 (1-2文で)  \nRails 7.2/8.0 系で導入された「属性が存在しないときに例外を投げる読み取りヘルパー (#59116)」が内部実装にも広く使われてしまい、本来 `nil` を返すべき箇所まで例外が出るようになっていた問題を修正した PR です。  \n内部の属性読み取りを「例外を期待する読み取り」と「存在しなければ `nil` を返す読み取り」にきちんと分離しつつ、パフォーマンス上の最適化（fast-path）も維持するよう実装が整理されています。"
-    },
-    {
-      "number": 59240,
-      "title": "Skip adding empty includes to preloads when loading a relation {#pr-59240}",
-      "url": "https://github.com/rails/rails/pull/59240",
-      "mergedAt": "2026-10-21T00:00:00.000Z",
-      "author": "sampokuokkanen",
-      "authorUrl": "https://github.com/sampokuokkanen",
-      "summary": "1. 概要 (1-2文で)  \nActive Record の `Relation#preload_associations` で、`includes` が空のときに不要な配列生成と `eager_loading?` チェックをスキップする最適化が行われました。これにより、`includes` を使わない一般的なケースでの Relation ロード時のメモリアロケーションと実行速度が改善されます。"
-    },
-    {
-      "number": 59232,
-      "title": "Remove supports_identity_columns? and supports_native_partitioning? {#pr-59232}",
-      "url": "https://github.com/rails/rails/pull/59232",
-      "mergedAt": "2026-10-21T00:00:00.000Z",
-      "author": "yahonda",
-      "authorUrl": "https://github.com/yahonda",
-      "summary": "1. 概要 (1–2文で)  \n`supports_identity_columns?` と `supports_native_partitioning?` は Rails 内部用（`:nodoc:`）のプライベート API なので、非推奨フラグを付けるのではなく、そのまま削除された PR です。これにより、未リリースの deprecation をクリーンに取り除き、パブリック API との扱いを明確化しています。"
-    },
-    {
-      "number": 59239,
-      "title": "Skip compact_blank for empty order values when building Arel {#pr-59239}",
-      "url": "https://github.com/rails/rails/pull/59239",
-      "mergedAt": "2026-10-21T00:00:00.000Z",
-      "author": "sampokuokkanen",
-      "authorUrl": "https://github.com/sampokuokkanen",
-      "summary": "1. 概要 (1-2文で)  \n`ActiveRecord::Relation` で Arel を組み立てる際、`order_values` / `default_order_values` が空なのに毎回 `compact_blank` を呼んで空配列を2回生成していた問題を避け、不要なオブジェクト割り当てを減らす最適化です。機能的な挙動（デフォルト order へのフォールバック）は変えず、パフォーマンスとメモリ効率をわずかに改善しています。"
-    },
-    {
-      "number": 59238,
-      "title": "Don't copy the payload when building an event for event object subscribers {#pr-59238}",
-      "url": "https://github.com/rails/rails/pull/59238",
-      "mergedAt": "2026-10-21T00:00:00.000Z",
-      "author": "sampokuokkanen",
-      "authorUrl": "https://github.com/sampokuokkanen",
-      "summary": "1. 概要 (1–2文で)  \nActiveSupport::Notifications のイベントオブジェクト購読者向けイベント生成時に、不要な payload のコピー（`dup`）をやめることで、オブジェクト割り当てとパフォーマンスを改善する変更です。`start` 時点では payload を渡さず、`finish` 時点で改めて payload をセットするようにしています。"
-    },
-    {
-      "number": 59217,
-      "title": "Load Prism with Action View's eager load, not on the first digest {#pr-59217}",
-      "url": "https://github.com/rails/rails/pull/59217",
-      "mergedAt": "2026-10-21T00:00:00.000Z",
-      "author": "amatsuda",
-      "authorUrl": "https://github.com/amatsuda",
-      "summary": "1. 概要 (1-2文で)  \nこのPRは、Prism の読み込みタイミングを見直し、「Action View の eager load 時に読み込む」ように戻すことで、本番環境（特に Puma クラスタ構成）での初回リクエスト時のオーバーヘッドを解消する変更です。`config.eager_load` が true のときはブート時に、false のときは最初のテンプレートダイジェスト計算時に Prism を読み込む挙動を両立させています。"
-    },
-    {
-      "number": 59235,
-      "title": "Skip empty group mapping when building notification handles {#pr-59235}",
-      "url": "https://github.com/rails/rails/pull/59235",
-      "mergedAt": "2026-10-21T00:00:00.000Z",
-      "author": "thomasklemm",
-      "authorUrl": "https://github.com/thomasklemm",
-      "summary": "1. 概要 (1-2文で)  \nActiveSupport::Notifications::Fanout が通知用ハンドルを組み立てる際、「購読者が1人もいないケース」で余計な配列生成などを行わないように最適化した PR です。振る舞いは変えずに、特に「購読者なし／全員サイレンス時」のオブジェクト生成とスループットを改善しています。"
-    },
-    {
-      "number": 59231,
-      "title": "Read each node's children once in BottomUpReducer {#pr-59231}",
-      "url": "https://github.com/rails/rails/pull/59231",
-      "mergedAt": "2026-10-21T00:00:00.000Z",
-      "author": "sampokuokkanen",
-      "authorUrl": "https://github.com/sampokuokkanen",
-      "summary": "1. 概要 (1-2文で)  \n`ActionText::BottomUpReducer` が各ノードについて `children` を複数回読み出していた処理を見直し、子ノード一覧を一度だけ配列として取得・再利用することで、`to_plain_text` / `to_markdown` のパフォーマンスとメモリアロケーションを改善する変更です。"
-    },
-    {
-      "number": 59230,
-      "title": "Build the plain text method name once per node {#pr-59230}",
-      "url": "https://github.com/rails/rails/pull/59230",
-      "mergedAt": "2026-10-21T00:00:00.000Z",
-      "author": "sampokuokkanen",
-      "authorUrl": "https://github.com/sampokuokkanen",
-      "summary": "1. 概要 (1-2文で)  \nAction Text の `ActionText::PlainTextConversion#plain_text_for_node` 内で、ノードごとに2回生成していたメソッド名シンボルを1回だけ生成して再利用するようにした、小さなパフォーマンス改善のPRです。これにより、リッチテキスト 102 ノード変換時のオブジェクト生成数が 1921 から 1749 に削減されています。"
-    },
-    {
-      "number": 59229,
-      "title": "Skip the instance variable lookup for model-less form fields {#pr-59229}",
-      "url": "https://github.com/rails/rails/pull/59229",
-      "mergedAt": "2026-10-21T00:00:00.000Z",
-      "author": "sampokuokkanen",
-      "authorUrl": "https://github.com/sampokuokkanen",
-      "summary": "1. 概要 (1-2文で)  \nモデルに紐づかない `form_with(url: ...)` などのフォームフィールドを描画する際に、毎回 `NameError` の発生と rescue が起きていた箇所を、事前条件チェックで回避することで高速化した PRです。オブジェクト名が空、またはネスト構文（`item[subobject]`）の場合は例外を投げず即座に `nil` を返すようにし、パフォーマンスを改善しています。"
-    },
-    {
-      "number": 59233,
-      "title": "Avoid re-deriving the attribute aliases and key strings in `where` {#pr-59233}",
-      "url": "https://github.com/rails/rails/pull/59233",
-      "mergedAt": "2026-10-21T00:00:00.000Z",
-      "author": "kamipo",
-      "authorUrl": "https://github.com/kamipo",
-      "summary": "1. 概要 (1-2文で)  \n`where` 句を組み立てる内部処理（`build_where_clause`）で、毎回キーを文字列化したり attribute alias を引き直していた部分を最適化し、不要なオブジェクト生成を減らすことでパフォーマンスを改善した PR です。`Symbol#to_s` ではなく `Symbol#name` を使うことで、シンボルキーの文字列化に伴う追加アロケーションも抑えています。"
-    },
-    {
-      "number": 59234,
-      "title": "Fix `scope_attributes?` to detect a private `self.default_scope` {#pr-59234}",
-      "url": "https://github.com/rails/rails/pull/59234",
-      "mergedAt": "2026-10-21T00:00:00.000Z",
-      "author": "kamipo",
-      "authorUrl": "https://github.com/kamipo",
-      "summary": "1. 概要 (1-2文で)  \n`scope_attributes?` が private な `self.default_scope` を検出できず、`all` と `new` / `find` 系で default scope の扱いが不整合になるバグを修正した PRです。`scope_attributes?` の実装を `has_default_scope?` に委譲することで、可視性に関係なく default scope を一貫して検出しつつ、パフォーマンスも改善しています。"
-    },
-    {
-      "number": 59220,
-      "title": "Document that RedisCacheStore counters and clear return nil on failure {#pr-59220}",
-      "url": "https://github.com/rails/rails/pull/59220",
-      "mergedAt": "2026-10-21T00:00:00.000Z",
-      "author": "carlosdanielpohlod",
-      "authorUrl": "https://github.com/carlosdanielpohlod",
-      "summary": "1. 概要 (1-2文で)  \nRedisCacheStore の `increment`, `decrement`, `clear` が「エラーを送出する」のではなく、失敗時に `nil` を返すフェイルセーフ挙動であることを、実装に合わせてドキュメントコメント側に反映した PR です。`delete_matched` は従来どおり例外を送出するため、その記述は変更されていません。"
-    },
-    {
-      "number": 59227,
-      "title": "Deprecate supports_identity_columns? on the PostgreSQL adapter {#pr-59227}",
-      "url": "https://github.com/rails/rails/pull/59227",
-      "mergedAt": "2026-10-21T00:00:00.000Z",
-      "author": "yahonda",
-      "authorUrl": "https://github.com/yahonda",
-      "summary": "1. 概要 (1-2文で)  \nPostgreSQL アダプタの `supports_identity_columns?` を「常に true になる無意味なメソッド」として非推奨にする変更です。Rails がサポートする PostgreSQL の最低バージョンが 10.0 以降になったことで、常に identity columns をサポートしている前提に移行しています。"
     }
   ]
 }
