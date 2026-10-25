@@ -1,7 +1,151 @@
 {
-  "lastUpdated": "2026-10-24T00:19:27.979Z",
+  "lastUpdated": "2026-10-25T00:16:07.259Z",
   "totalCount": 50,
   "items": [
+    {
+      "number": 59188,
+      "title": "Load relations returned by `connected_to_many` {#pr-59188}",
+      "url": "https://github.com/rails/rails/pull/59188",
+      "mergedAt": "2026-10-24T00:00:00.000Z",
+      "author": "laserlemon",
+      "authorUrl": "https://github.com/laserlemon",
+      "summary": "1. 概要 (1-2文で)  \n`ActiveRecord::Base.connected_to_many` が返す未ロードの `ActiveRecord::Relation` が、ブロック終了後に「元の接続ロール」でクエリされてしまう不具合を修正する PR です。`connected_to` と同様に、ブロックを抜ける前に Relation をロードし、その間も接続ロールの復元処理を正しく実行するようにしています。"
+    },
+    {
+      "number": 59348,
+      "title": "Don't use a sentinel for an omitted `default:` in `define_attribute` {#pr-59348}",
+      "url": "https://github.com/rails/rails/pull/59348",
+      "mergedAt": "2026-10-24T00:00:00.000Z",
+      "author": "kamipo",
+      "authorUrl": "https://github.com/kamipo",
+      "summary": "1. 概要 (1–2文で)  \n`define_attribute` で「default オプションが渡されたかどうか」を判定する方法を、専用の番兵値（`NO_DEFAULT_PROVIDED`）による判定から、Ruby の引数デフォルト式による判定に変更した PR です。これにより、既存の `ActiveModel::AttributeRegistration#attribute` と同じ仕組みに揃えつつ、実装がシンプルになっています。"
+    },
+    {
+      "number": 59347,
+      "title": "Don't store a sentinel in `CurrentAttributes.defaults` {#pr-59347}",
+      "url": "https://github.com/rails/rails/pull/59347",
+      "mergedAt": "2026-10-24T00:00:00.000Z",
+      "author": "kamipo",
+      "authorUrl": "https://github.com/kamipo",
+      "summary": "1. 概要 (1-2文で)  \n`ActiveSupport::CurrentAttributes` で、デフォルト値未指定の属性に内部的な「未設定シンボル (NOT_SET)」を `.defaults` に保存しないように変更し、`.defaults` の挙動と公開 API をよりシンプルかつ一貫性のあるものにしています。あわせて、属性名をシンボルに正規化することで、文字列名で宣言した属性にデフォルト値が返らない不具合も解消しています。"
+    },
+    {
+      "number": 59333,
+      "title": "Call `valid?` before reading errors in validations guide examples [ci skip] {#pr-59333}",
+      "url": "https://github.com/rails/rails/pull/59333",
+      "mergedAt": "2026-10-24T00:00:00.000Z",
+      "author": "ttrweb",
+      "authorUrl": "https://github.com/ttrweb",
+      "summary": "1. 概要 (1-2文で)  \n`Active Record Validations`ガイドの `errors.add` と `errors[:base]` のサンプルコードが、そのままでは `NoMethodError` になる問題を修正し、`errors` を参照する前に `valid?` を呼ぶようにしたドキュメント修正です。実装コードの変更はなく、ガイドのサンプルの動作を実際の挙動に合わせたものです。"
+    },
+    {
+      "number": 59346,
+      "title": "Use America/New_York in the cache key timezone test {#pr-59346}",
+      "url": "https://github.com/rails/rails/pull/59346",
+      "mergedAt": "2026-10-24T00:00:00.000Z",
+      "author": "flavorjones",
+      "authorUrl": "https://github.com/flavorjones",
+      "summary": "1. 概要 (1-2文で)  \nRails の Active Record テストにおいて、キャッシュキーがタイムゾーン依存にならないことを検証するテストのタイムゾーン指定を `\"EST\"` から `\"America/New_York\"` に変更し、Ubuntu/Debian の新しい環境で発生していたテスト失敗（`Invalid Timezone: EST`）を解消する修正です。機能仕様は変えず、テスト環境依存の問題だけを取り除いています。"
+    },
+    {
+      "number": 59345,
+      "title": "Convert Railties README to Markdown {#pr-59345}",
+      "url": "https://github.com/rails/rails/pull/59345",
+      "mergedAt": "2026-10-24T00:00:00.000Z",
+      "author": "fxn",
+      "authorUrl": "https://github.com/fxn",
+      "summary": "1. 概要 (1-2文で)  \nこのPRは、Railties の README を従来の形式（おそらく rdoc / plain text）から Markdown 形式 (`README.md`) に変換し、それに伴う参照箇所やメタデータを更新する小規模なドキュメント整備です。コードロジックへの影響はほぼなく、開発者向けドキュメントのフォーマットを現代的な形にそろえる変更です。"
+    },
+    {
+      "number": 59344,
+      "title": "Convert Active Support README to Markdown {#pr-59344}",
+      "url": "https://github.com/rails/rails/pull/59344",
+      "mergedAt": "2026-10-24T00:00:00.000Z",
+      "author": "fxn",
+      "authorUrl": "https://github.com/fxn",
+      "summary": "1. 概要 (1-2文で)  \nActive Support の README を従来の rdoc 形式から Markdown 形式に変換し、それに伴って参照パスや設定を Markdown 前提に揃えた PRです。機能追加・仕様変更はなく、ドキュメントフォーマットと関連ツール設定のみの変更です。"
+    },
+    {
+      "number": 59343,
+      "title": "Convert Action View README to Markdown {#pr-59343}",
+      "url": "https://github.com/rails/rails/pull/59343",
+      "mergedAt": "2026-10-24T00:00:00.000Z",
+      "author": "fxn",
+      "authorUrl": "https://github.com/fxn",
+      "summary": "1. 概要 (1-2文で)  \nAction View の README を rdoc 形式から Markdown (`README.md`) に移行し、それに伴って Rails 内部で README ファイルへの参照や関連設定を Markdown ベースに更新した PRです。機能追加や挙動変更はなく、ドキュメント形式と参照先の整理が主目的です。"
+    },
+    {
+      "number": 59342,
+      "title": "Convert Action Pack README to Markdown {#pr-59342}",
+      "url": "https://github.com/rails/rails/pull/59342",
+      "mergedAt": "2026-10-24T00:00:00.000Z",
+      "author": "fxn",
+      "authorUrl": "https://github.com/fxn",
+      "summary": "1. 概要 (1-2文で)  \nAction Pack の README が Markdown 形式（README.md）に移行され、それに伴って gemspec とテストが Markdown 前提の内容に更新されています。機能追加や挙動変更はなく、ドキュメント形式の整理が主目的です。"
+    },
+    {
+      "number": 59341,
+      "title": "Convert Action Mailer README to Markdown {#pr-59341}",
+      "url": "https://github.com/rails/rails/pull/59341",
+      "mergedAt": "2026-10-24T00:00:00.000Z",
+      "author": "fxn",
+      "authorUrl": "https://github.com/fxn",
+      "summary": "1. 概要 (1-2文で)  \nAction Mailer の README ドキュメントを RDoc 形式から Markdown 形式へ移行した PR です。機能追加や挙動変更はなく、主にドキュメントフォーマットとそれに付随する設定のみが変更されています。"
+    },
+    {
+      "number": 59339,
+      "title": "Use Markdown as the default API docs markup {#pr-59339}",
+      "url": "https://github.com/rails/rails/pull/59339",
+      "mergedAt": "2026-10-24T00:00:00.000Z",
+      "author": "fxn",
+      "authorUrl": "https://github.com/fxn",
+      "summary": "1. 概要 (1-2文で)  \nRails の API ドキュメントのデフォルトマークアップが RDoc から Markdown に正式に切り替えられました。これに伴い、既存コメントの大部分が Markdown へ移行され、CI ルールやファイルごとの `:markup:` 指定方法も整理されています。"
+    },
+    {
+      "number": 59335,
+      "title": "Use a module instance variable for silencer {#pr-59335}",
+      "url": "https://github.com/rails/rails/pull/59335",
+      "mergedAt": "2026-10-24T00:00:00.000Z",
+      "author": "jhawthorn",
+      "authorUrl": "https://github.com/jhawthorn",
+      "summary": "1. 概要 (1-2文で)  \nRails.logger の「silencer」設定方法が壊れていた問題 (#59303) を修正し、`Rails.logger.silencer = false` が再び使えるようにした PR です。`class_attribute` による定義をやめ、モジュールのインスタンス変数を使うことで、従来の「ほぼグローバル」な挙動と Ractor 対応を両立しています。"
+    },
+    {
+      "number": 58899,
+      "title": "Restore empty-options fast path in `LookupContext#detail_args_for` {#pr-58899}",
+      "url": "https://github.com/rails/rails/pull/58899",
+      "mergedAt": "2026-10-24T00:00:00.000Z",
+      "author": "shimonamit",
+      "authorUrl": "https://github.com/shimonamit",
+      "summary": "1. 概要 (1–2文で)  \n`ActionView::LookupContext#detail_args_for` に、「options が空のときは即座に返す」高速経路（fast path）を復活させる PR です。特に ViewComponent からの呼び出しで、ビュー描画時のオーバーヘッドを削減し、10,000コンポーネント描画で ~19ms（約14%）の高速化が確認されています。"
+    },
+    {
+      "number": 59329,
+      "title": "Reduce allocations when filtering route parameters {#pr-59329}",
+      "url": "https://github.com/rails/rails/pull/59329",
+      "mergedAt": "2026-10-24T00:00:00.000Z",
+      "author": "thomasklemm",
+      "authorUrl": "https://github.com/thomasklemm",
+      "summary": "1. 概要 (1-2文で)  \nRails のルーティングで URL を生成する際、パラメータ配列のフィルタリング処理を `reverse_each.drop_while` 連鎖から `rindex`＋`take` に置き換えることで、オブジェクト割り当て数を削減する最適化が行われました。ルーティング仕様や外部インターフェイスは変えずに、主にパフォーマンスとメモリアロケーション効率を改善する変更です。"
+    },
+    {
+      "number": 59331,
+      "title": "Short-circuit `Mime::Type#==` for Symbol arguments {#pr-59331}",
+      "url": "https://github.com/rails/rails/pull/59331",
+      "mergedAt": "2026-10-24T00:00:00.000Z",
+      "author": "amatsuda",
+      "authorUrl": "https://github.com/amatsuda",
+      "summary": "1. 概要 (1-2文で)  \nRails の `Mime::Type#==` において、引数が Symbol の場合の比較処理が最適化され、典型的な `request.format == :json` のような呼び出しがより高速かつ依然としてアロケーションゼロで動作するようになりました。挙動の変更はなく、あくまで内部実装のパフォーマンス改善です。"
+    },
+    {
+      "number": 59316,
+      "title": "Reduce allocations when building HTTP URLs {#pr-59316}",
+      "url": "https://github.com/rails/rails/pull/59316",
+      "mergedAt": "2026-10-24T00:00:00.000Z",
+      "author": "thomasklemm",
+      "authorUrl": "https://github.com/thomasklemm",
+      "summary": "1. 概要 (1–2文で)  \nHTTP(S) URL生成時の文字列割り当て（アロケーション）と正規表現キャプチャを減らし、特に「普通のホスト名＋HTTP/HTTPSプロトコル」のケースでパフォーマンスを改善したPRです。リクエスト全体のスループットではなく、URLヘルパー呼び出し単体のマイクロベンチマークで、約1.2〜1.36倍の高速化とアロケーション削減（16→9）を達成しています。"
+    },
     {
       "number": 59322,
       "title": "Fast-path canonical UUID casting in the PostgreSQL adapter {#pr-59322}",
@@ -307,150 +451,6 @@
       "author": "sampokuokkanen",
       "authorUrl": "https://github.com/sampokuokkanen",
       "summary": "1. 概要 (1–2文で)  \n`first`, `second`, `last` などで内部的に利用されるメソッドが、暗黙的な order を計算する際に同じ処理を二重に行っていたのを、一度だけの計算にまとめて軽量化した PR です。機能的な挙動は変えずに、メモリアロケーションとごくわずかな実行時間を削減するパフォーマンス改善です。"
-    },
-    {
-      "number": 59263,
-      "title": "Fix in-place mutation detection in Type::Serialized for immutable strings {#pr-59263}",
-      "url": "https://github.com/rails/rails/pull/59263",
-      "mergedAt": "2026-10-22T00:00:00.000Z",
-      "author": "kehra",
-      "authorUrl": "https://github.com/kehra",
-      "summary": "1. 概要 (1-2文で)  \n`ActiveRecord::Type::Serialized` が、`immutable_strings_by_default = true` や `ActiveModel::Type::ImmutableString` 利用時に「インプレース変更（Hash/Array 内の書き換え）」を検知できていなかった問題を修正した PR です。`subtype.mutable?` を利用して、従来の「二重シリアライズ防止」の挙動を維持しつつ、immutable な文字列型上のシリアライズ属性でも dirty tracking が正しく動くようにしています。"
-    },
-    {
-      "number": 59159,
-      "title": "Reduce object allocations in ActionController::Parameters#permit {#pr-59159}",
-      "url": "https://github.com/rails/rails/pull/59159",
-      "mergedAt": "2026-10-22T00:00:00.000Z",
-      "author": "kehra",
-      "authorUrl": "https://github.com/kehra",
-      "summary": "1. 概要 (1-2文で)  \n`ActionController::Parameters#permit` の内部実装を見直し、オブジェクト割り当て（アロケーション）を大幅に削減して高速化する PR です。ネストしたパラメータの許可処理での無駄なハッシュ生成・再走査を避け、約 1.7 倍のパフォーマンス向上と約 50% のアロケーション削減が報告されています。"
-    },
-    {
-      "number": 59265,
-      "title": "Don't allocate the implicit locals for every item of a rendered collection {#pr-59265}",
-      "url": "https://github.com/rails/rails/pull/59265",
-      "mergedAt": "2026-10-22T00:00:00.000Z",
-      "author": "sampokuokkanen",
-      "authorUrl": "https://github.com/sampokuokkanen",
-      "summary": "1. 概要 (1-2文で)  \nRails のコレクション部分テンプレート描画時に、各要素ごとに毎回生成していた暗黙ローカル変数用の配列（`[counter, iteration]`）をテンプレート単位でキャッシュするようにし、オブジェクト割り当てを削減する最適化です。これにより特に大量のコレクション描画時のメモリアロケーションが減り、一部の環境（YJIT）ではわずかに高速化が確認されています。"
-    },
-    {
-      "number": 59222,
-      "title": "fix: race condition setting $VERBOSE global value during serializer detection {#pr-59222}",
-      "url": "https://github.com/rails/rails/pull/59222",
-      "mergedAt": "2026-10-22T00:00:00.000Z",
-      "author": "oleksii-leonov",
-      "authorUrl": "https://github.com/oleksii-leonov",
-      "summary": "1. 概要 (1-2文で)  \nActiveSupport のシリアライザ検出時に `$VERBOSE` グローバル変数を書き換える実装が原因で、並行実行時に `$VERBOSE` が誤った値（例: `nil`）になるレースコンディションが発生していた問題を修正する PR です。`msgpack` の有無・バージョン確認ロジックを見直し、`silence_warnings` を使わずに事前に `msgpack` を有効化・require することで、グローバルな警告設定を汚染しないようにしています。"
-    },
-    {
-      "number": 59223,
-      "title": "Run async calculations and `async_find_by_sql`/`async_count_by_sql` synchronously inside a joinable transaction, in the same fashion as `load_async` {#pr-59223}",
-      "url": "https://github.com/rails/rails/pull/59223",
-      "mergedAt": "2026-10-22T00:00:00.000Z",
-      "author": "bensheldon",
-      "authorUrl": "https://github.com/bensheldon",
-      "summary": "1. 概要 (1-2文で)  \n`load_async` と同様に、トランザクション内（特に joinable なトランザクション内）で `async_*` 系の集計・SQLメソッドが呼ばれたときは、非同期ではなく同期実行にフォールバックするようにし、`ActiveRecord::AsynchronousQueryInsideTransactionError` を避ける変更です。これにより、トランザクション内でも「async APIを共通的に使える」「未コミット行を含めた期待どおりの結果を得られる」ようになります。"
-    },
-    {
-      "number": 59261,
-      "title": "Don't allocate forced changes just to check them {#pr-59261}",
-      "url": "https://github.com/rails/rails/pull/59261",
-      "mergedAt": "2026-10-22T00:00:00.000Z",
-      "author": "sampokuokkanen",
-      "authorUrl": "https://github.com/sampokuokkanen",
-      "summary": "1. 概要 (1-2文で)  \n`ActiveModel::AttributeMutationTracker` が属性変更有無を判定する際に、不要な空ハッシュを毎回確保していた問題を解消し、`forced_changes` が実際に使われるときだけハッシュを生成するようにしたパフォーマンス改善のPRです。挙動は変えず、オブジェクト生成数をわずかに削減しています。"
-    },
-    {
-      "number": 59260,
-      "title": "Only build the blocked hosts array when a host is blocked {#pr-59260}",
-      "url": "https://github.com/rails/rails/pull/59260",
-      "mergedAt": "2026-10-22T00:00:00.000Z",
-      "author": "sampokuokkanen",
-      "authorUrl": "https://github.com/sampokuokkanen",
-      "summary": "1. 概要 (1-2文で)  \n`ActionDispatch::HostAuthorization` ミドルウェアで、**常に空配列を生成していた blocked hosts 用配列の生成を「ブロックが発生したときだけ」に変更し、不要なオブジェクト割り当てを削減するパフォーマンス改善です。挙動（どのホストがブロックされるか）は変えずに、許可されたホストに対するリクエストの処理コストをわずかに減らしています。"
-    },
-    {
-      "number": 59156,
-      "title": "Default `config.active_support.message_serializer` to `:json` for 8.2 {#pr-59156}",
-      "url": "https://github.com/rails/rails/pull/59156",
-      "mergedAt": "2026-10-22T00:00:00.000Z",
-      "author": "bensheldon",
-      "authorUrl": "https://github.com/bensheldon",
-      "summary": "1. 概要 (1-2文で)  \nRails 8.2 の `config.load_defaults \"8.2\"` で、`config.active_support.message_serializer` のデフォルトを `:json_allow_marshal` から `:json` に変更し、Marshal シリアライズのフォールバックを無効化する PR です。長らく残っていた Marshal デシリアライズ経路をデフォルトから閉じることで、特に secret_key_base 流出時の RCE リスクを下げる意図があります。"
-    },
-    {
-      "number": 59259,
-      "title": "[doc][ci skip] Fix typo in Encryption Guide {#pr-59259}",
-      "url": "https://github.com/rails/rails/pull/59259",
-      "mergedAt": "2026-10-22T00:00:00.000Z",
-      "author": "hachi8833",
-      "authorUrl": "https://github.com/hachi8833",
-      "summary": "1. 概要 (1-2文で)  \nEncryption Guide (Active Record Encryption ガイド) 内のオプション名のタイポを修正するドキュメント専用のPRです。`extended_queries` という誤記を、正しい `extend_queries` に修正しています。"
-    },
-    {
-      "number": 59246,
-      "title": "Fix numericality validator on decimal attribute with implicit scale {#pr-59246}",
-      "url": "https://github.com/rails/rails/pull/59246",
-      "mergedAt": "2026-10-22T00:00:00.000Z",
-      "author": "kamipo",
-      "authorUrl": "https://github.com/kamipo",
-      "summary": "1. 概要 (1-2文で)  \n`decimal` カラムでスケールが暗黙（例: `decimal(10)`）のとき、`numericality` バリデータが実際の型キャスト結果と異なる値を比較してしまう不具合が修正されました。  \nあわせて、`type_for_attribute` を利用して ActiveModel 側で型情報を取得するようにしたことで、ActiveRecord 専用の `NumericalityValidator` 実装が不要になり削除されています。"
-    },
-    {
-      "number": 59237,
-      "title": "Don't cache the association reader if the through model has a `default_scope` method {#pr-59237}",
-      "url": "https://github.com/rails/rails/pull/59237",
-      "mergedAt": "2026-10-22T00:00:00.000Z",
-      "author": "kamipo",
-      "authorUrl": "https://github.com/kamipo",
-      "summary": "1. 概要 (1-2文で)  \nこのPRは、`has_many :through` などの「through経由の関連」が、`default_scope` をメソッドオーバーライドで動的に定義している場合でも安全に動作するよう、関連リーダーのキャッシュ/ステートメントキャッシュの扱いを修正したものです。従来はこのケースでクエリが誤ってキャッシュされ、最初に評価されたスコープ条件が固定されてしまう不具合がありました。"
-    },
-    {
-      "number": 59248,
-      "title": "Consolidate the record to id conversion into the predicate builder {#pr-59248}",
-      "url": "https://github.com/rails/rails/pull/59248",
-      "mergedAt": "2026-10-22T00:00:00.000Z",
-      "author": "kamipo",
-      "authorUrl": "https://github.com/kamipo",
-      "summary": "1. 概要 (1–2文で)  \n`where`/`excluding!` まわりの「レコード → id への変換ロジック」を `PredicateBuilder` に集約し、余計な map 処理を削除しつつ、単一主キー・複合主キーの両方で「レコードや decorator を直接渡せる」ように挙動を揃えた PRです。これにより、複合主キーでのタプル構文や、配列で decorator を渡すケースが正しく id 展開されるようになります。"
-    },
-    {
-      "number": 59257,
-      "title": "Skip building a new where clause when adding to an empty one {#pr-59257}",
-      "url": "https://github.com/rails/rails/pull/59257",
-      "mergedAt": "2026-10-22T00:00:00.000Z",
-      "author": "sampokuokkanen",
-      "authorUrl": "https://github.com/sampokuokkanen",
-      "summary": "1. 概要 (1-2文で)  \n`ActiveRecord::Relation::WhereClause` の `#+` 演算子が、片方が空のときに不要な新インスタンスを生成しないよう最適化されました。これにより、`where` / `find_by` を最初に呼ぶ際のオブジェクトアロケーションがわずかに削減されます。"
-    },
-    {
-      "number": 59258,
-      "title": "Avoid allocating the default implicit locals on every template render {#pr-59258}",
-      "url": "https://github.com/rails/rails/pull/59258",
-      "mergedAt": "2026-10-22T00:00:00.000Z",
-      "author": "sampokuokkanen",
-      "authorUrl": "https://github.com/sampokuokkanen",
-      "summary": "1. 概要 (1-2文で)  \n`ActionView::Template#render` のキーワード引数 `implicit_locals:` のデフォルト値として、その都度新しい配列 `[]` を生成していた処理を、凍結された空配列の定数を使うように変更し、1レンダリングあたりのオブジェクトアロケーションを1件削減するパフォーマンス改善です。挙動は変えずに、テンプレート・パーシャル・レイアウトレンダリング時のメモリアロケーションを微妙に最適化しています。"
-    },
-    {
-      "number": 59254,
-      "title": "Make LoggerSilence.silencer readable from non-main Ractors {#pr-59254}",
-      "url": "https://github.com/rails/rails/pull/59254",
-      "mergedAt": "2026-10-21T00:00:00.000Z",
-      "author": "jhawthorn",
-      "authorUrl": "https://github.com/jhawthorn",
-      "summary": "1. 概要 (1-2文で)  \nRails の `ActiveSupport::LoggerSilence` が Ractor 対応のために `cattr_accessor` から `class_attribute` ベースの実装に変更され、非メイン Ractor からでも `silencer` 設定を安全に参照できるようになりました。これにより、`config.silence_healthcheck_path` を利用しているアプリでも、ワーカー Ractor でのヘルスチェック処理が `Ractor::IsolationError` で落ちなくなります。"
-    },
-    {
-      "number": 59250,
-      "title": "Speed up enum readers by defining real methods {#pr-59250}",
-      "url": "https://github.com/rails/rails/pull/59250",
-      "mergedAt": "2026-10-21T00:00:00.000Z",
-      "author": "tenderlove",
-      "authorUrl": "https://github.com/tenderlove",
-      "summary": "1. 概要 (1-2文で)  \nActiveRecord の enum が生成する判定メソッド（`paid?` など）について、これまでの `public_send` ベースの「動的 bmethod 定義」から、「通常の Ruby メソッド定義」に変更して Ruby/JIT に最適化されやすくした PR です。これにより enum 判定メソッドを多用するコードの実行速度が大幅に向上します。"
     }
   ]
 }
