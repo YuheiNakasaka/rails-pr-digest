@@ -1,7 +1,25 @@
 {
-  "lastUpdated": "2026-10-26T00:18:08.787Z",
+  "lastUpdated": "2026-10-27T00:11:24.681Z",
   "totalCount": 50,
   "items": [
+    {
+      "number": 57747,
+      "title": "[RF Docs] Multiple Databases {#pr-57747}",
+      "url": "https://github.com/rails/rails/pull/57747",
+      "mergedAt": "2026-10-26T00:00:00.000Z",
+      "author": "Ridhwana",
+      "authorUrl": "https://github.com/Ridhwana",
+      "summary": "1. 概要 (1-2文で)  \nRails ガイドの「Multiple Databases（複数データベース）」ドキュメントを大幅に書き換え、3階層構成（writer/replica など）のデフォルト構成、縦・横の分割、ロール／シャード切り替え、外部DB連携、スキーマキャッシュなどの事項を体系的に整理・拡充した PR です。機能追加ではなくドキュメント改善ですが、最新の Rails のデフォルト挙動に合わせた内容になっているため、複数DB機能を使うアプリの設計・運用に直接的に役立つ変更です。"
+    },
+    {
+      "number": 59315,
+      "title": "Preserve filter behavior in ParameterFilter.precompile_filters {#pr-59315}",
+      "url": "https://github.com/rails/rails/pull/59315",
+      "mergedAt": "2026-10-26T00:00:00.000Z",
+      "author": "bastidotnet",
+      "authorUrl": "https://github.com/bastidotnet",
+      "summary": "1. 概要 (1-2文で)  \n`ActiveSupport::ParameterFilter.precompile_filters` が、元のフィルタ配列と振る舞いが変わってしまうリグレッションを修正し、「コンパイル前後で同じパラメータマスキング結果になる」ことを保証する変更です。深いキーと浅いキーの扱い、および正規表現フィルタと文字列フィルタの冗長判定ロジックが見直されています。"
+    },
     {
       "number": 59318,
       "title": "Fix join reuse across different parent paths {#pr-59318}",
@@ -433,24 +451,6 @@
       "author": "dersam",
       "authorUrl": "https://github.com/dersam",
       "summary": "1. 概要 (1-2文で)  \nRails の `Rails::Paths::Path` クラスで、これまで `method_missing` などで動的に扱っていた「フラグ系メソッド」を明示的に定義し直し、Bootsnap によるメソッドキャッシュが効くようにした変更です。これにより、ロード時・実行時のパフォーマンス向上が期待できます。"
-    },
-    {
-      "number": 59297,
-      "title": "Only keep the original url options when path params are given {#pr-59297}",
-      "url": "https://github.com/rails/rails/pull/59297",
-      "mergedAt": "2026-10-23T00:00:00.000Z",
-      "author": "sampokuokkanen",
-      "authorUrl": "https://github.com/sampokuokkanen",
-      "summary": "1. 概要 (1-2文で)  \n`Journey::Formatter#generate` が常に URL オプション Hash をコピーしていた挙動を見直し、`path_params` が Hash の場合にだけ元のオプションを保持するようにして、不要なオブジェクト生成を減らすパフォーマンス改善の PR です。機能的な振る舞いは変えず、1回の呼び出しあたりの割り当て数をわずかに削減しています。"
-    },
-    {
-      "number": 59309,
-      "title": "Only rewrite error attribute names that need it {#pr-59309}",
-      "url": "https://github.com/rails/rails/pull/59309",
-      "mergedAt": "2026-10-23T00:00:00.000Z",
-      "author": "sampokuokkanen",
-      "authorUrl": "https://github.com/sampokuokkanen",
-      "summary": "1. 概要 (1-2文で)  \n`ActiveModel::Error` がエラーメッセージ用に属性名を整形する際、「.」や「[」を含まない単純な属性名に対しては不要な文字列操作をスキップするようにし、`full_messages` などのパフォーマンスとメモリアロケーションをわずかに改善する変更です。機能・挙動は変えず、オーバーヘッドだけを減らしています。"
     }
   ]
 }
