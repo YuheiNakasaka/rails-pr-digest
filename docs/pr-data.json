@@ -1,7 +1,88 @@
 {
-  "lastUpdated": "2026-10-27T00:11:24.681Z",
+  "lastUpdated": "2026-10-28T00:13:47.440Z",
   "totalCount": 50,
   "items": [
+    {
+      "number": 59392,
+      "title": "Skip copying and re-rounding BigDecimals already at the decimal type's scale: 3 → 1 objects per cast {#pr-59392}",
+      "url": "https://github.com/rails/rails/pull/59392",
+      "mergedAt": "2026-10-27T00:00:00.000Z",
+      "author": "czj",
+      "authorUrl": "https://github.com/czj",
+      "summary": "1. 概要 (1-2文で)\n- PostgreSQL から読み込んだ decimal カラムに対する `ActiveModel::Type::Decimal` のキャスト処理を最適化し、不要な `BigDecimal` オブジェクト生成と再丸めをスキップする変更です。  \n- 結果として、1回のキャストあたりのオブジェクト数が 3→1（環境により 4→2）に減り、パフォーマンスとメモリ効率が改善されます。"
+    },
+    {
+      "number": 59391,
+      "title": "Load MessagePack TimeWithZone from its UTC time: 16 → 5 objects, 2–3x faster, right instant for non-zero offsets {#pr-59391}",
+      "url": "https://github.com/rails/rails/pull/59391",
+      "mergedAt": "2026-10-27T00:00:00.000Z",
+      "author": "czj",
+      "authorUrl": "https://github.com/czj",
+      "summary": "1. 概要 (1–2文で)  \nMessagePack でシリアライズされた `TimeWithZone` を復元する際の処理を修正し、UTC ではないオフセット付きデータで「別の瞬間」が復元されてしまうバグを解消しつつ、オブジェクト数・速度面でも 2〜3 倍程度高速化した PR です。変更は 1 行のみですが、非ゼロオフセットの `TimeWithZone` を正しい瞬間で復元できるようになります。"
+    },
+    {
+      "number": 59382,
+      "title": "Make Host Authorization opt-out examples more strict {#pr-59382}",
+      "url": "https://github.com/rails/rails/pull/59382",
+      "mergedAt": "2026-10-27T00:00:00.000Z",
+      "author": "p8",
+      "authorUrl": "https://github.com/p8",
+      "summary": "1. 概要 (1-2文で)  \nHost Authorization ミドルウェアで、特定パスをチェックから除外する「opt-out」例がより厳密になるように変更されました。`/healthcheck/` を含むだけのパスではなく、「`/healthcheck` から始まるパス」のみに除外対象を限定する形へサンプルと実装・テスト・ガイドが修正されています。"
+    },
+    {
+      "number": 59371,
+      "title": "Process each Action Cable connection's commands in order {#pr-59371}",
+      "url": "https://github.com/rails/rails/pull/59371",
+      "mergedAt": "2026-10-27T00:00:00.000Z",
+      "author": "rubys",
+      "authorUrl": "https://github.com/rubys",
+      "summary": "1. 概要 (1-2文で)  \nAction Cable の各 WebSocket 接続ごとに、コマンド（open/unsubscribe/subscribe/close など）が必ず到着順に一つずつ処理されるようにし、同一接続内での並行実行による順序逆転バグを修正する PR です。これにより、unsubscribe → subscribe が subscribe → unsubscribe の順で実行されてしまうことで発生していた sporadic な購読ロスト・レイテンシ増大が解消されます。"
+    },
+    {
+      "number": 59385,
+      "title": "Optimize Journey verb matchers for Bootsnap code caching {#pr-59385}",
+      "url": "https://github.com/rails/rails/pull/59385",
+      "mergedAt": "2026-10-27T00:00:00.000Z",
+      "author": "dersam",
+      "authorUrl": "https://github.com/dersam",
+      "summary": "1. 概要 (1-2文で)  \nRails のルーティングエンジン（Journey）における HTTP メソッド判定用のマッチャが、毎回動的生成される方式から「静的に定義されたメソッド」を使う方式に変更され、Bootsnap によるコードキャッシュの恩恵を受けられるよう最適化されています。HTTP 動詞に関するロジックを固定化することで、起動時やロード時のオーバーヘッドを減らす目的の変更です。"
+    },
+    {
+      "number": 59389,
+      "title": "Avoid building Arel AST in Relation#in_batches {#pr-59389}",
+      "url": "https://github.com/rails/rails/pull/59389",
+      "mergedAt": "2026-10-27T00:00:00.000Z",
+      "author": "kehra",
+      "authorUrl": "https://github.com/kehra",
+      "summary": "1. 概要 (1-2文で)  \n`ActiveRecord::Batches#in_batches` が既存の並び順（order）の有無を判定する際に、不要な Arel AST の構築を行わないように最適化された PRです。これにより、特にブロック無しで `in_batches` を呼び出すケースでオブジェクトアロケーションが削減され、処理スループットが大きく向上します。"
+    },
+    {
+      "number": 59370,
+      "title": "Don't render authenticity tokens under the header_only CSRF strategy {#pr-59370}",
+      "url": "https://github.com/rails/rails/pull/59370",
+      "mergedAt": "2026-10-27T00:00:00.000Z",
+      "author": "rubys",
+      "authorUrl": "https://github.com/rubys",
+      "summary": "1. 概要 (1-2文で)  \nRails 8.2 で導入される `:header_only` な CSRF 戦略を使っている場合、HTML に authenticity token（`csrf_meta_tags` やフォーム hidden フィールド）を一切レンダリングしないようにする変更です。これにより、CSRF の検証は `Sec-Fetch-Site` ヘッダのみに依存し、ページバイト列の安定性向上・不要なセッション発行の削減・トークン生成コスト削減が図られます。"
+    },
+    {
+      "number": 59314,
+      "title": "Match URL-decoded query parameter names when filtering logs {#pr-59314}",
+      "url": "https://github.com/rails/rails/pull/59314",
+      "mergedAt": "2026-10-27T00:00:00.000Z",
+      "author": "bastidotnet",
+      "authorUrl": "https://github.com/bastidotnet",
+      "summary": "1. 概要 (1-2文で)  \nURL クエリパラメータ名が URL エンコードされている場合でも、`filter_parameters` のルールに基づいて確実にマスクされるようにした変更です。Rails のログ出力（`filtered_path` やリダイレクト先のログ）と実際の `params` のフィルタリング挙動を揃え、「エンコードされたパラメータ名だけマスクされない」という抜けを塞いでいます。"
+    },
+    {
+      "number": 59386,
+      "title": "Keep query block scoped optimizer hints on the subquery for count on MySQL {#pr-59386}",
+      "url": "https://github.com/rails/rails/pull/59386",
+      "mergedAt": "2026-10-27T00:00:00.000Z",
+      "author": "kamipo",
+      "authorUrl": "https://github.com/kamipo",
+      "summary": "1. 概要 (1-2文で)  \nMySQL で `limit` / `offset` / `distinct` を伴う `count` を実行する際、サブクエリに付与した Optimizer Hint の扱いが改善され、テーブルレベルのヒントが正しくサブクエリ側に残るようになりました。これにより、これまで外側クエリに移されて無効化されていた一部のヒントが、期待どおりに効くようになります。"
+    },
     {
       "number": 57747,
       "title": "[RF Docs] Multiple Databases {#pr-57747}",
@@ -370,87 +451,6 @@
       "author": "thomasklemm",
       "authorUrl": "https://github.com/thomasklemm",
       "summary": "1. 概要 (1–2文で)  \nHTTP(S) URL生成時の文字列割り当て（アロケーション）と正規表現キャプチャを減らし、特に「普通のホスト名＋HTTP/HTTPSプロトコル」のケースでパフォーマンスを改善したPRです。リクエスト全体のスループットではなく、URLヘルパー呼び出し単体のマイクロベンチマークで、約1.2〜1.36倍の高速化とアロケーション削減（16→9）を達成しています。"
-    },
-    {
-      "number": 59322,
-      "title": "Fast-path canonical UUID casting in the PostgreSQL adapter {#pr-59322}",
-      "url": "https://github.com/rails/rails/pull/59322",
-      "mergedAt": "2026-10-23T00:00:00.000Z",
-      "author": "oleksii-leonov",
-      "authorUrl": "https://github.com/oleksii-leonov",
-      "summary": "1. 概要 (1-2文で)  \nPostgreSQLアダプタのUUIDキャスト処理（`PostgreSQL::OID::Uuid#cast_value`）に「正規形式(canonical)用の高速パス」が追加され、PostgreSQLが返す標準的なUUID文字列に対する処理が大幅に高速化されました。代わりに、大文字や不正なUUID入力の処理はやや遅くなりますが、UUID主流ケースでの性能向上を優先するトレードオフになっています。"
-    },
-    {
-      "number": 58924,
-      "title": "Avoid allocations in `Mime::Type#==` {#pr-58924}",
-      "url": "https://github.com/rails/rails/pull/58924",
-      "mergedAt": "2026-10-23T00:00:00.000Z",
-      "author": "njarrar",
-      "authorUrl": "https://github.com/njarrar",
-      "summary": "1. 概要 (1-2文で)  \n`Mime::Type#==` が比較のたびにオブジェクトを余計に生成していた問題を解消し、文字列・シンボル・Mime::Type 同士の比較をより効率的に行うようにしたパフォーマンス改善PRです。特に `request.format == :json` のような頻出パスでメモリアロケーションと時間コストが大きく削減されています。"
-    },
-    {
-      "number": 59327,
-      "title": "Define AssociationRelation bulk methods {#pr-59327}",
-      "url": "https://github.com/rails/rails/pull/59327",
-      "mergedAt": "2026-10-23T00:00:00.000Z",
-      "author": "dersam",
-      "authorUrl": "https://github.com/dersam",
-      "summary": "1. 概要 (1-2文で)  \nAssociationRelation が持つ「一括挿入系メソッド」（`insert_all` など）を明示的に定義し直し、Bootsnap がコードをキャッシュしやすい形にした PR です。機能的な挙動はほぼ維持しつつ、パフォーマンスや読みやすさ・テストを整えています。"
-    },
-    {
-      "number": 59326,
-      "title": "Unroll polymorphic route helper methods {#pr-59326}",
-      "url": "https://github.com/rails/rails/pull/59326",
-      "mergedAt": "2026-10-23T00:00:00.000Z",
-      "author": "dersam",
-      "authorUrl": "https://github.com/dersam",
-      "summary": "1. 概要 (1-2文で)  \npolymorphic ルーティング用のヘルパーメソッドを「動的定義」から「明示的にメソッドを定義する」形に変更し、Bootsnap がこれらをキャッシュしやすくするパフォーマンス改善の PR です。機能的な挙動はそのままに、Rails 起動時やルーティングヘルパー呼び出し時のオーバーヘッド削減が目的です。"
-    },
-    {
-      "number": 59311,
-      "title": "Fix find with select for composite primary key models {#pr-59311}",
-      "url": "https://github.com/rails/rails/pull/59311",
-      "mergedAt": "2026-10-23T00:00:00.000Z",
-      "author": "kehra",
-      "authorUrl": "https://github.com/kehra",
-      "summary": "1. 概要 (1-2文で)  \n`select` を指定した状態で複合主キー(composite primary key, CPK)モデルに対して `find`（内部的には `find_some` / `find_some_ordered`）を呼ぶと不正な SQL が生成されるバグを修正した PRです。単一カラム主キーの挙動は維持したまま、CPK でも正しく主キーが SELECT されるように内部実装を統一しています。"
-    },
-    {
-      "number": 59325,
-      "title": "Base the deprecation proxies on BasicObject {#pr-59325}",
-      "url": "https://github.com/rails/rails/pull/59325",
-      "mergedAt": "2026-10-23T00:00:00.000Z",
-      "author": "amatsuda",
-      "authorUrl": "https://github.com/amatsuda",
-      "summary": "1. 概要 (1-2文で)  \n`ActiveSupport::Deprecation::DeprecationProxy`（`DeprecatedObjectProxy` / `DeprecatedInstanceVariableProxy` のベースクラス）が `Object` ではなく `BasicObject` を継承するようになり、`to_json` や `blank?` など Object へ後から追加されるメソッドも、正しく deprecate された実オブジェクトに委譲されるようになりました。これにより、これまで「警告なくおかしな値を返していた」ケースが、1回の deprecation 警告付きで正しい動作をするように修正されています。"
-    },
-    {
-      "number": 59323,
-      "title": "Avoid Rational allocations in Time#change when usec is zero {#pr-59323}",
-      "url": "https://github.com/rails/rails/pull/59323",
-      "mergedAt": "2026-10-23T00:00:00.000Z",
-      "author": "czj",
-      "authorUrl": "https://github.com/czj",
-      "summary": "1. 概要 (1-2文で)  \nTime#change で usec（マイクロ秒）が 0 の場合でも不要な Rational オブジェクトを生成していた処理をスキップし、オブジェクト割り当てと処理時間を削減する最適化が行われました。これにより beginning_of_day などの時間操作メソッドのパフォーマンスが向上します。"
-    },
-    {
-      "number": 59321,
-      "title": "Document that Action Mailbox routing is not authentication [ci skip] {#pr-59321}",
-      "url": "https://github.com/rails/rails/pull/59321",
-      "mergedAt": "2026-10-23T00:00:00.000Z",
-      "author": "flavorjones",
-      "authorUrl": "https://github.com/flavorjones",
-      "summary": "1. 概要 (1-2文で)  \nAction Mailbox がメールをどのヘッダでルーティングしているかを明示し、「ルーティングは認証ではない」という警告をドキュメントに追加する変更です。挙動自体は変わらず、ガイドと `ActionMailbox::Base` の説明をより正確かつセキュアな観点で分かりやすくしています。"
-    },
-    {
-      "number": 59281,
-      "title": "Define Rails::Paths::Path flag methods explicitly {#pr-59281}",
-      "url": "https://github.com/rails/rails/pull/59281",
-      "mergedAt": "2026-10-23T00:00:00.000Z",
-      "author": "dersam",
-      "authorUrl": "https://github.com/dersam",
-      "summary": "1. 概要 (1-2文で)  \nRails の `Rails::Paths::Path` クラスで、これまで `method_missing` などで動的に扱っていた「フラグ系メソッド」を明示的に定義し直し、Bootsnap によるメソッドキャッシュが効くようにした変更です。これにより、ロード時・実行時のパフォーマンス向上が期待できます。"
     }
   ]
 }
