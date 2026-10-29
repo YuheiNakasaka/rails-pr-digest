@@ -1,7 +1,106 @@
 {
-  "lastUpdated": "2026-10-28T00:13:47.440Z",
+  "lastUpdated": "2026-10-29T00:13:44.421Z",
   "totalCount": 50,
   "items": [
+    {
+      "number": 59277,
+      "title": "Implement ActiveRecord::Association#initialize_clone {#pr-59277}",
+      "url": "https://github.com/rails/rails/pull/59277",
+      "mergedAt": "2026-10-28T00:00:00.000Z",
+      "author": "AIndrewn617",
+      "authorUrl": "https://github.com/AIndrewn617",
+      "summary": "1. 概要 (1-2文で)  \n`ActiveRecord::Association` に `initialize_clone` を実装し、モデルを `clone` した際に「元オブジェクトと関連のキャッシュ(@association_cache)を共有する」という従来の挙動が、association の遅延初期化導入後も維持されるようにした PR です。あわせて `ActiveModel::AttributeSet` 周りの clone 挙動テストや、継承・永続化まわりの clone のテストも補強されています。"
+    },
+    {
+      "number": 59406,
+      "title": "Make unnamed url_for up to 3.3x faster by not scoring redirects and Rack apps {#pr-59406}",
+      "url": "https://github.com/rails/rails/pull/59406",
+      "mergedAt": "2026-10-28T00:00:00.000Z",
+      "author": "czj",
+      "authorUrl": "https://github.com/czj",
+      "summary": "1. 概要 (1-2文で)  \n`url_for` を「名前なし」で呼び出した場合（`url_for(controller:, action:)` や `url_for(params.merge(page: 2))` など）に、リダイレクトルートや Rack アプリ用ルートを候補から除外することで、最大 3.3〜4x 程度まで高速化した PR です。ルーティングの挙動（どの URL が生成されるか）は維持しつつ、生成時のスコアリング対象を絞ることで無駄な処理を減らしています。"
+    },
+    {
+      "number": 59407,
+      "title": "Define FormBuilder field helpers explicitly {#pr-59407}",
+      "url": "https://github.com/rails/rails/pull/59407",
+      "mergedAt": "2026-10-28T00:00:00.000Z",
+      "author": "dersam",
+      "authorUrl": "https://github.com/dersam",
+      "summary": "1. 概要 (1-2文で)  \nFormBuilder が提供する「フィールド用ヘルパーメソッド」を、動的定義ではなく“明示的なメソッド定義”に変更した PR です。これにより、Bootsnap が FormBuilder のフィールドヘルパーをキャッシュできるようになり、起動時などのパフォーマンス改善が期待できます。"
+    },
+    {
+      "number": 59400,
+      "title": "Parameterize up to 1.5x faster with 40% fewer allocations {#pr-59400}",
+      "url": "https://github.com/rails/rails/pull/59400",
+      "mergedAt": "2026-10-28T00:00:00.000Z",
+      "author": "czj",
+      "authorUrl": "https://github.com/czj",
+      "summary": "1. 概要 (1-2文で)  \n`ActiveSupport::Inflector#parameterize` の内部実装を最適化し、条件が合う場合に正規表現＋`gsub!` の代わりに `tr_s!` を使うことで、最大約1.5倍高速・約40%少ないオブジェクト生成を実現した変更です。挙動・戻り値は従来と完全に同じになるよう、ASCII性やセパレータの条件を厳密にチェックしています。"
+    },
+    {
+      "number": 59397,
+      "title": "Allocate 11 fewer objects per TimeZone#parse of a local time {#pr-59397}",
+      "url": "https://github.com/rails/rails/pull/59397",
+      "mergedAt": "2026-10-28T00:00:00.000Z",
+      "author": "czj",
+      "authorUrl": "https://github.com/czj",
+      "summary": "1. 概要 (1-2文で)  \n`ActiveSupport::TimeZone#parse` と `#iso8601` がローカル時刻文字列を扱う際に、内部で同じ時刻を二重に組み立てて余計なオブジェクトを生成していたのをやめ、11個分のオブジェクト削減と 1.1〜1.3倍程度の高速化を行ったパフォーマンス改善PRです。挙動（返り値）は一切変わらず、テスト相当の検証でも完全に同一結果になることが確認されています。"
+    },
+    {
+      "number": 59394,
+      "title": "Define integration test request helpers explicitly {#pr-59394}",
+      "url": "https://github.com/rails/rails/pull/59394",
+      "mergedAt": "2026-10-28T00:00:00.000Z",
+      "author": "dai199",
+      "authorUrl": "https://github.com/dai199",
+      "summary": "1. 概要 (1-2文で)  \nRails の統合テスト (`ActionDispatch::Integration::Runner`) における HTTP リクエストヘルパーの定義方法を、これまでの `module_eval` 文字列生成から「明示的なメソッド定義」に変更し、抜けていた `options` メソッドを正式に追加した PRです。これにより、`options` 実行時にも `@html_document` が正しくリセットされ、`assert_select` などが古いレスポンスを誤って参照するバグが解消されています。"
+    },
+    {
+      "number": 59403,
+      "title": "Optimistically call `render_in` with `locals:` {#pr-59403}",
+      "url": "https://github.com/rails/rails/pull/59403",
+      "mergedAt": "2026-10-28T00:00:00.000Z",
+      "author": "byroot",
+      "authorUrl": "https://github.com/byroot",
+      "summary": "1. 概要 (1-2文で)  \n`render_in` を呼ぶ際に、事前にメソッドの引数(arity)をチェックするのをやめ、まずは `locals:` 付きのキーワード引数で楽観的に呼び出し、エラーになった場合だけフォールバックするように変更された PR です。これにより、ViewComponent など `render_in` を実装するオブジェクトのレンダリング時のオーバーヘッドを削減し、パフォーマンスを改善します。"
+    },
+    {
+      "number": 59402,
+      "title": "Make TimeZone#parse up to 1.3x and #strptime 1.5x faster when the string has a full date {#pr-59402}",
+      "url": "https://github.com/rails/rails/pull/59402",
+      "mergedAt": "2026-10-28T00:00:00.000Z",
+      "author": "czj",
+      "authorUrl": "https://github.com/czj",
+      "summary": "1. 概要 (1-2文で)  \n`ActiveSupport::TimeZone#parse` と `#strptime` が、入力文字列に「年月日まで含まれている場合」に無駄な `now` のローカル時刻計算を行わないようにして、最大 1.3〜1.6倍程度高速化した PRです。振る舞いは完全に同一で、ベンチとプロパティテストレベルで互換性が確認されています。"
+    },
+    {
+      "number": 59393,
+      "title": "CodeGenerate metaprogrammed association methods {#pr-59393}",
+      "url": "https://github.com/rails/rails/pull/59393",
+      "mergedAt": "2026-10-28T00:00:00.000Z",
+      "author": "hmcguire-shopify",
+      "authorUrl": "https://github.com/hmcguire-shopify",
+      "summary": "1. 概要 (1–2文で)  \nRails の関連メソッド（association readers/writers や `build_`, `create_`, `_ids` など）の定義方法を整理し、`CodeGenerator` ベースのコード生成に切り替えることで、命令列（instruction sequence）の共有によるメモリ削減とパフォーマンス向上を図った変更です。あわせて関連メソッド定義処理の重複を統合し、deprecated API ガードの呼び出しも軽量化しています。"
+    },
+    {
+      "number": 59299,
+      "title": "Deprecate ColumnDefinition option accessors {#pr-59299}",
+      "url": "https://github.com/rails/rails/pull/59299",
+      "mergedAt": "2026-10-28T00:00:00.000Z",
+      "author": "sampokuokkanen",
+      "authorUrl": "https://github.com/sampokuokkanen",
+      "summary": "1. 概要 (1-2文で)  \n`ActiveRecord::ConnectionAdapters::ColumnDefinition` が持っていた各種オプション (`limit`, `precision`, `default`, `null` など) のリーダー/ライターを「非推奨」にし、代わりに `options[...]` を使うよう誘導する変更です。これにより、`module_eval` による動的メソッド定義をやめて Bootsnap の compile cache と相性を良くしつつ、既存コードとの互換性も一定期間維持します。"
+    },
+    {
+      "number": 59398,
+      "title": "Don't require a truthy Dalli multi-write result in the local cache test {#pr-59398}",
+      "url": "https://github.com/rails/rails/pull/59398",
+      "mergedAt": "2026-10-28T00:00:00.000Z",
+      "author": "nuclearspike",
+      "authorUrl": "https://github.com/nuclearspike",
+      "summary": "1. 概要 (1-2文で)  \nDalli 5.2.3 以降で `set_multi` の戻り値が `nil` になったことにより、`MemCacheStore` のローカルキャッシュに関するテストが落ちていた問題を、「戻り値が truthy であること」を前提にしないようテストコードを修正して解消した PR です。実装コードや依存関係の変更はなく、テストコードのみの修正です。"
+    },
     {
       "number": 59392,
       "title": "Skip copying and re-rounding BigDecimals already at the decimal type's scale: 3 → 1 objects per cast {#pr-59392}",
@@ -352,105 +451,6 @@
       "author": "flavorjones",
       "authorUrl": "https://github.com/flavorjones",
       "summary": "1. 概要 (1-2文で)  \nRails の Active Record テストにおいて、キャッシュキーがタイムゾーン依存にならないことを検証するテストのタイムゾーン指定を `\"EST\"` から `\"America/New_York\"` に変更し、Ubuntu/Debian の新しい環境で発生していたテスト失敗（`Invalid Timezone: EST`）を解消する修正です。機能仕様は変えず、テスト環境依存の問題だけを取り除いています。"
-    },
-    {
-      "number": 59345,
-      "title": "Convert Railties README to Markdown {#pr-59345}",
-      "url": "https://github.com/rails/rails/pull/59345",
-      "mergedAt": "2026-10-24T00:00:00.000Z",
-      "author": "fxn",
-      "authorUrl": "https://github.com/fxn",
-      "summary": "1. 概要 (1-2文で)  \nこのPRは、Railties の README を従来の形式（おそらく rdoc / plain text）から Markdown 形式 (`README.md`) に変換し、それに伴う参照箇所やメタデータを更新する小規模なドキュメント整備です。コードロジックへの影響はほぼなく、開発者向けドキュメントのフォーマットを現代的な形にそろえる変更です。"
-    },
-    {
-      "number": 59344,
-      "title": "Convert Active Support README to Markdown {#pr-59344}",
-      "url": "https://github.com/rails/rails/pull/59344",
-      "mergedAt": "2026-10-24T00:00:00.000Z",
-      "author": "fxn",
-      "authorUrl": "https://github.com/fxn",
-      "summary": "1. 概要 (1-2文で)  \nActive Support の README を従来の rdoc 形式から Markdown 形式に変換し、それに伴って参照パスや設定を Markdown 前提に揃えた PRです。機能追加・仕様変更はなく、ドキュメントフォーマットと関連ツール設定のみの変更です。"
-    },
-    {
-      "number": 59343,
-      "title": "Convert Action View README to Markdown {#pr-59343}",
-      "url": "https://github.com/rails/rails/pull/59343",
-      "mergedAt": "2026-10-24T00:00:00.000Z",
-      "author": "fxn",
-      "authorUrl": "https://github.com/fxn",
-      "summary": "1. 概要 (1-2文で)  \nAction View の README を rdoc 形式から Markdown (`README.md`) に移行し、それに伴って Rails 内部で README ファイルへの参照や関連設定を Markdown ベースに更新した PRです。機能追加や挙動変更はなく、ドキュメント形式と参照先の整理が主目的です。"
-    },
-    {
-      "number": 59342,
-      "title": "Convert Action Pack README to Markdown {#pr-59342}",
-      "url": "https://github.com/rails/rails/pull/59342",
-      "mergedAt": "2026-10-24T00:00:00.000Z",
-      "author": "fxn",
-      "authorUrl": "https://github.com/fxn",
-      "summary": "1. 概要 (1-2文で)  \nAction Pack の README が Markdown 形式（README.md）に移行され、それに伴って gemspec とテストが Markdown 前提の内容に更新されています。機能追加や挙動変更はなく、ドキュメント形式の整理が主目的です。"
-    },
-    {
-      "number": 59341,
-      "title": "Convert Action Mailer README to Markdown {#pr-59341}",
-      "url": "https://github.com/rails/rails/pull/59341",
-      "mergedAt": "2026-10-24T00:00:00.000Z",
-      "author": "fxn",
-      "authorUrl": "https://github.com/fxn",
-      "summary": "1. 概要 (1-2文で)  \nAction Mailer の README ドキュメントを RDoc 形式から Markdown 形式へ移行した PR です。機能追加や挙動変更はなく、主にドキュメントフォーマットとそれに付随する設定のみが変更されています。"
-    },
-    {
-      "number": 59339,
-      "title": "Use Markdown as the default API docs markup {#pr-59339}",
-      "url": "https://github.com/rails/rails/pull/59339",
-      "mergedAt": "2026-10-24T00:00:00.000Z",
-      "author": "fxn",
-      "authorUrl": "https://github.com/fxn",
-      "summary": "1. 概要 (1-2文で)  \nRails の API ドキュメントのデフォルトマークアップが RDoc から Markdown に正式に切り替えられました。これに伴い、既存コメントの大部分が Markdown へ移行され、CI ルールやファイルごとの `:markup:` 指定方法も整理されています。"
-    },
-    {
-      "number": 59335,
-      "title": "Use a module instance variable for silencer {#pr-59335}",
-      "url": "https://github.com/rails/rails/pull/59335",
-      "mergedAt": "2026-10-24T00:00:00.000Z",
-      "author": "jhawthorn",
-      "authorUrl": "https://github.com/jhawthorn",
-      "summary": "1. 概要 (1-2文で)  \nRails.logger の「silencer」設定方法が壊れていた問題 (#59303) を修正し、`Rails.logger.silencer = false` が再び使えるようにした PR です。`class_attribute` による定義をやめ、モジュールのインスタンス変数を使うことで、従来の「ほぼグローバル」な挙動と Ractor 対応を両立しています。"
-    },
-    {
-      "number": 58899,
-      "title": "Restore empty-options fast path in `LookupContext#detail_args_for` {#pr-58899}",
-      "url": "https://github.com/rails/rails/pull/58899",
-      "mergedAt": "2026-10-24T00:00:00.000Z",
-      "author": "shimonamit",
-      "authorUrl": "https://github.com/shimonamit",
-      "summary": "1. 概要 (1–2文で)  \n`ActionView::LookupContext#detail_args_for` に、「options が空のときは即座に返す」高速経路（fast path）を復活させる PR です。特に ViewComponent からの呼び出しで、ビュー描画時のオーバーヘッドを削減し、10,000コンポーネント描画で ~19ms（約14%）の高速化が確認されています。"
-    },
-    {
-      "number": 59329,
-      "title": "Reduce allocations when filtering route parameters {#pr-59329}",
-      "url": "https://github.com/rails/rails/pull/59329",
-      "mergedAt": "2026-10-24T00:00:00.000Z",
-      "author": "thomasklemm",
-      "authorUrl": "https://github.com/thomasklemm",
-      "summary": "1. 概要 (1-2文で)  \nRails のルーティングで URL を生成する際、パラメータ配列のフィルタリング処理を `reverse_each.drop_while` 連鎖から `rindex`＋`take` に置き換えることで、オブジェクト割り当て数を削減する最適化が行われました。ルーティング仕様や外部インターフェイスは変えずに、主にパフォーマンスとメモリアロケーション効率を改善する変更です。"
-    },
-    {
-      "number": 59331,
-      "title": "Short-circuit `Mime::Type#==` for Symbol arguments {#pr-59331}",
-      "url": "https://github.com/rails/rails/pull/59331",
-      "mergedAt": "2026-10-24T00:00:00.000Z",
-      "author": "amatsuda",
-      "authorUrl": "https://github.com/amatsuda",
-      "summary": "1. 概要 (1-2文で)  \nRails の `Mime::Type#==` において、引数が Symbol の場合の比較処理が最適化され、典型的な `request.format == :json` のような呼び出しがより高速かつ依然としてアロケーションゼロで動作するようになりました。挙動の変更はなく、あくまで内部実装のパフォーマンス改善です。"
-    },
-    {
-      "number": 59316,
-      "title": "Reduce allocations when building HTTP URLs {#pr-59316}",
-      "url": "https://github.com/rails/rails/pull/59316",
-      "mergedAt": "2026-10-24T00:00:00.000Z",
-      "author": "thomasklemm",
-      "authorUrl": "https://github.com/thomasklemm",
-      "summary": "1. 概要 (1–2文で)  \nHTTP(S) URL生成時の文字列割り当て（アロケーション）と正規表現キャプチャを減らし、特に「普通のホスト名＋HTTP/HTTPSプロトコル」のケースでパフォーマンスを改善したPRです。リクエスト全体のスループットではなく、URLヘルパー呼び出し単体のマイクロベンチマークで、約1.2〜1.36倍の高速化とアロケーション削減（16→9）を達成しています。"
     }
   ]
 }
