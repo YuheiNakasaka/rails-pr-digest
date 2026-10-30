@@ -1,7 +1,70 @@
 {
-  "lastUpdated": "2026-10-29T00:13:44.421Z",
+  "lastUpdated": "2026-10-30T00:10:53.400Z",
   "totalCount": 50,
   "items": [
+    {
+      "number": 59423,
+      "title": "Make number_to_currency and number_to_percentage up to 1.5x faster {#pr-59423}",
+      "url": "https://github.com/rails/rails/pull/59423",
+      "mergedAt": "2026-10-29T00:00:00.000Z",
+      "author": "czj",
+      "authorUrl": "https://github.com/czj",
+      "summary": "1. 概要 (1-2文で)  \n`number_to_currency` や `number_to_percentage` などの数値フォーマット系ヘルパーが、オプション解決と I18n の重複処理を共有するように変更され、最大約 1.5 倍高速になった PR です。挙動や I18n の互換性は保ちつつ、オブジェクト生成数と `I18n.translate` 呼び出し回数を削減しています。"
+    },
+    {
+      "number": 59426,
+      "title": "Fix typo in `bin/rails test` usage {#pr-59426}",
+      "url": "https://github.com/rails/rails/pull/59426",
+      "mergedAt": "2026-10-29T00:00:00.000Z",
+      "author": "ttrweb",
+      "authorUrl": "https://github.com/ttrweb",
+      "summary": "1. 概要 (1-2文で)  \n`bin/rails test --help` のヘルプメッセージ中にあった英語のタイプミス「with in」を正しい「within」に修正する、ドキュメントレベルの小さな修正PRです。テスト実行機能そのものの挙動には一切変更はありません。"
+    },
+    {
+      "number": 59421,
+      "title": "Make Date.current up to 1.6x faster when Time.zone is set {#pr-59421}",
+      "url": "https://github.com/rails/rails/pull/59421",
+      "mergedAt": "2026-10-29T00:00:00.000Z",
+      "author": "czj",
+      "authorUrl": "https://github.com/czj",
+      "summary": "1. 概要 (1-2文で)  \n`Time.zone` が設定されている場合の `Date.current` / `Time.zone.today` などの日付取得系 API を、内部実装の見直しによって最大約 1.6 倍高速化した PRです。挙動（返る日付）は既存実装と同じになるよう厳密に検証されており、互換性を維持しつつパフォーマンスを改善しています。"
+    },
+    {
+      "number": 59415,
+      "title": "Exclude default_order when constructing relation for exists? {#pr-59415}",
+      "url": "https://github.com/rails/rails/pull/59415",
+      "mergedAt": "2026-10-29T00:00:00.000Z",
+      "author": "kehra",
+      "authorUrl": "https://github.com/kehra",
+      "summary": "1. 概要 (1-2文で)  \n`Relation#exists?` が内部で組み立てるクエリから、通常の `order` だけでなく `default_order` も除外するようになり、存在確認クエリに不要な `ORDER BY` が付かなくなりました。`except(:order)` と `except(:default_order)` はこれまで通り独立して指定できるように保たれています。"
+    },
+    {
+      "number": 59417,
+      "title": "Make Time.days_in_month up to 42x faster without a year by reading the current year only for February {#pr-59417}",
+      "url": "https://github.com/rails/rails/pull/59417",
+      "mergedAt": "2026-10-29T00:00:00.000Z",
+      "author": "czj",
+      "authorUrl": "https://github.com/czj",
+      "summary": "1. 概要 (1-2文で)  \n`Time.days_in_month(month, year = current.year)` が「年を省略して呼ばれた場合」に無駄に `Time.current` を呼んでいた問題を、内部的な「未指定値」用の sentinel 定数を導入することで解消し、特に 2 月以外の月で最大約 40 倍の高速化を行う変更です。挙動（返り値・例外）は完全に維持したまま、パフォーマンスだけを改善しています。"
+    },
+    {
+      "number": 59414,
+      "title": "[doc][ci skip] Remove invalid link for ActiveRecord::Railtie in Engine guide {#pr-59414}",
+      "url": "https://github.com/rails/rails/pull/59414",
+      "mergedAt": "2026-10-29T00:00:00.000Z",
+      "author": "hachi8833",
+      "authorUrl": "https://github.com/hachi8833",
+      "summary": "1. 概要 (1-2文で)  \nRails Guides「Engines」ページ内で、存在しない `ActiveRecord::Railtie` のAPIドキュメントへのリンクを削除し、ドキュメントのリンク切れを解消したPRです。機能変更はなく、ガイド文書の品質向上のみを目的としています。\n\n2. 変更内容の詳細  \n\n- 背景  \n  - `guides/source/engines.md` に、`ActiveRecord::Railtie` へのリンクとして `https://api.rubyonrails.org/classes/Rails/Railtie.html` が貼られていたが、このリンク先は `ActiveRecord::Railtie` ではなく `Rails::Railtie` であり、目的に合った API ドキュメントが存在しない状態だった。  \n  - 実際の `ActiveRecord::Railtie` 実装 (`activerecord/lib/active_record/railtie.rb`) には `nodoc` が付いており、APIドキュメントとして公開されていないため、リンク先として不適切。\n\n- 実際の変更  \n  - `guides/source/engines.md` 内で、`ActiveRecord::Railtie` に張られていた不正な API ドキュメントへのリンクを削除し、プレーンテキストの `ActiveRecord::Railtie` として記述するように変更。  \n  - 行数としては、リンク用のMarkdown構文の削除に伴い +5/-7 の微修正で、文章構造自体はほぼ変えずにリンクだけを取り除いている。\n\n  擬似的なイメージ（実際の行とは異なるがニュアンス）:\n  ```md\n  # 変更前\n  ... [`ActiveRecord::Railtie`](https://api.rubyonrails.org/classes/Rails/Railtie.html) を継承して ...\n\n  # 変更後\n  ... ActiveRecord::Railtie を継承して ...\n  ```\n\n- 方針  \n  - Rails Guides から直接 API doc へのリンクを貼るのはあまり好まれていない、という慣習も踏まえ、正しいリンク先を探して張り替えるのではなく、単純にリンク自体を除去するアプローチが採用されている。\n\n3. 影響範囲・注意点  \n\n- 影響範囲  \n  - 影響はガイドドキュメントの表示内容のみに限定され、Rails のコードベースや挙動には一切影響しません。\n  - エンジン開発者が Guides を読んだときに、以前は（誤った）APIドキュメントへ飛べていたリンクがなくなるため、「クリックすると `Rails::Railtie` に飛んでしまう」という混乱が解消されます。\n\n- 注意点 / 今後の検討余地  \n  - `ActiveRecord::Railtie` は `nodoc` であり、公式 API ドキュメントとしては公開対象外であるため、詳細仕様を知りたい場合はソースコード (`activerecord/lib/active_record/railtie.rb`) を直接読む必要があります。\n  - Guides から内部・非公開APIへのリンクを貼ると、将来的なリファクタリングの際にリンク切れや不整合が起こりやすいため、今回のようにリンクを削除するのは妥当な方針と言えます。\n  - もし独自エンジンで `ActiveRecord::Railtie` に依存した設計を検討している場合は、「公開APIではない」という点を理解した上で利用する必要があります（将来的な互換性の保証が弱い）。\n\n4. 参考情報 (あれば)  \n\n- 該当クラスのソースコード（実装確認用・ドキュメント非公開）  \n  - `activerecord/lib/active_record/railtie.rb`  \n    https://github.com/rails/rails/blob/main/activerecord/lib/active_record/railtie.rb#L18  \n- Rails::Railtie の公開APIドキュメント（対比用）  \n  - https://api.rubyonrails.org/classes/Rails/Railtie.html  \n- Rails Guides（Engines ガイド・英語版）  \n  - https://guides.rubyonrails.org/engines.html"
+    },
+    {
+      "number": 59399,
+      "title": "Decode and encode PostgreSQL integer arrays in C: 3 objects at any length, 2.3x to 12x faster {#pr-59399}",
+      "url": "https://github.com/rails/rails/pull/59399",
+      "mergedAt": "2026-10-29T00:00:00.000Z",
+      "author": "czj",
+      "authorUrl": "https://github.com/czj",
+      "summary": "1. 概要 (1-2文で)  \nPostgreSQL の `integer[]` / `bigint[]` カラムのデコード・エンコードを、Ruby ではなく pg gem の C 実装（`PG::TextDecoder::Integer` / `PG::TextEncoder::Integer`）で行うようにして、オブジェクト生成数を大幅削減し最大 2.3〜12 倍高速化する変更です。既存の挙動と互換性をできる限り保ちつつ、一部エッジケースでのみ戻り値が変わる可能性があります。"
+    },
     {
       "number": 59277,
       "title": "Implement ActiveRecord::Association#initialize_clone {#pr-59277}",
@@ -388,69 +451,6 @@
       "author": "oleksii-leonov",
       "authorUrl": "https://github.com/oleksii-leonov",
       "summary": "1. 概要 (1-2文で)  \nPostgreSQL アダプタの UUID キャスト処理で使っている正規表現を「繰り返し表記」から「展開した形」に書き換えることで、`cast_value` の高速化（おおよそ 2.2〜2.4 倍）が行われた PR です。UUID のバリデーション仕様自体は変えずに、Ruby の正規表現エンジン Onigmo の特性を踏まえて実行時オーバーヘッドを削減しています。"
-    },
-    {
-      "number": 59337,
-      "title": "Name the Arel union and with node classes explicitly {#pr-59337}",
-      "url": "https://github.com/rails/rails/pull/59337",
-      "mergedAt": "2026-10-25T00:00:00.000Z",
-      "author": "dai199",
-      "authorUrl": "https://github.com/dai199",
-      "summary": "1. 概要 (1-2文で)  \nArel の `SelectManager#union` と `#with` が、これまで動的に定数名を組み立てていたのをやめ、`Nodes::UnionAll` と `Nodes::WithRecursive` を明示的に参照するようにした PRです。これによりコードの可読性と静的解析・AOT コンパイルのしやすさが向上し、不正なオペレーション指定時のエラーも `ArgumentError` に整理されました。"
-    },
-    {
-      "number": 59336,
-      "title": "Define CollectionProxy bulk insert and upsert methods explicitly {#pr-59336}",
-      "url": "https://github.com/rails/rails/pull/59336",
-      "mergedAt": "2026-10-25T00:00:00.000Z",
-      "author": "dai199",
-      "authorUrl": "https://github.com/dai199",
-      "summary": "1. 概要 (1-2文で)  \n`ActiveRecord::Associations::CollectionProxy` が、これまで `class_eval` による文字列生成で定義していた `insert` / `insert_all` / `insert!` / `insert_all!` / `upsert` / `upsert_all` を、通常の Ruby メソッドとして明示的に定義し直した PRです。これにより Bootsnap でキャッシュできるようになり、かつ非推奨警告のメッセージが正しく呼び出し元メソッド名を示すようテストも強化されています。"
-    },
-    {
-      "number": 59188,
-      "title": "Load relations returned by `connected_to_many` {#pr-59188}",
-      "url": "https://github.com/rails/rails/pull/59188",
-      "mergedAt": "2026-10-24T00:00:00.000Z",
-      "author": "laserlemon",
-      "authorUrl": "https://github.com/laserlemon",
-      "summary": "1. 概要 (1-2文で)  \n`ActiveRecord::Base.connected_to_many` が返す未ロードの `ActiveRecord::Relation` が、ブロック終了後に「元の接続ロール」でクエリされてしまう不具合を修正する PR です。`connected_to` と同様に、ブロックを抜ける前に Relation をロードし、その間も接続ロールの復元処理を正しく実行するようにしています。"
-    },
-    {
-      "number": 59348,
-      "title": "Don't use a sentinel for an omitted `default:` in `define_attribute` {#pr-59348}",
-      "url": "https://github.com/rails/rails/pull/59348",
-      "mergedAt": "2026-10-24T00:00:00.000Z",
-      "author": "kamipo",
-      "authorUrl": "https://github.com/kamipo",
-      "summary": "1. 概要 (1–2文で)  \n`define_attribute` で「default オプションが渡されたかどうか」を判定する方法を、専用の番兵値（`NO_DEFAULT_PROVIDED`）による判定から、Ruby の引数デフォルト式による判定に変更した PR です。これにより、既存の `ActiveModel::AttributeRegistration#attribute` と同じ仕組みに揃えつつ、実装がシンプルになっています。"
-    },
-    {
-      "number": 59347,
-      "title": "Don't store a sentinel in `CurrentAttributes.defaults` {#pr-59347}",
-      "url": "https://github.com/rails/rails/pull/59347",
-      "mergedAt": "2026-10-24T00:00:00.000Z",
-      "author": "kamipo",
-      "authorUrl": "https://github.com/kamipo",
-      "summary": "1. 概要 (1-2文で)  \n`ActiveSupport::CurrentAttributes` で、デフォルト値未指定の属性に内部的な「未設定シンボル (NOT_SET)」を `.defaults` に保存しないように変更し、`.defaults` の挙動と公開 API をよりシンプルかつ一貫性のあるものにしています。あわせて、属性名をシンボルに正規化することで、文字列名で宣言した属性にデフォルト値が返らない不具合も解消しています。"
-    },
-    {
-      "number": 59333,
-      "title": "Call `valid?` before reading errors in validations guide examples [ci skip] {#pr-59333}",
-      "url": "https://github.com/rails/rails/pull/59333",
-      "mergedAt": "2026-10-24T00:00:00.000Z",
-      "author": "ttrweb",
-      "authorUrl": "https://github.com/ttrweb",
-      "summary": "1. 概要 (1-2文で)  \n`Active Record Validations`ガイドの `errors.add` と `errors[:base]` のサンプルコードが、そのままでは `NoMethodError` になる問題を修正し、`errors` を参照する前に `valid?` を呼ぶようにしたドキュメント修正です。実装コードの変更はなく、ガイドのサンプルの動作を実際の挙動に合わせたものです。"
-    },
-    {
-      "number": 59346,
-      "title": "Use America/New_York in the cache key timezone test {#pr-59346}",
-      "url": "https://github.com/rails/rails/pull/59346",
-      "mergedAt": "2026-10-24T00:00:00.000Z",
-      "author": "flavorjones",
-      "authorUrl": "https://github.com/flavorjones",
-      "summary": "1. 概要 (1-2文で)  \nRails の Active Record テストにおいて、キャッシュキーがタイムゾーン依存にならないことを検証するテストのタイムゾーン指定を `\"EST\"` から `\"America/New_York\"` に変更し、Ubuntu/Debian の新しい環境で発生していたテスト失敗（`Invalid Timezone: EST`）を解消する修正です。機能仕様は変えず、テスト環境依存の問題だけを取り除いています。"
     }
   ]
 }
