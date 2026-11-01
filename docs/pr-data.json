@@ -1,7 +1,322 @@
 {
-  "lastUpdated": "2026-10-31T00:13:31.506Z",
+  "lastUpdated": "2026-11-01T00:18:25.434Z",
   "totalCount": 50,
   "items": [
+    {
+      "number": 59476,
+      "title": "Fix Active Support inline RBS signatures {#pr-59476}",
+      "url": "https://github.com/rails/rails/pull/59476",
+      "mergedAt": "2026-10-31T00:00:00.000Z",
+      "author": "amatsuda",
+      "authorUrl": "https://github.com/amatsuda",
+      "summary": "1. 概要 (1-2文で)  \nActive Support に最近追加された「インライン RBS 型定義」と、実際の Ruby 実装とのズレをまとめて修正した PRです。主に「メソッドが本当は受け付けない値を受け付けることになっていた型」や、「戻り値の型が実装より粗かった箇所」が、実装に沿うように精密化されています。"
+    },
+    {
+      "number": 59308,
+      "title": "Instrument connection pool checkout waits {#pr-59308}",
+      "url": "https://github.com/rails/rails/pull/59308",
+      "mergedAt": "2026-10-31T00:00:00.000Z",
+      "author": "andrewfader",
+      "authorUrl": "https://github.com/andrewfader",
+      "summary": "1. 概要 (1-2文で)  \nActive Record のコネクションプールで、空きコネクションがなくて `checkout` がブロックしている待ち時間を、`checkout_wait.active_record` というイベントとして計測・通知できるようにした変更です。これにより、プール逼迫時の「よく分からない遅さ」が可観測になり、`ConnectionTimeoutError` が出る前から問題把握・チューニングがしやすくなります。"
+    },
+    {
+      "number": 59404,
+      "title": "Compile Arel SQL up to 1.23x faster under YJIT by avoiding each_with_index in ToSql {#pr-59404}",
+      "url": "https://github.com/rails/rails/pull/59404",
+      "mergedAt": "2026-10-31T00:00:00.000Z",
+      "author": "czj",
+      "authorUrl": "https://github.com/czj",
+      "summary": "1. 概要 (1-2文で)  \nArel の SQL 生成処理（ToSql ビジター）から `each_with_index` / `inject` を排除し、YJIT（および ZJIT）で最適化しやすい `each` ベースのループに書き換えることで、SQL コンパイルを最大約 1.23 倍高速化するパフォーマンス改善 PRです。生成される SQL 自体はビット単位で同一であり、挙動変更はありません。"
+    },
+    {
+      "number": 59479,
+      "title": "Keep the optimized URL helpers with default URL options that don't shape the path {#pr-59479}",
+      "url": "https://github.com/rails/rails/pull/59479",
+      "mergedAt": "2026-10-31T00:00:00.000Z",
+      "author": "linyiru",
+      "authorUrl": "https://github.com/linyiru",
+      "summary": "1. 概要 (1-2文で)  \n`routes.default_url_options` や `default_url_options` に `host` などの「パスに影響しないオプション」だけが設定されている場合でも、パフォーマンスの良い「最適化された URL ヘルパー」を使い続けられるようにする変更です。これにより、特にシリアライザや ActivityPub などリクエスト外で URL を大量生成するケースで、オブジェクト数・処理時間の削減が見込まれます。"
+    },
+    {
+      "number": 59471,
+      "title": "Reduce allocations of polymorphic URL helpers with arrays and actions {#pr-59471}",
+      "url": "https://github.com/rails/rails/pull/59471",
+      "mergedAt": "2026-10-31T00:00:00.000Z",
+      "author": "linyiru",
+      "authorUrl": "https://github.com/linyiru",
+      "summary": "1. 概要 (1-2文で)  \npolymorphic_path / polymorphic_url 系ヘルパーを「配列引数」や「アクション付き」で呼び出したときのオブジェクト生成数を減らし、パフォーマンスを改善する変更です。動作（生成されるURLやヘルパー名）は一切変えず、内部実装だけを最適化しています。"
+    },
+    {
+      "number": 59464,
+      "title": "Compute action_methods without stringifying every public instance method {#pr-59464}",
+      "url": "https://github.com/rails/rails/pull/59464",
+      "mergedAt": "2026-10-31T00:00:00.000Z",
+      "author": "igorwwwwwwwwwwwwwwwwwwww",
+      "authorUrl": "https://github.com/igorwwwwwwwwwwwwwwwwwwww",
+      "summary": "1. 概要 (1-2文で)  \nコントローラの `action_methods` を計算する際に、全ての public インスタンスメソッドを一度 String 化してから Set に入れていた処理を見直し、Symbol のままルートヘルパー名を差し引くことで、大規模アプリ(例: GitLab)のブート時間とオブジェクトアロケーションを大幅に削減するパフォーマンス改善です。挙動は従来と同一になるように保ちつつ、内部実装とキャッシュ戦略を最適化しています。"
+    },
+    {
+      "number": 59468,
+      "title": "Autoload Arel {#pr-59468}",
+      "url": "https://github.com/rails/rails/pull/59468",
+      "mergedAt": "2026-10-31T00:00:00.000Z",
+      "author": "linyiru",
+      "authorUrl": "https://github.com/linyiru",
+      "summary": "1. 概要 (1-2文で)  \nActive Record が `require \"arel\"` していたのをやめて、`Arel` をオートロードに変更し、「実際に必要になったタイミングでのみ Arel を読み込む」ようにした PR です。これにより開発環境でのブート時間短縮と読み込まれるファイル・オブジェクト数の削減を狙っています。"
+    },
+    {
+      "number": 59465,
+      "title": "Load the test runner only when testing {#pr-59465}",
+      "url": "https://github.com/rails/rails/pull/59465",
+      "mergedAt": "2026-10-31T00:00:00.000Z",
+      "author": "linyiru",
+      "authorUrl": "https://github.com/linyiru",
+      "summary": "1. 概要 (1-2文で)  \nこのPRは、Railsアプリのブート時に常に読み込まれていたテストランナー関連（特に Prism と Rake::FileList）を、「実際にテストを実行する時だけ」読み込むように変更するものです。これにより、開発環境でのアプリ起動や各種 `bin/rails` コマンドの起動時間が数十ミリ秒改善されます。"
+    },
+    {
+      "number": 59452,
+      "title": "[8-1-stable] Require `useragent` when loading `ActionController::AllowBrowser` {#pr-59452}",
+      "url": "https://github.com/rails/rails/pull/59452",
+      "mergedAt": "2026-10-31T00:00:00.000Z",
+      "author": "k0kubun",
+      "authorUrl": "https://github.com/k0kubun",
+      "summary": "1. 概要 (1-2文で)  \nRails 8.1系において、`ActionController::AllowBrowser` が内部で使う `useragent` gem を「最初のリクエスト時」ではなく「コントローラ定義時（クラス評価時）」に読み込むようにしたバックポートです。挙動やAPIは変えずに、JITコンパイラへの悪影響を減らし、起動後の最初のリクエスト時のオーバーヘッドを避けるためのパフォーマンス改善です。"
+    },
+    {
+      "number": 59470,
+      "title": "Don't add a trailing slash after a required format in optimized URL helpers {#pr-59470}",
+      "url": "https://github.com/rails/rails/pull/59470",
+      "mergedAt": "2026-10-31T00:00:00.000Z",
+      "author": "linyiru",
+      "authorUrl": "https://github.com/linyiru",
+      "summary": "1. 概要 (1-2文で)  \nRails の URL ヘルパー最適化で導入された挙動により、「必須フォーマット付きのルート + `trailing_slash: true`」のときに、拡張子の後ろに余計なスラッシュ (`/projects/1.json/`) が付いてしまう不具合を修正する PRです。一般ルート生成ロジックと同様に、フォーマットが必須セグメントの場合は末尾スラッシュを付けないよう、最適化ヘルパー側の条件分岐が調整されています。"
+    },
+    {
+      "number": 59474,
+      "title": "Optimize URL helpers for routes with requirements {#pr-59474}",
+      "url": "https://github.com/rails/rails/pull/59474",
+      "mergedAt": "2026-10-31T00:00:00.000Z",
+      "author": "linyiru",
+      "authorUrl": "https://github.com/linyiru",
+      "summary": "1. 概要 (1-2文で)  \n`constraints` などの「セグメントに対する正規表現制約」を持つルートでも、URLヘルパーの高速な最適化パス (`OptimizedUrlHelper`) を使えるようにしたパフォーマンス改善のPRです。制約違反時のエラー挙動や、オプション付き URL 生成の挙動は既存の一般パスと揃えたまま、オブジェクト生成数と実行時間を大きく削減しています。"
+    },
+    {
+      "number": 59472,
+      "title": "Read the user agent's version and browser once in allow_browser {#pr-59472}",
+      "url": "https://github.com/rails/rails/pull/59472",
+      "mergedAt": "2026-10-31T00:00:00.000Z",
+      "author": "linyiru",
+      "authorUrl": "https://github.com/linyiru",
+      "summary": "1. 概要 (1-2文で)  \n`allow_browser` が内部で利用する `BrowserBlocker` において、UserAgent から「ブラウザ名」と「バージョン」を何度も再計算していた処理を一度だけにまとめることで、各リクエストあたりのオブジェクト生成数と処理時間を削減するパフォーマンス改善です。Rails が新規生成したアプリのデフォルト設定（`allow_browser versions: :modern`）で、UA パースのオーバーヘッドを軽減します。"
+    },
+    {
+      "number": 59478,
+      "title": "ActiveSupport::Duration: precompute float versions of constants {#pr-59478}",
+      "url": "https://github.com/rails/rails/pull/59478",
+      "mergedAt": "2026-10-31T00:00:00.000Z",
+      "author": "byroot",
+      "authorUrl": "https://github.com/byroot",
+      "summary": "1. 概要 (1-2文で)  \nActiveSupport::Duration が内部で使っている時間定数（1分=60秒、1時間=3600秒、1日=86400秒など）について、「float 版」をあらかじめ計算しておくことで、`to_f` 呼び出しを減らし、Duration 周りの浮動小数演算を高速化するパフォーマンス改善の PR です。元 PR #59266 の修正として入り、同等の計算結果を保ったまま割り算や `fdiv` のコストを下げています。"
+    },
+    {
+      "number": 59294,
+      "title": "Forward arguments from HashWithIndifferentAccess#merge to update {#pr-59294}",
+      "url": "https://github.com/rails/rails/pull/59294",
+      "mergedAt": "2026-10-31T00:00:00.000Z",
+      "author": "sampokuokkanen",
+      "authorUrl": "https://github.com/sampokuokkanen",
+      "summary": "1. 概要 (1-2文で)  \n`ActiveSupport::HashWithIndifferentAccess#merge` が、可変長引数の受け渡し方法を従来の「配列にまとめてから splat」でなく、Ruby 3.4 以降で効率的に動作する「`...` による引数転送」に書き換えられました。これにより一部 Ruby バージョンで割り当て（allocation）削減とわずかな性能改善が見込まれます。"
+    },
+    {
+      "number": 59320,
+      "title": "Ignore blank forwarded hosts during request host extraction {#pr-59320}",
+      "url": "https://github.com/rails/rails/pull/59320",
+      "mergedAt": "2026-10-31T00:00:00.000Z",
+      "author": "svyatov",
+      "authorUrl": "https://github.com/svyatov",
+      "summary": "1. 概要 (1-2文で)  \nRails の `ActionDispatch::Request#host` が `X-Forwarded-Host: ,` のような「空のフォワードホスト」ヘッダで `NoMethodError` を起こしていた不具合を修正し、空の値は無視して `HTTP_HOST` などの従来ロジックにフォールバックするようにした PR です。これにより、HostAuthorization を含むリクエスト処理が壊れにくくなり、非標準的・壊れたプロキシヘッダにもより強くなります。"
+    },
+    {
+      "number": 59374,
+      "title": "Write Duration#iso8601 values as plain decimal numbers {#pr-59374}",
+      "url": "https://github.com/rails/rails/pull/59374",
+      "mergedAt": "2026-10-31T00:00:00.000Z",
+      "author": "wleeaf",
+      "authorUrl": "https://github.com/wleeaf",
+      "summary": "1. 概要 (1-2文で)  \nActiveSupport::Duration#iso8601 が、常に ISO 8601 準拠かつ ActiveSupport::Duration.parse で再パース可能なフォーマットになるように修正した PR です。浮動小数点数や Rational を含む duration でも、指数表記や分数表記ではなく「通常の 10 進小数」で出力されるようになります。"
+    },
+    {
+      "number": 59375,
+      "title": "Set Vary to Sec-Fetch-Site directly when it is empty {#pr-59375}",
+      "url": "https://github.com/rails/rails/pull/59375",
+      "mergedAt": "2026-10-31T00:00:00.000Z",
+      "author": "sampokuokkanen",
+      "authorUrl": "https://github.com/sampokuokkanen",
+      "summary": "1. 概要 (1-2文で)  \n`ActionController::Base` の CSRF 対策用 `after_action` が `Vary` ヘッダに `Sec-Fetch-Site` を追加する処理について、`Vary` が空のケースでは文字列操作を行わず、直接 `\"Sec-Fetch-Site\"` をセットするようにしてオブジェクト生成と処理時間を削減するパフォーマンス改善のPRです。既に `Vary` が存在する場合の挙動は変えず、空の場合のみ最適化しています。"
+    },
+    {
+      "number": 59373,
+      "title": "Don't build an asynchronous queries session until it's needed {#pr-59373}",
+      "url": "https://github.com/rails/rails/pull/59373",
+      "mergedAt": "2026-10-31T00:00:00.000Z",
+      "author": "sampokuokkanen",
+      "authorUrl": "https://github.com/sampokuokkanen",
+      "summary": "1. 概要 (1-2文で)  \nActive Record の非同期クエリ用セッション（AsynchronousQueriesTracker）が、リクエストやジョブごとに必ずフル構築されていたのを「実際に非同期クエリが使われたときにだけ本体を構築する」ように遅延初期化した PR です。これにより、非同期クエリを使わない大多数のケースでオブジェクト生成コストと実行時間が削減されます。"
+    },
+    {
+      "number": 59376,
+      "title": "Don't parse an empty query string {#pr-59376}",
+      "url": "https://github.com/rails/rails/pull/59376",
+      "mergedAt": "2026-10-31T00:00:00.000Z",
+      "author": "sampokuokkanen",
+      "authorUrl": "https://github.com/sampokuokkanen",
+      "summary": "1. 概要 (1-2文で)  \n`Request#GET` がクエリ文字列を持たないリクエストでも毎回クエリ解析処理を走らせていたのをやめ、クエリ文字列が `nil` または空文字のときは即座に空の params ハッシュを返すようにして、無駄なオブジェクト生成と処理時間を削減した PR です。機能的な挙動はほぼ変えず、パフォーマンスとメモリ効率を改善する目的の変更です。"
+    },
+    {
+      "number": 59381,
+      "title": "Backport to 8-1 exif orientation bugfix {#pr-59381}",
+      "url": "https://github.com/rails/rails/pull/59381",
+      "mergedAt": "2026-10-31T00:00:00.000Z",
+      "author": "g-pavlik",
+      "authorUrl": "https://github.com/g-pavlik",
+      "summary": "1. 概要 (1-2文で)  \nRails 8.1 ブランチに対して、Active Storage の画像解析処理における EXIF Orientation 関連のバグ修正（#57290）がバックポートされた PR です。ImageMagick・Vips 双方のアナライザで EXIF の回転情報を正しく扱えるようにし、その挙動をテストとフィクスチャで保証しています。"
+    },
+    {
+      "number": 59380,
+      "title": "Read libvips' orientation field in the Vips image analyzer {#pr-59380}",
+      "url": "https://github.com/rails/rails/pull/59380",
+      "mergedAt": "2026-10-31T00:00:00.000Z",
+      "author": "g-pavlik",
+      "authorUrl": "https://github.com/g-pavlik",
+      "summary": "1. 概要 (1-2文で)  \nActive Storage の Vips 画像アナライザが画像の回転情報を誤認識する不具合（特に TIFF など EXIF 以外で orientation が保存される場合）を修正し、libvips の `orientation` フィールドを一貫して参照するようにした PR です。これにより、アナライザと変換（variant）パイプラインの挙動が揃い、回転メタデータの解釈が正しくなります。"
+    },
+    {
+      "number": 59383,
+      "title": "ActiveStorage: Fix JSON::ParserError from ffprobe duplicate keys {#pr-59383}",
+      "url": "https://github.com/rails/rails/pull/59383",
+      "mergedAt": "2026-10-31T00:00:00.000Z",
+      "author": "jdelStrother",
+      "authorUrl": "https://github.com/jdelStrother",
+      "summary": "1. 概要 (1-2文で)  \nActiveStorage が ffprobe の JSON 出力に重複キーが含まれる場合に `JSON::ParserError` を起こしていた問題を、JSON パース時に重複キーを許可することで修正した PRです。あわせて、JSON gem の最低バージョン引き上げと、ffprobe に依存するテストまわりの調整が行われています。"
+    },
+    {
+      "number": 59401,
+      "title": "Reuse frozen PostgreSQL bind placeholders: 64 objects instead of 164 and up to 1.24x faster for an IN of 50 ids {#pr-59401}",
+      "url": "https://github.com/rails/rails/pull/59401",
+      "mergedAt": "2026-10-31T00:00:00.000Z",
+      "author": "czj",
+      "authorUrl": "https://github.com/czj",
+      "summary": "1. 概要 (1-2文で)  \nPostgreSQL の Arel visitor がバインドパラメータ用の文字列（`\"$1\"`, `\"$2\"` …）を毎回新規生成していたのをやめ、最大 256 個分をあらかじめ凍結したテーブルから再利用するようにした PR です。これによりオブジェクト生成数が大きく減り、特に `IN` 句で多数の ID を渡すクエリのコンパイル性能が最大 1.24 倍ほど向上します。"
+    },
+    {
+      "number": 59418,
+      "title": "Accept Symbol values for the routing format: option {#pr-59418}",
+      "url": "https://github.com/rails/rails/pull/59418",
+      "mergedAt": "2026-10-31T00:00:00.000Z",
+      "author": "cestercian",
+      "authorUrl": "https://github.com/cestercian",
+      "summary": "1. 概要 (1-2文で)  \nこのPRは、ルーティングの `format:` オプションに `Symbol`（例: `format: :json`）を渡した場合でも、`String`（`\"json\"`）と同様に正しく扱われるようにするバグ修正です。Rails 3.2 では動いていた挙動が Rails 4.0 で静かに壊れていた回帰を解消しています。"
+    },
+    {
+      "number": 59477,
+      "title": "Check if `::UserAgent` is defined before requiring {#pr-59477}",
+      "url": "https://github.com/rails/rails/pull/59477",
+      "mergedAt": "2026-10-31T00:00:00.000Z",
+      "author": "byroot",
+      "authorUrl": "https://github.com/byroot",
+      "summary": "1. 概要 (1-2文で)  \nこのPRは、`ActionController::Metal::AllowBrowser` が `::UserAgent` クラスを `require` する前に、その定義有無をチェックするように変更し、不要な `require` 呼び出しを避けてパフォーマンスを改善するものです。`require` が `$LOADED_FEATURES` を都度走査するコストを、既に定義済みのケースでは回避できるようにしています。"
+    },
+    {
+      "number": 59454,
+      "title": "[8-1-stable] Run async calculations and `async_find_by_sql`/`async_count_by_sql` synchronously inside a joinable transaction {#pr-59454}",
+      "url": "https://github.com/rails/rails/pull/59454",
+      "mergedAt": "2026-10-31T00:00:00.000Z",
+      "author": "bensheldon",
+      "authorUrl": "https://github.com/bensheldon",
+      "summary": "1. 概要 (1-2文で)  \nこのPRは、ActiveRecord 8.1系 (`8-1-stable`) に対して、「joinable なトランザクション内では非同期クエリを同期的に実行する」よう挙動を修正するバックポートです。`async_find_by_sql` / `async_count_by_sql` や、非同期計算 (`async_*`) 系メソッドがトランザクション内で例外を起こさず安全に動くようにします。"
+    },
+    {
+      "number": 58728,
+      "title": "Read structure dump exclusions from the database being dumped {#pr-58728}",
+      "url": "https://github.com/rails/rails/pull/58728",
+      "mergedAt": "2026-10-31T00:00:00.000Z",
+      "author": "ngan",
+      "authorUrl": "https://github.com/ngan",
+      "summary": "1. 概要 (1–2文で)  \n`db:structure:dump`（`structure_dump`）実行時に、`schema_ignored_tables` の判定と PostgreSQL の `search_path` 取得を「ダンプ対象DBではなく現在の接続DB」から読んでいたバグを修正し、常に「ダンプ対象の DB 設定 (`db_config`)」に対して接続して情報を取得するようにした PR です。これにより、マルチDB構成やカスタムタスクから `ActiveRecord::Tasks::DatabaseTasks.structure_dump` を直接呼び出すケースでも、期待通りに無視テーブル・search_path が反映されます。"
+    },
+    {
+      "number": 59463,
+      "title": "Bump trilogy to 2.13.2 and use ujis in test_character_set_connection_is_configured {#pr-59463}",
+      "url": "https://github.com/rails/rails/pull/59463",
+      "mergedAt": "2026-10-31T00:00:00.000Z",
+      "author": "yahonda",
+      "authorUrl": "https://github.com/yahonda",
+      "summary": "1. 概要 (1-2文で)  \ntrilogy を 2.13.2 にバージョンアップし、その影響で落ちていた `ConnectionTest#test_character_set_connection_is_configured` を `cp932` ではなく `ujis` を使うように修正した PRです。trilogy 2.13.2 で非サポートとなった文字コードをテストから排除し、脆弱性修正後の挙動に沿うようにしています。"
+    },
+    {
+      "number": 59458,
+      "title": "Freeze tag strings before marking them HTML safe {#pr-59458}",
+      "url": "https://github.com/rails/rails/pull/59458",
+      "mergedAt": "2026-10-31T00:00:00.000Z",
+      "author": "linyiru",
+      "authorUrl": "https://github.com/linyiru",
+      "summary": "1. 概要 (1-2文で)  \n`content_tag` や `tag.xxx` などのタグヘルパーが内部で生成する文字列を、HTML セーフ化する前に `freeze` することで、不要な文字列オブジェクトの割り当てを 1 つ削減し、リンクやフォーム要素が多いページでのメモリ・パフォーマンスを改善する変更です。挙動や API は変わらず、`SafeBuffer` 自体は引き続き変更可能なままです。"
+    },
+    {
+      "number": 59456,
+      "title": "Parse each address once when calculating the remote IP {#pr-59456}",
+      "url": "https://github.com/rails/rails/pull/59456",
+      "mergedAt": "2026-10-31T00:00:00.000Z",
+      "author": "linyiru",
+      "authorUrl": "https://github.com/linyiru",
+      "summary": "1. 概要 (1-2文で)  \nRails の `ActionDispatch::RemoteIp` ミドルウェアで、リモート IP 判定時に同じ IP 文字列を何度も `IPAddr` にパースしていた処理を見直し、1回のパース結果を再利用するようにしてオブジェクト生成数を削減した PR です。挙動（どの IP がクライアントとして選ばれるか）は変えずに、特にログ出力など頻繁に呼ばれるケースのパフォーマンスを改善します。"
+    },
+    {
+      "number": 59453,
+      "title": "Reuse the period of time zones without transitions {#pr-59453}",
+      "url": "https://github.com/rails/rails/pull/59453",
+      "mergedAt": "2026-10-31T00:00:00.000Z",
+      "author": "linyiru",
+      "authorUrl": "https://github.com/linyiru",
+      "summary": "1. 概要 (1–2文で)  \nUTC など「一切の遷移（サマータイム等）がないタイムゾーン」について、`TimeZone` が `TZInfo::TimezonePeriod` を毎回新規生成せずに再利用するようにして、ActiveSupport/ActiveRecord におけるタイムゾーン関連のオブジェクト生成数と処理時間を削減する変更です。機能的な挙動は変えずに、UTC をデフォルトタイムゾーンとする一般的な Rails アプリのパフォーマンスを改善します。"
+    },
+    {
+      "number": 59451,
+      "title": "Make Parameters#to_h and #to_unsafe_h up to 1.6x faster by copying each hash once {#pr-59451}",
+      "url": "https://github.com/rails/rails/pull/59451",
+      "mergedAt": "2026-10-31T00:00:00.000Z",
+      "author": "czj",
+      "authorUrl": "https://github.com/czj",
+      "summary": "1. 概要 (1-2文で)  \nRails の `ActionController::Parameters` における `to_h` / `to_unsafe_h` で、ネストしたハッシュを二重コピーしていた箇所を一度のコピーに抑えることで、最大約 1.6 倍の高速化を行った PR です。挙動（返却値の構造や `HashWithIndifferentAccess` の性質）は維持しつつ、内部実装をより効率的なメソッドに差し替えています。"
+    },
+    {
+      "number": 59450,
+      "title": "Make deep_symbolize_keys and deep_stringify_keys up to 1.48x faster by not allocating a pair per key {#pr-59450}",
+      "url": "https://github.com/rails/rails/pull/59450",
+      "mergedAt": "2026-10-31T00:00:00.000Z",
+      "author": "czj",
+      "authorUrl": "https://github.com/czj",
+      "summary": "1. 概要 (1-2文で)  \n`Hash#deep_symbolize_keys` / `deep_stringify_keys` / `deep_transform_keys` と `ActionController::Parameters#deep_transform_keys` の内部実装を変更し、キーごとに不要な `[key, value]` 配列を作らないようにして、最大約 1.5 倍の高速化とオブジェクト生成数削減を行う最適化 PR です。外部から見た振る舞い（結果のクラス・キー順序・衝突時の優先ルール）は一切変わりません。"
+    },
+    {
+      "number": 59461,
+      "title": "Expose the untouched association name to restrict_with_error messages {#pr-59461}",
+      "url": "https://github.com/rails/rails/pull/59461",
+      "mergedAt": "2026-10-31T00:00:00.000Z",
+      "author": "jasonmaxlee",
+      "authorUrl": "https://github.com/jasonmaxlee",
+      "summary": "1. 概要 (1-2文で)  \n`dependent: :restrict_with_error` のエラーメッセージに、従来の `%{record}` に加えてオリジナルの大文字・小文字を保持した `%{association_name}` を渡すようにし、多言語対応（特に名詞を大文字で書く言語）で正しい表記ができるようにした変更です。既存の英語訳などの挙動はそのまま維持されます。"
+    },
+    {
+      "number": 59462,
+      "title": "Pass associations added to a parent down to existing subclasses {#pr-59462}",
+      "url": "https://github.com/rails/rails/pull/59462",
+      "mergedAt": "2026-10-31T00:00:00.000Z",
+      "author": "jasonmaxlee",
+      "authorUrl": "https://github.com/jasonmaxlee",
+      "summary": "1. 概要 (1-2文で)  \nActive Record の関連定義（`has_many` など）を親クラスに「後から」追加した場合でも、その親クラスを継承したサブクラスに正しく伝播するようにしたバグ修正です。エンジン／Concern／再オープンしたクラスで親に関連を追加したとき、既存サブクラスで関連メソッドはあるのに `AssociationNotFoundError` が出る問題を解消します。"
+    },
     {
       "number": 58118,
       "title": "Action Controller: Fix bug to support `render(renderable: …) { … }` {#pr-58118}",
@@ -136,321 +451,6 @@
       "author": "amatsuda",
       "authorUrl": "https://github.com/amatsuda",
       "summary": "1. 概要 (1-2文で)  \nRails の `TimeZone#today` が、UTC かつ遷移のないタイムゾーン（`utc?` が true のゾーン）の場合に tzinfo の期間(period)検索をスキップし、UTC の日付を直接返すよう最適化された PR です。これにより `Time.zone = \"UTC\"` の環境で `Date.current` の性能とメモリアロケーションが大幅に改善されます。"
-    },
-    {
-      "number": 59437,
-      "title": "Speed up Date.current when Time.zone is set {#pr-59437}",
-      "url": "https://github.com/rails/rails/pull/59437",
-      "mergedAt": "2026-10-30T00:00:00.000Z",
-      "author": "npezza93",
-      "authorUrl": "https://github.com/npezza93",
-      "summary": "1. 概要 (1-2文で)  \nRails の `Date.current` / `Time.zone.today` などが、`Time.zone` 設定時に少し高速になるパフォーマンス改善です。`TimeZone#today` 内で使う現在時刻を UTC に変換してから TZInfo に渡すことで、TZInfo 側の高速パスを通し、日付計算の正しさを保ったまま速度を向上させています。"
-    },
-    {
-      "number": 59434,
-      "title": "Stop offering a string for the :if and :unless validation options {#pr-59434}",
-      "url": "https://github.com/rails/rails/pull/59434",
-      "mergedAt": "2026-10-30T00:00:00.000Z",
-      "author": "carlosdanielpohlod",
-      "authorUrl": "https://github.com/carlosdanielpohlod",
-      "summary": "1. 概要 (1-2文で)  \nRails 7 以降すでに使えなくなっている `:if` / `:unless` オプションへの「文字列」の指定について、APIドキュメントおよびガイドからその記述を削除し、「lambda などを使う」という正しい書き方に統一したドキュメント修正PRです。コードの挙動は変わらず、ドキュメントだけが実装に追従した形です。"
-    },
-    {
-      "number": 59436,
-      "title": "Exclude default_order from aggregate calculations {#pr-59436}",
-      "url": "https://github.com/rails/rails/pull/59436",
-      "mergedAt": "2026-10-30T00:00:00.000Z",
-      "author": "kehra",
-      "authorUrl": "https://github.com/kehra",
-      "summary": "1. 概要 (1-2文で)  \nRails の集計系メソッド（`count`, `sum` など）を実行する際に、`default_order` が残ってしまうことで PostgreSQL で不正な SQL が生成される問題を修正し、集計クエリから `default_order` も取り除くようにした PR です。グループ付き集計で必要な並び順は維持しつつ、元のリレーション自体の `default_order` は変更しないように実装されています。"
-    },
-    {
-      "number": 59427,
-      "title": "Fix code point notation in 3.2 release notes [ci skip] {#pr-59427}",
-      "url": "https://github.com/rails/rails/pull/59427",
-      "mergedAt": "2026-10-30T00:00:00.000Z",
-      "author": "ttrweb",
-      "authorUrl": "https://github.com/ttrweb",
-      "summary": "1. 概要 (1-2文で)  \nRails 3.2 リリースノート（Active Support セクション）において、全角スペース（ideographic space）の Unicode コードポイント表記の誤記を修正する PR です。`U\\`3000` と誤って書かれていたものを、正しい `U+3000` 表記に直しています。"
-    },
-    {
-      "number": 59423,
-      "title": "Make number_to_currency and number_to_percentage up to 1.5x faster {#pr-59423}",
-      "url": "https://github.com/rails/rails/pull/59423",
-      "mergedAt": "2026-10-29T00:00:00.000Z",
-      "author": "czj",
-      "authorUrl": "https://github.com/czj",
-      "summary": "1. 概要 (1-2文で)  \n`number_to_currency` や `number_to_percentage` などの数値フォーマット系ヘルパーが、オプション解決と I18n の重複処理を共有するように変更され、最大約 1.5 倍高速になった PR です。挙動や I18n の互換性は保ちつつ、オブジェクト生成数と `I18n.translate` 呼び出し回数を削減しています。"
-    },
-    {
-      "number": 59426,
-      "title": "Fix typo in `bin/rails test` usage {#pr-59426}",
-      "url": "https://github.com/rails/rails/pull/59426",
-      "mergedAt": "2026-10-29T00:00:00.000Z",
-      "author": "ttrweb",
-      "authorUrl": "https://github.com/ttrweb",
-      "summary": "1. 概要 (1-2文で)  \n`bin/rails test --help` のヘルプメッセージ中にあった英語のタイプミス「with in」を正しい「within」に修正する、ドキュメントレベルの小さな修正PRです。テスト実行機能そのものの挙動には一切変更はありません。"
-    },
-    {
-      "number": 59421,
-      "title": "Make Date.current up to 1.6x faster when Time.zone is set {#pr-59421}",
-      "url": "https://github.com/rails/rails/pull/59421",
-      "mergedAt": "2026-10-29T00:00:00.000Z",
-      "author": "czj",
-      "authorUrl": "https://github.com/czj",
-      "summary": "1. 概要 (1-2文で)  \n`Time.zone` が設定されている場合の `Date.current` / `Time.zone.today` などの日付取得系 API を、内部実装の見直しによって最大約 1.6 倍高速化した PRです。挙動（返る日付）は既存実装と同じになるよう厳密に検証されており、互換性を維持しつつパフォーマンスを改善しています。"
-    },
-    {
-      "number": 59415,
-      "title": "Exclude default_order when constructing relation for exists? {#pr-59415}",
-      "url": "https://github.com/rails/rails/pull/59415",
-      "mergedAt": "2026-10-29T00:00:00.000Z",
-      "author": "kehra",
-      "authorUrl": "https://github.com/kehra",
-      "summary": "1. 概要 (1-2文で)  \n`Relation#exists?` が内部で組み立てるクエリから、通常の `order` だけでなく `default_order` も除外するようになり、存在確認クエリに不要な `ORDER BY` が付かなくなりました。`except(:order)` と `except(:default_order)` はこれまで通り独立して指定できるように保たれています。"
-    },
-    {
-      "number": 59417,
-      "title": "Make Time.days_in_month up to 42x faster without a year by reading the current year only for February {#pr-59417}",
-      "url": "https://github.com/rails/rails/pull/59417",
-      "mergedAt": "2026-10-29T00:00:00.000Z",
-      "author": "czj",
-      "authorUrl": "https://github.com/czj",
-      "summary": "1. 概要 (1-2文で)  \n`Time.days_in_month(month, year = current.year)` が「年を省略して呼ばれた場合」に無駄に `Time.current` を呼んでいた問題を、内部的な「未指定値」用の sentinel 定数を導入することで解消し、特に 2 月以外の月で最大約 40 倍の高速化を行う変更です。挙動（返り値・例外）は完全に維持したまま、パフォーマンスだけを改善しています。"
-    },
-    {
-      "number": 59414,
-      "title": "[doc][ci skip] Remove invalid link for ActiveRecord::Railtie in Engine guide {#pr-59414}",
-      "url": "https://github.com/rails/rails/pull/59414",
-      "mergedAt": "2026-10-29T00:00:00.000Z",
-      "author": "hachi8833",
-      "authorUrl": "https://github.com/hachi8833",
-      "summary": "1. 概要 (1-2文で)  \nRails Guides「Engines」ページ内で、存在しない `ActiveRecord::Railtie` のAPIドキュメントへのリンクを削除し、ドキュメントのリンク切れを解消したPRです。機能変更はなく、ガイド文書の品質向上のみを目的としています。\n\n2. 変更内容の詳細  \n\n- 背景  \n  - `guides/source/engines.md` に、`ActiveRecord::Railtie` へのリンクとして `https://api.rubyonrails.org/classes/Rails/Railtie.html` が貼られていたが、このリンク先は `ActiveRecord::Railtie` ではなく `Rails::Railtie` であり、目的に合った API ドキュメントが存在しない状態だった。  \n  - 実際の `ActiveRecord::Railtie` 実装 (`activerecord/lib/active_record/railtie.rb`) には `nodoc` が付いており、APIドキュメントとして公開されていないため、リンク先として不適切。\n\n- 実際の変更  \n  - `guides/source/engines.md` 内で、`ActiveRecord::Railtie` に張られていた不正な API ドキュメントへのリンクを削除し、プレーンテキストの `ActiveRecord::Railtie` として記述するように変更。  \n  - 行数としては、リンク用のMarkdown構文の削除に伴い +5/-7 の微修正で、文章構造自体はほぼ変えずにリンクだけを取り除いている。\n\n  擬似的なイメージ（実際の行とは異なるがニュアンス）:\n  ```md\n  # 変更前\n  ... [`ActiveRecord::Railtie`](https://api.rubyonrails.org/classes/Rails/Railtie.html) を継承して ...\n\n  # 変更後\n  ... ActiveRecord::Railtie を継承して ...\n  ```\n\n- 方針  \n  - Rails Guides から直接 API doc へのリンクを貼るのはあまり好まれていない、という慣習も踏まえ、正しいリンク先を探して張り替えるのではなく、単純にリンク自体を除去するアプローチが採用されている。\n\n3. 影響範囲・注意点  \n\n- 影響範囲  \n  - 影響はガイドドキュメントの表示内容のみに限定され、Rails のコードベースや挙動には一切影響しません。\n  - エンジン開発者が Guides を読んだときに、以前は（誤った）APIドキュメントへ飛べていたリンクがなくなるため、「クリックすると `Rails::Railtie` に飛んでしまう」という混乱が解消されます。\n\n- 注意点 / 今後の検討余地  \n  - `ActiveRecord::Railtie` は `nodoc` であり、公式 API ドキュメントとしては公開対象外であるため、詳細仕様を知りたい場合はソースコード (`activerecord/lib/active_record/railtie.rb`) を直接読む必要があります。\n  - Guides から内部・非公開APIへのリンクを貼ると、将来的なリファクタリングの際にリンク切れや不整合が起こりやすいため、今回のようにリンクを削除するのは妥当な方針と言えます。\n  - もし独自エンジンで `ActiveRecord::Railtie` に依存した設計を検討している場合は、「公開APIではない」という点を理解した上で利用する必要があります（将来的な互換性の保証が弱い）。\n\n4. 参考情報 (あれば)  \n\n- 該当クラスのソースコード（実装確認用・ドキュメント非公開）  \n  - `activerecord/lib/active_record/railtie.rb`  \n    https://github.com/rails/rails/blob/main/activerecord/lib/active_record/railtie.rb#L18  \n- Rails::Railtie の公開APIドキュメント（対比用）  \n  - https://api.rubyonrails.org/classes/Rails/Railtie.html  \n- Rails Guides（Engines ガイド・英語版）  \n  - https://guides.rubyonrails.org/engines.html"
-    },
-    {
-      "number": 59399,
-      "title": "Decode and encode PostgreSQL integer arrays in C: 3 objects at any length, 2.3x to 12x faster {#pr-59399}",
-      "url": "https://github.com/rails/rails/pull/59399",
-      "mergedAt": "2026-10-29T00:00:00.000Z",
-      "author": "czj",
-      "authorUrl": "https://github.com/czj",
-      "summary": "1. 概要 (1-2文で)  \nPostgreSQL の `integer[]` / `bigint[]` カラムのデコード・エンコードを、Ruby ではなく pg gem の C 実装（`PG::TextDecoder::Integer` / `PG::TextEncoder::Integer`）で行うようにして、オブジェクト生成数を大幅削減し最大 2.3〜12 倍高速化する変更です。既存の挙動と互換性をできる限り保ちつつ、一部エッジケースでのみ戻り値が変わる可能性があります。"
-    },
-    {
-      "number": 59277,
-      "title": "Implement ActiveRecord::Association#initialize_clone {#pr-59277}",
-      "url": "https://github.com/rails/rails/pull/59277",
-      "mergedAt": "2026-10-28T00:00:00.000Z",
-      "author": "AIndrewn617",
-      "authorUrl": "https://github.com/AIndrewn617",
-      "summary": "1. 概要 (1-2文で)  \n`ActiveRecord::Association` に `initialize_clone` を実装し、モデルを `clone` した際に「元オブジェクトと関連のキャッシュ(@association_cache)を共有する」という従来の挙動が、association の遅延初期化導入後も維持されるようにした PR です。あわせて `ActiveModel::AttributeSet` 周りの clone 挙動テストや、継承・永続化まわりの clone のテストも補強されています。"
-    },
-    {
-      "number": 59406,
-      "title": "Make unnamed url_for up to 3.3x faster by not scoring redirects and Rack apps {#pr-59406}",
-      "url": "https://github.com/rails/rails/pull/59406",
-      "mergedAt": "2026-10-28T00:00:00.000Z",
-      "author": "czj",
-      "authorUrl": "https://github.com/czj",
-      "summary": "1. 概要 (1-2文で)  \n`url_for` を「名前なし」で呼び出した場合（`url_for(controller:, action:)` や `url_for(params.merge(page: 2))` など）に、リダイレクトルートや Rack アプリ用ルートを候補から除外することで、最大 3.3〜4x 程度まで高速化した PR です。ルーティングの挙動（どの URL が生成されるか）は維持しつつ、生成時のスコアリング対象を絞ることで無駄な処理を減らしています。"
-    },
-    {
-      "number": 59407,
-      "title": "Define FormBuilder field helpers explicitly {#pr-59407}",
-      "url": "https://github.com/rails/rails/pull/59407",
-      "mergedAt": "2026-10-28T00:00:00.000Z",
-      "author": "dersam",
-      "authorUrl": "https://github.com/dersam",
-      "summary": "1. 概要 (1-2文で)  \nFormBuilder が提供する「フィールド用ヘルパーメソッド」を、動的定義ではなく“明示的なメソッド定義”に変更した PR です。これにより、Bootsnap が FormBuilder のフィールドヘルパーをキャッシュできるようになり、起動時などのパフォーマンス改善が期待できます。"
-    },
-    {
-      "number": 59400,
-      "title": "Parameterize up to 1.5x faster with 40% fewer allocations {#pr-59400}",
-      "url": "https://github.com/rails/rails/pull/59400",
-      "mergedAt": "2026-10-28T00:00:00.000Z",
-      "author": "czj",
-      "authorUrl": "https://github.com/czj",
-      "summary": "1. 概要 (1-2文で)  \n`ActiveSupport::Inflector#parameterize` の内部実装を最適化し、条件が合う場合に正規表現＋`gsub!` の代わりに `tr_s!` を使うことで、最大約1.5倍高速・約40%少ないオブジェクト生成を実現した変更です。挙動・戻り値は従来と完全に同じになるよう、ASCII性やセパレータの条件を厳密にチェックしています。"
-    },
-    {
-      "number": 59397,
-      "title": "Allocate 11 fewer objects per TimeZone#parse of a local time {#pr-59397}",
-      "url": "https://github.com/rails/rails/pull/59397",
-      "mergedAt": "2026-10-28T00:00:00.000Z",
-      "author": "czj",
-      "authorUrl": "https://github.com/czj",
-      "summary": "1. 概要 (1-2文で)  \n`ActiveSupport::TimeZone#parse` と `#iso8601` がローカル時刻文字列を扱う際に、内部で同じ時刻を二重に組み立てて余計なオブジェクトを生成していたのをやめ、11個分のオブジェクト削減と 1.1〜1.3倍程度の高速化を行ったパフォーマンス改善PRです。挙動（返り値）は一切変わらず、テスト相当の検証でも完全に同一結果になることが確認されています。"
-    },
-    {
-      "number": 59394,
-      "title": "Define integration test request helpers explicitly {#pr-59394}",
-      "url": "https://github.com/rails/rails/pull/59394",
-      "mergedAt": "2026-10-28T00:00:00.000Z",
-      "author": "dai199",
-      "authorUrl": "https://github.com/dai199",
-      "summary": "1. 概要 (1-2文で)  \nRails の統合テスト (`ActionDispatch::Integration::Runner`) における HTTP リクエストヘルパーの定義方法を、これまでの `module_eval` 文字列生成から「明示的なメソッド定義」に変更し、抜けていた `options` メソッドを正式に追加した PRです。これにより、`options` 実行時にも `@html_document` が正しくリセットされ、`assert_select` などが古いレスポンスを誤って参照するバグが解消されています。"
-    },
-    {
-      "number": 59403,
-      "title": "Optimistically call `render_in` with `locals:` {#pr-59403}",
-      "url": "https://github.com/rails/rails/pull/59403",
-      "mergedAt": "2026-10-28T00:00:00.000Z",
-      "author": "byroot",
-      "authorUrl": "https://github.com/byroot",
-      "summary": "1. 概要 (1-2文で)  \n`render_in` を呼ぶ際に、事前にメソッドの引数(arity)をチェックするのをやめ、まずは `locals:` 付きのキーワード引数で楽観的に呼び出し、エラーになった場合だけフォールバックするように変更された PR です。これにより、ViewComponent など `render_in` を実装するオブジェクトのレンダリング時のオーバーヘッドを削減し、パフォーマンスを改善します。"
-    },
-    {
-      "number": 59402,
-      "title": "Make TimeZone#parse up to 1.3x and #strptime 1.5x faster when the string has a full date {#pr-59402}",
-      "url": "https://github.com/rails/rails/pull/59402",
-      "mergedAt": "2026-10-28T00:00:00.000Z",
-      "author": "czj",
-      "authorUrl": "https://github.com/czj",
-      "summary": "1. 概要 (1-2文で)  \n`ActiveSupport::TimeZone#parse` と `#strptime` が、入力文字列に「年月日まで含まれている場合」に無駄な `now` のローカル時刻計算を行わないようにして、最大 1.3〜1.6倍程度高速化した PRです。振る舞いは完全に同一で、ベンチとプロパティテストレベルで互換性が確認されています。"
-    },
-    {
-      "number": 59393,
-      "title": "CodeGenerate metaprogrammed association methods {#pr-59393}",
-      "url": "https://github.com/rails/rails/pull/59393",
-      "mergedAt": "2026-10-28T00:00:00.000Z",
-      "author": "hmcguire-shopify",
-      "authorUrl": "https://github.com/hmcguire-shopify",
-      "summary": "1. 概要 (1–2文で)  \nRails の関連メソッド（association readers/writers や `build_`, `create_`, `_ids` など）の定義方法を整理し、`CodeGenerator` ベースのコード生成に切り替えることで、命令列（instruction sequence）の共有によるメモリ削減とパフォーマンス向上を図った変更です。あわせて関連メソッド定義処理の重複を統合し、deprecated API ガードの呼び出しも軽量化しています。"
-    },
-    {
-      "number": 59299,
-      "title": "Deprecate ColumnDefinition option accessors {#pr-59299}",
-      "url": "https://github.com/rails/rails/pull/59299",
-      "mergedAt": "2026-10-28T00:00:00.000Z",
-      "author": "sampokuokkanen",
-      "authorUrl": "https://github.com/sampokuokkanen",
-      "summary": "1. 概要 (1-2文で)  \n`ActiveRecord::ConnectionAdapters::ColumnDefinition` が持っていた各種オプション (`limit`, `precision`, `default`, `null` など) のリーダー/ライターを「非推奨」にし、代わりに `options[...]` を使うよう誘導する変更です。これにより、`module_eval` による動的メソッド定義をやめて Bootsnap の compile cache と相性を良くしつつ、既存コードとの互換性も一定期間維持します。"
-    },
-    {
-      "number": 59398,
-      "title": "Don't require a truthy Dalli multi-write result in the local cache test {#pr-59398}",
-      "url": "https://github.com/rails/rails/pull/59398",
-      "mergedAt": "2026-10-28T00:00:00.000Z",
-      "author": "nuclearspike",
-      "authorUrl": "https://github.com/nuclearspike",
-      "summary": "1. 概要 (1-2文で)  \nDalli 5.2.3 以降で `set_multi` の戻り値が `nil` になったことにより、`MemCacheStore` のローカルキャッシュに関するテストが落ちていた問題を、「戻り値が truthy であること」を前提にしないようテストコードを修正して解消した PR です。実装コードや依存関係の変更はなく、テストコードのみの修正です。"
-    },
-    {
-      "number": 59392,
-      "title": "Skip copying and re-rounding BigDecimals already at the decimal type's scale: 3 → 1 objects per cast {#pr-59392}",
-      "url": "https://github.com/rails/rails/pull/59392",
-      "mergedAt": "2026-10-27T00:00:00.000Z",
-      "author": "czj",
-      "authorUrl": "https://github.com/czj",
-      "summary": "1. 概要 (1-2文で)\n- PostgreSQL から読み込んだ decimal カラムに対する `ActiveModel::Type::Decimal` のキャスト処理を最適化し、不要な `BigDecimal` オブジェクト生成と再丸めをスキップする変更です。  \n- 結果として、1回のキャストあたりのオブジェクト数が 3→1（環境により 4→2）に減り、パフォーマンスとメモリ効率が改善されます。"
-    },
-    {
-      "number": 59391,
-      "title": "Load MessagePack TimeWithZone from its UTC time: 16 → 5 objects, 2–3x faster, right instant for non-zero offsets {#pr-59391}",
-      "url": "https://github.com/rails/rails/pull/59391",
-      "mergedAt": "2026-10-27T00:00:00.000Z",
-      "author": "czj",
-      "authorUrl": "https://github.com/czj",
-      "summary": "1. 概要 (1–2文で)  \nMessagePack でシリアライズされた `TimeWithZone` を復元する際の処理を修正し、UTC ではないオフセット付きデータで「別の瞬間」が復元されてしまうバグを解消しつつ、オブジェクト数・速度面でも 2〜3 倍程度高速化した PR です。変更は 1 行のみですが、非ゼロオフセットの `TimeWithZone` を正しい瞬間で復元できるようになります。"
-    },
-    {
-      "number": 59382,
-      "title": "Make Host Authorization opt-out examples more strict {#pr-59382}",
-      "url": "https://github.com/rails/rails/pull/59382",
-      "mergedAt": "2026-10-27T00:00:00.000Z",
-      "author": "p8",
-      "authorUrl": "https://github.com/p8",
-      "summary": "1. 概要 (1-2文で)  \nHost Authorization ミドルウェアで、特定パスをチェックから除外する「opt-out」例がより厳密になるように変更されました。`/healthcheck/` を含むだけのパスではなく、「`/healthcheck` から始まるパス」のみに除外対象を限定する形へサンプルと実装・テスト・ガイドが修正されています。"
-    },
-    {
-      "number": 59371,
-      "title": "Process each Action Cable connection's commands in order {#pr-59371}",
-      "url": "https://github.com/rails/rails/pull/59371",
-      "mergedAt": "2026-10-27T00:00:00.000Z",
-      "author": "rubys",
-      "authorUrl": "https://github.com/rubys",
-      "summary": "1. 概要 (1-2文で)  \nAction Cable の各 WebSocket 接続ごとに、コマンド（open/unsubscribe/subscribe/close など）が必ず到着順に一つずつ処理されるようにし、同一接続内での並行実行による順序逆転バグを修正する PR です。これにより、unsubscribe → subscribe が subscribe → unsubscribe の順で実行されてしまうことで発生していた sporadic な購読ロスト・レイテンシ増大が解消されます。"
-    },
-    {
-      "number": 59385,
-      "title": "Optimize Journey verb matchers for Bootsnap code caching {#pr-59385}",
-      "url": "https://github.com/rails/rails/pull/59385",
-      "mergedAt": "2026-10-27T00:00:00.000Z",
-      "author": "dersam",
-      "authorUrl": "https://github.com/dersam",
-      "summary": "1. 概要 (1-2文で)  \nRails のルーティングエンジン（Journey）における HTTP メソッド判定用のマッチャが、毎回動的生成される方式から「静的に定義されたメソッド」を使う方式に変更され、Bootsnap によるコードキャッシュの恩恵を受けられるよう最適化されています。HTTP 動詞に関するロジックを固定化することで、起動時やロード時のオーバーヘッドを減らす目的の変更です。"
-    },
-    {
-      "number": 59389,
-      "title": "Avoid building Arel AST in Relation#in_batches {#pr-59389}",
-      "url": "https://github.com/rails/rails/pull/59389",
-      "mergedAt": "2026-10-27T00:00:00.000Z",
-      "author": "kehra",
-      "authorUrl": "https://github.com/kehra",
-      "summary": "1. 概要 (1-2文で)  \n`ActiveRecord::Batches#in_batches` が既存の並び順（order）の有無を判定する際に、不要な Arel AST の構築を行わないように最適化された PRです。これにより、特にブロック無しで `in_batches` を呼び出すケースでオブジェクトアロケーションが削減され、処理スループットが大きく向上します。"
-    },
-    {
-      "number": 59370,
-      "title": "Don't render authenticity tokens under the header_only CSRF strategy {#pr-59370}",
-      "url": "https://github.com/rails/rails/pull/59370",
-      "mergedAt": "2026-10-27T00:00:00.000Z",
-      "author": "rubys",
-      "authorUrl": "https://github.com/rubys",
-      "summary": "1. 概要 (1-2文で)  \nRails 8.2 で導入される `:header_only` な CSRF 戦略を使っている場合、HTML に authenticity token（`csrf_meta_tags` やフォーム hidden フィールド）を一切レンダリングしないようにする変更です。これにより、CSRF の検証は `Sec-Fetch-Site` ヘッダのみに依存し、ページバイト列の安定性向上・不要なセッション発行の削減・トークン生成コスト削減が図られます。"
-    },
-    {
-      "number": 59314,
-      "title": "Match URL-decoded query parameter names when filtering logs {#pr-59314}",
-      "url": "https://github.com/rails/rails/pull/59314",
-      "mergedAt": "2026-10-27T00:00:00.000Z",
-      "author": "bastidotnet",
-      "authorUrl": "https://github.com/bastidotnet",
-      "summary": "1. 概要 (1-2文で)  \nURL クエリパラメータ名が URL エンコードされている場合でも、`filter_parameters` のルールに基づいて確実にマスクされるようにした変更です。Rails のログ出力（`filtered_path` やリダイレクト先のログ）と実際の `params` のフィルタリング挙動を揃え、「エンコードされたパラメータ名だけマスクされない」という抜けを塞いでいます。"
-    },
-    {
-      "number": 59386,
-      "title": "Keep query block scoped optimizer hints on the subquery for count on MySQL {#pr-59386}",
-      "url": "https://github.com/rails/rails/pull/59386",
-      "mergedAt": "2026-10-27T00:00:00.000Z",
-      "author": "kamipo",
-      "authorUrl": "https://github.com/kamipo",
-      "summary": "1. 概要 (1-2文で)  \nMySQL で `limit` / `offset` / `distinct` を伴う `count` を実行する際、サブクエリに付与した Optimizer Hint の扱いが改善され、テーブルレベルのヒントが正しくサブクエリ側に残るようになりました。これにより、これまで外側クエリに移されて無効化されていた一部のヒントが、期待どおりに効くようになります。"
-    },
-    {
-      "number": 57747,
-      "title": "[RF Docs] Multiple Databases {#pr-57747}",
-      "url": "https://github.com/rails/rails/pull/57747",
-      "mergedAt": "2026-10-26T00:00:00.000Z",
-      "author": "Ridhwana",
-      "authorUrl": "https://github.com/Ridhwana",
-      "summary": "1. 概要 (1-2文で)  \nRails ガイドの「Multiple Databases（複数データベース）」ドキュメントを大幅に書き換え、3階層構成（writer/replica など）のデフォルト構成、縦・横の分割、ロール／シャード切り替え、外部DB連携、スキーマキャッシュなどの事項を体系的に整理・拡充した PR です。機能追加ではなくドキュメント改善ですが、最新の Rails のデフォルト挙動に合わせた内容になっているため、複数DB機能を使うアプリの設計・運用に直接的に役立つ変更です。"
-    },
-    {
-      "number": 59315,
-      "title": "Preserve filter behavior in ParameterFilter.precompile_filters {#pr-59315}",
-      "url": "https://github.com/rails/rails/pull/59315",
-      "mergedAt": "2026-10-26T00:00:00.000Z",
-      "author": "bastidotnet",
-      "authorUrl": "https://github.com/bastidotnet",
-      "summary": "1. 概要 (1-2文で)  \n`ActiveSupport::ParameterFilter.precompile_filters` が、元のフィルタ配列と振る舞いが変わってしまうリグレッションを修正し、「コンパイル前後で同じパラメータマスキング結果になる」ことを保証する変更です。深いキーと浅いキーの扱い、および正規表現フィルタと文字列フィルタの冗長判定ロジックが見直されています。"
-    },
-    {
-      "number": 59318,
-      "title": "Fix join reuse across different parent paths {#pr-59318}",
-      "url": "https://github.com/rails/rails/pull/59318",
-      "mergedAt": "2026-10-25T00:00:00.000Z",
-      "author": "ozamasa",
-      "authorUrl": "https://github.com/ozamasa",
-      "summary": "1. 概要 (1-2文で)  \n「同じ関連（terminal reflection）に複数の親パスから到達する」ケースで、`JOIN` の再利用キャッシュが誤って使い回され、中間テーブルの `JOIN` が落ちて誤った結果が返りうるバグを修正した PRです。`left_joins` と `eager_load` での `has_many :through` 系の複雑な関連でも、正しくテーブル結合されるようになります。"
-    },
-    {
-      "number": 59305,
-      "title": "Deprecate ActiveRecord::Validations::NumericalityValidator {#pr-59305}",
-      "url": "https://github.com/rails/rails/pull/59305",
-      "mergedAt": "2026-10-25T00:00:00.000Z",
-      "author": "bruno-costanzo",
-      "authorUrl": "https://github.com/bruno-costanzo",
-      "summary": "1. 概要 (1-2文で)  \n`ActiveRecord::Validations::NumericalityValidator` が完全削除されていたことによる互換性問題を緩和するため、このクラス名を `ActiveModel::Validations::NumericalityValidator` への「非推奨エイリアス」として復活させたPRです。既存コードを壊さずに動くようにしつつ、Rails 9.0 での完全削除に向けてデプリケーション警告を出すようにしています。"
     }
   ]
 }
