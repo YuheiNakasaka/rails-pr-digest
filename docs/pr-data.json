@@ -1,7 +1,178 @@
 {
-  "lastUpdated": "2026-11-02T00:16:05.546Z",
+  "lastUpdated": "2026-11-03T00:12:48.662Z",
   "totalCount": 50,
   "items": [
+    {
+      "number": 59544,
+      "title": "Only extract Ranges in ArrayHandler when there are any {#pr-59544}",
+      "url": "https://github.com/rails/rails/pull/59544",
+      "mergedAt": "2026-11-02T00:00:00.000Z",
+      "author": "thomasklemm",
+      "authorUrl": "https://github.com/thomasklemm",
+      "summary": "1. 概要 (1-2文で)  \n`where(column: array)` などで使用される `ArrayHandler` が、配列内に `Range` オブジェクトが含まれない場合には、Range 抽出用の一時配列を生成しないよう最適化されました。SQL やバインドパラメータの内容・挙動は変えずに、不要なオブジェクト割り当てをわずかに削減する変更です。"
+    },
+    {
+      "number": 59543,
+      "title": "Avoid copying relation values in except and only {#pr-59543}",
+      "url": "https://github.com/rails/rails/pull/59543",
+      "mergedAt": "2026-11-02T00:00:00.000Z",
+      "author": "thomasklemm",
+      "authorUrl": "https://github.com/thomasklemm",
+      "summary": "1. 概要 (1-2文で)  \nActiveRecord::Relation の `except` / `only` が内部で余計な Hash のコピーを作らないようにし、オブジェクト生成数をわずかに削減する変更です。挙動は変えずにメモリアロケーションを少し最適化するマイクロパフォーマンス改善です。"
+    },
+    {
+      "number": 59542,
+      "title": "Skip finalizing intents on checkin when none are pending {#pr-59542}",
+      "url": "https://github.com/rails/rails/pull/59542",
+      "mergedAt": "2026-11-02T00:00:00.000Z",
+      "author": "thomasklemm",
+      "authorUrl": "https://github.com/thomasklemm",
+      "summary": "1. 概要 (1-2文で)  \nこのPRは、接続チェックイン時（リクエストやジョブ終了時など）に「保留中の intent」が何もない場合は処理を早期リターンし、不要な配列オブジェクトの割り当てを避ける最適化です。機能的な挙動は変えずに、オブジェクトアロケーションをわずかに削減します。"
+    },
+    {
+      "number": 59541,
+      "title": "Skip unneeded Arrays when merging into an empty WhereClause {#pr-59541}",
+      "url": "https://github.com/rails/rails/pull/59541",
+      "mergedAt": "2026-11-02T00:00:00.000Z",
+      "author": "thomasklemm",
+      "authorUrl": "https://github.com/thomasklemm",
+      "summary": "1. 概要 (1-2文で)  \n`ActiveRecord::Relation::WhereClause#merge` が、空の `WhereClause` に他の条件をマージする際の不要な配列生成や分割処理をスキップする最適化が入りました。結果として、関連の読み取り（`post.author`, `author.posts`, スコープ付き `has_many` など）でオブジェクトアロケーション数が減少します。"
+    },
+    {
+      "number": 59534,
+      "title": "Map Arel project and order arguments in place {#pr-59534}",
+      "url": "https://github.com/rails/rails/pull/59534",
+      "mergedAt": "2026-11-02T00:00:00.000Z",
+      "author": "thomasklemm",
+      "authorUrl": "https://github.com/thomasklemm",
+      "summary": "1. 概要 (1-2文で)  \nRails の Arel において、`SelectManager#project` / `#order` と `Window#order` / `#partition` の可変長引数の扱いを「その場変換」に変えることで、余分な Array の生成を減らし、オブジェクトアロケーションを削減する最適化が行われました。機能的な挙動は変えずに、SELECT クエリのコンパイル時に発生するメモリアロケーションを抑える変更です。"
+    },
+    {
+      "number": 59539,
+      "title": "Use drop instead of an endless Range for the join chain tail {#pr-59539}",
+      "url": "https://github.com/rails/rails/pull/59539",
+      "mergedAt": "2026-11-02T00:00:00.000Z",
+      "author": "thomasklemm",
+      "authorUrl": "https://github.com/thomasklemm",
+      "summary": "1. 概要 (1-2文で)  \n`joins` / `left_joins` / `eager_load`（および JOIN に変換される `includes`）で内部的に使っている「関連リフレクションのチェーン処理」において、endless Range (`array[index..]`) の生成をやめて `drop(index)` に置き換えることで、オブジェクト割り当てを 1 個だけ削減するマイクロ最適化です。  \n振る舞いは一切変わらず、内部実装のメモリアロケーション削減のみを目的とした変更です。"
+    },
+    {
+      "number": 59538,
+      "title": "Pass frozen empty defaults when loading a relation {#pr-59538}",
+      "url": "https://github.com/rails/rails/pull/59538",
+      "mergedAt": "2026-11-02T00:00:00.000Z",
+      "author": "thomasklemm",
+      "authorUrl": "https://github.com/thomasklemm",
+      "summary": "1. 概要 (1-2文で)  \nRelation をロードするときに毎回新しく空配列を生成していた箇所を、共通の `FROZEN_EMPTY_ARRAY` を渡すように変更し、オブジェクトアロケーションを削減したパフォーマンス微改善の PR です。SQL 実行時の `binds` や association の `joins` 用デフォルト値として、内容も変更されない空配列であることを明示しています。"
+    },
+    {
+      "number": 59537,
+      "title": "Take tag_string options before the optional content {#pr-59537}",
+      "url": "https://github.com/rails/rails/pull/59537",
+      "mergedAt": "2026-11-02T00:00:00.000Z",
+      "author": "thomasklemm",
+      "authorUrl": "https://github.com/thomasklemm",
+      "summary": "1. 概要 (1–2文で)  \nRails の `ActionView::Helpers::TagHelper` 内部で使われる `TagBuilder#tag_string` の引数順を見直し、「任意引数の後ろに必須引数が来る」状態を解消して、毎回発生していた不要な配列オブジェクトの割り当てを削減するパフォーマンス改善です。外部 API の挙動（タグ出力・エスケープ・ブロックの扱い・エラー内容）は変わりません。"
+    },
+    {
+      "number": 59536,
+      "title": "Share an empty warnings Array when a query has none {#pr-59536}",
+      "url": "https://github.com/rails/rails/pull/59536",
+      "mergedAt": "2026-11-02T00:00:00.000Z",
+      "author": "thomasklemm",
+      "authorUrl": "https://github.com/thomasklemm",
+      "summary": "1. 概要 (1-2文で)  \nこのPRは、クエリ実行時に「警告がひとつも無い場合」に毎回新しい `Array` オブジェクトを生成していた処理を、共有の「凍結された空配列」を返すように変更し、オブジェクトアロケーションを1つ減らす最適化です。Rails本体内の挙動は変えずに、SQLite/PostgreSQL/MySQLで「警告なし」のケースのメモリ効率を改善しています。"
+    },
+    {
+      "number": 59535,
+      "title": "Avoid a rest Array in HashWithIndifferentAccess#fetch {#pr-59535}",
+      "url": "https://github.com/rails/rails/pull/59535",
+      "mergedAt": "2026-11-02T00:00:00.000Z",
+      "author": "thomasklemm",
+      "authorUrl": "https://github.com/thomasklemm",
+      "summary": "1. 概要 (1-2文で)  \n`HashWithIndifferentAccess#fetch` のシグネチャを見直し、毎回余計な配列オブジェクトが確保されていたのをやめて、`params` や enum などでのメモリアロケーションを削減する最適化です。機能的な挙動は（例外内容やブロック優先などを含めて）`Hash#fetch` と同等を維持しつつ、パフォーマンス改善のみを行っています。"
+    },
+    {
+      "number": 59533,
+      "title": "Build WhereClause#ast predicates in one pass {#pr-59533}",
+      "url": "https://github.com/rails/rails/pull/59533",
+      "mergedAt": "2026-11-02T00:00:00.000Z",
+      "author": "thomasklemm",
+      "authorUrl": "https://github.com/thomasklemm",
+      "summary": "1. 概要 (1-2文で)  \nWhereClause#ast 生成時に、空文字列の述語（`\"\"`）を除外する処理を「配列を減算してから map する」二段階から「一度の走査で判定して構築する」形に変更し、余分な配列生成・オブジェクト確保を削減するパフォーマンス改善です。挙動（どの述語が残るか、順序）は従来と同一に保ったまま、1リレーションあたり1配列分のアロケーションを削っています。"
+    },
+    {
+      "number": 59245,
+      "title": "Use RDoc fixed-width markup instead of backticks in API docs [ci skip] {#pr-59245}",
+      "url": "https://github.com/rails/rails/pull/59245",
+      "mergedAt": "2026-11-02T00:00:00.000Z",
+      "author": "ttrweb",
+      "authorUrl": "https://github.com/ttrweb",
+      "summary": "1. 概要 (1-2文で)  \nRDoc マークアップを使っている API ドキュメント内で、本来コードとして表示したい箇所がバッククォート（\\`...\\`）で囲まれていたため正しく等幅コード表示されていなかった問題を修正し、RDoc 推奨の `+...+` や `<tt>...</tt>` に置き換えた PRです。挙動変更は一切なく、API ドキュメントの表示のみが改善されます。"
+    },
+    {
+      "number": 59524,
+      "title": "Let a frozen CachingKeyGenerator work on Ruby 3.3 {#pr-59524}",
+      "url": "https://github.com/rails/rails/pull/59524",
+      "mergedAt": "2026-11-02T00:00:00.000Z",
+      "author": "czj",
+      "authorUrl": "https://github.com/czj",
+      "summary": "1. 概要 (1-2文で)  \nRuby 3.3 で `ActiveSupport::CachingKeyGenerator#freeze` を呼ぶと `Ractor.[]=` の未定義エラーで落ちていた問題を修正する PR です。Ractor ローカルなキャッシュへのアクセスに `ActiveSupport::Ractors` を経由するよう変更し、Ruby 3.3 でも凍結済みジェネレータが正しく動くようになりました。"
+    },
+    {
+      "number": 59523,
+      "title": "Fix in_batches with use_ranges keeping an ignored default_order {#pr-59523}",
+      "url": "https://github.com/rails/rails/pull/59523",
+      "mergedAt": "2026-11-02T00:00:00.000Z",
+      "author": "czj",
+      "authorUrl": "https://github.com/czj",
+      "summary": "1. 概要 (1-2文で)  \n`in_batches(use_ranges: true)` を使ったバッチ処理で、本来無視されるはずの `default_order` が残り続けてしまい、不要な `ORDER BY` が付いたクエリが発行されていた不具合を修正するPRです。ranged batching（`use_ranges: true`）の場合に限り、`default_order` も明示的な `order` と同様に削除されるようになりました。"
+    },
+    {
+      "number": 59522,
+      "title": "Don't load Herb when compiling with another ERB implementation {#pr-59522}",
+      "url": "https://github.com/rails/rails/pull/59522",
+      "mergedAt": "2026-11-02T00:00:00.000Z",
+      "author": "sampokuokkanen",
+      "authorUrl": "https://github.com/sampokuokkanen",
+      "summary": "1. 概要 (1-2文で)  \nRails の ERB テンプレートコンパイル時に、別実装（デフォルトの Erubi など）を使っている場合でも常に `Herb` が autoload されてしまう問題を修正し、`Herb` を明示的に選んだときだけロードされるようにした PR です。これにより MRI では無駄な gem ロードが避けられ、JRuby では C 拡張の `herb` ロード失敗によるレンダリングエラーが解消されます。"
+    },
+    {
+      "number": 59520,
+      "title": "Don't gsub preload Link hrefs that need no encoding {#pr-59520}",
+      "url": "https://github.com/rails/rails/pull/59520",
+      "mergedAt": "2026-11-02T00:00:00.000Z",
+      "author": "amatsuda",
+      "authorUrl": "https://github.com/amatsuda",
+      "summary": "1. 概要 (1-2文で)  \n`preload_link_href` が毎回 `String#gsub` を実行して余計なオブジェクトを生成していた問題に対し、「エンコードが不要な href 文字列はそのまま返す」ことで、`stylesheet_link_tag` / `javascript_include_tag` / `preload_link_tag` のメモリアロケーションを削減する最適化です。振る舞い（出力される HTML）の変更はなく、パフォーマンス改善のみを目的とした変更です。"
+    },
+    {
+      "number": 59516,
+      "title": "Allow `ActiveRecord::Relation#unscope(:default_order)` to remove default ordering while keeping explicit ordering {#pr-59516}",
+      "url": "https://github.com/rails/rails/pull/59516",
+      "mergedAt": "2026-11-02T00:00:00.000Z",
+      "author": "kehra",
+      "authorUrl": "https://github.com/kehra",
+      "summary": "1. 概要 (1–2文で)  \n`ActiveRecord::Relation#unscope` に `:default_order` を指定できるようになり、関連付けられた「デフォルトの ORDER 句」だけを取り除きつつ、明示的に指定した `order` はそのまま残せるようになりました。これにより、`unscope(:order)` と対になる挙動として「デフォルト順のみ解除」がサポートされます。"
+    },
+    {
+      "number": 59504,
+      "title": "Don't copy ASCII-only names when probing the static root {#pr-59504}",
+      "url": "https://github.com/rails/rails/pull/59504",
+      "mergedAt": "2026-11-02T00:00:00.000Z",
+      "author": "sampokuokkanen",
+      "authorUrl": "https://github.com/sampokuokkanen",
+      "summary": "1. 概要 (1-2文で)  \n`ActionDispatch::FileHandler#root_entry?` で、毎回文字列をバイナリコピーしていた処理を見直し、「ASCII だけのパス名」に対してはコピーを行わず、そのまま join するようにしたパフォーマンス改善の PR です。静的ファイル以外へのリクエストでの不要なオブジェクト生成を減らし、わずかながらアロケーション削減・高速化を図っています。"
+    },
+    {
+      "number": 59511,
+      "title": "Percent-encode href in preload Link header entries {#pr-59511}",
+      "url": "https://github.com/rails/rails/pull/59511",
+      "mergedAt": "2026-11-02T00:00:00.000Z",
+      "author": "fuzzyrichie",
+      "authorUrl": "https://github.com/fuzzyrichie",
+      "summary": "1. 概要 (1-2文で)  \nRails の `preload_link_tag` / `stylesheet_link_tag` / `javascript_include_tag` が返すレスポンスヘッダ `Link`（および 103 Early Hints）内の `href` を、RFC 8288 に沿ってパーセントエンコードする修正です。`>` など不正な文字が URL に含まれていても、`Link` ヘッダが壊れて複数のリンクとして誤解析されないようにします。"
+    },
     {
       "number": 59486,
       "title": "Honor unless_exist and avoid double compression in MemCacheStore#write_multi {#pr-59486}",
@@ -280,177 +451,6 @@
       "author": "czj",
       "authorUrl": "https://github.com/czj",
       "summary": "1. 概要 (1-2文で)  \nArel の SQL 生成処理（ToSql ビジター）から `each_with_index` / `inject` を排除し、YJIT（および ZJIT）で最適化しやすい `each` ベースのループに書き換えることで、SQL コンパイルを最大約 1.23 倍高速化するパフォーマンス改善 PRです。生成される SQL 自体はビット単位で同一であり、挙動変更はありません。"
-    },
-    {
-      "number": 59479,
-      "title": "Keep the optimized URL helpers with default URL options that don't shape the path {#pr-59479}",
-      "url": "https://github.com/rails/rails/pull/59479",
-      "mergedAt": "2026-10-31T00:00:00.000Z",
-      "author": "linyiru",
-      "authorUrl": "https://github.com/linyiru",
-      "summary": "1. 概要 (1-2文で)  \n`routes.default_url_options` や `default_url_options` に `host` などの「パスに影響しないオプション」だけが設定されている場合でも、パフォーマンスの良い「最適化された URL ヘルパー」を使い続けられるようにする変更です。これにより、特にシリアライザや ActivityPub などリクエスト外で URL を大量生成するケースで、オブジェクト数・処理時間の削減が見込まれます。"
-    },
-    {
-      "number": 59471,
-      "title": "Reduce allocations of polymorphic URL helpers with arrays and actions {#pr-59471}",
-      "url": "https://github.com/rails/rails/pull/59471",
-      "mergedAt": "2026-10-31T00:00:00.000Z",
-      "author": "linyiru",
-      "authorUrl": "https://github.com/linyiru",
-      "summary": "1. 概要 (1-2文で)  \npolymorphic_path / polymorphic_url 系ヘルパーを「配列引数」や「アクション付き」で呼び出したときのオブジェクト生成数を減らし、パフォーマンスを改善する変更です。動作（生成されるURLやヘルパー名）は一切変えず、内部実装だけを最適化しています。"
-    },
-    {
-      "number": 59464,
-      "title": "Compute action_methods without stringifying every public instance method {#pr-59464}",
-      "url": "https://github.com/rails/rails/pull/59464",
-      "mergedAt": "2026-10-31T00:00:00.000Z",
-      "author": "igorwwwwwwwwwwwwwwwwwwww",
-      "authorUrl": "https://github.com/igorwwwwwwwwwwwwwwwwwwww",
-      "summary": "1. 概要 (1-2文で)  \nコントローラの `action_methods` を計算する際に、全ての public インスタンスメソッドを一度 String 化してから Set に入れていた処理を見直し、Symbol のままルートヘルパー名を差し引くことで、大規模アプリ(例: GitLab)のブート時間とオブジェクトアロケーションを大幅に削減するパフォーマンス改善です。挙動は従来と同一になるように保ちつつ、内部実装とキャッシュ戦略を最適化しています。"
-    },
-    {
-      "number": 59468,
-      "title": "Autoload Arel {#pr-59468}",
-      "url": "https://github.com/rails/rails/pull/59468",
-      "mergedAt": "2026-10-31T00:00:00.000Z",
-      "author": "linyiru",
-      "authorUrl": "https://github.com/linyiru",
-      "summary": "1. 概要 (1-2文で)  \nActive Record が `require \"arel\"` していたのをやめて、`Arel` をオートロードに変更し、「実際に必要になったタイミングでのみ Arel を読み込む」ようにした PR です。これにより開発環境でのブート時間短縮と読み込まれるファイル・オブジェクト数の削減を狙っています。"
-    },
-    {
-      "number": 59465,
-      "title": "Load the test runner only when testing {#pr-59465}",
-      "url": "https://github.com/rails/rails/pull/59465",
-      "mergedAt": "2026-10-31T00:00:00.000Z",
-      "author": "linyiru",
-      "authorUrl": "https://github.com/linyiru",
-      "summary": "1. 概要 (1-2文で)  \nこのPRは、Railsアプリのブート時に常に読み込まれていたテストランナー関連（特に Prism と Rake::FileList）を、「実際にテストを実行する時だけ」読み込むように変更するものです。これにより、開発環境でのアプリ起動や各種 `bin/rails` コマンドの起動時間が数十ミリ秒改善されます。"
-    },
-    {
-      "number": 59452,
-      "title": "[8-1-stable] Require `useragent` when loading `ActionController::AllowBrowser` {#pr-59452}",
-      "url": "https://github.com/rails/rails/pull/59452",
-      "mergedAt": "2026-10-31T00:00:00.000Z",
-      "author": "k0kubun",
-      "authorUrl": "https://github.com/k0kubun",
-      "summary": "1. 概要 (1-2文で)  \nRails 8.1系において、`ActionController::AllowBrowser` が内部で使う `useragent` gem を「最初のリクエスト時」ではなく「コントローラ定義時（クラス評価時）」に読み込むようにしたバックポートです。挙動やAPIは変えずに、JITコンパイラへの悪影響を減らし、起動後の最初のリクエスト時のオーバーヘッドを避けるためのパフォーマンス改善です。"
-    },
-    {
-      "number": 59470,
-      "title": "Don't add a trailing slash after a required format in optimized URL helpers {#pr-59470}",
-      "url": "https://github.com/rails/rails/pull/59470",
-      "mergedAt": "2026-10-31T00:00:00.000Z",
-      "author": "linyiru",
-      "authorUrl": "https://github.com/linyiru",
-      "summary": "1. 概要 (1-2文で)  \nRails の URL ヘルパー最適化で導入された挙動により、「必須フォーマット付きのルート + `trailing_slash: true`」のときに、拡張子の後ろに余計なスラッシュ (`/projects/1.json/`) が付いてしまう不具合を修正する PRです。一般ルート生成ロジックと同様に、フォーマットが必須セグメントの場合は末尾スラッシュを付けないよう、最適化ヘルパー側の条件分岐が調整されています。"
-    },
-    {
-      "number": 59474,
-      "title": "Optimize URL helpers for routes with requirements {#pr-59474}",
-      "url": "https://github.com/rails/rails/pull/59474",
-      "mergedAt": "2026-10-31T00:00:00.000Z",
-      "author": "linyiru",
-      "authorUrl": "https://github.com/linyiru",
-      "summary": "1. 概要 (1-2文で)  \n`constraints` などの「セグメントに対する正規表現制約」を持つルートでも、URLヘルパーの高速な最適化パス (`OptimizedUrlHelper`) を使えるようにしたパフォーマンス改善のPRです。制約違反時のエラー挙動や、オプション付き URL 生成の挙動は既存の一般パスと揃えたまま、オブジェクト生成数と実行時間を大きく削減しています。"
-    },
-    {
-      "number": 59472,
-      "title": "Read the user agent's version and browser once in allow_browser {#pr-59472}",
-      "url": "https://github.com/rails/rails/pull/59472",
-      "mergedAt": "2026-10-31T00:00:00.000Z",
-      "author": "linyiru",
-      "authorUrl": "https://github.com/linyiru",
-      "summary": "1. 概要 (1-2文で)  \n`allow_browser` が内部で利用する `BrowserBlocker` において、UserAgent から「ブラウザ名」と「バージョン」を何度も再計算していた処理を一度だけにまとめることで、各リクエストあたりのオブジェクト生成数と処理時間を削減するパフォーマンス改善です。Rails が新規生成したアプリのデフォルト設定（`allow_browser versions: :modern`）で、UA パースのオーバーヘッドを軽減します。"
-    },
-    {
-      "number": 59478,
-      "title": "ActiveSupport::Duration: precompute float versions of constants {#pr-59478}",
-      "url": "https://github.com/rails/rails/pull/59478",
-      "mergedAt": "2026-10-31T00:00:00.000Z",
-      "author": "byroot",
-      "authorUrl": "https://github.com/byroot",
-      "summary": "1. 概要 (1-2文で)  \nActiveSupport::Duration が内部で使っている時間定数（1分=60秒、1時間=3600秒、1日=86400秒など）について、「float 版」をあらかじめ計算しておくことで、`to_f` 呼び出しを減らし、Duration 周りの浮動小数演算を高速化するパフォーマンス改善の PR です。元 PR #59266 の修正として入り、同等の計算結果を保ったまま割り算や `fdiv` のコストを下げています。"
-    },
-    {
-      "number": 59294,
-      "title": "Forward arguments from HashWithIndifferentAccess#merge to update {#pr-59294}",
-      "url": "https://github.com/rails/rails/pull/59294",
-      "mergedAt": "2026-10-31T00:00:00.000Z",
-      "author": "sampokuokkanen",
-      "authorUrl": "https://github.com/sampokuokkanen",
-      "summary": "1. 概要 (1-2文で)  \n`ActiveSupport::HashWithIndifferentAccess#merge` が、可変長引数の受け渡し方法を従来の「配列にまとめてから splat」でなく、Ruby 3.4 以降で効率的に動作する「`...` による引数転送」に書き換えられました。これにより一部 Ruby バージョンで割り当て（allocation）削減とわずかな性能改善が見込まれます。"
-    },
-    {
-      "number": 59320,
-      "title": "Ignore blank forwarded hosts during request host extraction {#pr-59320}",
-      "url": "https://github.com/rails/rails/pull/59320",
-      "mergedAt": "2026-10-31T00:00:00.000Z",
-      "author": "svyatov",
-      "authorUrl": "https://github.com/svyatov",
-      "summary": "1. 概要 (1-2文で)  \nRails の `ActionDispatch::Request#host` が `X-Forwarded-Host: ,` のような「空のフォワードホスト」ヘッダで `NoMethodError` を起こしていた不具合を修正し、空の値は無視して `HTTP_HOST` などの従来ロジックにフォールバックするようにした PR です。これにより、HostAuthorization を含むリクエスト処理が壊れにくくなり、非標準的・壊れたプロキシヘッダにもより強くなります。"
-    },
-    {
-      "number": 59374,
-      "title": "Write Duration#iso8601 values as plain decimal numbers {#pr-59374}",
-      "url": "https://github.com/rails/rails/pull/59374",
-      "mergedAt": "2026-10-31T00:00:00.000Z",
-      "author": "wleeaf",
-      "authorUrl": "https://github.com/wleeaf",
-      "summary": "1. 概要 (1-2文で)  \nActiveSupport::Duration#iso8601 が、常に ISO 8601 準拠かつ ActiveSupport::Duration.parse で再パース可能なフォーマットになるように修正した PR です。浮動小数点数や Rational を含む duration でも、指数表記や分数表記ではなく「通常の 10 進小数」で出力されるようになります。"
-    },
-    {
-      "number": 59375,
-      "title": "Set Vary to Sec-Fetch-Site directly when it is empty {#pr-59375}",
-      "url": "https://github.com/rails/rails/pull/59375",
-      "mergedAt": "2026-10-31T00:00:00.000Z",
-      "author": "sampokuokkanen",
-      "authorUrl": "https://github.com/sampokuokkanen",
-      "summary": "1. 概要 (1-2文で)  \n`ActionController::Base` の CSRF 対策用 `after_action` が `Vary` ヘッダに `Sec-Fetch-Site` を追加する処理について、`Vary` が空のケースでは文字列操作を行わず、直接 `\"Sec-Fetch-Site\"` をセットするようにしてオブジェクト生成と処理時間を削減するパフォーマンス改善のPRです。既に `Vary` が存在する場合の挙動は変えず、空の場合のみ最適化しています。"
-    },
-    {
-      "number": 59373,
-      "title": "Don't build an asynchronous queries session until it's needed {#pr-59373}",
-      "url": "https://github.com/rails/rails/pull/59373",
-      "mergedAt": "2026-10-31T00:00:00.000Z",
-      "author": "sampokuokkanen",
-      "authorUrl": "https://github.com/sampokuokkanen",
-      "summary": "1. 概要 (1-2文で)  \nActive Record の非同期クエリ用セッション（AsynchronousQueriesTracker）が、リクエストやジョブごとに必ずフル構築されていたのを「実際に非同期クエリが使われたときにだけ本体を構築する」ように遅延初期化した PR です。これにより、非同期クエリを使わない大多数のケースでオブジェクト生成コストと実行時間が削減されます。"
-    },
-    {
-      "number": 59376,
-      "title": "Don't parse an empty query string {#pr-59376}",
-      "url": "https://github.com/rails/rails/pull/59376",
-      "mergedAt": "2026-10-31T00:00:00.000Z",
-      "author": "sampokuokkanen",
-      "authorUrl": "https://github.com/sampokuokkanen",
-      "summary": "1. 概要 (1-2文で)  \n`Request#GET` がクエリ文字列を持たないリクエストでも毎回クエリ解析処理を走らせていたのをやめ、クエリ文字列が `nil` または空文字のときは即座に空の params ハッシュを返すようにして、無駄なオブジェクト生成と処理時間を削減した PR です。機能的な挙動はほぼ変えず、パフォーマンスとメモリ効率を改善する目的の変更です。"
-    },
-    {
-      "number": 59381,
-      "title": "Backport to 8-1 exif orientation bugfix {#pr-59381}",
-      "url": "https://github.com/rails/rails/pull/59381",
-      "mergedAt": "2026-10-31T00:00:00.000Z",
-      "author": "g-pavlik",
-      "authorUrl": "https://github.com/g-pavlik",
-      "summary": "1. 概要 (1-2文で)  \nRails 8.1 ブランチに対して、Active Storage の画像解析処理における EXIF Orientation 関連のバグ修正（#57290）がバックポートされた PR です。ImageMagick・Vips 双方のアナライザで EXIF の回転情報を正しく扱えるようにし、その挙動をテストとフィクスチャで保証しています。"
-    },
-    {
-      "number": 59380,
-      "title": "Read libvips' orientation field in the Vips image analyzer {#pr-59380}",
-      "url": "https://github.com/rails/rails/pull/59380",
-      "mergedAt": "2026-10-31T00:00:00.000Z",
-      "author": "g-pavlik",
-      "authorUrl": "https://github.com/g-pavlik",
-      "summary": "1. 概要 (1-2文で)  \nActive Storage の Vips 画像アナライザが画像の回転情報を誤認識する不具合（特に TIFF など EXIF 以外で orientation が保存される場合）を修正し、libvips の `orientation` フィールドを一貫して参照するようにした PR です。これにより、アナライザと変換（variant）パイプラインの挙動が揃い、回転メタデータの解釈が正しくなります。"
-    },
-    {
-      "number": 59383,
-      "title": "ActiveStorage: Fix JSON::ParserError from ffprobe duplicate keys {#pr-59383}",
-      "url": "https://github.com/rails/rails/pull/59383",
-      "mergedAt": "2026-10-31T00:00:00.000Z",
-      "author": "jdelStrother",
-      "authorUrl": "https://github.com/jdelStrother",
-      "summary": "1. 概要 (1-2文で)  \nActiveStorage が ffprobe の JSON 出力に重複キーが含まれる場合に `JSON::ParserError` を起こしていた問題を、JSON パース時に重複キーを許可することで修正した PRです。あわせて、JSON gem の最低バージョン引き上げと、ffprobe に依存するテストまわりの調整が行われています。"
     }
   ]
 }
