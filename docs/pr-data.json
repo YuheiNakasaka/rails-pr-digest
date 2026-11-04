@@ -1,7 +1,241 @@
 {
-  "lastUpdated": "2026-11-03T00:12:48.662Z",
+  "lastUpdated": "2026-11-04T00:17:41.484Z",
   "totalCount": 50,
   "items": [
+    {
+      "number": 59411,
+      "title": "Retry `ActiveRecord::SerializationFailure` errors on safely-retryable queries {#pr-59411}",
+      "url": "https://github.com/rails/rails/pull/59411",
+      "mergedAt": "2026-11-03T00:00:00.000Z",
+      "author": "adrianna-chang-shopify",
+      "authorUrl": "https://github.com/adrianna-chang-shopify",
+      "summary": "1. 概要 (1-2文で)  \n`ActiveRecord::SerializationFailure`（主にDBのトランザクション分離レベルに起因するシリアライゼーションエラー）発生時に、「安全にリトライできるクエリ」であれば自動リトライするようにしたPRです。すでに行っている `ActiveRecord::Deadlocked` の自動リトライと同じ扱いを、トランザクション外のシリアライゼーションエラーにも適用します。"
+    },
+    {
+      "number": 59586,
+      "title": "Fix `in_order_of` modifying the receiver relation {#pr-59586}",
+      "url": "https://github.com/rails/rails/pull/59586",
+      "mergedAt": "2026-11-03T00:00:00.000Z",
+      "author": "kamipo",
+      "authorUrl": "https://github.com/kamipo",
+      "summary": "1. 概要 (1-2文で)  \n`in_order_of` が既存の Relation（特に既にロード済みのもの）を不正に破壊的変更してしまい、`ActiveRecord::UnmodifiableRelation` を発生させていたバグを修正した PR です。  \n他のクエリメソッドと同様に、`in_order_of` の処理を spawn 済みの Relation 上で行うことで、元の Relation を変更しないようにしています。"
+    },
+    {
+      "number": 59580,
+      "title": "Fix `merge` dropping `RECURSIVE` from a relation built with `with_recursive` {#pr-59580}",
+      "url": "https://github.com/rails/rails/pull/59580",
+      "mergedAt": "2026-11-03T00:00:00.000Z",
+      "author": "kamipo",
+      "authorUrl": "https://github.com/kamipo",
+      "summary": "1. 概要 (1-2文で)  \n`with_recursive` を使った ActiveRecord::Relation を `merge` すると、生成される SQL から `RECURSIVE` が抜け落ちるバグを修正した PRです。`with_recursive` のフラグ管理を通常の relation 値として扱うように変更し、`merge`・`spawn`・`only`・`or` などの演算で正しく伝播するようになりました。"
+    },
+    {
+      "number": 59562,
+      "title": "Don't slice the event name on every ActiveSupport::Subscriber#call {#pr-59562}",
+      "url": "https://github.com/rails/rails/pull/59562",
+      "mergedAt": "2026-11-03T00:00:00.000Z",
+      "author": "thomasklemm",
+      "authorUrl": "https://github.com/thomasklemm",
+      "summary": "1. 概要 (1-2文で)  \nActiveSupport::Subscriber がイベントを受け取るたびに行っていた文字列スライスをやめ、あらかじめ計算したハンドラ名マッピングを使うことで、オブジェクト生成を削減しパフォーマンスを改善する変更です。通常の「`attach_to` でクラスを紐付けるタイプ」のサブスクライバで特に恩恵があり、既存のインターフェースは維持されています。"
+    },
+    {
+      "number": 59576,
+      "title": "Compile a single-predicate where clause without a nodes Array {#pr-59576}",
+      "url": "https://github.com/rails/rails/pull/59576",
+      "mergedAt": "2026-11-03T00:00:00.000Z",
+      "author": "thomasklemm",
+      "authorUrl": "https://github.com/thomasklemm",
+      "summary": "1. 概要 (1-2文で)  \n`where` 句に単一の述語しか無い場合に、内部で不要な `Array` を生成しないようにして、Active Record のクエリコンパイル時のオブジェクト生成数を削減する最適化です。クエリの意味や生成される SQL／AST は変えずに、メモリ効率とわずかなパフォーマンス向上を狙った変更です。"
+    },
+    {
+      "number": 59579,
+      "title": "Avoid extra array allocations when forwarding query method arguments {#pr-59579}",
+      "url": "https://github.com/rails/rails/pull/59579",
+      "mergedAt": "2026-11-03T00:00:00.000Z",
+      "author": "kamipo",
+      "authorUrl": "https://github.com/kamipo",
+      "summary": "1. 概要 (1-2文で)  \nRails の `ActiveRecord::Relation` のクエリメソッド (`order!`, `where!`, `having!` など) が引数配列を二重に生成していた問題を解消し、不要な配列アロケーションを削減してパフォーマンスを改善する変更です。結果として、一般的なクエリチェーンでのオブジェクト生成数が減ります。"
+    },
+    {
+      "number": 59571,
+      "title": "Define parameterless scope methods for lambda bodies without parameters {#pr-59571}",
+      "url": "https://github.com/rails/rails/pull/59571",
+      "mergedAt": "2026-11-03T00:00:00.000Z",
+      "author": "thomasklemm",
+      "authorUrl": "https://github.com/thomasklemm",
+      "summary": "1. 概要 (1-2文で)  \nRails の `scope` 定義で、引数を取らない lambda を使っている場合に限り、そのスコープ用メソッドを「引数なしメソッド」として定義するようにして、余計な配列・ハッシュの生成を減らすパフォーマンス改善が行われました。挙動（引数を渡したときに `ArgumentError` が出ることなど）は維持しつつ、1リクエストあたりのオブジェクト生成数を削減しています。"
+    },
+    {
+      "number": 59578,
+      "title": "Fix flaky test_preload_has_many_through_with_source_type_ignores_other_types_in_loaded_through_records {#pr-59578}",
+      "url": "https://github.com/rails/rails/pull/59578",
+      "mergedAt": "2026-11-03T00:00:00.000Z",
+      "author": "yahonda",
+      "authorUrl": "https://github.com/yahonda",
+      "summary": "1. 概要 (1-2文で)  \nPostgreSQLでときどき落ちていた `EagerAssociationTest#test_preload_has_many_through_with_source_type_ignores_other_types_in_loaded_through_records` を、レコードの順序に依存しないように修正したPRです。テストの本質である「型のフィルタリング」を確認しつつ、ORDER BY のないクエリに起因する順序の違いで失敗しないようにしています。"
+    },
+    {
+      "number": 59575,
+      "title": "Use `count(:all)` for `one?` and `many?` {#pr-59575}",
+      "url": "https://github.com/rails/rails/pull/59575",
+      "mergedAt": "2026-11-03T00:00:00.000Z",
+      "author": "kamipo",
+      "authorUrl": "https://github.com/kamipo",
+      "summary": "1. 概要 (1-2文で)  \n`ActiveRecord::Relation#one?` / `many?` が `select` 句付きのクエリで `ActiveRecord::StatementInvalid` を起こすケースがあり、それを内部で `count(:all)` を使うようにして修正したPRです。レコード数判定のためのカウント処理を「SELECT リスト」ではなく「行数ベース」に統一し、`distinct` 付きクエリでも正しく動くようにしています。"
+    },
+    {
+      "number": 59559,
+      "title": "Fix `one?` and `many?` on grouped relations {#pr-59559}",
+      "url": "https://github.com/rails/rails/pull/59559",
+      "mergedAt": "2026-11-03T00:00:00.000Z",
+      "author": "b84330808",
+      "authorUrl": "https://github.com/b84330808",
+      "summary": "1. 概要 (1-2文で)  \nGrouped Relation（`group` を使ったクエリ）に対して `one?` / `many?` が正しく動作していなかったバグを修正し、グループごとの件数に基づいて `one?` / `many?` を判定できるようにした PR です。`count` がハッシュを返す場合でも、追加のクエリをほぼ増やさずに正しいブール値が返るようになっています。"
+    },
+    {
+      "number": 59573,
+      "title": "Keep the local cache consistent with batched writes and deletes {#pr-59573}",
+      "url": "https://github.com/rails/rails/pull/59573",
+      "mergedAt": "2026-11-03T00:00:00.000Z",
+      "author": "kamipo",
+      "authorUrl": "https://github.com/kamipo",
+      "summary": "1. 概要 (1-2文で)  \nRails のローカルキャッシュ (`Strategy::LocalCache`) が、バッチ書き込み・削除 (`write_multi`, `delete_multi`) を使った場合でも一貫性を保つように修正された PR です。あわせて `MemCacheStore` のオプション処理（`unless_exist`, `compress`, `race_condition_ttl`）まわりの重複と漏れも整理・修正されています。"
+    },
+    {
+      "number": 59572,
+      "title": "Skip merging a relation's values into themselves {#pr-59572}",
+      "url": "https://github.com/rails/rails/pull/59572",
+      "mergedAt": "2026-11-03T00:00:00.000Z",
+      "author": "kamipo",
+      "authorUrl": "https://github.com/kamipo",
+      "summary": "1. 概要 (1-2文で)  \nActiveRecord::Relation 同士のマージ処理で、**同じ Relation を自分自身に対して merge!/Merger した場合にクエリ条件が失われうる不具合**が修正されました。自分自身をマージ対象とした場合は、何も変更せず同じ Relation をそのまま返すようにしています。"
+    },
+    {
+      "number": 59568,
+      "title": "Read attribute_types once when loading records {#pr-59568}",
+      "url": "https://github.com/rails/rails/pull/59568",
+      "mergedAt": "2026-11-03T00:00:00.000Z",
+      "author": "thomasklemm",
+      "authorUrl": "https://github.com/thomasklemm",
+      "summary": "1. 概要 (1-2文で)  \nActive Record が SQL 結果からレコードをロードする際に、`attribute_types` を毎カラムごとに何度も呼んでいた箇所を、事前に一度だけ読み出すようにして無駄なメソッド呼び出しを削減し、レコード生成処理のパフォーマンスを向上させる変更です。  \n機能的な挙動は変えずに、主に SQLite / PostgreSQL 利用時のクエリ結果インスタンス化コストを数 %〜最大 20% 程度削減しています（命令数ベース）。"
+    },
+    {
+      "number": 59563,
+      "title": "Serialize Active Job Hash arguments without pair Arrays {#pr-59563}",
+      "url": "https://github.com/rails/rails/pull/59563",
+      "mergedAt": "2026-11-03T00:00:00.000Z",
+      "author": "thomasklemm",
+      "authorUrl": "https://github.com/thomasklemm",
+      "summary": "1. 概要 (1-2文で)  \nActive Job でジョブ引数の Hash／キーワード引数をシリアライズする処理から、不要な `[key, value]` の一時配列生成を取り除き、オブジェクト生成数と実行時間を削減した変更です。動作仕様（キー・値・順序・`_aj_*` マーカー）は一切変えずに、内部実装のみを高速化しています。"
+    },
+    {
+      "number": 59566,
+      "title": "Fix stale reads from the local cache after `ActiveSupport::Cache::MemCacheStore#write_multi` {#pr-59566}",
+      "url": "https://github.com/rails/rails/pull/59566",
+      "mergedAt": "2026-11-03T00:00:00.000Z",
+      "author": "kehra",
+      "authorUrl": "https://github.com/kehra",
+      "summary": "1. 概要 (1-2文で)  \n`ActiveSupport::Cache::MemCacheStore#write_multi` 実行後に、同一リクエスト内のローカルキャッシュから古い値が読まれてしまう不具合を修正するPRです。`set_multi` 経由の書き込み時にローカルキャッシュを適切に無効化することで、一貫した読み取り結果を保証します。"
+    },
+    {
+      "number": 59531,
+      "title": "Fix -n ClassName#test_name filter in the test runner {#pr-59531}",
+      "url": "https://github.com/rails/rails/pull/59531",
+      "mergedAt": "2026-11-03T00:00:00.000Z",
+      "author": "sampokuokkanen",
+      "authorUrl": "https://github.com/sampokuokkanen",
+      "summary": "1. 概要 (1-2文で)  \nRails のテストランナーで `bin/rails test -n ClassName#test_name` 形式のフィルタが動作しなくなっていたバグを修正し、Minitest 本来のクラス名＋テスト名フィルタが正しく動くようにした PR です。これにより、`ActiveSupport::Testing::Isolation` が `-n` を使ってサブプロセス実行するケース（JRuby / Windows など fork 非対応環境）でもテストが正しく実行されます。"
+    },
+    {
+      "number": 59561,
+      "title": "Don't build the key String on every thread_mattr_accessor call {#pr-59561}",
+      "url": "https://github.com/rails/rails/pull/59561",
+      "mergedAt": "2026-11-03T00:00:00.000Z",
+      "author": "thomasklemm",
+      "authorUrl": "https://github.com/thomasklemm",
+      "summary": "1. 概要 (1-2文で)  \n`thread_mattr_accessor` がスレッド／ファイバごとの状態管理に使うキー文字列を、毎回動的に生成するのをやめ、モジュールごとに1回だけ生成した凍結リテラルを使い回す最適化です。これにより、多くのリクエストで発生していた不要な文字列オブジェクトの生成が削減され、パフォーマンスが向上します。"
+    },
+    {
+      "number": 59560,
+      "title": "Reuse type map cache keys for PostgreSQL result columns {#pr-59560}",
+      "url": "https://github.com/rails/rails/pull/59560",
+      "mergedAt": "2026-11-03T00:00:00.000Z",
+      "author": "thomasklemm",
+      "authorUrl": "https://github.com/thomasklemm",
+      "summary": "1. 概要 (1-2文で)  \nPostgreSQL のクエリ結果の型解決で、毎カラムごとに新しい配列オブジェクトを生成していたキャッシュキーを再利用することで、オブジェクト生成数を削減する最適化です。型解決ロジックの挙動（どの型になるか）は変えずに、メモリ・GC 負荷を下げる変更になっています。"
+    },
+    {
+      "number": 59558,
+      "title": "Avoid scratch Arrays when casting PostgreSQL results {#pr-59558}",
+      "url": "https://github.com/rails/rails/pull/59558",
+      "mergedAt": "2026-11-03T00:00:00.000Z",
+      "author": "thomasklemm",
+      "authorUrl": "https://github.com/thomasklemm",
+      "summary": "1. 概要 (1-2文で)  \nPostgreSQL 用アダプタで、クエリ結果をキャストする際に毎回作成していた一時的な Array（`field_types` と `missing_oids`）の生成を避け、オブジェクト割り当て数を削減する最適化です。ほぼすべてのカラム型が既知という前提で、実行時の動作は維持しつつメモリアロケーションを減らしています。"
+    },
+    {
+      "number": 59556,
+      "title": "Read the other relation's values without a copy when merging {#pr-59556}",
+      "url": "https://github.com/rails/rails/pull/59556",
+      "mergedAt": "2026-11-03T00:00:00.000Z",
+      "author": "thomasklemm",
+      "authorUrl": "https://github.com/thomasklemm",
+      "summary": "1. 概要 (1-2文で)  \n`Relation#merge` 実行時に、マージ元の `Relation` が持つ `values` ハッシュを不要にコピーしていたのをやめ、読み取り専用で直接参照するようにして、オブジェクト生成数を削減する最適化です。`unscope!` の影響を受け得る「自分自身の values」を扱う場合のみ、これまで通りコピーします。"
+    },
+    {
+      "number": 59550,
+      "title": "Compare Trix attachment HTML with assert_dom_equal {#pr-59550}",
+      "url": "https://github.com/rails/rails/pull/59550",
+      "mergedAt": "2026-11-03T00:00:00.000Z",
+      "author": "yahonda",
+      "authorUrl": "https://github.com/yahonda",
+      "summary": "1. 概要 (1-2文で)  \nAction Text の Trix 添付ファイル関連テストが Nokogiri 1.19.5 以降で落ちていた問題に対し、HTML 比較方法を文字列比較から `assert_dom_equal` に変更して、Nokogiri のシリアライズ仕様変更に依存しないようにした PR です。これにより、Nokogiri のバージョン差異に関係なく同じテストが通るようになります。"
+    },
+    {
+      "number": 59552,
+      "title": "Use the scopes as constraints of a direct association reflection {#pr-59552}",
+      "url": "https://github.com/rails/rails/pull/59552",
+      "mergedAt": "2026-11-03T00:00:00.000Z",
+      "author": "thomasklemm",
+      "authorUrl": "https://github.com/thomasklemm",
+      "summary": "1. 概要 (1-2文で)  \n`belongs_to` / `has_one` / `has_many` のような「直接の関連（through を介さないもの）」について、関連スコープ構築時に余分な配列オブジェクトを作らないようにして、オブジェクトアロケーションを減らす最適化が入っています。挙動は変えずに、メモリ使用量を少し改善する内部的なパフォーマンスチューニングです。"
+    },
+    {
+      "number": 59555,
+      "title": "Index what `each` yields in Enumerable#index_with again {#pr-59555}",
+      "url": "https://github.com/rails/rails/pull/59555",
+      "mergedAt": "2026-11-03T00:00:00.000Z",
+      "author": "thomasklemm",
+      "authorUrl": "https://github.com/thomasklemm",
+      "summary": "1. 概要 (1-2文で)  \nRails 8.1 以降で `Enumerable#index_with` が `Hash` や `Struct` に対して挙動退行していた問題を修正し、「`each` が yield する値」をインデックス対象として再び使うように戻した PRです。`Array` に対してはパフォーマンス改善のための `to_h` 利用を維持しつつ、`Enumerable` 全体では従来どおり `each` に基づいた挙動を保証します。"
+    },
+    {
+      "number": 59551,
+      "title": "Skip `extending!` in `Relation#merge` when there are no extensions {#pr-59551}",
+      "url": "https://github.com/rails/rails/pull/59551",
+      "mergedAt": "2026-11-03T00:00:00.000Z",
+      "author": "thomasklemm",
+      "authorUrl": "https://github.com/thomasklemm",
+      "summary": "1. 概要 (1-2文で)  \n`Relation#merge` 内で常に呼ばれていた `extending!` を、「拡張モジュールが存在する場合だけ」呼ぶようにし、余分な配列オブジェクトの生成を避けてメモリ割り当てをわずかに削減する変更です。動作仕様は変えずに、Active Record の関連操作（`author.posts.count` や `merge(Post.published)` など）のオブジェクト数を微減させるマイクロ最適化です。"
+    },
+    {
+      "number": 59554,
+      "title": "Don't build bang method names when merging relation values {#pr-59554}",
+      "url": "https://github.com/rails/rails/pull/59554",
+      "mergedAt": "2026-11-03T00:00:00.000Z",
+      "author": "thomasklemm",
+      "authorUrl": "https://github.com/thomasklemm",
+      "summary": "1. 概要 (1-2文で)  \n`ActiveRecord::Relation#merge` が内部で `limit!` や `offset!` などのメソッド名を毎回動的に生成していたのを、事前に定義したシンボルを使うように変更し、オブジェクトアロケーション数をわずかに削減するパフォーマンス改善です。挙動や公開APIは変えずに、Relation マージ時の文字列生成コストを減らしています。"
+    },
+    {
+      "number": 59553,
+      "title": "Return a frozen empty Array from `default_extensions` {#pr-59553}",
+      "url": "https://github.com/rails/rails/pull/59553",
+      "mergedAt": "2026-11-03T00:00:00.000Z",
+      "author": "thomasklemm",
+      "authorUrl": "https://github.com/thomasklemm",
+      "summary": "1. 概要 (1-2文で)  \n`ActiveRecord::Scoping::Named` の `default_extensions` が、毎回新しい空配列を返すのではなく、共有された frozen な空配列を返すように変更されました。これにより、関連オブジェクトの生成時のオブジェクト割り当てがわずかに減り、メモリアロケーションが最適化されています。"
+    },
     {
       "number": 59544,
       "title": "Only extract Ranges in ArrayHandler when there are any {#pr-59544}",
@@ -217,240 +451,6 @@
       "author": "kamipo",
       "authorUrl": "https://github.com/kamipo",
       "summary": "1. 概要 (1-2文で)  \nActiveRecord の動的 finder (`find_by_xxx` / `find_by_xxx!`) 判定ロジックにおいて、`respond_to?` 時の無駄なマッチ処理をスキップする最適化が行われました。`find_by_` で始まらないメソッド名については `DynamicMatchers` の詳細なパターンマッチを行わないことで、`respond_to?` が約 2 倍高速になっています。"
-    },
-    {
-      "number": 59189,
-      "title": "Fix inaccurate examples in Active Record docs [ci skip] {#pr-59189}",
-      "url": "https://github.com/rails/rails/pull/59189",
-      "mergedAt": "2026-11-01T00:00:00.000Z",
-      "author": "bastin27",
-      "authorUrl": "https://github.com/bastin27",
-      "summary": "1. 概要 (1-2文で)  \nActive Record の API ドキュメントおよびガイド中の、実際の挙動と食い違っていたサンプル出力が修正された PR です。コードの挙動は一切変えず、ドキュメントのみを実装どおりの正しい内容に揃えています。"
-    },
-    {
-      "number": 59497,
-      "title": "Fix preloading has_many :through with a default_order scope {#pr-59497}",
-      "url": "https://github.com/rails/rails/pull/59497",
-      "mergedAt": "2026-11-01T00:00:00.000Z",
-      "author": "czj",
-      "authorUrl": "https://github.com/czj",
-      "summary": "1. 概要 (1-2文で)  \n`has_many :through` でスコープに `default_order` を使っている場合に、`preload` 時だけ並び順が無視されていた不具合を修正する PR です。これにより、怠惰ロード（通常の関連アクセス）と `preload` の結果の並び順が揃うようになります。"
-    },
-    {
-      "number": 59508,
-      "title": "Exclude `default_order` from collection cache version query {#pr-59508}",
-      "url": "https://github.com/rails/rails/pull/59508",
-      "mergedAt": "2026-11-01T00:00:00.000Z",
-      "author": "kamipo",
-      "authorUrl": "https://github.com/kamipo",
-      "summary": "1. 概要 (1-2文で)  \n`Relation#compute_cache_version` がコレクションキャッシュキー算出時のクエリから `default_order` を除外するようになり、PostgreSQL で発生していた `PG::GroupingError`（GROUP BY 不備）を解消する修正です。これにより `default_order` を使ったリレーションでも安全に `cache_key` / `cache_version` が取得できます。"
-    },
-    {
-      "number": 59507,
-      "title": "Fix flaky `ChainedAliasAssociationsTest` {#pr-59507}",
-      "url": "https://github.com/rails/rails/pull/59507",
-      "mergedAt": "2026-11-01T00:00:00.000Z",
-      "author": "kamipo",
-      "authorUrl": "https://github.com/kamipo",
-      "summary": "1. 概要 (1-2文で)  \n`ChainedAliasAssociationsTest` が他テストから残ったコメントデータの影響で不安定（flaky）になる問題を修正した PR です。テストの `setup` でコメントテーブルを明示的にクリアし、このテスト自身が作成したデータだけに依存するようにしました。"
-    },
-    {
-      "number": 59506,
-      "title": "Extract `effective_order_values` to pick the orders a query is built with {#pr-59506}",
-      "url": "https://github.com/rails/rails/pull/59506",
-      "mergedAt": "2026-11-01T00:00:00.000Z",
-      "author": "kamipo",
-      "authorUrl": "https://github.com/kamipo",
-      "summary": "1. 概要 (1-2文で)  \n`Relation` がクエリの `ORDER BY` を決定する際に、「明示的な order がなければ default_order を使う」というルールを一箇所 (`effective_order_values`) に集約した PRです。`build_order`, `distinct_relation_for_primary_key`, `in_batches` などでバラバラに実装されていた同じ判定ロジックを共通化し、今後の実装漏れや不整合を防ぐ狙いがあります。"
-    },
-    {
-      "number": 58667,
-      "title": "Apply has_many default_order: when the association is preloaded {#pr-58667}",
-      "url": "https://github.com/rails/rails/pull/58667",
-      "mergedAt": "2026-11-01T00:00:00.000Z",
-      "author": "carlosdanielpohlod",
-      "authorUrl": "https://github.com/carlosdanielpohlod",
-      "summary": "1. 概要 (1-2文で)  \n`has_many default_order:` オプションが、関連を「遅延ロードする場合だけ」効いて「preload した場合は効かない」という不整合がありましたが、このPRで preload 時にも `default_order:` が適用されるように修正されています。これにより、`default_order:` オプションと lambda 版 (`-> { default_order(...) }`) の挙動が、少なくとも lazy load と preload の経路では揃いました。"
-    },
-    {
-      "number": 59503,
-      "title": "Don't copy the response media type just to check it {#pr-59503}",
-      "url": "https://github.com/rails/rails/pull/59503",
-      "mergedAt": "2026-11-01T00:00:00.000Z",
-      "author": "sampokuokkanen",
-      "authorUrl": "https://github.com/sampokuokkanen",
-      "summary": "1. 概要 (1-2文で)  \n`Response#media_type` を毎回呼ぶことで発生していた余分なオブジェクト生成を避けるため、内部的に直接ヘッダを参照するようにし、CORS まわりの JS レスポンス判定も `content_type` ベースに変更して、1リクエストあたりの割り当てオブジェクト数と処理時間を少し削減するパフォーマンス改善のPRです。挙動は従来と同じになるよう維持されているため、外部APIとしての振る舞いは変わりません。"
-    },
-    {
-      "number": 59496,
-      "title": "Fix eager loading with limit and default_order {#pr-59496}",
-      "url": "https://github.com/rails/rails/pull/59496",
-      "mergedAt": "2026-11-01T00:00:00.000Z",
-      "author": "czj",
-      "authorUrl": "https://github.com/czj",
-      "summary": "1. 概要 (1-2文で)  \n`eager_load` に `limit` / `offset` を組み合わせたときに `default_order` が無視され、その結果 PostgreSQL / MySQL で `SELECT DISTINCT` + `ORDER BY` の整合性が取れずにエラーになる不具合を修正した PR です。`distinct` 用に主キーを取得する内部クエリでも、明示的な order と同様のロジックで `default_order` を考慮するようになりました。"
-    },
-    {
-      "number": 59495,
-      "title": "Keep the scale of non-:decimal types in numericality validation {#pr-59495}",
-      "url": "https://github.com/rails/rails/pull/59495",
-      "mergedAt": "2026-11-01T00:00:00.000Z",
-      "author": "czj",
-      "authorUrl": "https://github.com/czj",
-      "summary": "1. 概要 (1-2文で)  \nRailsの数値バリデーション (`numericality`) が、`:decimal` 以外の型でも「スケール（小数桁数）」を考慮して丸めた上で検証するように戻されたPRです。Rails 8.1 での挙動（型が持つスケールで丸めてから判定）を、#59246 による変更で一部崩れていたのを修正し、PostgreSQLの `money` 型などでも従来どおりの判定になるようにしています。"
-    },
-    {
-      "number": 59485,
-      "title": "Add support for comma-separated values in ENV[\"RAILS_MASTER_KEY\"] {#pr-59485}",
-      "url": "https://github.com/rails/rails/pull/59485",
-      "mergedAt": "2026-11-01T00:00:00.000Z",
-      "author": "JeffTsang",
-      "authorUrl": "https://github.com/JeffTsang",
-      "summary": "1. 概要 (1-2文で)  \n`ENV[\"RAILS_MASTER_KEY\"]` にカンマ区切りで複数のマスターキーを指定できるようになり、Rails が順番に試して復号に成功したキーを採用することで、master key のローテーションをしやすくする変更です。`credentials.yml.enc` / `encrypted` 系ファイルの復号処理が、この複数キー対応になりました。"
-    },
-    {
-      "number": 59502,
-      "title": "Pass enums added to a parent down to existing subclasses {#pr-59502}",
-      "url": "https://github.com/rails/rails/pull/59502",
-      "mergedAt": "2026-11-01T00:00:00.000Z",
-      "author": "kamipo",
-      "authorUrl": "https://github.com/kamipo",
-      "summary": "1. 概要 (1-2文で)  \n親クラスに後から追加した enum を、既に存在しているサブクラスの `defined_enums` にも自動的に反映するようにした修正です。これにより、enum 自体のメソッド・スコープは動いているのに、`defined_enums` を使う箇所（fixtures や uniqueness validation など）だけが不整合を起こす問題が解消されます。"
-    },
-    {
-      "number": 59442,
-      "title": "Fix Ractor proxy savepoint rollback after before_commit {#pr-59442}",
-      "url": "https://github.com/rails/rails/pull/59442",
-      "mergedAt": "2026-11-01T00:00:00.000Z",
-      "author": "yorzi",
-      "authorUrl": "https://github.com/yorzi",
-      "summary": "1. 概要 (1-2文で)  \nRactor 用の ActiveRecord プロキシで、`before_commit` コールバックが例外を投げた場合に「セーブポイントがメイン側に開きっぱなしになり、トランザクションの深さがズレる」バグを修正する PRです。セーブポイントのロールバック時に、メイン側とプロキシ側でトランザクションの深さを正しく同期させるように変更されています。"
-    },
-    {
-      "number": 59494,
-      "title": "Raise on assigning `attr_readonly` attributes on subclasses with generated writers {#pr-59494}",
-      "url": "https://github.com/rails/rails/pull/59494",
-      "mergedAt": "2026-11-01T00:00:00.000Z",
-      "author": "kamipo",
-      "authorUrl": "https://github.com/kamipo",
-      "summary": "1. 概要 (1-2文で)  \n`attr_readonly` を親クラスに後から指定した場合でも、そのサブクラスで同じ属性に対する代入時に正しく `ActiveRecord::ReadonlyAttributeError` を発生させるようにした修正です。以前は、サブクラス側に既に生成済みの writer メソッドが残っており、例外が出ず「書き込みは無視されるがエラーにもならない」という潜在的バグがありました。"
-    },
-    {
-      "number": 58315,
-      "title": "Fix belongs_to `touch` option incorrectly triggering on models with composite primary keys {#pr-58315}",
-      "url": "https://github.com/rails/rails/pull/58315",
-      "mergedAt": "2026-11-01T00:00:00.000Z",
-      "author": "masom",
-      "authorUrl": "https://github.com/masom",
-      "summary": "1. 概要 (1-2文で)  \n`belongs_to` に `touch: true` を付けた関連が「複合外部キー」を持つ場合に、存在しえない親レコードを毎回 `WHERE ... IS NULL` で探しに行ってしまう不正なクエリが発行されるバグを修正した PRです。複合キーのうちどれかが `nil` の場合は「以前の親」は存在しないとみなして、親の `touch` 用クエリをスキップするようにしました。"
-    },
-    {
-      "number": 59488,
-      "title": "Fix preloading has_one through associations sharing a table {#pr-59488}",
-      "url": "https://github.com/rails/rails/pull/59488",
-      "mergedAt": "2026-11-01T00:00:00.000Z",
-      "author": "ozamasa",
-      "authorUrl": "https://github.com/ozamasa",
-      "summary": "1. 概要 (1-2文で)  \n`has_one :through` で、through側とsource側が同じテーブルを使う STI サブクラスの場合に、事前読み込み(preload/eager_load)すると `nil` が返ってしまうバグを修正した PR です。STI の `type` 条件が競合していたクエリ生成を見直し、正しいサブクラスを3クエリで確実にプリロードできるようにしています。"
-    },
-    {
-      "number": 59491,
-      "title": "Pass attribute aliases added to a parent down to existing subclasses {#pr-59491}",
-      "url": "https://github.com/rails/rails/pull/59491",
-      "mergedAt": "2026-11-01T00:00:00.000Z",
-      "author": "kehra",
-      "authorUrl": "https://github.com/kehra",
-      "summary": "1. 概要 (1-2文で)  \n親クラスにあとから追加した `alias_attribute` が、既に独自の `attribute_aliases` を持っているサブクラスには反映されず、クエリでエイリアス名がそのままカラム名として使われてしまう不具合を修正した PR です。`alias_attribute` 実行時に子孫クラスへもエイリアス定義（lookup 用ハッシュ）を伝搬させることで、Active Record の問い合わせでも正しくエイリアスを解決できるようにしています。"
-    },
-    {
-      "number": 59492,
-      "title": "Pass readonly attributes added to a parent down to existing subclasses {#pr-59492}",
-      "url": "https://github.com/rails/rails/pull/59492",
-      "mergedAt": "2026-11-01T00:00:00.000Z",
-      "author": "kehra",
-      "authorUrl": "https://github.com/kehra",
-      "summary": "1. 概要 (1-2文で)  \n親クラスにあとから `attr_readonly` を追加した場合でも、それ以前から存在していた子クラスにも正しく読み取り専用属性が引き継がれるようにした修正です。これにより、親と子で `readonly_attributes` の内容がずれて、一部のサブクラスだけ読み取り専用制約が効かない不整合が解消されます。"
-    },
-    {
-      "number": 59435,
-      "title": "Fix counter cache double increment with partial inserts disabled {#pr-59435}",
-      "url": "https://github.com/rails/rails/pull/59435",
-      "mergedAt": "2026-11-01T00:00:00.000Z",
-      "author": "ozamasa",
-      "authorUrl": "https://github.com/ozamasa",
-      "summary": "1. 概要 (1-2文で)  \n`has_many :through` + counter cache + `partial_inserts` を無効にした場合に、関連を1件作成しただけで counter cache が2回インクリメントされてしまう不具合を修正するPRです。未変更の counter cache カラムを INSERT 文から除外することで、メモリ上の値と DB 上の値が二重に更新されないようにしています。"
-    },
-    {
-      "number": 59490,
-      "title": "Pass aggregations added to a parent down to existing subclasses {#pr-59490}",
-      "url": "https://github.com/rails/rails/pull/59490",
-      "mergedAt": "2026-11-01T00:00:00.000Z",
-      "author": "kehra",
-      "authorUrl": "https://github.com/kehra",
-      "summary": "1. 概要 (1-2文で)  \n`composed_of` で定義した aggregation を、後から親クラスに追加した場合でも、既に存在しているサブクラスに正しく伝播させる修正です。これにより、サブクラスでも `reflect_on_aggregation` や `where` が期待通りに動作するようになります。"
-    },
-    {
-      "number": 58966,
-      "title": "Fix the response Content-Type memo from #59096 {#pr-58966}",
-      "url": "https://github.com/rails/rails/pull/58966",
-      "mergedAt": "2026-11-01T00:00:00.000Z",
-      "author": "linyiru",
-      "authorUrl": "https://github.com/linyiru",
-      "summary": "1. 概要 (1-2文で)  \nRails 8.1.4以降で導入予定だった「レスポンスの Content-Type をパースした結果のメモ化処理 (#59096)」に潜んでいた、オブジェクト共有・エンコーディング・不正バイト処理など5つの不具合をまとめて修正するPRです。`response.media_type` / `response.charset` の挙動を 8.1.4 相当の期待値に合わせつつ、安全で予測可能なメモ化ロジックにします（ただし、どれもまだリリース前の挙動なので既存アプリには影響なし）。"
-    },
-    {
-      "number": 59484,
-      "title": "Make `or` up to 1.28x and `and` up to 1.57x faster by comparing only the values set on either relation {#pr-59484}",
-      "url": "https://github.com/rails/rails/pull/59484",
-      "mergedAt": "2026-11-01T00:00:00.000Z",
-      "author": "linyiru",
-      "authorUrl": "https://github.com/linyiru",
-      "summary": "1. 概要 (1-2文で)  \nActiveRecord の `Relation#or` と `Relation#and` が、内部で行う互換性チェックを最適化することで最大 1.3〜1.6 倍程度高速化された PRです。互換性エラー時の挙動やエラーメッセージは変えずに、不要な比較処理だけを削って性能を上げています。"
-    },
-    {
-      "number": 59473,
-      "title": "Fix preloading ordered has_many :through reusing loaded source records {#pr-59473}",
-      "url": "https://github.com/rails/rails/pull/59473",
-      "mergedAt": "2026-11-01T00:00:00.000Z",
-      "author": "czj",
-      "authorUrl": "https://github.com/czj",
-      "summary": "1. 概要 (1-2文で)  \n`has_many :through` の関連をプリロードするとき、同じ関連先を使う「順序なし」と「順序あり」の関連を混在させた場合に、順序あり側の `order` が効かず「through 側の並び順」で返ってしまうバグを修正した PR です。条件付き (`where`) のケースに続き、`order` のケースでも「既にロード済みの中間・ソースレコードをそのまま再利用しない」ようにすることで正しい並び順を保証します。"
-    },
-    {
-      "number": 59483,
-      "title": "Build cookie jars' verifier and encryptor on first use {#pr-59483}",
-      "url": "https://github.com/rails/rails/pull/59483",
-      "mergedAt": "2026-11-01T00:00:00.000Z",
-      "author": "linyiru",
-      "authorUrl": "https://github.com/linyiru",
-      "summary": "1. 概要 (1-2文で)  \n`SignedKeyRotatingCookieJar` と `EncryptedKeyRotatingCookieJar` が、クッキーの署名・暗号化用オブジェクト（`MessageVerifier` / `MessageEncryptor`）を「生成時」ではなく「初めてクッキーを読む／書くとき」に遅延生成するように変更されました。これにより、対象クッキーが存在しないリクエストでの不要なキー導出・オブジェクト生成が減り、特にAPI等でセッションを毎回読むアプリケーションのパフォーマンス（オブジェクト数・レイテンシ）が改善します。"
-    },
-    {
-      "number": 59476,
-      "title": "Fix Active Support inline RBS signatures {#pr-59476}",
-      "url": "https://github.com/rails/rails/pull/59476",
-      "mergedAt": "2026-10-31T00:00:00.000Z",
-      "author": "amatsuda",
-      "authorUrl": "https://github.com/amatsuda",
-      "summary": "1. 概要 (1-2文で)  \nActive Support に最近追加された「インライン RBS 型定義」と、実際の Ruby 実装とのズレをまとめて修正した PRです。主に「メソッドが本当は受け付けない値を受け付けることになっていた型」や、「戻り値の型が実装より粗かった箇所」が、実装に沿うように精密化されています。"
-    },
-    {
-      "number": 59308,
-      "title": "Instrument connection pool checkout waits {#pr-59308}",
-      "url": "https://github.com/rails/rails/pull/59308",
-      "mergedAt": "2026-10-31T00:00:00.000Z",
-      "author": "andrewfader",
-      "authorUrl": "https://github.com/andrewfader",
-      "summary": "1. 概要 (1-2文で)  \nActive Record のコネクションプールで、空きコネクションがなくて `checkout` がブロックしている待ち時間を、`checkout_wait.active_record` というイベントとして計測・通知できるようにした変更です。これにより、プール逼迫時の「よく分からない遅さ」が可観測になり、`ConnectionTimeoutError` が出る前から問題把握・チューニングがしやすくなります。"
-    },
-    {
-      "number": 59404,
-      "title": "Compile Arel SQL up to 1.23x faster under YJIT by avoiding each_with_index in ToSql {#pr-59404}",
-      "url": "https://github.com/rails/rails/pull/59404",
-      "mergedAt": "2026-10-31T00:00:00.000Z",
-      "author": "czj",
-      "authorUrl": "https://github.com/czj",
-      "summary": "1. 概要 (1-2文で)  \nArel の SQL 生成処理（ToSql ビジター）から `each_with_index` / `inject` を排除し、YJIT（および ZJIT）で最適化しやすい `each` ベースのループに書き換えることで、SQL コンパイルを最大約 1.23 倍高速化するパフォーマンス改善 PRです。生成される SQL 自体はビット単位で同一であり、挙動変更はありません。"
     }
   ]
 }
