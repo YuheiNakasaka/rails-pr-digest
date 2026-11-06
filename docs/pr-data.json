@@ -1,7 +1,124 @@
 {
-  "lastUpdated": "2026-11-05T00:17:33.363Z",
+  "lastUpdated": "2026-11-06T00:11:59.622Z",
   "totalCount": 50,
   "items": [
+    {
+      "number": 59658,
+      "title": "Fix Array#index_with documentation {#pr-59658}",
+      "url": "https://github.com/rails/rails/pull/59658",
+      "mergedAt": "2026-11-05T00:00:00.000Z",
+      "author": "byroot",
+      "authorUrl": "https://github.com/byroot",
+      "summary": "1. 概要 (1-2文で)  \nArray#index_with のドキュメントから実装寄りの説明を取り除き、より API 利用者向けの内容に整理した PRです。機能や挙動には変更はなく、あくまでドキュメント改善のみです。"
+    },
+    {
+      "number": 59651,
+      "title": "Speed up pluralize and singularize by testing rules with match? {#pr-59651}",
+      "url": "https://github.com/rails/rails/pull/59651",
+      "mergedAt": "2026-11-05T00:00:00.000Z",
+      "author": "jhawthorn",
+      "authorUrl": "https://github.com/jhawthorn",
+      "summary": "1. 概要 (1-2文で)  \nActiveSupport::Inflector の `pluralize` / `singularize` が、内部でのルール適用方法を見直すことで大幅に高速化された PR です。従来は各ルールごとに `sub!` を実行していたのを、まず `match?` / `include?` で「マッチするルールか」を判定してから、該当ルールに対してのみ `sub!` を呼ぶように変更しています。"
+    },
+    {
+      "number": 59570,
+      "title": "Escape unsafe OutputBuffer appends without the super dispatch {#pr-59570}",
+      "url": "https://github.com/rails/rails/pull/59570",
+      "mergedAt": "2026-11-05T00:00:00.000Z",
+      "author": "thomasklemm",
+      "authorUrl": "https://github.com/thomasklemm",
+      "summary": "1. 概要 (1-2文で)  \nRails のテンプレートで `<%= %>` を評価した際の出力バッファ (`ActionView::OutputBuffer#<<`) におけるエスケープ処理を最適化し、`super` 経由の動的ディスパッチを避けることで、インタプリタ・YJIT の両方で高速化した PR です。  \nこれにより、非 `html_safe` な値を `<%= %>` で出力する処理が 20～25% 程度高速化されています（PR 記載のベンチマーク値より）。"
+    },
+    {
+      "number": 59602,
+      "title": "Show the template's line for syntax errors compiled through Herb {#pr-59602}",
+      "url": "https://github.com/rails/rails/pull/59602",
+      "mergedAt": "2026-11-05T00:00:00.000Z",
+      "author": "IslamElsayed",
+      "authorUrl": "https://github.com/IslamElsayed",
+      "summary": "1. 概要 (1-2文で)  \nRails 8.2 でデフォルト HTML テンプレートコンパイラになった Herb 利用時に、テンプレートの構文エラーが「どのファイルの何行目か」を正しく表示できるようにする修正です。ERB ハンドラが Herb にテンプレートのファイル名を渡すようにしたことで、エラー画面で実際のテンプレートの該当行がハイライトされるようになります。"
+    },
+    {
+      "number": 59582,
+      "title": "Running require from a Ractor currently creates a new thread every time {#pr-59582}",
+      "url": "https://github.com/rails/rails/pull/59582",
+      "mergedAt": "2026-11-05T00:00:00.000Z",
+      "author": "luke-gruber",
+      "authorUrl": "https://github.com/luke-gruber",
+      "summary": "1. 概要 (1-2文で)  \nこのPRは、Ractor 内で `require` を呼ぶと毎回スレッドが新規作成されてしまう現状を踏まえ、不要な `require` 呼び出しをスキップするための微修正を Active Support に入れたものです。実質的には 1 行の条件（または同等のロジック）変更で、Ractor 利用時のオーバーヘッドを軽減する意図があります。"
+    },
+    {
+      "number": 59482,
+      "title": "Map template frames in ExceptionWrapper without walking every resolver {#pr-59482}",
+      "url": "https://github.com/rails/rails/pull/59482",
+      "mergedAt": "2026-11-05T00:00:00.000Z",
+      "author": "linyiru",
+      "authorUrl": "https://github.com/linyiru",
+      "summary": "1. 概要 (1-2文で)  \nRails の例外ページなどで行っている「バックトレース中のテンプレートフレームのマッピング」を大幅に高速・省メモリ化する変更です。従来は全ての view resolver を総なめにしてテンプレートを探していましたが、`Template::Error` が持つ情報とテンプレートメソッド名のパターンを利用して、必要最小限の探索に絞るようになりました。"
+    },
+    {
+      "number": 59641,
+      "title": "Remove remaining Markdown directives {#pr-59641}",
+      "url": "https://github.com/rails/rails/pull/59641",
+      "mergedAt": "2026-11-05T00:00:00.000Z",
+      "author": "fxn",
+      "authorUrl": "https://github.com/fxn",
+      "summary": "1. 概要 (1-2文で)  \nRails のドキュメント形式を RDoc から Markdown に完全移行する一環として、ソースコード中に残っていた `# :markup: markdown` ディレクティブを削除し、プロジェクト全体のクリーンアップを完了した PR です。機能的な挙動や公開 API には一切変更がありません。"
+    },
+    {
+      "number": 59595,
+      "title": "Load associations when the owner has an attribute named `method` {#pr-59595}",
+      "url": "https://github.com/rails/rails/pull/59595",
+      "mergedAt": "2026-11-05T00:00:00.000Z",
+      "author": "anthonyfranco",
+      "authorUrl": "https://github.com/anthonyfranco",
+      "summary": "1. 概要 (1-2文で)  \nActive Record の関連読み込み時に、モデルに `method` という属性が存在すると `ArgumentError` が発生して関連がロードできなくなる不具合を修正する PR です。`owner.method(:read_attr)` の利用をやめ、`method` 属性と衝突しない形で属性値を読むように変更しています。"
+    },
+    {
+      "number": 59640,
+      "title": "Allow anonymous subclasses of cache stores with LocalCache {#pr-59640}",
+      "url": "https://github.com/rails/rails/pull/59640",
+      "mergedAt": "2026-11-05T00:00:00.000Z",
+      "author": "thomasklemm",
+      "authorUrl": "https://github.com/thomasklemm",
+      "summary": "1. 概要 (1-2文で)  \nRails のキャッシュストアに `LocalCache` 戦略を使う際、無名クラス（匿名サブクラス）のキャッシュストアでもエラーなく利用できるようにした修正です。`Rails.cache` を ractor 対応のために freeze する前に LocalCache のキーを生成する仕様変更によって発生した、匿名クラスでの `NoMethodError` を解消しています。"
+    },
+    {
+      "number": 59634,
+      "title": "Accept bind values in `where!` and `having!` again {#pr-59634}",
+      "url": "https://github.com/rails/rails/pull/59634",
+      "mergedAt": "2026-11-05T00:00:00.000Z",
+      "author": "thomasklemm",
+      "authorUrl": "https://github.com/thomasklemm",
+      "summary": "1. 概要 (1-2文で)  \nRails 8.1 → main の過程で `where!` / `having!` のシグネチャ変更により「バインド変数を渡せない」「既存のオーバーライドが壊れる」といった後方互換性問題が発生していたのを、元の可変長引数 (`*rest`) 形式に戻して修正する PR です。`where` / `having` / `merge` からの呼び出しも 8.1 と同じく再びスプラット渡しに戻しつつ、#59579 で入った他のメモリアロケーション最適化は維持しています。"
+    },
+    {
+      "number": 59638,
+      "title": "Fix Active Record `includes` with `merge` of an order on another model {#pr-59638}",
+      "url": "https://github.com/rails/rails/pull/59638",
+      "mergedAt": "2026-11-05T00:00:00.000Z",
+      "author": "kehra",
+      "authorUrl": "https://github.com/kehra",
+      "summary": "1. 概要 (1-2文で)  \n`includes` した関連に対して、別モデル側の `order` / `reorder` を `merge` すると事前ロードが外れ、JOIN せずに外部テーブルのカラムを参照して SQL エラーになるリグレッションが #59590 以降発生しており、この PR はそのバグを修正します。`merge` 時のソート情報の取り込み方法を変更し、適切に参照テーブルが記録されるようにしています。"
+    },
+    {
+      "number": 59635,
+      "title": "Fix FrozenError loading the Active Job Rakefile on JRuby {#pr-59635}",
+      "url": "https://github.com/rails/rails/pull/59635",
+      "mergedAt": "2026-11-05T00:00:00.000Z",
+      "author": "sampokuokkanen",
+      "authorUrl": "https://github.com/sampokuokkanen",
+      "summary": "1. 概要 (1-2文で)  \nJRuby 環境で Active Job の Rakefile を読み込む際に `FrozenError` が発生していた不具合を修正する PR です。`ACTIVEJOB_ADAPTERS` 定数の配列を「凍結(freeze)する前」に JRuby 専用の要素削除処理を行うように変更しています。"
+    },
+    {
+      "number": 59584,
+      "title": "Skip the HTML entity gsub! in JSON::Coder output with nothing to escape {#pr-59584}",
+      "url": "https://github.com/rails/rails/pull/59584",
+      "mergedAt": "2026-11-05T00:00:00.000Z",
+      "author": "thomasklemm",
+      "authorUrl": "https://github.com/thomasklemm",
+      "summary": "1. 概要 (1-2文で)  \nJSON 出力時に `<`, `>`, `&` をエスケープする処理について、「そもそもこれらの文字が含まれていない場合」は `gsub!` を実行しないようにして無駄な全体走査をスキップする最適化が行われました。出力結果の仕様は一切変えずに、特に JS セパレータ非エスケープ時のパフォーマンスを改善する変更です。"
+    },
     {
       "number": 59604,
       "title": "Close the stream when Action Cable's event loop fails to attach it {#pr-59604}",
@@ -334,123 +451,6 @@
       "author": "kamipo",
       "authorUrl": "https://github.com/kamipo",
       "summary": "1. 概要 (1-2文で)  \nRails のローカルキャッシュ (`Strategy::LocalCache`) が、バッチ書き込み・削除 (`write_multi`, `delete_multi`) を使った場合でも一貫性を保つように修正された PR です。あわせて `MemCacheStore` のオプション処理（`unless_exist`, `compress`, `race_condition_ttl`）まわりの重複と漏れも整理・修正されています。"
-    },
-    {
-      "number": 59572,
-      "title": "Skip merging a relation's values into themselves {#pr-59572}",
-      "url": "https://github.com/rails/rails/pull/59572",
-      "mergedAt": "2026-11-03T00:00:00.000Z",
-      "author": "kamipo",
-      "authorUrl": "https://github.com/kamipo",
-      "summary": "1. 概要 (1-2文で)  \nActiveRecord::Relation 同士のマージ処理で、**同じ Relation を自分自身に対して merge!/Merger した場合にクエリ条件が失われうる不具合**が修正されました。自分自身をマージ対象とした場合は、何も変更せず同じ Relation をそのまま返すようにしています。"
-    },
-    {
-      "number": 59568,
-      "title": "Read attribute_types once when loading records {#pr-59568}",
-      "url": "https://github.com/rails/rails/pull/59568",
-      "mergedAt": "2026-11-03T00:00:00.000Z",
-      "author": "thomasklemm",
-      "authorUrl": "https://github.com/thomasklemm",
-      "summary": "1. 概要 (1-2文で)  \nActive Record が SQL 結果からレコードをロードする際に、`attribute_types` を毎カラムごとに何度も呼んでいた箇所を、事前に一度だけ読み出すようにして無駄なメソッド呼び出しを削減し、レコード生成処理のパフォーマンスを向上させる変更です。  \n機能的な挙動は変えずに、主に SQLite / PostgreSQL 利用時のクエリ結果インスタンス化コストを数 %〜最大 20% 程度削減しています（命令数ベース）。"
-    },
-    {
-      "number": 59563,
-      "title": "Serialize Active Job Hash arguments without pair Arrays {#pr-59563}",
-      "url": "https://github.com/rails/rails/pull/59563",
-      "mergedAt": "2026-11-03T00:00:00.000Z",
-      "author": "thomasklemm",
-      "authorUrl": "https://github.com/thomasklemm",
-      "summary": "1. 概要 (1-2文で)  \nActive Job でジョブ引数の Hash／キーワード引数をシリアライズする処理から、不要な `[key, value]` の一時配列生成を取り除き、オブジェクト生成数と実行時間を削減した変更です。動作仕様（キー・値・順序・`_aj_*` マーカー）は一切変えずに、内部実装のみを高速化しています。"
-    },
-    {
-      "number": 59566,
-      "title": "Fix stale reads from the local cache after `ActiveSupport::Cache::MemCacheStore#write_multi` {#pr-59566}",
-      "url": "https://github.com/rails/rails/pull/59566",
-      "mergedAt": "2026-11-03T00:00:00.000Z",
-      "author": "kehra",
-      "authorUrl": "https://github.com/kehra",
-      "summary": "1. 概要 (1-2文で)  \n`ActiveSupport::Cache::MemCacheStore#write_multi` 実行後に、同一リクエスト内のローカルキャッシュから古い値が読まれてしまう不具合を修正するPRです。`set_multi` 経由の書き込み時にローカルキャッシュを適切に無効化することで、一貫した読み取り結果を保証します。"
-    },
-    {
-      "number": 59531,
-      "title": "Fix -n ClassName#test_name filter in the test runner {#pr-59531}",
-      "url": "https://github.com/rails/rails/pull/59531",
-      "mergedAt": "2026-11-03T00:00:00.000Z",
-      "author": "sampokuokkanen",
-      "authorUrl": "https://github.com/sampokuokkanen",
-      "summary": "1. 概要 (1-2文で)  \nRails のテストランナーで `bin/rails test -n ClassName#test_name` 形式のフィルタが動作しなくなっていたバグを修正し、Minitest 本来のクラス名＋テスト名フィルタが正しく動くようにした PR です。これにより、`ActiveSupport::Testing::Isolation` が `-n` を使ってサブプロセス実行するケース（JRuby / Windows など fork 非対応環境）でもテストが正しく実行されます。"
-    },
-    {
-      "number": 59561,
-      "title": "Don't build the key String on every thread_mattr_accessor call {#pr-59561}",
-      "url": "https://github.com/rails/rails/pull/59561",
-      "mergedAt": "2026-11-03T00:00:00.000Z",
-      "author": "thomasklemm",
-      "authorUrl": "https://github.com/thomasklemm",
-      "summary": "1. 概要 (1-2文で)  \n`thread_mattr_accessor` がスレッド／ファイバごとの状態管理に使うキー文字列を、毎回動的に生成するのをやめ、モジュールごとに1回だけ生成した凍結リテラルを使い回す最適化です。これにより、多くのリクエストで発生していた不要な文字列オブジェクトの生成が削減され、パフォーマンスが向上します。"
-    },
-    {
-      "number": 59560,
-      "title": "Reuse type map cache keys for PostgreSQL result columns {#pr-59560}",
-      "url": "https://github.com/rails/rails/pull/59560",
-      "mergedAt": "2026-11-03T00:00:00.000Z",
-      "author": "thomasklemm",
-      "authorUrl": "https://github.com/thomasklemm",
-      "summary": "1. 概要 (1-2文で)  \nPostgreSQL のクエリ結果の型解決で、毎カラムごとに新しい配列オブジェクトを生成していたキャッシュキーを再利用することで、オブジェクト生成数を削減する最適化です。型解決ロジックの挙動（どの型になるか）は変えずに、メモリ・GC 負荷を下げる変更になっています。"
-    },
-    {
-      "number": 59558,
-      "title": "Avoid scratch Arrays when casting PostgreSQL results {#pr-59558}",
-      "url": "https://github.com/rails/rails/pull/59558",
-      "mergedAt": "2026-11-03T00:00:00.000Z",
-      "author": "thomasklemm",
-      "authorUrl": "https://github.com/thomasklemm",
-      "summary": "1. 概要 (1-2文で)  \nPostgreSQL 用アダプタで、クエリ結果をキャストする際に毎回作成していた一時的な Array（`field_types` と `missing_oids`）の生成を避け、オブジェクト割り当て数を削減する最適化です。ほぼすべてのカラム型が既知という前提で、実行時の動作は維持しつつメモリアロケーションを減らしています。"
-    },
-    {
-      "number": 59556,
-      "title": "Read the other relation's values without a copy when merging {#pr-59556}",
-      "url": "https://github.com/rails/rails/pull/59556",
-      "mergedAt": "2026-11-03T00:00:00.000Z",
-      "author": "thomasklemm",
-      "authorUrl": "https://github.com/thomasklemm",
-      "summary": "1. 概要 (1-2文で)  \n`Relation#merge` 実行時に、マージ元の `Relation` が持つ `values` ハッシュを不要にコピーしていたのをやめ、読み取り専用で直接参照するようにして、オブジェクト生成数を削減する最適化です。`unscope!` の影響を受け得る「自分自身の values」を扱う場合のみ、これまで通りコピーします。"
-    },
-    {
-      "number": 59550,
-      "title": "Compare Trix attachment HTML with assert_dom_equal {#pr-59550}",
-      "url": "https://github.com/rails/rails/pull/59550",
-      "mergedAt": "2026-11-03T00:00:00.000Z",
-      "author": "yahonda",
-      "authorUrl": "https://github.com/yahonda",
-      "summary": "1. 概要 (1-2文で)  \nAction Text の Trix 添付ファイル関連テストが Nokogiri 1.19.5 以降で落ちていた問題に対し、HTML 比較方法を文字列比較から `assert_dom_equal` に変更して、Nokogiri のシリアライズ仕様変更に依存しないようにした PR です。これにより、Nokogiri のバージョン差異に関係なく同じテストが通るようになります。"
-    },
-    {
-      "number": 59552,
-      "title": "Use the scopes as constraints of a direct association reflection {#pr-59552}",
-      "url": "https://github.com/rails/rails/pull/59552",
-      "mergedAt": "2026-11-03T00:00:00.000Z",
-      "author": "thomasklemm",
-      "authorUrl": "https://github.com/thomasklemm",
-      "summary": "1. 概要 (1-2文で)  \n`belongs_to` / `has_one` / `has_many` のような「直接の関連（through を介さないもの）」について、関連スコープ構築時に余分な配列オブジェクトを作らないようにして、オブジェクトアロケーションを減らす最適化が入っています。挙動は変えずに、メモリ使用量を少し改善する内部的なパフォーマンスチューニングです。"
-    },
-    {
-      "number": 59555,
-      "title": "Index what `each` yields in Enumerable#index_with again {#pr-59555}",
-      "url": "https://github.com/rails/rails/pull/59555",
-      "mergedAt": "2026-11-03T00:00:00.000Z",
-      "author": "thomasklemm",
-      "authorUrl": "https://github.com/thomasklemm",
-      "summary": "1. 概要 (1-2文で)  \nRails 8.1 以降で `Enumerable#index_with` が `Hash` や `Struct` に対して挙動退行していた問題を修正し、「`each` が yield する値」をインデックス対象として再び使うように戻した PRです。`Array` に対してはパフォーマンス改善のための `to_h` 利用を維持しつつ、`Enumerable` 全体では従来どおり `each` に基づいた挙動を保証します。"
-    },
-    {
-      "number": 59551,
-      "title": "Skip `extending!` in `Relation#merge` when there are no extensions {#pr-59551}",
-      "url": "https://github.com/rails/rails/pull/59551",
-      "mergedAt": "2026-11-03T00:00:00.000Z",
-      "author": "thomasklemm",
-      "authorUrl": "https://github.com/thomasklemm",
-      "summary": "1. 概要 (1-2文で)  \n`Relation#merge` 内で常に呼ばれていた `extending!` を、「拡張モジュールが存在する場合だけ」呼ぶようにし、余分な配列オブジェクトの生成を避けてメモリ割り当てをわずかに削減する変更です。動作仕様は変えずに、Active Record の関連操作（`author.posts.count` や `merge(Post.published)` など）のオブジェクト数を微減させるマイクロ最適化です。"
     }
   ]
 }
