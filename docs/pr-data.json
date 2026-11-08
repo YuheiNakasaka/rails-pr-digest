@@ -1,7 +1,43 @@
 {
-  "lastUpdated": "2026-11-07T00:10:06.288Z",
+  "lastUpdated": "2026-11-08T00:09:14.566Z",
   "totalCount": 50,
   "items": [
+    {
+      "number": 59657,
+      "title": "[ci skip] Fix typos and phrasing in Getting Started and demo app guides {#pr-59657}",
+      "url": "https://github.com/rails/rails/pull/59657",
+      "mergedAt": "2026-11-07T00:00:00.000Z",
+      "author": "y0608",
+      "authorUrl": "https://github.com/y0608",
+      "summary": "1. 概要 (1-2文で)  \nGetting Started とデモアプリ関連のガイド文書に含まれていた英語のタイポと不自然な表現を修正するドキュメントのみのPRです。コードや挙動の変更はなく、文章の読みやすさと一貫性を高める目的です。"
+    },
+    {
+      "number": 59138,
+      "title": "Fix CSS styling for product review summaries [ci skip] {#pr-59138}",
+      "url": "https://github.com/rails/rails/pull/59138",
+      "mergedAt": "2026-11-07T00:00:00.000Z",
+      "author": "wtwingate",
+      "authorUrl": "https://github.com/wtwingate",
+      "summary": "1. 概要 (1-2文で)  \nRails ガイドの「Product Reviews」チュートリアル内で、レビュー要約部分の CSS Flex レイアウトが正しく効いていなかった問題を修正した PRです。`review__summary` クラスの付与位置を見直し、意図したスタイルで表示されるようにしています。\n\n2. 変更内容の詳細(あればサンプルコードも含めて)  \n- 対象はコード本体ではなく、`guides/source/product_reviews.md` に記載されているサンプルコード（チュートリアル用のビュー）です。\n- 「レビューのサマリー表示」用の HTML 構造において、`review__summary` クラスが子要素に付与されていたため、`display: flex` などのスタイルがレイアウト全体に効いていませんでした。\n- そのため、以下のようなイメージでクラスの付与先を「親 `div` 要素」に移動しています（実ファイルは英語ですが、構造イメージだけ示します）:\n\n  変更前（イメージ）:\n  ```erb\n  <div>\n    <div class=\"review__summary\">\n      <!-- レビュータイトルや評価表示など -->\n    </div>\n  </div>\n  ```\n\n  変更後（イメージ）:\n  ```erb\n  <div class=\"review__summary\">\n    <div>\n      <!-- レビュータイトルや評価表示など -->\n    </div>\n  </div>\n  ```\n\n- これにより、`review__summary` に定義されている Flex レイアウトが、意図通り「まとめて」適用され、テキストやアイコンがきれいに整列するようになります。\n- 実際の見た目として、Before スクリーンショットでは要素が縦に詰まって不自然に表示されており、After では横並び等を含めてバランスの取れたレイアウトになっていることが示されています。\n\n3. 影響範囲・注意点  \n- 影響範囲は「Rails 本体の挙動」ではなく、「Rails ガイドを見ながらチュートリアル通りに実装した場合の見た目」です。\n- 既に自分でレイアウトを調整しているアプリには影響しませんが、\n  - Rails ガイドの Product Reviews チュートリアル通りに HTML/CSS をコピペしている場合、\n  - この PR 以降のガイドのコード例に合わせることでレイアウト崩れが解消されます。\n- 実コードベースに取り込む際には、`review__summary` に対する CSS（`display: flex` など）が親要素に適用される前提で、子要素のマージンや幅指定を見直すとよりきれいに整列します。\n- コード本体への変更や API 変更はなく、テストや CHANGELOG 更新も不要な範囲の軽微なガイド修正です。\n\n4. 参考情報 (あれば)  \n- 変更ファイル: `guides/source/product_reviews.md` のみ（+2 / -2 行の微修正）\n- PR タイトルに `[ci skip]` が付いており、ドキュメントのみ変更で CI 実行を省略している点からも、実装影響はないドキュメント上のサンプル修正であることがわかります。"
+    },
+    {
+      "number": 50312,
+      "title": "Implement `button_to` in terms of `form_tag` {#pr-50312}",
+      "url": "https://github.com/rails/rails/pull/50312",
+      "mergedAt": "2026-11-07T00:00:00.000Z",
+      "author": "seanpdoyle",
+      "authorUrl": "https://github.com/seanpdoyle",
+      "summary": "1. 概要 (1-2文で)  \n`button_to` ヘルパーの内部実装を、既存の `form_tag` ヘルパーを利用する形に整理・統一した PR です。これにより重複していたロジックが集約され、`button_to` が生成するフォームの HTML 仕様が他ヘルパーとより一貫したものになります。"
+    },
+    {
+      "number": 59676,
+      "title": "Fix Active Support test loading with older minitest {#pr-59676}",
+      "url": "https://github.com/rails/rails/pull/59676",
+      "mergedAt": "2026-11-07T00:00:00.000Z",
+      "author": "thomasklemm",
+      "authorUrl": "https://github.com/thomasklemm",
+      "summary": "1. 概要 (1-2文で)  \nこのPRは、古いバージョンの minitest（5.1〜5.17）使用時に `ActiveSupport::TestCase` の読み込みで `NameError` が発生する問題を、`assert_not_pattern` の定義条件を調整することで修正しています。Active Support の依存関係バージョンを引き上げることなく、古い minitest との互換性を回復する変更です。"
+    },
     {
       "number": 59654,
       "title": "[ci skip] Fix typos, missing words, and grammar in Action Pack, View, and Asset guides {#pr-59654}",
@@ -415,42 +451,6 @@
       "author": "thomasklemm",
       "authorUrl": "https://github.com/thomasklemm",
       "summary": "1. 概要 (1-2文で)  \n`find`, `find_by`, association 読み出しなどで使われる **ステートメントキャッシュの SQL 文字列を「キャッシュ時に一度だけ freeze」する**ことで、実行ごとの文字列コピー・freeze を削減し、割り当てオブジェクト数と命令数をわずかに減らす変更です。  \nその結果、prepared statement 利用時に `payload[:sql]` が毎回別インスタンスではなく **同じ frozen String** になり、SQL をインプレースで書き換えるような独自拡張は `FrozenError` となる可能性があります。"
-    },
-    {
-      "number": 59590,
-      "title": "Extract order references from the built Arel nodes {#pr-59590}",
-      "url": "https://github.com/rails/rails/pull/59590",
-      "mergedAt": "2026-11-04T00:00:00.000Z",
-      "author": "kamipo",
-      "authorUrl": "https://github.com/kamipo",
-      "summary": "1. 概要 (1–2文で)  \n- `order` 系メソッドが、**生の引数からではなく Arel で組み立てたノードから参照テーブル情報（references）を抽出するように変更**された PR です。  \n- これにより、`order`/`reorder`/`default_order` の前処理タイミングが `spawn` 前に移り、副作用が減って、`merge` 時の余計な再処理もなくなり、オブジェクト割り当て数が減少しています。"
-    },
-    {
-      "number": 59589,
-      "title": "Remove outdated JRuby branch from test_should_impose_childless_html_tags_in_html {#pr-59589}",
-      "url": "https://github.com/rails/rails/pull/59589",
-      "mergedAt": "2026-11-04T00:00:00.000Z",
-      "author": "sampokuokkanen",
-      "authorUrl": "https://github.com/sampokuokkanen",
-      "summary": "1. 概要 (1-2文で)  \nJRuby 向けにだけ存在していたコントローラテストの分岐（JRuby + NekoHTML 由来の挙動差対応）を削除し、CRuby/JRuby を問わず同じ期待値でテストするようにした PR です。Nokogiri が JRuby で使用する HTML パーサを切り替えたことで挙動差が解消され、JRuby 専用アサーションがむしろ不正になったため、その対応を整理しています。"
-    },
-    {
-      "number": 59585,
-      "title": "Freeze TimeZoneConverter and EnumType when what they wrap is frozen {#pr-59585}",
-      "url": "https://github.com/rails/rails/pull/59585",
-      "mergedAt": "2026-11-04T00:00:00.000Z",
-      "author": "thomasklemm",
-      "authorUrl": "https://github.com/thomasklemm",
-      "summary": "1. 概要 (1-2文で)  \nActive Record の `TimeZoneConverter` と `EnumType` について、内部で包んでいるオブジェクトがすでに freeze 可能な場合は、それらラッパー自体も freeze するようにした PRです。これにより、モデルのデフォルト属性が Ractor 間で共有されやすくなり、`attribute_types` 取得やレコード生成・読み込みのパフォーマンスが改善されます。"
-    },
-    {
-      "number": 59588,
-      "title": "Fix flaky ServerTest#test_restart_rails_server_with_custom_pid_file_path {#pr-59588}",
-      "url": "https://github.com/rails/rails/pull/59588",
-      "mergedAt": "2026-11-04T00:00:00.000Z",
-      "author": "yahonda",
-      "authorUrl": "https://github.com/yahonda",
-      "summary": "1. 概要 (1-2文で)  \n`ServerTest#test_restart_rails_server_with_custom_pid_file_path` が CI でときどき失敗していた問題を、待ち条件を変更することで解消した PR です。Puma の起動ログのどのタイミングを待つかを見直し、サーバ再起動テストのフレークを減らしています。"
     }
   ]
 }
