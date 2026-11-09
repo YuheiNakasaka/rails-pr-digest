@@ -1,7 +1,52 @@
 {
-  "lastUpdated": "2026-11-08T00:09:14.566Z",
+  "lastUpdated": "2026-11-09T00:09:46.651Z",
   "totalCount": 50,
   "items": [
+    {
+      "number": 59601,
+      "title": "Don't convert the given scheduled_at to UTC in place {#pr-59601}",
+      "url": "https://github.com/rails/rails/pull/59601",
+      "mergedAt": "2026-11-08T00:00:00.000Z",
+      "author": "bruno-costanzo",
+      "authorUrl": "https://github.com/bruno-costanzo",
+      "summary": "1. 概要 (1-2文で)  \n`ActiveJob#set(wait_until:)` に素の `Time` オブジェクトを渡したとき、そのオブジェクト自体が UTC に「破壊的に」変換されてしまうバグを修正し、呼び出し元の `Time` を書き換えないようにした PR です。シリアライズされる内容は変えずに、内部で新しい `Time` オブジェクトを生成して扱うようにしています。"
+    },
+    {
+      "number": 59687,
+      "title": "Read controller config settings without going through method_missing {#pr-59687}",
+      "url": "https://github.com/rails/rails/pull/59687",
+      "mergedAt": "2026-11-08T00:00:00.000Z",
+      "author": "luke-gruber",
+      "authorUrl": "https://github.com/luke-gruber",
+      "summary": "1. 概要 (1-2文で)  \nこのPRは、コントローラの `config` 関連設定を `method_missing` 経由で読むのをやめ、明示的なメソッド呼び出しに変えることで、パフォーマンスとRactor対応を改善する変更です。あわせて ActiveSupport の `delegate` によって不要に生成されていた iseq（命令列）の削減も行われています。"
+    },
+    {
+      "number": 59410,
+      "title": "Fix incorrect routing mapper documentation [ci skip] {#pr-59410}",
+      "url": "https://github.com/rails/rails/pull/59410",
+      "mergedAt": "2026-11-08T00:00:00.000Z",
+      "author": "bastin27",
+      "authorUrl": "https://github.com/bastin27",
+      "summary": "1. 概要 (1-2文で)  \n`ActionDispatch::Routing::Mapper` のドキュメントに誤ったオプション説明や動作しないサンプルコードが含まれていたため、それらを現在の挙動に合わせて修正した PR です。コードの挙動自体は変わらず、ドキュメントとサンプルコードのみが更新されています。"
+    },
+    {
+      "number": 59527,
+      "title": "Filter parameters from Action Cable's unhandled message log {#pr-59527}",
+      "url": "https://github.com/rails/rails/pull/59527",
+      "mergedAt": "2026-11-08T00:00:00.000Z",
+      "author": "czj",
+      "authorUrl": "https://github.com/czj",
+      "summary": "1. 概要 (1-2文で)  \nこのPRは、Action Cable が処理に失敗した WebSocket メッセージをエラーログに出す際に、`filter_parameters` が効かず生の機密情報（例: password）が出てしまう問題を修正し、Action Controller と同様にパラメータフィルタリングを行うようにしたものです。あわせて、各種 Action Cable のエラーメッセージ内の identifier / command も同じフィルタを通すようになっています。"
+    },
+    {
+      "number": 59652,
+      "title": "[ci skip] Fix typos, grammar, and backtick syntax in Active Record and Active Model guides {#pr-59652}",
+      "url": "https://github.com/rails/rails/pull/59652",
+      "mergedAt": "2026-11-08T00:00:00.000Z",
+      "author": "y0608",
+      "authorUrl": "https://github.com/y0608",
+      "summary": "1. 概要 (1-2文で)  \nこのPRは、Active Record / Active Model ガイド内の英語ドキュメントのタイポ、文法ミス、誤ったバッククォート表記（メソッド参照）を修正するものです。コード変更や挙動の変更は一切なく、ドキュメントの可読性と正確性を高めるためのメンテナンス PR です。"
+    },
     {
       "number": 59657,
       "title": "[ci skip] Fix typos and phrasing in Getting Started and demo app guides {#pr-59657}",
@@ -406,51 +451,6 @@
       "author": "thomasklemm",
       "authorUrl": "https://github.com/thomasklemm",
       "summary": "1. 概要 (1-2文で)  \nSQLite3 アダプタがクエリ結果を組み立てる際に、これまでカラムごとに呼び出していた `type_map` を「結果セットごとに1回だけ」取得するようにし、CPU命令数を削減してパフォーマンスを改善する変更です。挙動は基本的に従来と同じですが、`type_map` をオーバーライドしているサブクラスのみ呼び出し頻度が変わります。"
-    },
-    {
-      "number": 59603,
-      "title": "Check for String tag attribute values first {#pr-59603}",
-      "url": "https://github.com/rails/rails/pull/59603",
-      "mergedAt": "2026-11-04T00:00:00.000Z",
-      "author": "thomasklemm",
-      "authorUrl": "https://github.com/thomasklemm",
-      "summary": "1. 概要 (1-2文で)  \n`tag.*`, `content_tag`, `link_to` などが HTML 属性を組み立てる際の内部処理で、「属性値が String であるケース」を最優先で判定するようにして、典型的なパスを高速化する最適化 PR です。主に文字列属性を大量にレンダリングするビューで、わずかながら CPU 命令数と実行時間が削減されます。"
-    },
-    {
-      "number": 59405,
-      "title": "Index existing attachments once when attaching to a collection, 1.6x faster alone and 63x with #58679 {#pr-59405}",
-      "url": "https://github.com/rails/rails/pull/59405",
-      "mergedAt": "2026-11-04T00:00:00.000Z",
-      "author": "czj",
-      "authorUrl": "https://github.com/czj",
-      "summary": "1. 概要 (1-2文で)  \n`has_many_attached` に対して既に大量の添付ファイルがあるレコードにさらに attach する際の計算量の悪さ（O(N²)）を解消し、添付処理を実質線形時間に近づけるパフォーマンス改善 PR です。既存の添付レコードを一度だけインデックス化して再利用することで、単体でも約 1.6x、高速化 PR #58679 と併用すると最大 63x 程度の高速化が報告されています。"
-    },
-    {
-      "number": 59598,
-      "title": "Anchor URI_REGEXP once instead of per alternative {#pr-59598}",
-      "url": "https://github.com/rails/rails/pull/59598",
-      "mergedAt": "2026-11-04T00:00:00.000Z",
-      "author": "thomasklemm",
-      "authorUrl": "https://github.com/thomasklemm",
-      "summary": "1. 概要 (1-2文で)  \nRails の `asset_path` などで使われる `URI_REGEXP` の正規表現を、「オルタネーションごとに `^` を付ける」形から「先頭に一度だけ `^` を付ける」形に変更し、特に相対パス（例: `\"application.css\"`）に対する `match?` のコストを削減するパフォーマンス改善です。  \nマッチ結果は（広範なテストで確認された範囲で）完全に互換であり、挙動を変えずに 10〜15% 程度 `asset_path` 呼び出しの命令数・時間を削減します。"
-    },
-    {
-      "number": 59597,
-      "title": "Build `allow_browser`'s named version sets once {#pr-59597}",
-      "url": "https://github.com/rails/rails/pull/59597",
-      "mergedAt": "2026-11-04T00:00:00.000Z",
-      "author": "thomasklemm",
-      "authorUrl": "https://github.com/thomasklemm",
-      "summary": "1. 概要 (1-2文で)  \n`allow_browser versions: :modern` などの「名前付きバージョンセット」を、これまでリクエストごとに `HashWithIndifferentAccess` へ変換していた処理をクラスロード時に一度だけ行うようにし、ブラウザチェックのオーバーヘッドを削減した PR です。アプリ側で渡す任意のバージョン Hash の挙動は変えず、生成アプリの共通リクエストパスをわずかに高速化しています。"
-    },
-    {
-      "number": 59596,
-      "title": "Freeze a cached statement's SQL once instead of copying it per execution {#pr-59596}",
-      "url": "https://github.com/rails/rails/pull/59596",
-      "mergedAt": "2026-11-04T00:00:00.000Z",
-      "author": "thomasklemm",
-      "authorUrl": "https://github.com/thomasklemm",
-      "summary": "1. 概要 (1-2文で)  \n`find`, `find_by`, association 読み出しなどで使われる **ステートメントキャッシュの SQL 文字列を「キャッシュ時に一度だけ freeze」する**ことで、実行ごとの文字列コピー・freeze を削減し、割り当てオブジェクト数と命令数をわずかに減らす変更です。  \nその結果、prepared statement 利用時に `payload[:sql]` が毎回別インスタンスではなく **同じ frozen String** になり、SQL をインプレースで書き換えるような独自拡張は `FrozenError` となる可能性があります。"
     }
   ]
 }
