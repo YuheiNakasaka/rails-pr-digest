@@ -1,7 +1,169 @@
 {
-  "lastUpdated": "2026-11-09T00:09:46.651Z",
+  "lastUpdated": "2026-11-10T00:13:27.239Z",
   "totalCount": 50,
   "items": [
+    {
+      "number": 59475,
+      "title": "Shift local times in a DST gap forward by the gap's length {#pr-59475}",
+      "url": "https://github.com/rails/rails/pull/59475",
+      "mergedAt": "2026-11-09T00:00:00.000Z",
+      "author": "55728",
+      "authorUrl": "https://github.com/55728",
+      "summary": "1. 概要 (1-2文で)  \nRails の `ActiveSupport::TimeZone#local` / `#parse` と `Time#change` が、夏時間（DST）の「飛ぶ」区間（ギャップ）に落ちるローカル時刻を解決する際、固定で1時間ずらしていた挙動を「実際のギャップ長だけ前方にシフトする」ように修正した PR です。これにより、非1時間（30分, 2時間, 24時間）のDST遷移を持つタイムゾーンでも期待どおり・一意に時刻が解決されます。"
+    },
+    {
+      "number": 59591,
+      "title": "Fix `eager_load` attaching the first record to every parent when the associated model has no primary key {#pr-59591}",
+      "url": "https://github.com/rails/rails/pull/59591",
+      "mergedAt": "2026-11-09T00:00:00.000Z",
+      "author": "kehra",
+      "authorUrl": "https://github.com/kehra",
+      "summary": "1. 概要 (1-2文で)  \nRails 7.1.4 / 7.2.0 で導入された回帰バグにより、「主キーを持たない関連モデル」を `eager_load` / `includes(...).references(...)` した際に、すべての親レコードに同じ子レコードが紐づいてしまう問題を修正するPRです。主キーなしモデルでは eager load 時の「重複排除キー」を `nil` に戻すことで、各親に正しい関連レコードが紐づくようにしています。"
+    },
+    {
+      "number": 59723,
+      "title": "Document where `sanitize` and `highlight` output is safe {#pr-59723}",
+      "url": "https://github.com/rails/rails/pull/59723",
+      "mergedAt": "2026-11-09T00:00:00.000Z",
+      "author": "flavorjones",
+      "authorUrl": "https://github.com/flavorjones",
+      "summary": "1. 概要 (1-2文で)  \n`sanitize` と `highlight` ヘルパーが返す文字列が「どのコンテキストで HTML として安全に使えるか」を、公式ドキュメントに明示した PR です。特に、「要素内容としては安全だが、属性値や `<script>` など一部の要素内では安全でない」という点がはっきり書かれるようになりました。"
+    },
+    {
+      "number": 59722,
+      "title": "Add Ruby Runtime Security section to security guide {#pr-59722}",
+      "url": "https://github.com/rails/rails/pull/59722",
+      "mergedAt": "2026-11-09T00:00:00.000Z",
+      "author": "flavorjones",
+      "authorUrl": "https://github.com/flavorjones",
+      "summary": "1. 概要 (1-2文で)  \nRails公式セキュリティガイドに「Rubyランタイムのセキュリティ」という節が新規追加され、Railsアプリが動作するRuby本体および標準添付/同梱Gemを最新に保つことの重要性が明示されました。あわせて、CRubyでのGMP対応有無がDoS耐性（大きな整数の扱い）に影響することと、その確認方法が追記されています。"
+    },
+    {
+      "number": 59718,
+      "title": "Fix the order of preloaded through associations over a nested through source, broken by #59528 {#pr-59718}",
+      "url": "https://github.com/rails/rails/pull/59718",
+      "mergedAt": "2026-11-09T00:00:00.000Z",
+      "author": "czj",
+      "authorUrl": "https://github.com/czj",
+      "summary": "1. 概要 (1-2文で)  \nRails 7（mainブランチ）で導入された #59528 によるリグレッションにより、「ネストした through 経由の関連 + order 指定」を preload したときに、並び順が崩れる問題を修正した PR です。あわせて、through preload 時のオーナー判定と重複レコードの扱いも、より正しい（かつ以前と同等の）挙動に戻しています。"
+    },
+    {
+      "number": 59587,
+      "title": "Honor a default_order in the scope of a disable_joins association {#pr-59587}",
+      "url": "https://github.com/rails/rails/pull/59587",
+      "mergedAt": "2026-11-09T00:00:00.000Z",
+      "author": "carlosdanielpohlod",
+      "authorUrl": "https://github.com/carlosdanielpohlod",
+      "summary": "1. 概要 (1-2文で)  \n`disable_joins: true` を指定した has_many :through 連鎖で、関連スコープに指定した `default_order` が無視されていた問題を修正し、通常の join を使う関連と同じ並び順になるようにした PR です。あわせて、disable_joins 連鎖内で「その関連が order 済みかどうか」の判定も `effective_order_values` ベースに見直しています。"
+    },
+    {
+      "number": 59719,
+      "title": "Cast numeric values to the scale of the PostgreSQL `money` type {#pr-59719}",
+      "url": "https://github.com/rails/rails/pull/59719",
+      "mergedAt": "2026-11-09T00:00:00.000Z",
+      "author": "kamipo",
+      "authorUrl": "https://github.com/kamipo",
+      "summary": "1. 概要 (1-2文で)  \nPostgreSQL の `money` 型に対して、数値オブジェクト（Numeric）を代入した場合でも、小数桁数（scale）に従って丸めるように `OID::Money#cast_value` の挙動が修正されました。これにより、保存前後での値の不一致が解消され、併せて numericality バリデーション側の一時的な丸めロジックも削除されています。"
+    },
+    {
+      "number": 59629,
+      "title": "Restore ActionView::LookupContext#find_template {#pr-59629}",
+      "url": "https://github.com/rails/rails/pull/59629",
+      "mergedAt": "2026-11-09T00:00:00.000Z",
+      "author": "thomasklemm",
+      "authorUrl": "https://github.com/thomasklemm",
+      "summary": "1. 概要 (1-2文で)  \nRails 8.1 まで存在していた `ActionView::LookupContext#find_template` を、`find!` のエイリアスとして復活させる PRです。これにより、従来通りテンプレートが見つからない場合に `ActionView::MissingTemplate` を投げる API が維持され、既存の gem との互換性が確保されます。"
+    },
+    {
+      "number": 59649,
+      "title": "[ci skip] Fix grammar, missing words, and punctuation in configuration and runtime guides {#pr-59649}",
+      "url": "https://github.com/rails/rails/pull/59649",
+      "mergedAt": "2026-11-09T00:00:00.000Z",
+      "author": "y0608",
+      "authorUrl": "https://github.com/y0608",
+      "summary": "1. 概要 (1-2文で)  \nこのPRは、Rails公式ガイドの英語ドキュメントに含まれていた文法ミス・単語抜け・句読点の不備を修正するもので、コードやMarkdown構造には一切手を加えていません。動作仕様には影響しない、純粋な文章品質向上のためのドキュメント修正です。"
+    },
+    {
+      "number": 59715,
+      "title": "RequestForgeryProtection: don't assume the module is included in a Controller {#pr-59715}",
+      "url": "https://github.com/rails/rails/pull/59715",
+      "mergedAt": "2026-11-09T00:00:00.000Z",
+      "author": "byroot",
+      "authorUrl": "https://github.com/byroot",
+      "summary": "1. 概要 (1-2文で)  \n`ActionController::RequestForgeryProtection` モジュールが「必ずコントローラに `include` される」と仮定していた部分を見直し、コントローラ以外のクラス（例: `omniauth-rails_csrf_protection` が使うクラス）にインクルードされても壊れないように抽象コントローラ周りの責務整理と初期化方法の改善を行った PR です。  \nこれにより CSRF 保護機能のモジュールを他クラスに混ぜ込んでも例外や不整合が起きにくくなり、`AbstractController` 系の設定の扱いも整理されています。"
+    },
+    {
+      "number": 59656,
+      "title": "[ci skip] Fix typos, missing words, and grammar in background, mail, and system guides {#pr-59656}",
+      "url": "https://github.com/rails/rails/pull/59656",
+      "mergedAt": "2026-11-09T00:00:00.000Z",
+      "author": "y0608",
+      "authorUrl": "https://github.com/y0608",
+      "summary": "1. 概要 (1-2文で)  \nこのPRは、Railsガイド(Active Job / Storage / Mailer / Mailbox / Text / Cable / セキュリティ / テスト / エラー報告 / I18n / Rack / アップグレードガイドなど)に含まれていた英語のタイポ・文法ミス・インラインコード表記の誤りを修正するドキュメント専用の変更です。コードや挙動の変更はなく、ガイドの可読性と正確さを高めることを目的としています。"
+    },
+    {
+      "number": 59528,
+      "title": "Fix nested preloads under a through association using copies of its records {#pr-59528}",
+      "url": "https://github.com/rails/rails/pull/59528",
+      "mergedAt": "2026-11-09T00:00:00.000Z",
+      "author": "czj",
+      "authorUrl": "https://github.com/czj",
+      "summary": "1. 概要 (1-2文で)  \n`has_many :through` に対するプリロードを「単体」と「ネスト付き」の2通りで同時に行った場合、実際に手元にあるレコードにはネスト先がプリロードされない不具合を修正するPRです。特に `strict_loading` を有効にしていると `ActiveRecord::StrictLoadingViolationError` を引き起こしていたケースが、正しく一括ロードされるようになります。"
+    },
+    {
+      "number": 59714,
+      "title": "Further simplify LocalCache#local_cache_key {#pr-59714}",
+      "url": "https://github.com/rails/rails/pull/59714",
+      "mergedAt": "2026-11-09T00:00:00.000Z",
+      "author": "byroot",
+      "authorUrl": "https://github.com/byroot",
+      "summary": "1. 概要 (1-2文で)  \n`ActiveSupport::Cache::Strategy::LocalCache` が内部で使う `local_cache_key` の生成ロジックをさらに簡略化し、クラス名を含めず `object_id` のみで一意性を担保するようにしたPRです。機能的な挙動は基本的に変わらず、内部実装の整理・軽量化が主目的です。"
+    },
+    {
+      "number": 59713,
+      "title": "Revert \"Skip the HTML entity gsub! in JSON::Coder output with nothing to escape\" {#pr-59713}",
+      "url": "https://github.com/rails/rails/pull/59713",
+      "mergedAt": "2026-11-09T00:00:00.000Z",
+      "author": "byroot",
+      "authorUrl": "https://github.com/byroot",
+      "summary": "1. 概要 (1-2文で)  \nこのPRは、JSONエンコード時のHTMLエンティティエスケープ処理を「一部のケースで `gsub!` をスキップする」最適化を元に戻し、従来の処理に戻しています。理由は、その最適化が大きな文字列に対しては逆に非効率であり、かつ対象となるのが実質的に古いRubyバージョン（〜2.0相当）のコードパスに限られるためです。"
+    },
+    {
+      "number": 59712,
+      "title": "Eager load AssociationRoute and Rack::Multipart {#pr-59712}",
+      "url": "https://github.com/rails/rails/pull/59712",
+      "mergedAt": "2026-11-09T00:00:00.000Z",
+      "author": "byroot",
+      "authorUrl": "https://github.com/byroot",
+      "summary": "1. 概要 (1-2文で)  \nこのPRは、これまで遅延（lazy）ロードされていた `AssociationRoute` と `Rack::Multipart` を、フレームワーク起動時に先読み（eager load）するように変更したものです。頻繁に使われるコンポーネントを事前ロードすることで、実行時のオーバーヘッドや一部のオートロード関連問題を減らす意図があります。"
+    },
+    {
+      "number": 59599,
+      "title": "Fix preloading scoped `has_many :through` reusing a sibling's source records {#pr-59599}",
+      "url": "https://github.com/rails/rails/pull/59599",
+      "mergedAt": "2026-11-09T00:00:00.000Z",
+      "author": "czj",
+      "authorUrl": "https://github.com/czj",
+      "summary": "1. 概要 (1-2文で)  \n`has_many :through` のスコープ付き関連を eager load する際に、同じ `through` を使うスコープなし（または別スコープ）の兄弟関連を先にプリロードすると、スコープが無視されてしまうバグを修正する PR です。  \nソース側レコード（`source`）をいつ再利用してよいかの判定ロジックを「ブラックリスト」から「ホワイトリスト」方式に変えることで、`joins`, `limit`, `offset`, `group`, `having`, `select`, `readonly` などが正しく効くようにしています。"
+    },
+    {
+      "number": 59530,
+      "title": "Split SchemaContext and SchemaContext::MappedTable {#pr-59530}",
+      "url": "https://github.com/rails/rails/pull/59530",
+      "mergedAt": "2026-11-09T00:00:00.000Z",
+      "author": "matthewd",
+      "authorUrl": "https://github.com/matthewd",
+      "summary": "1. 概要 (1-2文で)  \nこのPRは、Active Record の `SchemaContext` を「モデルとデータソースの設定上の関係」として再定義し、その実ランタイム情報を扱う部分を新クラス `SchemaContext::MappedTable` に分離した変更です。主な狙いは、primary key や STI 用カラムなどの「設定」と「実テーブル情報」の扱いを整理しつつ、スキーマリロード／スキーマキャッシュと整合的に扱える土台を整えることです。"
+    },
+    {
+      "number": 59708,
+      "title": "Fix flaky FullStackConsoleTest#test_reload_command_fires_preparation_and_cleanup_callbacks {#pr-59708}",
+      "url": "https://github.com/rails/rails/pull/59708",
+      "mergedAt": "2026-11-09T00:00:00.000Z",
+      "author": "yahonda",
+      "authorUrl": "https://github.com/yahonda",
+      "summary": "1. 概要 (1-2文で)  \nRails の `FullStackConsoleTest#test_reload_command_fires_preparation_and_cleanup_callbacks` が Buildkite 上で時々落ちる原因となっていた IRB のプロンプト待ちロジックのレースコンディションを解消するため、コンソールテストのプロンプト待ち条件が修正されました。これにより、テスト時に IRB の出力が途中で分断されてコマンドのエコー確認に失敗する “flaky test” が発生しないようになります。"
+    },
     {
       "number": 59601,
       "title": "Don't convert the given scheduled_at to UTC in place {#pr-59601}",
@@ -289,168 +451,6 @@
       "author": "kehra",
       "authorUrl": "https://github.com/kehra",
       "summary": "1. 概要 (1-2文で)  \n`includes` した関連に対して、別モデル側の `order` / `reorder` を `merge` すると事前ロードが外れ、JOIN せずに外部テーブルのカラムを参照して SQL エラーになるリグレッションが #59590 以降発生しており、この PR はそのバグを修正します。`merge` 時のソート情報の取り込み方法を変更し、適切に参照テーブルが記録されるようにしています。"
-    },
-    {
-      "number": 59635,
-      "title": "Fix FrozenError loading the Active Job Rakefile on JRuby {#pr-59635}",
-      "url": "https://github.com/rails/rails/pull/59635",
-      "mergedAt": "2026-11-05T00:00:00.000Z",
-      "author": "sampokuokkanen",
-      "authorUrl": "https://github.com/sampokuokkanen",
-      "summary": "1. 概要 (1-2文で)  \nJRuby 環境で Active Job の Rakefile を読み込む際に `FrozenError` が発生していた不具合を修正する PR です。`ACTIVEJOB_ADAPTERS` 定数の配列を「凍結(freeze)する前」に JRuby 専用の要素削除処理を行うように変更しています。"
-    },
-    {
-      "number": 59584,
-      "title": "Skip the HTML entity gsub! in JSON::Coder output with nothing to escape {#pr-59584}",
-      "url": "https://github.com/rails/rails/pull/59584",
-      "mergedAt": "2026-11-05T00:00:00.000Z",
-      "author": "thomasklemm",
-      "authorUrl": "https://github.com/thomasklemm",
-      "summary": "1. 概要 (1-2文で)  \nJSON 出力時に `<`, `>`, `&` をエスケープする処理について、「そもそもこれらの文字が含まれていない場合」は `gsub!` を実行しないようにして無駄な全体走査をスキップする最適化が行われました。出力結果の仕様は一切変えずに、特に JS セパレータ非エスケープ時のパフォーマンスを改善する変更です。"
-    },
-    {
-      "number": 59604,
-      "title": "Close the stream when Action Cable's event loop fails to attach it {#pr-59604}",
-      "url": "https://github.com/rails/rails/pull/59604",
-      "mergedAt": "2026-11-04T00:00:00.000Z",
-      "author": "sampokuokkanen",
-      "authorUrl": "https://github.com/sampokuokkanen",
-      "summary": "1. 概要 (1-2文で)  \nAction Cable の `StreamEventLoop` で `NIO::Selector#register` などの失敗時にストリームが閉じられずクライアントがハングする問題を修正し、失敗時でも確実に IO をクローズして接続を終了するようにした PRです。あわせてこの挙動を保証するテストが追加され、Action Cable のイベントループの堅牢性が向上しています。"
-    },
-    {
-      "number": 59626,
-      "title": "Skip nested values that serialize to an empty query in to_query {#pr-59626}",
-      "url": "https://github.com/rails/rails/pull/59626",
-      "mergedAt": "2026-11-04T00:00:00.000Z",
-      "author": "thomasklemm",
-      "authorUrl": "https://github.com/thomasklemm",
-      "summary": "1. 概要 (1-2文で)  \nRails の `to_query`（クエリ文字列生成）で、ネストした配列・ハッシュが「結果として空文字列にしかならない場合」はクエリから完全にスキップするようにし、「`?&page=2`」のような余計なセパレータ（`&`）が出ないようにする修正です。  \n同時に、`nil`・`false`・空文字列はこれまで通り有効な値としてクエリに残るようにテストで明示されています。"
-    },
-    {
-      "number": 59625,
-      "title": "Generate URLs for empty arguments with default URL options as before {#pr-59625}",
-      "url": "https://github.com/rails/rails/pull/59625",
-      "mergedAt": "2026-11-04T00:00:00.000Z",
-      "author": "thomasklemm",
-      "authorUrl": "https://github.com/thomasklemm",
-      "summary": "1. 概要 (1-2文で)  \nRails 7系(?) で導入された「最適化された URL ヘルパー」が、空文字 `\"\"` を返す `to_param` を持つレコードに対して `UrlGenerationError` を投げるようになっていた回 regress を修正する PRです。`default_url_options`（特に `host`）が存在する場合でも、従来どおり URL を生成できるように、最適化パスが失敗したときに従来の一般パスにフォールバックするようになりました。"
-    },
-    {
-      "number": 59624,
-      "title": "Load author addresses with authors in FieldOrderedValuesTest {#pr-59624}",
-      "url": "https://github.com/rails/rails/pull/59624",
-      "mergedAt": "2026-11-04T00:00:00.000Z",
-      "author": "thomasklemm",
-      "authorUrl": "https://github.com/thomasklemm",
-      "summary": "1. 概要 (1-2文で)  \nPostgreSQL 18.4以降で外部キー検証タイミングが変わったことにより、`FieldOrderedValuesTest` が `authors` フィクスチャだけを読み込んだ場合に外部キー制約エラーが出ていた問題を解消するPRです。`authors` と外部キーで結びつく `author_addresses` フィクスチャも同時にロードするようにして、テストが単体実行されても安定して通るようにしています。"
-    },
-    {
-      "number": 59620,
-      "title": "Don't build a Set of renderers on every render {#pr-59620}",
-      "url": "https://github.com/rails/rails/pull/59620",
-      "mergedAt": "2026-11-04T00:00:00.000Z",
-      "author": "thomasklemm",
-      "authorUrl": "https://github.com/thomasklemm",
-      "summary": "1. 概要 (1-2文で)  \nコントローラにローカルな renderer 設定がない場合に、毎回 Set を新規生成していた処理を共通の `Renderers.all` をそのまま返すようにし、レンダリング時のオーバーヘッドを削減する最適化です。Ractor セーフな実装方針を維持しつつ、`render` 呼び出しあたりの時間・オブジェクト数を削って高速化しています。"
-    },
-    {
-      "number": 59619,
-      "title": "Join adjacent literals when building a route's path format {#pr-59619}",
-      "url": "https://github.com/rails/rails/pull/59619",
-      "mergedAt": "2026-11-04T00:00:00.000Z",
-      "author": "thomasklemm",
-      "authorUrl": "https://github.com/thomasklemm",
-      "summary": "1. 概要 (1–2文で)  \nRails のルーティング内部で使われる `Journey::Format` の実装を改善し、ルート生成時に隣接するリテラル文字列を一度だけ結合するようにした PR です。これにより URL の実際の文字列出力は変えずに、ルートヘルパー呼び出し時のオブジェクト生成・命令数が削減され、軽微なパフォーマンス改善とメモリ節約が行われています。"
-    },
-    {
-      "number": 59614,
-      "title": "Iterate Hash#extract! keys with each instead of each_with_object {#pr-59614}",
-      "url": "https://github.com/rails/rails/pull/59614",
-      "mergedAt": "2026-11-04T00:00:00.000Z",
-      "author": "thomasklemm",
-      "authorUrl": "https://github.com/thomasklemm",
-      "summary": "1. 概要 (1-2文で)  \n`Hash#extract!` の実装を `each_with_object` ベースから単純な `each` + ローカル `Hash` 生成に変更し、余分なオブジェクト生成と命令数を減らすマイクロ最適化のPRです。これにより `stylesheet_link_tag` / `javascript_include_tag` や `ActionController::Parameters#extract!` 経由の呼び出しがわずかに軽量化されます。"
-    },
-    {
-      "number": 59618,
-      "title": "Append the default star projection without a rest Array {#pr-59618}",
-      "url": "https://github.com/rails/rails/pull/59618",
-      "mergedAt": "2026-11-04T00:00:00.000Z",
-      "author": "thomasklemm",
-      "authorUrl": "https://github.com/thomasklemm",
-      "summary": "1. 概要 (1-2文で)  \n`build_select` がデフォルトの `table.*`（星投影）を `project` 経由ではなく、`SelectManager` の `projections` に直接追加するように変更され、余計な配列割り当てが1つ減りました。Rails 標準の `SelectManager` を使う限り、生成される SQL と挙動は従来どおりです。"
-    },
-    {
-      "number": 59616,
-      "title": "Read the update timestamp only when it is written {#pr-59616}",
-      "url": "https://github.com/rails/rails/pull/59616",
-      "mergedAt": "2026-11-04T00:00:00.000Z",
-      "author": "thomasklemm",
-      "authorUrl": "https://github.com/thomasklemm",
-      "summary": "1. 概要 (1-2文で)  \n`record_update_timestamps` が、実際にタイムスタンプを書き込む直前にだけ現在時刻を取得するように変更され、不要な時計アクセスと接続取得を減らすことで、`update` 時のパフォーマンスと挙動の明瞭さが改善されました。`updated_at`/`updated_on` などに書き込まれる値そのものは、従来の標準的なタイムスタンプ処理と同じです。"
-    },
-    {
-      "number": 59615,
-      "title": "Read the blob filename's extension once when choosing a variant format {#pr-59615}",
-      "url": "https://github.com/rails/rails/pull/59615",
-      "mergedAt": "2026-11-04T00:00:00.000Z",
-      "author": "thomasklemm",
-      "authorUrl": "https://github.com/thomasklemm",
-      "summary": "1. 概要 (1–2文で)  \nActive Storage の `blob.variant(...)` がデフォルトの画像フォーマットを決める際に、ファイル名拡張子を何度も解析していた処理を1回だけにまとめ、オブジェクト生成と処理時間を削減するパフォーマンス改善です。機能的な挙動は変えずに、画像バリアント生成時のオーバーヘッドを削っています。"
-    },
-    {
-      "number": 59613,
-      "title": "Build notification handle groups with each instead of Hash#map {#pr-59613}",
-      "url": "https://github.com/rails/rails/pull/59613",
-      "mergedAt": "2026-11-04T00:00:00.000Z",
-      "author": "thomasklemm",
-      "authorUrl": "https://github.com/thomasklemm",
-      "summary": "1. 概要 (1-2文で)  \n`ActiveSupport::Notifications::Fanout#build_handle` 内で、通知ハンドルの生成に `Hash#map`（実際は `Enumerable#map`）を使うのをやめ、`each` + `<<` に書き換えることで、余計なオブジェクト生成を減らし、特に SQL 実行など高頻度イベントでのオーバーヘッドを削減するパフォーマンス改善 PR です。挙動は原則として同じまま、呼び出しトレース上のフレーム位置のみ変わる可能性があります。"
-    },
-    {
-      "number": 59608,
-      "title": "Skip the format union in prepend_formats when the format already leads {#pr-59608}",
-      "url": "https://github.com/rails/rails/pull/59608",
-      "mergedAt": "2026-11-04T00:00:00.000Z",
-      "author": "thomasklemm",
-      "authorUrl": "https://github.com/thomasklemm",
-      "summary": "1. 概要 (1-2文で)  \n`ActionView::TemplateRenderer#render` 内で毎回行われていた `prepend_formats` の不要な配列ユニオン処理を、既にフォーマットが先頭にある場合はスキップする最適化です。これにより、特にリクエスト外 (`ApplicationController.render` など) のレンダリングで命令数・オブジェクト数が削減され、若干のパフォーマンス向上が得られます。"
-    },
-    {
-      "number": 59612,
-      "title": "Avoid reprocessing `with` values when merging relations {#pr-59612}",
-      "url": "https://github.com/rails/rails/pull/59612",
-      "mergedAt": "2026-11-04T00:00:00.000Z",
-      "author": "kamipo",
-      "authorUrl": "https://github.com/kamipo",
-      "summary": "1. 概要 (1-2文で)  \n`Relation#merge` 時に `with` で指定した値を二重に処理していた問題を解消し、既に処理済みの `with_values` をそのままマージするようにした PR です。これにより不要なオブジェクト生成が減り、`with` を多用したクエリ合成でメモリアロケーションが削減されます。"
-    },
-    {
-      "number": 59607,
-      "title": "Resolve attribute aliases with a fetch default instead of a block {#pr-59607}",
-      "url": "https://github.com/rails/rails/pull/59607",
-      "mergedAt": "2026-11-04T00:00:00.000Z",
-      "author": "thomasklemm",
-      "authorUrl": "https://github.com/thomasklemm",
-      "summary": "1. 概要 (1-2文で)  \nActive Record がカラム型を取得する際に使う `type_for_attribute` 内の属性エイリアス解決ロジックを、ブロック付き `Hash#fetch` から「デフォルト値付き `fetch`」に変更し、`Symbol#to_proc` 呼び出しのオーバーヘッドを削減する最適化です。これにより `type_for_attribute` 呼び出しが 10〜20% 程度高速化され、`where` の条件評価などでの累積コストを下げています。"
-    },
-    {
-      "number": 59606,
-      "title": "Restore three ActionView::Template handler methods removed in #57874 {#pr-59606}",
-      "url": "https://github.com/rails/rails/pull/59606",
-      "mergedAt": "2026-11-04T00:00:00.000Z",
-      "author": "thomasklemm",
-      "authorUrl": "https://github.com/thomasklemm",
-      "summary": "1. 概要 (1-2文で)\nRails 8.1 までは存在していた `ActionView::Template` の3つのハンドラ関連メソッドが、#57874 で削除されたことによる互換性問題を解消するため、それらを `ActionView::Template::Handlers` への委譲として復活させた PR です。既存のテンプレートハンドラ（例: maildown の Markdown ハンドラ）が Rails main で動かなくなっていた問題を、8.1 と同等の挙動に戻す形で修正しています。"
-    },
-    {
-      "number": 59605,
-      "title": "Look up the SQLite3 type map once per result {#pr-59605}",
-      "url": "https://github.com/rails/rails/pull/59605",
-      "mergedAt": "2026-11-04T00:00:00.000Z",
-      "author": "thomasklemm",
-      "authorUrl": "https://github.com/thomasklemm",
-      "summary": "1. 概要 (1-2文で)  \nSQLite3 アダプタがクエリ結果を組み立てる際に、これまでカラムごとに呼び出していた `type_map` を「結果セットごとに1回だけ」取得するようにし、CPU命令数を削減してパフォーマンスを改善する変更です。挙動は基本的に従来と同じですが、`type_map` をオーバーライドしているサブクラスのみ呼び出し頻度が変わります。"
     }
   ]
 }
