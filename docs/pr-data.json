@@ -1,7 +1,106 @@
 {
-  "lastUpdated": "2026-11-10T00:13:27.239Z",
+  "lastUpdated": "2026-11-11T00:12:16.200Z",
   "totalCount": 50,
   "items": [
+    {
+      "number": 59702,
+      "title": "Fix `:integer` attributes silently truncating 64-bit integer strings {#pr-59702}",
+      "url": "https://github.com/rails/rails/pull/59702",
+      "mergedAt": "2026-11-10T00:00:00.000Z",
+      "author": "talaatmagdyx",
+      "authorUrl": "https://github.com/talaatmagdyx",
+      "summary": "1. 概要 (1-2文で)  \nRails の `ActiveModel::Type::Integer` で、`limit` を指定していない整数属性に 64bit 整数（最大 19 桁）文字列を渡した際に、値がサイレントに切り詰められてしまう不具合が修正されました。既存の `limit` 設定やバリデーションの挙動は変えず、デフォルトで 64bit 整数を正しく読み込めるようにする変更です。"
+    },
+    {
+      "number": 59727,
+      "title": "Compute `eager_load` primary key aliases once per join node instead of per row {#pr-59727}",
+      "url": "https://github.com/rails/rails/pull/59727",
+      "mergedAt": "2026-11-10T00:00:00.000Z",
+      "author": "salasebas",
+      "authorUrl": "https://github.com/salasebas",
+      "summary": "1. 概要 (1–2文で)\nRails の `eager_load`（includes + joins を使うパス）で、JoinDependency が「各行ごと」に組み立てていたプライマリキー用のカラムエイリアスを、「各ノード（JOIN されたテーブル）ごと」に一度だけ計算・キャッシュするように変更し、オブジェクト割り当て数を削減している PR です。挙動は変えずに、特にネストした eager_load や through, 複合主キーを使うケースでメモリアロケーションを 8〜14% 程度減らすパフォーマンス改善となっています。"
+    },
+    {
+      "number": 59726,
+      "title": "Prime the response Content-Type memo for the default charset {#pr-59726}",
+      "url": "https://github.com/rails/rails/pull/59726",
+      "mergedAt": "2026-11-10T00:00:00.000Z",
+      "author": "salasebas",
+      "authorUrl": "https://github.com/salasebas",
+      "summary": "1. 概要 (1-2文で)  \n`ActionDispatch::Response` が自分で書き込んだ `Content-Type` ヘッダを再パースしないためのキャッシュ最適化が、デフォルト設定（UTF-8）では効いていなかった問題を修正する PRです。ASCII だけから成る charset 名について、ヘッダ文字列のエンコーディングに「タグし直す」ことで、余計な正規表現パースやオブジェクト割り当てを減らします。"
+    },
+    {
+      "number": 59725,
+      "title": "Serve precompressed-only files at the top of the static root, broken by #59053 {#pr-59725}",
+      "url": "https://github.com/rails/rails/pull/59725",
+      "mergedAt": "2026-11-10T00:00:00.000Z",
+      "author": "salasebas",
+      "authorUrl": "https://github.com/salasebas",
+      "summary": "1. 概要 (1-2文で)  \nRails 8.1 までできていた「`public/` 直下にプレ圧縮ファイル（`.gz` や `.br`）しかない場合でも静的ファイルとして配信する」挙動が、#59053 の変更で壊れていたのを元に戻すバグ修正です。トップレベルパス（`/app.js`, `/page`, `/` など）でも、圧縮ファイルのみ存在する場合に `ActionDispatch::Static` が正しくそれを返すようにしつつ、不要なファイルシステムアクセスは最小限に抑えています。"
+    },
+    {
+      "number": 58617,
+      "title": "[RF-DOCS] Add a guide for using hotwire with rails {#pr-58617}",
+      "url": "https://github.com/rails/rails/pull/58617",
+      "mergedAt": "2026-11-10T00:00:00.000Z",
+      "author": "ayushn21",
+      "authorUrl": "https://github.com/ayushn21",
+      "summary": "1. 概要 (1-2文で)  \nこのPRは、Rails公式ガイドに「Hotwire を Rails で使うための新しい専用ガイド」を追加し、既存の「Working with JavaScript in Rails」から Hotwire 関連の説明を切り出して再構成したものです。Turbo（`turbo-rails`）と Stimulus（`stimulus-rails`）の使い方、Action Cable / Active Record との統合方法などを体系的に説明するドキュメント整備が主目的です。"
+    },
+    {
+      "number": 58631,
+      "title": "Improve the order of the sign up and settings walkthrough to avoid NameError [ci skip] {#pr-58631}",
+      "url": "https://github.com/rails/rails/pull/58631",
+      "mergedAt": "2026-11-10T00:00:00.000Z",
+      "author": "gCoreByte",
+      "authorUrl": "https://github.com/gCoreByte",
+      "summary": "1. 概要 (1-2文で)  \nRails ガイド「Sign up and settings walkthrough」の手順順序が見直され、**まだ存在しないクラス／メソッドを参照して NameError を起こしうる箇所が出ないよう**に、パスワード変更リンク関連の説明が後ろに移動されました。  \nこれにより、チュートリアルを手順通り進めれば、記述どおりにコードを書いても NameError が発生しない流れになります。"
+    },
+    {
+      "number": 59729,
+      "title": "Resolve CTE joins merged from a relation of another model {#pr-59729}",
+      "url": "https://github.com/rails/rails/pull/59729",
+      "mergedAt": "2026-11-10T00:00:00.000Z",
+      "author": "kamipo",
+      "authorUrl": "https://github.com/kamipo",
+      "summary": "1. 概要 (1-2文で)  \n他モデルの Relation を `merge` した際に、その中に含まれる CTE の `joins` が誤って関連名として扱われて例外が発生していた問題を修正した PR です。`merge_joins` / `merge_outer_joins` で CTE の join を正しく解決し、元の Relation 単体で使った場合と同じテーブルに join されるようになりました。"
+    },
+    {
+      "number": 59256,
+      "title": "Fix flaky ConnectionPoolThreadTest#test_connection_pool_stat failure {#pr-59256}",
+      "url": "https://github.com/rails/rails/pull/59256",
+      "mergedAt": "2026-11-10T00:00:00.000Z",
+      "author": "yahonda",
+      "authorUrl": "https://github.com/yahonda",
+      "summary": "1. 概要 (1-2文で)  \n`ActiveRecord::ConnectionAdapters::ConnectionPoolThreadTest#test_connection_pool_stat` が CI 上で時々失敗していた原因（reaper スレッドによる接続の掃除タイミング競合）を解消するため、当該テストで利用するコネクションプールの reaper を無効化する変更が行われました。\n\n2. 変更内容の詳細  \n\n### 何が問題だったか\nテスト `test_connection_pool_stat` は、以下のような状況を前提にしています。\n\n- スレッドが 1 つだけ接続を checkout した状態で「死んだスレッド」となる  \n- そのため、`pool.stat` は以下のような統計情報を返すことを期待している:\n\n```ruby\n{ size: 1, connections: 1, busy: 0, dead: 1, idle: 0, waiting: 0, checkout_timeout: 0.2 }\n```\n\nしかし CI で実際に観測された結果は:\n\n```ruby\n{ size: 1, connections: 0, busy: 0, dead: 0, idle: 0, waiting: 0, checkout_timeout: 0.2 }\n```\n\nとなっており、「接続が 1 つ死んでいる」のではなく「接続自体が 0 になっている」ためアサートに失敗していました。\n\n### 原因の詳細\nActive Record のコネクションプールには、バックグラウンドで動く「reaper（掃除役）スレッド」があり、一定間隔ごとにプール中の接続をチェックし、不要なものを回収・破棄します。\n\nこのテストでは：\n\n1. テスト用スレッドが接続を checkout する  \n2. スレッドを終了させる（死んだスレッドが接続を掴みっぱなしの状態）  \n3. その後 `pool.stat` を呼んで `dead: 1` であることを検証する  \n\nという流れになっていますが、その 2 と 3 の「間のごく短い時間」に、**共有の reaper スレッドが実行される場合がある**、というのが問題の本質です。\n\n- 該当接続は一度もクエリ実行などに使われていないため、reaper から見ると「単に不要な接続」と判断されやすい  \n- その結果、その接続は「dead としてプールに残される」のではなく、「プールから完全に削除（connections: 0, dead: 0）される」  \n- この動作自体はコネクションプールとしては妥当だが、テストが期待している状態とズレる  \n- よって、「まれに reaper がこのタイミングで動いたときだけテストが落ちる」というフレーク（非決定的失敗）になっていました  \n\nPR の説明にあるように、問題の再現は手動で `pool.reap` を最後の `pool.stat` 直前で呼び出すことで、確定的に再現できています。\n\n```diff"
+    },
+    {
+      "number": 59302,
+      "title": "Fix QueryCacheTest#test_query_cache_across_threads {#pr-59302}",
+      "url": "https://github.com/rails/rails/pull/59302",
+      "mergedAt": "2026-11-10T00:00:00.000Z",
+      "author": "yahonda",
+      "authorUrl": "https://github.com/yahonda",
+      "summary": "1. 概要 (1-2文で)  \n`sqlite3_ractor` 環境で `QueryCacheTest#test_query_cache_across_threads` が常に失敗していた問題を修正するテストコードの変更です。Ractor 用の `ProxyConnectionPool` 導入により接続プールのリース(lease)が取り残されるケースを考慮し、テスト開始前にそれを解放するようにしています。"
+    },
+    {
+      "number": 59709,
+      "title": "Qualify unscope values with table name when merging relations {#pr-59709}",
+      "url": "https://github.com/rails/rails/pull/59709",
+      "mergedAt": "2026-11-10T00:00:00.000Z",
+      "author": "helmipradita",
+      "authorUrl": "https://github.com/helmipradita",
+      "summary": "1. 概要 (1-2文で)  \n`Relation#merge` 時に `unscope(where: ...)` を含むリレーションをマージすると、対象カラム名がテーブル名で修飾されていなかったため、JOIN 先など他テーブルの同名カラム条件まで誤って消えてしまうバグを修正する PR です。`unscope` の対象カラムを、マージ元リレーションのテーブル名付き (`users.deleted_at` のような形) で扱うように変更しています。"
+    },
+    {
+      "number": 59593,
+      "title": "Fix preloading `has_many :through` with conditions ignoring `preload` and `eager_load` in the scope {#pr-59593}",
+      "url": "https://github.com/rails/rails/pull/59593",
+      "mergedAt": "2026-11-10T00:00:00.000Z",
+      "author": "kehra",
+      "authorUrl": "https://github.com/kehra",
+      "summary": "1. 概要 (1-2文で)  \n`has_many :through` に条件付きスコープを定義した際、そのスコープ内に書いた `preload` / `eager_load` が無視されてしまい、N+1 または `strict_loading` 例外が起きるバグを修正した PR です。`includes` だけが有効になっていた挙動を見直し、`preload` / `eager_load` も正しく適用されるようにしています。"
+    },
     {
       "number": 59475,
       "title": "Shift local times in a DST gap forward by the gap's length {#pr-59475}",
@@ -352,105 +451,6 @@
       "author": "luke-gruber",
       "authorUrl": "https://github.com/luke-gruber",
       "summary": "1. 概要 (1-2文で)  \nmsgpack を Ractor（メイン以外の Ractor）内で利用する際、Bundler / RubyGems の `gem` メソッド呼び出しが Ractor の分離制約に引っかかってエラーになる問題を回避するため、Active Support の「フォールバック付きシリアライザ」が msgpack のロード処理をより安全に行うよう修正されています。  \nこれにより、キャッシュやメッセージ署名で msgpack を使っているアプリでも、Ractor を併用した並列実行時により安定して動作するようになります。"
-    },
-    {
-      "number": 59658,
-      "title": "Fix Array#index_with documentation {#pr-59658}",
-      "url": "https://github.com/rails/rails/pull/59658",
-      "mergedAt": "2026-11-05T00:00:00.000Z",
-      "author": "byroot",
-      "authorUrl": "https://github.com/byroot",
-      "summary": "1. 概要 (1-2文で)  \nArray#index_with のドキュメントから実装寄りの説明を取り除き、より API 利用者向けの内容に整理した PRです。機能や挙動には変更はなく、あくまでドキュメント改善のみです。"
-    },
-    {
-      "number": 59651,
-      "title": "Speed up pluralize and singularize by testing rules with match? {#pr-59651}",
-      "url": "https://github.com/rails/rails/pull/59651",
-      "mergedAt": "2026-11-05T00:00:00.000Z",
-      "author": "jhawthorn",
-      "authorUrl": "https://github.com/jhawthorn",
-      "summary": "1. 概要 (1-2文で)  \nActiveSupport::Inflector の `pluralize` / `singularize` が、内部でのルール適用方法を見直すことで大幅に高速化された PR です。従来は各ルールごとに `sub!` を実行していたのを、まず `match?` / `include?` で「マッチするルールか」を判定してから、該当ルールに対してのみ `sub!` を呼ぶように変更しています。"
-    },
-    {
-      "number": 59570,
-      "title": "Escape unsafe OutputBuffer appends without the super dispatch {#pr-59570}",
-      "url": "https://github.com/rails/rails/pull/59570",
-      "mergedAt": "2026-11-05T00:00:00.000Z",
-      "author": "thomasklemm",
-      "authorUrl": "https://github.com/thomasklemm",
-      "summary": "1. 概要 (1-2文で)  \nRails のテンプレートで `<%= %>` を評価した際の出力バッファ (`ActionView::OutputBuffer#<<`) におけるエスケープ処理を最適化し、`super` 経由の動的ディスパッチを避けることで、インタプリタ・YJIT の両方で高速化した PR です。  \nこれにより、非 `html_safe` な値を `<%= %>` で出力する処理が 20～25% 程度高速化されています（PR 記載のベンチマーク値より）。"
-    },
-    {
-      "number": 59602,
-      "title": "Show the template's line for syntax errors compiled through Herb {#pr-59602}",
-      "url": "https://github.com/rails/rails/pull/59602",
-      "mergedAt": "2026-11-05T00:00:00.000Z",
-      "author": "IslamElsayed",
-      "authorUrl": "https://github.com/IslamElsayed",
-      "summary": "1. 概要 (1-2文で)  \nRails 8.2 でデフォルト HTML テンプレートコンパイラになった Herb 利用時に、テンプレートの構文エラーが「どのファイルの何行目か」を正しく表示できるようにする修正です。ERB ハンドラが Herb にテンプレートのファイル名を渡すようにしたことで、エラー画面で実際のテンプレートの該当行がハイライトされるようになります。"
-    },
-    {
-      "number": 59582,
-      "title": "Running require from a Ractor currently creates a new thread every time {#pr-59582}",
-      "url": "https://github.com/rails/rails/pull/59582",
-      "mergedAt": "2026-11-05T00:00:00.000Z",
-      "author": "luke-gruber",
-      "authorUrl": "https://github.com/luke-gruber",
-      "summary": "1. 概要 (1-2文で)  \nこのPRは、Ractor 内で `require` を呼ぶと毎回スレッドが新規作成されてしまう現状を踏まえ、不要な `require` 呼び出しをスキップするための微修正を Active Support に入れたものです。実質的には 1 行の条件（または同等のロジック）変更で、Ractor 利用時のオーバーヘッドを軽減する意図があります。"
-    },
-    {
-      "number": 59482,
-      "title": "Map template frames in ExceptionWrapper without walking every resolver {#pr-59482}",
-      "url": "https://github.com/rails/rails/pull/59482",
-      "mergedAt": "2026-11-05T00:00:00.000Z",
-      "author": "linyiru",
-      "authorUrl": "https://github.com/linyiru",
-      "summary": "1. 概要 (1-2文で)  \nRails の例外ページなどで行っている「バックトレース中のテンプレートフレームのマッピング」を大幅に高速・省メモリ化する変更です。従来は全ての view resolver を総なめにしてテンプレートを探していましたが、`Template::Error` が持つ情報とテンプレートメソッド名のパターンを利用して、必要最小限の探索に絞るようになりました。"
-    },
-    {
-      "number": 59641,
-      "title": "Remove remaining Markdown directives {#pr-59641}",
-      "url": "https://github.com/rails/rails/pull/59641",
-      "mergedAt": "2026-11-05T00:00:00.000Z",
-      "author": "fxn",
-      "authorUrl": "https://github.com/fxn",
-      "summary": "1. 概要 (1-2文で)  \nRails のドキュメント形式を RDoc から Markdown に完全移行する一環として、ソースコード中に残っていた `# :markup: markdown` ディレクティブを削除し、プロジェクト全体のクリーンアップを完了した PR です。機能的な挙動や公開 API には一切変更がありません。"
-    },
-    {
-      "number": 59595,
-      "title": "Load associations when the owner has an attribute named `method` {#pr-59595}",
-      "url": "https://github.com/rails/rails/pull/59595",
-      "mergedAt": "2026-11-05T00:00:00.000Z",
-      "author": "anthonyfranco",
-      "authorUrl": "https://github.com/anthonyfranco",
-      "summary": "1. 概要 (1-2文で)  \nActive Record の関連読み込み時に、モデルに `method` という属性が存在すると `ArgumentError` が発生して関連がロードできなくなる不具合を修正する PR です。`owner.method(:read_attr)` の利用をやめ、`method` 属性と衝突しない形で属性値を読むように変更しています。"
-    },
-    {
-      "number": 59640,
-      "title": "Allow anonymous subclasses of cache stores with LocalCache {#pr-59640}",
-      "url": "https://github.com/rails/rails/pull/59640",
-      "mergedAt": "2026-11-05T00:00:00.000Z",
-      "author": "thomasklemm",
-      "authorUrl": "https://github.com/thomasklemm",
-      "summary": "1. 概要 (1-2文で)  \nRails のキャッシュストアに `LocalCache` 戦略を使う際、無名クラス（匿名サブクラス）のキャッシュストアでもエラーなく利用できるようにした修正です。`Rails.cache` を ractor 対応のために freeze する前に LocalCache のキーを生成する仕様変更によって発生した、匿名クラスでの `NoMethodError` を解消しています。"
-    },
-    {
-      "number": 59634,
-      "title": "Accept bind values in `where!` and `having!` again {#pr-59634}",
-      "url": "https://github.com/rails/rails/pull/59634",
-      "mergedAt": "2026-11-05T00:00:00.000Z",
-      "author": "thomasklemm",
-      "authorUrl": "https://github.com/thomasklemm",
-      "summary": "1. 概要 (1-2文で)  \nRails 8.1 → main の過程で `where!` / `having!` のシグネチャ変更により「バインド変数を渡せない」「既存のオーバーライドが壊れる」といった後方互換性問題が発生していたのを、元の可変長引数 (`*rest`) 形式に戻して修正する PR です。`where` / `having` / `merge` からの呼び出しも 8.1 と同じく再びスプラット渡しに戻しつつ、#59579 で入った他のメモリアロケーション最適化は維持しています。"
-    },
-    {
-      "number": 59638,
-      "title": "Fix Active Record `includes` with `merge` of an order on another model {#pr-59638}",
-      "url": "https://github.com/rails/rails/pull/59638",
-      "mergedAt": "2026-11-05T00:00:00.000Z",
-      "author": "kehra",
-      "authorUrl": "https://github.com/kehra",
-      "summary": "1. 概要 (1-2文で)  \n`includes` した関連に対して、別モデル側の `order` / `reorder` を `merge` すると事前ロードが外れ、JOIN せずに外部テーブルのカラムを参照して SQL エラーになるリグレッションが #59590 以降発生しており、この PR はそのバグを修正します。`merge` 時のソート情報の取り込み方法を変更し、適切に参照テーブルが記録されるようにしています。"
     }
   ]
 }
