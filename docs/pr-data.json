@@ -1,7 +1,61 @@
 {
-  "lastUpdated": "2026-11-11T00:12:16.200Z",
+  "lastUpdated": "2026-11-12T00:09:28.916Z",
   "totalCount": 50,
   "items": [
+    {
+      "number": 59767,
+      "title": "Deprecate `unscope(where: :column)` removing conditions on other tables {#pr-59767}",
+      "url": "https://github.com/rails/rails/pull/59767",
+      "mergedAt": "2026-11-11T00:00:00.000Z",
+      "author": "kamipo",
+      "authorUrl": "https://github.com/kamipo",
+      "summary": "1. 概要 (1-2文で)  \n`unscope(where: :column)` が、同名カラムを持つ他テーブル（JOIN/Eager Load 先）までまとめて条件削除してしまう挙動を非推奨にし、今後は「自分自身のテーブルのみ」を対象にするように変更・非推奨警告を導入した PR です。  \n他テーブルの条件を外したい場合は、テーブル名付き（qualified）で指定する方法に統一されます（Rails 9.0 で挙動変更予定）。"
+    },
+    {
+      "number": 59141,
+      "title": "Use an Array for storing Active Record attributes {#pr-59141}",
+      "url": "https://github.com/rails/rails/pull/59141",
+      "mergedAt": "2026-11-11T00:00:00.000Z",
+      "author": "tenderlove",
+      "authorUrl": "https://github.com/tenderlove",
+      "summary": "1. 概要 (1-2文で)  \nActive Record の属性ストレージを「ハッシュ(Map)ベース」から「配列ベース」に切り替え、属性リーダを「名前」ではなく「スロット(インデックス)」で読むようにした変更です。これにより、特に「全カラム SELECT ＋属性読み出し」のケースで、CPU・メモリ両面で効率化を狙っています。"
+    },
+    {
+      "number": 59489,
+      "title": "Make framework configs shareable when ractorizing, not after initialize {#pr-59489}",
+      "url": "https://github.com/rails/rails/pull/59489",
+      "mergedAt": "2026-11-11T00:00:00.000Z",
+      "author": "linyiru",
+      "authorUrl": "https://github.com/linyiru",
+      "summary": "1. 概要 (1-2文で)  \nActive Record / Action Dispatch の一部設定を「アプリ初期化直後」に凍結していたのをやめ、「Ractor 化の直前」に凍結するように変更し、初期化後に設定を上書き・追加しようとすると `FrozenError` が出てしまう問題を解消する PR です。Ractor を使わない通常利用時の挙動は維持しつつ、Ractor 化のタイミングでのみ設定を Ractor-shareable（凍結）にするよう整理しています。"
+    },
+    {
+      "number": 59753,
+      "title": "[RF-DOCS] Add a guide for using hotwire with rails (#58617) {#pr-59753}",
+      "url": "https://github.com/rails/rails/pull/59753",
+      "mergedAt": "2026-11-11T00:00:00.000Z",
+      "author": "p8",
+      "authorUrl": "https://github.com/p8",
+      "summary": "1. 概要 (1–2文で)  \nRailsガイドに「Hotwire を Rails と一緒に使うための専用ガイド」が新設され、従来の「Working with JavaScript in Rails」ガイドは大幅に整理・縮小されました。今後は、Rails におけるモダンなフロントエンド開発の公式な入口として、Hotwire 中心の構成にシフトしています。"
+    },
+    {
+      "number": 59752,
+      "title": "[RF-DOCS] Update the JavaScript in Rails guide (#58165) {#pr-59752}",
+      "url": "https://github.com/rails/rails/pull/59752",
+      "mergedAt": "2026-11-11T00:00:00.000Z",
+      "author": "p8",
+      "authorUrl": "https://github.com/p8",
+      "summary": "1. 概要 (1-2文で)  \n「Working with JavaScript in Rails」ガイド全体の構成と内容が大幅に書き換えられ、importmap と JavaScript バンドラの位置づけが整理されるとともに、Hotwire（Turbo / Stimulus）や `turbo-rails` / `stimulus-rails` / `request.js` との統合手順が詳しく追記されました。Rails で JavaScript を扱う際の“標準的な道筋”を示す、実質的な改訂版ドキュメントになっています。"
+    },
+    {
+      "number": 59739,
+      "title": "Dedup strings when loading JSON schema cache {#pr-59739}",
+      "url": "https://github.com/rails/rails/pull/59739",
+      "mergedAt": "2026-11-11T00:00:00.000Z",
+      "author": "ilianah",
+      "authorUrl": "https://github.com/ilianah",
+      "summary": "1. 概要 (1-2文で)  \nJSON 形式で schema cache をロードする際、同一内容の文字列オブジェクトを共有（デデュープ）するようにして、オブジェクト数・メモリ使用量を大幅に削減した PR です。あわせて、デデュープのために凍結されたオブジェクトを前提に、一部の Column/SchemaCache 周りのコードが「書き換えない」ように調整されています。"
+    },
     {
       "number": 59702,
       "title": "Fix `:integer` attributes silently truncating 64-bit integer strings {#pr-59702}",
@@ -397,60 +451,6 @@
       "author": "czj",
       "authorUrl": "https://github.com/czj",
       "summary": "1. 概要 (1-2文で)  \n`ActiveSupport::MessageVerifier`, `MessageEncryptor`, `CachingKeyGenerator` を `freeze`（および Ractor で `make_shareable`）した際に `FrozenError` が発生していた問題を修正する PRです。内部で遅延初期化していた長さ計算などを `freeze` 前に済ませることで、凍結後も問題なく署名・復号などができるようにしています。"
-    },
-    {
-      "number": 59680,
-      "title": "Set SQLITE_PS1 in dbconsole tests for SQLite 3.54.0+ {#pr-59680}",
-      "url": "https://github.com/rails/rails/pull/59680",
-      "mergedAt": "2026-11-06T00:00:00.000Z",
-      "author": "yahonda",
-      "authorUrl": "https://github.com/yahonda",
-      "summary": "1. 概要 (1-2文で)  \nSQLite 3.54.0以降でCLIプロンプトのデフォルト表示が変わったことにより、Railsの`dbconsole`関連テストが失敗していた問題を、`SQLITE_PS1=\"sqlite> \"`を明示的に設定することで解消するPRです。テスト側でプロンプトを固定することで、SQLiteのバージョン差異に依存しない安定したテスト実行を可能にしています。"
-    },
-    {
-      "number": 59655,
-      "title": "Make Active Record serialization up to 1.7x faster by not building attributes to list their names {#pr-59655}",
-      "url": "https://github.com/rails/rails/pull/59655",
-      "mergedAt": "2026-11-06T00:00:00.000Z",
-      "author": "linyiru",
-      "authorUrl": "https://github.com/linyiru",
-      "summary": "1. 概要 (1-2文で)  \nActive Record の属性セット (`LazyAttributeSet`) で「属性名リスト」を取得する際に、全カラム分の Attribute オブジェクトを構築しないようにし、`attribute_names` や `to_json` / `as_json` / `serializable_hash` を最大約 1.7 倍高速化した PR です。既存の挙動（キー順序や未初期化属性の扱い）は維持したまま、初回シリアライズ時のオブジェクト生成と処理時間を大幅に削減しています。"
-    },
-    {
-      "number": 59670,
-      "title": "Make turning a result into records up to 1.98x faster by looking up only the types of unknown columns {#pr-59670}",
-      "url": "https://github.com/rails/rails/pull/59670",
-      "mergedAt": "2026-11-06T00:00:00.000Z",
-      "author": "linyiru",
-      "authorUrl": "https://github.com/linyiru",
-      "summary": "1. 概要 (1–2文で)  \nこのPRは、クエリ結果をActive Recordのレコードオブジェクトに変換する処理で、「モデルが知らないカラム（カスタムSELECTのエイリアスなど）」の型情報だけを効率的に取得するように変更し、最大約2倍（1件フェッチ時）の高速化を行う最適化です。`Result#column_types` をそのまま使うのではなく、必要なときだけ部分的にタイプ情報を求める `Result#column_types_except` を導入しています。"
-    },
-    {
-      "number": 59669,
-      "title": "Make serializable_hash up to 1.14x faster with Symbol options by building keys with Symbol#name {#pr-59669}",
-      "url": "https://github.com/rails/rails/pull/59669",
-      "mergedAt": "2026-11-06T00:00:00.000Z",
-      "author": "linyiru",
-      "authorUrl": "https://github.com/linyiru",
-      "summary": "1. 概要 (1-2文で)  \n`ActiveModel::Serialization#serializable_hash` で `only:`, `except:`, `methods:`, `include:` などに **Symbol を渡した場合のオーバーヘッドを削減し、最大約 1.14 倍高速化**した PRです。`Symbol#to_s` の代わりに **非アロケーション & 凍結済み文字列を返す `Symbol#name`** を使うことで、オブジェクト生成数も削減しています。"
-    },
-    {
-      "number": 59666,
-      "title": "Make serialization up to 1.13x faster for models with an inheritance column by not building options {#pr-59666}",
-      "url": "https://github.com/rails/rails/pull/59666",
-      "mergedAt": "2026-11-06T00:00:00.000Z",
-      "author": "linyiru",
-      "authorUrl": "https://github.com/linyiru",
-      "summary": "1. 概要 (1-2文で)  \n`type` カラム（継承カラム）を持つモデルの `serializable_hash` / `as_json` / `to_json` で、オプションを組み立てずに `type` を除外するようにして、最大 1.13 倍程度の高速化とオブジェクト生成数削減を行った PR です。挙動（とくに `only:` で `type` を指定した場合）は従来どおり維持しつつ、オプション未指定時の「無駄な options の構築」を避けています。"
-    },
-    {
-      "number": 59678,
-      "title": "Fix loading msgpack in a non-main Ractor {#pr-59678}",
-      "url": "https://github.com/rails/rails/pull/59678",
-      "mergedAt": "2026-11-06T00:00:00.000Z",
-      "author": "luke-gruber",
-      "authorUrl": "https://github.com/luke-gruber",
-      "summary": "1. 概要 (1-2文で)  \nmsgpack を Ractor（メイン以外の Ractor）内で利用する際、Bundler / RubyGems の `gem` メソッド呼び出しが Ractor の分離制約に引っかかってエラーになる問題を回避するため、Active Support の「フォールバック付きシリアライザ」が msgpack のロード処理をより安全に行うよう修正されています。  \nこれにより、キャッシュやメッセージ署名で msgpack を使っているアプリでも、Ractor を併用した並列実行時により安定して動作するようになります。"
     }
   ]
 }
