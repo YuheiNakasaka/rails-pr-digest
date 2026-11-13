@@ -1,7 +1,52 @@
 {
-  "lastUpdated": "2026-11-12T00:09:28.916Z",
+  "lastUpdated": "2026-11-13T00:09:47.964Z",
   "totalCount": 50,
   "items": [
+    {
+      "number": 59776,
+      "title": "[8.1] Treat a MessagePack cache entry with a missing class as a cache miss - #59683 {#pr-59776}",
+      "url": "https://github.com/rails/rails/pull/59776",
+      "mergedAt": "2026-11-12T00:00:00.000Z",
+      "author": "byroot",
+      "authorUrl": "https://github.com/byroot",
+      "summary": "1. 概要 (1-2文で)  \nRails 8.1系において、MessagePack を使ったキャッシュシリアライザで「復元時にクラスが見つからない」場合、そのエントリを **例外ではなくキャッシュミスとして扱う**ようにしたバックポートです。これにより、デプロイやクラス構成変更に伴う古いキャッシュが原因でアプリ全体が落ちにくくなります。"
+    },
+    {
+      "number": 59683,
+      "title": "Treat a MessagePack cache entry with a missing class as a cache miss {#pr-59683}",
+      "url": "https://github.com/rails/rails/pull/59683",
+      "mergedAt": "2026-11-12T00:00:00.000Z",
+      "author": "hasannadeem",
+      "authorUrl": "https://github.com/hasannadeem",
+      "summary": "1. 概要 (1-2文で)  \nMessagePack シリアライザ (`serializer: :message_pack`) 使用時に、「定義が失われたクラス（削除・リネーム済み）を参照するキャッシュエントリ」があると、それを「値が nil のヒット」と扱ってしまうバグを修正し、「キャッシュミス」として扱うように統一しました。Marshal シリアライザと同様に、その場合は `ActiveSupport::Cache::DeserializationError` を発生させ、各ストア側がミス扱いする挙動に揃えています。"
+    },
+    {
+      "number": 59692,
+      "title": "Prevent Active Record from silently losing `increment!`/`decrement!` updates with stale `lock_version` {#pr-59692}",
+      "url": "https://github.com/rails/rails/pull/59692",
+      "mergedAt": "2026-11-12T00:00:00.000Z",
+      "author": "kehra",
+      "authorUrl": "https://github.com/kehra",
+      "summary": "1. 概要 (1-2文で)  \nこのPRは、楽観ロック (`lock_version`) を使っているモデルに対して `increment!` / `decrement!` を呼んだとき、メモリ上の `lock_version` が古い場合に「更新がDBに反映されず、かつエラーも出ない」という問題を修正するものです。`increment!` / `decrement!` のSQLから暗黙の `lock_version` 条件を外し、以前の振る舞い（楽観ロックと独立した「カウンタの原子的インクリメント」）を復元しています。"
+    },
+    {
+      "number": 59548,
+      "title": "[8-1-stable] Add `--update` option to the `bin/bundler-audit` script {#pr-59548}",
+      "url": "https://github.com/rails/rails/pull/59548",
+      "mergedAt": "2026-11-12T00:00:00.000Z",
+      "author": "izkreny",
+      "authorUrl": "https://github.com/izkreny",
+      "summary": "1. 概要 (1-2文で)  \nRails 8.1 系の `bin/bundler-audit` テンプレートに、実行時に常に脆弱性DBを更新する `--update` オプションを追加するバックポートです。これにより、ローカル開発環境でも最新の脆弱性情報に基づいて `bundler-audit` が実行されるようになります。"
+    },
+    {
+      "number": 59679,
+      "title": "Consolidate accepting/memos on transition table {#pr-59679}",
+      "url": "https://github.com/rails/rails/pull/59679",
+      "mergedAt": "2026-11-12T00:00:00.000Z",
+      "author": "hmcguire-shopify",
+      "authorUrl": "https://github.com/hmcguire-shopify",
+      "summary": "1. 概要 (1-2文で)  \n`ActionDispatch::Journey` の GTG (graph transition graph) 実装で、状態が受理状態かどうかを表す `accepting` 情報を、既存の `memos` 情報から算出する形に統合するリファクタリングです。  \nこれにより、同じ情報を二重に持たず、遷移テーブル周りのデータ構造が少しシンプルになっています。"
+    },
     {
       "number": 59767,
       "title": "Deprecate `unscope(where: :column)` removing conditions on other tables {#pr-59767}",
@@ -406,51 +451,6 @@
       "author": "y0608",
       "authorUrl": "https://github.com/y0608",
       "summary": "1. 概要 (1–2文で)  \nこのPRは、Rails ガイド（Action Pack / Action View / Asset 関連）の英語ドキュメントに含まれていたタイポ、単語の抜け、文法ミス、および表記揺れを修正するものです。コードや挙動の変更は一切なく、ドキュメントの可読性と正確性を高めることのみを目的としています。"
-    },
-    {
-      "number": 59691,
-      "title": "[8-1-stable] Bump rubocop-md to 3.0.0 and fix Ruby snippets in guides {#pr-59691}",
-      "url": "https://github.com/rails/rails/pull/59691",
-      "mergedAt": "2026-11-06T00:00:00.000Z",
-      "author": "yahonda",
-      "authorUrl": "https://github.com/yahonda",
-      "summary": "1. 概要 (1-2文で)  \nRails 8-1-stableブランチで `rubocop-md` を 3.0.0 に追随した結果、ガイド内のRubyコード例で検出された違反を修正するバックポートPRです。実コードには手を入れず、`Gemfile.lock` とガイド文書中のコードスニペットのみを調整しています。"
-    },
-    {
-      "number": 59686,
-      "title": "Bump rubocop-md to 3.0.0 and fix Ruby snippets in guides {#pr-59686}",
-      "url": "https://github.com/rails/rails/pull/59686",
-      "mergedAt": "2026-11-06T00:00:00.000Z",
-      "author": "yahonda",
-      "authorUrl": "https://github.com/yahonda",
-      "summary": "1. 概要 (1-2文で)  \nrubocop-md を 3.0.0 に更新した結果、Rails Guides 内の Ruby コードスニペットに対して新たに検出されるようになった Lint/Syntax/Layout の違反をまとめて修正した PRです。Markdown 中のコードフェンスの扱い改善により、これまで実質ノーチェックだった一部の Ruby サンプルも正しく RuboCop の対象になりました。"
-    },
-    {
-      "number": 59688,
-      "title": "Force UTF8 encoding when reading source annotation {#pr-59688}",
-      "url": "https://github.com/rails/rails/pull/59688",
-      "mergedAt": "2026-11-06T00:00:00.000Z",
-      "author": "alexandre184",
-      "authorUrl": "https://github.com/alexandre184",
-      "summary": "1. 概要 (1-2文で)  \nRails のソースアノテーション機能で、コメント内に非 ASCII 文字が含まれていると `/rails/info/notes` アクセス時に `Encoding::CompatibilityError` が発生していた問題を、読み込み時に UTF-8 を強制しつつ不正なバイト列を置換することで解消する PR です。`railties` にパッチが入り、テストと CHANGELOG が追加されています。"
-    },
-    {
-      "number": 59685,
-      "title": "Use a single Active Record pool reaper thread {#pr-59685}",
-      "url": "https://github.com/rails/rails/pull/59685",
-      "mergedAt": "2026-11-06T00:00:00.000Z",
-      "author": "federico-carrocera",
-      "authorUrl": "https://github.com/federico-carrocera",
-      "summary": "1. 概要 (1-2文で)  \nActive Record のコネクションプールを掃除する「AR Pool Reaper」スレッドが、リープ頻度ごとに複数立っていた実装をやめ、**プロセスあたり 1 本の共有スレッドで全プールをリープする方式に統一**する変更です。あわせて、スレッド停止処理まわりのデッドロックの可能性を避けるため、スリープ方法やテストも調整されています。"
-    },
-    {
-      "number": 59501,
-      "title": "Fix FrozenError in frozen MessageVerifier, MessageEncryptor and CachingKeyGenerator {#pr-59501}",
-      "url": "https://github.com/rails/rails/pull/59501",
-      "mergedAt": "2026-11-06T00:00:00.000Z",
-      "author": "czj",
-      "authorUrl": "https://github.com/czj",
-      "summary": "1. 概要 (1-2文で)  \n`ActiveSupport::MessageVerifier`, `MessageEncryptor`, `CachingKeyGenerator` を `freeze`（および Ractor で `make_shareable`）した際に `FrozenError` が発生していた問題を修正する PRです。内部で遅延初期化していた長さ計算などを `freeze` 前に済ませることで、凍結後も問題なく署名・復号などができるようにしています。"
     }
   ]
 }
