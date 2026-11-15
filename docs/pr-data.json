@@ -1,7 +1,25 @@
 {
-  "lastUpdated": "2026-11-14T00:10:40.708Z",
+  "lastUpdated": "2026-11-15T00:08:29.085Z",
   "totalCount": 50,
   "items": [
+    {
+      "number": 59806,
+      "title": "[ci skip] Clarify create_table block behavior with as: {#pr-59806}",
+      "url": "https://github.com/rails/rails/pull/59806",
+      "mergedAt": "2026-11-14T00:00:00.000Z",
+      "author": "skatkov",
+      "authorUrl": "https://github.com/skatkov",
+      "summary": "1. 概要 (1-2文で)  \n`create_table` に `as:` オプションを指定したときのブロックの挙動について、ドキュメントの記述を実装に合わせて修正した PR です。`as:` を使ってもブロック内の index 定義などは評価される一方で、`:id` と `:primary_key` オプションは無視されることを明示しています。"
+    },
+    {
+      "number": 59802,
+      "title": "[PERFORMANCE] Use method_defined? to detect missing actions in unused_routes {#pr-59802}",
+      "url": "https://github.com/rails/rails/pull/59802",
+      "mergedAt": "2026-11-14T00:00:00.000Z",
+      "author": "corsonknowles",
+      "authorUrl": "https://github.com/corsonknowles",
+      "summary": "1. 概要 (1-2文で)  \n`bin/rails unused_routes` コマンドの内部で、コントローラにアクションが存在するかの判定方法を `instance_methods.exclude?` から `method_defined?` に変更し、大規模アプリで unused routes チェックの実行時間を大幅に短縮するパフォーマンス改善です。挙動は変えずに、メソッドテーブルの直接参照にすることで、不要な配列生成と線形走査をなくしています。"
+    },
     {
       "number": 59780,
       "title": "Fix merge of unscope values that include a Hash or Arel attribute in an array {#pr-59780}",
@@ -433,24 +451,6 @@
       "author": "matthewd",
       "authorUrl": "https://github.com/matthewd",
       "summary": "1. 概要 (1-2文で)  \nこのPRは、Active Record の `SchemaContext` を「モデルとデータソースの設定上の関係」として再定義し、その実ランタイム情報を扱う部分を新クラス `SchemaContext::MappedTable` に分離した変更です。主な狙いは、primary key や STI 用カラムなどの「設定」と「実テーブル情報」の扱いを整理しつつ、スキーマリロード／スキーマキャッシュと整合的に扱える土台を整えることです。"
-    },
-    {
-      "number": 59708,
-      "title": "Fix flaky FullStackConsoleTest#test_reload_command_fires_preparation_and_cleanup_callbacks {#pr-59708}",
-      "url": "https://github.com/rails/rails/pull/59708",
-      "mergedAt": "2026-11-09T00:00:00.000Z",
-      "author": "yahonda",
-      "authorUrl": "https://github.com/yahonda",
-      "summary": "1. 概要 (1-2文で)  \nRails の `FullStackConsoleTest#test_reload_command_fires_preparation_and_cleanup_callbacks` が Buildkite 上で時々落ちる原因となっていた IRB のプロンプト待ちロジックのレースコンディションを解消するため、コンソールテストのプロンプト待ち条件が修正されました。これにより、テスト時に IRB の出力が途中で分断されてコマンドのエコー確認に失敗する “flaky test” が発生しないようになります。"
-    },
-    {
-      "number": 59601,
-      "title": "Don't convert the given scheduled_at to UTC in place {#pr-59601}",
-      "url": "https://github.com/rails/rails/pull/59601",
-      "mergedAt": "2026-11-08T00:00:00.000Z",
-      "author": "bruno-costanzo",
-      "authorUrl": "https://github.com/bruno-costanzo",
-      "summary": "1. 概要 (1-2文で)  \n`ActiveJob#set(wait_until:)` に素の `Time` オブジェクトを渡したとき、そのオブジェクト自体が UTC に「破壊的に」変換されてしまうバグを修正し、呼び出し元の `Time` を書き換えないようにした PR です。シリアライズされる内容は変えずに、内部で新しい `Time` オブジェクトを生成して扱うようにしています。"
     }
   ]
 }
