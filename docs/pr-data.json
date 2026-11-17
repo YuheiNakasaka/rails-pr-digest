@@ -1,7 +1,79 @@
 {
-  "lastUpdated": "2026-11-16T00:09:52.246Z",
+  "lastUpdated": "2026-11-17T00:10:07.678Z",
   "totalCount": 50,
   "items": [
+    {
+      "number": 58967,
+      "title": "[doc][ci skip] Fix I18n guide example for array defaults to use a Symbol {#pr-58967}",
+      "url": "https://github.com/rails/rails/pull/58967",
+      "mergedAt": "2026-11-16T00:00:00.000Z",
+      "author": "hachi8833",
+      "authorUrl": "https://github.com/hachi8833",
+      "summary": "1. 概要 (1-2文で)  \nI18n ガイドの「Defaults」節で、`:default` オプションに配列を渡したときの挙動説明とサンプルコードが、実際の `I18n.t` の動作と食い違っていたため、それを修正するドキュメント専用PRです。`default` 配列内で「翻訳キーとして解決されるのは Symbol だけ」であることが明示されるようになりました。"
+    },
+    {
+      "number": 58169,
+      "title": "[doc][ci-skip] Remove redundant \"Setting the Locale from URL Params\" section in I18n edge guides {#pr-58169}",
+      "url": "https://github.com/rails/rails/pull/58169",
+      "mergedAt": "2026-11-16T00:00:00.000Z",
+      "author": "hachi8833",
+      "authorUrl": "https://github.com/hachi8833",
+      "summary": "1. 概要 (1-2文で)  \nRails Edge Guides の I18n ドキュメントで、「URLパラメータからロケールを設定する」親セクションが内容的に重複・混在しており、説明が循環参照的になっていた問題を整理した PR です。クエリパラメータ方式とパス方式をそれぞれ独立したトップレベルセクションとして再構成し、説明文を分かりやすく書き直しています。"
+    },
+    {
+      "number": 59823,
+      "title": "Apply through model's default scope to its aliased table {#pr-59823}",
+      "url": "https://github.com/rails/rails/pull/59823",
+      "mergedAt": "2026-11-16T00:00:00.000Z",
+      "author": "kamipo",
+      "authorUrl": "https://github.com/kamipo",
+      "summary": "1. 概要 (1-2文で)  \nRails の has_many :through 等の「through association」で、経由モデルに対する default_scope/STI 条件が、自己参照などでテーブルにエイリアスが付く場合に「本来かかるべきエイリアス先テーブルではなく元テーブル」に付いてしまっていたバグを修正する PR です。AssociationScope が使うテーブルエイリアスと同じものを使ってスコープを構築することで、through 先の default_scope などが正しくエイリアス側に適用されるようになりました。"
+    },
+    {
+      "number": 59819,
+      "title": "Read PostgreSQL index definitions from the catalogs {#pr-59819}",
+      "url": "https://github.com/rails/rails/pull/59819",
+      "mergedAt": "2026-11-16T00:00:00.000Z",
+      "author": "kamipo",
+      "authorUrl": "https://github.com/kamipo",
+      "summary": "1. 概要 (1-2文で)  \nPostgreSQL のインデックス定義を `pg_get_indexdef` の正規表現パースに頼るのではなく、カタログテーブルから構造的に読み取るように変更した PR です。これにより、複雑なインデックス定義でも `schema.rb` / structure dump が壊れたりロード不能になる問題が大幅に解消されます。"
+    },
+    {
+      "number": 59821,
+      "title": "Fix association `unscope(where:)` not applying when the join is aliased {#pr-59821}",
+      "url": "https://github.com/rails/rails/pull/59821",
+      "mergedAt": "2026-11-16T00:00:00.000Z",
+      "author": "americodls",
+      "authorUrl": "https://github.com/americodls",
+      "summary": "1. 概要 (1-2文で)  \n`unscope(where: ...)` を指定した関連を「テーブルエイリアス付きで JOIN したとき」に、意図したとおり default_scope の条件が外れずに残ってしまう回帰バグを修正する PR です。`unscope` がテーブルエイリアスを考慮して where 条件を外すようになりました。"
+    },
+    {
+      "number": 59820,
+      "title": "Break hard dependency between Action Mailer and Active Job {#pr-59820}",
+      "url": "https://github.com/rails/rails/pull/59820",
+      "mergedAt": "2026-11-16T00:00:00.000Z",
+      "author": "byroot",
+      "authorUrl": "https://github.com/byroot",
+      "summary": "1. 概要 (1-2文で)  \nAction Mailer が Active Job に「必須依存」しないようにし、Active Job を使わないアプリでも余計なコードをロードせずに Action Mailer を利用できるようにした変更です。これにより、Action Mailer と Active Job の結合度が下がり、軽量構成やカスタムジョブ実装がしやすくなります。"
+    },
+    {
+      "number": 59816,
+      "title": "Cast grouped keys and plucked columns unknown to the schema from the result {#pr-59816}",
+      "url": "https://github.com/rails/rails/pull/59816",
+      "mergedAt": "2026-11-16T00:00:00.000Z",
+      "author": "kamipo",
+      "authorUrl": "https://github.com/kamipo",
+      "summary": "1. 概要 (1-2文で)  \nRails の Active Record において、スキーマキャッシュが型情報を持たないカラム（サブクエリ/CTE/テーブル別名など）の `group` 集計や `pluck` 結果が常に文字列など「デフォルト型」になってしまう問題を修正し、DB が返す結果列の型情報にフォールバックして適切にキャストされるようにした PR です。これにより、JOIN したサブクエリや CTE のカラムでも、`Date` や `Time` など本来の Ruby 型で取得できるようになります。"
+    },
+    {
+      "number": 59813,
+      "title": "Don't reuse source records a nested through loaded without our scope {#pr-59813}",
+      "url": "https://github.com/rails/rails/pull/59813",
+      "mergedAt": "2026-11-16T00:00:00.000Z",
+      "author": "kamipo",
+      "authorUrl": "https://github.com/kamipo",
+      "summary": "1. 概要 (1-2文で)  \n`has_many :through` がネストしており、それぞれにスコープ（where / preload などの条件）が付いている場合に、外側のスコープが正しく反映されずに関連がプリロードされてしまうバグを修正した PR です。ネストした through のプリロード時に「中間モデル経由で既に読み込まれている関連レコード」を安易に再利用せず、外側のスコープを反映したクエリで取り直すようにしています。"
+    },
     {
       "number": 59797,
       "title": "Fix preloading scoped nested `has_many :through` reusing a sibling's records {#pr-59797}",
@@ -379,78 +451,6 @@
       "author": "kamipo",
       "authorUrl": "https://github.com/kamipo",
       "summary": "1. 概要 (1-2文で)  \nPostgreSQL の `money` 型に対して、数値オブジェクト（Numeric）を代入した場合でも、小数桁数（scale）に従って丸めるように `OID::Money#cast_value` の挙動が修正されました。これにより、保存前後での値の不一致が解消され、併せて numericality バリデーション側の一時的な丸めロジックも削除されています。"
-    },
-    {
-      "number": 59629,
-      "title": "Restore ActionView::LookupContext#find_template {#pr-59629}",
-      "url": "https://github.com/rails/rails/pull/59629",
-      "mergedAt": "2026-11-09T00:00:00.000Z",
-      "author": "thomasklemm",
-      "authorUrl": "https://github.com/thomasklemm",
-      "summary": "1. 概要 (1-2文で)  \nRails 8.1 まで存在していた `ActionView::LookupContext#find_template` を、`find!` のエイリアスとして復活させる PRです。これにより、従来通りテンプレートが見つからない場合に `ActionView::MissingTemplate` を投げる API が維持され、既存の gem との互換性が確保されます。"
-    },
-    {
-      "number": 59649,
-      "title": "[ci skip] Fix grammar, missing words, and punctuation in configuration and runtime guides {#pr-59649}",
-      "url": "https://github.com/rails/rails/pull/59649",
-      "mergedAt": "2026-11-09T00:00:00.000Z",
-      "author": "y0608",
-      "authorUrl": "https://github.com/y0608",
-      "summary": "1. 概要 (1-2文で)  \nこのPRは、Rails公式ガイドの英語ドキュメントに含まれていた文法ミス・単語抜け・句読点の不備を修正するもので、コードやMarkdown構造には一切手を加えていません。動作仕様には影響しない、純粋な文章品質向上のためのドキュメント修正です。"
-    },
-    {
-      "number": 59715,
-      "title": "RequestForgeryProtection: don't assume the module is included in a Controller {#pr-59715}",
-      "url": "https://github.com/rails/rails/pull/59715",
-      "mergedAt": "2026-11-09T00:00:00.000Z",
-      "author": "byroot",
-      "authorUrl": "https://github.com/byroot",
-      "summary": "1. 概要 (1-2文で)  \n`ActionController::RequestForgeryProtection` モジュールが「必ずコントローラに `include` される」と仮定していた部分を見直し、コントローラ以外のクラス（例: `omniauth-rails_csrf_protection` が使うクラス）にインクルードされても壊れないように抽象コントローラ周りの責務整理と初期化方法の改善を行った PR です。  \nこれにより CSRF 保護機能のモジュールを他クラスに混ぜ込んでも例外や不整合が起きにくくなり、`AbstractController` 系の設定の扱いも整理されています。"
-    },
-    {
-      "number": 59656,
-      "title": "[ci skip] Fix typos, missing words, and grammar in background, mail, and system guides {#pr-59656}",
-      "url": "https://github.com/rails/rails/pull/59656",
-      "mergedAt": "2026-11-09T00:00:00.000Z",
-      "author": "y0608",
-      "authorUrl": "https://github.com/y0608",
-      "summary": "1. 概要 (1-2文で)  \nこのPRは、Railsガイド(Active Job / Storage / Mailer / Mailbox / Text / Cable / セキュリティ / テスト / エラー報告 / I18n / Rack / アップグレードガイドなど)に含まれていた英語のタイポ・文法ミス・インラインコード表記の誤りを修正するドキュメント専用の変更です。コードや挙動の変更はなく、ガイドの可読性と正確さを高めることを目的としています。"
-    },
-    {
-      "number": 59528,
-      "title": "Fix nested preloads under a through association using copies of its records {#pr-59528}",
-      "url": "https://github.com/rails/rails/pull/59528",
-      "mergedAt": "2026-11-09T00:00:00.000Z",
-      "author": "czj",
-      "authorUrl": "https://github.com/czj",
-      "summary": "1. 概要 (1-2文で)  \n`has_many :through` に対するプリロードを「単体」と「ネスト付き」の2通りで同時に行った場合、実際に手元にあるレコードにはネスト先がプリロードされない不具合を修正するPRです。特に `strict_loading` を有効にしていると `ActiveRecord::StrictLoadingViolationError` を引き起こしていたケースが、正しく一括ロードされるようになります。"
-    },
-    {
-      "number": 59714,
-      "title": "Further simplify LocalCache#local_cache_key {#pr-59714}",
-      "url": "https://github.com/rails/rails/pull/59714",
-      "mergedAt": "2026-11-09T00:00:00.000Z",
-      "author": "byroot",
-      "authorUrl": "https://github.com/byroot",
-      "summary": "1. 概要 (1-2文で)  \n`ActiveSupport::Cache::Strategy::LocalCache` が内部で使う `local_cache_key` の生成ロジックをさらに簡略化し、クラス名を含めず `object_id` のみで一意性を担保するようにしたPRです。機能的な挙動は基本的に変わらず、内部実装の整理・軽量化が主目的です。"
-    },
-    {
-      "number": 59713,
-      "title": "Revert \"Skip the HTML entity gsub! in JSON::Coder output with nothing to escape\" {#pr-59713}",
-      "url": "https://github.com/rails/rails/pull/59713",
-      "mergedAt": "2026-11-09T00:00:00.000Z",
-      "author": "byroot",
-      "authorUrl": "https://github.com/byroot",
-      "summary": "1. 概要 (1-2文で)  \nこのPRは、JSONエンコード時のHTMLエンティティエスケープ処理を「一部のケースで `gsub!` をスキップする」最適化を元に戻し、従来の処理に戻しています。理由は、その最適化が大きな文字列に対しては逆に非効率であり、かつ対象となるのが実質的に古いRubyバージョン（〜2.0相当）のコードパスに限られるためです。"
-    },
-    {
-      "number": 59712,
-      "title": "Eager load AssociationRoute and Rack::Multipart {#pr-59712}",
-      "url": "https://github.com/rails/rails/pull/59712",
-      "mergedAt": "2026-11-09T00:00:00.000Z",
-      "author": "byroot",
-      "authorUrl": "https://github.com/byroot",
-      "summary": "1. 概要 (1-2文で)  \nこのPRは、これまで遅延（lazy）ロードされていた `AssociationRoute` と `Rack::Multipart` を、フレームワーク起動時に先読み（eager load）するように変更したものです。頻繁に使われるコンポーネントを事前ロードすることで、実行時のオーバーヘッドや一部のオートロード関連問題を減らす意図があります。"
     }
   ]
 }
