@@ -1,7 +1,124 @@
 {
-  "lastUpdated": "2026-11-17T00:10:07.678Z",
+  "lastUpdated": "2026-11-18T00:12:19.801Z",
   "totalCount": 50,
   "items": [
+    {
+      "number": 59837,
+      "title": "Entirely drop support for Active Record 6.1 marshal format {#pr-59837}",
+      "url": "https://github.com/rails/rails/pull/59837",
+      "mergedAt": "2026-11-17T00:00:00.000Z",
+      "author": "byroot",
+      "authorUrl": "https://github.com/byroot",
+      "summary": "1. 概要 (1-2文で)  \nこのPRでは、Active Record 6.1 で使われていた独自の marshal 形式に対する「読み込み（unmarshal）」互換サポートを完全に削除しています。これにより、Rails 6.1 形式で marshal された Active Record オブジェクトは、現行バージョンではそのままでは復元できなくなります。"
+    },
+    {
+      "number": 59845,
+      "title": "Instrument the query `rails query` runs, not its first argument {#pr-59845}",
+      "url": "https://github.com/rails/rails/pull/59845",
+      "mergedAt": "2026-11-17T00:00:00.000Z",
+      "author": "jeremy",
+      "authorUrl": "https://github.com/jeremy",
+      "summary": "1. 概要 (1-2文で)  \n`rails query` コマンドが発行する *実際のクエリ* を ActiveSupport::Notifications (`query.rails`) で正しく計測・記録するようにした PR です。標準入力（パイプやサブコマンド `explain` / `schema` など）から決定される「実際に実行されるコマンド内容」が監査ログ等に正しく残るようになります。"
+    },
+    {
+      "number": 59839,
+      "title": "[8-1-stable] Fix `ActionCable::Server::Socket` tests with websocket-driver 0.9.0 {#pr-59839}",
+      "url": "https://github.com/rails/rails/pull/59839",
+      "mergedAt": "2026-11-17T00:00:00.000Z",
+      "author": "yahonda",
+      "authorUrl": "https://github.com/yahonda",
+      "summary": "1. 概要 (1-2文で)  \nRails 8.1 系ブランチ（8-1-stable）で、`websocket-driver` 0.9.0 使用時に Action Cable のソケット関連テストがハング・失敗する問題を修正し、#59835 の変更を 8-1-stable 用にバックポートした PRです。テストが `websocket-driver` 0.8.0 / 0.9.0 の両方で通るように、WebSocket 接続に使うヘッダをテスト側に明示的に追加しています。"
+    },
+    {
+      "number": 59842,
+      "title": "[8-1-stable] Fix order dependent failure of `ActionCable::Server::Socket::StreamTest` {#pr-59842}",
+      "url": "https://github.com/rails/rails/pull/59842",
+      "mergedAt": "2026-11-17T00:00:00.000Z",
+      "author": "yahonda",
+      "authorUrl": "https://github.com/yahonda",
+      "summary": "1. 概要 (1-2文で)  \nAction Cable の `StreamTest` が、テスト実行順や Ruby バージョン (特に Linux 上の Ruby 3.4 以前) によって失敗する問題を修正するための backport PR です。`8-1-stable` ブランチ向けに、ソケットクローズの挙動を調整することで、イベントループスレッドの異常終了を防いでいます。"
+    },
+    {
+      "number": 59829,
+      "title": "Fix bind values with Arel.sql in where {#pr-59829}",
+      "url": "https://github.com/rails/rails/pull/59829",
+      "mergedAt": "2026-11-17T00:00:00.000Z",
+      "author": "andrewfader",
+      "authorUrl": "https://github.com/andrewfader",
+      "summary": "1. 概要 (1-2文で)  \nRails 8d6b63b0cd (#59642) 以降、`where(Arel.sql(\"id = ?\"), 1)` のような書き方で `ActiveRecord::PreparedStatementInvalid`（bind の数不整合）が起きる回 regresson を修正した PRです。`build_where_clause` 内で Arel の SQL リテラルを一度 `to_s` してからバインド数を数えるように変更し、`where` / `where.not` / `having` での `Arel.sql` 利用を元通り動作させています。"
+    },
+    {
+      "number": 59841,
+      "title": "Fix order dependent failure of `ActionCable::Server::Socket::StreamTest` {#pr-59841}",
+      "url": "https://github.com/rails/rails/pull/59841",
+      "mergedAt": "2026-11-17T00:00:00.000Z",
+      "author": "yahonda",
+      "authorUrl": "https://github.com/yahonda",
+      "summary": "1. 概要 (1-2文で)  \n`ActionCable::Server::Socket::StreamTest` が「テスト実行順序」や Ruby のバージョン・OS によってだけ失敗する問題を、`rack.hijack_io` に渡す IO を「読み書き可能なソケットペア」に変えることで解消した PR です。特に Linux + Ruby 3.4 以前で、そのテストファイル単体実行時にのみ起きる WebSocket 接続まわりのレースコンディション的な失敗を潰しています。"
+    },
+    {
+      "number": 59836,
+      "title": "Add `association_scope_keeps_owner_conditions` to keep the owner conditions of associations {#pr-59836}",
+      "url": "https://github.com/rails/rails/pull/59836",
+      "mergedAt": "2026-11-17T00:00:00.000Z",
+      "author": "kamipo",
+      "authorUrl": "https://github.com/kamipo",
+      "summary": "1. 概要 (1-2文で)  \nRails 8.2 からの新設定 `config.active_record.association_scope_keeps_owner_conditions` により、関連のスコープが「所有側の条件」（外部キーや polymorphic の type 条件）を勝手に外せなくなります。従来どおり `unscope` や独自条件でこれらを外したい場合は設定を無効にするか、Rails 9.0 までにコード側を明示的に対応する必要があります。"
+    },
+    {
+      "number": 59740,
+      "title": "Remove UrlForTest#test_protocol_encoding_is_preserved {#pr-59740}",
+      "url": "https://github.com/rails/rails/pull/59740",
+      "mergedAt": "2026-11-17T00:00:00.000Z",
+      "author": "yahonda",
+      "authorUrl": "https://github.com/yahonda",
+      "summary": "1. 概要 (1-2文で)  \nRails の `UrlForTest#test_protocol_encoding_is_preserved` が Ruby 4.1.0dev でエンコーディングの仕様変更により失敗するため、「プロトコル文字列のエンコーディングを保持する」ことを検証していたテスト自体を削除した PR です。Rails 側としてはプロトコルのエンコーディングを保証しない方針を明確にし、Ruby の内部仕様に強く依存した脆いテストを整理しています。"
+    },
+    {
+      "number": 59835,
+      "title": "Fix `ActionCable::Server::Socket` tests with websocket-driver 0.9.0 {#pr-59835}",
+      "url": "https://github.com/rails/rails/pull/59835",
+      "mergedAt": "2026-11-17T00:00:00.000Z",
+      "author": "yahonda",
+      "authorUrl": "https://github.com/yahonda",
+      "summary": "1. 概要 (1-2文で)  \nAction Cable のソケット周りのテストが、`websocket-driver` 0.9.0 で失敗する問題を修正する PRです。Rails 本体の実装は変えず、テスト側を RFC 6455 準拠のクライアント挙動に合わせることで、古い `websocket-driver` (0.7.7) と新しい 0.9.0 の両方でテストが通るようにしています。"
+    },
+    {
+      "number": 59838,
+      "title": "Fix order dependent failure of a `ReflectionTest` test {#pr-59838}",
+      "url": "https://github.com/rails/rails/pull/59838",
+      "mergedAt": "2026-11-17T00:00:00.000Z",
+      "author": "yahonda",
+      "authorUrl": "https://github.com/yahonda",
+      "summary": "1. 概要 (1-2文で)  \n`ReflectionTest` 内の `test_association_added_to_parent_reaches_subclass_that_defined_its_own_first` がテスト実行順によって失敗する問題を修正した PR です。原因はフィクスチャの読み込み状況によってレコード ID が変わり、期待する関連レコード以外が結果に混ざってしまうことでした。"
+    },
+    {
+      "number": 59828,
+      "title": "Fix `disable_joins` ignoring the polymorphic type condition of an `as:` association {#pr-59828}",
+      "url": "https://github.com/rails/rails/pull/59828",
+      "mergedAt": "2026-11-17T00:00:00.000Z",
+      "author": "kamipo",
+      "authorUrl": "https://github.com/kamipo",
+      "summary": "1. 概要 (1-2文で)  \n`has_many :through, disable_joins: true` を多態関連（`as:` オプション）経由で使った場合に、`taggable_type` などのポリモーフィックな type 条件が無視されてしまい、他のタイプのレコードまで読み込まれてしまう不具合を修正する PR です。`disable_joins` 利用時でも、通常の関連ロードと同じくポリモーフィックの type 条件が必ず付与されるようになります。"
+    },
+    {
+      "number": 59827,
+      "title": "Move PostgreSQL-only DDL into PostgreSQL `SchemaCreation` {#pr-59827}",
+      "url": "https://github.com/rails/rails/pull/59827",
+      "mergedAt": "2026-11-17T00:00:00.000Z",
+      "author": "kamipo",
+      "authorUrl": "https://github.com/kamipo",
+      "summary": "1. 概要 (1-2文で)  \nこのPRは、PostgreSQL 専用の DDL 生成ロジック（`INCLUDE` や `NULLS NOT DISTINCT` を含む `CREATE INDEX`、およびテーブル作成時の排他制約・ユニーク制約生成）を抽象クラスから PostgreSQL 用の `SchemaCreation` 実装へ移動し、アダプタごとの責務分離を明確にしたものです。生成される SQL 自体は変わらず、設計の整理・拡張性の向上が主目的です。"
+    },
+    {
+      "number": 59825,
+      "title": "Don't let the association scope remove the association's own key condition {#pr-59825}",
+      "url": "https://github.com/rails/rails/pull/59825",
+      "mergedAt": "2026-11-17T00:00:00.000Z",
+      "author": "kamipo",
+      "authorUrl": "https://github.com/kamipo",
+      "summary": "1. 概要 (1-2文で)  \nこのPRは、関連スコープ内で `unscope` や `rewhere` を使った際に、関連付け元のレコードに紐づけるための「外部キー条件」まで消えてしまう不具合を修正します。これにより、他オーナーのレコードが関連経由で読み込まれたり、`update_all` / `delete_all` / `dependent: :delete_all` が誤って他オーナーのレコードを更新・削除してしまう問題が解消されます。"
+    },
     {
       "number": 58967,
       "title": "[doc][ci skip] Fix I18n guide example for array defaults to use a Symbol {#pr-58967}",
@@ -334,123 +451,6 @@
       "author": "ayushn21",
       "authorUrl": "https://github.com/ayushn21",
       "summary": "1. 概要 (1-2文で)  \nこのPRは、Rails公式ガイドに「Hotwire を Rails で使うための新しい専用ガイド」を追加し、既存の「Working with JavaScript in Rails」から Hotwire 関連の説明を切り出して再構成したものです。Turbo（`turbo-rails`）と Stimulus（`stimulus-rails`）の使い方、Action Cable / Active Record との統合方法などを体系的に説明するドキュメント整備が主目的です。"
-    },
-    {
-      "number": 58631,
-      "title": "Improve the order of the sign up and settings walkthrough to avoid NameError [ci skip] {#pr-58631}",
-      "url": "https://github.com/rails/rails/pull/58631",
-      "mergedAt": "2026-11-10T00:00:00.000Z",
-      "author": "gCoreByte",
-      "authorUrl": "https://github.com/gCoreByte",
-      "summary": "1. 概要 (1-2文で)  \nRails ガイド「Sign up and settings walkthrough」の手順順序が見直され、**まだ存在しないクラス／メソッドを参照して NameError を起こしうる箇所が出ないよう**に、パスワード変更リンク関連の説明が後ろに移動されました。  \nこれにより、チュートリアルを手順通り進めれば、記述どおりにコードを書いても NameError が発生しない流れになります。"
-    },
-    {
-      "number": 59729,
-      "title": "Resolve CTE joins merged from a relation of another model {#pr-59729}",
-      "url": "https://github.com/rails/rails/pull/59729",
-      "mergedAt": "2026-11-10T00:00:00.000Z",
-      "author": "kamipo",
-      "authorUrl": "https://github.com/kamipo",
-      "summary": "1. 概要 (1-2文で)  \n他モデルの Relation を `merge` した際に、その中に含まれる CTE の `joins` が誤って関連名として扱われて例外が発生していた問題を修正した PR です。`merge_joins` / `merge_outer_joins` で CTE の join を正しく解決し、元の Relation 単体で使った場合と同じテーブルに join されるようになりました。"
-    },
-    {
-      "number": 59256,
-      "title": "Fix flaky ConnectionPoolThreadTest#test_connection_pool_stat failure {#pr-59256}",
-      "url": "https://github.com/rails/rails/pull/59256",
-      "mergedAt": "2026-11-10T00:00:00.000Z",
-      "author": "yahonda",
-      "authorUrl": "https://github.com/yahonda",
-      "summary": "1. 概要 (1-2文で)  \n`ActiveRecord::ConnectionAdapters::ConnectionPoolThreadTest#test_connection_pool_stat` が CI 上で時々失敗していた原因（reaper スレッドによる接続の掃除タイミング競合）を解消するため、当該テストで利用するコネクションプールの reaper を無効化する変更が行われました。\n\n2. 変更内容の詳細  \n\n### 何が問題だったか\nテスト `test_connection_pool_stat` は、以下のような状況を前提にしています。\n\n- スレッドが 1 つだけ接続を checkout した状態で「死んだスレッド」となる  \n- そのため、`pool.stat` は以下のような統計情報を返すことを期待している:\n\n```ruby\n{ size: 1, connections: 1, busy: 0, dead: 1, idle: 0, waiting: 0, checkout_timeout: 0.2 }\n```\n\nしかし CI で実際に観測された結果は:\n\n```ruby\n{ size: 1, connections: 0, busy: 0, dead: 0, idle: 0, waiting: 0, checkout_timeout: 0.2 }\n```\n\nとなっており、「接続が 1 つ死んでいる」のではなく「接続自体が 0 になっている」ためアサートに失敗していました。\n\n### 原因の詳細\nActive Record のコネクションプールには、バックグラウンドで動く「reaper（掃除役）スレッド」があり、一定間隔ごとにプール中の接続をチェックし、不要なものを回収・破棄します。\n\nこのテストでは：\n\n1. テスト用スレッドが接続を checkout する  \n2. スレッドを終了させる（死んだスレッドが接続を掴みっぱなしの状態）  \n3. その後 `pool.stat` を呼んで `dead: 1` であることを検証する  \n\nという流れになっていますが、その 2 と 3 の「間のごく短い時間」に、**共有の reaper スレッドが実行される場合がある**、というのが問題の本質です。\n\n- 該当接続は一度もクエリ実行などに使われていないため、reaper から見ると「単に不要な接続」と判断されやすい  \n- その結果、その接続は「dead としてプールに残される」のではなく、「プールから完全に削除（connections: 0, dead: 0）される」  \n- この動作自体はコネクションプールとしては妥当だが、テストが期待している状態とズレる  \n- よって、「まれに reaper がこのタイミングで動いたときだけテストが落ちる」というフレーク（非決定的失敗）になっていました  \n\nPR の説明にあるように、問題の再現は手動で `pool.reap` を最後の `pool.stat` 直前で呼び出すことで、確定的に再現できています。\n\n```diff"
-    },
-    {
-      "number": 59302,
-      "title": "Fix QueryCacheTest#test_query_cache_across_threads {#pr-59302}",
-      "url": "https://github.com/rails/rails/pull/59302",
-      "mergedAt": "2026-11-10T00:00:00.000Z",
-      "author": "yahonda",
-      "authorUrl": "https://github.com/yahonda",
-      "summary": "1. 概要 (1-2文で)  \n`sqlite3_ractor` 環境で `QueryCacheTest#test_query_cache_across_threads` が常に失敗していた問題を修正するテストコードの変更です。Ractor 用の `ProxyConnectionPool` 導入により接続プールのリース(lease)が取り残されるケースを考慮し、テスト開始前にそれを解放するようにしています。"
-    },
-    {
-      "number": 59709,
-      "title": "Qualify unscope values with table name when merging relations {#pr-59709}",
-      "url": "https://github.com/rails/rails/pull/59709",
-      "mergedAt": "2026-11-10T00:00:00.000Z",
-      "author": "helmipradita",
-      "authorUrl": "https://github.com/helmipradita",
-      "summary": "1. 概要 (1-2文で)  \n`Relation#merge` 時に `unscope(where: ...)` を含むリレーションをマージすると、対象カラム名がテーブル名で修飾されていなかったため、JOIN 先など他テーブルの同名カラム条件まで誤って消えてしまうバグを修正する PR です。`unscope` の対象カラムを、マージ元リレーションのテーブル名付き (`users.deleted_at` のような形) で扱うように変更しています。"
-    },
-    {
-      "number": 59593,
-      "title": "Fix preloading `has_many :through` with conditions ignoring `preload` and `eager_load` in the scope {#pr-59593}",
-      "url": "https://github.com/rails/rails/pull/59593",
-      "mergedAt": "2026-11-10T00:00:00.000Z",
-      "author": "kehra",
-      "authorUrl": "https://github.com/kehra",
-      "summary": "1. 概要 (1-2文で)  \n`has_many :through` に条件付きスコープを定義した際、そのスコープ内に書いた `preload` / `eager_load` が無視されてしまい、N+1 または `strict_loading` 例外が起きるバグを修正した PR です。`includes` だけが有効になっていた挙動を見直し、`preload` / `eager_load` も正しく適用されるようにしています。"
-    },
-    {
-      "number": 59475,
-      "title": "Shift local times in a DST gap forward by the gap's length {#pr-59475}",
-      "url": "https://github.com/rails/rails/pull/59475",
-      "mergedAt": "2026-11-09T00:00:00.000Z",
-      "author": "55728",
-      "authorUrl": "https://github.com/55728",
-      "summary": "1. 概要 (1-2文で)  \nRails の `ActiveSupport::TimeZone#local` / `#parse` と `Time#change` が、夏時間（DST）の「飛ぶ」区間（ギャップ）に落ちるローカル時刻を解決する際、固定で1時間ずらしていた挙動を「実際のギャップ長だけ前方にシフトする」ように修正した PR です。これにより、非1時間（30分, 2時間, 24時間）のDST遷移を持つタイムゾーンでも期待どおり・一意に時刻が解決されます。"
-    },
-    {
-      "number": 59591,
-      "title": "Fix `eager_load` attaching the first record to every parent when the associated model has no primary key {#pr-59591}",
-      "url": "https://github.com/rails/rails/pull/59591",
-      "mergedAt": "2026-11-09T00:00:00.000Z",
-      "author": "kehra",
-      "authorUrl": "https://github.com/kehra",
-      "summary": "1. 概要 (1-2文で)  \nRails 7.1.4 / 7.2.0 で導入された回帰バグにより、「主キーを持たない関連モデル」を `eager_load` / `includes(...).references(...)` した際に、すべての親レコードに同じ子レコードが紐づいてしまう問題を修正するPRです。主キーなしモデルでは eager load 時の「重複排除キー」を `nil` に戻すことで、各親に正しい関連レコードが紐づくようにしています。"
-    },
-    {
-      "number": 59723,
-      "title": "Document where `sanitize` and `highlight` output is safe {#pr-59723}",
-      "url": "https://github.com/rails/rails/pull/59723",
-      "mergedAt": "2026-11-09T00:00:00.000Z",
-      "author": "flavorjones",
-      "authorUrl": "https://github.com/flavorjones",
-      "summary": "1. 概要 (1-2文で)  \n`sanitize` と `highlight` ヘルパーが返す文字列が「どのコンテキストで HTML として安全に使えるか」を、公式ドキュメントに明示した PR です。特に、「要素内容としては安全だが、属性値や `<script>` など一部の要素内では安全でない」という点がはっきり書かれるようになりました。"
-    },
-    {
-      "number": 59722,
-      "title": "Add Ruby Runtime Security section to security guide {#pr-59722}",
-      "url": "https://github.com/rails/rails/pull/59722",
-      "mergedAt": "2026-11-09T00:00:00.000Z",
-      "author": "flavorjones",
-      "authorUrl": "https://github.com/flavorjones",
-      "summary": "1. 概要 (1-2文で)  \nRails公式セキュリティガイドに「Rubyランタイムのセキュリティ」という節が新規追加され、Railsアプリが動作するRuby本体および標準添付/同梱Gemを最新に保つことの重要性が明示されました。あわせて、CRubyでのGMP対応有無がDoS耐性（大きな整数の扱い）に影響することと、その確認方法が追記されています。"
-    },
-    {
-      "number": 59718,
-      "title": "Fix the order of preloaded through associations over a nested through source, broken by #59528 {#pr-59718}",
-      "url": "https://github.com/rails/rails/pull/59718",
-      "mergedAt": "2026-11-09T00:00:00.000Z",
-      "author": "czj",
-      "authorUrl": "https://github.com/czj",
-      "summary": "1. 概要 (1-2文で)  \nRails 7（mainブランチ）で導入された #59528 によるリグレッションにより、「ネストした through 経由の関連 + order 指定」を preload したときに、並び順が崩れる問題を修正した PR です。あわせて、through preload 時のオーナー判定と重複レコードの扱いも、より正しい（かつ以前と同等の）挙動に戻しています。"
-    },
-    {
-      "number": 59587,
-      "title": "Honor a default_order in the scope of a disable_joins association {#pr-59587}",
-      "url": "https://github.com/rails/rails/pull/59587",
-      "mergedAt": "2026-11-09T00:00:00.000Z",
-      "author": "carlosdanielpohlod",
-      "authorUrl": "https://github.com/carlosdanielpohlod",
-      "summary": "1. 概要 (1-2文で)  \n`disable_joins: true` を指定した has_many :through 連鎖で、関連スコープに指定した `default_order` が無視されていた問題を修正し、通常の join を使う関連と同じ並び順になるようにした PR です。あわせて、disable_joins 連鎖内で「その関連が order 済みかどうか」の判定も `effective_order_values` ベースに見直しています。"
-    },
-    {
-      "number": 59719,
-      "title": "Cast numeric values to the scale of the PostgreSQL `money` type {#pr-59719}",
-      "url": "https://github.com/rails/rails/pull/59719",
-      "mergedAt": "2026-11-09T00:00:00.000Z",
-      "author": "kamipo",
-      "authorUrl": "https://github.com/kamipo",
-      "summary": "1. 概要 (1-2文で)  \nPostgreSQL の `money` 型に対して、数値オブジェクト（Numeric）を代入した場合でも、小数桁数（scale）に従って丸めるように `OID::Money#cast_value` の挙動が修正されました。これにより、保存前後での値の不一致が解消され、併せて numericality バリデーション側の一時的な丸めロジックも削除されています。"
     }
   ]
 }
