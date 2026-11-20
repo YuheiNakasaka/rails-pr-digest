@@ -1,7 +1,88 @@
 {
-  "lastUpdated": "2026-11-19T00:11:16.278Z",
+  "lastUpdated": "2026-11-20T00:10:41.906Z",
   "totalCount": 50,
   "items": [
+    {
+      "number": 59846,
+      "title": "Harden generated GitHub Actions workflows {#pr-59846}",
+      "url": "https://github.com/rails/rails/pull/59846",
+      "mergedAt": "2026-11-19T00:00:00.000Z",
+      "author": "eliotsykes",
+      "authorUrl": "https://github.com/eliotsykes",
+      "summary": "1. 概要 (1-2文で)  \nRails が生成する GitHub Actions の `ci.yml` テンプレートをセキュリティ強化する変更です。アクションのバージョン固定（ピン留め）と GitHub トークン取り扱いの見直しにより、サプライチェーン攻撃やトークン漏洩リスクを低減しています。"
+    },
+    {
+      "number": 59874,
+      "title": "[8.0] Patch Rack::Multipart::Parser to not allow arbitrary encoding {#pr-59874}",
+      "url": "https://github.com/rails/rails/pull/59874",
+      "mergedAt": "2026-11-19T00:00:00.000Z",
+      "author": "byroot",
+      "authorUrl": "https://github.com/byroot",
+      "summary": "1. 概要 (1–2文で)  \nこのPRは、`Rack::Multipart::Parser` がマルチパートフォームデータの「任意のエンコーディング」を受け付けないようにするパッチを Rails 側から当てる変更です。Rails 8.0 向けに、アップロード等の multipart パラメータ解析時のエンコーディングを安全かつ制御可能にし、潜在的な不正・想定外のエンコーディング利用を防ぐための対応です。"
+    },
+    {
+      "number": 59873,
+      "title": "[8.1] Patch Rack::Multipart::Parser to not allow arbitrary encoding {#pr-59873}",
+      "url": "https://github.com/rails/rails/pull/59873",
+      "mergedAt": "2026-11-19T00:00:00.000Z",
+      "author": "byroot",
+      "authorUrl": "https://github.com/byroot",
+      "summary": "1. 概要 (1-2文で)  \nRails 8.1 で、`Rack::Multipart::Parser` が任意のエンコーディングを受け付けないようにパッチを当て、マルチパートフォームデータの解析時に使用される文字エンコーディングを制限・制御できるようにした PR です。セキュリティ・安定性の観点から、マルチパート解析時のエンコーディング周りの挙動を Rails 側で明示的にラップ・統制しています。"
+    },
+    {
+      "number": 59843,
+      "title": "Remove a reaped connection whose reset fails {#pr-59843}",
+      "url": "https://github.com/rails/rails/pull/59843",
+      "mergedAt": "2026-11-19T00:00:00.000Z",
+      "author": "cole-robertson",
+      "authorUrl": "https://github.com/cole-robertson",
+      "summary": "1. 概要 (1-2文で)  \nRails の `ActiveRecord::ConnectionAdapters::ConnectionPool#reap` が、接続リセット（`reset!`）に失敗した場合にその接続をプールから正常に解放できず「詰まり」を起こしていた不具合を修正する PR です。失敗した接続はエラーレポートを行った上でプールから削除・切断され、残りの接続は引き続き有効に利用されるようになります。"
+    },
+    {
+      "number": 59863,
+      "title": "Don't generate fixture values for virtual columns {#pr-59863}",
+      "url": "https://github.com/rails/rails/pull/59863",
+      "mergedAt": "2026-11-19T00:00:00.000Z",
+      "author": "ianterrell",
+      "authorUrl": "https://github.com/ianterrell",
+      "summary": "1. 概要 (1-2文で)  \nRails の fixtures が「仮想列（generated/virtual columns）」に対しても値を生成してしまい、ロード時に「table has no column named ...」エラーになる問題を修正した PR です。fixtures から仮想列を除外し、値は DB 側の計算に任せるように変更されています。"
+    },
+    {
+      "number": 59844,
+      "title": "Preserve leases across disconnect during checkout {#pr-59844}",
+      "url": "https://github.com/rails/rails/pull/59844",
+      "mergedAt": "2026-11-19T00:00:00.000Z",
+      "author": "cole-robertson",
+      "authorUrl": "https://github.com/cole-robertson",
+      "summary": "1. 概要 (1-2文で)  \nActive Record のコネクションプールで、`disconnect` 実行中に `lease_connection` / `with_connection` が待機している場合に「コネクションがプールに返却されず取りっぱなしになる」バグを修正した PRです。  \n`disconnect` によってクリアされた「リース (lease)」情報を世代管理し、チェックアウト完了時に正しいリースへコネクションを紐づけ直すことで、長寿命スレッドでの接続枯渇を防いでいます。"
+    },
+    {
+      "number": 59872,
+      "title": "Patch Rack::Multipart::Parser to not allow arbitrary encoding {#pr-59872}",
+      "url": "https://github.com/rails/rails/pull/59872",
+      "mergedAt": "2026-11-19T00:00:00.000Z",
+      "author": "byroot",
+      "authorUrl": "https://github.com/byroot",
+      "summary": "1. 概要 (1-2文で)  \nRack の `Rack::Multipart::Parser` が「任意の文字エンコーディングを受け入れる」挙動を Rails 側で上書きし、マルチパートのフォームデータにおける不必要かつ危険度の高いエンコーディング指定を無効化できるようにするパッチです。Rack 本体での対応（Rack 3.3 以降のオプション／Rack 4.0 でのデフォルト）を待たず、Rails から安全側のデフォルトを先取りする形になっています。"
+    },
+    {
+      "number": 59871,
+      "title": "[8-1-stable] Don't generate fixture values for virtual columns {#pr-59871}",
+      "url": "https://github.com/rails/rails/pull/59871",
+      "mergedAt": "2026-11-19T00:00:00.000Z",
+      "author": "yahonda",
+      "authorUrl": "https://github.com/yahonda",
+      "summary": "1. 概要 (1-2文で)  \nRails 8.1系で、フィクスチャ読み込み時に「table has no columns named ...」エラーを引き起こしていた“仮想カラム（virtual column）”に対する値生成を行わないようにする修正をバックポートしたPRです。主に、仮想カラムが主キーや複合外部キーに含まれている場合のフィクスチャ読み込みエラーを解消します。"
+    },
+    {
+      "number": 59868,
+      "title": "Skip the SQLString wrapper for unprepared queries {#pr-59868}",
+      "url": "https://github.com/rails/rails/pull/59868",
+      "mergedAt": "2026-11-19T00:00:00.000Z",
+      "author": "SamSaffron",
+      "authorUrl": "https://github.com/SamSaffron",
+      "summary": "1. 概要 (1-2文で)  \nこのPRは、未プリペアド(「?」バインドを使わない)クエリを生成する際に `SQLString` ラッパーを経由せず、素の可変文字列（`String`）を直接使うようにして、Arelコンパイル時のオブジェクト生成数と若干の実行時間を削減する最適化です。`SubstituteBinds` コレクタの役割とインターフェースは保ちつつ、デフォルト実装をより軽量にしています。"
+    },
     {
       "number": 59861,
       "title": "[ci skip][docs] Restore Reloading Interlock wording in threading guide {#pr-59861}",
@@ -370,87 +451,6 @@
       "author": "czj",
       "authorUrl": "https://github.com/czj",
       "summary": "1. 概要 (1-2文で)  \n`has_many :through` のネストした関連に order がついている状態で、内側の through のターゲットに「クエリでは返ってこない新規レコード」が既にロードされていると `preload` 時に `ArgumentError` が起きていた不具合を修正した PR です。ランク付けされないレコード（クエリに出てこなかった既存ロード済みレコード）を、エラーにせず末尾に並べるように変更しています。"
-    },
-    {
-      "number": 59783,
-      "title": "Load authors fixtures in StrictLoadingTest {#pr-59783}",
-      "url": "https://github.com/rails/rails/pull/59783",
-      "mergedAt": "2026-11-13T00:00:00.000Z",
-      "author": "yahonda",
-      "authorUrl": "https://github.com/yahonda",
-      "summary": "1. 概要 (1-2文で)  \nStrictLoadingTest で `authors` フィクスチャが読み込まれていなかったため、テストの実行順によって `StrictLoadingTest#test_strict_loading_with_has_many_through_preloaded_alone_and_with_nested_association` が不安定に失敗していた問題を修正する PR です。`authors` およびそれに外部キー参照されている `author_addresses` フィクスチャを読み込むようにして、ID 採番と関連のブレを防いでいます。"
-    },
-    {
-      "number": 59642,
-      "title": "Group bound SQL literals in `WhereClause` like other SQL literals {#pr-59642}",
-      "url": "https://github.com/rails/rails/pull/59642",
-      "mergedAt": "2026-11-13T00:00:00.000Z",
-      "author": "thomasklemm",
-      "authorUrl": "https://github.com/thomasklemm",
-      "summary": "1. 概要 (1-2文で)  \nこのPRは、`WhereClause` 内で `BoundSqlLiteral`（バインド付きSQLリテラル）も他の SQL リテラル同様にカッコでグルーピングするようにし、7.1 以降で発生していた `OR` が `AND` を「飛び越える」誤った条件式と、不要なテキスト上の括弧による挙動差分を是正します。これにより、プレースホルダ付き条件と文字列条件の扱いが統一され、`merge` などを含む様々な経路での条件結合が論理的に一貫したものになります。"
-    },
-    {
-      "number": 59781,
-      "title": "[8-1-stable] Backport #59779 {#pr-59781}",
-      "url": "https://github.com/rails/rails/pull/59781",
-      "mergedAt": "2026-11-13T00:00:00.000Z",
-      "author": "skipkayhil",
-      "authorUrl": "https://github.com/skipkayhil",
-      "summary": "1. 概要 (1-2文で)  \nこのPRは、Rails 8.1 系ブランチ（8-1-stable）に対して本家PR #59779 の内容をバックポートしたものです。`rails app:update` コマンドに関する挙動・テスト・CHANGELOGの更新を取り込んでおり、8.1 で本家と同等の修正・仕様が反映されるようにしています。"
-    },
-    {
-      "number": 59779,
-      "title": "Detect Kamal in app:update {#pr-59779}",
-      "url": "https://github.com/rails/rails/pull/59779",
-      "mergedAt": "2026-11-13T00:00:00.000Z",
-      "author": "fuzzyrichie",
-      "authorUrl": "https://github.com/fuzzyrichie",
-      "summary": "1. 概要 (1-2文で)  \n`bin/rails app:update` 実行時に、Kamal を使っていないアプリでも誤って `config.force_ssl` / `config.assume_ssl` をコメントアウトしてしまう問題を修正し、Kamal の有無を自動検知してスキップできるようにした PR です。`--skip-kamal` オプション付きで生成されたアプリをアップデートしても、SSL 関連設定が維持されるようになります。"
-    },
-    {
-      "number": 59759,
-      "title": "Check for protect_from_forgery in ActiveStorage::BaseController {#pr-59759}",
-      "url": "https://github.com/rails/rails/pull/59759",
-      "mergedAt": "2026-11-13T00:00:00.000Z",
-      "author": "fuzzyrichie",
-      "authorUrl": "https://github.com/fuzzyrichie",
-      "summary": "1. 概要 (1-2文で)  \nActive Storage のベースコントローラ (`ActiveStorage::BaseController`) に CSRF 対策 (`protect_from_forgery`) が正しく有効になっていなかった不具合を修正し、適切な条件で `protect_from_forgery` が呼ばれるようにした PR です。これにより、フルスタック向けコントローラでは従来どおり Active Storage も CSRF 保護され、API モードのような forgery 保護を持たない親クラスではスキップされます。"
-    },
-    {
-      "number": 59776,
-      "title": "[8.1] Treat a MessagePack cache entry with a missing class as a cache miss - #59683 {#pr-59776}",
-      "url": "https://github.com/rails/rails/pull/59776",
-      "mergedAt": "2026-11-12T00:00:00.000Z",
-      "author": "byroot",
-      "authorUrl": "https://github.com/byroot",
-      "summary": "1. 概要 (1-2文で)  \nRails 8.1系において、MessagePack を使ったキャッシュシリアライザで「復元時にクラスが見つからない」場合、そのエントリを **例外ではなくキャッシュミスとして扱う**ようにしたバックポートです。これにより、デプロイやクラス構成変更に伴う古いキャッシュが原因でアプリ全体が落ちにくくなります。"
-    },
-    {
-      "number": 59683,
-      "title": "Treat a MessagePack cache entry with a missing class as a cache miss {#pr-59683}",
-      "url": "https://github.com/rails/rails/pull/59683",
-      "mergedAt": "2026-11-12T00:00:00.000Z",
-      "author": "hasannadeem",
-      "authorUrl": "https://github.com/hasannadeem",
-      "summary": "1. 概要 (1-2文で)  \nMessagePack シリアライザ (`serializer: :message_pack`) 使用時に、「定義が失われたクラス（削除・リネーム済み）を参照するキャッシュエントリ」があると、それを「値が nil のヒット」と扱ってしまうバグを修正し、「キャッシュミス」として扱うように統一しました。Marshal シリアライザと同様に、その場合は `ActiveSupport::Cache::DeserializationError` を発生させ、各ストア側がミス扱いする挙動に揃えています。"
-    },
-    {
-      "number": 59692,
-      "title": "Prevent Active Record from silently losing `increment!`/`decrement!` updates with stale `lock_version` {#pr-59692}",
-      "url": "https://github.com/rails/rails/pull/59692",
-      "mergedAt": "2026-11-12T00:00:00.000Z",
-      "author": "kehra",
-      "authorUrl": "https://github.com/kehra",
-      "summary": "1. 概要 (1-2文で)  \nこのPRは、楽観ロック (`lock_version`) を使っているモデルに対して `increment!` / `decrement!` を呼んだとき、メモリ上の `lock_version` が古い場合に「更新がDBに反映されず、かつエラーも出ない」という問題を修正するものです。`increment!` / `decrement!` のSQLから暗黙の `lock_version` 条件を外し、以前の振る舞い（楽観ロックと独立した「カウンタの原子的インクリメント」）を復元しています。"
-    },
-    {
-      "number": 59548,
-      "title": "[8-1-stable] Add `--update` option to the `bin/bundler-audit` script {#pr-59548}",
-      "url": "https://github.com/rails/rails/pull/59548",
-      "mergedAt": "2026-11-12T00:00:00.000Z",
-      "author": "izkreny",
-      "authorUrl": "https://github.com/izkreny",
-      "summary": "1. 概要 (1-2文で)  \nRails 8.1 系の `bin/bundler-audit` テンプレートに、実行時に常に脆弱性DBを更新する `--update` オプションを追加するバックポートです。これにより、ローカル開発環境でも最新の脆弱性情報に基づいて `bundler-audit` が実行されるようになります。"
     }
   ]
 }
