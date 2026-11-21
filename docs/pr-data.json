@@ -1,7 +1,97 @@
 {
-  "lastUpdated": "2026-11-20T00:10:41.906Z",
+  "lastUpdated": "2026-11-21T00:09:53.988Z",
   "totalCount": 50,
   "items": [
+    {
+      "number": 59899,
+      "title": "Require Object#in? in the numericality validator {#pr-59899}",
+      "url": "https://github.com/rails/rails/pull/59899",
+      "mergedAt": "2026-11-20T00:00:00.000Z",
+      "author": "carlosdanielpohlod",
+      "authorUrl": "https://github.com/carlosdanielpohlod",
+      "summary": "1. 概要 (1-2文で)  \n`ActiveModel::Validations::NumericalityValidator` が `:in` オプションの判定に `Object#in?` を使っているにもかかわらず、必要な拡張を `require` していなかったバグを修正する PR です。Active Record/Rails 全体では表面化しづらかった「`NoMethodError: undefined method 'in?'`」を、Active Model 単体利用時でも発生しないようにしています。"
+    },
+    {
+      "number": 59898,
+      "title": "[8.1] Remove job from the execution context after `perform_now` {#pr-59898}",
+      "url": "https://github.com/rails/rails/pull/59898",
+      "mergedAt": "2026-11-20T00:00:00.000Z",
+      "author": "fatkodima",
+      "authorUrl": "https://github.com/fatkodima",
+      "summary": "1. 概要 (1-2文で)  \nRails 8.1 系に対して、`perform_now` 実行後に Active Job の「現在実行中ジョブ」を示すコンテキスト情報を必ずクリアするようにしたバックポートです。これにより、同一スレッド内でのジョブ実行後にコンテキストがリークしてしまう問題を防ぎます。"
+    },
+    {
+      "number": 59897,
+      "title": "Return all records from in_order_of with filter: false when no values are left {#pr-59897}",
+      "url": "https://github.com/rails/rails/pull/59897",
+      "mergedAt": "2026-11-20T00:00:00.000Z",
+      "author": "carlosdanielpohlod",
+      "authorUrl": "https://github.com/carlosdanielpohlod",
+      "summary": "1. 概要 (1-2文で)  \n`ActiveRecord::Relation#in_order_of` に `filter: false` を指定した場合、並び替えに使う値リストが最終的に空になっても「0件」ではなく、元のレコード集合をそのまま返すように仕様が修正されました。これにより、`Enumerable#in_order_of` とドキュメントに書かれた挙動が Active Record でも一致します。"
+    },
+    {
+      "number": 59893,
+      "title": "Fix #59882: Remove job from the execution context after perform_now {#pr-59893}",
+      "url": "https://github.com/rails/rails/pull/59893",
+      "mergedAt": "2026-11-20T00:00:00.000Z",
+      "author": "azmi2409",
+      "authorUrl": "https://github.com/azmi2409",
+      "summary": "1. 概要 (1-2文で)  \n`MyJob.perform_now` 実行後も `ActiveSupport::ExecutionContext[:job]` にジョブが残り続け、後続クエリの SQL コメントにジョブ名が「漏れ続ける」不具合を修正した PRです。`ExecutionContext` へのジョブ設定をブロック形式に変更し、ジョブ終了時（例外発生時やネストしたジョブ実行時も含む）にコンテキストが元に戻るようになりました。"
+    },
+    {
+      "number": 58618,
+      "title": "[RF-DOCS] Rewrite the Securing Rails guide {#pr-58618}",
+      "url": "https://github.com/rails/rails/pull/58618",
+      "mergedAt": "2026-11-20T00:00:00.000Z",
+      "author": "ayushn21",
+      "authorUrl": "https://github.com/ayushn21",
+      "summary": "1. 概要 (1-2文で)  \nRails Guides の「Securing Rails アプリケーション」ガイド全体が大幅に書き直され、古い内容・ツール・CVE 参照などを整理しつつ、現行 Rails の機能（Active Storage、`allow_other_host`, rate limiting など）を前提とした構成・内容に更新されています。併せて、関連するガイドや `redirect_to` の `allow_other_host:` オプションの rdoc なども細かく修正されています。"
+    },
+    {
+      "number": 59887,
+      "title": "Keep LeaseRegistry working on engines other than MRI {#pr-59887}",
+      "url": "https://github.com/rails/rails/pull/59887",
+      "mergedAt": "2026-11-20T00:00:00.000Z",
+      "author": "bruno-costanzo",
+      "authorUrl": "https://github.com/bruno-costanzo",
+      "summary": "1. 概要 (1-2文で)  \nActiveRecord のコネクションプールが、MRI 以外の Ruby エンジン（TruffleRuby, JRuby）上でデッドロックしてしまう不具合を修正した PR です。`LeaseRegistry` が `ActiveSupport::WeakKeyMap` を正しく初期化せず、同じミューテックスを二重にロックしてしまう問題を避けるために、`super` 呼び出しとミューテックス名の変更が行われています。"
+    },
+    {
+      "number": 59896,
+      "title": "Require Object#with in test helper {#pr-59896}",
+      "url": "https://github.com/rails/rails/pull/59896",
+      "mergedAt": "2026-11-20T00:00:00.000Z",
+      "author": "byroot",
+      "authorUrl": "https://github.com/byroot",
+      "summary": "1. 概要 (1-2文で)  \nこのPRは、テスト環境で `Object#with` を共通ヘルパー側で一括 `require` するようにし、各テストファイルごとに個別で `require \"active_support/core_ext/object/with\"` する必要をなくした変更です。これにより「書き忘れ」「重複記述」を防ぎ、テストコードをシンプルに保守しやすくしています。"
+    },
+    {
+      "number": 59894,
+      "title": "[8.1] Fix RackMultipartParser frozen check {#pr-59894}",
+      "url": "https://github.com/rails/rails/pull/59894",
+      "mergedAt": "2026-11-20T00:00:00.000Z",
+      "author": "byroot",
+      "authorUrl": "https://github.com/byroot",
+      "summary": "1. 概要 (1-2文で)  \nRails 8.1系において、`RackMultipartParser` の「オブジェクトが frozen かどうか」を判定する処理の不具合を修正したバックポートPRです。Rackのマルチパート解析処理で、凍結オブジェクトに対する不正な操作が起きないようにチェック方法を修正しています。"
+    },
+    {
+      "number": 59895,
+      "title": "[8.0] Fix RackMultipartParser frozen check {#pr-59895}",
+      "url": "https://github.com/rails/rails/pull/59895",
+      "mergedAt": "2026-11-20T00:00:00.000Z",
+      "author": "byroot",
+      "authorUrl": "https://github.com/byroot",
+      "summary": "1. 概要 (1-2文で)  \nRails 8.0 ブランチにおいて、`RackMultipartParser` の「オブジェクトが frozen かどうか」を判定する処理が誤っていた／不十分だったため、それを修正するパッチがバックポートされました。これにより、マルチパートフォーム（ファイルアップロードなど）のパース時に、凍結オブジェクトの扱いに起因する例外や不正な状態になる可能性が減ります。"
+    },
+    {
+      "number": 59888,
+      "title": "Fix RackMultipartParser frozen check {#pr-59888}",
+      "url": "https://github.com/rails/rails/pull/59888",
+      "mergedAt": "2026-11-20T00:00:00.000Z",
+      "author": "byroot",
+      "authorUrl": "https://github.com/byroot",
+      "summary": "1. 概要 (1-2文で)  \nRackMultipartParser の「オブジェクトが frozen かどうか」の判定ロジックを 1 行だけ修正した PR です。マルチパートフォームデータの解析時に、凍結状態チェックが誤っていたケースを正しく扱えるようにしています。"
+    },
     {
       "number": 59846,
       "title": "Harden generated GitHub Actions workflows {#pr-59846}",
@@ -361,96 +451,6 @@
       "author": "byroot",
       "authorUrl": "https://github.com/byroot",
       "summary": "1. 概要 (1-2文で)  \nAction Mailer が Active Job に「必須依存」しないようにし、Active Job を使わないアプリでも余計なコードをロードせずに Action Mailer を利用できるようにした変更です。これにより、Action Mailer と Active Job の結合度が下がり、軽量構成やカスタムジョブ実装がしやすくなります。"
-    },
-    {
-      "number": 59816,
-      "title": "Cast grouped keys and plucked columns unknown to the schema from the result {#pr-59816}",
-      "url": "https://github.com/rails/rails/pull/59816",
-      "mergedAt": "2026-11-16T00:00:00.000Z",
-      "author": "kamipo",
-      "authorUrl": "https://github.com/kamipo",
-      "summary": "1. 概要 (1-2文で)  \nRails の Active Record において、スキーマキャッシュが型情報を持たないカラム（サブクエリ/CTE/テーブル別名など）の `group` 集計や `pluck` 結果が常に文字列など「デフォルト型」になってしまう問題を修正し、DB が返す結果列の型情報にフォールバックして適切にキャストされるようにした PR です。これにより、JOIN したサブクエリや CTE のカラムでも、`Date` や `Time` など本来の Ruby 型で取得できるようになります。"
-    },
-    {
-      "number": 59813,
-      "title": "Don't reuse source records a nested through loaded without our scope {#pr-59813}",
-      "url": "https://github.com/rails/rails/pull/59813",
-      "mergedAt": "2026-11-16T00:00:00.000Z",
-      "author": "kamipo",
-      "authorUrl": "https://github.com/kamipo",
-      "summary": "1. 概要 (1-2文で)  \n`has_many :through` がネストしており、それぞれにスコープ（where / preload などの条件）が付いている場合に、外側のスコープが正しく反映されずに関連がプリロードされてしまうバグを修正した PR です。ネストした through のプリロード時に「中間モデル経由で既に読み込まれている関連レコード」を安易に再利用せず、外側のスコープを反映したクエリで取り直すようにしています。"
-    },
-    {
-      "number": 59797,
-      "title": "Fix preloading scoped nested `has_many :through` reusing a sibling's records {#pr-59797}",
-      "url": "https://github.com/rails/rails/pull/59797",
-      "mergedAt": "2026-11-15T00:00:00.000Z",
-      "author": "czj",
-      "authorUrl": "https://github.com/czj",
-      "summary": "1. 概要 (1-2文で)  \nRails の Active Record において、スコープ付きのネストした `has_many :through`（あるいは `has_and_belongs_to_many` を経由する関連）をプリロードすると、兄弟関連で先にロードされたレコードを誤って再利用してスコープが無視されてしまう不具合を修正した PR です。これにより、`includes` などで兄弟の関連を同時に読み込んだ場合でも、 `order` や `where` を持つネストした through 関連が正しくスコープされた結果を返すようになります。"
-    },
-    {
-      "number": 59809,
-      "title": "Spell out \"query\" and \"queries\" in the request log line {#pr-59809}",
-      "url": "https://github.com/rails/rails/pull/59809",
-      "mergedAt": "2026-11-15T00:00:00.000Z",
-      "author": "thomasklemm",
-      "authorUrl": "https://github.com/thomasklemm",
-      "summary": "1. 概要 (1-2文で)  \nRails のリクエストログに出る `Completed` 行で、`ActiveRecord: 0.4ms (2 queries, 0 cached)` の「queries」の単語を inflector で動的に複数形化するのをやめ、固定文字列にする変更です。これにより、リクエストごとの余計なオブジェクト生成と inflection コストが削減され、ログ出力部分のパフォーマンスが大幅に向上します。"
-    },
-    {
-      "number": 59806,
-      "title": "[ci skip] Clarify create_table block behavior with as: {#pr-59806}",
-      "url": "https://github.com/rails/rails/pull/59806",
-      "mergedAt": "2026-11-14T00:00:00.000Z",
-      "author": "skatkov",
-      "authorUrl": "https://github.com/skatkov",
-      "summary": "1. 概要 (1-2文で)  \n`create_table` に `as:` オプションを指定したときのブロックの挙動について、ドキュメントの記述を実装に合わせて修正した PR です。`as:` を使ってもブロック内の index 定義などは評価される一方で、`:id` と `:primary_key` オプションは無視されることを明示しています。"
-    },
-    {
-      "number": 59802,
-      "title": "[PERFORMANCE] Use method_defined? to detect missing actions in unused_routes {#pr-59802}",
-      "url": "https://github.com/rails/rails/pull/59802",
-      "mergedAt": "2026-11-14T00:00:00.000Z",
-      "author": "corsonknowles",
-      "authorUrl": "https://github.com/corsonknowles",
-      "summary": "1. 概要 (1-2文で)  \n`bin/rails unused_routes` コマンドの内部で、コントローラにアクションが存在するかの判定方法を `instance_methods.exclude?` から `method_defined?` に変更し、大規模アプリで unused routes チェックの実行時間を大幅に短縮するパフォーマンス改善です。挙動は変えずに、メソッドテーブルの直接参照にすることで、不要な配列生成と線形走査をなくしています。"
-    },
-    {
-      "number": 59780,
-      "title": "Fix merge of unscope values that include a Hash or Arel attribute in an array {#pr-59780}",
-      "url": "https://github.com/rails/rails/pull/59780",
-      "mergedAt": "2026-11-13T00:00:00.000Z",
-      "author": "kehra",
-      "authorUrl": "https://github.com/kehra",
-      "summary": "1. 概要 (1-2文で)  \n`merge` 時の `unscope` の挙動が #59709 によって壊れていた（`unscope(where: [:title, { comments: :body }])` などで Hash や Arel 属性を含む要素が正しく外れない）問題を修正する PRです。`unscope` の対象をテーブル名で修飾する処理を、配列要素のうち `String` / `Symbol` のみに限定し、Hash や Arel 属性はそのまま扱うように変更しています。"
-    },
-    {
-      "number": 59782,
-      "title": "Don't alias a joined table only because the association scope includes it {#pr-59782}",
-      "url": "https://github.com/rails/rails/pull/59782",
-      "mergedAt": "2026-11-13T00:00:00.000Z",
-      "author": "b84330808",
-      "authorUrl": "https://github.com/b84330808",
-      "summary": "1. 概要 (1-2文で)  \nRails の Active Record が、関連のスコープ内で `includes` / `references` を使っている場合に、実際の JOIN で不要なテーブル別名を付けてしまい、その結果 `no such column` になる不具合を修正する PRです。`joins` / `eager_load` / `left_joins` に `merge` や `where(items: {...})` を組み合わせたときに、テーブル名と SQL 上のテーブル別名がずれてしまう問題が解消されます。"
-    },
-    {
-      "number": 59754,
-      "title": "Don't show the encryption key in EncryptedFile#inspect {#pr-59754}",
-      "url": "https://github.com/rails/rails/pull/59754",
-      "mergedAt": "2026-11-13T00:00:00.000Z",
-      "author": "dennispaagman",
-      "authorUrl": "https://github.com/dennispaagman",
-      "summary": "1. 概要 (1-2文で)  \n`ActiveSupport::EncryptedFile` の `inspect` 出力から暗号鍵情報（`@key_file_contents`）が漏れていた問題を修正し、`inspect` では鍵を表示しないようにした PR です。`inspect` は `content_path` と `key_path` のみに限定され、ログやコンソールに鍵が出ないようになります。"
-    },
-    {
-      "number": 59771,
-      "title": "Fix `ArgumentError` preloading an ordered nested through association with a new record {#pr-59771}",
-      "url": "https://github.com/rails/rails/pull/59771",
-      "mergedAt": "2026-11-13T00:00:00.000Z",
-      "author": "czj",
-      "authorUrl": "https://github.com/czj",
-      "summary": "1. 概要 (1-2文で)  \n`has_many :through` のネストした関連に order がついている状態で、内側の through のターゲットに「クエリでは返ってこない新規レコード」が既にロードされていると `preload` 時に `ArgumentError` が起きていた不具合を修正した PR です。ランク付けされないレコード（クエリに出てこなかった既存ロード済みレコード）を、エラーにせず末尾に並べるように変更しています。"
     }
   ]
 }
