@@ -1,7 +1,43 @@
 {
-  "lastUpdated": "2026-11-21T00:09:53.988Z",
+  "lastUpdated": "2026-11-22T00:08:34.934Z",
   "totalCount": 50,
   "items": [
+    {
+      "number": 59917,
+      "title": "[8-1-stable] Skip test_via_to_sql_with_complicating_connection for PostgreSQL 19+ {#pr-59917}",
+      "url": "https://github.com/rails/rails/pull/59917",
+      "mergedAt": "2026-11-21T00:00:00.000Z",
+      "author": "yahonda",
+      "authorUrl": "https://github.com/yahonda",
+      "summary": "1. 概要 (1–2文で)  \nRails 8.1 系の CI で PostgreSQL 19 以降を使った際に落ちていた `PostgresqlByteaTest#test_via_to_sql_with_complicating_connection` を、PostgreSQL 19+ 環境ではスキップするようにした backport PR です。PostgreSQL の仕様変更（非標準文字列リテラルの非サポート）によってテストが失敗するため、それに合わせてテスト側を調整しています。"
+    },
+    {
+      "number": 59793,
+      "title": "Do not load all records at once for `dependent: :destroy_async` {#pr-59793}",
+      "url": "https://github.com/rails/rails/pull/59793",
+      "mergedAt": "2026-11-21T00:00:00.000Z",
+      "author": "fatkodima",
+      "authorUrl": "https://github.com/fatkodima",
+      "summary": "1. 概要 (1-2文で)  \n`dependent: :destroy_async` を使った関連削除時に、関連レコードを一度に全件ロードしていた処理を、必要なカラムだけをバッチで読み込む実装に変更し、大量データ時のメモリ使用量を大幅に削減する変更です。Rails の挙動は基本的に同じままですが、大量関連レコードを持つ親レコード削除のパフォーマンスと安定性が向上します。"
+    },
+    {
+      "number": 59912,
+      "title": "Fix the block example in the `highlight` documentation {#pr-59912}",
+      "url": "https://github.com/rails/rails/pull/59912",
+      "mergedAt": "2026-11-21T00:00:00.000Z",
+      "author": "55728",
+      "authorUrl": "https://github.com/55728",
+      "summary": "1. 概要 (1-2文で)  \n`ActionView::Helpers::TextHelper#highlight` のドキュメント中にあるブロック利用例が、実際の挙動と一致していなかったため、例示コードと出力例を正しい形に修正した PR です。コード本体の挙動変更はなく、ドキュメントのみの修正です。"
+    },
+    {
+      "number": 59881,
+      "title": "Restrict multipart filename encoding on Rack < 3.1 {#pr-59881}",
+      "url": "https://github.com/rails/rails/pull/59881",
+      "mergedAt": "2026-11-21T00:00:00.000Z",
+      "author": "camallen",
+      "authorUrl": "https://github.com/camallen",
+      "summary": "1. 概要 (1-2文で)  \nこのPRは、Rack 3.1 未満を使っている Rails アプリでも、マルチパートアップロードの `filename*=` の文字コード判定が Rack 3.1+ と同じポリシーになるように制限するパッチです。これにより、クライアントが任意の文字エンコーディングを指定してファイル名文字列をねじ曲げることを防ぎ、UTF-8 / BINARY へ安全に正規化します。"
+    },
     {
       "number": 59899,
       "title": "Require Object#in? in the numericality validator {#pr-59899}",
@@ -415,42 +451,6 @@
       "author": "hachi8833",
       "authorUrl": "https://github.com/hachi8833",
       "summary": "1. 概要 (1-2文で)  \nRails Edge Guides の I18n ドキュメントで、「URLパラメータからロケールを設定する」親セクションが内容的に重複・混在しており、説明が循環参照的になっていた問題を整理した PR です。クエリパラメータ方式とパス方式をそれぞれ独立したトップレベルセクションとして再構成し、説明文を分かりやすく書き直しています。"
-    },
-    {
-      "number": 59823,
-      "title": "Apply through model's default scope to its aliased table {#pr-59823}",
-      "url": "https://github.com/rails/rails/pull/59823",
-      "mergedAt": "2026-11-16T00:00:00.000Z",
-      "author": "kamipo",
-      "authorUrl": "https://github.com/kamipo",
-      "summary": "1. 概要 (1-2文で)  \nRails の has_many :through 等の「through association」で、経由モデルに対する default_scope/STI 条件が、自己参照などでテーブルにエイリアスが付く場合に「本来かかるべきエイリアス先テーブルではなく元テーブル」に付いてしまっていたバグを修正する PR です。AssociationScope が使うテーブルエイリアスと同じものを使ってスコープを構築することで、through 先の default_scope などが正しくエイリアス側に適用されるようになりました。"
-    },
-    {
-      "number": 59819,
-      "title": "Read PostgreSQL index definitions from the catalogs {#pr-59819}",
-      "url": "https://github.com/rails/rails/pull/59819",
-      "mergedAt": "2026-11-16T00:00:00.000Z",
-      "author": "kamipo",
-      "authorUrl": "https://github.com/kamipo",
-      "summary": "1. 概要 (1-2文で)  \nPostgreSQL のインデックス定義を `pg_get_indexdef` の正規表現パースに頼るのではなく、カタログテーブルから構造的に読み取るように変更した PR です。これにより、複雑なインデックス定義でも `schema.rb` / structure dump が壊れたりロード不能になる問題が大幅に解消されます。"
-    },
-    {
-      "number": 59821,
-      "title": "Fix association `unscope(where:)` not applying when the join is aliased {#pr-59821}",
-      "url": "https://github.com/rails/rails/pull/59821",
-      "mergedAt": "2026-11-16T00:00:00.000Z",
-      "author": "americodls",
-      "authorUrl": "https://github.com/americodls",
-      "summary": "1. 概要 (1-2文で)  \n`unscope(where: ...)` を指定した関連を「テーブルエイリアス付きで JOIN したとき」に、意図したとおり default_scope の条件が外れずに残ってしまう回帰バグを修正する PR です。`unscope` がテーブルエイリアスを考慮して where 条件を外すようになりました。"
-    },
-    {
-      "number": 59820,
-      "title": "Break hard dependency between Action Mailer and Active Job {#pr-59820}",
-      "url": "https://github.com/rails/rails/pull/59820",
-      "mergedAt": "2026-11-16T00:00:00.000Z",
-      "author": "byroot",
-      "authorUrl": "https://github.com/byroot",
-      "summary": "1. 概要 (1-2文で)  \nAction Mailer が Active Job に「必須依存」しないようにし、Active Job を使わないアプリでも余計なコードをロードせずに Action Mailer を利用できるようにした変更です。これにより、Action Mailer と Active Job の結合度が下がり、軽量構成やカスタムジョブ実装がしやすくなります。"
     }
   ]
 }
