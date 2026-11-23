@@ -1,7 +1,43 @@
 {
-  "lastUpdated": "2026-11-22T00:08:34.934Z",
+  "lastUpdated": "2026-11-23T00:09:11.704Z",
   "totalCount": 50,
   "items": [
+    {
+      "number": 59926,
+      "title": "Fix the days range in `distance_of_time_in_words` docs [ci skip] {#pr-59926}",
+      "url": "https://github.com/rails/rails/pull/59926",
+      "mergedAt": "2026-11-22T00:00:00.000Z",
+      "author": "55728",
+      "authorUrl": "https://github.com/55728",
+      "summary": "1. 概要 (1-2文で)  \n`distance_of_time_in_words` のドキュメント内にある「日数レンジ」の表記が、実際の挙動と一致していなかったため、`[2..29] days` を `[2..30] days` に修正したドキュメント専用のPRです。コードの挙動は既に「最大30日」として動いており、ドキュメントのみをそれに合わせています。"
+    },
+    {
+      "number": 59928,
+      "title": "[8.1] Honor `force: true` in `fetch_multi` with a local cache {#pr-59928}",
+      "url": "https://github.com/rails/rails/pull/59928",
+      "mergedAt": "2026-11-22T00:00:00.000Z",
+      "author": "fatkodima",
+      "authorUrl": "https://github.com/fatkodima",
+      "summary": "1. 概要 (1-2文で)  \nRails 8.1 の `ActiveSupport::Cache` において、`local_cache` 使用時の `fetch_multi` が `force: true` オプションを正しく解釈するように修正したバックポートです。これによりローカルキャッシュ経由の `fetch_multi` でも、既存値を無視して強制的に再計算・再保存できるようになります。"
+    },
+    {
+      "number": 59924,
+      "title": "Fix `ProxyLogger#ignore` raising on an incompatible message encoding {#pr-59924}",
+      "url": "https://github.com/rails/rails/pull/59924",
+      "mergedAt": "2026-11-22T00:00:00.000Z",
+      "author": "55728",
+      "authorUrl": "https://github.com/55728",
+      "summary": "1. 概要 (1-2文で)  \n`ActiveSupport::ProxyLogger#ignore` に、無視パターンとログメッセージのエンコーディングが非互換な場合に `Encoding::CompatibilityError` が発生してしまう不具合があり、それを修正したPRです。エンコーディング不一致でマッチできないメッセージは例外ではなく素通しで実ロガーに委譲されるようになります。"
+    },
+    {
+      "number": 59922,
+      "title": "Honor `force: true` in `fetch_multi` with a local cache {#pr-59922}",
+      "url": "https://github.com/rails/rails/pull/59922",
+      "mergedAt": "2026-11-22T00:00:00.000Z",
+      "author": "55728",
+      "authorUrl": "https://github.com/55728",
+      "summary": "1. 概要 (1-2文で)  \n`Rails.cache.fetch_multi` に `force: true` を渡したとき、ローカルキャッシュが有効でも必ずブロックを実行して値を取り直すように挙動を修正した PR です。これにより、`fetch` と `fetch_multi` で `force: true` の意味が一貫し、ローカルキャッシュ利用時の予期しない古い値の返却が解消されます。"
+    },
     {
       "number": 59917,
       "title": "[8-1-stable] Skip test_via_to_sql_with_complicating_connection for PostgreSQL 19+ {#pr-59917}",
@@ -415,42 +451,6 @@
       "author": "kamipo",
       "authorUrl": "https://github.com/kamipo",
       "summary": "1. 概要 (1-2文で)  \n`has_many :through, disable_joins: true` を多態関連（`as:` オプション）経由で使った場合に、`taggable_type` などのポリモーフィックな type 条件が無視されてしまい、他のタイプのレコードまで読み込まれてしまう不具合を修正する PR です。`disable_joins` 利用時でも、通常の関連ロードと同じくポリモーフィックの type 条件が必ず付与されるようになります。"
-    },
-    {
-      "number": 59827,
-      "title": "Move PostgreSQL-only DDL into PostgreSQL `SchemaCreation` {#pr-59827}",
-      "url": "https://github.com/rails/rails/pull/59827",
-      "mergedAt": "2026-11-17T00:00:00.000Z",
-      "author": "kamipo",
-      "authorUrl": "https://github.com/kamipo",
-      "summary": "1. 概要 (1-2文で)  \nこのPRは、PostgreSQL 専用の DDL 生成ロジック（`INCLUDE` や `NULLS NOT DISTINCT` を含む `CREATE INDEX`、およびテーブル作成時の排他制約・ユニーク制約生成）を抽象クラスから PostgreSQL 用の `SchemaCreation` 実装へ移動し、アダプタごとの責務分離を明確にしたものです。生成される SQL 自体は変わらず、設計の整理・拡張性の向上が主目的です。"
-    },
-    {
-      "number": 59825,
-      "title": "Don't let the association scope remove the association's own key condition {#pr-59825}",
-      "url": "https://github.com/rails/rails/pull/59825",
-      "mergedAt": "2026-11-17T00:00:00.000Z",
-      "author": "kamipo",
-      "authorUrl": "https://github.com/kamipo",
-      "summary": "1. 概要 (1-2文で)  \nこのPRは、関連スコープ内で `unscope` や `rewhere` を使った際に、関連付け元のレコードに紐づけるための「外部キー条件」まで消えてしまう不具合を修正します。これにより、他オーナーのレコードが関連経由で読み込まれたり、`update_all` / `delete_all` / `dependent: :delete_all` が誤って他オーナーのレコードを更新・削除してしまう問題が解消されます。"
-    },
-    {
-      "number": 58967,
-      "title": "[doc][ci skip] Fix I18n guide example for array defaults to use a Symbol {#pr-58967}",
-      "url": "https://github.com/rails/rails/pull/58967",
-      "mergedAt": "2026-11-16T00:00:00.000Z",
-      "author": "hachi8833",
-      "authorUrl": "https://github.com/hachi8833",
-      "summary": "1. 概要 (1-2文で)  \nI18n ガイドの「Defaults」節で、`:default` オプションに配列を渡したときの挙動説明とサンプルコードが、実際の `I18n.t` の動作と食い違っていたため、それを修正するドキュメント専用PRです。`default` 配列内で「翻訳キーとして解決されるのは Symbol だけ」であることが明示されるようになりました。"
-    },
-    {
-      "number": 58169,
-      "title": "[doc][ci-skip] Remove redundant \"Setting the Locale from URL Params\" section in I18n edge guides {#pr-58169}",
-      "url": "https://github.com/rails/rails/pull/58169",
-      "mergedAt": "2026-11-16T00:00:00.000Z",
-      "author": "hachi8833",
-      "authorUrl": "https://github.com/hachi8833",
-      "summary": "1. 概要 (1-2文で)  \nRails Edge Guides の I18n ドキュメントで、「URLパラメータからロケールを設定する」親セクションが内容的に重複・混在しており、説明が循環参照的になっていた問題を整理した PR です。クエリパラメータ方式とパス方式をそれぞれ独立したトップレベルセクションとして再構成し、説明文を分かりやすく書き直しています。"
     }
   ]
 }
