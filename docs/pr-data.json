@@ -1,7 +1,142 @@
 {
-  "lastUpdated": "2026-11-23T00:09:11.704Z",
+  "lastUpdated": "2026-11-24T00:10:55.758Z",
   "totalCount": 50,
   "items": [
+    {
+      "number": 58389,
+      "title": "Update the default Node.js version to 26.13.1 for new applications {#pr-58389}",
+      "url": "https://github.com/rails/rails/pull/58389",
+      "mergedAt": "2026-11-23T00:00:00.000Z",
+      "author": "taketo1113",
+      "authorUrl": "https://github.com/taketo1113",
+      "summary": "1. 概要 (1-2文で)  \n`rails new` でアプリを生成したときに作られる `.node-version` のデフォルト値を、Node.js 22.21.1 から 26.13.1 (最新の LTS) に更新した PRです。Node.js 22 の EoL を見据え、Rails 新規アプリの標準 Node.js バージョンをより長くサポートされる LTS に切り替えています。"
+    },
+    {
+      "number": 59935,
+      "title": "Remove unused ActiveModel::Dirty include from Normalization {#pr-59935}",
+      "url": "https://github.com/rails/rails/pull/59935",
+      "mergedAt": "2026-11-23T00:00:00.000Z",
+      "author": "hamajyotan",
+      "authorUrl": "https://github.com/hamajyotan",
+      "summary": "1. 概要 (1-2文で)  \n`ActiveModel::Attributes::Normalization` から不要になった `ActiveModel::Dirty` の `include` が削除されました。  \nこれにより、正規化モジュールを通じて暗黙的に Dirty 機能が混入することがなくなり、Dirty 機能が必要なクラスは明示的に `ActiveModel::Dirty` を `include` する必要があります。"
+    },
+    {
+      "number": 59945,
+      "title": "[8.1] Remove unused `ActiveModel::Dirty` include from `Normalization` {#pr-59945}",
+      "url": "https://github.com/rails/rails/pull/59945",
+      "mergedAt": "2026-11-23T00:00:00.000Z",
+      "author": "fatkodima",
+      "authorUrl": "https://github.com/fatkodima",
+      "summary": "1. 概要 (1-2文で)  \nRails 8.1 ブランチに対して、`ActiveModel::Attributes::Normalization` モジュールから未使用の `ActiveModel::Dirty` の `include` が削除されました。機能追加ではなく、内部依存関係の整理・軽量化目的のリファクタリングです。"
+    },
+    {
+      "number": 49513,
+      "title": "Document `ActionDispatch::IntegrationTest#register_encoder` [ci skip] {#pr-49513}",
+      "url": "https://github.com/rails/rails/pull/49513",
+      "mergedAt": "2026-11-23T00:00:00.000Z",
+      "author": "seanpdoyle",
+      "authorUrl": "https://github.com/seanpdoyle",
+      "summary": "1. 概要 (1-2文で)  \n`ActionDispatch::IntegrationTest` に関するドキュメント更新のPRで、`response.parsed_body` が `format: :json` だけでなく `format: :html` も扱えることを明記し、`register_encoder` メソッドの説明を正式なメソッドドキュメントに追加しています。コードの挙動変更はなく、テストガイドとAPIドキュメントの改善のみです。"
+    },
+    {
+      "number": 56921,
+      "title": "Improve Readme for Rails Guides with info about rake commands {#pr-56921}",
+      "url": "https://github.com/rails/rails/pull/56921",
+      "mergedAt": "2026-11-23T00:00:00.000Z",
+      "author": "ayushn21",
+      "authorUrl": "https://github.com/ayushn21",
+      "summary": "1. 概要 (1-2文で)  \nRails Guides の README と執筆ガイドラインを、実際の挙動（`output` ディレクトリは自動でクリーンアップされる）に合わせて更新し、「手動で `output` を削除する必要がある」という古い記述を削除・修正したドキュメント改善のPRです。コード挙動の変更はなく、開発者向けの手順説明と rake タスク案内を最新化しています。"
+    },
+    {
+      "number": 59932,
+      "title": "Fix the return value in `Parameters#select!` docs [ci skip] {#pr-59932}",
+      "url": "https://github.com/rails/rails/pull/59932",
+      "mergedAt": "2026-11-23T00:00:00.000Z",
+      "author": "55728",
+      "authorUrl": "https://github.com/55728",
+      "summary": "1. 概要 (1-2文で)  \n`ActionController::Parameters#select!`（およびエイリアスの`keep_if`）のドキュメントが、実際の挙動と食い違っていたため、「変更がない場合はnilを返す」としていた説明を「常にselfを返す」に修正したPRです。コードの挙動自体は従来どおりで、ドキュメントのみの更新です。"
+    },
+    {
+      "number": 59938,
+      "title": "Fix destroy_async with an ordered has_many scope {#pr-59938}",
+      "url": "https://github.com/rails/rails/pull/59938",
+      "mergedAt": "2026-11-23T00:00:00.000Z",
+      "author": "wtn",
+      "authorUrl": "https://github.com/wtn",
+      "summary": "1. 概要 (1-2文で)  \n`has_many` に `dependent: :destroy_async` と `order`（あるいは `default_order` / `default_scope` の order）が付いているときに、`ActiveRecord.error_on_ignored_order = true` だと `destroy` が `ArgumentError` で落ちてしまう問題を修正した PR です。`destroy_async` 実行時には関連スコープの order を取り除いてバッチ処理することで、例外を防ぎつつ、キューに積まれるレコードの ID はこれまで通りになるようにしています。"
+    },
+    {
+      "number": 59933,
+      "title": "Fix `connected_to?` and `ShardSelector` raising with Integer shard keys {#pr-59933}",
+      "url": "https://github.com/rails/rails/pull/59933",
+      "mergedAt": "2026-11-23T00:00:00.000Z",
+      "author": "55728",
+      "authorUrl": "https://github.com/55728",
+      "summary": "1. 概要 (1-2文で)  \nRails 8.1 で導入された「整数のシャードキー」に対して、`connected_to?` と `ShardSelector` ミドルウェアが `NoMethodError` を起こしていた不具合を修正するPRです。整数シャードキーを `connects_to` 同様にそのまま扱うことで、ミドルウェアや問い合わせ系APIでも問題なく利用できるようにしています。"
+    },
+    {
+      "number": 59942,
+      "title": "[8.1] Avoid redefinition warnings for inherited Proc layouts {#pr-59942}",
+      "url": "https://github.com/rails/rails/pull/59942",
+      "mergedAt": "2026-11-23T00:00:00.000Z",
+      "author": "skipkayhil",
+      "authorUrl": "https://github.com/skipkayhil",
+      "summary": "1. 概要 (1-2文で)  \nRails 8.1系において、レイアウトに `Proc` を使った場合に継承先コントローラで「再定義」の警告が出てしまう問題を避けるための修正を、main側(#59930)から 8-1-stable にバックポートしたPRです。Action View のレイアウト解決ロジックを1行だけ調整し、それに対応するテストを追加しています。"
+    },
+    {
+      "number": 59940,
+      "title": "Use `utf8mb3` for the MySQL `key_tests` test table {#pr-59940}",
+      "url": "https://github.com/rails/rails/pull/59940",
+      "mergedAt": "2026-11-23T00:00:00.000Z",
+      "author": "yahonda",
+      "authorUrl": "https://github.com/yahonda",
+      "summary": "1. 概要 (1-2文で)  \nMySQL/MariaDB 用テストテーブル `key_tests` の文字セット指定を `CHARSET=utf8` から `CHARSET=utf8mb3` に変更し、MariaDB 13.1.1 以降でもインデックス長が変わらないようにした PR です。これにより、`SchemaDumperTest#test_schema_dumps_index_type` が MariaDB 13.1.1 で失敗していた問題を解消しています。"
+    },
+    {
+      "number": 59930,
+      "title": "Avoid redefinition warnings for inherited Proc layouts {#pr-59930}",
+      "url": "https://github.com/rails/rails/pull/59930",
+      "mergedAt": "2026-11-23T00:00:00.000Z",
+      "author": "brunoprietog",
+      "authorUrl": "https://github.com/brunoprietog",
+      "summary": "1. 概要 (1-2文で)  \nRails の Action View が、継承関係にあるコントローラ同士で Proc ベースのレイアウトを使う際に発生していた「メソッド再定義」の警告を出さないようにする修正です。Turbo Rails のフレーム用レイアウトとアプリ側のレイアウトが Proc で衝突したときにも警告が出ないようになります。"
+    },
+    {
+      "number": 59901,
+      "title": "[memory ⬇️] CodeGenerate relation delegation methods {#pr-59901}",
+      "url": "https://github.com/rails/rails/pull/59901",
+      "mergedAt": "2026-11-23T00:00:00.000Z",
+      "author": "fuzzyrichie",
+      "authorUrl": "https://github.com/fuzzyrichie",
+      "summary": "1. 概要 (1-2文で)  \nActive Record の relation から model への委譲メソッド生成処理を、`ActiveSupport::CodeGenerator` ベースに変更し、同名メソッドをアプリ全体で共有できるようにしてメモリ使用量を削減する PR です。挙動は変えず、特に大規模アプリで約 3MB 程度のメモリ削減が確認されています。"
+    },
+    {
+      "number": 59939,
+      "title": "[8.1] Don't convert the given `expires_at` to UTC in place {#pr-59939}",
+      "url": "https://github.com/rails/rails/pull/59939",
+      "mergedAt": "2026-11-23T00:00:00.000Z",
+      "author": "skipkayhil",
+      "authorUrl": "https://github.com/skipkayhil",
+      "summary": "1. 概要 (1-2文で)  \nRails 8.1 の ActiveSupport::Messages メタデータ処理において、`expires_at` に渡されたオブジェクトを「その場で UTC に変換してしまう」挙動を修正したバックポートです。呼び出し元が渡した `expires_at` のオブジェクトはこれまでミューテートされていましたが、この PR により破壊的変更が行われなくなります。"
+    },
+    {
+      "number": 59910,
+      "title": "Don't convert the given `expires_at` to UTC in place {#pr-59910}",
+      "url": "https://github.com/rails/rails/pull/59910",
+      "mergedAt": "2026-11-23T00:00:00.000Z",
+      "author": "55728",
+      "authorUrl": "https://github.com/55728",
+      "summary": "1. 概要 (1-2文で)  \n`MessageVerifier` / `MessageEncryptor` などで `expires_at`（および Cookie の `expires`）に渡した `Time` オブジェクトを、その場で UTC 変換してしまう不具合を修正し、元の `Time` オブジェクトを変更しないようにした PR です。これにより、`expires_at` に渡した `Time` のタイムゾーンや frozen 状態が壊れる問題が解消されます。"
+    },
+    {
+      "number": 59920,
+      "title": "Ignore `validate:` and `enforced:` when looking up the foreign key to remove {#pr-59920}",
+      "url": "https://github.com/rails/rails/pull/59920",
+      "mergedAt": "2026-11-23T00:00:00.000Z",
+      "author": "yahonda",
+      "authorUrl": "https://github.com/yahonda",
+      "summary": "1. 概要 (1-2文で)  \n`remove_foreign_key` が `validate:` および `enforced:` オプションを指定した場合に、実際の外部キーの状態と違うと `ArgumentError` になるバグを修正する PR です。外部キー削除時の検索条件から `validate:` と `enforced:` を除外し、状態変更後でも外部キーを正しく削除できるようにしています。"
+    },
     {
       "number": 59926,
       "title": "Fix the days range in `distance_of_time_in_words` docs [ci skip] {#pr-59926}",
@@ -316,141 +451,6 @@
       "author": "bruno-costanzo",
       "authorUrl": "https://github.com/bruno-costanzo",
       "summary": "1. 概要 (1-2文で)  \n`LazyIndexedAttributeSet#keys` から冗長な `cached_names` のユニオン処理を削除し、戻り値の内容を変えずにパフォーマンスを改善した PR です。機能的な挙動は一切変えず、`changed?` や `attribute_names` など頻出メソッドの実行速度を向上させています。"
-    },
-    {
-      "number": 59848,
-      "title": "Fix unnecessary string consumption in String#truncate_words {#pr-59848}",
-      "url": "https://github.com/rails/rails/pull/59848",
-      "mergedAt": "2026-11-18T00:00:00.000Z",
-      "author": "dogweather",
-      "authorUrl": "https://github.com/dogweather",
-      "summary": "1. 概要 (1-2文で)  \n`String#truncate_words` が内部で使っている正規表現を修正し、長大な文字列に対して不要に末尾までマッチさせてしまう処理を避けることで、ピークメモリ使用量と処理時間を大幅に削減した PR です。挙動は変えずに、正規表現の末尾を「消費するマッチ」から「先読み」に置き換えています。"
-    },
-    {
-      "number": 59853,
-      "title": "Fix numericality parity checks raising for non-finite values {#pr-59853}",
-      "url": "https://github.com/rails/rails/pull/59853",
-      "mergedAt": "2026-11-18T00:00:00.000Z",
-      "author": "yorzi",
-      "authorUrl": "https://github.com/yorzi",
-      "summary": "1. 概要 (1-2文で)  \n`numericality` バリデーションで `odd: true` / `even: true` を指定した際、値が無限大 (`Infinity`) や `NaN` のときに `FloatDomainError` が発生していた不具合を修正し、例外ではなく通常のバリデーションエラーとして扱うようにした PR です。有限値の挙動や、パリティ指定なしの場合の挙動には変更はありません。"
-    },
-    {
-      "number": 59850,
-      "title": "Move adapter-specific index attributes into adapter `IndexDefinition`s {#pr-59850}",
-      "url": "https://github.com/rails/rails/pull/59850",
-      "mergedAt": "2026-11-18T00:00:00.000Z",
-      "author": "kamipo",
-      "authorUrl": "https://github.com/kamipo",
-      "summary": "1. 概要 (1-2文で)  \nこのPRは、インデックス定義のうち特定のDBアダプタ（PostgreSQL / MySQL）でしか意味を持たない属性を、共通の `IndexDefinition` から各アダプタ専用の `IndexDefinition` クラスへ移動したものです。あわせてスキーマダンプ・スキーマキャッシュ・SQL生成まわりのフックを整理し、抽象レイヤで不正なSQLが生成される問題も解消しています。"
-    },
-    {
-      "number": 59849,
-      "title": "[8-1-stable] Fix test_precompile_shouldn't_use_the_digests_present_in_manifest.json failure {#pr-59849}",
-      "url": "https://github.com/rails/rails/pull/59849",
-      "mergedAt": "2026-11-18T00:00:00.000Z",
-      "author": "yahonda",
-      "authorUrl": "https://github.com/yahonda",
-      "summary": "1. 概要 (1-2文で)  \n8-1-stable ブランチで sporadic（ときどき）落ちていた `ApplicationTests::SprocketsAssetsTest#test_precompile_shouldn't_use_the_digests_present_in_manifest.json` のテスト失敗を防ぐために、master 側の修正 (#58148) をバックポートした PR です。実質的にはテストコードを 1 行だけ追加し、アセットプリコンパイルに関する期待値を安定させています。"
-    },
-    {
-      "number": 59837,
-      "title": "Entirely drop support for Active Record 6.1 marshal format {#pr-59837}",
-      "url": "https://github.com/rails/rails/pull/59837",
-      "mergedAt": "2026-11-17T00:00:00.000Z",
-      "author": "byroot",
-      "authorUrl": "https://github.com/byroot",
-      "summary": "1. 概要 (1-2文で)  \nこのPRでは、Active Record 6.1 で使われていた独自の marshal 形式に対する「読み込み（unmarshal）」互換サポートを完全に削除しています。これにより、Rails 6.1 形式で marshal された Active Record オブジェクトは、現行バージョンではそのままでは復元できなくなります。"
-    },
-    {
-      "number": 59845,
-      "title": "Instrument the query `rails query` runs, not its first argument {#pr-59845}",
-      "url": "https://github.com/rails/rails/pull/59845",
-      "mergedAt": "2026-11-17T00:00:00.000Z",
-      "author": "jeremy",
-      "authorUrl": "https://github.com/jeremy",
-      "summary": "1. 概要 (1-2文で)  \n`rails query` コマンドが発行する *実際のクエリ* を ActiveSupport::Notifications (`query.rails`) で正しく計測・記録するようにした PR です。標準入力（パイプやサブコマンド `explain` / `schema` など）から決定される「実際に実行されるコマンド内容」が監査ログ等に正しく残るようになります。"
-    },
-    {
-      "number": 59839,
-      "title": "[8-1-stable] Fix `ActionCable::Server::Socket` tests with websocket-driver 0.9.0 {#pr-59839}",
-      "url": "https://github.com/rails/rails/pull/59839",
-      "mergedAt": "2026-11-17T00:00:00.000Z",
-      "author": "yahonda",
-      "authorUrl": "https://github.com/yahonda",
-      "summary": "1. 概要 (1-2文で)  \nRails 8.1 系ブランチ（8-1-stable）で、`websocket-driver` 0.9.0 使用時に Action Cable のソケット関連テストがハング・失敗する問題を修正し、#59835 の変更を 8-1-stable 用にバックポートした PRです。テストが `websocket-driver` 0.8.0 / 0.9.0 の両方で通るように、WebSocket 接続に使うヘッダをテスト側に明示的に追加しています。"
-    },
-    {
-      "number": 59842,
-      "title": "[8-1-stable] Fix order dependent failure of `ActionCable::Server::Socket::StreamTest` {#pr-59842}",
-      "url": "https://github.com/rails/rails/pull/59842",
-      "mergedAt": "2026-11-17T00:00:00.000Z",
-      "author": "yahonda",
-      "authorUrl": "https://github.com/yahonda",
-      "summary": "1. 概要 (1-2文で)  \nAction Cable の `StreamTest` が、テスト実行順や Ruby バージョン (特に Linux 上の Ruby 3.4 以前) によって失敗する問題を修正するための backport PR です。`8-1-stable` ブランチ向けに、ソケットクローズの挙動を調整することで、イベントループスレッドの異常終了を防いでいます。"
-    },
-    {
-      "number": 59829,
-      "title": "Fix bind values with Arel.sql in where {#pr-59829}",
-      "url": "https://github.com/rails/rails/pull/59829",
-      "mergedAt": "2026-11-17T00:00:00.000Z",
-      "author": "andrewfader",
-      "authorUrl": "https://github.com/andrewfader",
-      "summary": "1. 概要 (1-2文で)  \nRails 8d6b63b0cd (#59642) 以降、`where(Arel.sql(\"id = ?\"), 1)` のような書き方で `ActiveRecord::PreparedStatementInvalid`（bind の数不整合）が起きる回 regresson を修正した PRです。`build_where_clause` 内で Arel の SQL リテラルを一度 `to_s` してからバインド数を数えるように変更し、`where` / `where.not` / `having` での `Arel.sql` 利用を元通り動作させています。"
-    },
-    {
-      "number": 59841,
-      "title": "Fix order dependent failure of `ActionCable::Server::Socket::StreamTest` {#pr-59841}",
-      "url": "https://github.com/rails/rails/pull/59841",
-      "mergedAt": "2026-11-17T00:00:00.000Z",
-      "author": "yahonda",
-      "authorUrl": "https://github.com/yahonda",
-      "summary": "1. 概要 (1-2文で)  \n`ActionCable::Server::Socket::StreamTest` が「テスト実行順序」や Ruby のバージョン・OS によってだけ失敗する問題を、`rack.hijack_io` に渡す IO を「読み書き可能なソケットペア」に変えることで解消した PR です。特に Linux + Ruby 3.4 以前で、そのテストファイル単体実行時にのみ起きる WebSocket 接続まわりのレースコンディション的な失敗を潰しています。"
-    },
-    {
-      "number": 59836,
-      "title": "Add `association_scope_keeps_owner_conditions` to keep the owner conditions of associations {#pr-59836}",
-      "url": "https://github.com/rails/rails/pull/59836",
-      "mergedAt": "2026-11-17T00:00:00.000Z",
-      "author": "kamipo",
-      "authorUrl": "https://github.com/kamipo",
-      "summary": "1. 概要 (1-2文で)  \nRails 8.2 からの新設定 `config.active_record.association_scope_keeps_owner_conditions` により、関連のスコープが「所有側の条件」（外部キーや polymorphic の type 条件）を勝手に外せなくなります。従来どおり `unscope` や独自条件でこれらを外したい場合は設定を無効にするか、Rails 9.0 までにコード側を明示的に対応する必要があります。"
-    },
-    {
-      "number": 59740,
-      "title": "Remove UrlForTest#test_protocol_encoding_is_preserved {#pr-59740}",
-      "url": "https://github.com/rails/rails/pull/59740",
-      "mergedAt": "2026-11-17T00:00:00.000Z",
-      "author": "yahonda",
-      "authorUrl": "https://github.com/yahonda",
-      "summary": "1. 概要 (1-2文で)  \nRails の `UrlForTest#test_protocol_encoding_is_preserved` が Ruby 4.1.0dev でエンコーディングの仕様変更により失敗するため、「プロトコル文字列のエンコーディングを保持する」ことを検証していたテスト自体を削除した PR です。Rails 側としてはプロトコルのエンコーディングを保証しない方針を明確にし、Ruby の内部仕様に強く依存した脆いテストを整理しています。"
-    },
-    {
-      "number": 59835,
-      "title": "Fix `ActionCable::Server::Socket` tests with websocket-driver 0.9.0 {#pr-59835}",
-      "url": "https://github.com/rails/rails/pull/59835",
-      "mergedAt": "2026-11-17T00:00:00.000Z",
-      "author": "yahonda",
-      "authorUrl": "https://github.com/yahonda",
-      "summary": "1. 概要 (1-2文で)  \nAction Cable のソケット周りのテストが、`websocket-driver` 0.9.0 で失敗する問題を修正する PRです。Rails 本体の実装は変えず、テスト側を RFC 6455 準拠のクライアント挙動に合わせることで、古い `websocket-driver` (0.7.7) と新しい 0.9.0 の両方でテストが通るようにしています。"
-    },
-    {
-      "number": 59838,
-      "title": "Fix order dependent failure of a `ReflectionTest` test {#pr-59838}",
-      "url": "https://github.com/rails/rails/pull/59838",
-      "mergedAt": "2026-11-17T00:00:00.000Z",
-      "author": "yahonda",
-      "authorUrl": "https://github.com/yahonda",
-      "summary": "1. 概要 (1-2文で)  \n`ReflectionTest` 内の `test_association_added_to_parent_reaches_subclass_that_defined_its_own_first` がテスト実行順によって失敗する問題を修正した PR です。原因はフィクスチャの読み込み状況によってレコード ID が変わり、期待する関連レコード以外が結果に混ざってしまうことでした。"
-    },
-    {
-      "number": 59828,
-      "title": "Fix `disable_joins` ignoring the polymorphic type condition of an `as:` association {#pr-59828}",
-      "url": "https://github.com/rails/rails/pull/59828",
-      "mergedAt": "2026-11-17T00:00:00.000Z",
-      "author": "kamipo",
-      "authorUrl": "https://github.com/kamipo",
-      "summary": "1. 概要 (1-2文で)  \n`has_many :through, disable_joins: true` を多態関連（`as:` オプション）経由で使った場合に、`taggable_type` などのポリモーフィックな type 条件が無視されてしまい、他のタイプのレコードまで読み込まれてしまう不具合を修正する PR です。`disable_joins` 利用時でも、通常の関連ロードと同じくポリモーフィックの type 条件が必ず付与されるようになります。"
     }
   ]
 }
