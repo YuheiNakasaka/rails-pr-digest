@@ -1,7 +1,115 @@
 {
-  "lastUpdated": "2026-11-24T00:10:55.758Z",
+  "lastUpdated": "2026-11-25T00:10:48.031Z",
   "totalCount": 50,
   "items": [
+    {
+      "number": 59918,
+      "title": "Find check constraints by name alone when adding and removing them {#pr-59918}",
+      "url": "https://github.com/rails/rails/pull/59918",
+      "mergedAt": "2026-11-24T00:00:00.000Z",
+      "author": "yahonda",
+      "authorUrl": "https://github.com/yahonda",
+      "summary": "1. 概要 (1-2文で)  \nPostgreSQL で `add_check_constraint` / `remove_check_constraint` を使う際、制約の「検証済み(validate)状態」まで含めて既存制約を検索していたために発生していた不整合を、「名前だけ」で検索するように変更した PR です。これにより、`if_not_exists: true` や `validate: false` 指定時に `PG::DuplicateObject` や `ArgumentError` が発生していたケースが解消されます。"
+    },
+    {
+      "number": 59970,
+      "title": "Fix Dockerfile package updates after a database change {#pr-59970}",
+      "url": "https://github.com/rails/rails/pull/59970",
+      "mergedAt": "2026-11-24T00:00:00.000Z",
+      "author": "rafaelfranca",
+      "authorUrl": "https://github.com/rafaelfranca",
+      "summary": "1. 概要 (1-2文で)  \nRails の `db_system:change` ジェネレータが生成・更新する Dockerfile 周りを修正し、DB 変更後でも正しくパッケージ更新・インストールが行われるようにしたフォローアップ PR です。あわせて、`libvips` が存在しない環境向けのランタイムパッケージ更新と、SQLite devcontainer 機能の削除テストが追加されています。"
+    },
+    {
+      "number": 59128,
+      "title": "Add tests for combining length validator options {#pr-59128}",
+      "url": "https://github.com/rails/rails/pull/59128",
+      "mergedAt": "2026-11-24T00:00:00.000Z",
+      "author": "bastin27",
+      "authorUrl": "https://github.com/bastin27",
+      "summary": "1. 概要 (1-2文で)  \n`validates_length_of` のオプションを複数組み合わせたときの挙動（`:is` + `:minimum` / `:maximum`、および `:within`/`:in` と `:minimum`/`:maximum` の優先関係）をテストで「仕様として明示」するためのPRです。ライブラリコードは一切変更せず、既存の実装どおりに動作していることを検証するテストだけが追加されています。"
+    },
+    {
+      "number": 59127,
+      "title": "Clarify length and numericality validator options [ci skip] {#pr-59127}",
+      "url": "https://github.com/rails/rails/pull/59127",
+      "mergedAt": "2026-11-24T00:00:00.000Z",
+      "author": "bastin27",
+      "authorUrl": "https://github.com/bastin27",
+      "summary": "1. 概要 (1-2文で)  \nlengthバリデータとnumericalityバリデータの挙動について、既存ドキュメントの説明が実装と食い違っていた点を修正・明確化したPRです。コードの挙動自体は変えず、APIドキュメントとガイドの文章のみを実装に合わせて更新しています。"
+    },
+    {
+      "number": 59433,
+      "title": "Document the options before_validation and after_validation take {#pr-59433}",
+      "url": "https://github.com/rails/rails/pull/59433",
+      "mergedAt": "2026-11-24T00:00:00.000Z",
+      "author": "carlosdanielpohlod",
+      "authorUrl": "https://github.com/carlosdanielpohlod",
+      "summary": "1. 概要 (1-2文で)  \n`before_validation` / `after_validation` コールバックで利用できるオプション (`on`, `except_on`, `if`, `unless` など) を、RDoc に明示的に書き起こしたドキュメント専用の変更です。挙動は既存実装に合わせており、コードの振る舞い自体には一切変更がありません。"
+    },
+    {
+      "number": 59963,
+      "title": "Build AttributeSet#to_hash and #keys in one pass {#pr-59963}",
+      "url": "https://github.com/rails/rails/pull/59963",
+      "mergedAt": "2026-11-24T00:00:00.000Z",
+      "author": "bruno-costanzo",
+      "authorUrl": "https://github.com/bruno-costanzo",
+      "summary": "1. 概要 (1–2文で)  \n`AttributeSet#to_hash` と `#keys` を、内部構造である `IndexedRow` を1回なぞるだけで生成するようにして、高頻度で呼ばれる `attributes` や `as_json` のパフォーマンスとメモリ割り当てを大幅に改善した PR です。API モデルやフォームオブジェクトなど `ActiveModel::Attributes` ベースのオブジェクトの JSON シリアライズが主な恩恵を受けます。"
+    },
+    {
+      "number": 55189,
+      "title": "Don't pull in unnecessary packages for gem build {#pr-55189}",
+      "url": "https://github.com/rails/rails/pull/55189",
+      "mergedAt": "2026-11-24T00:00:00.000Z",
+      "author": "brianclinkenbeard",
+      "authorUrl": "https://github.com/brianclinkenbeard",
+      "summary": "1. 概要 (1-2文で)  \nRails が Dockerfile やジェネレータで Debian の `build-essential` を使っていた部分を、Gem のネイティブ拡張のビルドに本当に必要なパッケージ (`gcc`, `g++`, `make`) のみに置き換えた PR です。これにより、不要な Debian パッケージ（特に `dpkg-dev`）を引き込まず、よりミニマルで目的に沿った依存関係になります。"
+    },
+    {
+      "number": 59943,
+      "title": "Move column layout information to the model {#pr-59943}",
+      "url": "https://github.com/rails/rails/pull/59943",
+      "mergedAt": "2026-11-24T00:00:00.000Z",
+      "author": "tenderlove",
+      "authorUrl": "https://github.com/tenderlove",
+      "summary": "1. 概要 (1–2文で)  \nこのPRでは、スキーマごとに異なり得る「カラムの並び順・インデックス情報」を、スキーマ側ではなくモデル側に保持するように変更しています。これにより、複数の schema context を使うアプリケーションでも、カラム順の違いに起因する不整合を防ぎ、モデルのカラムアクセスを安定させます。"
+    },
+    {
+      "number": 59966,
+      "title": "Let MessageEncryptor subclasses inherit use_authenticated_message_encryption {#pr-59966}",
+      "url": "https://github.com/rails/rails/pull/59966",
+      "mergedAt": "2026-11-24T00:00:00.000Z",
+      "author": "bruno-costanzo",
+      "authorUrl": "https://github.com/bruno-costanzo",
+      "summary": "1. 概要 (1-2文で)  \nMessageEncryptor の `use_authenticated_message_encryption` フラグがサブクラスに継承されなくなっていた回帰を修正し、サブクラスでも親と同じ GCM などの設定を引き継げるようにした PR です。これにより、既存サブクラスで暗号方式が CBC に戻ってしまう問題を防ぎ、8.1 → main 間の互換性を保ちます。"
+    },
+    {
+      "number": 59947,
+      "title": "Fix the include_seconds example in `relative_time_in_words` docs [ci skip] {#pr-59947}",
+      "url": "https://github.com/rails/rails/pull/59947",
+      "mergedAt": "2026-11-24T00:00:00.000Z",
+      "author": "wintan1418",
+      "authorUrl": "https://github.com/wintan1418",
+      "summary": "1. 概要 (1-2文で)  \n`relative_time_in_words` のドキュメントに記載されていた `include_seconds: true` の戻り値例が、実際の挙動と食い違っていたため、戻り値の文字列を正しいものに修正したドキュメント専用PRです。コードの挙動変更はなく、あくまで説明文の修正のみです。"
+    },
+    {
+      "number": 59946,
+      "title": "Require String#remove in ActiveModel::Error {#pr-59946}",
+      "url": "https://github.com/rails/rails/pull/59946",
+      "mergedAt": "2026-11-24T00:00:00.000Z",
+      "author": "wintan1418",
+      "authorUrl": "https://github.com/wintan1418",
+      "summary": "1. 概要 (1-2文で)  \nActiveModel::Error 内で `String#remove` を使っているにもかかわらず、その定義元である `active_support/core_ext/string/filters` が require されていなかった問題を修正する PRです。これにより、ActiveModel::Validations を使わずに素の `ActiveModel::Errors` だけを利用した場合でも、`full_messages` や `generate_message` が `NoMethodError` を起こさなくなります。"
+    },
+    {
+      "number": 59949,
+      "title": "Do not reload the schema in `test_disable_enable_hstore` {#pr-59949}",
+      "url": "https://github.com/rails/rails/pull/59949",
+      "mergedAt": "2026-11-24T00:00:00.000Z",
+      "author": "yahonda",
+      "authorUrl": "https://github.com/yahonda",
+      "summary": "1. 概要 (1-2文で)  \nPostgreSQL 用の `PostgresqlHstoreTest#test_disable_enable_hstore` がスキーマを再ロードしないように変更し、テスト実行順によって CI で発生していた `ActiveRecord::PreparedStatementCacheExpired`（`cached plan must not change result type`）エラーを解消する PR です。  \n既に削除された `postgresql_hstores` テーブルの `hstore` カラムを復元する目的で行っていたスキーマ再ロード処理を削除しています。"
+    },
     {
       "number": 58389,
       "title": "Update the default Node.js version to 26.13.1 for new applications {#pr-58389}",
@@ -343,114 +451,6 @@
       "author": "ianterrell",
       "authorUrl": "https://github.com/ianterrell",
       "summary": "1. 概要 (1-2文で)  \nRails の fixtures が「仮想列（generated/virtual columns）」に対しても値を生成してしまい、ロード時に「table has no column named ...」エラーになる問題を修正した PR です。fixtures から仮想列を除外し、値は DB 側の計算に任せるように変更されています。"
-    },
-    {
-      "number": 59844,
-      "title": "Preserve leases across disconnect during checkout {#pr-59844}",
-      "url": "https://github.com/rails/rails/pull/59844",
-      "mergedAt": "2026-11-19T00:00:00.000Z",
-      "author": "cole-robertson",
-      "authorUrl": "https://github.com/cole-robertson",
-      "summary": "1. 概要 (1-2文で)  \nActive Record のコネクションプールで、`disconnect` 実行中に `lease_connection` / `with_connection` が待機している場合に「コネクションがプールに返却されず取りっぱなしになる」バグを修正した PRです。  \n`disconnect` によってクリアされた「リース (lease)」情報を世代管理し、チェックアウト完了時に正しいリースへコネクションを紐づけ直すことで、長寿命スレッドでの接続枯渇を防いでいます。"
-    },
-    {
-      "number": 59872,
-      "title": "Patch Rack::Multipart::Parser to not allow arbitrary encoding {#pr-59872}",
-      "url": "https://github.com/rails/rails/pull/59872",
-      "mergedAt": "2026-11-19T00:00:00.000Z",
-      "author": "byroot",
-      "authorUrl": "https://github.com/byroot",
-      "summary": "1. 概要 (1-2文で)  \nRack の `Rack::Multipart::Parser` が「任意の文字エンコーディングを受け入れる」挙動を Rails 側で上書きし、マルチパートのフォームデータにおける不必要かつ危険度の高いエンコーディング指定を無効化できるようにするパッチです。Rack 本体での対応（Rack 3.3 以降のオプション／Rack 4.0 でのデフォルト）を待たず、Rails から安全側のデフォルトを先取りする形になっています。"
-    },
-    {
-      "number": 59871,
-      "title": "[8-1-stable] Don't generate fixture values for virtual columns {#pr-59871}",
-      "url": "https://github.com/rails/rails/pull/59871",
-      "mergedAt": "2026-11-19T00:00:00.000Z",
-      "author": "yahonda",
-      "authorUrl": "https://github.com/yahonda",
-      "summary": "1. 概要 (1-2文で)  \nRails 8.1系で、フィクスチャ読み込み時に「table has no columns named ...」エラーを引き起こしていた“仮想カラム（virtual column）”に対する値生成を行わないようにする修正をバックポートしたPRです。主に、仮想カラムが主キーや複合外部キーに含まれている場合のフィクスチャ読み込みエラーを解消します。"
-    },
-    {
-      "number": 59868,
-      "title": "Skip the SQLString wrapper for unprepared queries {#pr-59868}",
-      "url": "https://github.com/rails/rails/pull/59868",
-      "mergedAt": "2026-11-19T00:00:00.000Z",
-      "author": "SamSaffron",
-      "authorUrl": "https://github.com/SamSaffron",
-      "summary": "1. 概要 (1-2文で)  \nこのPRは、未プリペアド(「?」バインドを使わない)クエリを生成する際に `SQLString` ラッパーを経由せず、素の可変文字列（`String`）を直接使うようにして、Arelコンパイル時のオブジェクト生成数と若干の実行時間を削減する最適化です。`SubstituteBinds` コレクタの役割とインターフェースは保ちつつ、デフォルト実装をより軽量にしています。"
-    },
-    {
-      "number": 59861,
-      "title": "[ci skip][docs] Restore Reloading Interlock wording in threading guide {#pr-59861}",
-      "url": "https://github.com/rails/rails/pull/59861",
-      "mergedAt": "2026-11-18T00:00:00.000Z",
-      "author": "hachi8833",
-      "authorUrl": "https://github.com/hachi8833",
-      "summary": "1. 概要 (1-2文で)  \nこのPRは、Railsガイド「Threading and Code Execution」における「Load Interlock」と「Reloading Interlock」の用語混在や、現状の実装と合わない記述を整理し、最新の挙動に沿ったドキュメントへ修正するものです。実装側ではすでに意味を失っている `permit_concurrent_loads` などの説明を削除し、「Reloading Interlock」を中心とした一貫した説明に戻しています。"
-    },
-    {
-      "number": 59859,
-      "title": "Freeze NumericalityValidator::RESERVED_OPTIONS {#pr-59859}",
-      "url": "https://github.com/rails/rails/pull/59859",
-      "mergedAt": "2026-11-18T00:00:00.000Z",
-      "author": "kehra",
-      "authorUrl": "https://github.com/kehra",
-      "summary": "1. 概要 (1-2文で)  \n`ActiveModel::Validations::NumericalityValidator::RESERVED_OPTIONS` を凍結 (`freeze`) して、Ractor（マルチスレッド並列実行機構）から安全に参照できるようにした PR です。これにより、非メイン Ractor から数値バリデーションを利用した際に発生していた `Ractor::IsolationError` が解消されます。"
-    },
-    {
-      "number": 59855,
-      "title": "Parse only token schemes in `Token.token_and_options` {#pr-59855}",
-      "url": "https://github.com/rails/rails/pull/59855",
-      "mergedAt": "2026-11-18T00:00:00.000Z",
-      "author": "czj",
-      "authorUrl": "https://github.com/czj",
-      "summary": "1. 概要 (1-2文で)  \n`ActionController::HttpAuthentication::Token.token_and_options` が、`Authorization` ヘッダのスキームを無条件にパースしてしまう挙動をやめ、デフォルトでは `Token` / `Bearer` / `DPoP` のトークンスキームだけを解釈するように戻した PR です。これにより、8.1 以前と同様に Basic / Digest 認証ヘッダはトークンとして扱われず、既存アプリや gem（Devise/GitLab/Zammad など）の期待する挙動と互換性が保たれます。"
-    },
-    {
-      "number": 59856,
-      "title": "Fix single-predicate OR groups built as an Array {#pr-59856}",
-      "url": "https://github.com/rails/rails/pull/59856",
-      "mergedAt": "2026-11-18T00:00:00.000Z",
-      "author": "americodls",
-      "authorUrl": "https://github.com/americodls",
-      "summary": "1. 概要 (1-2文で)  \n`PredicateBuilder#grouping_queries` が単一の OR 条件を Array のまま返してしまう回帰バグを修正し、単一要素の場合は Arel ノードを直接返すようにした PRです。これにより、`unscope` などで条件ツリーを走査した際に `Array` が紛れ込んで例外が発生していた問題が解消されます。"
-    },
-    {
-      "number": 59795,
-      "title": "Log source location when scoped order is ignored in batching {#pr-59795}",
-      "url": "https://github.com/rails/rails/pull/59795",
-      "mergedAt": "2026-11-18T00:00:00.000Z",
-      "author": "fatkodima",
-      "authorUrl": "https://github.com/fatkodima",
-      "summary": "1. 概要 (1-2文で)  \nActive Record のバッチ処理（`find_each`, `find_in_batches` など）で「スコープで指定した order が無視された」ときに出る警告ログに、「そのバッチ呼び出し元のソースコード位置（ファイル名・行番号）」が追加されました。これにより、どこから問題のバッチが呼ばれているかをログだけで即座に特定できるようになります。"
-    },
-    {
-      "number": 59770,
-      "title": "Install the pinned connection's lock before pinning it {#pr-59770}",
-      "url": "https://github.com/rails/rails/pull/59770",
-      "mergedAt": "2026-11-18T00:00:00.000Z",
-      "author": "hasannadeem",
-      "authorUrl": "https://github.com/hasannadeem",
-      "summary": "1. 概要 (1-2文で)  \nActive Record の `connection_pool` において、接続ピン留め (`pin_connection!`) 中に他スレッドが同じ接続を誤って取得してデッドロックする可能性があった問題を修正した PR です。`@pinned_connection` をセットする順序とロックのインストール順を見直すことで、トランザクションテストやバックグラウンドスレッド(例: Solid Cache の期限切れスレッド)との競合によるデッドロックを防いでいます。"
-    },
-    {
-      "number": 59818,
-      "title": "Support sets in class attributes and token lists {#pr-59818}",
-      "url": "https://github.com/rails/rails/pull/59818",
-      "mergedAt": "2026-11-18T00:00:00.000Z",
-      "author": "Alexander-Senko",
-      "authorUrl": "https://github.com/Alexander-Senko",
-      "summary": "1. 概要 (1-2文で)  \nRails の `tag`, `content_tag`, `class_names`, `token_list` などで、`Set` を `Array` と同様に扱えるようになり、HTML クラス属性やその他の属性に `Set` を直接渡しても意図どおり展開されるようになりました。これにより、クラスやトークンを集合として段階的に組み立てるケースで、明示的な配列変換が不要になります。"
-    },
-    {
-      "number": 59833,
-      "title": "Don't union cached names into LazyIndexedAttributeSet#keys {#pr-59833}",
-      "url": "https://github.com/rails/rails/pull/59833",
-      "mergedAt": "2026-11-18T00:00:00.000Z",
-      "author": "bruno-costanzo",
-      "authorUrl": "https://github.com/bruno-costanzo",
-      "summary": "1. 概要 (1-2文で)  \n`LazyIndexedAttributeSet#keys` から冗長な `cached_names` のユニオン処理を削除し、戻り値の内容を変えずにパフォーマンスを改善した PR です。機能的な挙動は一切変えず、`changed?` や `attribute_names` など頻出メソッドの実行速度を向上させています。"
     }
   ]
 }
