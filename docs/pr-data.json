@@ -1,7 +1,160 @@
 {
-  "lastUpdated": "2026-11-25T00:10:48.031Z",
+  "lastUpdated": "2026-11-26T00:12:06.641Z",
   "totalCount": 50,
   "items": [
+    {
+      "number": 59925,
+      "title": "Fix parallel CI groups raising when steps share a title {#pr-59925}",
+      "url": "https://github.com/rails/rails/pull/59925",
+      "mergedAt": "2026-11-25T00:00:00.000Z",
+      "author": "55728",
+      "authorUrl": "https://github.com/55728",
+      "summary": "1. 概要 (1-2文で)  \nRails の CI DSL (`config/ci.rb`) において、並列グループ内で同じタイトルを持つ step が同時に動くと `TypeError` で落ちていた問題を修正する PRです。これにより、同名の step を含む並列実行でも、各 step が正しく実行・計測・表示されるようになります。"
+    },
+    {
+      "number": 59906,
+      "title": "Fix `order(Arel.sql(...).desc)` making `includes` load with a join {#pr-59906}",
+      "url": "https://github.com/rails/rails/pull/59906",
+      "mergedAt": "2026-11-25T00:00:00.000Z",
+      "author": "55728",
+      "authorUrl": "https://github.com/55728",
+      "summary": "1. 概要 (1-2文で)  \nRails main ブランチで、`order(Arel.sql(...).desc)` を使ったときに SQL リテラルから誤ってテーブル名を抽出してしまい、`includes` がプリロードではなく JOIN を使ってしまう／エラーになる不具合を 8.1 と同等の挙動に戻す修正です。`references_values` に何を含めるかのロジックを見直し、`order` が「実際にテーブル参照として扱うべきもの」だけを参照とみなすようにしました。"
+    },
+    {
+      "number": 59907,
+      "title": "Fix preloading ordered `has_many :through` scoped on its through table {#pr-59907}",
+      "url": "https://github.com/rails/rails/pull/59907",
+      "mergedAt": "2026-11-25T00:00:00.000Z",
+      "author": "55728",
+      "authorUrl": "https://github.com/55728",
+      "summary": "1. 概要 (1-2文で)  \n`has_many :through` / `has_one :through` の関連に対して、スコープ内で「中間テーブル(through)をハッシュ条件で絞りつつ、Symbol/Hash/Arel で order を指定している」場合に、`preload` / `includes` 時だけ並び順が崩れたり SQL エラーになる不具合を修正する PRです。スコープ評価時と `preload` 時で、常に同じレコード集合・順序になるように、through 経由のプリロード時の JOIN 戦略を修正しています。"
+    },
+    {
+      "number": 59982,
+      "title": "Apply the rest of the scope of a `disable_joins` association {#pr-59982}",
+      "url": "https://github.com/rails/rails/pull/59982",
+      "mergedAt": "2026-11-25T00:00:00.000Z",
+      "author": "kamipo",
+      "authorUrl": "https://github.com/kamipo",
+      "summary": "1. 概要 (1–2文で)  \n`disable_joins: true` な関連（特に has_many :through / has_one :through）の「遅延ロード時」に、関連スコープの `select / limit / includes / readonly / strict_loading` などが無視されていた問題を修正し、通常の関連と同様にそれらが適用されるようにした PR です。これにより、preload 時と lazy load 時の挙動差分が解消され、関連スコープの一貫性が向上します。"
+    },
+    {
+      "number": 59826,
+      "title": "Keep readonly when preloading a filtered through {#pr-59826}",
+      "url": "https://github.com/rails/rails/pull/59826",
+      "mergedAt": "2026-11-25T00:00:00.000Z",
+      "author": "wtn",
+      "authorUrl": "https://github.com/wtn",
+      "summary": "1. 概要 (1-2文で)  \n`readonly` オプション付きの条件付き `has_many :through` をプリロードしたときだけ関連オブジェクトが readonly にならないという不整合な挙動を修正する PRです。`preload` 使用時も遅延ロード時と同様に、関連レコードが正しく readonly として扱われるようになります。"
+    },
+    {
+      "number": 59979,
+      "title": "Backport #58169 to 8-1-stable {#pr-59979}",
+      "url": "https://github.com/rails/rails/pull/59979",
+      "mergedAt": "2026-11-25T00:00:00.000Z",
+      "author": "rails-bot",
+      "authorUrl": "https://github.com/rails-bot",
+      "summary": "1. 概要 (1-2文で)  \nRails 8.1 ステーブルブランチに対して、既存PR #58169 で行われた i18n ガイドのドキュメント修正・整理をバックポートしたものです。コードや挙動の変更はなく、`guides/source/i18n.md` の文章・例示の改善と整理のみが行われています。"
+    },
+    {
+      "number": 59961,
+      "title": "Locate an Array of records passed to a job with one query per model {#pr-59961}",
+      "url": "https://github.com/rails/rails/pull/59961",
+      "mergedAt": "2026-11-25T00:00:00.000Z",
+      "author": "bruno-costanzo",
+      "authorUrl": "https://github.com/bruno-costanzo",
+      "summary": "1. 概要 (1-2文で)  \nActive Job に、配列で渡された Global ID（レコード）の一括解決（`locate_many`）を使う最適化が入った PRです。これにより、`[user1, user2, ...]` のような配列をジョブに渡した際、モデルごとに1クエリでまとめてロードされ、クエリ数とオブジェクト生成コストが大幅に削減されます。"
+    },
+    {
+      "number": 59954,
+      "title": "Check the encrypted file key length when decrypting {#pr-59954}",
+      "url": "https://github.com/rails/rails/pull/59954",
+      "mergedAt": "2026-11-25T00:00:00.000Z",
+      "author": "dennispaagman",
+      "authorUrl": "https://github.com/dennispaagman",
+      "summary": "1. 概要 (1-2文で)  \n`ActiveSupport::EncryptedFile` で「書き込み時だけ」行っていた鍵長チェックを「読み込み時」にも行うようにし、誤った長さの鍵（特に末尾が欠けた16進文字列など）であってもサイレントに復号できてしまうケースを防ぐ変更です。あわせて、`rails credentials:*` / `rails encrypted:*` コマンドのエラー挙動が整えられ、鍵が不正な場合は早い段階で失敗するようになりました。"
+    },
+    {
+      "number": 59956,
+      "title": "Keep the unaliased table name for left_joins when eager loading {#pr-59956}",
+      "url": "https://github.com/rails/rails/pull/59956",
+      "mergedAt": "2026-11-25T00:00:00.000Z",
+      "author": "bruno-costanzo",
+      "authorUrl": "https://github.com/bruno-costanzo",
+      "summary": "1. 概要 (1-2文で)  \n`left_joins` と `eager_load` を同じテーブルに対して併用したときに、**素のテーブル名 (users など) が常に eager load 側に紐づいてしまう**回帰バグを修正し、8.1 系と同じように **`left_joins` 側が素のテーブル名を使う**ように戻す変更です。これにより、`where(users: ...)` や `pluck(\"users.name\")`, `where.missing` などが、意図した join に対して動くようになります。"
+    },
+    {
+      "number": 59965,
+      "title": "Rescue all Redis errors in RedisCacheStore failsafe {#pr-59965}",
+      "url": "https://github.com/rails/rails/pull/59965",
+      "mergedAt": "2026-11-25T00:00:00.000Z",
+      "author": "bruno-costanzo",
+      "authorUrl": "https://github.com/bruno-costanzo",
+      "summary": "1. 概要 (1-2文で)  \nRedis クライアントを `redis-client` に置き換えた新しい `RedisCacheStore` が、一部の Redis エラーを救済できずに 500 エラーを発生させていた問題を修正し、すべての `RedisClient::Error` をフェイルセーフで握りつぶすようにした PR です。これにより、Redis 側の障害時でも Rails アプリが「キャッシュなしで動作」し続けられる、本来のフォールトトレラントな挙動が復元されます。"
+    },
+    {
+      "number": 59960,
+      "title": "Fix the hour and zone in `ActiveModel::Type::DateTime` docs [ci skip] {#pr-59960}",
+      "url": "https://github.com/rails/rails/pull/59960",
+      "mergedAt": "2026-11-25T00:00:00.000Z",
+      "author": "wintan1418",
+      "authorUrl": "https://github.com/wintan1418",
+      "summary": "1. 概要 (1-2文で)  \n`ActiveModel::Type::DateTime` のドキュメント中のサンプルコードで、タイムゾーン付き時刻文字列を代入したときの `hour` と `zone` の出力例が、実際の挙動と食い違っていたため、それを修正するドキュメント-only PRです。コードの挙動変更は一切なく、UTC への変換結果に合わせて例示値だけが更新されています。"
+    },
+    {
+      "number": 59574,
+      "title": "Deprecate a positional table name in Arel::Table.new {#pr-59574}",
+      "url": "https://github.com/rails/rails/pull/59574",
+      "mergedAt": "2026-11-25T00:00:00.000Z",
+      "author": "thomasklemm",
+      "authorUrl": "https://github.com/thomasklemm",
+      "summary": "1. 概要 (1-2文で)  \nRails 8.1 まで許可されていた `Arel::Table.new(:users)` などの「位置引数でのテーブル名指定」が、Rails main で `ArgumentError` になっていた問題を解消し、**互換を保ったまま非推奨(deprecate)** に変更する PR です。  \nこれにより、既存の gem / アプリは動作を継続しつつ、将来に向けて `name:` キーワード引数への移行を促す形になります。"
+    },
+    {
+      "number": 59955,
+      "title": "Limit the size of the quoted name caches {#pr-59955}",
+      "url": "https://github.com/rails/rails/pull/59955",
+      "mergedAt": "2026-11-25T00:00:00.000Z",
+      "author": "bruno-costanzo",
+      "authorUrl": "https://github.com/bruno-costanzo",
+      "summary": "1. 概要 (1-2文で)  \nこのPRは、ActiveRecord の SQLite3 / MySQL / PostgreSQL アダプタが内部で保持している「クオート済みカラム名・テーブル名」のキャッシュサイズに上限（1000件）を設け、無制限に増え続けないようにしたものです。これにより、パラメータ由来の不正なカラム名などが原因でメモリを大量に消費し続ける問題を防ぎます。"
+    },
+    {
+      "number": 59971,
+      "title": "Speed up numbering of Action Text plain-text list items {#pr-59971}",
+      "url": "https://github.com/rails/rails/pull/59971",
+      "mergedAt": "2026-11-25T00:00:00.000Z",
+      "author": "saddestmartian",
+      "authorUrl": "https://github.com/saddestmartian",
+      "summary": "1. 概要 (1-2文で)  \nAction Text のリッチテキストをプレーンテキストに変換する際、`<ol><li>...</li></ol>` の番号付けが遅いという問題に対し、`<li>` の「何番目か」の算出方法を Ruby 実装から libxml (C 実装) に切り替えて大幅に高速化した PR です。  \n出力結果（番号の付き方）は従来と完全に同一で、特に長大な番号付きリストで変換時間が 10〜20 倍以上短縮されています。"
+    },
+    {
+      "number": 59977,
+      "title": "Document redirect settings for metal controllers {#pr-59977}",
+      "url": "https://github.com/rails/rails/pull/59977",
+      "mergedAt": "2026-11-25T00:00:00.000Z",
+      "author": "flavorjones",
+      "authorUrl": "https://github.com/flavorjones",
+      "summary": "1. 概要 (1-2文で)  \nRails の `ActionController::Metal` を使ったコントローラでリダイレクト機能を利用する場合に、`ActionController::Base` 側では自動設定されるリダイレクト関連の設定が引き継がれないという罠がドキュメント上で明示されました。Metal の「Redirection Helpers」例に、3つのリダイレクト設定を明示的にコピーする形でドキュメントが更新されています。"
+    },
+    {
+      "number": 58677,
+      "title": "Match Rack::BadRequest errors in ActionDispatch::ParamError {#pr-58677}",
+      "url": "https://github.com/rails/rails/pull/58677",
+      "mergedAt": "2026-11-25T00:00:00.000Z",
+      "author": "navidemad",
+      "authorUrl": "https://github.com/navidemad",
+      "summary": "1. 概要 (1-2文で)  \n`Rack >= 3.1` が導入した `Rack::BadRequest` マーカー付きのエラーも `ActionDispatch::ParamError` として扱うようにし、これまで 500 (Internal Server Error) になっていた一部の不正リクエストを 400 (Bad Request) として適切に扱う修正です。主に `multipart/form-data` の境界長やパート数制限超過などで発生するエラーが対象です。"
+    },
+    {
+      "number": 58173,
+      "title": "Locate Action Text attachables in bulk {#pr-58173}",
+      "url": "https://github.com/rails/rails/pull/58173",
+      "mergedAt": "2026-11-25T00:00:00.000Z",
+      "author": "lylo",
+      "authorUrl": "https://github.com/lylo",
+      "summary": "1. 概要 (1-2文で)  \nAction Text でリッチテキスト中の添付ファイル（attachable）を SGID ごとに個別クエリで解決していた処理を、「まとめて一括解決」できるようにし、クエリ数を大幅に削減した PR です。レンダリング・作成・更新時の N+1／二重三重解決問題を解消し、大量画像コンテンツでのパフォーマンスを大きく改善します。"
+    },
     {
       "number": 59918,
       "title": "Find check constraints by name alone when adding and removing them {#pr-59918}",
@@ -298,159 +451,6 @@
       "author": "fatkodima",
       "authorUrl": "https://github.com/fatkodima",
       "summary": "1. 概要 (1-2文で)  \n`dependent: :destroy_async` を使った関連削除時に、関連レコードを一度に全件ロードしていた処理を、必要なカラムだけをバッチで読み込む実装に変更し、大量データ時のメモリ使用量を大幅に削減する変更です。Rails の挙動は基本的に同じままですが、大量関連レコードを持つ親レコード削除のパフォーマンスと安定性が向上します。"
-    },
-    {
-      "number": 59912,
-      "title": "Fix the block example in the `highlight` documentation {#pr-59912}",
-      "url": "https://github.com/rails/rails/pull/59912",
-      "mergedAt": "2026-11-21T00:00:00.000Z",
-      "author": "55728",
-      "authorUrl": "https://github.com/55728",
-      "summary": "1. 概要 (1-2文で)  \n`ActionView::Helpers::TextHelper#highlight` のドキュメント中にあるブロック利用例が、実際の挙動と一致していなかったため、例示コードと出力例を正しい形に修正した PR です。コード本体の挙動変更はなく、ドキュメントのみの修正です。"
-    },
-    {
-      "number": 59881,
-      "title": "Restrict multipart filename encoding on Rack < 3.1 {#pr-59881}",
-      "url": "https://github.com/rails/rails/pull/59881",
-      "mergedAt": "2026-11-21T00:00:00.000Z",
-      "author": "camallen",
-      "authorUrl": "https://github.com/camallen",
-      "summary": "1. 概要 (1-2文で)  \nこのPRは、Rack 3.1 未満を使っている Rails アプリでも、マルチパートアップロードの `filename*=` の文字コード判定が Rack 3.1+ と同じポリシーになるように制限するパッチです。これにより、クライアントが任意の文字エンコーディングを指定してファイル名文字列をねじ曲げることを防ぎ、UTF-8 / BINARY へ安全に正規化します。"
-    },
-    {
-      "number": 59899,
-      "title": "Require Object#in? in the numericality validator {#pr-59899}",
-      "url": "https://github.com/rails/rails/pull/59899",
-      "mergedAt": "2026-11-20T00:00:00.000Z",
-      "author": "carlosdanielpohlod",
-      "authorUrl": "https://github.com/carlosdanielpohlod",
-      "summary": "1. 概要 (1-2文で)  \n`ActiveModel::Validations::NumericalityValidator` が `:in` オプションの判定に `Object#in?` を使っているにもかかわらず、必要な拡張を `require` していなかったバグを修正する PR です。Active Record/Rails 全体では表面化しづらかった「`NoMethodError: undefined method 'in?'`」を、Active Model 単体利用時でも発生しないようにしています。"
-    },
-    {
-      "number": 59898,
-      "title": "[8.1] Remove job from the execution context after `perform_now` {#pr-59898}",
-      "url": "https://github.com/rails/rails/pull/59898",
-      "mergedAt": "2026-11-20T00:00:00.000Z",
-      "author": "fatkodima",
-      "authorUrl": "https://github.com/fatkodima",
-      "summary": "1. 概要 (1-2文で)  \nRails 8.1 系に対して、`perform_now` 実行後に Active Job の「現在実行中ジョブ」を示すコンテキスト情報を必ずクリアするようにしたバックポートです。これにより、同一スレッド内でのジョブ実行後にコンテキストがリークしてしまう問題を防ぎます。"
-    },
-    {
-      "number": 59897,
-      "title": "Return all records from in_order_of with filter: false when no values are left {#pr-59897}",
-      "url": "https://github.com/rails/rails/pull/59897",
-      "mergedAt": "2026-11-20T00:00:00.000Z",
-      "author": "carlosdanielpohlod",
-      "authorUrl": "https://github.com/carlosdanielpohlod",
-      "summary": "1. 概要 (1-2文で)  \n`ActiveRecord::Relation#in_order_of` に `filter: false` を指定した場合、並び替えに使う値リストが最終的に空になっても「0件」ではなく、元のレコード集合をそのまま返すように仕様が修正されました。これにより、`Enumerable#in_order_of` とドキュメントに書かれた挙動が Active Record でも一致します。"
-    },
-    {
-      "number": 59893,
-      "title": "Fix #59882: Remove job from the execution context after perform_now {#pr-59893}",
-      "url": "https://github.com/rails/rails/pull/59893",
-      "mergedAt": "2026-11-20T00:00:00.000Z",
-      "author": "azmi2409",
-      "authorUrl": "https://github.com/azmi2409",
-      "summary": "1. 概要 (1-2文で)  \n`MyJob.perform_now` 実行後も `ActiveSupport::ExecutionContext[:job]` にジョブが残り続け、後続クエリの SQL コメントにジョブ名が「漏れ続ける」不具合を修正した PRです。`ExecutionContext` へのジョブ設定をブロック形式に変更し、ジョブ終了時（例外発生時やネストしたジョブ実行時も含む）にコンテキストが元に戻るようになりました。"
-    },
-    {
-      "number": 58618,
-      "title": "[RF-DOCS] Rewrite the Securing Rails guide {#pr-58618}",
-      "url": "https://github.com/rails/rails/pull/58618",
-      "mergedAt": "2026-11-20T00:00:00.000Z",
-      "author": "ayushn21",
-      "authorUrl": "https://github.com/ayushn21",
-      "summary": "1. 概要 (1-2文で)  \nRails Guides の「Securing Rails アプリケーション」ガイド全体が大幅に書き直され、古い内容・ツール・CVE 参照などを整理しつつ、現行 Rails の機能（Active Storage、`allow_other_host`, rate limiting など）を前提とした構成・内容に更新されています。併せて、関連するガイドや `redirect_to` の `allow_other_host:` オプションの rdoc なども細かく修正されています。"
-    },
-    {
-      "number": 59887,
-      "title": "Keep LeaseRegistry working on engines other than MRI {#pr-59887}",
-      "url": "https://github.com/rails/rails/pull/59887",
-      "mergedAt": "2026-11-20T00:00:00.000Z",
-      "author": "bruno-costanzo",
-      "authorUrl": "https://github.com/bruno-costanzo",
-      "summary": "1. 概要 (1-2文で)  \nActiveRecord のコネクションプールが、MRI 以外の Ruby エンジン（TruffleRuby, JRuby）上でデッドロックしてしまう不具合を修正した PR です。`LeaseRegistry` が `ActiveSupport::WeakKeyMap` を正しく初期化せず、同じミューテックスを二重にロックしてしまう問題を避けるために、`super` 呼び出しとミューテックス名の変更が行われています。"
-    },
-    {
-      "number": 59896,
-      "title": "Require Object#with in test helper {#pr-59896}",
-      "url": "https://github.com/rails/rails/pull/59896",
-      "mergedAt": "2026-11-20T00:00:00.000Z",
-      "author": "byroot",
-      "authorUrl": "https://github.com/byroot",
-      "summary": "1. 概要 (1-2文で)  \nこのPRは、テスト環境で `Object#with` を共通ヘルパー側で一括 `require` するようにし、各テストファイルごとに個別で `require \"active_support/core_ext/object/with\"` する必要をなくした変更です。これにより「書き忘れ」「重複記述」を防ぎ、テストコードをシンプルに保守しやすくしています。"
-    },
-    {
-      "number": 59894,
-      "title": "[8.1] Fix RackMultipartParser frozen check {#pr-59894}",
-      "url": "https://github.com/rails/rails/pull/59894",
-      "mergedAt": "2026-11-20T00:00:00.000Z",
-      "author": "byroot",
-      "authorUrl": "https://github.com/byroot",
-      "summary": "1. 概要 (1-2文で)  \nRails 8.1系において、`RackMultipartParser` の「オブジェクトが frozen かどうか」を判定する処理の不具合を修正したバックポートPRです。Rackのマルチパート解析処理で、凍結オブジェクトに対する不正な操作が起きないようにチェック方法を修正しています。"
-    },
-    {
-      "number": 59895,
-      "title": "[8.0] Fix RackMultipartParser frozen check {#pr-59895}",
-      "url": "https://github.com/rails/rails/pull/59895",
-      "mergedAt": "2026-11-20T00:00:00.000Z",
-      "author": "byroot",
-      "authorUrl": "https://github.com/byroot",
-      "summary": "1. 概要 (1-2文で)  \nRails 8.0 ブランチにおいて、`RackMultipartParser` の「オブジェクトが frozen かどうか」を判定する処理が誤っていた／不十分だったため、それを修正するパッチがバックポートされました。これにより、マルチパートフォーム（ファイルアップロードなど）のパース時に、凍結オブジェクトの扱いに起因する例外や不正な状態になる可能性が減ります。"
-    },
-    {
-      "number": 59888,
-      "title": "Fix RackMultipartParser frozen check {#pr-59888}",
-      "url": "https://github.com/rails/rails/pull/59888",
-      "mergedAt": "2026-11-20T00:00:00.000Z",
-      "author": "byroot",
-      "authorUrl": "https://github.com/byroot",
-      "summary": "1. 概要 (1-2文で)  \nRackMultipartParser の「オブジェクトが frozen かどうか」の判定ロジックを 1 行だけ修正した PR です。マルチパートフォームデータの解析時に、凍結状態チェックが誤っていたケースを正しく扱えるようにしています。"
-    },
-    {
-      "number": 59846,
-      "title": "Harden generated GitHub Actions workflows {#pr-59846}",
-      "url": "https://github.com/rails/rails/pull/59846",
-      "mergedAt": "2026-11-19T00:00:00.000Z",
-      "author": "eliotsykes",
-      "authorUrl": "https://github.com/eliotsykes",
-      "summary": "1. 概要 (1-2文で)  \nRails が生成する GitHub Actions の `ci.yml` テンプレートをセキュリティ強化する変更です。アクションのバージョン固定（ピン留め）と GitHub トークン取り扱いの見直しにより、サプライチェーン攻撃やトークン漏洩リスクを低減しています。"
-    },
-    {
-      "number": 59874,
-      "title": "[8.0] Patch Rack::Multipart::Parser to not allow arbitrary encoding {#pr-59874}",
-      "url": "https://github.com/rails/rails/pull/59874",
-      "mergedAt": "2026-11-19T00:00:00.000Z",
-      "author": "byroot",
-      "authorUrl": "https://github.com/byroot",
-      "summary": "1. 概要 (1–2文で)  \nこのPRは、`Rack::Multipart::Parser` がマルチパートフォームデータの「任意のエンコーディング」を受け付けないようにするパッチを Rails 側から当てる変更です。Rails 8.0 向けに、アップロード等の multipart パラメータ解析時のエンコーディングを安全かつ制御可能にし、潜在的な不正・想定外のエンコーディング利用を防ぐための対応です。"
-    },
-    {
-      "number": 59873,
-      "title": "[8.1] Patch Rack::Multipart::Parser to not allow arbitrary encoding {#pr-59873}",
-      "url": "https://github.com/rails/rails/pull/59873",
-      "mergedAt": "2026-11-19T00:00:00.000Z",
-      "author": "byroot",
-      "authorUrl": "https://github.com/byroot",
-      "summary": "1. 概要 (1-2文で)  \nRails 8.1 で、`Rack::Multipart::Parser` が任意のエンコーディングを受け付けないようにパッチを当て、マルチパートフォームデータの解析時に使用される文字エンコーディングを制限・制御できるようにした PR です。セキュリティ・安定性の観点から、マルチパート解析時のエンコーディング周りの挙動を Rails 側で明示的にラップ・統制しています。"
-    },
-    {
-      "number": 59843,
-      "title": "Remove a reaped connection whose reset fails {#pr-59843}",
-      "url": "https://github.com/rails/rails/pull/59843",
-      "mergedAt": "2026-11-19T00:00:00.000Z",
-      "author": "cole-robertson",
-      "authorUrl": "https://github.com/cole-robertson",
-      "summary": "1. 概要 (1-2文で)  \nRails の `ActiveRecord::ConnectionAdapters::ConnectionPool#reap` が、接続リセット（`reset!`）に失敗した場合にその接続をプールから正常に解放できず「詰まり」を起こしていた不具合を修正する PR です。失敗した接続はエラーレポートを行った上でプールから削除・切断され、残りの接続は引き続き有効に利用されるようになります。"
-    },
-    {
-      "number": 59863,
-      "title": "Don't generate fixture values for virtual columns {#pr-59863}",
-      "url": "https://github.com/rails/rails/pull/59863",
-      "mergedAt": "2026-11-19T00:00:00.000Z",
-      "author": "ianterrell",
-      "authorUrl": "https://github.com/ianterrell",
-      "summary": "1. 概要 (1-2文で)  \nRails の fixtures が「仮想列（generated/virtual columns）」に対しても値を生成してしまい、ロード時に「table has no column named ...」エラーになる問題を修正した PR です。fixtures から仮想列を除外し、値は DB 側の計算に任せるように変更されています。"
     }
   ]
 }
