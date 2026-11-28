@@ -1,7 +1,349 @@
 {
-  "lastUpdated": "2026-11-27T00:20:56.927Z",
+  "lastUpdated": "2026-11-28T00:17:13.267Z",
   "totalCount": 50,
   "items": [
+    {
+      "number": 60036,
+      "title": "Fix the status code for `:unprocessable_content` in the Layouts and Rendering guide [ci skip] {#pr-60036}",
+      "url": "https://github.com/rails/rails/pull/60036",
+      "mergedAt": "2026-11-27T00:00:00.000Z",
+      "author": "55728",
+      "authorUrl": "https://github.com/55728",
+      "summary": "1. 概要 (1-2文で)  \nRailsガイド「Layouts and Rendering」で、`:unprocessable_content` シンボルに対応するHTTPステータスコードの説明が誤っていたのを、正しい 422 に修正したドキュメント向けPRです。実装コードではなくガイドのみの修正で、挙動には一切影響しません。\n\n2. 変更内容の詳細(あればサンプルコードも含めて)  \n- 対象箇所: guides/source/layouts_and_rendering.md  \n- 修正前のガイド記述（意図としては以下のような内容）:\n  - `render action: :edit, status: :unprocessable_content` の説明文中で  \n    - 「HTTPステータス `303 Unprocessable Content`」と書かれており、\n    - 303のMDNページ（`See Other`）にリンクされていた。\n- 修正内容:\n  - ステータス表現を `303 Unprocessable Content` → `422 Unprocessable Content` に変更\n  - リンク先を 303 の MDN から 422 用の MDN ページに変更\n\nコード例そのものは変わっておらず、ガイド中のサンプルは引き続き:\n\n```ruby\nrender action: :edit, status: :unprocessable_content\n```\n\nのままです。  \nここで使われるシンボル `:unprocessable_content` は Rack ベースで 422 にマップされています。\n\n3. 影響範囲・注意点  \n- 影響範囲:\n  - Rails本体の挙動やRackのマッピングには変更なし。\n  - 影響するのは「edge guides（最新版ガイド）」の文言のみ。\n- 技術的ポイント:\n  - `Rack::Utils.status_code(:unprocessable_content)` は 422 を返す。\n  - `Rack::Utils::HTTP_STATUS_CODES[422] #=> \"Unprocessable Content\"`\n  - `Rack::Utils::HTTP_STATUS_CODES[303] #=> \"See Other\"`\n- 注意点:\n  - ガイド上で 303 と書かれていたため、`:unprocessable_content` を 303 と誤解していた読者がいた可能性があるが、実際の動作は常に 422 だった。\n  - 今後、`:unprocessable_content` を使うときは、HTTP上は「422 Unprocessable Content」として扱われることを前提に設計・ハンドリング（クライアント側のエラー処理など）を行えばよい。\n\n4. 参考情報 (あれば)  \n- MDN:  \n  - 422 Unprocessable Content: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/422  \n  - 303 See Other: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/303  \n- Rackのステータスコード対応:\n  - `Rack::Utils.status_code(:unprocessable_content) #=> 422`  \n  - `Rack::Utils::HTTP_STATUS_CODES[422] #=> \"Unprocessable Content\"`"
+    },
+    {
+      "number": 59671,
+      "title": "Find SQLite tables by any ASCII case of their name in the schema readers {#pr-59671}",
+      "url": "https://github.com/rails/rails/pull/59671",
+      "mergedAt": "2026-11-27T00:00:00.000Z",
+      "author": "thomasklemm",
+      "authorUrl": "https://github.com/thomasklemm",
+      "summary": "1. 概要 (1-2文で)  \nSQLite 用の batched schema reader がテーブル名の大文字小文字を厳密一致でしか扱えなかった問題を修正し、ASCII 範囲内の case-insensitive な名前解決を行うようにした PRです。これにより、`Widgets` というテーブル名に対して `columns(\"widgets\")` を呼んでも正しく動作するようになり、Ransack などで発生していたエラーを解消します。"
+    },
+    {
+      "number": 60003,
+      "title": "Fix flaky `test_restart_rails_server_with_custom_pid_file_path` {#pr-60003}",
+      "url": "https://github.com/rails/rails/pull/60003",
+      "mergedAt": "2026-11-27T00:00:00.000Z",
+      "author": "yahonda",
+      "authorUrl": "https://github.com/yahonda",
+      "summary": "1. 概要 (1-2文で)  \nRails の `ApplicationTests::ServerTest#test_restart_rails_server_with_custom_pid_file_path` が CI 上でときどき失敗していた原因（Puma の `tmp_restart` プラグインと `tmp/restart.txt` の mtime が同一になる問題）を避けるために、テスト側であらかじめ古い mtime の `tmp/restart.txt` を作成するようにした PRです。これにより、`rails restart` 実行時の `touch` で必ず mtime が更新され、Puma が確実に再起動されるようになります。"
+    },
+    {
+      "number": 60002,
+      "title": "[8-1-stable] Fix Mysql2Adapter#discard! corrupting parent connection after fork {#pr-60002}",
+      "url": "https://github.com/rails/rails/pull/60002",
+      "mergedAt": "2026-11-27T00:00:00.000Z",
+      "author": "yahonda",
+      "authorUrl": "https://github.com/yahonda",
+      "summary": "1. 概要 (1-2文で)  \nRails 8.1 の `ActiveRecord::ConnectionAdapters::Mysql2Adapter#discard!` が、fork 後に親プロセスの MySQL コネクションを壊してしまう問題を修正するためのバックポート PRです。主に TLS を使う環境で、prepared statements 利用時に親側が「Lost connection to MySQL server during query」などのエラーで落ちる CI 不安定性を解消します。"
+    },
+    {
+      "number": 60023,
+      "title": "Backport #58677 to 8-1-stable {#pr-60023}",
+      "url": "https://github.com/rails/rails/pull/60023",
+      "mergedAt": "2026-11-27T00:00:00.000Z",
+      "author": "rails-bot",
+      "authorUrl": "https://github.com/rails-bot",
+      "summary": "1. 概要 (1-2文で)  \nこのPRは、Rails 8.1 系ブランチに対して #58677 の変更をバックポートし、パラメータエラーの扱いに `Rack::BadRequest` を含めるよう拡張するとともに、マルチパートリクエストに関するテストと CHANGELOG の追記を行うものです。これにより、リクエストパラメータ関連の例外処理がより一貫した挙動になります。"
+    },
+    {
+      "number": 60025,
+      "title": "Backport #59954 to 8-1-stable {#pr-60025}",
+      "url": "https://github.com/rails/rails/pull/60025",
+      "mergedAt": "2026-11-27T00:00:00.000Z",
+      "author": "rails-bot",
+      "authorUrl": "https://github.com/rails-bot",
+      "summary": "1. 概要 (1-2文で)  \nRails 8.1 系ブランチに対して、「暗号化ファイルを復号する前に鍵長を検証し、不正な鍵長の場合はスタックトレースなしでわかりやすいエラーを出す」変更 (#59954) をバックポートした PR です。対象は Rails.credentials や `rails encrypted:*` コマンドで使われる暗号化設定ファイル全般です。"
+    },
+    {
+      "number": 60022,
+      "title": "Backport #59931 to 8-1-stable {#pr-60022}",
+      "url": "https://github.com/rails/rails/pull/60022",
+      "mergedAt": "2026-11-27T00:00:00.000Z",
+      "author": "rails-bot",
+      "authorUrl": "https://github.com/rails-bot",
+      "summary": "1. 概要 (1-2文で)  \nRails 8.1系（8-1-stableブランチ）に対して、`Accept` ヘッダのパース処理を改善した本家PR #59931 がバックポートされています。具体的には、`Accept` ヘッダ内のクォート付きパラメータに含まれるエスケープ済み文字（バックスラッシュでエスケープされた文字）を正しく解釈できるようにし、その回 regresson test を追加しています。"
+    },
+    {
+      "number": 59416,
+      "title": "Clear `default_order`when calling`ActiveRecord::Relation#reorder` {#pr-59416}",
+      "url": "https://github.com/rails/rails/pull/59416",
+      "mergedAt": "2026-11-27T00:00:00.000Z",
+      "author": "kehra",
+      "authorUrl": "https://github.com/kehra",
+      "summary": "1. 概要 (1-2文で)  \n`ActiveRecord::Relation#reorder` を呼んだときに、これまで残ってしまっていた `default_order` も一緒にクリアするようにした変更です。これにより `reorder(nil)` は「並び順なし」を明示する動作になり、`default_order` にフォールバックしなくなります。"
+    },
+    {
+      "number": 59369,
+      "title": "Make Symbol#to_s return the interned frozen String on Ruby < 4.1 {#pr-59369}",
+      "url": "https://github.com/rails/rails/pull/59369",
+      "mergedAt": "2026-11-27T00:00:00.000Z",
+      "author": "amatsuda",
+      "authorUrl": "https://github.com/amatsuda",
+      "summary": "1. 概要 (1–2文で)\n- Ruby 4.1 で導入される「`Symbol#to_s` が毎回新しい String を作らず、インターン済みの凍結文字列を返す」仕様を、Rails サポート対象の古い Ruby (〜4.0) でも Active Support 経由で有効にする変更です。  \n- これにより `sym.to_s` を多用するコードでのオブジェクト生成・GC 負荷を減らし、これまで Rails 内で散在していた `value.is_a?(Symbol) ? value.name : value.to_s` のような特殊扱いパターンを不要にします。"
+    },
+    {
+      "number": 59432,
+      "title": "Preserve unsafe status in `SafeBuffer#encode`, `-@`, `dedup`, and `+@` {#pr-59432}",
+      "url": "https://github.com/rails/rails/pull/59432",
+      "mergedAt": "2026-11-27T00:00:00.000Z",
+      "author": "wtn",
+      "authorUrl": "https://github.com/wtn",
+      "summary": "1. 概要 (1-2文で)  \n`ActiveSupport::SafeBuffer` において、一度「unsafe」になったバッファが `encode`, 単項 `-@` / `+@`, `dedup` を通ると誤って再び `html_safe? == true` になってしまう不具合を修正した PR です。これにより、XSS などにつながりうる「エスケープされずに描画される」状況を防ぎます。"
+    },
+    {
+      "number": 59498,
+      "title": "Fix Active Model inline RBS signatures {#pr-59498}",
+      "url": "https://github.com/rails/rails/pull/59498",
+      "mergedAt": "2026-11-27T00:00:00.000Z",
+      "author": "amatsuda",
+      "authorUrl": "https://github.com/amatsuda",
+      "summary": "1. 概要 (1-2文で)  \nActive Model の `ActiveModel::Errors` に埋め込まれている inline RBS 型注釈を、実装と `gem_rbs_collection` 側の署名に合わせて修正した PRです。パースできない注釈の修正や、実装よりゆるすぎる／不正確だった型を、実際の挙動に即した正確な型にしています。"
+    },
+    {
+      "number": 59518,
+      "title": "Memoize QueryAttribute#hash {#pr-59518}",
+      "url": "https://github.com/rails/rails/pull/59518",
+      "mergedAt": "2026-11-27T00:00:00.000Z",
+      "author": "sampokuokkanen",
+      "authorUrl": "https://github.com/sampokuokkanen",
+      "summary": "1. 概要 (1-2文で)  \nQuery cache 利用時に同じ bind パラメータが何度もハッシュ計算されていた問題に対し、`ActiveRecord::Relation::QueryAttribute#hash` の結果をメモ化して再利用することで、クエリキャッシュのヒット/ミス双方の性能を改善する変更です。挙動は変えずに、ハッシュ計算コストだけを下げています。"
+    },
+    {
+      "number": 59772,
+      "title": "Add `bin/rails credentials:keys` to list credentials without their values {#pr-59772}",
+      "url": "https://github.com/rails/rails/pull/59772",
+      "mergedAt": "2026-11-27T00:00:00.000Z",
+      "author": "coorasse",
+      "authorUrl": "https://github.com/coorasse",
+      "summary": "1. 概要 (1-2文で)  \nRails に `bin/rails credentials:keys` コマンドが追加され、credentials の「キーの一覧」だけを値を表示せずに確認できるようになりました。環境ごとに設定済みキーの差分確認や、値を秘匿したままの監査・自動チェックがしやすくなります。"
+    },
+    {
+      "number": 60020,
+      "title": "Build attribute Hashes without copying the lazy row {#pr-60020}",
+      "url": "https://github.com/rails/rails/pull/60020",
+      "mergedAt": "2026-11-27T00:00:00.000Z",
+      "author": "thomasklemm",
+      "authorUrl": "https://github.com/thomasklemm",
+      "summary": "1. 概要 (1-2文で)  \n`attributes_for_database` と `attributes_before_type_cast` が、毎回 `IndexedRow::Mutable` をコピーしてから Hash を作っていたのをやめ、コピーせずに Hash を構築するようにして、メモリ割り当てと速度を改善した PRです。Marshal や MessagePack など、レコード属性を丸ごとシリアライズする処理が特に高速化されます。"
+    },
+    {
+      "number": 58935,
+      "title": "Fix incorrect output examples in Action View helper docs [skip ci] {#pr-58935}",
+      "url": "https://github.com/rails/rails/pull/58935",
+      "mergedAt": "2026-11-27T00:00:00.000Z",
+      "author": "bastin27",
+      "authorUrl": "https://github.com/bastin27",
+      "summary": "1. 概要 (1-2文で)  \nAction View の各種ヘルパー（`asset_path`, `number_to_currency`, `mail_to`, `sms_to`）のドキュメントコメント内の「戻り値の例」が、実際の動作と一致するように修正されたPRです。コード本体には変更がなく、ドキュメントのみの修正です。"
+    },
+    {
+      "number": 59738,
+      "title": "Fix Action View helper examples that do not match the output [ci skip] {#pr-59738}",
+      "url": "https://github.com/rails/rails/pull/59738",
+      "mergedAt": "2026-11-27T00:00:00.000Z",
+      "author": "carlosdanielpohlod",
+      "authorUrl": "https://github.com/carlosdanielpohlod",
+      "summary": "1. 概要 (1-2文で)  \nAction View のヘルパーのドキュメント中にある `# =>` 形式の出力例が、実際のヘルパー出力と食い違っていた箇所を修正する PR です。コードの挙動は変えず、`datetime_field`, `picture_tag`, `video_tag` の出力例のみを実際の挙動に合わせて更新しています。"
+    },
+    {
+      "number": 60009,
+      "title": "Fix `Time.now(in:)` raising inside `travel_to` {#pr-60009}",
+      "url": "https://github.com/rails/rails/pull/60009",
+      "mergedAt": "2026-11-27T00:00:00.000Z",
+      "author": "55728",
+      "authorUrl": "https://github.com/55728",
+      "summary": "1. 概要 (1-2文で)  \n`ActiveSupport::Testing::TimeHelpers` の `travel_to` / `travel` / `freeze_time` 使用中に、`Time.now(in: ...)` を呼ぶと `ArgumentError` が発生していたバグを修正する PR です。以後、テストで時間をスタブしていても `Time.now(in: \"+09:00\")` などが正しく動作し、指定されたタイムゾーンのスタブ時刻を返します。"
+    },
+    {
+      "number": 59807,
+      "title": "Fix MySQL `algorithm: :instant` examples that also pass `lock: :none` [ci skip] {#pr-59807}",
+      "url": "https://github.com/rails/rails/pull/59807",
+      "mergedAt": "2026-11-27T00:00:00.000Z",
+      "author": "yshmarov",
+      "authorUrl": "https://github.com/yshmarov",
+      "summary": "1. 概要 (1-2文で)  \nMySQLで受け付けられない `algorithm: :instant` と `lock: :none` の組み合わせが、Railsのドキュメント例として紹介されていた問題を修正したPRです。コード本体には手を入れず、Active Record の CHANGELOG・APIドキュメント・ガイド中の記述だけを正しい例に更新しています。"
+    },
+    {
+      "number": 59847,
+      "title": "Add `broadcast` to `ActionCable::Connection::TestServer` {#pr-59847}",
+      "url": "https://github.com/rails/rails/pull/59847",
+      "mergedAt": "2026-11-27T00:00:00.000Z",
+      "author": "czj",
+      "authorUrl": "https://github.com/czj",
+      "summary": "1. 概要 (1-2文で)  \n`ActionCable::Connection::TestServer` に `broadcast` メソッドが追加され、テスト環境でも `connection.broadcast` を使ったコードがそのまま動作し、`assert_broadcasts` などのテストヘルパと連携できるようになりました。これにより、本番コードとテストコードで `ActionCable.server.broadcast` / `connection.broadcast` を使い分ける必要がなくなります。"
+    },
+    {
+      "number": 59953,
+      "title": "Keep the job in the execution context while its errors are handled {#pr-59953}",
+      "url": "https://github.com/rails/rails/pull/59953",
+      "mergedAt": "2026-11-27T00:00:00.000Z",
+      "author": "MIbtehajNasar",
+      "authorUrl": "https://github.com/MIbtehajNasar",
+      "summary": "1. 概要 (1-2文で)  \nActive Job の実行時コンテキスト (`ActiveSupport::ExecutionContext[:job]`) からジョブ情報が例外処理中に消えてしまう回 regress を修正し、`perform_now` の実行～例外ハンドリング中までは常に `context[:job]` にジョブが入るようにした PR です。  \n同時に、以前のメモリリーク／コンテキストリーク (#59882) を再発させないよう、`perform_now` の外に例外が出た後はジョブを文脈に残さない設計を維持しています。"
+    },
+    {
+      "number": 59769,
+      "title": "[8-1-stable] Backport #56236: show the navbar for the Login link in the Getting Started guide {#pr-59769}",
+      "url": "https://github.com/rails/rails/pull/59769",
+      "mergedAt": "2026-11-27T00:00:00.000Z",
+      "author": "hasannadeem",
+      "authorUrl": "https://github.com/hasannadeem",
+      "summary": "1. 概要 (1-2文で)  \nRails公式ガイド「Getting Started」のログインリンクに関するコード例が誤って `app/views/products/index.html.erb` を参照していたのを、実際の配置ファイルである `app/views/layouts/application.html.erb` の `<nav>` 全体を示すように修正した PR を、`8-1-stable` ブランチへバックポートしたものです。コード本体には変更はなく、ガイドのドキュメントのみが更新されています。"
+    },
+    {
+      "number": 59876,
+      "title": "Ignore a schema cache dump that can't be deserialized instead of raising {#pr-59876}",
+      "url": "https://github.com/rails/rails/pull/59876",
+      "mergedAt": "2026-11-27T00:00:00.000Z",
+      "author": "company-account-1",
+      "authorUrl": "https://github.com/company-account-1",
+      "summary": "1. 概要 (1-2文で)  \nRails の schema cache dump（`schema_cache.yml` など）が壊れていたり、存在しないクラスを参照していてデシリアライズできない場合でも、例外でアプリ起動や接続確立が失敗しないようにし、警告とエラーレポートを出した上で DB からスキーマを再取得するように変更する PR です。  \nこれにより、Rails アップグレードや schema cache ファイル破損をきっかけとした「アプリが起動しなくなる」系の事故を避けられるようになります。"
+    },
+    {
+      "number": 60011,
+      "title": "Fix `receive_inbound_email_from_fixture` raising when given a `status` {#pr-60011}",
+      "url": "https://github.com/rails/rails/pull/60011",
+      "mergedAt": "2026-11-27T00:00:00.000Z",
+      "author": "55728",
+      "authorUrl": "https://github.com/55728",
+      "summary": "1. 概要 (1-2文で)  \n`ActionMailbox::TestHelper` の `receive_inbound_email_from_fixture` / `receive_inbound_email_from_source` が、ドキュメントどおり `status:` などのキーワード引数を受け取れるように修正された PR です。Ruby 3 での「位置引数とキーワード引数の分離」によって発生していた不具合を解消し、テストも追加しています。"
+    },
+    {
+      "number": 60015,
+      "title": "Fix the error type examples in `full_messages_for` and `messages_for` docs [ci skip] {#pr-60015}",
+      "url": "https://github.com/rails/rails/pull/60015",
+      "mergedAt": "2026-11-27T00:00:00.000Z",
+      "author": "55728",
+      "authorUrl": "https://github.com/55728",
+      "summary": "1. 概要 (1-2文で)  \nActiveModel::Errors の `full_messages_for` / `messages_for` に関するドキュメント例が、実際には発生しないエラー種別（`:invalid`）を使っていた問題を修正した PRです。実行結果と一致するように、例で使用するエラー種別を `:too_short` に変更しています。"
+    },
+    {
+      "number": 60014,
+      "title": "Fix collection options with a Proc for both `value_method` and `selected` {#pr-60014}",
+      "url": "https://github.com/rails/rails/pull/60014",
+      "mergedAt": "2026-11-27T00:00:00.000Z",
+      "author": "55728",
+      "authorUrl": "https://github.com/55728",
+      "summary": "1. 概要 (1-2文で)  \n`options_from_collection_for_select` および `collection_select` で、`value_method` に Proc を使いつつ `selected` / `disabled` にも Proc を渡したときに `TypeError` が出る不具合を修正した PRです。これにより、ドキュメント通り「値の取得」「選択状態」「無効状態」をすべて Proc で柔軟に指定できるようになりました。"
+    },
+    {
+      "number": 60012,
+      "title": "Fix `bin/rails notes` raising on invalid bytes in a Ruby file's comment {#pr-60012}",
+      "url": "https://github.com/rails/rails/pull/60012",
+      "mergedAt": "2026-11-27T00:00:00.000Z",
+      "author": "55728",
+      "authorUrl": "https://github.com/55728",
+      "summary": "1. 概要 (1-2文で)  \nRails 8.0 / 8.1 で `bin/rails notes` や `/rails/info/notes` 実行時、コメント内に非UTF-8バイト（Latin-1 など）を含む Ruby ファイルがあると `ArgumentError: invalid byte sequence in UTF-8` で落ちていた不具合を修正する PR です。無効バイトを置換して処理を継続するようにし、Rails 7.2 と同様に注釈を表示できるように戻しています。"
+    },
+    {
+      "number": 60010,
+      "title": "Fix `row_count` and `exception` in `sql.active_record` for async queries {#pr-60010}",
+      "url": "https://github.com/rails/rails/pull/60010",
+      "mergedAt": "2026-11-27T00:00:00.000Z",
+      "author": "55728",
+      "authorUrl": "https://github.com/55728",
+      "summary": "1. 概要 (1-2文で)  \n`load_async` や `async_*` といった非同期クエリで発行される `sql.active_record` 通知について、クエリ実行後でないと分からない `row_count` と `exception` が正しく載らなくなっていた不具合を修正するPRです。これにより、非同期クエリでも同期クエリと同じ形のペイロードが `ActiveSupport::Notifications` に送られるようになります。"
+    },
+    {
+      "number": 59916,
+      "title": "Correct how :only and :except combine with :if and :unless in callback docs [ci skip] {#pr-59916}",
+      "url": "https://github.com/rails/rails/pull/59916",
+      "mergedAt": "2026-11-27T00:00:00.000Z",
+      "author": "jonasporto",
+      "authorUrl": "https://github.com/jonasporto",
+      "summary": "1. 概要 (1-2文で)  \nこのPRは、Rails のコールバック（`before_action` など）のドキュメントにおける `:only` / `:except` と `:if` / `:unless` の組み合わせの説明が実際の挙動と食い違っていた点を修正し、特に `skip_before_action` 利用時に生じうる危険な誤解を防ぐためのものです。コードの挙動は変えず、`_normalize_callback_options` に関する説明文だけを正しい内容に更新しています。"
+    },
+    {
+      "number": 60019,
+      "title": "Rename `default_order` to `fallback_order` {#pr-60019}",
+      "url": "https://github.com/rails/rails/pull/60019",
+      "mergedAt": "2026-11-27T00:00:00.000Z",
+      "author": "rafaelfranca",
+      "authorUrl": "https://github.com/rafaelfranca",
+      "summary": "1. 概要 (1-2文で)  \nActive Record に追加されたクエリメソッド `default_order` を、名前衝突の問題を避けるために `fallback_order` にリネームした PRです。`has_many` のオプション名や `unscope` のキーも同様に `fallback_order` に統一され、明示的な `order` が優先されるという挙動はそのまま維持されます。"
+    },
+    {
+      "number": 60006,
+      "title": "Let Attachment.from_node pick attachables the bulk lookup didn't locate {#pr-60006}",
+      "url": "https://github.com/rails/rails/pull/60006",
+      "mergedAt": "2026-11-27T00:00:00.000Z",
+      "author": "thomasklemm",
+      "authorUrl": "https://github.com/thomasklemm",
+      "summary": "1. 概要 (1-2文で)  \nActionText がリッチテキスト内の添付（attachments）を復元する際の挙動を修正し、`ActionText::Attachment.from_node` をアプリ側がオーバーライドしている場合でも、従来どおりフォールバック処理が働くように戻した PR です。#58173 で導入された一括 lookup の副作用により、Campfire などのカスタム attachable 解決ロジックが効かなくなっていた問題を解消します。"
+    },
+    {
+      "number": 60018,
+      "title": "Backport #59919 to 8-1-stable {#pr-60018}",
+      "url": "https://github.com/rails/rails/pull/60018",
+      "mergedAt": "2026-11-27T00:00:00.000Z",
+      "author": "rails-bot",
+      "authorUrl": "https://github.com/rails-bot",
+      "summary": "1. 概要 (1–2文で)  \nRails 8.1 系ブランチに対して、テンプレートの「strict locals」解析処理を専用パーサに切り出し、Prism を使ってブロック引数の検出を行うようにした本流 PR (#59919) のバックポートです。Action View に Prism 依存を追加しつつ、テンプレート解析ロジックを整理・強化しています。"
+    },
+    {
+      "number": 59997,
+      "title": "Add missing Active Support core extension requires {#pr-59997}",
+      "url": "https://github.com/rails/rails/pull/59997",
+      "mergedAt": "2026-11-27T00:00:00.000Z",
+      "author": "wintan1418",
+      "authorUrl": "https://github.com/wintan1418",
+      "summary": "1. 概要 (1-2文で)  \nこのPRは、Active Supportのコア拡張メソッドを利用しているにもかかわらず、対応する`require`が抜けていた箇所に明示的な`require`を追加し、`NoMethodError`が発生する不整合を解消するものです。これにより、Rails全体ではなくAction DispatchやActive Support単体を読み込んだ状況でも、想定どおりの挙動（例: 例外種別やデprecation警告）が得られるようになります。"
+    },
+    {
+      "number": 60007,
+      "title": "Note in the upgrade guide that default_url_options is frozen by default {#pr-60007}",
+      "url": "https://github.com/rails/rails/pull/60007",
+      "mergedAt": "2026-11-27T00:00:00.000Z",
+      "author": "thomasklemm",
+      "authorUrl": "https://github.com/thomasklemm",
+      "summary": "1. 概要 (1-2文で)  \nRails 8.2 では、コントローラやメイラーなどが利用する `default_url_options` のデフォルト値(Hash)が「凍結(freeze)される」ようになったことがアップグレードガイドに追記されました。これにより、従来の「デフォルトの Hash をその場で書き換える」コードは `FrozenError` を起こすため、その回避策・書き換えパターンがガイドに明記されています。"
+    },
+    {
+      "number": 59662,
+      "title": "Don't freeze serialized column defaults {#pr-59662}",
+      "url": "https://github.com/rails/rails/pull/59662",
+      "mergedAt": "2026-11-27T00:00:00.000Z",
+      "author": "thomasklemm",
+      "authorUrl": "https://github.com/thomasklemm",
+      "summary": "1. 概要 (1-2文で)  \nRails 8.1 で導入された「モデルのデフォルト属性を凍結（freeze）する」挙動が、serialized カラムのデフォルト値と相性が悪く不具合を起こしていたため、**serialized 型の属性についてはデフォルト値を凍結しない**ように修正した PR です。暗号化属性についても、暗号化対象の型に合わせて freeze 可能かを判断するように変更されています。"
+    },
+    {
+      "number": 60013,
+      "title": "Let the Action Mailer test helper load without Active Job {#pr-60013}",
+      "url": "https://github.com/rails/rails/pull/60013",
+      "mergedAt": "2026-11-27T00:00:00.000Z",
+      "author": "thomasklemm",
+      "authorUrl": "https://github.com/thomasklemm",
+      "summary": "1. 概要 (1-2文で)  \nAction Mailer を Active Job なしでも安全に使えるようにするため、`ActionMailer::TestHelper` から Active Job への必須依存を外し、Active Job に紐づくメールキュー系テストヘルパは Active Job 側 (`ActiveJob::ActionMailerTestHelper`) に分離されました。これにより、`activejob` gem を入れていないアプリでも Integration Test や Mailer Test の読み込みで `LoadError` が出なくなります。"
+    },
+    {
+      "number": 60008,
+      "title": "Bump the minimum supported SQLite version to 3.37.0 {#pr-60008}",
+      "url": "https://github.com/rails/rails/pull/60008",
+      "mergedAt": "2026-11-27T00:00:00.000Z",
+      "author": "thomasklemm",
+      "authorUrl": "https://github.com/thomasklemm",
+      "summary": "1. 概要 (1-2文で)  \nRails の SQLite アダプタが内部で利用している `pragma_table_list` が SQLite 3.37.0 以降でしか存在しないため、Rails がサポートする SQLite の最小バージョンを 3.37.0 に引き上げる PR です。これにより、古い SQLite (3.35〜3.36) を使っている環境では接続時に分かりやすいエラーで弾かれるようになります。"
+    },
+    {
+      "number": 59999,
+      "title": "Fix the `attribute_method_affix` example in Active Model docs [ci skip] {#pr-59999}",
+      "url": "https://github.com/rails/rails/pull/59999",
+      "mergedAt": "2026-11-27T00:00:00.000Z",
+      "author": "wintan1418",
+      "authorUrl": "https://github.com/wintan1418",
+      "summary": "1. 概要 (1-2文で)  \nActiveModel::AttributeMethods のドキュメント中にある `attribute_method_affix` のコード例が実際の動作と食い違っていたため、それを修正するドキュメント専用のPRです。`Person` インスタンスに対して `name` を事前にセットする1行を追加し、説明どおりの出力になるようにしています。"
+    },
+    {
+      "number": 59884,
+      "title": "Don't drop the STI type condition when joining {#pr-59884}",
+      "url": "https://github.com/rails/rails/pull/59884",
+      "mergedAt": "2026-11-27T00:00:00.000Z",
+      "author": "smyk-git",
+      "authorUrl": "https://github.com/smyk-git",
+      "summary": "1. 概要 (1-2文で)  \nRails 7（mainブランチ）で導入された回帰により、STI（単一テーブル継承）のサブクラス関連を `joins` / `eager_load` した際に、本来かかるべき `type` 条件が消えてしまう問題を修正するPRです。`Reflection#join_scope` 内で、関連スコープとのマージ時に失われた STI の `type` 条件を再適用するように変更しています。"
+    },
     {
       "number": 59936,
       "title": "Fix the in-place modification example in `ActiveModel::Dirty` docs [ci skip] {#pr-59936}",
@@ -109,348 +451,6 @@
       "author": "thomasklemm",
       "authorUrl": "https://github.com/thomasklemm",
       "summary": "1. 概要 (1–2文で)  \nRails 8.2 では、Action Mailer が自動的に Active Job をロードしなくなったため、`action_mailer/railtie` だけを読み込んでいるアプリで `config.active_job` を設定するとブート時にエラーになる場合があります。今回の PR は、この仕様変更をアップグレードガイド（8.1 → 8.2）に明記し、必要なら Active Job railtie を明示的に require するよう案内するものです。"
-    },
-    {
-      "number": 59824,
-      "title": "Skip copying form field names that need no changes {#pr-59824}",
-      "url": "https://github.com/rails/rails/pull/59824",
-      "mergedAt": "2026-11-26T00:00:00.000Z",
-      "author": "thomasklemm",
-      "authorUrl": "https://github.com/thomasklemm",
-      "summary": "1. 概要 (1-2文で)  \n`form_with` / `form_for` などで使われる `text_field` や `check_box` といったフォームビルダのフィールドヘルパが、ID・name を生成する際に「何も変換が発生しない場合は文字列コピーを行わない」ように最適化されました。これによりフィールド生成時のオブジェクトアロケーションが削減され、若干のパフォーマンス向上が見込めます（出力される HTML は従来と同一）。"
-    },
-    {
-      "number": 59996,
-      "title": "Backport #59915 to 8-1-stable {#pr-59996}",
-      "url": "https://github.com/rails/rails/pull/59996",
-      "mergedAt": "2026-11-26T00:00:00.000Z",
-      "author": "rails-bot",
-      "authorUrl": "https://github.com/rails-bot",
-      "summary": "1. 概要 (1-2文で)  \nRails 8.1系（8-1-stable ブランチ）に対して、`String#truncate` / `truncate_bytes` の HTML セーフ文字列扱いに関する修正 (#59915) をバックポートした PR です。HTML セーフな文字列を省略（truncate）しても中身が意図せずエスケープされたり、バイト長制限を超えたりしないようにし、返り値は HTML セーフ扱いしないように変更しています。"
-    },
-    {
-      "number": 59661,
-      "title": "Allow registering parameter parsers in place during boot {#pr-59661}",
-      "url": "https://github.com/rails/rails/pull/59661",
-      "mergedAt": "2026-11-26T00:00:00.000Z",
-      "author": "thomasklemm",
-      "authorUrl": "https://github.com/thomasklemm",
-      "summary": "1. 概要 (1-2文で)  \nRails 8.1 以降で `ActionDispatch::Request.parameter_parsers` が凍結され、ブート時にパラメータパーサを追加する既存の gem が `FrozenError` で落ちていた問題を解消する PRです。ブート中はパーサの in-place 追加を許可しつつ、`ractorize!` 実行後にのみ最終的に凍結・共有可能化するように振る舞いを調整しています。"
-    },
-    {
-      "number": 59569,
-      "title": "Build the association alias tracker only for through chains {#pr-59569}",
-      "url": "https://github.com/rails/rails/pull/59569",
-      "mergedAt": "2026-11-26T00:00:00.000Z",
-      "author": "thomasklemm",
-      "authorUrl": "https://github.com/thomasklemm",
-      "summary": "1. 概要 (1-2文で)  \nRails の関連スコープ生成時に毎回 `AliasTracker` を作っていた処理を、「through を含む関連チェーン」に限って必要なタイミングで作成するように変更し、`belongs_to` / 直の `has_many` では無駄なコネクションアクセスを省くパフォーマンス改善です。これにより、関連リーダー呼び出しごとの命令数・オブジェクト生成数が減少し、アプリ全体の実行効率が向上します。"
-    },
-    {
-      "number": 59995,
-      "title": "Keep navigation helpers available through UrlHelper {#pr-59995}",
-      "url": "https://github.com/rails/rails/pull/59995",
-      "mergedAt": "2026-11-26T00:00:00.000Z",
-      "author": "rafaelfranca",
-      "authorUrl": "https://github.com/rafaelfranca",
-      "summary": "1. 概要 (1-2文で)  \nRails 7.2 系の変更で `NavigationHelper` に移動していた `link_to` / `button_to` / `current_page?` などのナビゲーション系ヘルパーを、`UrlHelper` を include しているクラスからも再び利用できるようにする修正です。アプリケーション側のコード変更やアップグレードガイドの追従なしに、後方互換性を回復することが目的です。"
-    },
-    {
-      "number": 59987,
-      "title": "Stop setting the Action Mailer delivery job in `load_defaults` {#pr-59987}",
-      "url": "https://github.com/rails/rails/pull/59987",
-      "mergedAt": "2026-11-26T00:00:00.000Z",
-      "author": "thomasklemm",
-      "authorUrl": "https://github.com/thomasklemm",
-      "summary": "1. 概要 (1-2文で)  \nAction Mailer が Active Job に依存しなくなった変更 (#59820) を踏まえ、`load_defaults \"6.0\"` 以降で行っていた「`delivery_job` を強制的に `ActionMailer::MailDeliveryJob` に設定する」初期化処理を削除し、Active Job が不要なアプリでの `LoadError` を防ぐ PR です。これにより、Active Job は「メール配送ジョブを実際に使うときだけ」読み込まれるようになります。"
-    },
-    {
-      "number": 59804,
-      "title": "Allocate less per field in `text_field_tag` and `tag` {#pr-59804}",
-      "url": "https://github.com/rails/rails/pull/59804",
-      "mergedAt": "2026-11-26T00:00:00.000Z",
-      "author": "thomasklemm",
-      "authorUrl": "https://github.com/thomasklemm",
-      "summary": "1. 概要 (1-2文で)  \nこのPRは、`text_field_tag` と `tag`（およびそれらを経由している `button_to` / `hidden_field_tag`）での不要なオブジェクト生成を減らし、パフォーマンスを向上させる変更です。HTML 出力（既に正しくレンダリングできていたケース）を変えずに、`button_to` の 1〜2パラメータ時で数 μs/数オブジェクトの削減が行われています。"
-    },
-    {
-      "number": 59817,
-      "title": "Unpin the main pool the Ractor proxy pinned {#pr-59817}",
-      "url": "https://github.com/rails/rails/pull/59817",
-      "mergedAt": "2026-11-26T00:00:00.000Z",
-      "author": "thomasklemm",
-      "authorUrl": "https://github.com/thomasklemm",
-      "summary": "1. 概要 (1-2文で)  \nRactor 用の Active Record 接続プロキシが「ピン止め解除（unpin）」時に、実際に自分がピンした main プールを正しく unpin していなかった不具合を修正した PRです。これにより、特定のシードで sqlite3:ractor ジョブの非同期クエリテストが不安定に失敗していた問題が解消されています。"
-    },
-    {
-      "number": 59812,
-      "title": "Compare Server-Timing durations with the events they come from {#pr-59812}",
-      "url": "https://github.com/rails/rails/pull/59812",
-      "mergedAt": "2026-11-26T00:00:00.000Z",
-      "author": "thomasklemm",
-      "authorUrl": "https://github.com/thomasklemm",
-      "summary": "1. 概要 (1-2文で)  \nこのPRは、`ServerTimingTest` におけるサーバタイミングのテストが CI 環境の負荷により頻繁に不安定化していた問題を修正し、`sleep` の実時間ではなく、計測イベント同士の相対比較によってテストするように変更しています。これにより、`main` や関係ない PR でのビルド失敗が大幅に減り、テストが安定します。"
-    },
-    {
-      "number": 59985,
-      "title": "Note in the upgrade guide that Rack::Sendfile is omitted when x_sendfile_header is unset {#pr-59985}",
-      "url": "https://github.com/rails/rails/pull/59985",
-      "mergedAt": "2026-11-26T00:00:00.000Z",
-      "author": "thomasklemm",
-      "authorUrl": "https://github.com/thomasklemm",
-      "summary": "1. 概要 (1-2文で)  \nRails 8.1 から 8.2 へのアップグレード時に、`x_sendfile_header` が未設定の場合はミドルウェア `Rack::Sendfile` がミドルウェアスタックに含まれなくなる、という挙動変更をアップグレードガイドに追記した PR です。これにより、`Rack::Sendfile` を前提にしたミドルウェア操作コードがブート時にエラーになるケースがあることを明示しています。"
-    },
-    {
-      "number": 59984,
-      "title": "Note in the upgrade guide that Sidekiq 8.0.3 or later is required {#pr-59984}",
-      "url": "https://github.com/rails/rails/pull/59984",
-      "mergedAt": "2026-11-26T00:00:00.000Z",
-      "author": "thomasklemm",
-      "authorUrl": "https://github.com/thomasklemm",
-      "summary": "1. 概要 (1–2文で)  \nRails 8.1 から 8.2 へのアップグレードガイドに、「Sidekiq は 8.0.3 以上が必須」であることを追記した PR です。Rails main（将来の 8.2 相当）では、Sidekiq 7 系など古いバージョンだとジョブアダプタの読み込みに失敗するケースがあるため、その注意喚起と回避方法が明文化されています。"
-    },
-    {
-      "number": 59800,
-      "title": "Avoid rebuilding attribute names in `LazyIndexedAttributeSet#keys` {#pr-59800}",
-      "url": "https://github.com/rails/rails/pull/59800",
-      "mergedAt": "2026-11-26T00:00:00.000Z",
-      "author": "thomasklemm",
-      "authorUrl": "https://github.com/thomasklemm",
-      "summary": "1. 概要 (1-2文で)  \n`LazyIndexedAttributeSet#keys` で、すでに全属性名を含んでいる `row_keys` に対して冗長な和集合計算（`row_keys | @ctx.type_keys`）をしていた処理を削除し、不要な配列・ハッシュ生成と二重ループをなくしたパフォーマンス改善のPRです。返されるキーの集合と順序は従来どおり変わりません。"
-    },
-    {
-      "number": 59735,
-      "title": "Note in the upgrade guide that PostgreSQL 18.4+ fixture loading acquires more locks {#pr-59735}",
-      "url": "https://github.com/rails/rails/pull/59735",
-      "mergedAt": "2026-11-26T00:00:00.000Z",
-      "author": "thomasklemm",
-      "authorUrl": "https://github.com/thomasklemm",
-      "summary": "1. 概要 (1-2文で)  \nRails 8.1 から 8.2 へのアップグレードガイドに、「PostgreSQL 18.4 以降で fixture をロードする際に取得されるロックが増える」という既知の互換性問題が追記されました。特に、多数の外部キーを持つDBで並列テストを走らせるアプリが `out of shared memory` エラーで落ちうる点が明示されています。"
-    },
-    {
-      "number": 59611,
-      "title": "Declare Prism dependencies in Action View and Railties {#pr-59611}",
-      "url": "https://github.com/rails/rails/pull/59611",
-      "mergedAt": "2026-11-26T00:00:00.000Z",
-      "author": "thomasklemm",
-      "authorUrl": "https://github.com/thomasklemm",
-      "summary": "1. 概要 (1-2文で)  \nRuby 4.1 以降で `prism` が「default gem」から「bundled gem」に変わることに伴い、Action View と Railties が明示的に `prism` を依存関係として宣言するようにした PR です。これにより、Ruby master 環境などで `LoadError` が発生していたケースを防ぎます。"
-    },
-    {
-      "number": 59627,
-      "title": "Restore ActiveModel::SecurePassword::MAX_PASSWORD_LENGTH_ALLOWED {#pr-59627}",
-      "url": "https://github.com/rails/rails/pull/59627",
-      "mergedAt": "2026-11-26T00:00:00.000Z",
-      "author": "thomasklemm",
-      "authorUrl": "https://github.com/thomasklemm",
-      "summary": "1. 概要 (1-2文で)  \nこのPRは、Rails 8.1系まで公開されていた `ActiveModel::SecurePassword::MAX_PASSWORD_LENGTH_ALLOWED` 定数を main ブランチでも再度公開し、既存アプリやgemとの互換性を維持する修正です。内部的には `BCryptPassword::MAX_PASSWORD_LENGTH_ALLOWED` への委譲としつつ、外部APIとしての定数名を元に戻しています。"
-    },
-    {
-      "number": 59959,
-      "title": "Document the 8.2 default of `s3_public_uploads_via_acl` [ci skip] {#pr-59959}",
-      "url": "https://github.com/rails/rails/pull/59959",
-      "mergedAt": "2026-11-26T00:00:00.000Z",
-      "author": "wintan1418",
-      "authorUrl": "https://github.com/wintan1418",
-      "summary": "1. 概要 (1-2文で)  \nRails 8.2 での `config.active_storage.s3_public_uploads_via_acl` のデフォルト値に関するドキュメントの誤記を修正し、`config.load_defaults` のターゲットバージョンに応じてデフォルト値が変わることを明示的に説明する PR です。コード変更はなく、ガイド (configuring.md) の記述のみが更新されています。"
-    },
-    {
-      "number": 59931,
-      "title": "Handle escaped quotes in Accept header parameters {#pr-59931}",
-      "url": "https://github.com/rails/rails/pull/59931",
-      "mergedAt": "2026-11-26T00:00:00.000Z",
-      "author": "ozamasa",
-      "authorUrl": "https://github.com/ozamasa",
-      "summary": "1. 概要 (1-2文で)  \nAcceptヘッダー内のクォート付きパラメータ中に「エスケープされた引用符（\\\"）」が含まれている場合に、`Mime::Type.parse` が誤ってクォート終端と解釈してしまうバグを修正するPRです。RFC準拠の形でエスケープシーケンスを1文字として扱うようスキャナを改善し、例外 `Mime::Type::InvalidMimeType` が不要に発生しないようにしています。"
-    },
-    {
-      "number": 58842,
-      "title": "Inline connection_pool dependency {#pr-58842}",
-      "url": "https://github.com/rails/rails/pull/58842",
-      "mergedAt": "2026-11-26T00:00:00.000Z",
-      "author": "rafaelfranca",
-      "authorUrl": "https://github.com/rafaelfranca",
-      "summary": "1. 概要 (1-2文で)  \nActive Support が依存していた外部 gem の `connection_pool` を、Active Support 内部に取り込んで（インライン化して）自前実装として持つようにした PR です。これにより依存関係を減らしつつ、既存の Redis/Memcache 用キャッシュストアが引き続き同様の API で接続プールを利用できるようにしています。"
-    },
-    {
-      "number": 59989,
-      "title": "Don't share the query cache state with the ActionController::Live thread {#pr-59989}",
-      "url": "https://github.com/rails/rails/pull/59989",
-      "mergedAt": "2026-11-26T00:00:00.000Z",
-      "author": "cestercian",
-      "authorUrl": "https://github.com/cestercian",
-      "summary": "1. 概要 (1-2文で)  \n`ActionController::Live` がストリーミング用に生成するスレッドへ、Active Record のクエリキャッシュ状態を引き継がないようにする変更です。これにより、ストリーミング中にレコードをポーリングしても「最初の結果だけが延々返る」といった不具合が解消されます。"
-    },
-    {
-      "number": 59994,
-      "title": "Backport #59911 to 8-1-stable {#pr-59994}",
-      "url": "https://github.com/rails/rails/pull/59994",
-      "mergedAt": "2026-11-26T00:00:00.000Z",
-      "author": "rails-bot",
-      "authorUrl": "https://github.com/rails-bot",
-      "summary": "1. 概要 (1-2文で)  \nRails 8.1系に対して、#59911 の修正をバックポートした PR です。`ActiveSupport::MessagePack` のデシリアライズ時に、オートロードされたクラス内部で起きた `NameError` が、本来とは違う「クラスが見つからない」エラーとして誤判定されてしまう問題を修正しています。"
-    },
-    {
-      "number": 59900,
-      "title": "[memory ⬇️] CodeGenerate class_attribute methods {#pr-59900}",
-      "url": "https://github.com/rails/rails/pull/59900",
-      "mergedAt": "2026-11-26T00:00:00.000Z",
-      "author": "fuzzyrichie",
-      "authorUrl": "https://github.com/fuzzyrichie",
-      "summary": "1. 概要 (1-2文で)  \n`class_attribute` が属性ごとに `class_eval` で都度メソッドをコンパイルしていた実装を、`ActiveSupport::CodeGenerator` によるコード生成に置き換え、同じ属性名のメソッド定義をアプリ全体で「共有」できるようにしてメモリ使用量を削減する変更です。大規模アプリの計測では約 8MB の常駐メモリ削減が報告されています。"
-    },
-    {
-      "number": 59902,
-      "title": "[ci skip][docs] Revert link facebook/jemalloc to jemalloc/jemalloc {#pr-59902}",
-      "url": "https://github.com/rails/rails/pull/59902",
-      "mergedAt": "2026-11-26T00:00:00.000Z",
-      "author": "hachi8833",
-      "authorUrl": "https://github.com/hachi8833",
-      "summary": "1. 概要 (1-2文で)  \nRailsガイド中に記載されていた `jemalloc` の GitHub リンクを、`facebook/meta` 側ではなく公式の `jemalloc/jemalloc` リポジトリに戻すドキュメント修正のPRです。`jemalloc` 本家リポジトリのアーカイブ解除・再活性化を受けて、以前のリンク変更(#56423)をリバートしています。"
-    },
-    {
-      "number": 59993,
-      "title": "Backport #58967 to 8-1-stable {#pr-59993}",
-      "url": "https://github.com/rails/rails/pull/59993",
-      "mergedAt": "2026-11-26T00:00:00.000Z",
-      "author": "rails-bot",
-      "authorUrl": "https://github.com/rails-bot",
-      "summary": "1. 概要 (1-2文で)  \nRails 8.1 系ブランチ（8-1-stable）に対して、I18n ガイドの誤った記述を修正した PR #58967 をバックポートした PR です。フォールバック用の翻訳キーの指定方法を、文字列ではなくシンボルを使う正しい例に更新しています。"
-    },
-    {
-      "number": 59992,
-      "title": "Honor DATE_FORMATS overrides of built-in formats {#pr-59992}",
-      "url": "https://github.com/rails/rails/pull/59992",
-      "mergedAt": "2026-11-26T00:00:00.000Z",
-      "author": "adityawrk",
-      "authorUrl": "https://github.com/adityawrk",
-      "summary": "1. 概要 (1-2文で)  \nRails/Active Support の `Date`/`Time`/`DateTime` における `to_fs` の組み込み日付フォーマット（`:short`, `:long`, `:db` など）について、従来の `DATE_FORMATS` への代入による上書きが再び有効になるよう修正した PR です。あわせて、Ractor 対応や非推奨となったフォーマットハッシュの扱いを整理し、「組み込みフォーマット」「`ActiveSupport::TimeFormats.register`」「古い `DATE_FORMATS` 代入」の優先順位を明確にしています。"
-    },
-    {
-      "number": 59915,
-      "title": "Return a plain String when truncate_bytes cuts an html_safe string {#pr-59915}",
-      "url": "https://github.com/rails/rails/pull/59915",
-      "mergedAt": "2026-11-26T00:00:00.000Z",
-      "author": "carlosdanielpohlod",
-      "authorUrl": "https://github.com/carlosdanielpohlod",
-      "summary": "1. 概要 (1-2文で)  \n`String#truncate_bytes` が `html_safe` な文字列に対してバイト数制限で途中カットを行う場合、結果が `SafeBuffer` ではなく「普通の String」として返るように変更されたPRです。これにより、カット時に HTML エスケープされてしまう問題と、バイト数制限を超えてしまう問題が解消され、`String#truncate` の挙動とも揃えられました。"
-    },
-    {
-      "number": 59952,
-      "title": "Don't run Action Mailer deliver callbacks when no email was built {#pr-59952}",
-      "url": "https://github.com/rails/rails/pull/59952",
-      "mergedAt": "2026-11-26T00:00:00.000Z",
-      "author": "bastin27",
-      "authorUrl": "https://github.com/bastin27",
-      "summary": "1. 概要 (1-2文で)  \nAction Mailer で実際にはメールが構築・送信されなかった場合に、`before_deliver` / `around_deliver` / `after_deliver` コールバックを実行しないようにする挙動変更です。これにより「送っていないメールなのに after_deliver で送信済みとして扱われてしまう」問題を防ぎます。"
-    },
-    {
-      "number": 59919,
-      "title": "Fix unused block warnings for strict locals with ampersands {#pr-59919}",
-      "url": "https://github.com/rails/rails/pull/59919",
-      "mergedAt": "2026-11-26T00:00:00.000Z",
-      "author": "milkcocoa",
-      "authorUrl": "https://github.com/milkcocoa",
-      "summary": "1. 概要 (1-2文で)  \nAction View の strict locals 機能で、`name&.upcase` のような `&` を含むローカル変数定義を使ったときに、Ruby 4.0 で「渡したブロックが無視されるかもしれない」という警告が出る問題を修正した PR です。Prism を使って生成される引数リストを解析し、ブロック引数を正しく保持するようにしたうえで、その挙動をテストで保証しています。"
-    },
-    {
-      "number": 59957,
-      "title": "Give Live actions the event reporter context and tags of their request {#pr-59957}",
-      "url": "https://github.com/rails/rails/pull/59957",
-      "mergedAt": "2026-11-26T00:00:00.000Z",
-      "author": "bruno-costanzo",
-      "authorUrl": "https://github.com/bruno-costanzo",
-      "summary": "1. 概要 (1-2文で)  \nRails 8.1 を含む現行実装で、`ActionController::Live` アクション内の `Rails.event` がリクエストごとの context / tags を正しくリセットできていないバグを修正した PRです。Live アクションを別スレッドで実行する際に、そのリクエスト専用のイベント context / tags を正しく引き継ぎ、終了時にクリアするようになりました。"
-    },
-    {
-      "number": 59958,
-      "title": "Reset the dirty tracker before dup copies the record {#pr-59958}",
-      "url": "https://github.com/rails/rails/pull/59958",
-      "mergedAt": "2026-11-26T00:00:00.000Z",
-      "author": "bruno-costanzo",
-      "authorUrl": "https://github.com/bruno-costanzo",
-      "summary": "1. 概要 (1-2文で)  \nRails 8.1 系で `dup` を使ったときに、楽観的ロック(`lock_version`)とダーティトラッキングの組み合わせで不正な変更情報がコピー側／元側に残るバグを修正した PR です。`dup` 実行時に、コピー元の dirty tracker（`@mutations_from_database`）をきちんとリセットしてから複製処理を行うようにし、モジュールの include 順序に依存しない安全な挙動にしています。"
-    },
-    {
-      "number": 59972,
-      "title": "Don't share nested values of a column default between records {#pr-59972}",
-      "url": "https://github.com/rails/rails/pull/59972",
-      "mergedAt": "2026-11-26T00:00:00.000Z",
-      "author": "bruno-costanzo",
-      "authorUrl": "https://github.com/bruno-costanzo",
-      "summary": "1. 概要 (1-2文で)  \nRails 8.2系(?) で導入された「カラムデフォルト値を1回だけキャスト＆freezeして使い回す」最適化により、Hash/配列などの“入れ子”のオブジェクトがレコード間で共有されてしまうバグがありました。  \nこのPRは、レコード生成時に `dup` ではなく `deep_dup` を使うことで、ネストした値も含めてレコードごとに独立したオブジェクトを持つように修正しています。"
-    },
-    {
-      "number": 59983,
-      "title": "Look up an existing connection lease without the registry mutex {#pr-59983}",
-      "url": "https://github.com/rails/rails/pull/59983",
-      "mergedAt": "2026-11-26T00:00:00.000Z",
-      "author": "thomasklemm",
-      "authorUrl": "https://github.com/thomasklemm",
-      "summary": "1. 概要 (1-2文で)  \n`LeaseRegistry#lease` を毎回ミューテックス取得して呼び出していたために発生していたボトルネックを緩和し、既存のコネクションリース取得時にはロックを回避することで `lease_connection` / `with_connection` / `active_connection?` のオーバーヘッドを削減するパフォーマンス改善です。スレッド／ファイバ単位の接続確保パターンを崩さずに、既存リースの参照だけを安くしています。"
-    },
-    {
-      "number": 59964,
-      "title": "Compare scalar ids without arrays in nested attributes {#pr-59964}",
-      "url": "https://github.com/rails/rails/pull/59964",
-      "mergedAt": "2026-11-26T00:00:00.000Z",
-      "author": "bruno-costanzo",
-      "authorUrl": "https://github.com/bruno-costanzo",
-      "summary": "1. 概要 (1-2文で)  \n`accepts_nested_attributes_for` が子レコードを id で突き合わせる際の比較処理を最適化し、単一カラム主キーの場合に余計な配列生成を行わないことで、大量のネスト属性更新時のオブジェクト生成数と処理時間を大幅に削減する変更です。  \n動作仕様は変えず、内部実装のみを元の 8.1 系に近い形へ戻したパフォーマンス向上 PR です。"
-    },
-    {
-      "number": 59975,
-      "title": "Hide generator-only flags from `rails new --help` {#pr-59975}",
-      "url": "https://github.com/rails/rails/pull/59975",
-      "mergedAt": "2026-11-26T00:00:00.000Z",
-      "author": "yatmsu",
-      "authorUrl": "https://github.com/yatmsu",
-      "summary": "1. 概要 (1-2文で)  \n`rails new --help` に表示されていた、実際には「既存アプリでのジェネレータ用」のフラグ `--skip-namespace` と `--skip-collision-check` をヘルプ出力から非表示にして、`rails new` のオプション一覧を分かりやすくする変更です。挙動自体は変えず、既存のコマンド呼び出しやカスタムテンプレートとの互換性は維持されています。"
-    },
-    {
-      "number": 59950,
-      "title": "Only draw Action Mailbox conductor routes in local environments {#pr-59950}",
-      "url": "https://github.com/rails/rails/pull/59950",
-      "mergedAt": "2026-11-26T00:00:00.000Z",
-      "author": "mattyr",
-      "authorUrl": "https://github.com/mattyr",
-      "summary": "1. 概要 (1-2文で)  \nAction Mailbox のコンダクタ用ルーティング(`/rails/conductor/action_mailbox/*`)を、開発・ローカル環境でのみ描画するように変更し、本番などではルート自体を作らないようにした PR です。これにより、`bin/rails routes` にも表示されず、本番環境でセキュリティスキャナに「デバッグ/管理用エンドポイント」として検出されにくくなります。"
-    },
-    {
-      "number": 59980,
-      "title": "Bound quoted-name cache entries by byte size {#pr-59980}",
-      "url": "https://github.com/rails/rails/pull/59980",
-      "mergedAt": "2026-11-26T00:00:00.000Z",
-      "author": "imattas",
-      "authorUrl": "https://github.com/imattas",
-      "summary": "1. 概要 (1-2文で)  \nRails の Active Record が内部で使っている「quoted name（識別子のクオート）」用キャッシュにサイズ上限（1 KiB/エントリ）が導入され、大きすぎる識別子はキャッシュしないことで、リクエスト経由で渡された巨大なカラム名などがプロセス常駐メモリを圧迫し続けるのを防ぐ変更です。クオート自体の挙動は変えず、あくまで「キャッシュに乗せない」だけの制御が入っています。"
-    },
-    {
-      "number": 59988,
-      "title": "Add `change_check_constraint` for PostgreSQL 19+ {#pr-59988}",
-      "url": "https://github.com/rails/rails/pull/59988",
-      "mergedAt": "2026-11-26T00:00:00.000Z",
-      "author": "yahonda",
-      "authorUrl": "https://github.com/yahonda",
-      "summary": "1. 概要 (1-2文で)  \nPostgreSQL 19で追加された「CHECK制約の ENFORCED / NOT ENFORCED を切り替える機能」を、Railsのマイグレーションから扱うための `change_check_constraint` が追加されています。これにより、既存のCHECK制約を生SQLを書かずに「強制する / しない」を切り替えられるようになります（PostgreSQL 19 以降限定）。"
-    },
-    {
-      "number": 59962,
-      "title": "Don't build log subscriber events whose logging is turned off {#pr-59962}",
-      "url": "https://github.com/rails/rails/pull/59962",
-      "mergedAt": "2026-11-26T00:00:00.000Z",
-      "author": "bruno-costanzo",
-      "authorUrl": "https://github.com/bruno-costanzo",
-      "summary": "1. 概要 (1-2文で)  \n`ActionController::LogSubscriber` が設定でログ出力を無効化しているイベントについて、「どうせ捨てられるイベント」をそもそも組み立てないようにし、CPU負荷を下げる最適化です。ログ内容や挙動は変えずに、不要なイベント構築コストだけを削減しています。"
-    },
-    {
-      "number": 59991,
-      "title": "Don't run a query when checking `or` compatibility {#pr-59991}",
-      "url": "https://github.com/rails/rails/pull/59991",
-      "mergedAt": "2026-11-26T00:00:00.000Z",
-      "author": "abdulwd",
-      "authorUrl": "https://github.com/abdulwd",
-      "summary": "1. 概要 (1-2文で)  \n`Relation#or` / `Relation#and` の互換性チェック時に、`from` に関連（association）リレーションを含むと不要なクエリが実行されてしまう問題を修正する PR です。`==` を呼ばずに同一オブジェクトはそのまま互換とみなすことで、無駄なクエリ発行を防いでいます。"
     }
   ]
 }
